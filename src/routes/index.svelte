@@ -7,11 +7,11 @@
 		// fetch data from the server using the `/api/load-data` endpoint
 		// the requested file must lie within the ./data directory
 		const filename = 'example-data.csv';
-		const dataRes = await fetch(`/load-data?filename=${filename}`);
+		const dataRes = await fetch(`/load/data/${filename}`);
 
 		// fetch configurations from a Google doc
 		const GOOGLE_DOC_ID = '1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A';
-		const configRes = await fetch(`/load-google-doc?docId=${GOOGLE_DOC_ID}`);
+		const configRes = await fetch(`/load/google-doc/${GOOGLE_DOC_ID}`);
 
 		// if successful, pass props to the component
 		if (configRes.ok && dataRes.ok)

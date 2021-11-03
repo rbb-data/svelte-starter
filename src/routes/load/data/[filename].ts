@@ -13,9 +13,9 @@ const parse = (path: string) => {
 	else if (path.endsWith('.csv')) return csvParse(content);
 };
 
-// GET /load-data.json
-export const get: RequestHandler = async ({ query }) => {
-	const filename = query.get('filename');
+// GET /load/data/
+export const get: RequestHandler = async ({ params }) => {
+	const { filename } = params;
 	const path = `data/${filename}`;
 
 	// check if filename exists

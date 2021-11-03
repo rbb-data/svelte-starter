@@ -3,9 +3,9 @@ import archieml from 'archieml';
 
 import type { RequestHandler } from '@sveltejs/kit';
 
-// GET /load-google-doc.json
-export const get: RequestHandler = async ({ query }) => {
-	const docId = query.get('docId');
+// GET /load/google-doc/
+export const get: RequestHandler = async ({ params }) => {
+	const { docId } = params;
 
 	const doc = await loadGoogleDoc(docId);
 	const config = archieml.load(doc);
