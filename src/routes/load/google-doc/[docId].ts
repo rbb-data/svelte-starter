@@ -1,4 +1,4 @@
-import loadGoogleDoc from '$lib/loadGoogleDoc';
+import loadGoogleDoc from '$lib/utils/loadGoogleDoc';
 import archieml from 'archieml';
 
 import type { RequestHandler } from '@sveltejs/kit';

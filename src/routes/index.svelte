@@ -28,8 +28,18 @@
 </script>
 
 <script lang="ts">
-	export let config: { header: { title: string; subtitle: string } };
+	import Svg from '$lib/components/Svg.svelte';
+
 	export let data: Array<{ x: string; y: string }>;
+	export let config: { header: { title: string; subtitle: string } };
+
+	let width = 0; // width is bound to the width of the wrapper element
+	let height = 200; // height is fixed
+
+	let boundedWidth = 0;
+	let boundedHeight = 0;
+
+	let margin = { top: 10, right: 10, bottom: 10, left: 10 };
 </script>
 
 <div>
@@ -47,4 +57,10 @@
 			{/each}
 		</dd>
 	</dl>
+
+	<div class="wrapper" bind:clientWidth={width}>
+		<Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
+			<circle r="5" fill="black" cx={boundedWidth / 2} cy={boundedHeight / 2} />
+		</Svg>
+	</div>
 </div>
