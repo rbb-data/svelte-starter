@@ -11,8 +11,7 @@
 
 		// fetch configurations from a Google doc
 		const GOOGLE_DOC_ID = '1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A';
-		const url = `https://google-doc-api.vercel.app/api/${GOOGLE_DOC_ID}`;
-		const configRes = await fetch(url);
+		const configRes = await fetch(`/load-google-doc?docId=${GOOGLE_DOC_ID}`);
 
 		// if successful, pass props to the component
 		if (configRes.ok && dataRes.ok)
