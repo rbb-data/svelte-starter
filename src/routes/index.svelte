@@ -1,2 +1,51 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script context="module" lang="ts">
+	import type { Load } from '@sveltejs/kit';
+
+	// this function runs before the component is created
+	// see: https://kit.svelte.dev/docs#loading
+	export const load: Load = async ({ fetch }) => {
+		// fetch data from the server using the `/api/load-data` endpoint
+		// the requested file must lie within the ./data directory
+		const filename = 'example-data.csv';
+		const dataRes = await fetch(`/load-data?filename=${filename}`);
+
+		// fetch configurations from a Google doc
+		const GOOGLE_DOC_ID = '1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A';
+		const url = `https://google-doc-api.vercel.app/api/${GOOGLE_DOC_ID}`;
+		const configRes = await fetch(url);
+
+		// if successful, pass props to the component
+		if (configRes.ok && dataRes.ok)
+			return {
+				props: { data: await dataRes.json(), config: await configRes.json() }
+			};
+
+		// throw an error if one of the resources could not be loaded
+		return {
+			status: dataRes.ok ? configRes.status : dataRes.status,
+			error: new Error((await (dataRes.ok ? configRes : dataRes).json()).error)
+		};
+	};
+</script>
+
+<script lang="ts">
+	export let config: { header: { title: string; subtitle: string } };
+	export let data: Array<{ x: string; y: string }>;
+</script>
+
+<div>
+	<dl>
+		<dt>title:</dt>
+		<dd>{config.header.title}</dd>
+
+		<dt>subtitle:</dt>
+		<dd>{config.header.subtitle}</dd>
+
+		<dt>data:</dt>
+		<dd>
+			{#each data as { x, y }}
+				{x} - {y}<br />
+			{/each}
+		</dd>
+	</dl>
+</div>
