@@ -4,12 +4,12 @@
 	// this function runs before the component is created
 	// see: https://kit.svelte.dev/docs#loading
 	export const load: Load = async ({ fetch }) => {
-		// fetch data from the server using the `/api/load-data` endpoint
+		// fetch data from the server using the `/load/data/` endpoint
 		// the requested file must lie within the ./data directory
 		const filename = 'example-data.csv';
 		const dataRes = await fetch(`/load/data/${filename}`);
 
-		// fetch configurations from a Google doc
+		// fetch configurations from a Google doc using the `/load/google-doc/` endpoint
 		const GOOGLE_DOC_ID = '1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A';
 		const configRes = await fetch(`/load/google-doc/${GOOGLE_DOC_ID}`);
 
