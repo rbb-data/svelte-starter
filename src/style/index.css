@@ -1,0 +1,11 @@
+@import './fonts';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Interstate', sans-serif;
+}

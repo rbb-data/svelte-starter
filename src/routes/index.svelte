@@ -31,6 +31,8 @@
 </script>
 
 <script lang="ts">
+  import '../style/index.css';
+
   import Svg from '$lib/components/shared/Svg.svelte';
   import CenteredSvg from '$lib/components/shared/CenteredSvg.svelte';
 
