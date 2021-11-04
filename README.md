@@ -24,7 +24,7 @@ npm run dev
 
 Your app is then available at http://localhost:3000/
 
-### Alteratively, do it the old school way
+### Alternatively, do it the old school way
 
 If you prefer the command line or if you don't want to automatically link a GitHub repo, you can alternatively pick a `cool-project-name` and run
 
