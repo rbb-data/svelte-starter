@@ -7,14 +7,11 @@
 # print every executed line and abort when one fails
 set -ex
 
-# skip when the project was not templated
-[ "$(git log --oneline | wc -l)" -eq 1 ] || exit 0
-
-# avoid running the setup script multiple times
-git log --oneline | grep -q 'Initial commit' && exit 0
-
 # make sure to run from project root
 cd $(dirname $0)/..
 
+# skip when the project was not templated
+[ $(basename $(pwd)) = 'svelte-starter' ] && exit 0
+
 # substitute '{project-name}' with the current folder name
-sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json
+sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env
