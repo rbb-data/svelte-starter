@@ -31,7 +31,7 @@
 </script>
 
 <script lang="ts">
-  import Svg from '$lib/components/Svg.svelte';
+  import Svg from '$lib/components/shared/Svg.svelte';
 
   export let data: Array<{
     x: number;
@@ -41,9 +41,11 @@
     header: { title: string; subtitle: string };
   };
 
+  // dimension of the chart
   let width = 0; // width is bound to the width of the wrapper element
   let height = 200; // height is fixed
 
+  // dimension of the chart's canvas (respecting margins)
   let boundedWidth = 0;
   let boundedHeight = 0;
 
@@ -72,8 +74,16 @@
   </dl>
 
   <div class="wrapper" bind:clientWidth={width}>
-    <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
-      <circle r="5" fill="black" cx={boundedWidth / 2} cy={boundedHeight / 2} />
+    <Svg
+      {width}
+      {height}
+      {margin}
+      origin="center"
+      bind:boundedWidth
+      bind:boundedHeight
+      debug
+    >
+      <circle r="5" fill="black" />
     </Svg>
   </div>
 </div>
