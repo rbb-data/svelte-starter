@@ -1,38 +1,50 @@
-# create-svelte
+# rbb-data svelte-starter
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte);
+> **This project is work in progress**
 
-## Creating a project
+This repository serves as a starting point to create data visualizations with [Svelte](https://svelte.dev/).
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Get started
+
+To create a new project, click the `Use this template` button above.
+
+If you prefer the command line or if you don't want to automatically link a GitHub repo, you can alternatively pick a `cool-project-name` and run
 
 ```bash
-# create a new project in the current directory
-npm init svelte@next
-
-# create a new project in my-app
-npm init svelte@next my-app
+npx degit rbb-data/svelte-starter project-name --mode=git
 ```
 
-> Note: the `@next` is temporary
+> **Note:** Specifying `--mode=git` is only necessary for private repos. It can be removed once this repo goes public.
 
-## Developing
+> **Note:** `degit` downloads content from GitHub but does not initialize a git repository. To add a remote, create an empty GitHub repo named `cool-project-name` and run
+>
+> ```bash
+> # initialize git
+> git init
+>
+> # commit content
+> git add --all
+> git commit -m "Initial commit"
+>
+> # add a remote and push
+> git remote add origin https://github.com/rbb-data/cool-project-name.git
+> git branch -M main
+> git push -u origin main
+> ```
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+To get started, run
 
 ```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Your app is then available at http://localhost:3000/
 
-Before creating a production version of your app, install an [adapter](https://kit.svelte.dev/docs#adapters) for your target environment. Then:
+## Directory structure
 
-```bash
-npm run build
-```
+To do
 
-> You can preview the built app with `npm run preview`, regardless of whether you installed an adapter. This should _not_ be used to serve your app in production.
+## Development and build scripts
+
+To do
