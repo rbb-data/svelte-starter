@@ -32,6 +32,7 @@
 
 <script lang="ts">
   import Svg from '$lib/components/shared/Svg.svelte';
+  import CenteredSvg from '$lib/components/shared/CenteredSvg.svelte';
 
   export let data: Array<{
     x: number;
@@ -74,16 +75,14 @@
   </dl>
 
   <div class="wrapper" bind:clientWidth={width}>
-    <Svg
-      {width}
-      {height}
-      {margin}
-      origin="center"
-      bind:boundedWidth
-      bind:boundedHeight
-      debug
-    >
-      <circle r="5" fill="black" />
+    <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
+      <circle cx={boundedWidth / 2} cy={boundedHeight / 2} r="5" fill="black" />
     </Svg>
+  </div>
+
+  <div class="wrapper" bind:clientWidth={width}>
+    <CenteredSvg {width} {height} debug>
+      <circle r="5" fill="black" />
+    </CenteredSvg>
   </div>
 </div>

@@ -16,45 +16,25 @@
     left: 0,
   };
 
-  export let origin: 'topLeft' | 'center' = 'topLeft';
-
   // if true, show outline of the chart
   export let debug = false;
 
   // bounded dimensions respect the given margins
   $: boundedWidth = width - margin.left - margin.right;
   $: boundedHeight = height - margin.top - margin.bottom;
-
-  $: viewBox = {
-    topLeft: [0, 0, width, height],
-    center: [-width / 2, -height / 2, width, height],
-  }[origin];
-
-  $: translateXY = {
-    topLeft: [0, 0],
-    center: [-width / 2, -height / 2],
-  }[origin];
 </script>
 
-<svg {width} {height} viewBox={viewBox.join(' ')}>
-  {#if debug}
-    <rect
-      {width}
-      {height}
-      transform={translate(translateXY)}
-      fill="none"
-      stroke="black"
-    />
-  {/if}
+<svg class:debug {width} {height} viewBox={[0, 0, width, height].join(' ')}>
   <g transform={translate([margin.left, margin.top])}>
     {#if debug}
-      <rect
-        width={boundedWidth}
-        height={boundedHeight}
-        transform={translate(translateXY)}
-        fill="aliceblue"
-      />
+      <rect width={boundedWidth} height={boundedHeight} fill="aliceblue" />
     {/if}
     <slot />
   </g>
 </svg>
+
+<style>
+  svg.debug {
+    outline: black dashed 1px;
+  }
+</style>
