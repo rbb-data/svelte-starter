@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { extname } from 'path';
 import yaml from 'yaml';
-import { csvParse } from 'd3-dsv';
+import { autoType, csvParse } from 'd3-dsv';
 
 import error from '../_error';
 
@@ -16,7 +16,7 @@ export const get: RequestHandler = async ({ params }) => {
   const parse = {
     json: JSON.parse,
     yaml: yaml.parse,
-    csv: csvParse,
+    csv: (str: string) => csvParse(str, autoType),
   };
   const supportedFormats = Object.keys(parse);
   const supportedFormatsStr = supportedFormats.join(', ');

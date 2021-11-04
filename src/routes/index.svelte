@@ -34,8 +34,8 @@
   import Svg from '$lib/components/Svg.svelte';
 
   export let data: Array<{
-    x: string;
-    y: string;
+    x: number;
+    y: number;
   }>;
   export let config: {
     header: { title: string; subtitle: string };
