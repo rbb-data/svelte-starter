@@ -3,7 +3,7 @@ import archieml from 'archieml';
 
 import type { RequestHandler } from '@sveltejs/kit';
 
-// GET /load/google-doc/
+// GET /load/google-doc/[docId]
 export const get: RequestHandler = async ({ params }) => {
   const { docId } = params;
 

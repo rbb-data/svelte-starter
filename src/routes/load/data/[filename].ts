@@ -2,50 +2,51 @@ import fs from 'fs';
 import { extname } from 'path';
 import { csvParse } from 'd3-dsv';
 
+import error from '../_error';
+
 import type { RequestHandler } from '@sveltejs/kit';
 
-const SUPPORTED_EXTENSIONS = ['.json', '.csv'];
-
-// parse contents of a file
-const parse = (path: string) => {
-  const content = fs.readFileSync(path, 'utf8');
-  if (path.endsWith('.json')) return JSON.parse(content);
-  else if (path.endsWith('.csv')) return csvParse(content);
-};
-
-// GET /load/data/
+// GET /load/data/[filename]
 export const get: RequestHandler = async ({ params }) => {
   const { filename } = params;
   const path = `data/${filename}`;
+  const extension = extname(filename).slice(1);
 
-  // check if filename exists
-  if (!filename || !fs.existsSync(path)) {
-    return {
-      status: 404,
-      body: {
-        error: filename
-          ? `File ${path} does not exist. Make sure that the file you are referring to lies within the ./data directory`
-          : 'Query parameter "filename" not specified',
-      },
-    };
+  const parse = {
+    json: JSON.parse,
+    csv: csvParse,
+  };
+  const supportedFormats = Object.keys(parse);
+  const supportedFormatsStr = supportedFormats.join(', ');
+
+  // check if file exists
+  if (!fs.existsSync(path)) {
+    const message = [
+      `File ${path} does not exist.`,
+      'Make sure that the file you are referring to lies within the ./data directory.',
+    ];
+    return error(404, message.join(' '));
+  }
+
+  // check if a format is specified
+  if (!extension) {
+    const message = `Please specify one of the supported extensions (${supportedFormatsStr})`;
+    return error(501, message);
   }
 
   // check if the given file format is supported
-  if (!SUPPORTED_EXTENSIONS.some((ext) => filename.endsWith(ext))) {
-    return {
-      status: 501,
-      body: {
-        error: [
-          'Extension',
-          extname(path),
-          'is not supported. Supported extensions:',
-          SUPPORTED_EXTENSIONS.join(', '),
-        ].join(' '),
-      },
-    };
+  if (!supportedFormats.some((ext) => ext === extension)) {
+    const message = [
+      `File with extension .${extension} is not supported.`,
+      'Supported extensions:',
+      supportedFormats.join(', '),
+    ];
+    return error(501, message.join(' '));
   }
 
-  const data = parse(path);
+  // parse data
+  const content = fs.readFileSync(path, 'utf8');
+  const data = parse[extension](content);
 
   return {
     status: 200,
