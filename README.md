@@ -53,7 +53,7 @@ git push -u origin main
 
 ## How to...
 
-Explainations of some common patterns. Some of these techniques are exemplified in `src/routes/index.svelte`.
+Explanations of some common patterns. Some of these techniques are exemplified in `src/routes/index.svelte`.
 
 ### ...load data?
 
@@ -63,7 +63,7 @@ Supported file formats are `*.json`, `*.yaml` and `*.csv`. If you want to add su
 
 ### ...connect to a Google doc?
 
-First, grant _connect@rbb-datenteam.iam.gserviceaccount.com_ read access to your Google doc and grab the doc's id from its URL (e.g. a doc with URL https://docs.google.com/document/d/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A/ has id `1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A`). Within SvelteKit's `load` function, make a request against the app's own endpoint `/load/google-doc/my-google-doc-id`, for example `/load/google-doc/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A`. The reponse is a json object with the contents of your doc parsed as [ArchieML](http://archieml.org). ArchieML is a simple markup language designed at the New York Times, learn about its syntax from [their demo](http://archieml.org/#demo).
+First, grant _connect@rbb-datenteam.iam.gserviceaccount.com_ read access to your Google doc and grab the doc's id from its URL (e.g. a doc with URL https://docs.google.com/document/d/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A/ has id `1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A`). Within SvelteKit's `load` function, make a request against the app's own endpoint `/load/google-doc/my-google-doc-id`, for example `/load/google-doc/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A`. The response is a json object with the contents of your doc parsed as [ArchieML](http://archieml.org). ArchieML is a simple markup language designed at the New York Times, learn about its syntax from [their demo](http://archieml.org/#demo).
 
 The Google credentials necessary to access docs that are shared with _connect@rbb-datenteam.iam.gserviceaccount.com_ should be stored in a json file named `google-credentials.json`. Secrets are not stored in version control; let one of your colleagues know, if you need them :)
 
@@ -88,7 +88,7 @@ If you want to deploy to `rbb-online.de/static`, rbb's static server for product
 ├── src  -- your code lives here
 │   ├── lib  -- internal library
 │   │   └── components
-│   │       └── shared  -- reusable Svelte componenets provided by this starter
+│   │       └── shared  -- reusable Svelte components provided by this starter
 │   ├── routes  -- public-facing stuff
 │   │   └── load  -- a collection of endpoints to load stuff
 │   │       ├── data  -- contains an endpoint to load data from the server
