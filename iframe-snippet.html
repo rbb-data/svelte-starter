@@ -1,0 +1,39 @@
+<!-- 
+  This snippet can be be used to embed the app into a foreign page.
+  Make sure to set an appropriate title (this is important for accessibility).
+  
+  By default, a resizer script is included that makes sure the iframe is
+  sized properly. If you don't want this, simply remove the script tags.
+-->
+
+<iframe
+  title="To do: Insert title"
+  loading="lazy"
+  width="100%"
+  height="600"
+  id="rbb-data--{project-name}"
+  src="https://www.rbb-online.de/static/rbb/rbb-data/{project-name}/"
+></iframe>
+<style>
+  /* explained here: https://github.com/davidjbradshaw/iframe-resizer#typical-setup */
+  #rbb-data--{project-name} {
+    width: 1px;
+    min-width: 100%;
+  }
+  /* fix position in app */
+  @media screen and (max-width: 630px) {
+    #rbb-data--{project-name} {
+      width: 100%; /* full width in app */
+      margin-left: 0; /* center in app */
+    }
+  }
+</style>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.min.js"
+  integrity="sha512-dnvR4Aebv5bAtJxDunq3eE8puKAJrY9GBJYl9GC6lTOEC76s1dbDfJFcL9GyzpaDW4vlI/UjR8sKbc1j6Ynx6w=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+<script>
+  iFrameResize({}, '#rbb-data--{project-name}');
+</script>

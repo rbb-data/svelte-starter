@@ -14,4 +14,4 @@ cd $(dirname $0)/..
 [ $(basename $(pwd)) = 'svelte-starter' ] && exit 0
 
 # substitute '{project-name}' with the current folder name
-sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env
+sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe-snippet.html
