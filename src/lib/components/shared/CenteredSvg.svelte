@@ -1,7 +1,7 @@
 <script lang="ts">
   // dimension of the chart
-  export let width = 0;
-  export let height = 0;
+  export let width: number;
+  export let height: number;
 
   // if true, show outline of the chart
   export let debug = false;

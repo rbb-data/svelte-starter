@@ -2,8 +2,8 @@
   import { translate } from '$lib/utils';
 
   // dimension of the chart
-  export let width = 0;
-  export let height = 0;
+  export let width: number;
+  export let height: number;
 
   // dimension of the chart's canvas (respecting margins)
   export let boundedWidth = 0;
