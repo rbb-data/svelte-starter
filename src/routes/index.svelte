@@ -33,10 +33,12 @@
 </script>
 
 <script lang="ts">
-  import '../style/index.css';
+  import { scaleLinear } from 'd3-scale';
+  import { extent } from 'd3-array';
 
   import Svg from '$lib/components/shared/Svg.svelte';
-  import CenteredSvg from '$lib/components/shared/CenteredSvg.svelte';
+
+  import '../style/index.css';
 
   export let data: Array<{
     x: number;
@@ -60,33 +62,37 @@
     bottom: 10,
     left: 10,
   };
+
+  // set up some scales with d3
+  $: xScale = scaleLinear()
+    .domain(extent(data, (d) => d.x))
+    .range([0, boundedWidth]);
+  $: yScale = scaleLinear()
+    .domain(extent(data, (d) => d.y))
+    .range([boundedHeight, 0]);
 </script>
 
-<div>
+<div class="wrapper">
   <dl>
     <dt>title:</dt>
     <dd>{config.header.title}</dd>
 
     <dt>subtitle:</dt>
     <dd>{config.header.subtitle}</dd>
-
-    <dt>data:</dt>
-    <dd>
-      {#each data as { x, y }}
-        {x} - {y}<br />
-      {/each}
-    </dd>
   </dl>
 
-  <div class="wrapper" bind:clientWidth={width}>
+  <div bind:clientWidth={width}>
     <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
-      <circle cx={boundedWidth / 2} cy={boundedHeight / 2} r="5" fill="black" />
+      {#each data as { x, y }}
+        <circle cx={xScale(x)} cy={yScale(y)} r="5" fill="#212529" />
+      {/each}
     </Svg>
   </div>
-
-  <div class="wrapper" bind:clientWidth={width}>
-    <CenteredSvg {width} {height} debug>
-      <circle r="5" fill="black" />
-    </CenteredSvg>
-  </div>
 </div>
+
+<style>
+  .wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+</style>
