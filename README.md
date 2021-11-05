@@ -51,9 +51,43 @@ git branch -M main
 git push -u origin main
 ```
 
+## How to...
+
+### ...load data
+
+To do
+
+### ...connect to a Google doc
+
+To do
+
+### ...set up a responsive SVG container
+
+To do
+
+### ...build and deploy
+
+To do
+
 ## Directory structure
 
 To do
+
+```bash
+.
+├── data
+├── scripts
+├── src
+│   ├── lib
+│   │   └── components
+│   │       └── shared
+│   ├── routes
+│   │   └── load
+│   │       ├── data
+│   │       └── google-doc
+│   └── style
+└── static
+```
 
 ## Development and build scripts
 
