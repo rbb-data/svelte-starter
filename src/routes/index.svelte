@@ -25,7 +25,9 @@
     // throw an error if one of the resources could not be loaded
     return {
       status: dataRes.ok ? configRes.status : dataRes.status,
-      error: new Error((await (dataRes.ok ? configRes : dataRes).json()).error),
+      error: new Error(
+        (await (dataRes.ok ? configRes : dataRes).json()).error.message
+      ),
     };
   };
 </script>
