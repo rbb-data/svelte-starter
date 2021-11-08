@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "postinstall": "scripts/setup.sh",
-    "style-dictionary": "style-dictionary build --config style-dictionary/config.json",
+    "style-dictionary": "style-dictionary build --config style-dictionary/config.json && npm run format",
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "build:rbb-online": "BASE_PATH=/static/rbb/rbb-data/{project-name} BUILD_DIR={project-name} npm run build",
