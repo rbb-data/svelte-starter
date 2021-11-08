@@ -39,7 +39,7 @@
 
 <dl>
   <dt>title:</dt>
-  <dd>{header.title}</dd>
+  <dd>{@html header.title}</dd>
 
   <dt>subtitle:</dt>
   <dd>{header.subtitle}</dd>

@@ -11,7 +11,7 @@
 
     // fetch configurations from a Google doc using the `/load/google-doc/` endpoint
     const GOOGLE_DOC_ID = '1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A';
-    const configRes = await fetch(`/load/google-doc/${GOOGLE_DOC_ID}`);
+    const configRes = await fetch(`/load/google-doc/${GOOGLE_DOC_ID}?preserve-styles`);
 
     // if successful, pass props to the component
     if (configRes.ok && dataRes.ok)

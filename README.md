@@ -72,6 +72,8 @@ Supported file formats are `*.json`, `*.yaml` and `*.csv`. If you want to add su
 - Grab the doc's id from its url
 - Fetch `/load/google-doc/my-google-doc-id` in SvelteKit's [`load`](https://kit.svelte.dev/docs#loading) function
 
+By default any formatting is ignored when loading the doc. Fetch from `/load/google-doc/my-google-doc-id?preserve-styles` to preserve some formatting. Supported styles are: bold, italic, underline, superscript, subscript. As well as links. Anything else is stripped ("sanitized") for security reasons.
+
 The response is a json object with the contents of your doc parsed as [ArchieML](http://archieml.org).
 
 The Google credentials necessary to access docs that are shared with _connect@rbb-datenteam.iam.gserviceaccount.com_ should be stored in a json file named `google-credentials.json`. Secrets are not stored in version control; let one of your colleagues know, if you need them :)
