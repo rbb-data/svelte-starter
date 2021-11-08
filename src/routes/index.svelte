@@ -1,13 +1,13 @@
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit';
 
-  // this function runs before the component is created
+  // this function runs on the server and on the client
   // see: https://kit.svelte.dev/docs#loading
   export const load: Load = async ({ fetch }) => {
-    // fetch data from the server using the `/load/data/` endpoint
+    // load data by fetching it from the app's own endpoint
     // the requested file must lie within the ./data directory
-    const filename = 'example-data.csv';
-    const dataRes = await fetch(`/load/data/${filename}`);
+    const FILENAME = 'example-data.csv';
+    const dataRes = await fetch(`/load/data/${FILENAME}`);
 
     // fetch configurations from a Google doc using the `/load/google-doc/` endpoint
     const GOOGLE_DOC_ID = '1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A';
@@ -33,10 +33,7 @@
 </script>
 
 <script lang="ts">
-  import { scaleLinear } from 'd3-scale';
-  import { extent } from 'd3-array';
-
-  import Svg from '$lib/components/shared/Svg.svelte';
+  import Demo from '$lib/components/Demo.svelte';
 
   import '../style/index.css';
 
@@ -47,47 +44,10 @@
   export let config: {
     header: { title: string; subtitle: string };
   };
-
-  // dimension of the chart
-  let width = 0; // width is bound to the width of the wrapper element
-  let height = 200; // height is fixed
-
-  // dimension of the chart's canvas (respecting margins)
-  let boundedWidth = 0;
-  let boundedHeight = 0;
-
-  let margin = {
-    top: 10,
-    right: 10,
-    bottom: 10,
-    left: 10,
-  };
-
-  // set up some scales with d3
-  $: xScale = scaleLinear()
-    .domain(extent(data, (d) => d.x))
-    .range([0, boundedWidth]);
-  $: yScale = scaleLinear()
-    .domain(extent(data, (d) => d.y))
-    .range([boundedHeight, 0]);
 </script>
 
 <div class="wrapper">
-  <dl>
-    <dt>title:</dt>
-    <dd>{config.header.title}</dd>
-
-    <dt>subtitle:</dt>
-    <dd>{config.header.subtitle}</dd>
-  </dl>
-
-  <div bind:clientWidth={width}>
-    <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
-      {#each data as { x, y }}
-        <circle cx={xScale(x)} cy={yScale(y)} r="5" fill="#212529" />
-      {/each}
-    </Svg>
-  </div>
+  <Demo {data} header={config.header} />
 </div>
 
 <style>

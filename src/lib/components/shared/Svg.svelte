@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { translate } from '$lib/utils';
+  import { translate } from '$lib/helpers/utils';
 
   // dimension of the chart
   export let width: number;

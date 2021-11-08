@@ -1,5 +1,7 @@
-import loadGoogleDoc from '$lib/loadGoogleDoc';
+import loadGoogleDoc from '$lib/helpers/loadGoogleDoc';
 import archieml from 'archieml';
+
+import error from '../_error';
 
 import type { RequestHandler } from '@sveltejs/kit';
 
@@ -7,8 +9,13 @@ import type { RequestHandler } from '@sveltejs/kit';
 export const get: RequestHandler = async ({ params }) => {
   const { docId } = params;
 
-  const doc = await loadGoogleDoc(docId);
-  const config = archieml.load(doc);
+  let config = {};
+  try {
+    const doc = await loadGoogleDoc(docId);
+    config = archieml.load(doc);
+  } catch (e) {
+    return error(e.code, e.errors[0].message);
+  }
 
   return {
     status: 200,
