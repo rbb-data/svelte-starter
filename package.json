@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "postinstall": "scripts/setup.sh",
+    "style-dictionary": "style-dictionary build --config style-dictionary/config.json",
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
     "build:rbb-online": "BASE_PATH=/static/rbb/rbb-data/{project-name} BUILD_DIR={project-name} npm run build",
@@ -35,6 +36,7 @@
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "sanitize-html": "^2.5.3",
+    "style-dictionary": "^3.0.3",
     "svelte": "^3.42.6",
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.9.4",

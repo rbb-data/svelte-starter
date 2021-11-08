@@ -1,0 +1,31 @@
+{
+  "source": ["style-dictionary/tokens.json"],
+  "platforms": {
+    "css": {
+      "transformGroup": "css",
+      "buildPath": "src/style/",
+      "files": [
+        {
+          "destination": "variables.css",
+          "format": "css/variables"
+        }
+      ]
+    },
+    "js": {
+      "transformGroup": "js",
+      "transforms": [
+        "attribute/cti",
+        "name/cti/camel",
+        "size/rem",
+        "color/hex"
+      ],
+      "buildPath": "src/style/",
+      "files": [
+        {
+          "destination": "variables.js",
+          "format": "javascript/es6"
+        }
+      ]
+    }
+  }
+}

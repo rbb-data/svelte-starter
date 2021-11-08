@@ -9,6 +9,7 @@ This template serves as a starting point to create data visualizations with [Sve
 - Server-side rendered builds that can be hosted on a static file server
 - Data imports on the server (json, yaml and csv)
 - Fetching content from ArchieML-formatted Google docs
+- [Style Dictionary](https://amzn.github.io/style-dictionary/#/) as a single source of truth for design tokens
 - Easy deployment to rbb’s static servers
 - Pre-generated iframe snippet to embed build into a foreign website with [David J. Bradshaw's iFrame Resizer script](https://github.com/davidjbradshaw/iframe-resizer) supported by default
 
@@ -97,3 +98,7 @@ Creates a build that can be deployed to rbb's static server
 `iframe.html` contains a snippet for you to copy-paste into your article. Make sure to give the iframe an appropriate title.
 
 [David J. Bradshaw's iFrame Resizer script](https://github.com/davidjbradshaw/iframe-resizer) is supported by default. If you don't need this, simply remove the corresponding script tags in `iframe-snippet.html` and `src/app.html`.
+
+## Design tokens
+
+Design tokens live in `style-dictionary/tokens.json`. `npm run style-dictionary` builds CSS and javascript files into `src/style` (powered by [Style Dictionary](https://amzn.github.io/style-dictionary/#/)).
