@@ -90,7 +90,7 @@ Creates a build that can be deployed to rbb's static server
 
 `npm run deploy` builds the app for production and uploads the build to the `dj1` dev server. The deployed file will be available at https://dj1.app.rbb-cloud.de/cool-project-name (assuming you named your project `cool-project-name`).
 
-### Embed as iframe
+## Embed as iframe
 
 `iframe.html` contains a snippet for you to copy-paste into your article. Make sure to give the iframe an appropriate title.
 
