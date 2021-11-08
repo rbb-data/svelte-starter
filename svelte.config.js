@@ -18,6 +18,9 @@ const config = {
     paths: {
       base: dev ? '' : process.env.BASE_PATH,
     },
+    package: {
+      exports: () => false,
+    },
   },
 };
 

@@ -8,6 +8,7 @@
     "build": "svelte-kit build",
     "build:rbb-online": "BASE_PATH=/static/rbb/rbb-data/{project-name} BUILD_DIR={project-name} npm run build",
     "preview": "svelte-kit preview",
+    "package": "svelte-kit package",
     "upload": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/{project-name}/",
     "deploy": "npm run build && npm run upload",
     "check": "svelte-check --tsconfig ./tsconfig.json",
@@ -40,9 +41,13 @@
     "svelte": "^3.42.6",
     "svelte-check": "^2.2.6",
     "svelte-preprocess": "^4.9.4",
+    "svelte2tsx": "^0.4.8",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3",
     "yaml": "^1.10.2"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": "./index.js"
+  }
 }
