@@ -2,7 +2,7 @@
  * This action dynamically sets CSS variables.
  *
  * For example,
- * <div use:css{{ color: 'steelblue' }}>...</div>
+ * <div use:css={{ color: 'steelblue' }}>...</div>
  * sets --color to 'steelblue' on that div.
  */
 

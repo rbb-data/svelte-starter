@@ -85,7 +85,7 @@ Defined in `src/lib/actions/`.
 
 ### `use:css`
 
-Dynamically set CSS variables. For example, `<div use:css{{ color: 'steelblue' }}>...</div>` sets `--color` to `'steelblue'` on that div.
+Dynamically sets CSS variables. For example, `<div use:css={{ color: 'steelblue' }}>...</div>` sets the CSS variable `--color` to `'steelblue'` on that div.
 
 ## Build and deploy
 
