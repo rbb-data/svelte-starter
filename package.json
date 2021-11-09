@@ -1,5 +1,5 @@
 {
-  "name": "svelte-starter",
+  "name": "@rbb-data/svelte-starter",
   "version": "0.0.1",
   "scripts": {
     "postinstall": "scripts/setup.sh",
