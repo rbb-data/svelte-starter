@@ -6,10 +6,12 @@
  * sets --color to 'steelblue' on that div.
  */
 
+import type { ActionReturn } from './types';
+
 export default function css(
   node: HTMLElement | SVGElement,
   variables: Record<string, string>
-): { update: (variables: Record<string, string>) => void } {
+): ActionReturn<Record<string, string>> {
   function setCssVariables() {
     if (variables) {
       for (const name of Object.keys(variables)) {

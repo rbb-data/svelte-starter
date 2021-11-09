@@ -79,6 +79,14 @@ The response is a json object with the contents of your doc parsed as [ArchieML]
 
 The Google credentials necessary to access docs that are shared with _connect@rbb-datenteam.iam.gserviceaccount.com_ should be stored in a json file named `google-credentials.json`. Secrets are not stored in version control; let one of your colleagues know, if you need them :)
 
+## Actions
+
+Defined in `src/lib/actions/`.
+
+### `use:css`
+
+Dynamically set CSS variables. For example, `<div use:css{{ color: 'steelblue' }}>...</div>` sets `--color` to `'steelblue'` on that div.
+
 ## Build and deploy
 
 ### `npm run build`
