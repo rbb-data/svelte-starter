@@ -1,14 +1,19 @@
 <script lang="ts">
   import { translate } from '$lib/helpers/utils';
 
-  // dimension of the chart
+  // width of the svg
   export let width: number;
+
+  // height of the svg
   export let height: number;
 
-  // dimension of the chart's canvas (respecting margins)
+  // width of the canvas (the svg's width minus margins)
   export let boundedWidth = 0;
+
+  // height of the canvas (the svg's height minus margins)
   export let boundedHeight = 0;
 
+  // size of the margins on each side of the svg
   export let margin = {
     top: 0,
     right: 0,
@@ -16,7 +21,7 @@
     left: 0,
   };
 
-  // if true, show outline of the chart
+  // if true, show the svg's outline and highlight canvas
   export let debug = false;
 
   // bounded dimensions respect the given margins
