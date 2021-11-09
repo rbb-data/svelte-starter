@@ -1,6 +1,6 @@
 {
   "name": "@rbb-data/svelte-starter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "postinstall": "scripts/setup.sh",
     "style-dictionary": "style-dictionary build --config style-dictionary/config.json && npm run format",
