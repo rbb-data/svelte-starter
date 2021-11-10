@@ -13,7 +13,8 @@ export const get: RequestHandler = async ({ params, query }) => {
   let config = {};
   try {
     const doc = await loadGoogleDoc(docId, preserveStyles);
-    config = archieml.load(doc);
+    if (doc) config = archieml.load(doc);
+    else return error(401, 'Google credentials not found');
   } catch (e) {
     return error(e.code, e.errors[0].message);
   }

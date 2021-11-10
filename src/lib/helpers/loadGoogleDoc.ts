@@ -1,5 +1,6 @@
 // adapted from https://github.com/rdmurphy/doc-to-archieml (MIT licensed)
 
+import fs from 'fs';
 import { google } from 'googleapis';
 import sanitizeHtml from 'sanitize-html';
 
@@ -25,7 +26,7 @@ async function sanitize(input: string, preserveStyles = false) {
  * @param keyFile path to secret credential file
  * @returns authenticated Google doc client
  */
-async function connect(keyFile = 'google-credentials.json') {
+async function connect(keyFile: string) {
   const auth = await google.auth.getClient({
     scopes: ['https://www.googleapis.com/auth/documents.readonly'],
     keyFile,
@@ -43,9 +44,13 @@ async function connect(keyFile = 'google-credentials.json') {
  */
 async function loadGoogleDoc(
   documentId: string,
-  preserveStyles = false
+  preserveStyles = false,
+  keyFile = 'google-credentials.json'
 ): Promise<string> {
-  const client = await connect();
+  // check if credentials file exists
+  if (!fs.existsSync(keyFile)) return null;
+
+  const client = await connect(keyFile);
   const { data } = await client.documents.get({
     documentId,
   });
