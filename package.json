@@ -10,8 +10,6 @@
     "preview": "svelte-kit preview",
     "upload": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/{project-name}/",
     "deploy": "npm run build && npm run upload",
-    "package": "svelte-kit package",
-    "publish": "npm run package && npm publish ./package --access public",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
