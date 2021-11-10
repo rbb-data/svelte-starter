@@ -12,9 +12,10 @@ cd $(dirname $0)/..
 
 # skip when the project was not templated
 [ $(basename $(pwd)) = 'svelte-starter' ] && exit 0
+[ "$(git log --oneline | wc -l)" -eq 1 ] || exit 0
 
 # remove documentation
 [ -d doc ] && rm -rf doc/
 
 # substitute '{project-name}' with the current folder name
-sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe-snippet.html
+sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
