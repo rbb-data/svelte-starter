@@ -1,0 +1,27 @@
+{
+  "name": "svelte-stories",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm run update-doc",
+    "update-doc": "(cd ../ && npm run update-doc)",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "storybook-to-ghpages"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/addon-svelte-csf": "^1.1.0",
+    "@storybook/storybook-deployer": "^2.8.10",
+    "@storybook/svelte": "^6.3.12",
+    "babel-loader": "^8.2.3",
+    "svelte": "^3.44.1",
+    "svelte-loader": "^3.1.2"
+  },
+  "localDependencies": {
+    "@rbb-data/svelte-starter": "../package"
+  }
+}
