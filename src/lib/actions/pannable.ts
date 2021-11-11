@@ -51,12 +51,11 @@ export default function pannable(
   }
 
   function handleEnd(event: MouseEvent | TouchEvent) {
-    [x, y] = getClientXY(event);
-    if (x === null) return;
+    const [clientX, clientY] = getClientXY(event);
 
     node.dispatchEvent(
       new CustomEvent('panend', {
-        detail: { x, y },
+        detail: { x: clientX || x, y: clientY || y },
       })
     );
 

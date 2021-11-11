@@ -1,11 +1,11 @@
 <script lang="ts">
   import { writable } from 'svelte/store';
+  import { tweened } from 'svelte/motion';
 
   import Arrow from './Arrow.svelte';
+  import css from '$lib/actions/css';
   import pannable, { handlePanMove } from '$lib/actions/pannable';
   import { translate } from '$lib/helpers/utils';
-
-  const offset = 4;
 
   // initial x and y coordinates
   export let cx: number;
@@ -24,29 +24,37 @@
   // position of the doc (could also be a spring)
   const coords = writable({ x: cx, y: cy });
 
-  let showArrows = true;
+  // specify arrows
+  const offset = 4;
+  const arrows: Array<{
+    orientation: 'n' | 'w' | 's' | 'e';
+    xy: Array<number>;
+  }> = [
+    { orientation: 'n', xy: [0, -radius - offset] },
+    { orientation: 'w', xy: [radius + offset, 0] },
+    { orientation: 's', xy: [0, radius + offset] },
+    { orientation: 'e', xy: [-radius - offset, 0] },
+  ];
+
+  // arrows are hidden when a dot is dragged
+  let arrowOpacity = tweened(1);
 </script>
 
 <g transform={translate([$coords.x, $coords.y])}>
-  {#if showArrows}
-    <g transform={translate([0, -radius - offset])}>
-      <Arrow orientation="n" color="darkgrey" />
+  {#each arrows as arrow}
+    <g
+      class="arrow"
+      transform={translate(arrow.xy)}
+      use:css={{ opacity: $arrowOpacity }}
+    >
+      <Arrow orientation={arrow.orientation} color="darkgrey" />
     </g>
-    <g transform={translate([radius + offset, 0])}>
-      <Arrow orientation="w" color="darkgrey" />
-    </g>
-    <g transform={translate([0, radius + offset])}>
-      <Arrow orientation="s" color="darkgrey" />
-    </g>
-    <g transform={translate([-radius - offset, 0])}>
-      <Arrow orientation="e" color="darkgrey" />
-    </g>
-  {/if}
+  {/each}
   <circle
     use:pannable
-    on:panstart={() => (showArrows = false)}
+    on:panstart={() => arrowOpacity.set(0)}
     on:panmove={handlePanMove(coords, { axis: 'xy', bounds })}
-    on:panend={() => (showArrows = true)}
+    on:panend={() => arrowOpacity.set(1)}
     r={radius}
   />
 </g>
@@ -54,5 +62,8 @@
 <style>
   circle {
     fill: steelblue;
+  }
+  .arrow {
+    opacity: var(--opacity);
   }
 </style>
