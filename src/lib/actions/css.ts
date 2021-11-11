@@ -10,12 +10,12 @@ import type { ActionReturn } from './types';
 
 export default function css(
   node: HTMLElement | SVGElement,
-  variables: Record<string, string>
-): ActionReturn<Record<string, string>> {
+  variables: Record<string, string | number>
+): ActionReturn<Record<string, string | number>> {
   function setCssVariables() {
     if (variables) {
       for (const name of Object.keys(variables)) {
-        node.style.setProperty(`--${name}`, variables[name]);
+        node.style.setProperty(`--${name}`, variables[name] as string);
       }
     }
   }
