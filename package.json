@@ -14,8 +14,7 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "style-dictionary": "style-dictionary build --config style-dictionary/config.json && npm run format",
-    "package": "svelte-kit package",
-    "update-doc": "npm run package && (cd doc/ && install-local --save ../package)"
+    "package": "svelte-kit package"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.21",
