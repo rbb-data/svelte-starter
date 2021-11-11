@@ -20,16 +20,15 @@ export default function pannable(
   let x: number;
   let y: number;
 
-  function getClientXY(event: MouseEvent | TouchEvent) {
-    if (event instanceof MouseEvent) return [event.clientX, event.clientY];
-    return event.touches.length > 0
-      ? [event.touches[0].clientX, event.touches[0].clientY]
-      : [null, null];
-  }
+  let pointerId: number;
 
-  function handleStart(event: MouseEvent | TouchEvent) {
-    [x, y] = getClientXY(event);
-    if (x === null) return;
+  function handleStart(event: PointerEvent) {
+    if (!event.isPrimary) return;
+
+    x = event.clientX;
+    y = event.clientY;
+
+    pointerId = event.pointerId;
 
     node.dispatchEvent(
       new CustomEvent('panstart', {
@@ -37,19 +36,15 @@ export default function pannable(
       })
     );
 
-    window.addEventListener(
-      event instanceof MouseEvent ? 'mousemove' : 'touchmove',
-      handleMove
-    );
-    window.addEventListener(
-      event instanceof MouseEvent ? 'mouseup' : 'touchend',
-      handleEnd
-    );
+    window.addEventListener('pointermove', handleMove);
+    window.addEventListener('pointerup', handleEnd);
+    window.addEventListener('pointercancel', handleEnd);
   }
 
-  function handleMove(event: MouseEvent | TouchEvent) {
-    const [clientX, clientY] = getClientXY(event);
-    if (x === null) return;
+  function handleMove(event: PointerEvent) {
+    if (event.pointerId !== pointerId) return;
+
+    const { clientX, clientY } = event;
 
     const dx = clientX - x;
     const dy = clientY - y;
@@ -63,32 +58,27 @@ export default function pannable(
     );
   }
 
-  function handleEnd(event: MouseEvent | TouchEvent) {
-    const [clientX, clientY] = getClientXY(event);
+  function handleEnd(event: PointerEvent) {
+    if (event.pointerId !== pointerId) return;
+
+    const { clientX, clientY } = event;
 
     node.dispatchEvent(
       new CustomEvent('panend', {
-        detail: { x: clientX || x, y: clientY || y },
+        detail: { x: clientX, y: clientY },
       })
     );
 
-    window.removeEventListener(
-      event instanceof MouseEvent ? 'mousemove' : 'touchmove',
-      handleMove
-    );
-    window.removeEventListener(
-      event instanceof MouseEvent ? 'mouseup' : 'touchend',
-      handleEnd
-    );
+    window.removeEventListener('pointermove', handleMove);
+    window.removeEventListener('pointerup', handleEnd);
+    window.removeEventListener('pointercancel', handleEnd);
   }
 
-  node.addEventListener('mousedown', handleStart);
-  node.addEventListener('touchstart', handleStart);
+  node.addEventListener('pointerdown', handleStart);
 
   return {
     destroy() {
-      node.removeEventListener('mousedown', handleStart);
-      node.removeEventListener('touchstart', handleStart);
+      node.removeEventListener('pointerdown', handleStart);
     },
   };
 }
