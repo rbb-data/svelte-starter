@@ -25,11 +25,11 @@ export default function pannable(
     );
 
     window.addEventListener(
-      event instanceof TouchEvent ? 'touchmove' : 'mousemove',
+      event instanceof MouseEvent ? 'mousemove' : 'touchmove',
       handleMove
     );
     window.addEventListener(
-      event instanceof TouchEvent ? 'touchend' : 'mouseup',
+      event instanceof MouseEvent ? 'mouseup' : 'touchend',
       handleEnd
     );
   }
@@ -61,11 +61,11 @@ export default function pannable(
     );
 
     window.removeEventListener(
-      event instanceof TouchEvent ? 'touchmove' : 'mousemove',
+      event instanceof MouseEvent ? 'mousemove' : 'touchmove',
       handleMove
     );
     window.removeEventListener(
-      event instanceof TouchEvent ? 'touchend' : 'mouseup',
+      event instanceof MouseEvent ? 'mouseup' : 'touchend',
       handleEnd
     );
   }
