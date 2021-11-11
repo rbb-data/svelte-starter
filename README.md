@@ -90,7 +90,7 @@ Dynamically sets CSS variables. For example, `<div use:css={{ color: 'steelblue'
 
 This action makes an element pannable. It listens to the respective mouse and touch events, tracks an element's position and dispatches three custom events: `panstart`, `panmove` and `panend`.
 
-`handlePanMove` is a convenience function to use on `panmove` that implements drag & drop.
+The module also exports `handlePanMove`, a convenience function to use on `panmove` that implements drag & drop.
 
 See `src/lib/components/demo/DraggableCircle.svelte` for an example of how to use this action.
 
