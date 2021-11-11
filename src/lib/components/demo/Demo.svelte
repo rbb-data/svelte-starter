@@ -3,6 +3,9 @@
   import { extent } from 'd3-array';
 
   import Svg from '$lib/components/shared/Svg.svelte';
+  import DraggableCircle from './DraggableCircle.svelte';
+
+  const radius = 10;
 
   export let data: Array<{
     x: number;
@@ -48,9 +51,23 @@
 <p>Ein responsiver SVG Container:</p>
 
 <div bind:clientWidth={width}>
-  <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
-    {#each data as { x, y }}
-      <circle cx={xScale(x)} cy={yScale(y)} r="5" fill="#212529" />
-    {/each}
-  </Svg>
+  {#if width}
+    <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
+      {#each data as { x, y }}
+        {#if xScale(x) && yScale(y)}
+          <DraggableCircle
+            cx={xScale(x)}
+            cy={yScale(y)}
+            bounds={{
+              top: radius,
+              right: boundedWidth - radius,
+              bottom: boundedHeight - radius,
+              left: radius,
+            }}
+            {radius}
+          />
+        {/if}
+      {/each}
+    </Svg>
+  {/if}
 </div>
