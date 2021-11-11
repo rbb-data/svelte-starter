@@ -50,7 +50,7 @@
 
 <p>Ein responsiver SVG Container:</p>
 
-<div bind:clientWidth={width}>
+<div class="wrapper" bind:clientWidth={width}>
   {#if width}
     <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
       {#each data as { x, y }}
@@ -71,3 +71,9 @@
     </Svg>
   {/if}
 </div>
+
+<style>
+  .wrapper :global(svg) {
+    overflow: visible;
+  }
+</style>
