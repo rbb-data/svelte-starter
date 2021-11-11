@@ -1,3 +1,16 @@
+/**
+ * This action makes an element pannable.
+ * It listens to the respective mouse and touch
+ * events, tracks an element's position and dispatches
+ * three custom events: panstart, panmove and panend.
+ *
+ * `handlePanMove` is a convenience function to use on
+ * panmove that implements drag & drop.
+ *
+ * See src/lib/components/demo/DraggableCircle.svelte
+ * for an example of how to use this action.
+ */
+
 import type { Writable } from 'svelte/store';
 import type { ActionReturn } from './types';
 
@@ -83,7 +96,9 @@ export default function pannable(
 export function handlePanMove(
   coords: Writable<{ x: number; y: number }>,
   options: {
+    /** move along the `x` or `y` axis, or both (`xy`) */
     axis: 'xy' | 'x' | 'y';
+    /** if given, the element is restricted to move within these bounds */
     bounds?: { top?: number; right?: number; bottom?: number; left?: number };
   } = { axis: 'xy' }
 ): (event: CustomEvent) => void {
