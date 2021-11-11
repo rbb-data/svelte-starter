@@ -63,6 +63,11 @@
   circle {
     fill: steelblue;
   }
+
+  circle:hover {
+    cursor: move;
+  }
+
   .arrow {
     opacity: var(--opacity);
   }
