@@ -87,7 +87,7 @@ export function handlePanMove(
   coords: Writable<{ x: number; y: number }>,
   options: {
     /** move along the `x` or `y` axis, or both (`xy`) */
-    axis: 'xy' | 'x' | 'y';
+    axis?: 'xy' | 'x' | 'y';
     /** if given, the element is restricted to move within these bounds */
     bounds?: { top?: number; right?: number; bottom?: number; left?: number };
   } = { axis: 'xy' }

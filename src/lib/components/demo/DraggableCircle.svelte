@@ -53,7 +53,7 @@
   <circle
     use:pannable
     on:panstart={() => arrowOpacity.set(0)}
-    on:panmove={handlePanMove(coords, { axis: 'xy', bounds })}
+    on:panmove={handlePanMove(coords, { bounds })}
     on:panend={() => arrowOpacity.set(1)}
     r={radius}
   />
