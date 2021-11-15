@@ -157,9 +157,9 @@ This action creates and destroys a (tooltip) component on interaction with an el
 />
 ```
 
-This renders the `Tooltip` component on hover or touch.
+This renders the `Tooltip` component with the given `options.props` on hover or touch.
 
-The initialization `options` are passed to `Component` on creation (see https://svelte.dev/docs#Creating_a_component). `options.target` is the element the component is rendered to and defaults to `document.body`.
+The initialization `options` are passed to `Component` on creation; see [Svelte's docs](https://svelte.dev/docs#Creating_a_component) for more information.
 
 **Note:** `Component` must render an element with an id that matches `id`.
 
