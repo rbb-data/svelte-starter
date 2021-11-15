@@ -102,11 +102,11 @@ div {
 
 This action makes an element "pannable". It recognizes when an element is interacted with, tracks a pointer's position, and dispatches three custom events:
 
-- `panstart`: the interaction starts, exposes `{ x: number, y: number }`
-- `panmove`: the pointer is being moved, exposes `{ x: number, y: number, dx: number, dy: number }`
-- `panend`: the interaction ends, exposes `{ x: number, y: number }`
+- `panstart`: the interaction started (exposes `{ x: number, y: number }`)
+- `panmove`: the pointer is being moved (exposes `{ x: number, y: number, dx: number, dy: number }`)
+- `panend`: the interaction ended (exposes `{ x: number, y: number }`)
 
-Use as:
+For example:
 
 ```svelte
 <circle
@@ -144,6 +144,7 @@ This action creates and destroys a (tooltip) component on interaction with an el
 
 ```svelte
 <script>
+  import tooltip from '$lib/actions/tooltip';
   import Tooltip from '...';
 </script>
 
@@ -157,11 +158,11 @@ This action creates and destroys a (tooltip) component on interaction with an el
 />
 ```
 
-This renders the `Tooltip` component with the given `options.props` on hover or touch.
+This renders the `Tooltip` component on hover or touch with props as given in `options.props`.
 
-The initialization `options` are passed to `Component` on creation; see [Svelte's docs](https://svelte.dev/docs#Creating_a_component) for more information.
+The initialization `options` are passed to `Component` on creation; see [Svelte's docs](https://svelte.dev/docs#Creating_a_component) for more information. `Component` is rendered into `document.body` by default.
 
-**Note:** `Component` must render an element with an id that matches `id`.
+**Note:** `Component` must render an element that is uniquely identified by `id`.
 
 ## Build and deploy
 
