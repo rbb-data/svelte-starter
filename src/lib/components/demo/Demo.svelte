@@ -5,8 +5,6 @@
   import Svg from '$lib/components/shared/Svg.svelte';
   import DraggableCircle from './DraggableCircle.svelte';
 
-  const radius = 10;
-
   export let data: Array<{
     x: number;
     y: number;
@@ -22,17 +20,21 @@
   let boundedHeight = 0;
 
   // the chart's margins
-  let margin = {
+  const margin = {
     top: 10,
     right: 10,
     bottom: 10,
     left: 10,
   };
 
+  const radius = 10;
+
   // set up some scales with d3
-  $: xScale = scaleLinear()
-    .domain(extent(data, (d) => d.x))
-    .range([0, boundedWidth]);
+  $: xScale = boundedWidth
+    ? scaleLinear()
+        .domain(extent(data, (d) => d.x))
+        .range([0, boundedWidth])
+    : () => null;
   $: yScale = scaleLinear()
     .domain(extent(data, (d) => d.y))
     .range([boundedHeight, 0]);
@@ -54,7 +56,7 @@
   {#if width}
     <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
       {#each data as { x, y }}
-        {#if xScale(x) && yScale(y)}
+        {#if xScale(x) !== null}
           <DraggableCircle
             cx={xScale(x)}
             cy={yScale(y)}
@@ -75,5 +77,7 @@
 <style>
   .wrapper :global(svg) {
     overflow: visible;
+    /* this is not optimal as it prevents scrolling on the svg */
+    touch-action: none;
   }
 </style>
