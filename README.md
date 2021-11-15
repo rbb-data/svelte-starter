@@ -136,7 +136,7 @@ Use as:
 />
 ```
 
-`drag` can be configured to move an element along a specified axis or within given bounds (check `src/lib/actions/pannable.ts`). Also check out `src/lib/components/demo/DraggableCircle.svelte` to see `pannable` and `drag` in action.
+`drag` can be configured to move an element along a specified axis or within given bounds (see `src/lib/actions/pannable.ts`). Check out `src/lib/components/demo/DraggableCircle.svelte` to see `pannable` and `drag` in action.
 
 ## Build and deploy
 

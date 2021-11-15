@@ -1,4 +1,4 @@
 import css from './css';
-import pannable from './pannable';
+import pannable, { drag } from './pannable';
 
-export { css, pannable };
+export { css, pannable, drag };
