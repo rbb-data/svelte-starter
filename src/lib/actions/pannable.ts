@@ -12,7 +12,7 @@
  */
 
 import type { Writable } from 'svelte/store';
-import type { ActionReturn } from './types';
+import type { ActionReturn } from '$lib/types';
 
 export default function pannable(
   node: HTMLElement | SVGElement

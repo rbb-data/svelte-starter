@@ -6,7 +6,7 @@
  * sets --color to 'steelblue' on that div.
  */
 
-import type { ActionReturn } from './types';
+import type { ActionReturn } from '$lib/types';
 
 export default function css(
   node: HTMLElement | SVGElement,
