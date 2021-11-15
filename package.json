@@ -54,7 +54,8 @@
   ],
   "type": "module",
   "exports": {
-    ".": "./index.js"
+    ".": "./index.js",
+    "./actions": "./actions/index.js"
   },
   "license": "MIT"
 }
