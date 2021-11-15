@@ -84,15 +84,59 @@ Defined in `src/lib/actions/`
 
 ### `use:css`
 
-Dynamically sets CSS variables. For example, `<div use:css={{ color: 'steelblue' }}>...</div>` sets the CSS variable `--color` to `'steelblue'` on that element.
+This action dynamically sets CSS variables. For example:
+
+```svelte
+<div use:css={{ 'my-dynamically-set-color': 'steelblue' }}>...</div>
+```
+
+sets the CSS variable `--my-dynamically-set-color` to `'steelblue'` on that element. The variable can then be referenced in the style tag like any other CSS variable:
+
+```css
+div {
+  background-color: var(--my-dynamically-set-color);
+}
+```
 
 ### `use:pannable`
 
-This action makes an element pannable. It listens to the respective mouse and touch events, tracks an element's position and dispatches three custom events: `panstart`, `panmove` and `panend`.
+This action makes an element "pannable". It recognizes when an element is interacted with, tracks a pointer's position, and dispatches three custom events:
 
-The module also exports `handlePanMove`, a convenience function to use on `panmove` that implements drag & drop.
+- `panstart`: the interaction starts, exposes `{ x: number, y: number }`
+- `panmove`: the pointer is being moved, exposes `{ x: number, y: number, dx: number, dy: number }`
+- `panend`: the interaction ends, exposes `{ x: number, y: number }`
 
-See `src/lib/components/demo/DraggableCircle.svelte` for an example of how to use this action.
+Use as:
+
+```svelte
+<circle
+  use:pannable
+  on:panstart={(e) => console.log('panning started', e.detail)}
+  on:panmove={(e) => console.log('pointer is moving...', e.detail)}
+  on:panend={(e) => console.log('panning ended', e.detail)}
+  r="10"
+/>
+```
+
+`pannable.js` also exports an additional function `drag` that makes it easy to make an element draggable. For example:
+
+```svelte
+<script>
+  import { writable } from 'svelte/store';
+  import pannable, { drag } from '$lib/actions/pannable';
+  const coords = writable({ x: 0, y: 0 });
+</script>
+
+<circle
+  cx={$coords.x}
+  cy={$coords.y}
+  use:pannable
+  on:panmove={drag(coords)}
+  r="10"
+/>
+```
+
+`drag` can be configured to move an element along a specified axis or within given bounds (check `src/lib/actions/pannable.ts`). Also check out `src/lib/components/demo/DraggableCircle.svelte` to see `pannable` and `drag` in action.
 
 ## Build and deploy
 

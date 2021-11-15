@@ -1,19 +1,53 @@
 /**
- * This action makes an element pannable.
- * It listens to the respective mouse and touch
- * events, tracks an element's position and dispatches
- * three custom events: panstart, panmove and panend.
+ * This action makes an element "pannable". It recognizes when an element
+ * is interacted with, tracks a pointer's position, and dispatches three
+ * custom events:
  *
- * `handlePanMove` is a convenience function to use on
- * panmove that implements drag & drop.
+ * - `panstart`: the interaction starts, exposes `{ x: number, y: number }`
+ * - `panmove`: the pointer is being moved, exposes `{ x: number, y: number, dx: number, dy: number }`
+ * - `panend`: the interaction ends, exposes `{ x: number, y: number }`
  *
- * See src/lib/components/demo/DraggableCircle.svelte
- * for an example of how to use this action.
+ * Use as:
+ *
+ * <circle
+ *   use:pannable
+ *   on:panstart={(e) => console.log('panning started', e.detail)}
+ *   on:panmove={(e) => console.log('pointer is moving...', e.detail)}
+ *   on:panend={(e) => console.log('panning ended', e.detail)}
+ *   r="10"
+ * />
+ *
+ * `pannable.js` also exports an additional function `drag` that makes it
+ * easy to make an element draggable. For example:
+ *
+ * ```svelte
+ * <script>
+ *   import { writable } from 'svelte/store';
+ *   import pannable, { drag } from '$lib/actions/pannable';
+ *   const coords = writable({ x: 0, y: 0 });
+ * </script>
+ *
+ * <circle
+ *   cx={$coords.x}
+ *   cy={$coords.y}
+ *   use:pannable
+ *   on:panmove={drag(coords)}
+ *   r="10"
+ * />
+ * ```
+ *
+ * `drag` can be configured to move an element along a specified axis
+ * or within given bounds (see function signature below).
  */
 
 import type { Writable } from 'svelte/store';
 import type { ActionReturn } from '$lib/types';
 
+/**
+ * Make an element pannable
+ *
+ * @param node - the element to make pannable
+ */
 export default function pannable(
   node: HTMLElement | SVGElement
 ): ActionReturn<void> {
@@ -83,17 +117,25 @@ export default function pannable(
   };
 }
 
+/**
+ * Creates a function that updates an element's coordinates
+ * according to the information exposed by some custom event
+ *
+ * @param coords - a writable store that exposes an element's position
+ * @param options.axis - the axis to move along (`x` or `y`), or `xy` for no restrictions (default)
+ * @param options.bounds - if given, the element is restricted to move within these bounds
+ * @returns function that consumes a custom event and keeps the given coordinates in sync
+ */
 export function drag(
   coords: Writable<{ x: number; y: number }>,
   options: {
-    /** move along the `x` or `y` axis, or both (`xy`) */
     axis?: 'xy' | 'x' | 'y';
-    /** if given, the element is restricted to move within these bounds */
     bounds?: { top?: number; right?: number; bottom?: number; left?: number };
   } = { axis: 'xy' }
-): (event: CustomEvent) => void {
+): (event: CustomEvent<{ dx: number; dy: number }>) => void {
   const { axis, bounds } = options;
 
+  // use `bounds` to constrain movement
   function bounded(value: number, axis: 'x' | 'y') {
     if (!options.bounds) return value;
     const [min, max] = {
