@@ -58,9 +58,8 @@ export default function tooltipable<Props>(
   const { id, Component } = tooltip;
 
   // attach to body by default
-  let { options } = tooltip;
-  if (!options) options = {};
-  if (!options.target) options.target = document.body;
+  const options = tooltip.options || {};
+  options.target = options.target || document.body;
 
   let component: SvelteComponent;
 
