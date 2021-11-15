@@ -83,7 +83,7 @@ export default function pannable(
   };
 }
 
-export function handlePanMove(
+export function drag(
   coords: Writable<{ x: number; y: number }>,
   options: {
     /** move along the `x` or `y` axis, or both (`xy`) */

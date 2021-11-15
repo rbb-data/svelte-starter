@@ -3,7 +3,7 @@
 
   import Arrows from './Arrows.svelte';
 
-  import pannable, { handlePanMove } from '$lib/actions/pannable';
+  import pannable, { drag } from '$lib/actions/pannable';
   import { translate } from '$lib/helpers/utils';
 
   // initial x and y coordinates
@@ -32,7 +32,7 @@
   <circle
     use:pannable
     on:panstart={() => (showArrows = false)}
-    on:panmove={handlePanMove(coords, { bounds })}
+    on:panmove={drag(coords, { bounds })}
     on:panend={() => (showArrows = true)}
     r={radius}
   />
