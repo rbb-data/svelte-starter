@@ -138,7 +138,7 @@ Use as:
 
 `drag` can be configured to move an element along a specified axis or within given bounds (see `src/lib/actions/pannable.ts`). Check out `src/lib/components/demo/DraggableCircle.svelte` to see `pannable` and `drag` in action.
 
-### `use:tooltipable`
+### `use:tooltip`
 
 This action creates and destroys a (tooltip) component on interaction with an element.
 
@@ -148,7 +148,7 @@ This action creates and destroys a (tooltip) component on interaction with an el
 </script>
 
 <circle
-  use:tooltipable={{
+  use:tooltip={{
     id: 'tooltip',
     Component: Tooltip,
     options: { props: { message: 'Hello world' } },

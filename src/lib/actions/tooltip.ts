@@ -8,7 +8,7 @@
  * </script>
  *
  * <circle
- *   use:tooltipable={{
+ *   use:tooltip={{
  *     id: 'tooltip',
  *     Component: Tooltip,
  *     options: { props: { message: 'Hello world' } },
