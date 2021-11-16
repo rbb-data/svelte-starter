@@ -11,8 +11,6 @@ interface XYd extends XY {
   dy: number;
 }
 
-type Test = XYd;
-
 interface Pannable {
   // custom events defined in `src/lib/actions/pannable.ts`
   onpanstart?: (e: CustomEvent<XY>) => void;
