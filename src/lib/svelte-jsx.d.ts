@@ -17,4 +17,10 @@ declare namespace svelte.JSX {
     onpanmove?: (e: CustomEvent<XYd>) => void;
     onpanend?: (e: CustomEvent<XY>) => void;
   }
+  interface HTMLAttributes<T> {
+    // custom events defined in `src/lib/actions/pannable.ts`
+    onpanstart?: (e: CustomEvent<XY>) => void;
+    onpanmove?: (e: CustomEvent<XYd>) => void;
+    onpanend?: (e: CustomEvent<XY>) => void;
+  }
 }
