@@ -41,7 +41,7 @@
   let xy = writable({ x: 0, y: 0 });
   const animatedXY = spring({ x: 0, y: 0 });
 
-  // animatedXY mirrows xy
+  // animatedXY mirrors xy
   $: animatedXY.set($xy);
 
   function canNavigate(navigateBackward: boolean) {
