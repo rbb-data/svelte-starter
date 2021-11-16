@@ -24,6 +24,16 @@
         },
       };
 
+    // don't throw an error if the credentials are missing
+    if (!configRes.ok && configRes.status === 401) {
+      return {
+        props: {
+          data: await dataRes.json(),
+          config: {},
+        },
+      };
+    }
+
     // throw an error if one of the resources could not be loaded
     return {
       status: dataRes.ok ? configRes.status : dataRes.status,
@@ -47,10 +57,12 @@
   export let config: {
     header: { title: string; subtitle: string };
   };
+
+  const { header } = config;
 </script>
 
 <div class="wrapper">
-  <Demo {data} header={config.header} />
+  <Demo {data} {header} />
 </div>
 
 <style>

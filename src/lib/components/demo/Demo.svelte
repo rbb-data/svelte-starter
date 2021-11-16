@@ -42,13 +42,20 @@
 
 <h1>Demo</h1>
 
-<dl>
-  <dt>title:</dt>
-  <dd>{@html header.title}</dd>
+{#if header}
+  <dl>
+    <dt>title:</dt>
+    <dd>{@html header.title}</dd>
 
-  <dt>subtitle:</dt>
-  <dd>{header.subtitle}</dd>
-</dl>
+    <dt>subtitle:</dt>
+    <dd>{header.subtitle}</dd>
+  </dl>
+{:else}
+  <i>
+    You are lacking the necessary credentials to read content from the linked
+    Google doc.
+  </i>
+{/if}
 
 <p>Ein responsiver SVG Container:</p>
 
