@@ -105,6 +105,7 @@
     width: 100%;
     height: var(--height);
     overflow-x: hidden;
+    touch-action: none;
   }
 
   .content {
