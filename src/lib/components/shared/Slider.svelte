@@ -6,25 +6,33 @@
   import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
 
-  export let onForwardNavigation: () => void;
-  export let onBackwardNavigation: () => void;
-
+  // array of three slides: the previous, the current, and the next
   export let slides: Array<{
     component: typeof SvelteComponent;
     props: Record<string, any>;
   }>;
+
+  // function called on forward navigation
+  export let onForwardNavigation: () => void;
+
+  // function called on backward navigation
+  export let onBackwardNavigation: () => void;
 
   $: [prevSlide, currSlide, nextSlide] = slides;
   $: prevNext = [prevSlide, nextSlide]
     .map((slide, i) => ({ slide, key: i === 0 ? 'prev' : 'next' }))
     .filter(({ slide }) => slide);
 
+  // dimensions of the slider
   let width = 0;
   let height = 0;
 
   let animate = true;
+
+  // x coordinate on touchstart
   let startX: number;
 
+  // thresholds that filter out small movements
   $: minX = 0.33 * width;
   $: maxX = 0.66 * width;
   const minDiff = 20;
@@ -33,6 +41,7 @@
   let xy = writable({ x: 0, y: 0 });
   const animatedXY = spring({ x: 0, y: 0 });
 
+  // animatedXY mirrows xy
   $: animatedXY.set($xy);
 
   function canNavigate(navigateBackward: boolean) {
