@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { SvelteComponent } from 'svelte';
   import { writable } from 'svelte/store';
   import { spring } from 'svelte/motion';
 
@@ -7,6 +8,16 @@
 
   export let onForwardNavigation: () => void;
   export let onBackwardNavigation: () => void;
+
+  export let slides: Array<{
+    component: typeof SvelteComponent;
+    props: Record<string, any>;
+  }>;
+
+  $: [prevSlide, currSlide, nextSlide] = slides;
+  $: prevNext = [prevSlide, nextSlide]
+    .map((slide, i) => ({ slide, key: i === 0 ? 'prev' : 'next' }))
+    .filter(({ slide }) => slide);
 
   let width = 0;
   let height = 0;
@@ -25,9 +36,7 @@
   $: animatedXY.set($xy);
 
   function canNavigate(navigateBackward: boolean) {
-    return (
-      (navigateBackward && $$slots.prev) || (!navigateBackward && $$slots.next)
-    );
+    return (navigateBackward && prevSlide) || (!navigateBackward && nextSlide);
   }
 
   function navigateAndReset(navigateBackward: boolean) {
@@ -96,19 +105,18 @@
       'translate-x': `${animate ? $animatedXY.x : $xy.x}px`,
     }}
   >
-    {#if $$slots.prev}
-      <div class="inner prev">
-        <slot name="prev" />
-      </div>
-    {/if}
+    <!-- visible content -->
     <div class="inner" bind:clientHeight={height}>
-      <slot name="curr" />
+      <svelte:component this={currSlide.component} {...currSlide.props} />
     </div>
-    {#if $$slots.next}
-      <div class="inner next">
-        <slot name="next" />
-      </div>
-    {/if}
+    <!-- previous and next slides -->
+    {#each prevNext as { slide, key }}
+      {#if slide}
+        <div class={`inner ${key}`}>
+          <svelte:component this={slide.component} {...slide.props} />
+        </div>
+      {/if}
+    {/each}
   </div>
 </div>
 
