@@ -51,6 +51,10 @@
     navigateAndReset(navigateBackward);
   }
 
+  function handlePanStart(e: CustomEvent<{ x: number; y: number }>) {
+    startX = e.detail.x;
+  }
+
   function handlePanEnd(e: CustomEvent<{ x: number; y: number }>) {
     const endX = e.detail.x;
     const diff = endX - startX;
@@ -88,7 +92,7 @@
       bind:clientHeight={height}
       on:click={handleClick}
       use:pannable
-      on:panstart={(e) => (startX = e.detail.x)}
+      on:panstart={handlePanStart}
       on:panmove={drag(xy)}
       on:panend={handlePanEnd}
     >
