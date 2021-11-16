@@ -19,16 +19,17 @@
 
   $: animatedXY.set(xy);
 
-  console.log($$slots);
-
   function handleClick(event: MouseEvent) {
     const { clientX: x } = event;
 
     if (x >= minX && x <= maxX) return;
 
-    animate = true;
-
     const navigateBackward = x < minX;
+
+    if (navigateBackward && !$$slots.prev) return;
+    if (!navigateBackward && !$$slots.next) return;
+
+    animate = true;
     xy = navigateBackward ? { x: 100, y: 0 } : { x: -100, y: 0 };
 
     setTimeout(() => {
