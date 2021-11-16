@@ -24,6 +24,12 @@
 
   $: animatedXY.set($xy);
 
+  function canNavigate(navigateBackward: boolean) {
+    return (
+      (navigateBackward && $$slots.prev) || (!navigateBackward && $$slots.next)
+    );
+  }
+
   function navigateAndReset(navigateBackward: boolean) {
     // transition to the next (or previous) slide
     animate = true;
@@ -44,10 +50,14 @@
     if (x >= minX && x <= maxX) return;
 
     const navigateBackward = x < minX;
+    if (!canNavigate(navigateBackward)) return;
+    navigateAndReset(navigateBackward);
+  }
 
-    if (navigateBackward && !$$slots.prev) return;
-    if (!navigateBackward && !$$slots.next) return;
-
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const navigateBackward = e.key === 'ArrowLeft';
+    if (!canNavigate(navigateBackward)) return;
     navigateAndReset(navigateBackward);
   }
 
@@ -60,11 +70,7 @@
     const diff = endX - startX;
     const navigateBackward = diff > 0;
 
-    if (
-      Math.abs(diff) < minDiff ||
-      (navigateBackward && !$$slots.prev) ||
-      (!navigateBackward && !$$slots.next)
-    ) {
+    if (Math.abs(diff) < minDiff || !canNavigate(navigateBackward)) {
       xy.set({ x: 0, y: 0 });
       return;
     }
@@ -77,6 +83,12 @@
   class="slider"
   bind:clientWidth={width}
   use:css={{ height: `${height}px` }}
+  on:keydown={handleKeyDown}
+  on:click={handleClick}
+  use:pannable
+  on:panstart={handlePanStart}
+  on:panmove={drag(xy)}
+  on:panend={handlePanEnd}
 >
   <div
     class="content"
@@ -84,23 +96,19 @@
       'translate-x': `${animate ? $animatedXY.x : $xy.x}px`,
     }}
   >
-    <div class="inner prev">
-      <slot name="prev" />
-    </div>
-    <div
-      class="inner"
-      bind:clientHeight={height}
-      on:click={handleClick}
-      use:pannable
-      on:panstart={handlePanStart}
-      on:panmove={drag(xy)}
-      on:panend={handlePanEnd}
-    >
+    {#if $$slots.prev}
+      <div class="inner prev">
+        <slot name="prev" />
+      </div>
+    {/if}
+    <div class="inner" bind:clientHeight={height}>
       <slot name="curr" />
     </div>
-    <div class="inner next">
-      <slot name="next" />
-    </div>
+    {#if $$slots.next}
+      <div class="inner next">
+        <slot name="next" />
+      </div>
+    {/if}
   </div>
 </div>
 
