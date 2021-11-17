@@ -6,6 +6,8 @@
   import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
 
+  // TODO: Something is off when dragging with mouse
+
   // array of three slides: the previous, the current, and the next
   export let slides: Array<{
     component: typeof SvelteComponent;
@@ -103,7 +105,7 @@
   use:css={{ height: `${height}px` }}
   on:keydown={handleKeyDown}
   on:click={handleClick}
-  use:pannable
+  use:pannable={{ ignorePointers: ['mouse'] }}
   on:panstart={handlePanStart}
   on:panmove={drag(xy)}
   on:panend={handlePanEnd}

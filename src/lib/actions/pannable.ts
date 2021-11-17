@@ -10,12 +10,14 @@
  * Use as:
  *
  * <circle
- *   use:pannable
+ *   use:pannable={{ ignorePointers: ['mouse'] }}
  *   on:panstart={(e) => console.log('panning started', e.detail)}
  *   on:panmove={(e) => console.log('pointer is moving...', e.detail)}
  *   on:panend={(e) => console.log('panning ended', e.detail)}
  *   r="10"
  * />
+ *
+ * `ignorePointers` allows to ignore interactions from specific pointers.
  *
  * `pannable.js` also exports an additional function `drag` that makes it
  * easy to make an element draggable. For example:
@@ -43,13 +45,19 @@
 import type { Writable } from 'svelte/store';
 import type { ActionReturn } from '$lib/types';
 
+type PointerType = 'mouse' | 'pen' | 'touch';
+
 /**
  * Make an element pannable
  *
  * @param node - the element to make pannable
+ * @param options.ignorePointers - a list of pointer types to ignore
  */
 export default function pannable(
-  node: HTMLElement | SVGElement
+  node: HTMLElement | SVGElement,
+  options: { ignorePointers: Array<PointerType> } = {
+    ignorePointers: [],
+  }
 ): ActionReturn<void> {
   let x: number;
   let y: number;
@@ -58,6 +66,8 @@ export default function pannable(
 
   function handleStart(event: PointerEvent) {
     if (!event.isPrimary) return;
+    if (options.ignorePointers.includes(event.pointerType as PointerType))
+      return;
 
     x = event.clientX;
     y = event.clientY;

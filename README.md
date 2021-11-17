@@ -110,13 +110,15 @@ For example:
 
 ```svelte
 <circle
-  use:pannable
+  use:pannable={{ ignorePointers: ['mouse'] }}
   on:panstart={(e) => console.log('panning started', e.detail)}
   on:panmove={(e) => console.log('pointer is moving...', e.detail)}
   on:panend={(e) => console.log('panning ended', e.detail)}
   r="10"
 />
 ```
+
+`ignorePointers` allows to ignore interactions from specific pointers.
 
 `pannable.js` also exports an additional function `drag` that makes it easy to make an element draggable. For example:
 
