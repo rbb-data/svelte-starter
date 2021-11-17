@@ -91,7 +91,11 @@
     const navigateBackward = diff > 0;
 
     if (Math.abs(diff) < minDiff || !canNavigate(navigateBackward)) {
+      animate = true;
       xy.set({ x: 0, y: 0 });
+      setTimeout(() => {
+        animate = false;
+      }, 500);
       return;
     }
 
