@@ -1,6 +1,7 @@
 <script lang="ts">
   export let tabs = [];
-  export let activeIndex = 0;
+  export let initialIndex = 0;
+  export let activeIndex = initialIndex;
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
