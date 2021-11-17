@@ -5,3 +5,4 @@ node_modules
 /package
 google-credentials.json
 /doc/storybook-static
+/doc/out*

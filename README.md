@@ -187,7 +187,30 @@ This can then be rendered as:
 
 ### `Slider`
 
-To do
+`Slider` renders a single component at a time and provides the necessary functionality to navigate back and forth through swipe gestures (on touch devices) or mouse clicks (on desktop). Check out its [stories](https://rbb-data.github.io/svelte-starter/?path=/story/core-slider--basic).
+
+`Slider` keeps track of the active slide internally. Binding to this prop is a common pattern. For example:
+
+```svelte
+<script>
+  import Slide from './Slide.svelte';
+
+  // a list of slide components
+  const slides = [..., { component: Slide, props: { ... } }, ...];
+
+  // the active index
+  let activeIndex;
+</script>
+
+<Slider
+  {slides}
+  prev={(idx) => (idx - 1 >= 0 ? idx - 1 : null)}
+  next={(idx) => (idx + 1 <= nSlides - 1 ? idx + 1 : null)}
+  bind:activeIndex
+/>
+```
+
+`prev` and `next` determine the index of the previous and next slide; returning `null` means there is no slide to go to.
 
 ### `Svg`
 

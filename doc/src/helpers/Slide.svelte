@@ -1,11 +1,11 @@
 <script>
   import { css } from '@rbb-data/svelte-starter/actions';
 
-  export let message;
+  export let content;
   export let color;
 </script>
 
-<div use:css={{ color }}>{message}</div>
+<div use:css={{ color }}>{content}</div>
 
 <style>
   div {
