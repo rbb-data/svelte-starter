@@ -1,6 +1,13 @@
 <script lang="ts">
-  export let tabs = [];
+  import type { Component } from '$lib/types';
+
+  // list of tabs (a tab is any svelte component that can be rendered)
+  export let tabs: Array<Component>;
+
+  // initial index of the active tab
   export let initialIndex = 0;
+
+  // the index of the active tab
   export let activeIndex = initialIndex;
 
   function handleKeyDown(e: KeyboardEvent) {

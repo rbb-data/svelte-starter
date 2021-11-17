@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SvelteComponent } from 'svelte';
+  import type { Component } from '$lib/types';
   import { writable } from 'svelte/store';
   import { spring } from 'svelte/motion';
 
@@ -7,10 +7,7 @@
   import pannable, { drag } from '$lib/actions/pannable';
 
   // array of three slides: the previous, the current, and the next
-  export let slides: Array<{
-    component: typeof SvelteComponent;
-    props: Record<string, any>;
-  }>;
+  export let slides: Array<Component>;
 
   // function called on forward navigation
   export let onForwardNavigation: () => void;
