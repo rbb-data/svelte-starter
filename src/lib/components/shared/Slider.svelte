@@ -6,8 +6,6 @@
   import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
 
-  // TODO: Something is off when dragging with mouse
-
   // array of three slides: the previous, the current, and the next
   export let slides: Array<{
     component: typeof SvelteComponent;
