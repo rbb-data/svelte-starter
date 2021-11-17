@@ -1,9 +1,20 @@
 <script lang="ts">
   export let tabs = [];
   export let activeIndex = 0;
+
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    const toLeft = e.key === 'ArrowLeft';
+    if (
+      (toLeft && activeIndex === 0) ||
+      (!toLeft && activeIndex === tabs.length - 1)
+    )
+      return;
+    toLeft ? activeIndex-- : activeIndex++;
+  }
 </script>
 
-<ul class="tabs">
+<ul class="tabs" tabindex="0" on:keydown={handleKeyDown}>
   {#each tabs as tab, tabIndex}
     <li
       class:active={tabIndex === activeIndex}
