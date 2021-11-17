@@ -1,5 +1,5 @@
-import Svg from './components/shared/Svg.svelte';
-import Slider from './components/shared/Slider.svelte';
-import Tabs from './components/shared/Tabs.svelte';
+import Svg from './components/core/Svg.svelte';
+import Slider from './components/core/Slider.svelte';
+import Tabs from './components/core/Tabs.svelte';
 
 export { Svg, Slider, Tabs };

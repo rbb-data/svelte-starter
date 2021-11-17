@@ -45,7 +45,7 @@
 </script>
 
 <Meta
-  title="Components/Slider"
+  title="Core/Slider"
   component={Slider}
   argTypes={{
     slides: {
