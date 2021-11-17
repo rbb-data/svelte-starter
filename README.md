@@ -170,7 +170,7 @@ The initialization `options` are passed to `Component` on creation; see [Svelte'
 
 Defined in `src/lib/components/core`
 
-"Core" components are essentially higher-level components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
+"Core" components are essentially higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
 
 Passing components as props in Svelte entails specifying a component constructur and its props. For example:
 
