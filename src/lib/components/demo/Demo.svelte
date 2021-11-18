@@ -3,6 +3,7 @@
   import { extent } from 'd3-array';
 
   import Svg from '$lib/components/shared/core/Svg.svelte';
+  import Search from '$lib/components/shared/Search.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
 
@@ -42,6 +43,8 @@
 </script>
 
 <h1>Demo</h1>
+
+<Search />
 
 {#if header}
   <dl>

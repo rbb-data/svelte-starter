@@ -13,7 +13,7 @@ interface Suggestion {
   highlight?: string;
 }
 
-export default function fuzzySearch(
+export default function fuzzysearch(
   node: HTMLInputElement,
   { data, key, highlight }: SearchOptions
 ): ActionReturn<void> {
