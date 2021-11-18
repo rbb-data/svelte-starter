@@ -170,9 +170,9 @@ The initialization `options` are passed to `Component` on creation; see [Svelte'
 
 Defined in `src/lib/components/core`
 
-"Core" components are essentially higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
+Core components are essentially higher-level components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways. Core components don't usually control styling other than layouting.
 
-Passing components as props in Svelte entails specifying a component constructur and its props. For example:
+Passing components as props in Svelte entails specifying a component constructor and its props. For example:
 
 ```javascript
 import Tab from './Tab.svelte';
@@ -198,7 +198,7 @@ This can then be rendered as:
   // a list of slide components
   const slides = [..., { component: Slide, props: { ... } }, ...];
 
-  // the active index
+  // the index of the visible slide
   let activeIndex;
 </script>
 
@@ -214,11 +214,37 @@ This can then be rendered as:
 
 ### `Svg`
 
-To do
+`Svg` is a SVG container that implements a common pattern for sizing charts (check out [Amelia Wattenberger's blog post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)). Typically, one would bind to the internally managed `boundedWidth` and `boundedHeight`.
 
 ### `Tabs`
 
-To do
+The `Tabs` component layouts given components horizontally and makes them selectable. The active tab is tracked internally and marked by adding the class `.active`. `Tabs` doesn't define any styles for the selected tab, this has to be handled elsewhere. For example:
+
+```svelte
+<script>
+  import Tab from '../helpers/Tab.svelte';
+
+  // the index of the selected tab
+  let activeIndex;
+
+  // a list of tab components
+  const tabContent = ['Tab #1', 'Tab #2', 'Tab #3'];
+  $: tabs = tabContent.map((content, tabIndex) => ({
+    component: Tab,
+    props: { content, active: tabIndex === activeIndex },
+  }));
+</script>
+
+<Tabs {tabs} bind:activeIndex />
+```
+
+Alternatively, one could also make use of global styling in the custom `Tab` component:
+
+```css
+:global(.tabs .active) .my-tab {
+  outline: 2px solid steelblue;
+}
+```
 
 ## Build and deploy
 
