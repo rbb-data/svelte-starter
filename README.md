@@ -168,7 +168,7 @@ The initialization `options` are passed to `Component` on creation; see [Svelte'
 
 ## Core components
 
-Defined in `src/lib/components/core`
+Defined in `src/lib/components/shared/core`
 
 Core components are essentially higher-level components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways. Core components don't usually control styling other than layouting.
 
