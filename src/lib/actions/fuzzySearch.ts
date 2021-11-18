@@ -55,13 +55,30 @@ export default function fuzzySearch(
     );
   }
 
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key !== 'Escape') return;
+    event.preventDefault();
+
+    // clear input field
+    node.value = '';
+
+    // reset result
+    node.dispatchEvent(
+      new CustomEvent('result', {
+        detail: { result: null },
+      })
+    );
+  }
+
   node.addEventListener('input', handleInput);
   node.addEventListener('change', handleChange);
+  node.addEventListener('keydown', handleKeyDown);
 
   return {
     destroy() {
       node.removeEventListener('input', handleInput);
       node.removeEventListener('change', handleChange);
+      node.removeEventListener('keydown', handleKeyDown);
     },
   };
 }
