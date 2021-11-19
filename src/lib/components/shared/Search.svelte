@@ -55,30 +55,30 @@
       bind:this={inputElement}
     />
 
-    <button type="submit">Submit</button>
     <button type="reset">Reset</button>
+    <button type="submit">Submit</button>
   </form>
 
-  <ul>
-    {#each suggestions as suggestion, i}
-      <li class:active={i === highlightedIndex}>{suggestion.item}</li>
-    {/each}
-  </ul>
+  <div class="suggestions">
+    <ul>
+      {#each suggestions as suggestion, i}
+        <li class:active={i === highlightedIndex}>{suggestion.item}</li>
+      {/each}
+    </ul>
+  </div>
 </div>
 
 <style>
-  .search {
-    width: 100%;
-  }
-
-  input {
-    width: 100%;
+  .suggestions {
+    position: relative;
   }
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    position: absolute;
+    top: 0;
   }
 
   li {
