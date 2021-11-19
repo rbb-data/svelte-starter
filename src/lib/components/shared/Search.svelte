@@ -8,6 +8,7 @@
   export let format = (d: any): string => d;
 
   export let hideLabel = false;
+  export let label = 'Search';
   export let placeholder = 'Placeholder';
   export let highlightSelection = true;
 
@@ -74,7 +75,7 @@
     on:reset={handleReset}
     on:keydown={handleKeyDown}
   >
-    <label class:hidden={hideLabel} for="input-search">Search</label>
+    <label class:hidden={hideLabel} for="input-search">{label}</label>
     <input
       id="input-search"
       {placeholder}
