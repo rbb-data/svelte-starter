@@ -16,7 +16,7 @@
 
   function handleSubmit(e) {
     e.preventDefault();
-    inputElement.value = result.item;
+    inputElement.value = result;
     discardSuggestions();
   }
 
@@ -62,7 +62,7 @@
   <div class="suggestions">
     <ul>
       {#each suggestions as suggestion, i}
-        <li class:active={i === highlightedIndex}>{suggestion.item}</li>
+        <li class:active={i === highlightedIndex}>{suggestion}</li>
       {/each}
     </ul>
   </div>

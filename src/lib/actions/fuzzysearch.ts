@@ -5,20 +5,16 @@ import type { ActionReturn } from '$lib/types';
 interface SearchOptions {
   data: Array<string | Record<string, any>>;
   key?: string;
-  highlight?: boolean;
 }
 
 interface Suggestion {
   item: string | Record<string, any>;
-  highlight?: string;
 }
 
 export default function fuzzysearch(
   node: HTMLInputElement,
-  { data, key, highlight }: SearchOptions
+  { data, key }: SearchOptions
 ): ActionReturn<void> {
-  if (!highlight) highlight = false;
-
   function search(query: string, top?: number): Array<Suggestion> {
     let results = fuzzysort.go(query, data, { key });
 
@@ -27,10 +23,7 @@ export default function fuzzysearch(
     const suggestions = [];
     for (let i = 0; i < results.length; i++) {
       const result = results[i];
-      suggestions.push({
-        item: key ? result.obj : result.target,
-        highlight: highlight ? fuzzysort.highlight(result) : undefined,
-      });
+      suggestions.push(key ? result.obj : result.target);
     }
 
     return suggestions;
