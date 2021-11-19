@@ -30,6 +30,11 @@
   }
 
   function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape') {
+      discardSuggestions();
+      return;
+    }
+
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
 
     const up = e.key === 'ArrowUp';
