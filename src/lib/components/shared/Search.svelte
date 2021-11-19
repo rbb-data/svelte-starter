@@ -71,8 +71,12 @@
       bind:this={inputElement}
     />
 
-    <button type="reset">Reset</button>
-    <button type="submit">Submit</button>
+    {#if $$slots['reset-button']}
+      <slot name="reset-button" />
+    {/if}
+    {#if $$slots['submit-button']}
+      <slot name="submit-button" />
+    {/if}
   </form>
 
   <div class="suggestions">
@@ -95,9 +99,6 @@
     padding: 0;
     position: absolute;
     top: 0;
-  }
-
-  li {
     background-color: white;
   }
 </style>
