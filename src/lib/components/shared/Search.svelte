@@ -110,6 +110,10 @@
     background-color: white;
   }
 
+  label {
+    display: block;
+  }
+
   /* hides label visually but keeps it avaliable
   for screen readers and assistive technology */
   label.hidden {
