@@ -9,6 +9,7 @@
 
   export let hideLabel = false;
   export let placeholder = 'Placeholder';
+  export let highlightSelection = true;
 
   export let result: string | Record<string, any> | null = null;
 
@@ -25,12 +26,16 @@
     highlightedIndex = null;
   }
 
-  function handleSubmit(e: Event) {
-    e.preventDefault();
-    if (highlightedElement === null) return;
+  function submit() {
     inputElement.value = format(highlightedElement);
     result = highlightedElement;
     discardSuggestions();
+  }
+
+  function handleSubmit(e: Event) {
+    e.preventDefault();
+    if (highlightedElement === null) return;
+    submit();
   }
 
   function handleReset() {
@@ -90,7 +95,14 @@
   <div class="suggestions">
     <ul>
       {#each suggestions as suggestion, i}
-        <li class:active={i === highlightedIndex}>{format(suggestion)}</li>
+        <li
+          class:active={i === highlightedIndex}
+          class:highlight={highlightSelection}
+          on:pointerover={() => (highlightedIndex = i)}
+          on:pointerdown={() => submit()}
+        >
+          {format(suggestion)}
+        </li>
       {/each}
     </ul>
   </div>
@@ -108,6 +120,12 @@
     position: absolute;
     top: 0;
     background-color: white;
+  }
+
+  li.highlight:hover,
+  li.highlight.active {
+    font-weight: bold;
+    cursor: pointer;
   }
 
   label {
