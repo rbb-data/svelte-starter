@@ -27,6 +27,7 @@
 
   function handleSubmit(e: Event) {
     e.preventDefault();
+    if (highlightedElement === null) return;
     inputElement.value = format(highlightedElement);
     result = highlightedElement;
     discardSuggestions();
