@@ -1,7 +1,10 @@
 <script>
   import fuzzysearch from '$lib/actions/fuzzysearch';
 
-  const data = ['banana', 'apple', 'citron', 'banane', 'ban', 'ba'];
+  export let data;
+  export let key;
+  export let format = (d) => d;
+
   let inputElement;
 
   let suggestions = [];
@@ -16,7 +19,7 @@
 
   function handleSubmit(e) {
     e.preventDefault();
-    inputElement.value = result;
+    inputElement.value = format(result);
     discardSuggestions();
   }
 
@@ -50,7 +53,7 @@
     on:keydown={handleKeyDown}
   >
     <input
-      use:fuzzysearch={{ data }}
+      use:fuzzysearch={{ data, key }}
       on:search={handleSearch}
       bind:this={inputElement}
     />
@@ -62,7 +65,7 @@
   <div class="suggestions">
     <ul>
       {#each suggestions as suggestion, i}
-        <li class:active={i === highlightedIndex}>{suggestion}</li>
+        <li class:active={i === highlightedIndex}>{format(suggestion)}</li>
       {/each}
     </ul>
   </div>
