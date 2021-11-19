@@ -7,12 +7,15 @@
   export let key: string;
   export let format = (d: any): string => d;
 
+  export let result: string | Record<string, any> | null = null;
+
   let inputElement: HTMLInputElement;
 
   let suggestions: Array<Suggestion> = [];
   let highlightedIndex: number | null = null;
 
-  $: result = highlightedIndex !== null ? suggestions[highlightedIndex] : null;
+  $: highlightedElement =
+    highlightedIndex !== null ? suggestions[highlightedIndex] : null;
 
   function discardSuggestions() {
     suggestions = [];
@@ -21,16 +24,19 @@
 
   function handleSubmit(e: Event) {
     e.preventDefault();
-    inputElement.value = format(result);
+    inputElement.value = format(highlightedElement);
+    result = highlightedElement;
     discardSuggestions();
   }
 
-  function handleReset(e: Event) {
+  function handleReset() {
+    result = null;
     discardSuggestions();
   }
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape') {
+      result = null;
       discardSuggestions();
       return;
     }
