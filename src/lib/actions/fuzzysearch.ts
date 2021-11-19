@@ -1,14 +1,10 @@
 import fuzzysort from 'fuzzysort';
 
-import type { ActionReturn } from '$lib/types';
+import type { ActionReturn, Suggestion } from '$lib/types';
 
 interface SearchOptions {
   data: Array<string | Record<string, any>>;
   key?: string;
-}
-
-interface Suggestion {
-  item: string | Record<string, any>;
 }
 
 export default function fuzzysearch(

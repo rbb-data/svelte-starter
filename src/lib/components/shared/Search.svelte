@@ -1,14 +1,16 @@
-<script>
+<script lang="ts">
   import fuzzysearch from '$lib/actions/fuzzysearch';
 
-  export let data;
-  export let key;
-  export let format = (d) => d;
+  import type { Suggestion } from '$lib/types';
 
-  let inputElement;
+  export let data: Array<string | Record<string, any>>;
+  export let key: string;
+  export let format = (d: any): string => d;
 
-  let suggestions = [];
-  let highlightedIndex = null;
+  let inputElement: HTMLInputElement;
+
+  let suggestions: Array<Suggestion> = [];
+  let highlightedIndex: number | null = null;
 
   $: result = highlightedIndex !== null ? suggestions[highlightedIndex] : null;
 
@@ -17,17 +19,17 @@
     highlightedIndex = null;
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: Event) {
     e.preventDefault();
     inputElement.value = format(result);
     discardSuggestions();
   }
 
-  function handleReset(e) {
+  function handleReset(e: Event) {
     discardSuggestions();
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return;
 
     const up = e.key === 'ArrowUp';
@@ -40,7 +42,7 @@
     up ? highlightedIndex-- : highlightedIndex++;
   }
 
-  function handleSearch(e) {
+  function handleSearch(e: CustomEvent<{ suggestions: Array<Suggestion> }>) {
     suggestions = e.detail.suggestions;
     highlightedIndex = suggestions.length > 0 ? 0 : null;
   }
