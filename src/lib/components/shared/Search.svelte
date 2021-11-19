@@ -98,10 +98,6 @@
   }
 
   li {
-    background-color: aliceblue;
-  }
-
-  li.active {
-    background-color: steelblue;
+    background-color: white;
   }
 </style>
