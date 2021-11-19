@@ -40,11 +40,26 @@
   $: yScale = scaleLinear()
     .domain(extent(data, (d) => d.y))
     .range([boundedHeight, 0]);
+
+  let result = null;
+
+  $: console.log(result);
 </script>
 
 <h1>Demo</h1>
 
-<Search />
+<Search
+  data={['banana', 'apple', 'citron', 'banane', 'ban', 'ba'].map((d) => ({
+    internal: d,
+    external: d[0].toUpperCase() + d.slice(1),
+  }))}
+  key="internal"
+  format={(d) => d.external}
+  bind:result
+>
+  <button slot="reset-button" type="reset">Reset</button>
+  <button slot="submit-button" type="submit">Submit</button>
+</Search>
 
 {#if header}
   <dl>

@@ -7,6 +7,9 @@
   export let key: string;
   export let format = (d: any): string => d;
 
+  export let hideLabel = false;
+  export let placeholder = 'Placeholder';
+
   export let result: string | Record<string, any> | null = null;
 
   let inputElement: HTMLInputElement;
@@ -65,7 +68,11 @@
     on:reset={handleReset}
     on:keydown={handleKeyDown}
   >
+    <label class:hidden={hideLabel} for="input-search">Search</label>
     <input
+      id="input-search"
+      {placeholder}
+      autocomplete="off"
       use:fuzzysearch={{ data, key }}
       on:search={handleSearch}
       bind:this={inputElement}
@@ -100,5 +107,24 @@
     position: absolute;
     top: 0;
     background-color: white;
+  }
+
+  /* hides label visually but keeps it avaliable
+  for screen readers and assistive technology */
+  label.hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  /* sensible default for accessible placeholder text */
+  input::placeholder {
+    color: #767676;
+    opacity: 1;
   }
 </style>
