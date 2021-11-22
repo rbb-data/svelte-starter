@@ -39,10 +39,6 @@
   $: yScale = scaleLinear()
     .domain(extent(data, (d) => d.y))
     .range([boundedHeight, 0]);
-
-  let result = null;
-
-  $: console.log(result);
 </script>
 
 <h1>Demo</h1>
