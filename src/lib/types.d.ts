@@ -11,3 +11,7 @@ export interface Component {
   component: typeof SvelteComponent;
   props: Record<string, any>;
 }
+
+interface Suggestion {
+  item: string | Record<string, any>;
+}

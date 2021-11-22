@@ -2,7 +2,7 @@
   import { scaleLinear } from 'd3-scale';
   import { extent } from 'd3-array';
 
-  import Svg from '$lib/components/core/Svg.svelte';
+  import Svg from '$lib/components/shared/core/Svg.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
 
