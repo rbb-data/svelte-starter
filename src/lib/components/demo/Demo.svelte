@@ -58,7 +58,7 @@
   </i>
 {/if}
 
-<p>Ein responsiver SVG Container:</p>
+<h4>Ein responsiver SVG Container:</h4>
 
 <div class="wrapper" bind:clientWidth={width}>
   {#if width}
@@ -87,5 +87,9 @@
     overflow: visible;
     /* this is not optimal as it prevents scrolling on the svg */
     touch-action: none;
+  }
+
+  h4 {
+    margin: 10px 0;
   }
 </style>

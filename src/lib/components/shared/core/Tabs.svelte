@@ -10,23 +10,31 @@
   // the index of the active tab
   export let activeIndex = initialIndex;
 
+  // keeps a reference to tab nodes
+  const nodes = [];
+
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     const toLeft = e.key === 'ArrowLeft';
-    if (
-      (toLeft && activeIndex === 0) ||
-      (!toLeft && activeIndex === tabs.length - 1)
-    )
-      return;
-    toLeft ? activeIndex-- : activeIndex++;
+
+    let nextIndex = toLeft ? activeIndex - 1 : activeIndex + 1;
+    if (nextIndex < 0) nextIndex = tabs.length - 1;
+    else if (nextIndex >= tabs.length) nextIndex = 0;
+
+    activeIndex = nextIndex;
+    nodes[activeIndex].focus();
   }
 </script>
 
-<ul class="tabs" tabindex="0" on:keydown={handleKeyDown}>
+<ul class="tabs" role="tablist" on:keydown={handleKeyDown}>
   {#each tabs as tab, tabIndex}
     <li
+      role="tab"
       class:active={tabIndex === activeIndex}
+      aria-selected={tabIndex === activeIndex}
+      tabindex={tabIndex === activeIndex ? 0 : -1}
       on:pointerdown={() => (activeIndex = tabIndex)}
+      bind:this={nodes[tabIndex]}
     >
       <svelte:component this={tab.component} {...tab.props} />
     </li>
