@@ -19,7 +19,7 @@ const config = {
       base: dev ? '' : process.env.BASE_PATH,
     },
     package: {
-      exports: () => false,
+      exports: (path) => ['index.ts', 'actions/index.ts'].includes(path),
     },
   },
 };
