@@ -170,7 +170,7 @@ The initialization `options` are passed to `Component` on creation; see [Svelte'
 
 Defined in `src/lib/components/shared/core`
 
-Core components are essentially higher-level components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways. Core components don't usually control styling other than layouting.
+Core components are essentially higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways. Core components don't usually control styling other than layouting.
 
 Passing components as props in Svelte entails specifying a component constructor and its props. For example:
 
@@ -184,6 +184,12 @@ This can then be rendered as:
 ```svelte
 <svelte:component this={tab.component} {...tab.props} />
 ```
+
+### `Search`
+
+`Search` implements an input field that facilitates client-side fuzzy searching (using [`fuzzysort`](https://github.com/farzher/fuzzysort)). The setup includes a reset and submit button as well as the necessary event management for an accessible search experience.
+
+To do
 
 ### `Slider`
 
