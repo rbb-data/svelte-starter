@@ -5,14 +5,18 @@ import type { ActionReturn, Suggestion } from '$lib/types';
 interface SearchOptions {
   data: Array<string | Record<string, any>>;
   key?: string;
+  limit?: number;
 }
 
 export default function fuzzysearch(
   node: HTMLInputElement,
-  { data, key }: SearchOptions
+  { data, key, limit }: SearchOptions
 ): ActionReturn<void> {
+  // be default, return all results
+  if (!limit) limit = Infinity;
+
   function search(query: string, top?: number): Array<Suggestion> {
-    let results = fuzzysort.go(query, data, { key });
+    let results = fuzzysort.go(query, data, { key, limit });
 
     if (top) results = results.slice(0, top) as any;
 

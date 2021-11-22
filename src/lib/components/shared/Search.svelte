@@ -6,6 +6,7 @@
   export let data: Array<string | Record<string, any>>;
   export let key: string;
   export let format = (d: any): string => d;
+  export let nSuggestions = 8;
 
   export let hideLabel = false;
   export let label = 'Label';
@@ -87,7 +88,7 @@
       type="search"
       {placeholder}
       autocomplete="off"
-      use:fuzzysearch={{ data, key }}
+      use:fuzzysearch={{ data, key, limit: nSuggestions }}
       on:search={handleSearch}
       bind:this={inputElement}
     />
