@@ -143,17 +143,14 @@ export default function pannable(
 
 export function drag(
   coords: Writable<number|{ x: number; y: number }>,
-  /**Hier schreibe ich also die Axis als Default XY??? */
+// we set xy here as an axis default
   options: {
     axis?: 'xy' | 'x' | 'y';
     bounds?: { top?: number; right?: number; bottom?: number; left?: number };
   } = { axis: 'xy' }
 ): (event: CustomEvent<{ dx: number; dy: number }>) => void {
   const { axis, bounds } = options;
-  /**Wieso kann ich hier nur bounds auslesen??? */
- // console.log(options.bounds)
-  /**weil es vorher */
-  //console.log(options.axis)
+
 
 
 
@@ -164,12 +161,12 @@ export function drag(
       x: [bounds.left, bounds.right],
       y: [bounds.top, bounds.bottom],
     }[axis];
-    //was macht das genau hier???
     return Math.min(Math.max(value, min), max);
   }
 
   return (event) => {
     coords.update(($coords) => {
+      //if the coords are just one number, we check how to interpret this
       if(typeof $coords === "number"){
         if(axis==="y"){
           return bounded($coords + (axis !== 'x' ? event.detail.dy : 0), 'y')
@@ -178,7 +175,7 @@ export function drag(
         return bounded($coords + (axis !== 'y' ? event.detail.dx : 0), 'x')}
       }
       return{
-        //HIER MUSS DER CODE HIN
+        //otherwise, we just turn this into an x,y object
         x: bounded($coords.x + (axis !== 'y' ? event.detail.dx : 0), 'x'),
         y: bounded($coords.y + (axis !== 'x' ? event.detail.dy : 0), 'y'),
       }
