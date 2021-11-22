@@ -8,7 +8,7 @@
   export let format = (d: any): string => d;
 
   export let hideLabel = false;
-  export let label = 'Search';
+  export let label = 'Label';
   export let placeholder = 'Placeholder';
   export let highlightSelection = true;
 
@@ -78,6 +78,7 @@
     <label class:hidden={hideLabel} for="input-search">{label}</label>
     <input
       id="input-search"
+      type="search"
       {placeholder}
       autocomplete="off"
       use:fuzzysearch={{ data, key }}
@@ -129,6 +130,10 @@
     cursor: pointer;
   }
 
+  form {
+    position: relative;
+  }
+
   label {
     display: block;
   }
@@ -150,5 +155,19 @@
   input::placeholder {
     color: #767676;
     opacity: 1;
+  }
+
+  input[type='search']::-ms-clear,
+  input[type='search']::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  input[type='search']::-webkit-search-decoration,
+  input[type='search']::-webkit-search-cancel-button,
+  input[type='search']::-webkit-search-results-button,
+  input[type='search']::-webkit-search-results-decoration {
+    display: none;
   }
 </style>
