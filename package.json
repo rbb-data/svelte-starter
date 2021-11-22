@@ -54,9 +54,5 @@
     "not op_mini all"
   ],
   "type": "module",
-  "exports": {
-    ".": "./index.js",
-    "./actions": "./actions/index.js"
-  },
   "license": "MIT"
 }
