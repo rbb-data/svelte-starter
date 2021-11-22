@@ -3,7 +3,6 @@
   import { extent } from 'd3-array';
 
   import Svg from '$lib/components/shared/core/Svg.svelte';
-  import Search from '$lib/components/shared/Search.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
 
@@ -47,19 +46,6 @@
 </script>
 
 <h1>Demo</h1>
-
-<Search
-  data={['banana', 'apple', 'citron', 'banane', 'ban', 'ba'].map((d) => ({
-    internal: d,
-    external: d[0].toUpperCase() + d.slice(1),
-  }))}
-  key="internal"
-  format={(d) => d.external}
-  bind:result
->
-  <button slot="reset-button" type="reset">Reset</button>
-  <button slot="submit-button" type="submit">Submit</button>
-</Search>
 
 {#if header}
   <dl>
