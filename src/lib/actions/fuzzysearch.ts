@@ -8,17 +8,25 @@ interface SearchOptions {
   limit?: number;
 }
 
+/**
+ * Implements fuzzy searching on an input element
+ *
+ * @param node - input element for search
+ * @param options.data - array of objects or strings to search through
+ * @param options.key - key to search on if `data` is an array of objects
+ * @param options.limit - max number of results to return
+ */
 export default function fuzzysearch(
   node: HTMLInputElement,
   { data, key, limit }: SearchOptions
 ): ActionReturn<void> {
-  // be default, return all results
+  // by default, return all results
   if (!limit) limit = Infinity;
 
-  function search(query: string, top?: number): Array<Suggestion> {
-    let results = fuzzysort.go(query, data, { key, limit });
+  let suggestions = [];
 
-    if (top) results = results.slice(0, top) as any;
+  function search(query: string): Array<Suggestion> {
+    const results = fuzzysort.go(query, data, { key, limit });
 
     const suggestions = [];
     for (let i = 0; i < results.length; i++) {
@@ -30,22 +38,28 @@ export default function fuzzysearch(
   }
 
   function handleInput(event: Event) {
-    const suggestions = search((event.target as HTMLInputElement).value);
+    suggestions = search((event.target as HTMLInputElement).value);
+
     node.dispatchEvent(
       new CustomEvent('search', {
         detail: { suggestions },
       })
     );
+
+    node.addEventListener('change', handleChange);
+    node.addEventListener('keydown', handleKeyDown);
   }
 
-  function handleChange(event: Event) {
-    const suggestions = search((event.target as HTMLInputElement).value, 1);
+  function handleChange() {
     const result = suggestions.length > 0 ? suggestions[0] : null;
+
     node.dispatchEvent(
       new CustomEvent('result', {
         detail: { result },
       })
     );
+
+    node.removeEventListener('change', handleChange);
   }
 
   function handleKeyDown(event: KeyboardEvent) {
@@ -61,17 +75,15 @@ export default function fuzzysearch(
         detail: { result: null },
       })
     );
+
+    node.removeEventListener('keydown', handleKeyDown);
   }
 
   node.addEventListener('input', handleInput);
-  node.addEventListener('change', handleChange);
-  node.addEventListener('keydown', handleKeyDown);
 
   return {
     destroy() {
       node.removeEventListener('input', handleInput);
-      node.removeEventListener('change', handleChange);
-      node.removeEventListener('keydown', handleKeyDown);
     },
   };
 }

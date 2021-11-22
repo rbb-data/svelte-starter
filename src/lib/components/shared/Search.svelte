@@ -1,30 +1,53 @@
 <script lang="ts">
   import fuzzysearch from '$lib/actions/fuzzysearch';
+  import css from '$lib/actions/css';
 
   import type { Suggestion } from '$lib/types';
 
+  // the data to search through
   export let data: Array<string | Record<string, any>>;
+
+  // the key to search on if the data is an array of objects
   export let key: string;
+
+  // format a data item for display
   export let format = (d: any): string => d;
+
+  // the maximum number of suggestions to display
   export let nSuggestions = 8;
 
-  export let hideLabel = false;
-  export let label = 'Label';
+  // the placeholder text to display
   export let placeholder = 'Placeholder';
-  export let highlightSelection = true;
 
+  // if true, the label is hidden visually (but is still accessible)
+  export let hideLabel = false;
+  // the label to display
+  export let label = 'Label';
+
+  // if true, no reset button is rendered
   export let hideResetButton = false;
+  // the reset button label
   export let resetButtonLabel = 'Reset';
 
+  // if true, no submit button is rendered
   export let hideSubmitButton = false;
+  // the submit button label
   export let submitButtonLabel = 'Submit';
 
+  // if true, minimal styling is applied to highlight
+  // the selected suggestion for debugging purposes;
+  // however, this is not recommended for production use
+  export let highlightSelection = false;
+
+  // the search result
   export let result: string | Record<string, any> | null = null;
 
   let inputElement: HTMLInputElement;
 
   let suggestions: Array<Suggestion> = [];
   let highlightedIndex: number | null = null;
+
+  let inputWidth = 0;
 
   $: highlightedElement =
     highlightedIndex !== null ? suggestions[highlightedIndex] : null;
@@ -83,15 +106,17 @@
     on:keydown={handleKeyDown}
   >
     <label class:hidden={hideLabel} for="input-search">{label}</label>
-    <input
-      id="input-search"
-      type="search"
-      {placeholder}
-      autocomplete="off"
-      use:fuzzysearch={{ data, key, limit: nSuggestions }}
-      on:search={handleSearch}
-      bind:this={inputElement}
-    />
+    <div class="input-wrapper" bind:clientWidth={inputWidth}>
+      <input
+        id="input-search"
+        type="search"
+        {placeholder}
+        autocomplete="off"
+        use:fuzzysearch={{ data, key, limit: nSuggestions }}
+        on:search={handleSearch}
+        bind:this={inputElement}
+      />
+    </div>
 
     {#if !hideResetButton}
       {#if $$slots['reset-button']}
@@ -110,7 +135,7 @@
     {/if}
   </form>
 
-  <div class="suggestions">
+  <div class="suggestions" use:css={{ 'input-width': `${inputWidth}px` }}>
     <ul>
       {#each suggestions as suggestion, i}
         <li
@@ -132,6 +157,7 @@
   }
 
   ul {
+    width: var(--input-width);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -148,6 +174,10 @@
 
   form {
     position: relative;
+  }
+
+  .input-wrapper {
+    display: inline-block;
   }
 
   label {
