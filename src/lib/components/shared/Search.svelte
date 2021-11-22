@@ -12,6 +12,12 @@
   export let placeholder = 'Placeholder';
   export let highlightSelection = true;
 
+  export let hideResetButton = false;
+  export let resetButtonLabel = 'Reset';
+
+  export let hideSubmitButton = false;
+  export let submitButtonLabel = 'Submit';
+
   export let result: string | Record<string, any> | null = null;
 
   let inputElement: HTMLInputElement;
@@ -86,11 +92,20 @@
       bind:this={inputElement}
     />
 
-    {#if $$slots['reset-button']}
-      <slot name="reset-button" />
+    {#if !hideResetButton}
+      {#if $$slots['reset-button']}
+        <slot name="reset-button" />
+      {:else}
+        <button type="reset">{resetButtonLabel}</button>
+      {/if}
     {/if}
-    {#if $$slots['submit-button']}
-      <slot name="submit-button" />
+
+    {#if !hideSubmitButton}
+      {#if $$slots['submit-button']}
+        <slot name="submit-button" />
+      {:else}
+        <button type="submit">{submitButtonLabel}</button>
+      {/if}
     {/if}
   </form>
 
@@ -157,6 +172,7 @@
     opacity: 1;
   }
 
+  /* hide clear button in Chrome */
   input[type='search']::-ms-clear,
   input[type='search']::-ms-reveal {
     display: none;
@@ -164,6 +180,7 @@
     height: 0;
   }
 
+  /* hide clear button in Safari */
   input[type='search']::-webkit-search-decoration,
   input[type='search']::-webkit-search-cancel-button,
   input[type='search']::-webkit-search-results-button,
