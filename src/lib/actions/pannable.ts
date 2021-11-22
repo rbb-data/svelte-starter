@@ -151,9 +151,9 @@ export function drag(
 ): (event: CustomEvent<{ dx: number; dy: number }>) => void {
   const { axis, bounds } = options;
   /**Wieso kann ich hier nur bounds auslesen??? */
-  console.log(options.bounds)
+ // console.log(options.bounds)
   /**weil es vorher */
-  console.log(options.axis)
+  //console.log(options.axis)
 
 
 
@@ -170,13 +170,12 @@ export function drag(
 
   return (event) => {
     coords.update(($coords) => {
-      console.log($coords);
       if(typeof $coords === "number"){
         if(axis==="y"){
-          console.log("this is the y axis")
+          return bounded($coords + (axis !== 'x' ? event.detail.dy : 0), 'y')
         }
         if(axis==="x"){
-        console.log("this is the x axis")}
+        return bounded($coords + (axis !== 'y' ? event.detail.dx : 0), 'x')}
       }
       return{
         //HIER MUSS DER CODE HIN

@@ -14,7 +14,7 @@
   //this is a sort of ts definiton of what variables can be, correct???
   //because it is defined here, we can read it out
   //and there
-  export let axis="x";
+  export let axis="y";
 
   // if given, the dot is restricted to move within these bounds
   export let bounds: {
@@ -27,12 +27,11 @@
 
   // position of the dot (could also be a spring)
   //here
-  const coords = writable({x:cx,y:cy});
-  console.log($coords);
+  const coords = writable(cy);
   let showArrows = true;
 </script>
 <!--and because axis is defined in the panmove-->
-<g transform={translate([$coords.x,$coords.y])}>
+<g transform={translate([cx,$coords])}>
   <Arrows offset={radius + 4} show={showArrows} />
   <circle
     use:pannable
