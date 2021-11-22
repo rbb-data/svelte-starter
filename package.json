@@ -1,6 +1,8 @@
 {
   "name": "@rbb-data/svelte-starter",
   "version": "0.1.5",
+  "type": "module",
+  "license": "MIT",
   "scripts": {
     "postinstall": "scripts/setup.sh",
     "dev": "svelte-kit dev",
@@ -16,6 +18,11 @@
     "style-dictionary": "style-dictionary build --config style-dictionary/config.json && npm run format",
     "package": "svelte-kit package"
   },
+  "dependencies": {
+    "d3-array": "^3.1.1",
+    "d3-scale": "^4.0.2",
+    "fuzzysort": "^1.1.4"
+  },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.21",
     "@sveltejs/kit": "next",
@@ -26,14 +33,11 @@
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "archieml": "^0.4.2",
-    "d3-array": "^3.1.1",
     "d3-dsv": "^3.0.1",
-    "d3-scale": "^4.0.2",
     "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
-    "fuzzysort": "^1.1.4",
     "googleapis": "^89.0.0",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
@@ -52,7 +56,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "type": "module",
-  "license": "MIT"
+  ]
 }
