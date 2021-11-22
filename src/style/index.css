@@ -1,3 +1,5 @@
+/* partly taken from https://github.com/andy-piccalilli/modern-css-reset (MIT licensed) */
+
 @import './fonts';
 @import './variables';
 
@@ -9,4 +11,34 @@
 
 body {
   font-family: 'Interstate', sans-serif;
+  line-height: 1.5;
+}
+
+/* remove default margins */
+body,
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* remove animations and transitions for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
