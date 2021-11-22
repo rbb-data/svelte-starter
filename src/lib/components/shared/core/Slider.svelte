@@ -110,6 +110,7 @@
 
 <div
   class="slider"
+  aria-roledescription="carousel"
   bind:clientWidth={width}
   use:css={{ height: `${height}px` }}
   on:keydown={handleKeyDown}
@@ -126,13 +127,19 @@
     }}
   >
     <!-- visible content -->
-    <div class="inner" bind:clientHeight={height}>
+    <div
+      class="inner"
+      tabindex="0"
+      role="group"
+      aria-roledescription="slide"
+      bind:clientHeight={height}
+    >
       <svelte:component this={currSlide.component} {...currSlide.props} />
     </div>
     <!-- previous and next slides -->
     {#each prevNext as { slide, key }}
       {#if slide}
-        <div class={`inner ${key}`}>
+        <div class={`inner ${key}`} role="group" aria-roledescription="slide">
           <svelte:component this={slide.component} {...slide.props} />
         </div>
       {/if}
