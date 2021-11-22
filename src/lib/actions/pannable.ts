@@ -47,17 +47,20 @@ import type { ActionReturn } from '$lib/types';
 
 type PointerType = 'mouse' | 'pen' | 'touch';
 
+
 /**
  * Make an element pannable
  *
  * @param node - the element to make pannable
  * @param options.ignorePointers - a list of pointer types to ignore
  */
+/**so for every HTML / SVG Element */
 export default function pannable(
   node: HTMLElement | SVGElement,
   options: { ignorePointers: Array<PointerType> } = {
     ignorePointers: [],
   }
+  /**we do this Action */
 ): ActionReturn<void> {
   let x: number;
   let y: number;
@@ -86,6 +89,7 @@ export default function pannable(
   }
 
   function handleMove(event: PointerEvent) {
+    /**wieso muss ich das gegenchecken ??? */
     if (event.pointerId !== pointerId) return;
 
     const { clientX, clientY } = event;
@@ -136,14 +140,22 @@ export default function pannable(
  * @param options.bounds - if given, the element is restricted to move within these bounds
  * @returns function that consumes a custom event and keeps the given coordinates in sync
  */
+
 export function drag(
-  coords: Writable<{ x: number; y: number }>,
+  coords: Writable<number|{ x: number; y: number }>,
+  /**Hier schreibe ich also die Axis als Default XY??? */
   options: {
     axis?: 'xy' | 'x' | 'y';
     bounds?: { top?: number; right?: number; bottom?: number; left?: number };
   } = { axis: 'xy' }
 ): (event: CustomEvent<{ dx: number; dy: number }>) => void {
   const { axis, bounds } = options;
+  /**Wieso kann ich hier nur bounds auslesen??? */
+  console.log(options.bounds)
+  /**weil es vorher */
+  console.log(options.axis)
+
+
 
   // use `bounds` to constrain movement
   function bounded(value: number, axis: 'x' | 'y') {
@@ -152,13 +164,25 @@ export function drag(
       x: [bounds.left, bounds.right],
       y: [bounds.top, bounds.bottom],
     }[axis];
+    //was macht das genau hier???
     return Math.min(Math.max(value, min), max);
   }
 
   return (event) => {
-    coords.update(($coords) => ({
-      x: bounded($coords.x + (axis !== 'y' ? event.detail.dx : 0), 'x'),
-      y: bounded($coords.y + (axis !== 'x' ? event.detail.dy : 0), 'y'),
-    }));
+    coords.update(($coords) => {
+      console.log($coords);
+      if(typeof $coords === "number"){
+        if(axis==="y"){
+          console.log("this is the y axis")
+        }
+        if(axis==="x"){
+        console.log("this is the x axis")}
+      }
+      return{
+        //HIER MUSS DER CODE HIN
+        x: bounded($coords.x + (axis !== 'y' ? event.detail.dx : 0), 'x'),
+        y: bounded($coords.y + (axis !== 'x' ? event.detail.dy : 0), 'y'),
+      }
+    });
   };
 }
