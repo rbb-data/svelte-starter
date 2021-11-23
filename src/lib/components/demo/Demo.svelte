@@ -5,7 +5,6 @@
   import Svg from '$lib/components/shared/core/Svg.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
-
   export let data: Array<{
     x: number;
     y: number;
@@ -27,7 +26,7 @@
     bottom: 10,
     left: 10,
   };
-
+  //why does this fail, if I do not define it here???
   const radius = 10;
 
   // set up some scales with d3
@@ -57,6 +56,7 @@
     Google doc.
   </i>
 {/if}
+
 
 <h4>Ein responsiver SVG Container:</h4>
 

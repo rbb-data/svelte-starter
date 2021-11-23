@@ -10,8 +10,9 @@
   export let cx: number;
   export let cy: number;
 
-  // size of the circle
   export let radius = 5;
+  //this is a sort of ts definiton of what variables can be
+  export let axis = 'xy';
 
   // if given, the dot is restricted to move within these bounds
   export let bounds: {
@@ -22,17 +23,18 @@
   } = undefined;
 
   // position of the dot (could also be a spring)
+  //here
   const coords = writable({ x: cx, y: cy });
-
   let showArrows = true;
 </script>
 
+<!--and because axis is defined in the panmove-->
 <g transform={translate([$coords.x, $coords.y])}>
   <Arrows offset={radius + 4} show={showArrows} />
   <circle
     use:pannable
     on:panstart={() => (showArrows = false)}
-    on:panmove={drag(coords, { bounds })}
+    on:panmove={drag(coords, { axis, bounds })}
     on:panend={() => (showArrows = true)}
     r={radius}
   />
