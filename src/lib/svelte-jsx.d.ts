@@ -18,9 +18,11 @@ interface Pannable {
   onpanend?: (e: CustomEvent<XY>) => void;
 }
 
+type Item = string | Record<string, unknown>;
+
 interface FuzzySearch {
-  onsearch?: (e: CustomEvent<{ suggestions: Array<Suggestion> }>) => void;
-  onresult?: (e: CustomEvent<{ result: Suggestion }>) => void;
+  onsearch?: (e: CustomEvent<{ suggestions: Array<Item> }>) => void;
+  onresult?: (e: CustomEvent<{ result: Item }>) => void;
 }
 
 declare namespace svelte.JSX {
