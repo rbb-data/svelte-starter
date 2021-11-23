@@ -1,9 +1,11 @@
 import fuzzysort from 'fuzzysort';
 
-import type { ActionReturn, Suggestion } from '$lib/types';
+import type { ActionReturn } from '$lib/types';
+
+export type Item = string | Record<string, unknown>;
 
 interface SearchOptions {
-  data: Array<string | Record<string, any>>;
+  data: Array<Item>;
   key?: string;
   limit?: number;
 }
@@ -23,9 +25,9 @@ export default function fuzzysearch(
   // by default, return all results
   if (!limit) limit = Infinity;
 
-  let suggestions = [];
+  let suggestions: Array<Item> = [];
 
-  function search(query: string): Array<Suggestion> {
+  function search(query: string): Array<Item> {
     const results = fuzzysort.go(query, data, { key, limit });
 
     const suggestions = [];

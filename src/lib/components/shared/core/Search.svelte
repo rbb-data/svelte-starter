@@ -2,16 +2,17 @@
   import fuzzysearch from '$lib/actions/fuzzysearch';
   import css from '$lib/actions/css';
 
-  import type { Suggestion } from '$lib/types';
+  import type { Item } from '$lib/actions/fuzzysearch';
+  type T = $$Generic<Item>;
 
   // the data to search through
-  export let data: Array<string | Record<string, any>>;
+  export let data: Array<T>;
 
   // the key to search on if the data is an array of objects
   export let key: string;
 
   // format a data item for display
-  export let format = (d: any): string => d;
+  export let format = (d: T): string => d as string;
 
   // the maximum number of suggestions to display
   export let nSuggestions = 8;
@@ -40,11 +41,11 @@
   export let highlightSelection = false;
 
   // the search result
-  export let result: string | Record<string, any> | null = null;
+  export let result: T | null = null;
 
   let inputElement: HTMLInputElement;
 
-  let suggestions: Array<Suggestion> = [];
+  let suggestions: Array<T> = [];
   let highlightedIndex: number | null = null;
 
   let inputWidth = 0;
@@ -93,7 +94,7 @@
     up ? highlightedIndex-- : highlightedIndex++;
   }
 
-  function handleSearch(e: CustomEvent<{ suggestions: Array<Suggestion> }>) {
+  function handleSearch(e: CustomEvent<{ suggestions: Array<T> }>) {
     suggestions = e.detail.suggestions;
     highlightedIndex = suggestions.length > 0 ? 0 : null;
   }

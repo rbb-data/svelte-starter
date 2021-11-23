@@ -78,179 +78,29 @@ The response is a json object with the contents of your doc parsed as [ArchieML]
 
 The Google credentials necessary to access docs that are shared with _connect@rbb-datenteam.iam.gserviceaccount.com_ should be stored in a json file named `google-credentials.json`. Secrets are not stored in version control; let one of your colleagues know, if you need them :)
 
-## Actions
+## Helpers
 
-Defined in `src/lib/actions/`
+This repo provides some useful helpers to quickly build interactive interfaces. The [Wiki](https://github.com/rbb-data/svelte-starter/wiki) provides a more in-depth description of each helper.
 
-### `use:css`
+### Stores (`src/lib/stores`)
 
-This action dynamically sets CSS variables. For example:
+- `prefersReducedMotion`: true if a user has requested to minimize the amount of non-essential motion
 
-```svelte
-<div use:css={{ 'my-dynamically-set-color': 'steelblue' }}>...</div>
-```
+### Actions (`src/lib/actions`)
 
-sets the CSS variable `--my-dynamically-set-color` to `'steelblue'` on that element. The variable can then be referenced in the style tag like any other CSS variable:
+- `use:css`: dynamically sets CSS variables
+- `use:fuzzysearch`: fuzzy searches input from a user against a dataset (using [`fuzzysort`](https://github.com/farzher/fuzzysort))
+- `use:pannable`: makes an element "pannable", i.e. recognizes when an element is interacted with and tracks a pointer's position
+- `use:tooltip`: creates and destroys a (tooltip) component on interaction with an element
 
-```css
-div {
-  background-color: var(--my-dynamically-set-color);
-}
-```
+### Core components (`src/lib/components/shared/core`)
 
-### `use:pannable`
+Core components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
 
-This action makes an element "pannable". It recognizes when an element is interacted with, tracks a pointer's position, and dispatches three custom events:
-
-- `panstart`: the interaction started (exposes `{ x: number, y: number }`)
-- `panmove`: the pointer is being moved (exposes `{ x: number, y: number, dx: number, dy: number }`)
-- `panend`: the interaction ended (exposes `{ x: number, y: number }`)
-
-For example:
-
-```svelte
-<circle
-  use:pannable={{ ignorePointers: ['mouse'] }}
-  on:panstart={(e) => console.log('panning started', e.detail)}
-  on:panmove={(e) => console.log('pointer is moving...', e.detail)}
-  on:panend={(e) => console.log('panning ended', e.detail)}
-  r="10"
-/>
-```
-
-`ignorePointers` allows to ignore interactions from specific pointers.
-
-`pannable.js` also exports an additional function `drag` that makes it easy to make an element draggable. For example:
-
-```svelte
-<script>
-  import { writable } from 'svelte/store';
-  import pannable, { drag } from '$lib/actions/pannable';
-  const coords = writable({ x: 0, y: 0 });
-</script>
-
-<circle
-  cx={$coords.x}
-  cy={$coords.y}
-  use:pannable
-  on:panmove={drag(coords)}
-  r="10"
-/>
-```
-
-`drag` can be configured to move an element along a specified axis or within given bounds (see `src/lib/actions/pannable.ts`). Check out `src/lib/components/demo/DraggableCircle.svelte` to see `pannable` and `drag` in action.
-
-### `use:tooltip`
-
-This action creates and destroys a (tooltip) component on interaction with an element.
-
-```svelte
-<script>
-  import tooltip from '$lib/actions/tooltip';
-  import Tooltip from '...';
-</script>
-
-<circle
-  use:tooltip={{
-    id: 'tooltip',
-    Component: Tooltip,
-    options: { props: { message: 'Hello world' } },
-  }}
-  r="10"
-/>
-```
-
-This renders the `Tooltip` component on hover or touch with props as given in `options.props`.
-
-The initialization `options` are passed to `Component` on creation; see [Svelte's docs](https://svelte.dev/docs#Creating_a_component) for more information. `Component` is rendered into `document.body` by default.
-
-**Note:** `Component` must render an element that is uniquely identified by `id`.
-
-## Core components
-
-Defined in `src/lib/components/shared/core`
-
-Core components are essentially higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways. Core components don't usually control styling other than layouting.
-
-Passing components as props in Svelte entails specifying a component constructor and its props. For example:
-
-```javascript
-import Tab from './Tab.svelte';
-const tab = { component: Tab, props: { message: 'Hello world' } };
-```
-
-This can then be rendered as:
-
-```svelte
-<svelte:component this={tab.component} {...tab.props} />
-```
-
-### `Search`
-
-`Search` implements an input field that facilitates client-side fuzzy searching (using [`fuzzysort`](https://github.com/farzher/fuzzysort)). The setup includes a reset and submit button as well as the necessary event management for an accessible search experience.
-
-To do
-
-### `Slider`
-
-`Slider` renders a single component at a time and provides the necessary functionality to navigate back and forth through swipe gestures (on touch devices) or mouse clicks (on desktop). Check out its [stories](https://rbb-data.github.io/svelte-starter/?path=/story/core-slider--basic).
-
-`Slider` keeps track of the active slide internally. Binding to this prop is a common pattern. For example:
-
-```svelte
-<script>
-  import Slide from './Slide.svelte';
-
-  // a list of slide components
-  const slides = [..., { component: Slide, props: { ... } }, ...];
-
-  // the index of the visible slide
-  let activeIndex;
-</script>
-
-<Slider
-  {slides}
-  prev={(idx) => (idx - 1 >= 0 ? idx - 1 : null)}
-  next={(idx) => (idx + 1 <= nSlides - 1 ? idx + 1 : null)}
-  bind:activeIndex
-/>
-```
-
-`prev` and `next` determine the index of the previous and next slide; returning `null` means there is no slide to go to.
-
-### `Svg`
-
-`Svg` is a SVG container that implements a common pattern for sizing charts (check out [Amelia Wattenberger's blog post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)). Typically, one would bind to the internally managed `boundedWidth` and `boundedHeight`.
-
-### `Tabs`
-
-The `Tabs` component layouts given components horizontally and makes them selectable. The active tab is tracked internally and marked by adding the class `.active`. `Tabs` doesn't define any styles for the selected tab, this has to be handled elsewhere. For example:
-
-```svelte
-<script>
-  import Tab from '../helpers/Tab.svelte';
-
-  // the index of the selected tab
-  let activeIndex;
-
-  // a list of tab components
-  const tabContent = ['Tab #1', 'Tab #2', 'Tab #3'];
-  $: tabs = tabContent.map((content, tabIndex) => ({
-    component: Tab,
-    props: { content, active: tabIndex === activeIndex },
-  }));
-</script>
-
-<Tabs {tabs} bind:activeIndex />
-```
-
-Alternatively, one could also make use of global styling in the custom `Tab` component:
-
-```css
-:global(.tabs .active) .my-tab {
-  outline: 2px solid steelblue;
-}
-```
+- `Search`: implements an input field that facilitates client-side fuzzy searching
+- `Slider`: renders a single slide at a time and allows to navigate back and forth through swipe gestures or mouse clicks
+- `Svg`: simple SVG container that implements a common chart sizing pattern
+- `Tabs`: makes content selectable
 
 ## Build and deploy
 

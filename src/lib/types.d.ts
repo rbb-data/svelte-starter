@@ -9,9 +9,5 @@ export type ActionReturn<Params> = {
 // specification of a component
 export interface Component {
   component: typeof SvelteComponent;
-  props: Record<string, any>;
-}
-
-interface Suggestion {
-  item: string | Record<string, any>;
+  props: Record<string, unknown>;
 }
