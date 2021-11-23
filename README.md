@@ -78,7 +78,7 @@ The response is a json object with the contents of your doc parsed as [ArchieML]
 
 The Google credentials necessary to access docs that are shared with _connect@rbb-datenteam.iam.gserviceaccount.com_ should be stored in a json file named `google-credentials.json`. Secrets are not stored in version control; let one of your colleagues know, if you need them :)
 
-## Helper
+## Helpers
 
 This repo provides some useful helpers to quickly build interactive interfaces. The [Wiki](https://github.com/rbb-data/svelte-starter/wiki) provides a more in-depth description of each helper.
 
@@ -98,8 +98,8 @@ This repo provides some useful helpers to quickly build interactive interfaces. 
 Core components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
 
 - `Search`: implements an input field that facilitates client-side fuzzy searching
-- `Slider`: renders a single slide at a time and allows to navigate back and forth by swipe gestures or mouse clicks
-- `Svg`: simple SVG container
+- `Slider`: renders a single slide at a time and allows to navigate back and forth through swipe gestures or mouse clicks
+- `Svg`: simple SVG container that implements a common chart sizing pattern
 - `Tabs`: makes content selectable
 
 ## Build and deploy
