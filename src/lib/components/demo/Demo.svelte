@@ -2,7 +2,7 @@
   import { scaleLinear } from 'd3-scale';
   import { extent } from 'd3-array';
 
-  import Svg from '$lib/components/core/Svg.svelte';
+  import Svg from '$lib/components/shared/core/Svg.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
   export let data: Array<{
@@ -57,7 +57,9 @@
   </i>
 {/if}
 
-<p>Ein responsiver SVG Container:</p>
+
+<h4>Ein responsiver SVG Container:</h4>
+
 <div class="wrapper" bind:clientWidth={width}>
   {#if width}
     <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight debug>
@@ -85,5 +87,9 @@
     overflow: visible;
     /* this is not optimal as it prevents scrolling on the svg */
     touch-action: none;
+  }
+
+  h4 {
+    margin: 10px 0;
   }
 </style>

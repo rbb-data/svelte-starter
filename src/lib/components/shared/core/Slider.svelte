@@ -6,16 +6,26 @@
   import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
 
-  // array of three slides: the previous, the current, and the next
+  // list of slides
   export let slides: Array<Component>;
 
-  // function called on forward navigation
-  export let onForwardNavigation: () => void;
+  // function that determines the previous slide
+  export let prev: (index: number) => number | null;
 
-  // function called on backward navigation
-  export let onBackwardNavigation: () => void;
+  // function that determines the next slide
+  export let next: (index: number) => number | null;
 
-  $: [prevSlide, currSlide, nextSlide] = slides;
+  // intial slide index
+  export let initialActiveIndex = 0;
+
+  // index of the currently visible slide
+  export let activeIndex = initialActiveIndex;
+
+  $: currSlide = slides[activeIndex];
+
+  $: prevSlide = prev(activeIndex) !== null ? slides[prev(activeIndex)] : null;
+  $: nextSlide = next(activeIndex) !== null ? slides[next(activeIndex)] : null;
+
   $: prevNext = [prevSlide, nextSlide]
     .map((slide, i) => ({ slide, key: i === 0 ? 'prev' : 'next' }))
     .filter(({ slide }) => slide);
@@ -54,8 +64,8 @@
     setTimeout(() => {
       animate = false;
       xy.set({ x: 0, y: 0 });
-      if (navigateBackward) onBackwardNavigation();
-      else onForwardNavigation();
+      if (navigateBackward) activeIndex = prev(activeIndex);
+      else activeIndex = next(activeIndex);
     }, 500);
   }
 
@@ -100,6 +110,7 @@
 
 <div
   class="slider"
+  aria-roledescription="carousel"
   bind:clientWidth={width}
   use:css={{ height: `${height}px` }}
   on:keydown={handleKeyDown}
@@ -116,13 +127,19 @@
     }}
   >
     <!-- visible content -->
-    <div class="inner" bind:clientHeight={height}>
+    <div
+      class="inner"
+      tabindex="0"
+      role="group"
+      aria-roledescription="slide"
+      bind:clientHeight={height}
+    >
       <svelte:component this={currSlide.component} {...currSlide.props} />
     </div>
     <!-- previous and next slides -->
     {#each prevNext as { slide, key }}
       {#if slide}
-        <div class={`inner ${key}`}>
+        <div class={`inner ${key}`} role="group" aria-roledescription="slide">
           <svelte:component this={slide.component} {...slide.props} />
         </div>
       {/if}
