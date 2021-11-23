@@ -26,7 +26,7 @@
     bottom: 10,
     left: 10,
   };
-//why does this fail, if I do not define it here???
+  //why does this fail, if I do not define it here???
   const radius = 10;
 
   // set up some scales with d3
@@ -57,7 +57,6 @@
   </i>
 {/if}
 
-
 <p>Ein responsiver SVG Container:</p>
 <div class="wrapper" bind:clientWidth={width}>
   {#if width}
@@ -73,7 +72,7 @@
               bottom: boundedHeight - radius,
               left: radius,
             }}
-          {radius}
+            {radius}
           />
         {/if}
       {/each}

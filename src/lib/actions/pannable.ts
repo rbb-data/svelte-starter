@@ -47,7 +47,6 @@ import type { ActionReturn } from '$lib/types';
 
 type PointerType = 'mouse' | 'pen' | 'touch';
 
-
 /**
  * Make an element pannable
  *
@@ -142,17 +141,14 @@ export default function pannable(
  */
 
 export function drag(
-  coords: Writable<number|{ x: number; y: number }>,
-// we set xy here as an axis default
+  coords: Writable<number | { x: number; y: number }>,
   options: {
     axis?: 'xy' | 'x' | 'y';
     bounds?: { top?: number; right?: number; bottom?: number; left?: number };
   } = { axis: 'xy' }
 ): (event: CustomEvent<{ dx: number; dy: number }>) => void {
-  const { axis, bounds } = options;
-
-
-
+  const { bounds } = options;
+  const axis = options.axis || 'xy';
 
   // use `bounds` to constrain movement
   function bounded(value: number, axis: 'x' | 'y') {
@@ -167,18 +163,21 @@ export function drag(
   return (event) => {
     coords.update(($coords) => {
       //if the coords are just one number, we check how to interpret this
-      if(typeof $coords === "number"){
-        if(axis==="y"){
-          return bounded($coords + (axis !== 'x' ? event.detail.dy : 0), 'y')
+      if (typeof $coords === 'number') {
+        if (axis !== 'xy') {
+          const delta = axis === 'x' ? event.detail.dx : event.detail.dy;
+          return bounded($coords + delta, axis);
+        } else {
+          throw new Error(
+            'Please specify an appropriate axis (x or y), if you only pass on one coord'
+          );
         }
-        if(axis==="x"){
-        return bounded($coords + (axis !== 'y' ? event.detail.dx : 0), 'x')}
       }
-      return{
+      return {
         //otherwise, we just turn this into an x,y object
         x: bounded($coords.x + (axis !== 'y' ? event.detail.dx : 0), 'x'),
         y: bounded($coords.y + (axis !== 'x' ? event.detail.dy : 0), 'y'),
-      }
+      };
     });
   };
 }
