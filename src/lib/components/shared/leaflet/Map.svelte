@@ -9,7 +9,10 @@
 
   import { key } from '$lib/assets/leaflet';
 
+  // height of the map
   export let height: number;
+
+  // map options (see https://leafletjs.com/reference.html#map)
   export let options: MapOptions = undefined;
 
   // hide zoom controls by default
