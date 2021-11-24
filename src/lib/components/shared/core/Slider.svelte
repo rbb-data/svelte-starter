@@ -5,6 +5,7 @@
 
   import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
+  import { px } from '$lib/helpers/utils';
 
   // list of slides
   export let slides: Array<Component>;
@@ -112,7 +113,7 @@
   class="slider"
   aria-roledescription="carousel"
   bind:clientWidth={width}
-  use:css={{ height: `${height}px` }}
+  use:css={{ height: px(height) }}
   on:keydown={handleKeyDown}
   on:click={handleClick}
   use:pannable={{ ignorePointers: ['mouse'] }}
@@ -123,7 +124,7 @@
   <div
     class="content"
     use:css={{
-      'translate-x': `${animate ? $animatedXY.x : $xy.x}px`,
+      'translate-x': px(animate ? $animatedXY.x : $xy.x),
     }}
   >
     <!-- visible content -->

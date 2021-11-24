@@ -1,6 +1,7 @@
 <script lang="ts">
   import fuzzysearch from '$lib/actions/fuzzysearch';
   import css from '$lib/actions/css';
+  import { px } from '$lib/helpers/utils';
 
   import type { Item } from '$lib/actions/fuzzysearch';
   type T = $$Generic<Item>;
@@ -136,7 +137,7 @@
     {/if}
   </form>
 
-  <div class="suggestions" use:css={{ 'input-width': `${inputWidth}px` }}>
+  <div class="suggestions" use:css={{ 'input-width': px(inputWidth) }}>
     <ul>
       {#each suggestions as suggestion, i}
         <li
