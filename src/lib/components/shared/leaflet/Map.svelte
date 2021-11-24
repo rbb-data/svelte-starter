@@ -12,6 +12,10 @@
   export let height: number;
   export let options: MapOptions = undefined;
 
+  // hide zoom controls by default
+  const defaultOptions = { zoomControl: false };
+  options = { ...defaultOptions, ...options };
+
   const mapId = 'map';
 
   let map: Map;
