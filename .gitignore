@@ -6,3 +6,4 @@ node_modules
 google-credentials.json
 /doc/storybook-static
 /doc/out*
+*.local

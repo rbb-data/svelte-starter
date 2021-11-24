@@ -1,18 +1,20 @@
-<script>
+<script lang="ts">
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';
+
+  import type { Map, MapOptions } from 'leaflet';
 
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
 
   import { key } from '$lib/assets/leaflet';
 
-  export let height;
-  export let options = undefined;
+  export let height: number;
+  export let options: MapOptions = undefined;
 
   const mapId = 'map';
 
-  let map;
+  let map: Map;
 
   setContext(key, () => map);
 
@@ -23,16 +25,6 @@
     const L = await import('leaflet');
 
     map = L.map(mapId, options);
-
-    // here as an example, but will be done elsewhere
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-    L.marker([51.5, -0.09])
-      .addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-      .openPopup();
 
     return {
       destroy: () => {
