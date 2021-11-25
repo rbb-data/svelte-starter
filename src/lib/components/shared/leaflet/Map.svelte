@@ -2,7 +2,7 @@
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';
 
-  import type { Map, MapOptions } from 'leaflet';
+  import type { Map, MapOptions, LatLngBoundsLiteral } from 'leaflet';
 
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
@@ -14,6 +14,9 @@
 
   // map options (see https://leafletjs.com/reference.html#map)
   export let options: MapOptions = undefined;
+
+  // if given, the map will zoom in on the given bounds
+  export let fitBounds: LatLngBoundsLiteral = undefined;
 
   // hide zoom controls by default
   const defaultOptions = { zoomControl: false };
@@ -32,6 +35,12 @@
     const L = await import('leaflet');
 
     map = L.map(mapId, options);
+
+    // zoom map to fit bounds
+    if (fitBounds) {
+      map.fitBounds(fitBounds);
+      map.setMinZoom(map.getZoom());
+    }
 
     return {
       destroy: () => {
