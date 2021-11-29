@@ -1,53 +1,88 @@
 <script lang="ts">
   import Map from './leaflet/Map.svelte';
   import BingLayer from './leaflet/BingLayer.svelte';
-  import ZoomControl from './leaflet/ZoomControl.svelte';
+  import GeoJson from './leaflet/GeoJSON.svelte';
 
+  import coordsMap from '$lib/assets/geo/coords.json';
+
+  // height of the map
   export let height: number;
+
+  // region to show
   export let location: 'berlin' | 'brandenburg';
 
-  // TODO: This shouldn't live here
-  const coords = {
-    berlin: {
-      center: { lat: 52.5244, lng: 13.4105 },
-      bounds: {
-        topleft: { lat: 52.65, lng: 13.1 },
-        bottomright: { lat: 52.35, lng: 13.75 },
-      },
-      maxBounds: {
-        topleft: { lat: 52.8, lng: 12.9 },
-        bottomright: { lat: 52.2, lng: 13.9 },
-      },
-    },
-    brandenburg: {
-      center: { lat: 52.8455492, lng: 13.2461296 },
-      bounds: {
-        topleft: { lat: 53.5590907, lng: 14.7658159 },
-        bottomright: { lat: 51.359064, lng: 11.2662278 },
-      },
-      maxBounds: {
-        topleft: { lat: 54.8590907, lng: 15.2658159 },
-        bottomright: { lat: 50.659064, lng: 11.067355 },
-      },
-    },
-  };
-  const locationCoords = coords[location];
+  // if true, show Berlin's Bezirke or Brandenburg's Kreise
+  export let showDistricts = false;
+
+  // map options for the mask (see https://leafletjs.com/examples/geojson/)
+  export let maskOptions = undefined;
+
+  // map options for districts (see https://leafletjs.com/examples/geojson/)
+  export let districtOptions = undefined;
+
+  // dynamically load the mask
+  async function loadMask() {
+    switch (location) {
+      case 'berlin':
+        return await import('$lib/assets/geo/berlin-mask.geo.json');
+      case 'brandenburg':
+        return await import('$lib/assets/geo/brandenburg-mask.geo.json');
+    }
+  }
+
+  // dynamically load the districts
+  async function loadDistricts() {
+    switch (location) {
+      case 'berlin':
+        return await import('$lib/assets/geo/berlin-bezirke.geo.json');
+      case 'brandenburg':
+        return await import(
+          '$lib/assets/geo/brandenburg-kreise-simplified.geo.json'
+        );
+    }
+  }
+
+  const maxZoom = 17;
+
+  const coords = coordsMap[location];
+
+  const zoom = {
+    berlin: 10,
+    brandenburg: 7,
+  }[location];
+
+  const minZoom = {
+    berlin: 9,
+    brandenburg: 7,
+  }[location];
 
   const bounds = [
-    [
-      locationCoords.bounds.bottomright.lat,
-      locationCoords.bounds.bottomright.lng,
-    ],
-    [locationCoords.bounds.topleft.lat, locationCoords.bounds.topleft.lng],
+    [coords.bounds.bottomright.lat, coords.bounds.bottomright.lng],
+    [coords.bounds.topleft.lat, coords.bounds.topleft.lng],
   ] as Array<[number, number]>;
 
-  const options = {
+  const mapOptions = {
+    center: coords.center,
     bounds,
     maxBounds: bounds,
+    zoom,
+    minZoom,
+    maxZoom,
   };
 </script>
 
-<Map {height} {options} fitBounds={bounds}>
+<Map {height} options={mapOptions}>
   <BingLayer />
-  <ZoomControl />
+
+  {#await loadMask() then mask}
+    <GeoJson data={mask} options={maskOptions} />
+  {/await}
+
+  {#if showDistricts}
+    {#await loadDistricts() then districts}
+      <GeoJson data={districts} options={districtOptions} />
+    {/await}
+  {/if}
+
+  <slot />
 </Map>

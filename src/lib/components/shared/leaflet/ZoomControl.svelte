@@ -27,7 +27,7 @@
     if (!browser) return;
 
     // leaflet needs to be loaded dynamically as it interacts with the DOM
-    const L = await import('leaflet');
+    const L = (await import('leaflet')).default;
 
     const zoomControl = L.control
       .zoom({ position, zoomInText, zoomInTitle, zoomOutText, zoomOutTitle })

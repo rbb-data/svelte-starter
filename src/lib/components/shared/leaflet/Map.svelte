@@ -32,15 +32,12 @@
     if (!browser) return;
 
     // leaflet needs to be loaded dynamically as it interacts with the DOM
-    const L = await import('leaflet');
+    const L = (await import('leaflet')).default;
 
     map = L.map(mapId, options);
 
     // zoom map to fit bounds
-    if (fitBounds) {
-      map.fitBounds(fitBounds);
-      map.setMinZoom(map.getZoom());
-    }
+    if (fitBounds) map.fitBounds(fitBounds);
 
     return {
       destroy: () => {
