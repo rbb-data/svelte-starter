@@ -34,6 +34,8 @@ npm run dev
 
 Your app is then available at http://localhost:3000/. Edit `src/routes/index.svelte`.
 
+**Note:** SvelteKit requires `node>=14.13`. If you get an error message on `npm install` that an "engine is unsupported", update your node version and try again.
+
 ### Alternatively, do it the old school way
 
 If you don't want to automatically link a GitHub repo, you can instead run
