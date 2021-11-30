@@ -34,6 +34,8 @@ npm run dev
 
 Your app is then available at http://localhost:3000/. Edit `src/routes/index.svelte`.
 
+**Note:** SvelteKit requires `node>=14.13`. If you get an error message on `npm install` that an "engine is unsupported", update your node version and try again.
+
 ### Alternatively, do it the old school way
 
 If you don't want to automatically link a GitHub repo, you can instead run
@@ -93,14 +95,22 @@ This repo provides some useful helpers to quickly build interactive interfaces. 
 - `use:pannable`: makes an element "pannable", i.e. recognizes when an element is interacted with and tracks a pointer's position
 - `use:tooltip`: creates and destroys a (tooltip) component on interaction with an element
 
-### Core components (`src/lib/components/shared/core`)
+### Headless components (`src/lib/components/shared/headless`)
 
-Core components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
+Headless components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
 
 - `Search`: implements an input field that facilitates client-side fuzzy searching
 - `Slider`: renders a single slide at a time and allows to navigate back and forth through swipe gestures or mouse clicks
 - `Svg`: simple SVG container that implements a common chart sizing pattern
 - `Tabs`: makes content selectable
+
+## Environment variables
+
+Environment variables are handled by Vite, the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information.
+
+Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git.
+
+If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains examples files for both, `.env.development.example` and `.env.production.example`. Simply rename `.env.*.example` to `.env.*.local` and add the keys.
 
 ## Build and deploy
 
@@ -115,6 +125,10 @@ Creates a build that can be deployed to rbb's static server.
 ### `npm run deploy`
 
 Builds the app for production and uploads the build to the `dj1` dev server. The deployed file will be available at https://dj1.app.rbb-cloud.de/cool-project-name (assuming you named your project `cool-project-name`).
+
+**Note:** You need a certificate to access the server. If you don't have one yet your colleagues will gladly help you out.
+
+**Note:** The script uses [rsync](https://rsync.samba.org/) to efficiently synchronize changes between your local build and the target folder. The version of `rsync` that ships with macOS is out of date, so please install a recent version via [homebrew](https://brew.sh/) or [nix](https://nixos.org/guides/install-nix.html).
 
 ## Embed as iframe
 

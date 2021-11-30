@@ -1,17 +1,14 @@
 <script lang="ts">
-  import type { Component } from '$lib/types';
+  import focus from '$lib/actions/focus';
 
-  // list of tabs (a tab is any svelte component that can be rendered)
-  export let tabs: Array<Component>;
+  // list of tabs
+  export let tabs: Array<any>;
 
   // initial index of the active tab
   export let initialIndex = 0;
 
   // the index of the active tab
-  export let activeIndex = initialIndex;
-
-  // keeps a reference to tab nodes
-  const nodes = [];
+  let activeIndex = initialIndex;
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -22,7 +19,6 @@
     else if (nextIndex >= tabs.length) nextIndex = 0;
 
     activeIndex = nextIndex;
-    nodes[activeIndex].focus();
   }
 </script>
 
@@ -34,9 +30,9 @@
       aria-selected={tabIndex === activeIndex}
       tabindex={tabIndex === activeIndex ? 0 : -1}
       on:pointerdown={() => (activeIndex = tabIndex)}
-      bind:this={nodes[tabIndex]}
+      use:focus={tabIndex === activeIndex}
     >
-      <svelte:component this={tab.component} {...tab.props} />
+      <slot {tab} active={tabIndex === activeIndex} />
     </li>
   {/each}
 </ul>
@@ -46,11 +42,10 @@
     padding: 0;
     margin: 0;
     list-style-type: none;
-    display: flex;
   }
 
   li {
-    flex: 1;
+    display: inline-block;
   }
 
   li:hover {

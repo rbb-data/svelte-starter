@@ -1,6 +1,6 @@
-import Svg from './components/shared/core/Svg.svelte';
-import Slider from './components/shared/core/Slider.svelte';
-import Tabs from './components/shared/core/Tabs.svelte';
-import Search from './components/shared/core/Search.svelte';
+import Svg from './components/shared/headless/Svg.svelte';
+import Slider from './components/shared/headless/Slider.svelte';
+import Tabs from './components/shared/headless/Tabs.svelte';
+import Search from './components/shared/headless/Search.svelte';
 
 export { Svg, Slider, Tabs, Search };

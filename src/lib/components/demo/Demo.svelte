@@ -2,7 +2,7 @@
   import { scaleLinear } from 'd3-scale';
   import { extent } from 'd3-array';
 
-  import Svg from '$lib/components/shared/core/Svg.svelte';
+  import Svg from '$lib/components/shared/headless/Svg.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
   export let data: Array<{
@@ -43,13 +43,9 @@
 <h1>Demo</h1>
 
 {#if header}
-  <dl>
-    <dt>title:</dt>
-    <dd>{@html header.title}</dd>
-
-    <dt>subtitle:</dt>
-    <dd>{header.subtitle}</dd>
-  </dl>
+  <u>title:</u>
+  {@html header.title}<br />
+  <u>subtitle</u>: {header.subtitle}
 {:else}
   <i>
     You are lacking the necessary credentials to read content from the linked
