@@ -91,9 +91,14 @@ This repo provides some useful helpers to quickly build interactive interfaces. 
 ### Actions (`src/lib/actions`)
 
 - `use:css`: dynamically sets CSS variables
+- `use:focus`: sets focus or blur on an element
 - `use:fuzzysearch`: fuzzy searches input from a user against a dataset (using [`fuzzysort`](https://github.com/farzher/fuzzysort))
 - `use:pannable`: makes an element "pannable", i.e. recognizes when an element is interacted with and tracks a pointer's position
 - `use:tooltip`: creates and destroys a (tooltip) component on interaction with an element
+
+### Components (`src/lib/components/shared`)
+
+- `LocalMap.svelte`: Bing map of Berlin or Brandenburg
 
 ### Headless components (`src/lib/components/shared/headless`)
 
@@ -106,11 +111,11 @@ Headless components are essentially unstyled, higher-order components that "orch
 
 ## Environment variables
 
-Environment variables are handled by Vite, the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information.
+Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables.
 
 Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git.
 
-If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains examples files for both, `.env.development.example` and `.env.production.example`. Simply rename `.env.*.example` to `.env.*.local` and add the keys.
+If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains example files for both environments, `.env.development.example` and `.env.production.example`, so that you can simply rename `.env.*.example` to `.env.*.local` and add the keys.
 
 ## Build and deploy
 
