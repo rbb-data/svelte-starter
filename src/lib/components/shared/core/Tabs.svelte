@@ -2,7 +2,7 @@
   import focus from '$lib/actions/focus';
 
   // list of tabs
-  export let tabs: Array<string>;
+  export let tabs: Array<any>;
 
   // initial index of the active tab
   export let initialIndex = 0;
