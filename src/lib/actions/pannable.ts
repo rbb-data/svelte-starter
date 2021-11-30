@@ -53,7 +53,6 @@ type PointerType = 'mouse' | 'pen' | 'touch';
  * @param node - the element to make pannable
  * @param options.ignorePointers - a list of pointer types to ignore
  */
-/**so for every HTML / SVG Element */
 export default function pannable(
   node: HTMLElement | SVGElement,
   options: { ignorePointers: Array<PointerType> } = {

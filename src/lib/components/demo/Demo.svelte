@@ -26,7 +26,7 @@
     bottom: 10,
     left: 10,
   };
-  //why does this fail, if I do not define it here???
+
   const radius = 10;
 
   // set up some scales with d3

@@ -11,8 +11,7 @@
   export let cy: number;
 
   export let radius = 5;
-  //this is a sort of ts definiton of what variables can be
-  export let axis = 'xy';
+  export let axis: 'x' | 'y' | 'xy' = 'xy';
 
   // if given, the dot is restricted to move within these bounds
   export let bounds: {
@@ -23,8 +22,8 @@
   } = undefined;
 
   // position of the dot (could also be a spring)
-  //here
   const coords = writable({ x: cx, y: cy });
+
   let showArrows = true;
 </script>
 
