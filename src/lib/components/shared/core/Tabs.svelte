@@ -42,11 +42,10 @@
     padding: 0;
     margin: 0;
     list-style-type: none;
-    display: flex;
   }
 
   li {
-    flex: 1;
+    display: inline-block;
   }
 
   li:hover {
