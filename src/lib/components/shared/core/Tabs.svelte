@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { Component } from '$lib/types';
 
+  import focus from '$lib/actions/focus';
+
   // list of tabs (a tab is any svelte component that can be rendered)
   export let tabs: Array<Component>;
 
@@ -9,9 +11,6 @@
 
   // the index of the active tab
   export let activeIndex = initialIndex;
-
-  // keeps a reference to tab nodes
-  const nodes = [];
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
@@ -22,7 +21,6 @@
     else if (nextIndex >= tabs.length) nextIndex = 0;
 
     activeIndex = nextIndex;
-    nodes[activeIndex].focus();
   }
 </script>
 
@@ -34,7 +32,7 @@
       aria-selected={tabIndex === activeIndex}
       tabindex={tabIndex === activeIndex ? 0 : -1}
       on:pointerdown={() => (activeIndex = tabIndex)}
-      bind:this={nodes[tabIndex]}
+      use:focus={activeIndex === tabIndex}
     >
       <svelte:component this={tab.component} {...tab.props} />
     </li>
