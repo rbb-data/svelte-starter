@@ -45,12 +45,12 @@
   $: maxX = 0.66 * width;
   const minDiff = 20;
 
-  // TODO: this should only be x
-  let xy = writable({ x: 0, y: 0 });
-  const animatedXY = spring({ x: 0, y: 0 });
+  // tracks movement
+  let x = writable(0);
+  const animatedX = spring(0);
 
-  // animatedXY mirrors xy
-  $: animatedXY.set($xy);
+  // animatedX mirrors x
+  $: animatedX.set($x);
 
   function canNavigate(navigateBackward: boolean) {
     return (navigateBackward && prevSlide) || (!navigateBackward && nextSlide);
@@ -59,23 +59,22 @@
   function navigateAndReset(navigateBackward: boolean) {
     // transition to the next (or previous) slide
     animate = true;
-    xy.set(navigateBackward ? { x: width, y: 0 } : { x: -width, y: 0 });
+    x.set(navigateBackward ? width : -width);
 
     // reset after the transition is complete
     setTimeout(() => {
       animate = false;
-      xy.set({ x: 0, y: 0 });
-      if (navigateBackward) activeIndex = prev(activeIndex);
-      else activeIndex = next(activeIndex);
+      x.set(0);
+      activeIndex = navigateBackward ? prev(activeIndex) : next(activeIndex);
     }, 500);
   }
 
   function handleClick(e: MouseEvent) {
-    const { clientX: x } = e;
+    const { clientX } = e;
 
-    if (x >= minX && x <= maxX) return;
+    if (clientX >= minX && clientX <= maxX) return;
 
-    const navigateBackward = x < minX;
+    const navigateBackward = clientX < minX;
     if (!canNavigate(navigateBackward)) return;
     navigateAndReset(navigateBackward);
   }
@@ -98,7 +97,7 @@
 
     if (Math.abs(diff) < minDiff || !canNavigate(navigateBackward)) {
       animate = true;
-      xy.set({ x: 0, y: 0 });
+      x.set(0);
       setTimeout(() => {
         animate = false;
       }, 500);
@@ -118,13 +117,13 @@
   on:click={handleClick}
   use:pannable={{ ignorePointers: ['mouse'] }}
   on:panstart={handlePanStart}
-  on:panmove={drag(xy)}
+  on:panmove={drag(x)}
   on:panend={handlePanEnd}
 >
   <div
     class="content"
     use:css={{
-      'translate-x': px(animate ? $animatedXY.x : $xy.x),
+      'translate-x': px(animate ? $animatedX : $x),
     }}
   >
     <!-- visible content -->
