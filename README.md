@@ -126,6 +126,10 @@ Creates a build that can be deployed to rbb's static server.
 
 Builds the app for production and uploads the build to the `dj1` dev server. The deployed file will be available at https://dj1.app.rbb-cloud.de/cool-project-name (assuming you named your project `cool-project-name`).
 
+**Note:** You need a certificate to access the server. If you don't have one yet your colleagues will gladly help you out.
+
+**Note:** The script uses [rsync](https://rsync.samba.org/) to efficiently synchronize changes between your local build and the target folder. The version of `rsync` that ships with macOS is out of date, so please install a recent version via [homebrew](https://brew.sh/) or [nix](https://nixos.org/guides/install-nix.html).
+
 ## Embed as iframe
 
 `iframe.html` contains a snippet for you to copy-paste into your article. Make sure to give the iframe an appropriate title.
