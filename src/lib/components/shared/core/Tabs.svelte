@@ -8,7 +8,7 @@
   export let initialIndex = 0;
 
   // the index of the active tab
-  export let activeIndex = initialIndex;
+  let activeIndex = initialIndex;
 
   function handleKeyDown(e: KeyboardEvent) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
