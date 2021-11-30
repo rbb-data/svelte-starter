@@ -57,7 +57,6 @@
   </i>
 {/if}
 
-
 <h4>Ein responsiver SVG Container:</h4>
 
 <div class="wrapper" bind:clientWidth={width}>
