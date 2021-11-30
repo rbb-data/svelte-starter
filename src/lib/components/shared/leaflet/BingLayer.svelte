@@ -1,3 +1,9 @@
+<!--
+  @component
+
+  Renderless component that implements a Leaflet layer
+  that renders a Bing map
+-->
 <script lang="ts">
   import { getContext, onMount } from 'svelte';
   import { browser } from '$app/env';

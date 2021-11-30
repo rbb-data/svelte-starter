@@ -1,3 +1,10 @@
+<!--
+  @component
+
+  Makes content selectable
+
+  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#tabs)
+-->
 <script lang="ts">
   import focus from '$lib/actions/focus';
 

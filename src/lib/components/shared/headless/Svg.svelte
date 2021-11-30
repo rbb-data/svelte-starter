@@ -1,3 +1,10 @@
+<!--
+  @component
+
+  Renders an SVG container that implements a common pattern for sizing charts
+
+  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#svg)
+-->
 <script lang="ts">
   import { translate } from '$lib/helpers/utils';
 

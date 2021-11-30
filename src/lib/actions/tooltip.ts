@@ -1,30 +1,3 @@
-/**
- * This action creates and destroys a (tooltip) component on
- * interaction with an element.
- *
- * ```svelte
- * <script>
- *   import Tooltip from '...';
- * </script>
- *
- * <circle
- *   use:tooltip={{
- *     id: 'tooltip',
- *     Component: Tooltip,
- *     options: { props: { message: 'Hello world' } },
- *   }}
- *   r="10"
- * />
- * ```
- *
- * This renders the `Tooltip` component with the given `options.props` on hover or touch.
- *
- * The initialization `options` are passed to `Component` on creation;
- * see [Svelte's docs](https://svelte.dev/docs#Creating_a_component) for more information.
- *
- * **Note:** `Component` must render an element with an id that matches `id`.
- */
-
 import type { SvelteComponent } from 'svelte';
 import type { ActionReturn } from '$lib/types';
 
@@ -44,12 +17,14 @@ interface Tooltip<Props extends Record<string, any>> {
 }
 
 /**
- *  Render (tooltip) component on interaction with `node`
+ * Renders a (tooltip) component on interaction with `node`
  *
  * @param node - the element that triggers rendering of a component
  * @param tooltip.id - id of the component to render
  * @param tooltip.Component - component to render
  * @param tooltip.options - options passed to `Component` on creation
+ *
+ * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usetooltip)
  */
 export default function tooltipable<Props>(
   node: HTMLElement | SVGElement,

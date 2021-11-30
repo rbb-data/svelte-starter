@@ -1,3 +1,10 @@
+<!--
+  @component
+
+  Bing-powered Leaflet map of Berlin or Brandenburg
+
+  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#localmap)
+-->
 <script lang="ts">
   import Map from './leaflet/Map.svelte';
   import BingLayer from './leaflet/BingLayer.svelte';

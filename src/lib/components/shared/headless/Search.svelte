@@ -1,3 +1,10 @@
+<!--
+  @component
+
+  Implements an input field that facilitates client-side fuzzy searching
+
+  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#search)
+-->
 <script lang="ts">
   import fuzzysearch from '$lib/actions/fuzzysearch';
   import css from '$lib/actions/css';

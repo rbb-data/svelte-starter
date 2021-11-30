@@ -1,47 +1,3 @@
-/**
- * This action makes an element "pannable". It recognizes when an element
- * is interacted with, tracks a pointer's position, and dispatches three
- * custom events:
- *
- * - `panstart`: the interaction starts, exposes `{ x: number, y: number }`
- * - `panmove`: the pointer is being moved, exposes `{ x: number, y: number, dx: number, dy: number }`
- * - `panend`: the interaction ends, exposes `{ x: number, y: number }`
- *
- * Use as:
- *
- * <circle
- *   use:pannable={{ ignorePointers: ['mouse'] }}
- *   on:panstart={(e) => console.log('panning started', e.detail)}
- *   on:panmove={(e) => console.log('pointer is moving...', e.detail)}
- *   on:panend={(e) => console.log('panning ended', e.detail)}
- *   r="10"
- * />
- *
- * `ignorePointers` allows to ignore interactions from specific pointers.
- *
- * `pannable.js` also exports an additional function `drag` that makes it
- * easy to make an element draggable. For example:
- *
- * ```svelte
- * <script>
- *   import { writable } from 'svelte/store';
- *   import pannable, { drag } from '$lib/actions/pannable';
- *   const coords = writable({ x: 0, y: 0 });
- * </script>
- *
- * <circle
- *   cx={$coords.x}
- *   cy={$coords.y}
- *   use:pannable
- *   on:panmove={drag(coords)}
- *   r="10"
- * />
- * ```
- *
- * `drag` can be configured to move an element along a specified axis
- * or within given bounds (see function signature below).
- */
-
 import type { Writable } from 'svelte/store';
 import type { ActionReturn } from '$lib/types';
 
@@ -52,13 +8,14 @@ type PointerType = 'mouse' | 'pen' | 'touch';
  *
  * @param node - the element to make pannable
  * @param options.ignorePointers - a list of pointer types to ignore
+ *
+ * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usepannable)
  */
 export default function pannable(
   node: HTMLElement | SVGElement,
   options: { ignorePointers: Array<PointerType> } = {
     ignorePointers: [],
   }
-  /**we do this Action */
 ): ActionReturn<void> {
   let x: number;
   let y: number;
@@ -87,7 +44,6 @@ export default function pannable(
   }
 
   function handleMove(event: PointerEvent) {
-    /**wieso muss ich das gegenchecken ??? */
     if (event.pointerId !== pointerId) return;
 
     const { clientX, clientY } = event;

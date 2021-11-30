@@ -1,17 +1,13 @@
-/**
- * This action focuses or blurs an element. Use as:
- *
- * <div use:focus={true}>...</div>
- *
- * focuses the element while
- *
- * <div use:focus={false}>...</div>
- *
- * blurs the element.
- */
-
 import type { ActionReturn } from '$lib/types';
 
+/**
+ * Focuses or blurs an element
+ *
+ * @param node - the node to focus/blur
+ * @param active - if true, focus the node, otherwise blur it
+ *
+ * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usefocus)
+ */
 export default function focus(
   node: HTMLElement,
   active: boolean

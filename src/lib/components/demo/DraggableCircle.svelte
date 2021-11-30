@@ -27,7 +27,6 @@
   let showArrows = true;
 </script>
 
-<!--and because axis is defined in the panmove-->
 <g transform={translate([$coords.x, $coords.y])}>
   <Arrows offset={radius + 4} show={showArrows} />
   <circle

@@ -1,3 +1,12 @@
+<!--
+  @component
+
+  Renders a single component at a time and provides the necessary functionality
+  to navigate back and forth through swipe gestures (on touch devices)
+  or mouse clicks (on desktop)
+
+  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#slider)
+-->
 <script lang="ts">
   import type { Component } from '$lib/types';
   import { writable } from 'svelte/store';

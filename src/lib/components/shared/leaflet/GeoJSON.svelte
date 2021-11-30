@@ -1,3 +1,8 @@
+<!--
+  @component
+
+  Renderless component that adds GeoJSON to a Leaflet map
+-->
 <script lang="ts">
   import { onMount, getContext } from 'svelte';
   import { browser } from '$app/env';

@@ -1,6 +1,7 @@
 import css from './css';
+import focus from './focus';
+import fuzzysearch from './fuzzysearch';
 import pannable, { drag } from './pannable';
 import tooltip from './tooltip';
-import fuzzysearch from './fuzzysearch';
 
-export { css, pannable, drag, tooltip, fuzzysearch };
+export { css, focus, fuzzysearch, pannable, drag, tooltip };

@@ -1,3 +1,8 @@
+<!--
+  @component
+
+  Renders a Leaflet map
+-->
 <script lang="ts">
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';

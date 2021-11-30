@@ -1,17 +1,3 @@
-/**
- * This action dynamically sets CSS variables. For example:
- *
- * <div use:css={{ 'my-dynamically-set-color': 'steelblue' }}>...</div>
- *
- * sets the CSS variable `--my-dynamically-set-color` to `'steelblue'`
- * on that element. The variable can then be referenced in the style
- * tag like any other CSS variable:
- *
- * div {
- *   background-color: var(--my-dynamically-set-color);
- * }
- */
-
 import type { ActionReturn } from '$lib/types';
 
 /**
@@ -19,6 +5,8 @@ import type { ActionReturn } from '$lib/types';
  *
  * @param node - the node to set the CSS variable on
  * @param variables - the variables to set
+ *
+ * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usecss)
  */
 export default function css(
   node: HTMLElement | SVGElement,

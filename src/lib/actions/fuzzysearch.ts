@@ -17,6 +17,8 @@ interface SearchOptions {
  * @param options.data - array of objects or strings to search through
  * @param options.key - key to search on if `data` is an array of objects
  * @param options.limit - max number of results to return
+ *
+ * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usefuzzysearch)
  */
 export default function fuzzysearch(
   node: HTMLInputElement,
