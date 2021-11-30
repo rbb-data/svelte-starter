@@ -43,13 +43,9 @@
 <h1>Demo</h1>
 
 {#if header}
-  <dl>
-    <dt>title:</dt>
-    <dd>{@html header.title}</dd>
-
-    <dt>subtitle:</dt>
-    <dd>{header.subtitle}</dd>
-  </dl>
+  <u>title:</u>
+  {@html header.title}<br />
+  <u>subtitle</u>: {header.subtitle}
 {:else}
   <i>
     You are lacking the necessary credentials to read content from the linked

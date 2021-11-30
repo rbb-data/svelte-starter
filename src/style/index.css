@@ -1,4 +1,5 @@
-/* partly taken from https://github.com/andy-piccalilli/modern-css-reset (MIT licensed) */
+/* partly taken from https://github.com/andy-piccalilli/modern-css-reset (MIT licensed)
+and https://www.joshwcomeau.com/css/custom-css-reset/ */
 
 @import './fonts';
 @import './variables';
@@ -9,19 +10,14 @@
   box-sizing: border-box;
 }
 
+* {
+  margin: 0;
+}
+
 body {
   font-family: 'Interstate', sans-serif;
   line-height: 1.5;
-}
-
-/* remove default margins */
-body,
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
 input,
