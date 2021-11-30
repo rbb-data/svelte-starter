@@ -93,9 +93,9 @@ This repo provides some useful helpers to quickly build interactive interfaces. 
 - `use:pannable`: makes an element "pannable", i.e. recognizes when an element is interacted with and tracks a pointer's position
 - `use:tooltip`: creates and destroys a (tooltip) component on interaction with an element
 
-### Core components (`src/lib/components/shared/core`)
+### Headless components (`src/lib/components/shared/headless`)
 
-Core components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
+Headless components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
 
 - `Search`: implements an input field that facilitates client-side fuzzy searching
 - `Slider`: renders a single slide at a time and allows to navigate back and forth through swipe gestures or mouse clicks
