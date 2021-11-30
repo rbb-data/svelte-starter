@@ -5,6 +5,8 @@
 
   import coordsMap from '$lib/assets/geo/coords.json';
 
+  import rbbStyles from '$lib/assets/map-styles/rbb.json';
+
   // height of the map
   export let height: number;
 
@@ -13,6 +15,9 @@
 
   // if true, show Berlin's Bezirke or Brandenburg's Kreise
   export let showDistricts = false;
+
+  // if given, styles are passed to the Bing layer
+  export let styleSheet = undefined;
 
   // map options for the mask (see https://leafletjs.com/examples/geojson/)
   export let maskOptions = undefined;
@@ -69,10 +74,13 @@
     minZoom,
     maxZoom,
   };
+
+  // by default, apply rbb styles
+  if (styleSheet === undefined) styleSheet = rbbStyles;
 </script>
 
 <Map {height} options={mapOptions}>
-  <BingLayer />
+  <BingLayer {styleSheet} />
 
   {#await loadMask() then mask}
     <GeoJson data={mask} options={maskOptions} />
