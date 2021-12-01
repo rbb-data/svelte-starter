@@ -43,13 +43,13 @@
   // the submit button label
   export let submitButtonLabel = 'Submit';
 
+  // the search result
+  export let result: T | null = null;
+
   // if true, minimal styling is applied to highlight
   // the selected suggestion for debugging purposes;
   // however, this is not recommended for production use
-  export let highlightSelection = false;
-
-  // the search result
-  export let result: T | null = null;
+  export let debug = false;
 
   let inputElement: HTMLInputElement;
 
@@ -149,7 +149,7 @@
       {#each suggestions as suggestion, i}
         <li
           class:active={i === highlightedIndex}
-          class:highlight={highlightSelection}
+          class:highlight={debug}
           on:pointerover={() => (highlightedIndex = i)}
           on:pointerdown={() => submit()}
         >

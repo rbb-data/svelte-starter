@@ -14,6 +14,11 @@
   // initial index of the active tab
   export let initialIndex = 0;
 
+  // if true, minimal styling is applied to highlight
+  // the selected tab for debugging purposes;
+  // however, this is not recommended for production use
+  export let debug = false;
+
   // the index of the active tab
   let activeIndex = initialIndex;
 
@@ -34,6 +39,7 @@
     <li
       role="tab"
       class:active={tabIndex === activeIndex}
+      class:highlight={debug}
       aria-selected={tabIndex === activeIndex}
       tabindex={tabIndex === activeIndex ? 0 : -1}
       on:pointerdown={() => (activeIndex = tabIndex)}
@@ -53,6 +59,10 @@
 
   li {
     display: inline-block;
+  }
+
+  li.active.highlight {
+    font-weight: bold;
   }
 
   li:hover {

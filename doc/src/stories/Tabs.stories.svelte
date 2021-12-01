@@ -22,7 +22,7 @@
 
 <Story name="Basic">
   <div class="wrapper">
-    <Tabs {tabs} let:tab let:active>
+    <Tabs {tabs} debug let:tab let:active>
       {tab}
       {active ? ' (active)' : ''}
     </Tabs>
@@ -30,7 +30,7 @@
 </Story>
 
 <style>
-  .wrapper :global(.tabs li) {
+  /* .wrapper :global(.tabs li) {
     background-color: aliceblue;
     padding: 5px;
     margin: 10px;
@@ -40,5 +40,5 @@
 
   .wrapper :global(.tabs .active) {
     outline: 2px solid steelblue;
-  }
+  } */
 </style>
