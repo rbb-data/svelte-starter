@@ -26,7 +26,7 @@
 </script>
 
 <Meta
-  title="Core/Slider"
+  title="Headless/Slider"
   component={Slider}
   argTypes={{
     slides: {

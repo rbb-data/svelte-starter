@@ -4,7 +4,7 @@
 </script>
 
 <Meta
-  title="Core/Svg"
+  title="Headless/Svg"
   component={Svg}
   argTypes={{
     width: {

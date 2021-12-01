@@ -6,7 +6,7 @@
 </script>
 
 <Meta
-  title="Core/Tabs"
+  title="Headless/Tabs"
   component={Tabs}
   argTypes={{
     tabs: {

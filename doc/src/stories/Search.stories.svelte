@@ -18,7 +18,7 @@
   ];
 </script>
 
-<Meta title="Core/Search" component={Search} />
+<Meta title="Headless/Search" component={Search} />
 
 <Template let:args>
   <Search {data} {...args} />
