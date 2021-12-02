@@ -1,13 +1,18 @@
-<!--
-  @component
-
-  Renders a single component at a time and provides the necessary functionality
-  to navigate back and forth through swipe gestures (on touch devices)
-  or mouse clicks (on desktop)
-
-  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#slider)
--->
 <script lang="ts">
+  /**
+   * `Slider` renders a single component at a time and provides the necessary functionality
+   * to navigate back and forth through swipe gestures (on touch devices) or mouse clicks
+   * (on desktop).
+   *
+   * `Slider` keeps track of the active slide internally. Binding to this prop (`activeIndex`)
+   * is a common pattern.
+   *
+   * `prev` and `next` determine the index of the previous and next slide;
+   * returning `null` means there is no slide to go to.
+   *
+   * @component
+   */
+
   import type { Component } from '$lib/types';
   import { writable } from 'svelte/store';
   import { spring } from 'svelte/motion';
@@ -16,19 +21,32 @@
   import pannable, { drag } from '$lib/actions/pannable';
   import { px } from '$lib/helpers/utils';
 
-  // list of slides
+  /**
+   * list of slides
+   * @required
+   */
   export let slides: Array<Component>;
 
-  // function that determines the previous slide
+  /**
+   * function that determines the previous slide
+   * @required
+   */
   export let prev: (index: number) => number | null;
 
-  // function that determines the next slide
+  /**
+   * function that determines the next slide
+   * @required
+   */
   export let next: (index: number) => number | null;
 
-  // intial slide index
+  /**
+   * intial slide index
+   */
   export let initialActiveIndex = 0;
 
-  // index of the currently visible slide
+  /**
+   * index of the currently visible slide
+   */
   export let activeIndex = initialActiveIndex;
 
   $: currSlide = slides[activeIndex];

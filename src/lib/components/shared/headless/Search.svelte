@@ -1,11 +1,26 @@
-<!--
-  @component
-
-  Implements an input field that facilitates client-side fuzzy searching
-
-  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#search)
--->
 <script lang="ts">
+  /**
+   * `Search` implements an input field that facilitates client-side fuzzy searching
+   * (via [fuzzysort](https://github.com/farzher/fuzzysort)).
+   * The setup includes a reset and submit button as well as the necessary event management
+   * for an accessible search experience.
+   *
+   * As headless components don't control styling, this renders a _browser-styled_ form
+   * containing an input field as well as a reset and submit button by default.
+   *
+   * **Note:** By default the currently selected suggestion is not highlighted.
+   * Setting `debug` to `true` applies minimal styling to the highlighted selection
+   * for debugging purposes (however, this is not meant for production!).
+   *
+   * Custom reset und submit buttons can be passed as props. If you do so,
+   * make sure to add the appropriate types, or the form will not work as expected.
+   *
+   * **A11y:** If you replace the inside of a button with an icon, make sure to
+   * add an `aria-label` to the button for a11y reasons.
+   *
+   * @component
+   */
+
   import fuzzysearch from '$lib/actions/fuzzysearch';
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
@@ -13,42 +28,72 @@
   import type { Item } from '$lib/actions/fuzzysearch';
   type T = $$Generic<Item>;
 
-  // the data to search through
+  /**
+   * the data to search through
+   * @required
+   */
   export let data: Array<T>;
 
-  // the key to search on if the data is an array of objects
+  /**
+   * the key to search on if the data is an array of objects
+   */
   export let key: string;
 
-  // format a data item for display
+  /**
+   * format a data item for display
+   */
   export let format = (d: T): string => d as string;
 
-  // the maximum number of suggestions to display
+  /**
+   * the maximum number of suggestions to display
+   */
   export let nSuggestions = 8;
 
-  // the placeholder text to display
+  /**
+   * the placeholder text to display
+   */
   export let placeholder = 'Placeholder';
 
-  // if true, the label is hidden visually (but is still accessible)
+  /**
+   * if true, the label is hidden visually (but is still accessible)
+   */
   export let hideLabel = false;
-  // the label to display
+
+  /**
+   * the label to display
+   */
   export let label = 'Label';
 
-  // if true, no reset button is rendered
+  /**
+   * if true, no reset button is rendered
+   */
   export let hideResetButton = false;
-  // the reset button label
+
+  /**
+   * the reset button label
+   */
   export let resetButtonLabel = 'Reset';
 
-  // if true, no submit button is rendered
+  /**
+   * if true, no submit button is rendered
+   */
   export let hideSubmitButton = false;
-  // the submit button label
+
+  /**
+   * the submit button label
+   */
   export let submitButtonLabel = 'Submit';
 
-  // the search result
+  /**
+   * the search result
+   */
   export let result: T | null = null;
 
-  // if true, minimal styling is applied to highlight
-  // the selected suggestion for debugging purposes;
-  // however, this is not recommended for production use
+  /**
+   * if true, minimal styling is applied to highlight
+   * the selected suggestion for debugging purposes;
+   * however, this is not recommended for production use
+   */
   export let debug = false;
 
   let inputElement: HTMLInputElement;

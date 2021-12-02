@@ -1,26 +1,40 @@
-<!--
-  @component
-
-  Renders an SVG container that implements a common pattern for sizing charts
-
-  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#svg)
--->
 <script lang="ts">
+  /**
+   * `Svg` is a SVG container that implements a common pattern for sizing charts
+   * (check out [Amelia Wattenberger's blog post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)).
+   *
+   * Typically, one would bind to the internally managed `boundedWidth` and `boundedHeight`.
+   *
+   * @component
+   */
+
   import { translate } from '$lib/helpers/utils';
 
-  // width of the svg
+  /**
+   * width of the svg
+   * @required
+   */
   export let width: number;
 
-  // height of the svg
+  /**
+   * height of the svg
+   * @required
+   */
   export let height: number;
 
-  // width of the canvas (the svg's width minus margins)
+  /**
+   * width of the canvas (the svg's width minus margins)
+   */
   export let boundedWidth = 0;
 
-  // height of the canvas (the svg's height minus margins)
+  /**
+   * height of the canvas (the svg's height minus margins)
+   */
   export let boundedHeight = 0;
 
-  // size of the margins on each side of the svg
+  /**
+   * size of the margins on each side of the svg
+   */
   export let margin = {
     top: 0,
     right: 0,

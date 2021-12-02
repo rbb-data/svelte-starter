@@ -1,22 +1,33 @@
-<!--
-  @component
-
-  Makes content selectable
-
-  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#tabs)
--->
 <script lang="ts">
+  /**
+   * The `Tabs` component makes content selectable.
+   * The active tab is tracked internally and marked by adding the class `.active`
+   * (no default styles are applied to the active element however).
+   *
+   * `Tabs` exposes to slot props, `tab` and `active`.
+   * `tab` is an element in `tabs` and `active` is true if `tab` is currently selected.
+   *
+   * @component
+   */
+
   import focus from '$lib/actions/focus';
 
-  // list of tabs
+  /**
+   * list of tabs
+   * @required
+   */
   export let tabs: Array<any>;
 
-  // initial index of the active tab
+  /**
+   * initial index of the active tab
+   */
   export let initialIndex = 0;
 
-  // if true, minimal styling is applied to highlight
-  // the selected tab for debugging purposes;
-  // however, this is not recommended for production use
+  /**
+   * if true, minimal styling is applied to highlight
+   * the selected tab for debugging purposes;
+   * however, this is not recommended for production use
+   */
   export let debug = false;
 
   // the index of the active tab
