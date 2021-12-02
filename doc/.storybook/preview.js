@@ -8,6 +8,11 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  options: {
+    storySort: {
+      method: 'alphabetical',
+    },
+  },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
   },

@@ -1,5 +1,5 @@
 <script>
-  import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+  import { Meta, Story } from '@storybook/addon-svelte-csf';
   import { Search } from '@rbb-data/svelte-starter';
 
   const data = [
@@ -20,13 +20,11 @@
 
 <Meta title="Headless/Search" component={Search} />
 
-<Template let:args>
-  <Search {data} {...args} />
-</Template>
-
-<Story
-  name="Basic"
-  args={{
-    highlightSelection: true,
-  }}
-/>
+<Story name="Basic">
+  <Search
+    {data}
+    debug
+    label="Suche einen Berliner Bezirk"
+    placeholder="Mitte"
+  />
+</Story>

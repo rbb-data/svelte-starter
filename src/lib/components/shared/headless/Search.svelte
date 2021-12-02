@@ -37,7 +37,7 @@
   /**
    * the key to search on if the data is an array of objects
    */
-  export let key: string;
+  export let key: string = undefined;
 
   /**
    * format a data item for display

@@ -21,24 +21,8 @@
 />
 
 <Story name="Basic">
-  <div class="wrapper">
-    <Tabs {tabs} debug let:tab let:active>
-      {tab}
-      {active ? ' (active)' : ''}
-    </Tabs>
-  </div>
+  <Tabs {tabs} debug let:tab let:active>
+    {tab}
+    {active ? ' (active)' : ''}
+  </Tabs>
 </Story>
-
-<style>
-  /* .wrapper :global(.tabs li) {
-    background-color: aliceblue;
-    padding: 5px;
-    margin: 10px;
-    text-align: center;
-    border-radius: 5px;
-  }
-
-  .wrapper :global(.tabs .active) {
-    outline: 2px solid steelblue;
-  } */
-</style>

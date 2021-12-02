@@ -1,5 +1,5 @@
 <script>
-  import { Meta, Template, Story } from '@storybook/addon-svelte-csf';
+  import { Meta, Story } from '@storybook/addon-svelte-csf';
   import { Slider } from '@rbb-data/svelte-starter';
   import Slide from '../helpers/Slide.svelte';
 
@@ -43,7 +43,7 @@
       control: null,
       table: {
         type: {
-          summary: '(activeIndex: number) => number',
+          summary: '(idx: number) => number',
         },
       },
     },
@@ -52,7 +52,7 @@
       control: null,
       table: {
         type: {
-          summary: '(activeIndex: number) => number',
+          summary: '(idx: number) => number',
         },
       },
     },
@@ -68,22 +68,18 @@
   }}
 />
 
-<Template let:args>
-  <Slider {slides} {...args} />
-</Template>
+<Story name="Basic">
+  <Slider
+    {slides}
+    prev={(idx) => (idx - 1 >= 0 ? idx - 1 : null)}
+    next={(idx) => (idx + 1 <= nSlides - 1 ? idx + 1 : null)}
+  />
+</Story>
 
-<Story
-  name="Basic"
-  args={{
-    prev: (idx) => (idx - 1 >= 0 ? idx - 1 : null),
-    next: (idx) => (idx + 1 <= nSlides - 1 ? idx + 1 : null),
-  }}
-/>
-
-<Story
-  name="Carousel"
-  args={{
-    prev: (idx) => (idx - 1 >= 0 ? idx - 1 : nSlides - 1),
-    next: (idx) => (idx + 1 <= nSlides - 1 ? idx + 1 : 0),
-  }}
-/>
+<Story name="Carousel">
+  <Slider
+    {slides}
+    prev={(idx) => (idx - 1 >= 0 ? idx - 1 : nSlides - 1)}
+    next={(idx) => (idx + 1 <= nSlides - 1 ? idx + 1 : 0)}
+  />
+</Story>

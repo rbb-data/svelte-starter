@@ -45,15 +45,6 @@
   }}
 />
 
-<Template let:args>
-  <Svg {...args} />
-</Template>
-
-<Story
-  name="Basic"
-  args={{
-    width: 200,
-    height: 100,
-    debug: true,
-  }}
-/>
+<Story name="basic">
+  <Svg width={200} height={100} debug />
+</Story>
