@@ -1,9 +1,8 @@
-<script context="module" lang="ts">
-  import type { Load } from '@sveltejs/kit';
-
+<script context="module">
   // this function runs on the server and on the client
   // see: https://kit.svelte.dev/docs#loading
-  export const load: Load = async ({ fetch }) => {
+  /** @type {import('@sveltejs/kit').Load} */
+  export const load = async ({ fetch }) => {
     // load data by fetching it from the app's own endpoint
     // the requested file must lie within the ./data directory
     const FILENAME = 'example-data.csv';
@@ -44,19 +43,16 @@
   };
 </script>
 
-<script lang="ts">
+<script>
   import Demo from '$lib/components/demo/Demo.svelte';
 
   import '../style/index.css';
 
   // these props are loaded on the server
-  export let data: Array<{
-    x: number;
-    y: number;
-  }>;
-  export let config: {
-    header: { title: string; subtitle: string };
-  };
+  /** @type {Array<{ x: number; y: number }>} */
+  export let data;
+  /** @type {{header: { title: string, subtitle: string }}} */
+  export let config;
 
   const { header } = config;
 </script>

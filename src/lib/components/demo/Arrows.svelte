@@ -1,12 +1,15 @@
-<script lang="ts">
+<script>
   import { tweened } from 'svelte/motion';
 
   import Arrow from './Arrow.svelte';
   import css from '$lib/actions/css';
   import { translate } from '$lib/helpers/utils';
 
-  export let orientations: Array<'n' | 'w' | 's' | 'e'> = ['n', 'w', 's', 'e'];
+  /** @type {Array<'n' | 's' | 'e' | 'w'>} */
+  export let orientations = ['n', 'w', 's', 'e'];
+
   export let offset = 10;
+
   export let show = true;
 
   // position of each arrow

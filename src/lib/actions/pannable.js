@@ -1,30 +1,39 @@
-import type { Writable } from 'svelte/store';
-import type { ActionReturn } from '$lib/types';
-
-type PointerType = 'mouse' | 'pen' | 'touch';
+/**
+ * @typedef {'mouse' | 'pen' | 'touch'} PointerType
+ */
 
 /**
  * Make an element pannable
  *
- * @param node - the element to make pannable
- * @param options.ignorePointers - a list of pointer types to ignore
- *
- * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usepannable)
+ * @param {HTMLElement | SVGElement} node - the element to make pannable
+ * @param {Object} options
+ * @param {Array<PointerType>} options.ignorePointers - a list of pointer types to ignore
+ * @return {import('$lib/types').ActionReturn<boolean>}
  */
 export default function pannable(
-  node: HTMLElement | SVGElement,
-  options: { ignorePointers: Array<PointerType> } = {
+  node,
+  options = {
     ignorePointers: [],
   }
-): ActionReturn<void> {
-  let x: number;
-  let y: number;
+) {
+  /** @type {number} */
+  let x;
+  /** @type {number} */
+  let y;
 
-  let pointerId: number;
+  /** @type {number} */
+  let pointerId;
 
-  function handleStart(event: PointerEvent) {
+  /**
+   * @param {PointerEvent} event
+   */
+  function handleStart(event) {
     if (!event.isPrimary) return;
-    if (options.ignorePointers.includes(event.pointerType as PointerType))
+    if (
+      options.ignorePointers.includes(
+        /** @type PointerType */ (event.pointerType)
+      )
+    )
       return;
 
     x = event.clientX;
@@ -43,7 +52,10 @@ export default function pannable(
     window.addEventListener('pointercancel', handleEnd);
   }
 
-  function handleMove(event: PointerEvent) {
+  /**
+   * @param {PointerEvent} event
+   */
+  function handleMove(event) {
     if (event.pointerId !== pointerId) return;
 
     const { clientX, clientY } = event;
@@ -60,7 +72,10 @@ export default function pannable(
     );
   }
 
-  function handleEnd(event: PointerEvent) {
+  /**
+   * @param {PointerEvent} event
+   */
+  function handleEnd(event) {
     if (event.pointerId !== pointerId) return;
 
     const { clientX, clientY } = event;
@@ -89,24 +104,25 @@ export default function pannable(
  * Creates a function that updates an element's coordinates
  * according to the information exposed by some custom event
  *
- * @param coords - a writable store that exposes an element's position
- * @param options.axis - the axis to move along (`x` or `y`), or `xy` for no restrictions (default)
- * @param options.bounds - if given, the element is restricted to move within these bounds
- * @returns function that consumes a custom event and keeps the given coordinates in sync
+ * @param {import('svelte/store').Writable<number | { x: number, y: number }>} coords - a writable store that exposes an element's position
+ * @param {Object} options
+ * @param {'xy' | 'x' | 'y'} [options.axis] - the axis to move along (`x` or `y`), or `xy` for no restrictions (default)
+ * @param {{ top?: number, right?: number, bottom?: number, left?: number }} [options.bounds] - if given, the element is restricted to move within these bounds
+ * @returns {(event: CustomEvent<{ dx: number, dy: number }>) => void}
  */
 
-export function drag(
-  coords: Writable<number | { x: number; y: number }>,
-  options: {
-    axis?: 'xy' | 'x' | 'y';
-    bounds?: { top?: number; right?: number; bottom?: number; left?: number };
-  } = { axis: 'xy' }
-): (event: CustomEvent<{ dx: number; dy: number }>) => void {
+export function drag(coords, options = { axis: 'xy' }) {
   const { bounds } = options;
   const axis = options.axis || 'xy';
 
-  // use `bounds` to constrain movement
-  function bounded(value: number, axis: 'x' | 'y') {
+  /**
+   * Use `bounds` to constrain movement
+   *
+   * @param {number} value
+   * @param {'x' | 'y'} axis
+   * @returns
+   */
+  function bounded(value, axis) {
     if (!options.bounds) return value;
     const [min, max] = {
       x: [bounds.left, bounds.right],

@@ -3,25 +3,33 @@
 
   Renders a Leaflet map
 -->
-<script lang="ts">
+<script>
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';
-
-  import type { Map, MapOptions, LatLngBoundsLiteral } from 'leaflet';
 
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
 
   import { key } from '$lib/assets/leaflet';
 
-  // height of the map
-  export let height: number;
+  /**
+   * height of the map
+   * @type {number}
+   */
+  export let height;
 
-  // map options (see https://leafletjs.com/reference.html#map)
-  export let options: MapOptions = undefined;
+  /**
+   * map options
+   * @type {import('leaflet').MapOptions}
+   * @see https://leafletjs.com/reference.html#map
+   */
+  export let options = undefined;
 
-  // if given, the map will zoom in on the given bounds
-  export let fitBounds: LatLngBoundsLiteral = undefined;
+  /**
+   * if given, the map will zoom in on the given bounds
+   * @type {import('leaflet').LatLngBoundsLiteral}
+   */
+  export let fitBounds = undefined;
 
   // hide zoom controls by default
   const defaultOptions = { zoomControl: false };
@@ -29,7 +37,8 @@
 
   const mapId = 'map';
 
-  let map: Map;
+  /** @type {import('leaflet').Map} */
+  let map;
 
   setContext(key, () => map);
 

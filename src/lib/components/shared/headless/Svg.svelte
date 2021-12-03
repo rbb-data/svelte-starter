@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   /**
    * `Svg` is a SVG container that implements a common pattern for sizing charts
    * (check out [Amelia Wattenberger's blog post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)).
@@ -12,15 +12,17 @@
 
   /**
    * width of the svg
+   * @type {number}
    * @required
    */
-  export let width: number;
+  export let width;
 
   /**
    * height of the svg
+   * @type {number}
    * @required
    */
-  export let height: number;
+  export let height;
 
   /**
    * width of the canvas (the svg's width minus margins)

@@ -3,19 +3,24 @@
 
   Renderless component that adds GeoJSON to a Leaflet map
 -->
-<script lang="ts">
+<script>
   import { onMount, getContext } from 'svelte';
   import { browser } from '$app/env';
 
-  import type { GeoJsonObject } from 'geojson';
-  import type { Map, GeoJSONOptions } from 'leaflet';
-
   import { key } from '$lib/assets/leaflet';
 
-  const map = (getContext(key) as () => Map)();
+  /** @type {import('leaflet').Map} */
+  const map = getContext(key)();
 
-  export let data: GeoJsonObject;
-  export let options: GeoJSONOptions = undefined;
+  /**
+   * @type {import('geojson').GeoJsonObject}
+   */
+  export let data;
+
+  /**
+   * @type {import('leaflet').GeoJSONOptions}
+   */
+  export let options = undefined;
 
   onMount(async () => {
     if (!browser) return;

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   /**
    * `Slider` renders a single component at a time and provides the necessary functionality
    * to navigate back and forth through swipe gestures (on touch devices) or mouse clicks
@@ -13,7 +13,6 @@
    * @component
    */
 
-  import type { Component } from '$lib/types';
   import { writable } from 'svelte/store';
   import { spring } from 'svelte/motion';
 
@@ -23,21 +22,24 @@
 
   /**
    * list of slides
+   * @type {Array<import('$lib/types').Component>}
    * @required
    */
-  export let slides: Array<Component>;
+  export let slides;
 
   /**
    * function that determines the previous slide
+   * @type {(index: number) => number | null}
    * @required
    */
-  export let prev: (index: number) => number | null;
+  export let prev;
 
   /**
    * function that determines the next slide
+   * @type {(index: number) => number | null}
    * @required
    */
-  export let next: (index: number) => number | null;
+  export let next;
 
   /**
    * intial slide index
@@ -64,8 +66,11 @@
 
   let animate = true;
 
-  // x coordinate on touchstart
-  let startX: number;
+  /**
+   * x coordinate on touchstart
+   * @type {number}
+   */
+  let startX;
 
   // thresholds that filter out small movements
   $: minX = 0.33 * width;
@@ -79,11 +84,17 @@
   // animatedX mirrors x
   $: animatedX.set($x);
 
-  function canNavigate(navigateBackward: boolean) {
+  /**
+   * @param {boolean} navigateBackward
+   */
+  function canNavigate(navigateBackward) {
     return (navigateBackward && prevSlide) || (!navigateBackward && nextSlide);
   }
 
-  function navigateAndReset(navigateBackward: boolean) {
+  /**
+   * @param {boolean} navigateBackward
+   */
+  function navigateAndReset(navigateBackward) {
     // transition to the next (or previous) slide
     animate = true;
     x.set(navigateBackward ? width : -width);
@@ -96,7 +107,10 @@
     }, 500);
   }
 
-  function handleClick(e: MouseEvent) {
+  /**
+   * @param {MouseEvent} e
+   */
+  function handleClick(e) {
     const { clientX } = e;
 
     if (clientX >= minX && clientX <= maxX) return;
@@ -106,18 +120,27 @@
     navigateAndReset(navigateBackward);
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
+  /**
+   * @param {KeyboardEvent} e
+   */
+  function handleKeyDown(e) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     const navigateBackward = e.key === 'ArrowLeft';
     if (!canNavigate(navigateBackward)) return;
     navigateAndReset(navigateBackward);
   }
 
-  function handlePanStart(e: CustomEvent<{ x: number; y: number }>) {
+  /**
+   * @param {CustomEvent<{ x: number; y: number }>} e
+   */
+  function handlePanStart(e) {
     startX = e.detail.x;
   }
 
-  function handlePanEnd(e: CustomEvent<{ x: number; y: number }>) {
+  /**
+   * @param {CustomEvent<{ x: number; y: number }>} e
+   */
+  function handlePanEnd(e) {
     const endX = e.detail.x;
     const diff = endX - startX;
     const navigateBackward = diff > 0;

@@ -1,8 +1,11 @@
-<script lang="ts">
+<script>
   import css from '$lib/actions/css';
 
   export let length = 10;
-  export let orientation: 'n' | 'w' | 's' | 'e' = 'w';
+
+  /** @type {'n' | 'w' | 's' | 'e'} */
+  export let orientation = 'w';
+
   export let color = 'black';
 
   const arrowHeadLength = 6;

@@ -5,18 +5,18 @@ import { autoType, csvParse } from 'd3-dsv';
 
 import error from '../_error';
 
-import type { RequestHandler } from '@sveltejs/kit';
-
 // GET /load/data/[filename]
-export const get: RequestHandler = async ({ params }) => {
+/** @type {import('@sveltejs/kit').RequestHandler} */
+export const get = async ({ params }) => {
   const { filename } = params;
   const path = `data/${filename}`;
   const extension = extname(filename).slice(1);
 
+  /** @type {Record<string, (s: string) => Record<any,any>>} */
   const parse = {
     json: JSON.parse,
     yaml: yaml.parse,
-    csv: (str: string) => csvParse(str, autoType),
+    csv: (str) => csvParse(str, autoType),
   };
   const supportedFormats = Object.keys(parse);
   const supportedFormatsStr = supportedFormats.join(', ');

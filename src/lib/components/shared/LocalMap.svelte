@@ -5,7 +5,7 @@
 
   [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#localmap)
 -->
-<script lang="ts">
+<script>
   import Map from './leaflet/Map.svelte';
   import BingLayer from './leaflet/BingLayer.svelte';
   import GeoJson from './leaflet/GeoJSON.svelte';
@@ -14,22 +14,39 @@
 
   import rbbStyles from '$lib/assets/map-styles/rbb.json';
 
-  // height of the map
-  export let height: number;
+  /**
+   * height of the map
+   * @type {number}
+   */
+  export let height;
 
-  // region to show
-  export let location: 'berlin' | 'brandenburg';
+  /**
+   * region to show
+   * @type {'berlin' | 'brandenburg'}
+   */
+  export let location;
 
   // if true, show Berlin's Bezirke or Brandenburg's Kreise
   export let showDistricts = false;
 
-  // if given, styles are passed to the Bing layer
+  /**
+   * if given, styles are passed to the Bing layer
+   * @type {Record<string,string>}
+   */
   export let styleSheet = undefined;
 
-  // map options for the mask (see https://leafletjs.com/examples/geojson/)
+  /**
+   * map options for the mask
+   * @type {import('leaflet').GeoJSONOptions}
+   * @see https://leafletjs.com/examples/geojson/
+   */
   export let maskOptions = undefined;
 
-  // map options for districts (see https://leafletjs.com/examples/geojson/)
+  /**
+   * map options for districts
+   * @type {import('leaflet').GeoJSONOptions}
+   * @see https://leafletjs.com/examples/geojson/
+   */
   export let districtOptions = undefined;
 
   // dynamically load the mask
@@ -68,14 +85,15 @@
     brandenburg: 7,
   }[location];
 
+  /** @type {import('leaflet').LatLngBoundsLiteral} */
   const bounds = [
     [coords.bounds.bottomright.lat, coords.bounds.bottomright.lng],
     [coords.bounds.topleft.lat, coords.bounds.topleft.lng],
-  ] as Array<[number, number]>;
+  ];
 
+  /** @type {import('leaflet').MapOptions} */
   const mapOptions = {
     center: coords.center,
-    bounds,
     maxBounds: bounds,
     zoom,
     minZoom,

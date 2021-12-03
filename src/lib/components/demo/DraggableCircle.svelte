@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   import { writable } from 'svelte/store';
 
   import Arrows from './Arrows.svelte';
@@ -7,19 +7,20 @@
   import { translate } from '$lib/helpers/utils';
 
   // initial x and y coordinates
-  export let cx: number;
-  export let cy: number;
+  /** @type {number} */
+  export let cx;
+
+  /** @type {number} */
+  export let cy;
 
   export let radius = 5;
-  export let axis: 'x' | 'y' | 'xy' = 'xy';
+
+  /** @type {'x' | 'y' | 'xy'} */
+  export let axis = 'xy';
 
   // if given, the dot is restricted to move within these bounds
-  export let bounds: {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-  } = undefined;
+  /** @type {{ top: number; right: number; bottom: number; left: number }} */
+  export let bounds = undefined;
 
   // position of the dot (could also be a spring)
   const coords = writable({ x: cx, y: cy });

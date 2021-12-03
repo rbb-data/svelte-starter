@@ -4,38 +4,38 @@
   Renderless component that implements a Leaflet layer
   that renders a Bing map
 -->
-<script lang="ts">
+<script>
   import { getContext, onMount } from 'svelte';
   import { browser } from '$app/env';
 
-  import type { Map } from 'leaflet';
-
   import { key } from '$lib/assets/leaflet';
   import addBingLayer from '$lib/helpers/leaflet/addBingLayer';
-  import toStyleString, {
-    MapStyleSheet,
-  } from '$lib/helpers/leaflet/toStyleString';
+  import toStyleString from '$lib/helpers/leaflet/toStyleString';
 
   const API_KEY = import.meta.env.VITE_BING_KEY;
 
-  const map = (getContext(key) as () => Map)();
+  /** @type {import('leaflet').Map} */
+  const map = getContext(key)();
 
-  type ImagerySet =
-    | 'Aerial'
-    | 'AerialWithLabelsOnDemand'
-    | 'CanvasDark'
-    | 'CanvasLight'
-    | 'CanvasGray'
-    | 'RoadOnDemand';
+  /**
+   * type of imagery
+   * @type {'Aerial' | 'AerialWithLabelsOnDemand' | 'CanvasDark' | 'CanvasLight' | 'CanvasGray' | 'RoadOnDemand'}
+   * @see https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters
+   */
+  export let type = 'CanvasGray';
 
-  // type of imagery (see https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters)
-  export let type: ImagerySet = 'CanvasGray';
-
-  // culture code (see https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes)
+  /**
+   * culture code
+   * @see https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes
+   */
   export let culture = 'de-DE';
 
-  // style sheet (see https://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements)
-  export let styleSheet: MapStyleSheet = {};
+  /**
+   * style sheet
+   * @type {import('$lib/helpers/leaflet/toStyleString').MapStyleSheet}
+   * @see https://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements
+   */
+  export let styleSheet = {};
 
   onMount(async () => {
     if (!browser) return;
