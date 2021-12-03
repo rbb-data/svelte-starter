@@ -3,20 +3,20 @@
 
   Renderless component that adds a zoom control to a Leaflet map
 -->
-<script lang="ts">
+<script>
   import { onMount, getContext } from 'svelte';
   import { browser } from '$app/env';
 
-  import type { Map } from 'leaflet';
-
   import { key } from '$lib/assets/leaflet';
 
-  const map = (getContext(key) as () => Map)();
+  /** @type {import('leaflet').Map} */
+  const map = getContext(key)();
 
-  type Position = 'topleft' | 'topright' | 'bottomleft' | 'bottomright';
-
-  // position of the zoom control
-  export let position: Position = 'topright';
+  /**
+   * position of the zoom control
+   * @type {'topleft' | 'topright' | 'bottomleft' | 'bottomright'}
+   */
+  export let position = 'topright';
 
   // zoom in icon (any valid html string is allowed)
   export let zoomInText = '+';

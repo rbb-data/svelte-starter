@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   /**
    * The `Tabs` component makes content selectable.
    * The active tab is tracked internally and marked by adding the class `.active`
@@ -14,9 +14,10 @@
 
   /**
    * list of tabs
+   * @type {Array<any>}
    * @required
    */
-  export let tabs: Array<any>;
+  export let tabs;
 
   /**
    * initial index of the active tab
@@ -33,7 +34,10 @@
   // the index of the active tab
   let activeIndex = initialIndex;
 
-  function handleKeyDown(e: KeyboardEvent) {
+  /**
+   * @param {KeyboardEvent} e
+   */
+  function handleKeyDown(e) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     const toLeft = e.key === 'ArrowLeft';
 

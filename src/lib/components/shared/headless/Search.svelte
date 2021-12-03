@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
   /**
    * `Search` implements an input field that facilitates client-side fuzzy searching
    * (via [fuzzysort](https://github.com/farzher/fuzzysort)).
@@ -25,24 +25,28 @@
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
 
-  import type { Item } from '$lib/actions/fuzzysearch';
-  type T = $$Generic<Item>;
+  /**
+   * @typedef {string | Record<string,any>} Item
+   */
 
   /**
    * the data to search through
    * @required
+   * @type {Array<Item>}
    */
-  export let data: Array<T>;
+  export let data;
 
   /**
    * the key to search on if the data is an array of objects
+   * @type {string}
    */
-  export let key: string = undefined;
+  export let key = undefined;
 
   /**
    * format a data item for display
+   * @type {(d: any) => string}
    */
-  export let format = (d: T): string => d as string;
+  export let format = (d) => d;
 
   /**
    * the maximum number of suggestions to display
@@ -86,8 +90,9 @@
 
   /**
    * the search result
+   * @type {Item}
    */
-  export let result: T | null = null;
+  export let result = null;
 
   /**
    * if true, minimal styling is applied to highlight
@@ -96,10 +101,14 @@
    */
   export let debug = false;
 
-  let inputElement: HTMLInputElement;
+  /** @type {HTMLInputElement} */
+  let inputElement;
 
-  let suggestions: Array<T> = [];
-  let highlightedIndex: number | null = null;
+  /** @type {Array<Item>} */
+  let suggestions = [];
+
+  /** @type {number} */
+  let highlightedIndex = null;
 
   let inputWidth = 0;
 
@@ -117,7 +126,10 @@
     discardSuggestions();
   }
 
-  function handleSubmit(e: Event) {
+  /**
+   * @param {Event} e
+   */
+  function handleSubmit(e) {
     e.preventDefault();
     if (highlightedElement === null) return;
     submit();
@@ -128,7 +140,10 @@
     discardSuggestions();
   }
 
-  function handleKeyDown(e: KeyboardEvent) {
+  /**
+   * @param {KeyboardEvent} e
+   */
+  function handleKeyDown(e) {
     if (e.key === 'Escape') {
       result = null;
       discardSuggestions();
@@ -147,7 +162,10 @@
     up ? highlightedIndex-- : highlightedIndex++;
   }
 
-  function handleSearch(e: CustomEvent<{ suggestions: Array<T> }>) {
+  /**
+   * @param {CustomEvent<{ suggestions: Array<Item> }>} e
+   */
+  function handleSearch(e) {
     suggestions = e.detail.suggestions;
     highlightedIndex = suggestions.length > 0 ? 0 : null;
   }

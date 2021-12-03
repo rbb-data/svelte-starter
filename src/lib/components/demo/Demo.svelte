@@ -1,15 +1,16 @@
-<script lang="ts">
+<script>
   import { scaleLinear } from 'd3-scale';
   import { extent } from 'd3-array';
 
   import Svg from '$lib/components/shared/headless/Svg.svelte';
 
   import DraggableCircle from './DraggableCircle.svelte';
-  export let data: Array<{
-    x: number;
-    y: number;
-  }>;
-  export let header: { title: string; subtitle: string };
+
+  /** @type {Array<{ x: number; y: number }>} */
+  export let data;
+
+  /** @type {{ title: string; subtitle: string }} */
+  export let header;
 
   // dimension of the chart
   let width = 0; // width is bound to the width of the wrapper element
@@ -34,7 +35,7 @@
     ? scaleLinear()
         .domain(extent(data, (d) => d.x))
         .range([0, boundedWidth])
-    : () => null;
+    : /** @type {() => null} */ (() => null);
   $: yScale = scaleLinear()
     .domain(extent(data, (d) => d.y))
     .range([boundedHeight, 0]);

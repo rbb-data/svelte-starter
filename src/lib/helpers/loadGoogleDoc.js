@@ -4,16 +4,14 @@ import fs from 'fs';
 import { google } from 'googleapis';
 import sanitizeHtml from 'sanitize-html';
 
-import type { docs_v1 } from 'googleapis/build/src/apis/docs/v1';
-
 /**
  * Sanitize HTML
  *
- * @param input possibly dirty HTML
+ * @param {string} input possibly dirty HTML
  * @param preserveStyles if true, allow few decorative tags; else, strip everything
  * @returns clean HTML
  */
-async function sanitize(input: string, preserveStyles = false) {
+async function sanitize(input, preserveStyles = false) {
   return sanitizeHtml(input, {
     allowedTags: preserveStyles ? ['b', 'i', 'u', 's', 'sub', 'sup', 'a'] : [],
     allowedAttributes: preserveStyles ? { a: ['href'] } : {},
@@ -23,10 +21,10 @@ async function sanitize(input: string, preserveStyles = false) {
 /**
  * Connect to Google Docs
  *
- * @param keyFile path to secret credential file
+ * @param {string} keyFile path to secret credential file
  * @returns authenticated Google doc client
  */
-async function connect(keyFile: string) {
+async function connect(keyFile) {
   const auth = await google.auth.getClient({
     scopes: ['https://www.googleapis.com/auth/documents.readonly'],
     keyFile,
@@ -38,15 +36,15 @@ async function connect(keyFile: string) {
 /**
  * Load content from a Google doc
  *
- * @param documentId Google doc ID
+ * @param {string} documentId Google doc ID
  * @param preserveStyles if true, preserve some formatting
- * @returns sanitized doc contents
+ * @returns {Promise<string>} sanitized doc contents
  */
 async function loadGoogleDoc(
-  documentId: string,
+  documentId,
   preserveStyles = false,
   keyFile = 'google-credentials.json'
-): Promise<string> {
+) {
   // check if credentials file exists
   if (!fs.existsSync(keyFile)) return null;
 
@@ -60,14 +58,11 @@ async function loadGoogleDoc(
 /**
  * Transform Google Doc object into content string
  *
- * @param document Google Doc object
+ * @param {import('googleapis/build/src/apis/docs/v1').docs_v1.Schema$Document} document Google Doc object
  * @param preserveStyles if true, preserve some formatting
  * @returns sanitized doc contents
  */
-function parseGoogleDoc(
-  document: docs_v1.Schema$Document,
-  preserveStyles = false
-) {
+function parseGoogleDoc(document, preserveStyles = false) {
   let text = '';
 
   // sanity checks
@@ -101,14 +96,11 @@ function parseGoogleDoc(
 /**
  * Parse Google doc element
  *
- * @param element Google doc element
+ * @param {import('googleapis/build/src/apis/docs/v1').docs_v1.Schema$ParagraphElement} element Google doc element
  * @param preserveStyles if true, preserve some formatting
  * @returns content parsed as HTML
  */
-function parseParagraphElement(
-  element: docs_v1.Schema$ParagraphElement,
-  preserveStyles = false
-) {
+function parseParagraphElement(element, preserveStyles = false) {
   if (!element.textRun) return '';
 
   const { textRun } = element;
@@ -147,18 +139,19 @@ function parseParagraphElement(
 /**
  * Wrap content in tags
  *
- * @param content text
- * @param tag name of the tag (e.g. "b" for <b>)
+ * @param {string} content text
+ * @param {string} tag name of the tag (e.g. "b" for <b>)
  * @returns HTML tag
  */
-function wrap(content: string, tag: string) {
+function wrap(content, tag) {
   // there is no content to be wrapped
   if (content.trim().length == 0) return content;
 
   // initialize whitespace before and after content
   const ws = { start: '', end: '' };
 
-  const isWhitespace = (char: string) => /\s/.test(char);
+  /** @type {(char: string) => boolean} */
+  const isWhitespace = (char) => /\s/.test(char);
 
   // record whitespace before content
   for (let i = 0; i < content.length; i++) {

@@ -1,35 +1,31 @@
 import fuzzysort from 'fuzzysort';
 
-import type { ActionReturn } from '$lib/types';
-
-export type Item = string | Record<string, unknown>;
-
-interface SearchOptions {
-  data: Array<Item>;
-  key?: string;
-  limit?: number;
-}
+/**
+ * @typedef {string | Record<string, unknown>} Item
+ */
 
 /**
  * Implements fuzzy searching on an input element
  *
- * @param node - input element for search
- * @param options.data - array of objects or strings to search through
- * @param options.key - key to search on if `data` is an array of objects
- * @param options.limit - max number of results to return
- *
- * @see [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#usefuzzysearch)
+ * @param {HTMLInputElement} node - input element for search
+ * @param {Object} options - options for search
+ * @param {Array<Item>} options.data - array of objects or strings to search through
+ * @param {string} options.key - key to search on if `data` is an array of objects
+ * @param {number} options.limit - max number of results to return
+ * @return {import('$lib/types').ActionReturn<void>}
  */
-export default function fuzzysearch(
-  node: HTMLInputElement,
-  { data, key, limit }: SearchOptions
-): ActionReturn<void> {
+export default function fuzzysearch(node, { data, key, limit }) {
   // by default, return all results
   if (!limit) limit = Infinity;
 
-  let suggestions: Array<Item> = [];
+  /** @type {Array<Item>} */
+  let suggestions = [];
 
-  function search(query: string): Array<Item> {
+  /**
+   * @param {string} query
+   * @returns {Array<Item>}
+   */
+  function search(query) {
     const results = fuzzysort.go(query, data, { key, limit });
 
     const suggestions = [];
@@ -41,8 +37,11 @@ export default function fuzzysearch(
     return suggestions;
   }
 
-  function handleInput(event: Event) {
-    suggestions = search((event.target as HTMLInputElement).value);
+  /**
+   * @param {Event} event
+   */
+  function handleInput(event) {
+    suggestions = search(/** @type {HTMLInputElement} */ (event.target).value);
 
     node.dispatchEvent(
       new CustomEvent('search', {
@@ -66,7 +65,10 @@ export default function fuzzysearch(
     node.removeEventListener('change', handleChange);
   }
 
-  function handleKeyDown(event: KeyboardEvent) {
+  /**
+   * @param {KeyboardEvent} event
+   */
+  function handleKeyDown(event) {
     if (event.key !== 'Escape') return;
     event.preventDefault();
 
