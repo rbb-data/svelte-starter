@@ -1,5 +1,5 @@
 <script context="module">
-  const FILENAME = 'Svg.json';
+  const FILENAME = 'tooltip.json';
 
   export const load = async ({ fetch }) => {
     const res = await fetch(`/load/${FILENAME}`);
@@ -23,27 +23,17 @@
 
 <script>
   import Header from '$lib/Header.svelte';
-  import APITable from '$lib/APITable.svelte'
-  
-  import { Svg } from '@rbb-data/svelte-starter';
+  import APITable from '$lib/APITable.svelte';
 
   export let meta;
+
+  const { name, description, type, params } = meta[0];
 </script>
 
-<Header name={meta.name} description={meta.description} />
+<Header {name} {description} />
 
-Start custom text...
+Custom text....
 
-```svelte
-<Svg width={100} height={100} debug>
-  <circle cx="50" cy="50" r="10" fill="steelblue" />
-</Svg>
-```
+Type: {type}
 
-<Svg width={100} height={100} debug>
-  <circle cx="50" cy="50" r="10" fill="steelblue" /></Svg
->
-
-End custom text...
-
-<APITable params={meta.props} />
+<APITable {params} />

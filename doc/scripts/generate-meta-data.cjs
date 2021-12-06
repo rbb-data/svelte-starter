@@ -34,16 +34,28 @@ function extract(sourceFile, typeChecker) {
         node
       );
 
-      const params = node.parameters.map((param) => ({
-        name: param.getText(),
-        type: typeChecker.typeToString(
-          typeChecker.getTypeAtLocation(param),
-          param
-        ),
-        description: param.jsDocCache[0].comment,
-        optional: param.jsDocCache[0].isBracketed,
-        default: param.initializer ? param.initializer.getText() : null,
-      }));
+      const params = node.parameters.map((param) => {
+        const jsDoc =
+          param.jsDocCache && param.jsDocCache.length > 0
+            ? param.jsDocCache[0]
+            : null;
+
+        let comment = jsDoc ? jsDoc.comment : null;
+        if (comment && comment.trim().startsWith('-')) {
+          comment = comment.slice(1).trim();
+        }
+
+        return {
+          name: param.getText(),
+          type: typeChecker.typeToString(
+            typeChecker.getTypeAtLocation(param),
+            param
+          ),
+          description: comment,
+          optional: jsDoc.isBracketed,
+          default: param.initializer ? param.initializer.getText() : null,
+        };
+      });
 
       data.push({ name, description: comment, type, params });
     } else if (ts.isVariableStatement(node)) {
@@ -60,13 +72,16 @@ function extract(sourceFile, typeChecker) {
         symbol.getDocumentationComment(typeChecker)
       );
 
+      const defaultValue = declaration.initializer
+        ? declaration.initializer.getText()
+        : null;
+
       data.push({
         name,
         description: comment,
         type,
-        default: declaration.initializer
-          ? declaration.initializer.getText()
-          : null,
+        optional: defaultValue !== null,
+        default: defaultValue,
       });
     } else if (ts.isExportAssignment(node)) {
       const name = node.expression.getText();

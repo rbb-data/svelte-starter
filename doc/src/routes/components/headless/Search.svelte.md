@@ -1,5 +1,5 @@
 <script context="module">
-  const FILENAME = 'Svg.json';
+  const FILENAME = 'Search.json';
 
   export const load = async ({ fetch }) => {
     const res = await fetch(`/load/${FILENAME}`);
@@ -25,25 +25,11 @@
   import Header from '$lib/Header.svelte';
   import APITable from '$lib/APITable.svelte'
   
-  import { Svg } from '@rbb-data/svelte-starter';
-
   export let meta;
 </script>
 
 <Header name={meta.name} description={meta.description} />
 
-Start custom text...
-
-```svelte
-<Svg width={100} height={100} debug>
-  <circle cx="50" cy="50" r="10" fill="steelblue" />
-</Svg>
-```
-
-<Svg width={100} height={100} debug>
-  <circle cx="50" cy="50" r="10" fill="steelblue" /></Svg
->
-
-End custom text...
+Custom text...
 
 <APITable params={meta.props} />

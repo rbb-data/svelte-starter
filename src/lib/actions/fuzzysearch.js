@@ -10,8 +10,8 @@ import fuzzysort from 'fuzzysort';
  * @param {HTMLInputElement} node - input element for search
  * @param {Object} options - options for search
  * @param {Array<Item>} options.data - array of objects or strings to search through
- * @param {string} options.key - key to search on if `data` is an array of objects
- * @param {number} options.limit - max number of results to return
+ * @param {string} [options.key] - key to search on if `data` is an array of objects
+ * @param {number} [options.limit] - max number of results to return
  */
 export default function fuzzysearch(node, { data, key, limit }) {
   // by default, return all results
