@@ -1,0 +1,41 @@
+[
+  {
+    "name": "pannable",
+    "type": "(node: HTMLElement | SVGElement, options?: {    ignorePointers: Array<PointerType>;}) => { destroy(): void; }",
+    "params": [
+      {
+        "name": "node",
+        "type": "HTMLElement | SVGElement",
+        "description": "- the element to make pannable",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "options = {\n    ignorePointers: [],\n  }",
+        "type": "{ ignorePointers: PointerType[]; }",
+        "optional": false,
+        "default": "{\n    ignorePointers: [],\n  }"
+      }
+    ]
+  },
+  {
+    "name": "drag",
+    "description": "Creates a function that updates an element's coordinates\naccording to the information exposed by some custom event",
+    "type": "(coords: import('svelte/store').Writable<number | {    x: number;    y: number;}>, options?: {    axis?: 'xy' | 'x' | 'y';    bounds?: {        top?: number;        right?: number;        bottom?: number;        left?: number;    };}) => (event: CustomEvent<{    dx: number;    dy: number;}>) => void",
+    "params": [
+      {
+        "name": "coords",
+        "type": "Writable<number | { x: number; y: number; }>",
+        "description": "- a writable store that exposes an element's position",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "options = { axis: 'xy' }",
+        "type": "{ axis?: \"xy\" | \"x\" | \"y\"; bounds?: { top?: number; right?: number; bottom?: number; left?: number; }; }",
+        "optional": false,
+        "default": "{ axis: 'xy' }"
+      }
+    ]
+  }
+]

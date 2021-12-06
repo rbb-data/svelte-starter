@@ -1,0 +1,23 @@
+[
+  {
+    "name": "focus",
+    "description": "Focuses or blurs an element",
+    "type": "<T extends boolean>(node: HTMLElement, active: T) => { update(newActive: T): void; }",
+    "params": [
+      {
+        "name": "node",
+        "type": "HTMLElement",
+        "description": "- the node to focus/blur",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "active",
+        "type": "T",
+        "description": "- if true, focus the node, otherwise blur it",
+        "optional": false,
+        "default": null
+      }
+    ]
+  }
+]

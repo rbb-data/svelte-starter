@@ -1,0 +1,22 @@
+[
+  {
+    "name": "fuzzysearch",
+    "type": "(node: HTMLInputElement, { data, key, limit }: {    data: Array<Item>;    key: string;    limit: number;}) => { destroy(): void; }",
+    "params": [
+      {
+        "name": "node",
+        "type": "HTMLInputElement",
+        "description": "- input element for search",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "{ data, key, limit }",
+        "type": "{ data: Item[]; key: string; limit: number; }",
+        "description": "- options for search",
+        "optional": false,
+        "default": null
+      }
+    ]
+  }
+]

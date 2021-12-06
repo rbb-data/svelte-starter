@@ -1,0 +1,36 @@
+{
+  "name": "ZoomControl",
+  "description": null,
+  "props": [
+    {
+      "name": "position",
+      "description": "position of the zoom control",
+      "type": "\"topleft\" | \"topright\" | \"bottomleft\" | \"bottomright\"",
+      "default": "'topright'"
+    },
+    {
+      "name": "zoomInText",
+      "description": "",
+      "type": "string",
+      "default": "'+'"
+    },
+    {
+      "name": "zoomInTitle",
+      "description": "",
+      "type": "string",
+      "default": "'Hineinzoomen'"
+    },
+    {
+      "name": "zoomOutText",
+      "description": "",
+      "type": "string",
+      "default": "'&#x2212'"
+    },
+    {
+      "name": "zoomOutTitle",
+      "description": "",
+      "type": "string",
+      "default": "'Herauszommen'"
+    }
+  ]
+}

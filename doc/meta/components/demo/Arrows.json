@@ -1,0 +1,24 @@
+{
+  "name": "Arrows",
+  "description": null,
+  "props": [
+    {
+      "name": "orientations",
+      "description": "",
+      "type": "Array<\"n\" | \"s\" | \"e\" | \"w\">",
+      "default": "['n', 'w', 's', 'e']"
+    },
+    {
+      "name": "offset",
+      "description": "",
+      "type": "number",
+      "default": "10"
+    },
+    {
+      "name": "show",
+      "description": "",
+      "type": "boolean",
+      "default": "true"
+    }
+  ]
+}

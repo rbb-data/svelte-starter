@@ -1,0 +1,36 @@
+{
+  "name": "DraggableCircle",
+  "description": null,
+  "props": [
+    {
+      "name": "cx",
+      "description": "",
+      "type": "number",
+      "default": null
+    },
+    {
+      "name": "cy",
+      "description": "",
+      "type": "number",
+      "default": null
+    },
+    {
+      "name": "radius",
+      "description": "",
+      "type": "number",
+      "default": "5"
+    },
+    {
+      "name": "axis",
+      "description": "",
+      "type": "\"x\" | \"y\" | \"xy\"",
+      "default": "'xy'"
+    },
+    {
+      "name": "bounds",
+      "description": "",
+      "type": "{ top: number; right: number; bottom: number; left: number; }",
+      "default": "undefined"
+    }
+  ]
+}

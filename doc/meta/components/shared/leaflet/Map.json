@@ -1,0 +1,24 @@
+{
+  "name": "Map",
+  "description": null,
+  "props": [
+    {
+      "name": "height",
+      "description": "height of the map",
+      "type": "number",
+      "default": null
+    },
+    {
+      "name": "options",
+      "description": "map options",
+      "type": "any",
+      "default": "undefined"
+    },
+    {
+      "name": "fitBounds",
+      "description": "if given, the map will zoom in on the given bounds",
+      "type": "any",
+      "default": "undefined"
+    }
+  ]
+}

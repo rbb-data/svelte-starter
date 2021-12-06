@@ -1,0 +1,24 @@
+{
+  "name": "BingLayer",
+  "description": null,
+  "props": [
+    {
+      "name": "type",
+      "description": "type of imagery",
+      "type": "\"Aerial\" | \"AerialWithLabelsOnDemand\" | \"CanvasDark\" | \"CanvasLight\" | \"CanvasGray\" | \"RoadOnDemand\"",
+      "default": "'CanvasGray'"
+    },
+    {
+      "name": "culture",
+      "description": "culture code",
+      "type": "string",
+      "default": "'de-DE'"
+    },
+    {
+      "name": "styleSheet",
+      "description": "style sheet",
+      "type": "any",
+      "default": "{}"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "name": "tooltipable",
+    "type": "<Props>(node: HTMLElement | SVGElement, tooltip: {    id: string;    Component: typeof import('svelte').SvelteComponent;    options?: Partial<Options<Props>>;}) => { destroy(): void; }",
+    "params": [
+      {
+        "name": "node",
+        "type": "HTMLElement | SVGElement",
+        "description": "- the element that triggers rendering of a component",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "tooltip",
+        "type": "{ id: string; Component: typeof SvelteComponentDev; options?: Partial<Options<Props>>; }",
+        "optional": false,
+        "default": null
+      }
+    ]
+  }
+]
