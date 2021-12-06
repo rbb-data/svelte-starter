@@ -8,7 +8,6 @@
  * @param {HTMLElement | SVGElement} node - the element to make pannable
  * @param {Object} options
  * @param {Array<PointerType>} options.ignorePointers - a list of pointer types to ignore
- * @return {import('$lib/types').ActionReturn<boolean>}
  */
 export default function pannable(
   node,

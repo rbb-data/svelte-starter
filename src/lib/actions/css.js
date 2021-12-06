@@ -1,11 +1,11 @@
 /**
  * Dynamically set CSS `variables` on `node`.
  *
+ * @template {Record<string, string | number>} T
  * @param {HTMLElement | SVGElement} node - the node to set the CSS variable on
- * @param {Record<string, string | number>} variables - the variables to set
- * @return {import('$lib/types').ActionReturn<Record<string, string | number>>}
+ * @param {T} variables - the variables to set
  */
-export default function css(node, variables) {
+function css(node, variables) {
   function setCssVariables() {
     if (variables) {
       for (const name of Object.keys(variables)) {
@@ -20,9 +20,12 @@ export default function css(node, variables) {
   setCssVariables();
 
   return {
+    /** @type {(newVars: T) => void} */
     update(newVariables) {
       variables = newVariables;
       setCssVariables();
     },
   };
 }
+
+export default css;
