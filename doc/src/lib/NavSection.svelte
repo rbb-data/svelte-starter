@@ -3,6 +3,8 @@
   export let urlPrefix = '/';
   export let format = (d) => d;
   export let items = [];
+
+  $: items.sort();
 </script>
 
 <section>

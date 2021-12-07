@@ -1,6 +1,4 @@
 <script context="module">
-  import { loop_guard } from 'svelte/internal';
-
   export const load = async ({ fetch }) => {
     const res = await fetch(`/load/nav.json`);
     const navSections = await res.json();
@@ -26,10 +24,7 @@
 
   import NavSection from '$lib/NavSection.svelte';
 
-  const components = ['LocalMap'];
-  const headlessComponents = ['Search', 'Slider', 'Svg', 'Tabs'];
-  const actions = ['css', 'focus', 'fuzzysearch', 'pannable', 'tooltip'];
-  const stores = ['prefersReducedMotion'];
+  export let navSections;
 
   function format(type) {
     switch (type) {
@@ -41,10 +36,6 @@
         return (item) => `$${item}`;
     }
   }
-
-  export let navSections;
-
-  console.log(navSections);
 </script>
 
 <div class="wrapper">
