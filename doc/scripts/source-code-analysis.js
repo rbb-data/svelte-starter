@@ -1,14 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const glob = require('glob');
-const ts = require('typescript');
+import fs from 'fs';
+import path from 'path';
+import ts from 'typescript';
 
 const compilerOptions = { allowJs: true, checkJs: true };
 
 /**
- * Check if node has an export modifier
- * @param node
- * @returns true if the node has the export modifier
+ * Check if a function or variable is exported
+ * @param {import('typescript').Node} node
+ * @returns {boolean}
  */
 function isExported(node) {
   const { modifiers } = node;
@@ -20,9 +19,74 @@ function isExported(node) {
 }
 
 /**
- * Extract information from a source file using Typescript's AST
+ * Create Typescript AST and types from file
+ * @param {string} file
+ * @param {import('typescript').CompilerOptions} compilerOptions
+ * @returns {{ program: import('typescript').Program, sourceFile: import('typescript').SourceFile, typeChecker: import('typescript').TypeChecker }}
  */
-function extract(sourceFile, typeChecker) {
+function createProgramFromFile(file, compilerOptions) {
+  const program = ts.createProgram([file], compilerOptions);
+  const sourceFile = program.getSourceFile(file);
+  const typeChecker = program.getTypeChecker();
+  return { program, sourceFile, typeChecker };
+}
+
+/**
+ * Create Typescript AST and types from source code
+ * @param {string} source
+ * @param {import('typescript').CompilerOptions} compilerOptions
+ * @returns {{ program: import('typescript').Program, sourceFile: import('typescript').SourceFile, typeChecker: import('typescript').TypeChecker }}
+ */
+function createProgramFromSource(source, compilerOptions) {
+  const tmpFile = 'tmp.ts';
+
+  const sourceFile = ts.createSourceFile(
+    tmpFile,
+    source,
+    ts.ScriptTarget.Latest,
+    undefined,
+    ts.ScriptKind.JS
+  );
+
+  const defaultCompilerHost = ts.createCompilerHost({});
+
+  const customCompilerHost = {
+    getSourceFile: (name, languageVersion) => {
+      if (name === tmpFile) {
+        return sourceFile;
+      } else {
+        return defaultCompilerHost.getSourceFile(name, languageVersion);
+      }
+    },
+    writeFile: () => {},
+    getDefaultLibFileName: () => '../src/lib/types.d.ts',
+    useCaseSensitiveFileNames: () => false,
+    getCanonicalFileName: (filename) => filename,
+    getCurrentDirectory: () => '',
+    getNewLine: () => '\n',
+    getDirectories: () => [],
+    fileExists: () => true,
+    readFile: () => '',
+  };
+
+  const program = ts.createProgram(
+    ['tmp.ts'],
+    compilerOptions,
+    customCompilerHost
+  );
+
+  const typeChecker = program.getTypeChecker();
+
+  return { program, sourceFile, typeChecker };
+}
+
+/**
+ * Extract information from a source file using Typescript's AST and type checker
+ * @param {import('typescript').SourceFile} sourceFile
+ * @param {import('typescript').TypeChecker} typeChecker
+ * @returns {any}
+ */
+function extractDoc(sourceFile, typeChecker) {
   const isExport = {};
   const data = [];
 
@@ -123,64 +187,33 @@ function extract(sourceFile, typeChecker) {
 
 /**
  * Extract documentation from a javascript file
+ * @param {string} file
+ * @returns
  */
-function extractJsFile(file) {
-  const program = ts.createProgram([file], compilerOptions);
-  var sourceFile = program.getSourceFile(file);
-  let typeChecker = program.getTypeChecker();
-
-  const data = extract(sourceFile, typeChecker);
-
+export function extractDocFromJsFile(file) {
+  const { sourceFile, typeChecker } = createProgramFromFile(
+    file,
+    compilerOptions
+  );
+  const data = extractDoc(sourceFile, typeChecker);
   return data;
 }
 
 /**
  * Extract documentation from a svelte file
+ * @param {string} file
+ * @returns
  */
-function extractSvelteFile(file) {
-  const tmpFile = 'tmp.ts';
-
+export function extractDocFromSvelteFile(file) {
   // extract the source code within the <script> tag
   const content = fs.readFileSync(file, 'utf-8');
   const match = content.match(/<script.*>([\S\s]*)<\/script>/m);
   const source = match[1];
 
-  const sourceFile = ts.createSourceFile(
-    tmpFile,
+  const { sourceFile, typeChecker } = createProgramFromSource(
     source,
-    ts.ScriptTarget.Latest,
-    undefined,
-    ts.ScriptKind.JS
+    compilerOptions
   );
-
-  const defaultCompilerHost = ts.createCompilerHost({});
-
-  const customCompilerHost = {
-    getSourceFile: (name, languageVersion) => {
-      if (name === tmpFile) {
-        return sourceFile;
-      } else {
-        return defaultCompilerHost.getSourceFile(name, languageVersion);
-      }
-    },
-    writeFile: () => {},
-    getDefaultLibFileName: () => '../src/lib/types.d.ts',
-    useCaseSensitiveFileNames: () => false,
-    getCanonicalFileName: (filename) => filename,
-    getCurrentDirectory: () => '',
-    getNewLine: () => '\n',
-    getDirectories: () => [],
-    fileExists: () => true,
-    readFile: () => '',
-  };
-
-  const program = ts.createProgram(
-    ['tmp.ts'],
-    { allowJs: true, checkJs: true },
-    customCompilerHost
-  );
-
-  const typeChecker = program.getTypeChecker();
 
   // extract component-level jsdoc
   const name = path.basename(file, '.svelte');
@@ -189,51 +222,9 @@ function extractSvelteFile(file) {
     ? firstStatement.jsDoc[0].comment
     : null;
 
-  const props = extract(sourceFile, typeChecker);
+  const props = extractDoc(sourceFile, typeChecker);
 
   const data = { name, description, props };
 
   return data;
 }
-
-function makeDirectories(path) {
-  if (fs.existsSync(path)) return;
-  const dirs = path.split('/').slice(0, -1);
-  for (let i = 0; i < dirs.length; i++) {
-    const dir = dirs.slice(0, i + 1).join('/');
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
-    }
-  }
-}
-
-const srcPrefix = '../src/lib/';
-const outPrefix = 'meta/';
-
-// process actions and stores
-glob(srcPrefix + '+(actions|stores)/*.js', function (er, files) {
-  if (er) throw new Error(er);
-  files.forEach((file) => {
-    console.log(file);
-    const data = extractJsFile(file);
-    const out = file
-      .replace(srcPrefix, outPrefix)
-      .replace(path.extname(file), '.json');
-    makeDirectories(out);
-    fs.writeFileSync(out, JSON.stringify(data, null, 2));
-  });
-});
-
-// process shared svelte components
-glob(srcPrefix + 'components/shared/**/*.svelte', function (er, files) {
-  if (er) throw new Error(er);
-  files.forEach((file) => {
-    console.log(file);
-    const data = extractSvelteFile(file);
-    const out = file
-      .replace(srcPrefix, outPrefix)
-      .replace(path.extname(file), '.json');
-    makeDirectories(out);
-    fs.writeFileSync(out, JSON.stringify(data, null, 2));
-  });
-});

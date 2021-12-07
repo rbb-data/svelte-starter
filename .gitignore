@@ -4,6 +4,8 @@ node_modules
 /.svelte-kit
 /package
 google-credentials.json
-/doc/storybook-static
+/doc/data
+/doc/build
+/doc/.svelte-kit
 /doc/out*
 *.local

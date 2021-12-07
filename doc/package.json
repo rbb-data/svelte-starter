@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "generate-meta": "node scripts/generate-meta-data.cjs"
+    "extract-doc": "node scripts/extract-documentation.js"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.21",
