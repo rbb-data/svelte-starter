@@ -10,19 +10,19 @@ import {
   extractDocFromSvelteFile,
 } from './source-code-analysis.js';
 
+import config from '../doc.config.js';
+
 const srcPrefix = '../src/lib/';
 const outPrefix = 'data/meta/';
 
-const ignoreDirs = ['assets', 'helpers', 'components/demo'];
-
-function ignore(file, directories = []) {
+function ignore(file, folders = []) {
   // ignore index files
   const basename = path.basename(file);
   if (basename === 'index.js') return true;
 
-  // ignore given directories
+  // ignore given folders
   const dir = path.dirname(file).replace(srcPrefix, '');
-  if (directories.some((d) => dir.startsWith(d))) return true;
+  if (folders.some((folder) => dir.startsWith(folder))) return true;
 
   return false;
 }
@@ -30,7 +30,7 @@ function ignore(file, directories = []) {
 function main() {
   const files = glob
     .sync(srcPrefix + '**/*.{js,svelte}')
-    .filter((file) => !ignore(file, ignoreDirs));
+    .filter((file) => !ignore(file, config.ignoreFolders));
 
   files.forEach((file) => {
     console.log('extract doc from', file);

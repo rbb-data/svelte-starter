@@ -35,8 +35,5 @@ for f in $(find $META_DIR -name '*.json'); do
   placeholder=%rbb-data.placeholder%
   sed -i '' "s/${placeholder}/${item}/g" $route
 
-  # update navigation
-  node scripts/update-navigation.js $route
-
   echo "created $route"
 done
