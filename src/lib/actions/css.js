@@ -1,9 +1,8 @@
 /**
  * Dynamically set CSS `variables` on `node`.
  *
- * @template {Record<string, string | number>} T
  * @param {HTMLElement | SVGElement} node - the node to set the CSS variable on
- * @param {T} variables - the variables to set
+ * @param {Record<string, string | number>} variables - the variables to set
  */
 function css(node, variables) {
   function setCssVariables() {
@@ -20,7 +19,7 @@ function css(node, variables) {
   setCssVariables();
 
   return {
-    /** @type {(newVars: T) => void} */
+    /** @type {(newVars: Record<string, string | number>) => void} */
     update(newVariables) {
       variables = newVariables;
       setCssVariables();

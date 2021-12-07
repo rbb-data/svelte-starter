@@ -24,7 +24,7 @@
    */
   export let location;
 
-  // if true, show Berlin's Bezirke or Brandenburg's Kreise
+  /** if true, show Berlin's Bezirke or Brandenburg's Kreise */
   export let showDistricts = false;
 
   /**
@@ -34,16 +34,14 @@
   export let styleSheet = undefined;
 
   /**
-   * map options for the mask
+   * map options for the mask (see https://leafletjs.com/examples/geojson/)
    * @type {import('leaflet').GeoJSONOptions}
-   * @see https://leafletjs.com/examples/geojson/
    */
   export let maskOptions = undefined;
 
   /**
-   * map options for districts
+   * map options for districts (see https://leafletjs.com/examples/geojson/)
    * @type {import('leaflet').GeoJSONOptions}
-   * @see https://leafletjs.com/examples/geojson/
    */
   export let districtOptions = undefined;
 

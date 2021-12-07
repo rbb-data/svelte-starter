@@ -1,9 +1,8 @@
 /**
  * Focuses or blurs an element
  *
- * @template {boolean} T
  * @param {HTMLElement} node - the node to focus/blur
- * @param {T} active - if true, focus the node, otherwise blur it
+ * @param {boolean} active - if true, focus the node, otherwise blur it
  */
 export default function focus(node, active) {
   function setFocus() {
@@ -13,7 +12,7 @@ export default function focus(node, active) {
   setFocus();
 
   return {
-    /** @type {(newActive: T) => void} */
+    /** @type {(newActive: boolean) => void} */
     update(newActive) {
       active = newActive;
       setFocus();

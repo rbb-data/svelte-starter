@@ -8,12 +8,15 @@ import fuzzysort from 'fuzzysort';
  * Implements fuzzy searching on an input element
  *
  * @param {HTMLInputElement} node - input element for search
- * @param {Object} options - options for search
+ * @param {Object} options - search options
  * @param {Array<Item>} options.data - array of objects or strings to search through
  * @param {string} [options.key] - key to search on if `data` is an array of objects
  * @param {number} [options.limit] - max number of results to return
  */
-export default function fuzzysearch(node, { data, key, limit }) {
+export default function fuzzysearch(node, options) {
+  const { data, key } = options;
+  let { limit } = options;
+
   // by default, return all results
   if (!limit) limit = Infinity;
 

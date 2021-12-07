@@ -15,13 +15,10 @@
   /**
    * list of tabs
    * @type {Array<any>}
-   * @required
    */
   export let tabs;
 
-  /**
-   * initial index of the active tab
-   */
+  /** initial index of the active tab */
   export let initialIndex = 0;
 
   /**

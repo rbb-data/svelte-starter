@@ -31,7 +31,6 @@
 
   /**
    * the data to search through
-   * @required
    * @type {Array<Item>}
    */
   export let data;

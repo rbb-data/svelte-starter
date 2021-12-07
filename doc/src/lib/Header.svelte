@@ -1,5 +1,5 @@
 <script>
-  import { micromark } from 'micromark';
+  // import { micromark } from 'micromark';
 
   export let name;
   export let description = '';
@@ -7,6 +7,8 @@
 
 <h1>{name}</h1>
 
-{#if description}
+<!-- {#if description}
   {@html micromark(description)}
-{/if}
+{/if} -->
+
+{description}

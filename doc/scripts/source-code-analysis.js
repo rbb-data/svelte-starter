@@ -19,6 +19,17 @@ function isExported(node) {
 }
 
 /**
+ * Extract jsdoc comment from `node`
+ * @param {import('typescript').Node} node
+ * @returns {string}
+ */
+function extractJsdocComment(node) {
+  if (!node.jsDoc) return null;
+  if (node.jsDoc.length === 0) return null;
+  return node.jsDoc.map((d) => d.comment).join(' ');
+}
+
+/**
  * Create Typescript AST and types from file
  * @param {string} file
  * @param {import('typescript').CompilerOptions} compilerOptions
@@ -98,8 +109,7 @@ function extractDoc(sourceFile, typeChecker) {
       isExport[name] = isExported(node);
 
       // extract jsdoc comment if available
-      const comment =
-        node.jsDoc && node.jsDoc.length > 0 ? node.jsDoc[0].comment : null;
+      const comment = extractJsdocComment(node);
 
       // get function type
       const type = typeChecker.typeToString(
@@ -122,7 +132,7 @@ function extractDoc(sourceFile, typeChecker) {
         }
 
         return {
-          name: param.getText(),
+          name: param.name.text,
           type: typeChecker.typeToString(
             typeChecker.getTypeAtLocation(param),
             param
@@ -143,7 +153,7 @@ function extractDoc(sourceFile, typeChecker) {
       const name = declaration.name.getText(sourceFile);
 
       // get type of the declared variable
-      const type = typeChecker.typeToString(
+      let type = typeChecker.typeToString(
         typeChecker.getTypeAtLocation(declaration),
         declaration
       );
@@ -156,6 +166,16 @@ function extractDoc(sourceFile, typeChecker) {
       const comment = ts.displayPartsToString(
         symbol.getDocumentationComment(typeChecker)
       );
+
+      // if no type can be inferred, grab the type from the jsdoc tag
+      if (type === 'any') {
+        const tags = symbol.getJsDocTags(typeChecker);
+        if (tags && tags.length > 0) {
+          const typeTag = tags.find(({ name }) => name === 'type');
+          if (typeTag)
+            type = typeTag.text.map((t) => t.text.slice(1, -1)).join(' ');
+        }
+      }
 
       // the value that the variable is initialized with
       const defaultValue = declaration.initializer
@@ -217,10 +237,7 @@ export function extractDocFromSvelteFile(file) {
 
   // extract component-level jsdoc
   const name = path.basename(file, '.svelte');
-  const firstStatement = sourceFile.statements[0];
-  const description = firstStatement.jsDoc
-    ? firstStatement.jsDoc[0].comment
-    : null;
+  const description = extractJsdocComment(sourceFile.statements[0]);
 
   const props = extractDoc(sourceFile, typeChecker);
 

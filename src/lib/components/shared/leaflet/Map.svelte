@@ -1,9 +1,10 @@
-<!--
-  @component
-
-  Renders a Leaflet map
--->
 <script>
+  /**
+   * Renders a Leaflet map
+   *
+   * @component
+   */
+
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';
 
@@ -19,9 +20,8 @@
   export let height;
 
   /**
-   * map options
+   * map options (see https://leafletjs.com/reference.html#map)
    * @type {import('leaflet').MapOptions}
-   * @see https://leafletjs.com/reference.html#map
    */
   export let options = undefined;
 

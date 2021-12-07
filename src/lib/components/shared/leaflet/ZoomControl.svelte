@@ -1,9 +1,10 @@
-<!--
-  @component
-
-  Renderless component that adds a zoom control to a Leaflet map
--->
 <script>
+  /**
+   * Renderless component that adds a zoom control to a Leaflet map
+   *
+   * @component
+   */
+
   import { onMount, getContext } from 'svelte';
   import { browser } from '$app/env';
 
@@ -18,14 +19,14 @@
    */
   export let position = 'topright';
 
-  // zoom in icon (any valid html string is allowed)
+  /** zoom in icon (any valid html string is allowed) */
   export let zoomInText = '+';
-  // zoom in title for accessibility
+  /** zoom in title for accessibility */
   export let zoomInTitle = 'Hineinzoomen';
 
-  // zoom out icon (any valid html string is allowed)
+  /** zoom out icon (any valid html string is allowed) */
   export let zoomOutText = '&#x2212';
-  // zoom out title for accessibility
+  /** zoom out title for accessibility */
   export let zoomOutTitle = 'Herauszommen';
 
   onMount(async () => {

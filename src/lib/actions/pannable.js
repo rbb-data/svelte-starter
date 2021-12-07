@@ -6,7 +6,7 @@
  * Make an element pannable
  *
  * @param {HTMLElement | SVGElement} node - the element to make pannable
- * @param {Object} options
+ * @param {Object} options - options
  * @param {Array<PointerType>} [options.ignorePointers] - a list of pointer types to ignore
  */
 export default function pannable(

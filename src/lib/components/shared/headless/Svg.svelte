@@ -13,7 +13,6 @@
   /**
    * width of the svg
    * @type {number}
-   * @required
    */
   export let width;
 
