@@ -10,13 +10,11 @@
 
   export let meta;
 
-  const { name, description, type, params } = meta[0];
+  const { name, description, params } = meta[0];
 </script>
 
-<Header {name} {description} />
+<Header name={`use:${name}`} {description} />
 
-Custom text....
-
-Type: {type}
+<!-- More documentation... -->
 
 <APITable {params} />

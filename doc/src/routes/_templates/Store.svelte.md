@@ -11,12 +11,12 @@
   export let meta;
 
   const { name, description, type } = meta[0];
-
-  console.log(name, description, type)
 </script>
 
 <Header name={'$' + name} {description} />
 
-Custom text....
+<div class="type">
+  {type}
+</div>
 
-Type: {type}
+<!-- More documentation... -->

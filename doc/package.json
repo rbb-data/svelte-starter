@@ -14,8 +14,8 @@
     "@sveltejs/kit": "next",
     "glob": "^7.2.0",
     "mdsvex": "^0.9.8",
-    "micromark": "^3.0.10",
-    "svelte": "^3.44.0"
+    "svelte": "^3.44.0",
+    "svelte-markdown": "^0.1.14"
   },
   "type": "module"
 }

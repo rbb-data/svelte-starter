@@ -1,4 +1,6 @@
 <script>
+  import SvelteMarkdown from 'svelte-markdown';
+
   export let params;
 </script>
 
@@ -12,7 +14,7 @@
   {#each params as param}
     <tr>
       <td>{param.name}{param.optional ? '' : '*'}</td>
-      <td>{param.description}</td>
+      <td><SvelteMarkdown source={param.description} isInline /></td>
       <td>{param.type}</td>
       <td>{param.default || '-'}</td>
     </tr>

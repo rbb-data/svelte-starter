@@ -1,5 +1,5 @@
 <script>
-  // import { micromark } from 'micromark';
+  import SvelteMarkdown from 'svelte-markdown';
 
   export let name;
   export let description = '';
@@ -7,8 +7,6 @@
 
 <h1>{name}</h1>
 
-<!-- {#if description}
-  {@html micromark(description)}
-{/if} -->
-
-{description}
+{#if description}
+  <SvelteMarkdown source={description} />
+{/if}

@@ -9,10 +9,12 @@
   import APITable from '$lib/APITable.svelte'
   
   export let meta;
+
+  const { name, description, props } = meta;
 </script>
 
-<Header name={meta.name} description={meta.description} />
+<Header {name} {description} />
 
-Custom text...
+<!-- More documentation... -->
 
-<APITable params={meta.props} />
+<APITable params={props} />
