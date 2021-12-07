@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'fuzzysearch.json';
+  const filename = '%rbb-data.placeholder%.json';
   export const load = fetchMetaData(filename);
 </script>
 

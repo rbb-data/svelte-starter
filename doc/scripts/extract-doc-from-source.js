@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
@@ -31,7 +33,7 @@ function main() {
     .filter((file) => !ignore(file, ignoreDirs));
 
   files.forEach((file) => {
-    console.log(file);
+    console.log('extract doc from', file);
 
     // extract data for documentation
     const data = file.endsWith('.js')

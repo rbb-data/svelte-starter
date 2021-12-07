@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "extract-doc": "node scripts/extract-documentation.js"
+    "doc:extract": "node scripts/extract-doc-from-source.js",
+    "doc:generate": "scripts/generate-doc.sh",
+    "update": "npm run doc:extract && npm run doc:generate"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.21",

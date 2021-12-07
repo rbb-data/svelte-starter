@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'fuzzysearch.json';
+  const filename = '%rbb-data.placeholder%.json';
   export const load = fetchMetaData(filename);
 </script>
 
@@ -10,13 +10,13 @@
 
   export let meta;
 
-  const { name, description, type, params } = meta[0];
+  const { name, description, type } = meta[0];
+
+  console.log(name, description, type)
 </script>
 
-<Header {name} {description} />
+<Header name={'$' + name} {description} />
 
 Custom text....
 
 Type: {type}
-
-<APITable {params} />

@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 
-const files = glob.sync('meta/**/*.*');
+const files = glob.sync('data/**/*.*');
 
 function getPath(filename) {
   for (const file of files) {
@@ -32,7 +32,7 @@ export const get = async ({ params }) => {
   if (!fs.existsSync(path)) {
     const message = [
       `File ${path} does not exist.`,
-      'Make sure that the file you are referring to lies within the ./jsdoc directory.',
+      'Make sure that the file you are referring to lies within the ./data directory.',
     ];
     return error(404, message.join(' '));
   }

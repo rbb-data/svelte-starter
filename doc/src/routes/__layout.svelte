@@ -1,3 +1,26 @@
+<script context="module">
+  import { loop_guard } from 'svelte/internal';
+
+  export const load = async ({ fetch }) => {
+    const res = await fetch(`/load/nav.json`);
+    const navSections = await res.json();
+
+    // if successful, pass props to the component
+    if (res.ok)
+      return {
+        props: {
+          navSections,
+        },
+      };
+
+    // throw an error otherwise
+    return {
+      status: res.status,
+      error: new Error(navSections.error.message),
+    };
+  };
+</script>
+
 <script>
   import '../style/index.css';
 
@@ -7,32 +30,28 @@
   const headlessComponents = ['Search', 'Slider', 'Svg', 'Tabs'];
   const actions = ['css', 'focus', 'fuzzysearch', 'pannable', 'tooltip'];
   const stores = ['prefersReducedMotion'];
+
+  function format(type) {
+    switch (type) {
+      case 'component':
+        return (item) => item;
+      case 'action':
+        return (item) => `use:${item}`;
+      case 'store':
+        return (item) => `$${item}`;
+    }
+  }
+
+  export let navSections;
+
+  console.log(navSections);
 </script>
 
 <div class="wrapper">
   <nav>
-    <NavSection
-      heading="Components"
-      urlPrefix="/components"
-      items={components}
-    />
-    <NavSection
-      heading="Headless Components"
-      urlPrefix="/components/headless"
-      items={headlessComponents}
-    />
-    <NavSection
-      heading="Actions"
-      urlPrefix="/actions"
-      items={actions}
-      format={(item) => `use:${item}`}
-    />
-    <NavSection
-      heading="Stores"
-      urlPrefix="/stores"
-      items={stores}
-      format={(item) => `$${item}`}
-    />
+    {#each navSections as navSection}
+      <NavSection {...navSection} format={format(navSection.type)} />
+    {/each}
   </nav>
   <main>
     <slot />
