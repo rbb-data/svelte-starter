@@ -70,8 +70,7 @@
   }
 
   main {
-    padding: var(--padding);
-    padding-left: calc(2 * var(--padding));
+    padding: var(--padding) calc(2 * var(--padding));
   }
 
   .logo {
