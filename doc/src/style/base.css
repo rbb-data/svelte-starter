@@ -1,0 +1,8 @@
+h1 {
+  font-size: var(--h1);
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}

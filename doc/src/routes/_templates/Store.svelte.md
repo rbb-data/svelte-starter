@@ -15,8 +15,6 @@
 
 <Header name={'$' + name} {description} />
 
-<div class="type">
-  {type}
-</div>
+<code>{type}</code>
 
 <!-- More documentation... -->

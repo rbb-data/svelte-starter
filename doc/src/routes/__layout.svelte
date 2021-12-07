@@ -39,11 +39,16 @@
 </script>
 
 <div class="wrapper">
-  <nav>
-    {#each navSections as navSection}
-      <NavSection {...navSection} format={format(navSection.type)} />
-    {/each}
-  </nav>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/rbb24Logo.png" alt="rbb|24 logo" />
+    </div>
+    <nav>
+      {#each navSections as navSection}
+        <NavSection {...navSection} format={format(navSection.type)} />
+      {/each}
+    </nav>
+  </div>
   <main>
     <slot />
   </main>
@@ -51,7 +56,35 @@
 
 <style>
   .wrapper {
+    --padding: 1rem;
+
     display: grid;
     grid-template-columns: minmax(150px, 20%) 1fr;
+    height: 100%;
+  }
+
+  .sidebar {
+    height: 100%;
+    padding: var(--padding);
+    border-right: 2px solid currentColor;
+  }
+
+  main {
+    padding: var(--padding);
+    padding-left: calc(2 * var(--padding));
+  }
+
+  .logo {
+    height: calc(1.5 * var(--h1));
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    height: 80%;
+  }
+
+  nav {
+    margin-top: 1rem;
   }
 </style>

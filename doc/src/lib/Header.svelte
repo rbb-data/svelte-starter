@@ -5,7 +5,7 @@
   export let description = '';
 </script>
 
-<h1>{name}</h1>
+<h1><code>{name}</code></h1>
 
 {#if description}
   <SvelteMarkdown source={description} />
