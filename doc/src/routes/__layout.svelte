@@ -1,50 +1,38 @@
 <script>
   import '../style/index.css';
 
-  const components = [{ route: '/components/LocalMap', label: 'LocalMap' }];
+  import NavSection from '$lib/NavSection.svelte';
 
-  const headlessComponents = [
-    { route: '/components/headless/Search', label: 'Search' },
-    { route: '/components/headless/Slider', label: 'Slider' },
-    { route: '/components/headless/Svg', label: 'Svg' },
-    { route: '/components/headless/Tabs', label: 'Tabs' },
-  ];
-
-  const actions = [
-    { route: '/actions/css', label: 'use:css' },
-    { route: '/actions/focus', label: 'use:focus' },
-    { route: '/actions/fuzzysearch', label: 'use:fuzzysearch' },
-    { route: '/actions/pannable', label: 'use:pannable' },
-    { route: '/actions/tooltip', label: 'use:tooltip' },
-  ];
+  const components = ['LocalMap'];
+  const headlessComponents = ['Search', 'Slider', 'Svg', 'Tabs'];
+  const actions = ['css', 'focus', 'fuzzysearch', 'pannable', 'tooltip'];
+  const stores = ['prefersReducedMotion'];
 </script>
 
 <div class="wrapper">
   <nav>
-    <section>
-      Components
-      <ul>
-        {#each components as { route, label }}
-          <li><a href={route}>{label}</a></li>
-        {/each}
-      </ul>
-    </section>
-    <section>
-      Headless Components
-      <ul>
-        {#each headlessComponents as { route, label }}
-          <li><a href={route}>{label}</a></li>
-        {/each}
-      </ul>
-    </section>
-    <section>
-      Actions
-      <ul>
-        {#each actions as { route, label }}
-          <li><a href={route}>{label}</a></li>
-        {/each}
-      </ul>
-    </section>
+    <NavSection
+      heading="Components"
+      urlPrefix="/components"
+      items={components}
+    />
+    <NavSection
+      heading="Headless Components"
+      urlPrefix="/components/headless"
+      items={headlessComponents}
+    />
+    <NavSection
+      heading="Actions"
+      urlPrefix="/actions"
+      items={actions}
+      format={(item) => `use:${item}`}
+    />
+    <NavSection
+      heading="Stores"
+      urlPrefix="/stores"
+      items={stores}
+      format={(item) => `$${item}`}
+    />
   </nav>
   <main>
     <slot />
@@ -55,10 +43,5 @@
   .wrapper {
     display: grid;
     grid-template-columns: minmax(150px, 20%) 1fr;
-  }
-
-  ul {
-    list-style: none;
-    padding: 0;
   }
 </style>

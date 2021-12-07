@@ -19,28 +19,40 @@ function isExported(node) {
   return false;
 }
 
+/**
+ * Extract information from a source file using Typescript's AST
+ */
 function extract(sourceFile, typeChecker) {
   const isExport = {};
   const data = [];
+
   ts.forEachChild(sourceFile, (node) => {
+    // node is a function
     if (ts.isFunctionDeclaration(node)) {
       const name = node.name.text;
+
       isExport[name] = isExported(node);
 
+      // extract jsdoc comment if available
       const comment =
         node.jsDoc && node.jsDoc.length > 0 ? node.jsDoc[0].comment : null;
+
+      // get function type
       const type = typeChecker.typeToString(
         typeChecker.getTypeAtLocation(node),
         node
       );
 
+      // process parameters
       const params = node.parameters.map((param) => {
+        // extract jsdoc string if available
         const jsDoc =
           param.jsDocCache && param.jsDocCache.length > 0
             ? param.jsDocCache[0]
             : null;
-
+        // extract comment
         let comment = jsDoc ? jsDoc.comment : null;
+        // remove the '-' that parameter descriptions usually start with
         if (comment && comment.trim().startsWith('-')) {
           comment = comment.slice(1).trim();
         }
@@ -58,20 +70,30 @@ function extract(sourceFile, typeChecker) {
       });
 
       data.push({ name, description: comment, type, params });
-    } else if (ts.isVariableStatement(node)) {
+    }
+
+    // node is a variable statement
+    else if (ts.isVariableStatement(node)) {
+      // only the first variable declaration is processed
       const declaration = node.declarationList.declarations[0];
       const name = declaration.name.getText(sourceFile);
+
+      // get type of the declared variable
       const type = typeChecker.typeToString(
         typeChecker.getTypeAtLocation(declaration),
         declaration
       );
+
+      // is the declared variable exported?
       isExport[name] = isExported(node);
 
+      // extract jsdoc comment
       const symbol = typeChecker.getSymbolAtLocation(declaration.name);
       const comment = ts.displayPartsToString(
         symbol.getDocumentationComment(typeChecker)
       );
 
+      // the value that the variable is initialized with
       const defaultValue = declaration.initializer
         ? declaration.initializer.getText()
         : null;
@@ -83,7 +105,10 @@ function extract(sourceFile, typeChecker) {
         optional: defaultValue !== null,
         default: defaultValue,
       });
-    } else if (ts.isExportAssignment(node)) {
+    }
+
+    // records variables that are exported at a later stage
+    else if (ts.isExportAssignment(node)) {
       const name = node.expression.getText();
       isExport[name] = true;
     } else if (ts.isExportDeclaration(node)) {
@@ -93,11 +118,12 @@ function extract(sourceFile, typeChecker) {
     }
   });
 
-  const exportedData = data.filter((d) => isExport[d.name]);
-
-  return exportedData;
+  return data.filter((d) => isExport[d.name]);
 }
 
+/**
+ * Extract documentation from a javascript file
+ */
 function extractJsFile(file) {
   const program = ts.createProgram([file], compilerOptions);
   var sourceFile = program.getSourceFile(file);
@@ -108,11 +134,14 @@ function extractJsFile(file) {
   return data;
 }
 
+/**
+ * Extract documentation from a svelte file
+ */
 function extractSvelteFile(file) {
   const tmpFile = 'tmp.ts';
 
+  // extract the source code within the <script> tag
   const content = fs.readFileSync(file, 'utf-8');
-
   const match = content.match(/<script.*>([\S\s]*)<\/script>/m);
   const source = match[1];
 
@@ -153,6 +182,7 @@ function extractSvelteFile(file) {
 
   const typeChecker = program.getTypeChecker();
 
+  // extract component-level jsdoc
   const name = path.basename(file, '.svelte');
   const firstStatement = sourceFile.statements[0];
   const description = firstStatement.jsDoc
@@ -180,12 +210,9 @@ function makeDirectories(path) {
 const srcPrefix = '../src/lib/';
 const outPrefix = 'meta/';
 
+// process actions and stores
 glob(srcPrefix + '+(actions|stores)/*.js', function (er, files) {
-  // TODO
-  if (er) {
-    console.log('handle this');
-  }
-
+  if (er) throw new Error(er);
   files.forEach((file) => {
     console.log(file);
     const data = extractJsFile(file);
@@ -197,12 +224,9 @@ glob(srcPrefix + '+(actions|stores)/*.js', function (er, files) {
   });
 });
 
-glob(srcPrefix + 'components/**/*.svelte', function (er, files) {
-  // TODO
-  if (er) {
-    console.log('handle this');
-  }
-
+// process shared svelte components
+glob(srcPrefix + 'components/shared/**/*.svelte', function (er, files) {
+  if (er) throw new Error(er);
   files.forEach((file) => {
     console.log(file);
     const data = extractSvelteFile(file);
