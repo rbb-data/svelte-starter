@@ -6,7 +6,7 @@ for f in $(find $META_DIR -name '*.json'); do
   base=${f#"$META_DIR/"}
   filename="${base##*/}"
   item="${filename%.json}"
-  route="src/routes/${base%.json}.svelte.md"
+  route="src/routes/${base%.json}.svelte"
 
   # skip if route exists
   [ -f "$route" ] && continue
@@ -15,13 +15,13 @@ for f in $(find $META_DIR -name '*.json'); do
   template=""
   case "$base" in 
     actions*)
-      template=src/routes/_templates/Action.svelte.md
+      template=src/routes/_templates/Action.svelte
       ;;
     components*)
-      template=src/routes/_templates/Component.svelte.md
+      template=src/routes/_templates/Component.svelte
       ;;
     stores*)
-      template=src/routes/_templates/Store.svelte.md
+      template=src/routes/_templates/Store.svelte
       ;;
   esac
 
