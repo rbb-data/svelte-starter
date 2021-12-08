@@ -4,9 +4,9 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
-    "doc:extract": "node scripts/extract-doc-from-source.js",
+    "doc:extract": "rm -rf data/meta && node scripts/extract-doc-from-source.js",
     "doc:generate": "scripts/generate-doc.sh",
-    "doc:nav": "scripts/update-navigation.sh",
+    "doc:nav": "node scripts/update-navigation.js",
     "update": "npm run doc:extract && npm run doc:generate && npm run doc:nav"
   },
   "devDependencies": {
