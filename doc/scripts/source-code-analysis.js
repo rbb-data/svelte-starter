@@ -43,55 +43,6 @@ function createProgramFromFile(file, compilerOptions) {
 }
 
 /**
- * Create Typescript AST and types from source code
- * @param {string} source
- * @param {import('typescript').CompilerOptions} compilerOptions
- * @returns {{ program: import('typescript').Program, sourceFile: import('typescript').SourceFile, typeChecker: import('typescript').TypeChecker }}
- */
-function createProgramFromSource(source, compilerOptions) {
-  const tmpFile = 'tmp.ts';
-
-  const sourceFile = ts.createSourceFile(
-    tmpFile,
-    source,
-    ts.ScriptTarget.Latest,
-    undefined,
-    ts.ScriptKind.JS
-  );
-
-  const defaultCompilerHost = ts.createCompilerHost({});
-
-  const customCompilerHost = {
-    getSourceFile: (name, languageVersion) => {
-      if (name === tmpFile) {
-        return sourceFile;
-      } else {
-        return defaultCompilerHost.getSourceFile(name, languageVersion);
-      }
-    },
-    writeFile: () => {},
-    getDefaultLibFileName: () => '../src/lib/types.d.ts',
-    useCaseSensitiveFileNames: () => false,
-    getCanonicalFileName: (filename) => filename,
-    getCurrentDirectory: () => '',
-    getNewLine: () => '\n',
-    getDirectories: () => [],
-    fileExists: () => true,
-    readFile: () => '',
-  };
-
-  const program = ts.createProgram(
-    ['tmp.ts'],
-    compilerOptions,
-    customCompilerHost
-  );
-
-  const typeChecker = program.getTypeChecker();
-
-  return { program, sourceFile, typeChecker };
-}
-
-/**
  * Extract information from a source file using Typescript's AST and type checker
  * @param {import('typescript').SourceFile} sourceFile
  * @param {import('typescript').TypeChecker} typeChecker
@@ -230,10 +181,15 @@ export function extractDocFromSvelteFile(file) {
   const match = content.match(/<script.*>([\S\s]*)<\/script>/m);
   const source = match[1];
 
-  const { sourceFile, typeChecker } = createProgramFromSource(
-    source,
+  const tmpFile = file.replace('.svelte', '.js');
+  fs.writeFileSync(tmpFile, source);
+
+  const { sourceFile, typeChecker } = createProgramFromFile(
+    tmpFile,
     compilerOptions
   );
+
+  fs.unlinkSync(tmpFile);
 
   // extract component-level jsdoc
   const name = path.basename(file, '.svelte');
