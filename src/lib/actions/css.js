@@ -1,5 +1,5 @@
 /**
- * Dynamically set CSS `variables` on `node`.
+ * Dynamically set CSS `variables` on `node`
  *
  * @param {HTMLElement | SVGElement} node - the node to set the CSS variable on
  * @param {Record<string, string | number>} variables - the variables to set
