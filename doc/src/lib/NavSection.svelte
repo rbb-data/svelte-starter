@@ -29,7 +29,7 @@
           class:active={$activePage === [urlPrefix, item].join('/')}
           href={[urlPrefix, item].join('/')}
         >
-          <code>{format(item)}</code>
+          <code class="no-style">{format(item)}</code>
         </a>
       </li>
     {/each}

@@ -13,9 +13,9 @@
   </tr>
   {#each params as param}
     <tr>
-      <td>{param.name}{param.optional ? '' : '*'}</td>
+      <td><code>{param.name}</code>{param.optional ? '' : '*'}</td>
       <td><SvelteMarkdown source={param.description} isInline /></td>
-      <td>{param.type}</td>
+      <td><code>{param.type}</code></td>
       <td>{param.default || '-'}</td>
     </tr>
   {/each}

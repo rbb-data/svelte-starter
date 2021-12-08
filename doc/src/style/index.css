@@ -2,10 +2,10 @@
 and https://www.joshwcomeau.com/css/custom-css-reset/ */
 
 @import '../../../src/style/fonts';
-@import './prism-theme';
+@import './prism';
 
 @import './variables';
-@import './base.css';
+@import './base';
 
 *,
 *::before,
