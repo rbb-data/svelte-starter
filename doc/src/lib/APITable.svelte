@@ -5,24 +5,72 @@
 </script>
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Type</th>
-    <th>Default</th>
-  </tr>
-  {#each params as param}
+  <thead>
     <tr>
-      <td><code>{param.name}</code>{param.optional ? '' : '*'}</td>
-      <td><SvelteMarkdown source={param.description} isInline /></td>
-      <td><code>{param.type}</code></td>
-      <td>{param.default || '-'}</td>
+      <th class="name">Name</th>
+      <th class="description">Description</th>
+      <th class="type">Type</th>
+      <th class="default">Default</th>
     </tr>
-  {/each}
+  </thead>
+  <tbody>
+    {#each params as param}
+      <tr>
+        <td>
+          <code>
+            {param.name}
+            {param.optional ? '' : '*'}
+          </code>
+        </td>
+        <td><SvelteMarkdown source={param.description} isInline /></td>
+        <td><code>{param.type}</code></td>
+        <td>
+          {#if param.default}
+            <code>{param.default}</code>
+          {/if}
+        </td>
+      </tr>
+    {/each}
+  </tbody>
 </table>
 
 <style>
+  code {
+    white-space: pre-wrap;
+    margin: 0;
+  }
+
+  table {
+    margin: 2rem 0;
+    display: grid;
+    border-collapse: collapse;
+    grid-template-columns: auto 4fr 2fr 2fr;
+  }
+
+  thead,
+  tbody,
+  tr {
+    display: contents;
+  }
+
+  th,
+  td {
+    padding: 1rem 0.4rem;
+    border-top: 1px solid #e6e6e6;
+  }
+
   th {
+    position: sticky;
+    top: 0;
     text-align: left;
+    font-weight: bold;
+    color: #4a4a4a;
+    background-color: #fafafa;
+  }
+
+  th.name,
+  th.type,
+  th.default {
+    padding-left: 0.8rem; /* identical to padding of <code> */
   }
 </style>
