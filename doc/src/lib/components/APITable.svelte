@@ -66,6 +66,7 @@
     margin-top: 0.2rem;
     margin-left: 0.4rem;
     font-size: 0.8rem;
+    text-align: right;
   }
 
   dt,
