@@ -4,7 +4,6 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 
-import { makeDirectories } from './utils.js';
 import {
   extractDocFromJsFile,
   extractDocFromSvelteFile,
@@ -14,6 +13,17 @@ import config from '../doc.config.js';
 
 const srcPrefix = '../src/lib/';
 const outPrefix = 'data/meta/';
+
+export function makeDirectories(path) {
+  if (fs.existsSync(path)) return;
+  const dirs = path.split('/').slice(0, -1);
+  for (let i = 0; i < dirs.length; i++) {
+    const dir = dirs.slice(0, i + 1).join('/');
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+    }
+  }
+}
 
 function ignore(file, folders = []) {
   // ignore index files
