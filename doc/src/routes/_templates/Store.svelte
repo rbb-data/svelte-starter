@@ -14,6 +14,8 @@
 
 <Header name={'$' + name} {description} />
 
-<code>{type}</code>
+<p>
+  Type: <code>{type}</code>
+</p>
 
 <!-- More documentation... -->
