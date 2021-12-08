@@ -10,10 +10,17 @@
 
   export let meta;
 
-  const { name, description, props } = meta;
+  const { name, description, props, slots } = meta;
 </script>
 
 <Header {name} {description} />
+
+{#if slots}
+  <b>Slots:</b>
+  {#each slots as slot}
+    <code>{slot}</code>
+  {/each}
+{/if}
 
 <!-- More documentation... -->
 

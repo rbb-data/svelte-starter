@@ -182,11 +182,11 @@ export function extractDocFromSvelteFile(file) {
 
   // extract the source code within the <script> tag
   const content = fs.readFileSync(file, 'utf-8');
-  const match = content.match(/<script.*>([\S\s]*)<\/script>/m);
+  const scriptMatch = content.match(/<script.*>([\S\s]*)<\/script>/m);
 
-  if (!match) return { name };
+  if (!scriptMatch) return { name };
 
-  const source = match[1];
+  const source = scriptMatch[1];
 
   const tmpFile = file.replace('.svelte', '.js');
   fs.writeFileSync(tmpFile, source);
@@ -198,10 +198,22 @@ export function extractDocFromSvelteFile(file) {
 
   fs.unlinkSync(tmpFile);
 
-  // extract information
+  // extract information from the script tag
   const description = extractJsdocComment(sourceFile.statements[0]);
   const props = extractDoc(sourceFile, typeChecker);
-  const data = { name, description, props };
+
+  // document slots
+  const slotMatches = content.match(/<slot.*>/gm);
+  let slots;
+  if (slotMatches) {
+    slots = slotMatches.map((str) => {
+      const nameMatch = str.match(/name=['"](.+)['"]/m);
+      const name = nameMatch ? nameMatch[1] : 'default';
+      return name;
+    });
+  }
+
+  const data = { name, description, props, slots };
 
   return data;
 }
