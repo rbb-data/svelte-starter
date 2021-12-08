@@ -20,8 +20,12 @@
           <td>
             <code>
               {param.name}
-              <span class="annotation">{param.optional ? '' : '*'}</span>
-              <span class="annotation">{param.isExposed ? '!' : ''}</span>
+              {#if !param.optional}
+                <span class="annotation">*</span>
+              {/if}
+              {#if param.isExposed}
+                <span class="annotation">!</span>
+              {/if}
             </code>
           </td>
           <td><SvelteMarkdown source={param.description} isInline /></td>
@@ -64,7 +68,6 @@
 
   .footnote {
     margin-top: 0.2rem;
-    margin-left: 0.4rem;
     font-size: 0.8rem;
     text-align: right;
   }
