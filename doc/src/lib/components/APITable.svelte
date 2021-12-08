@@ -4,48 +4,81 @@
   export let params;
 </script>
 
-<table>
-  <thead>
-    <tr>
-      <th class="name">Name</th>
-      <th class="description">Description</th>
-      <th class="type">Type</th>
-      <th class="default">Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each params as param}
+<div class="table-wrapper">
+  <table>
+    <thead>
       <tr>
-        <td>
-          <code>
-            {param.name}
-            <span class="required">{param.optional ? '' : '*'}</span>
-          </code>
-        </td>
-        <td><SvelteMarkdown source={param.description} isInline /></td>
-        <td><code>{param.type}</code></td>
-        <td>
-          {#if param.default}
-            <code>{param.default}</code>
-          {/if}
-        </td>
+        <th class="name">Name</th>
+        <th class="description">Description</th>
+        <th class="type">Type</th>
+        <th class="default">Default</th>
       </tr>
-    {/each}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {#each params as param}
+        <tr>
+          <td>
+            <code>
+              {param.name}
+              <span class="annotation">{param.optional ? '' : '*'}</span>
+              <span class="annotation">{param.isExposed ? '!' : ''}</span>
+            </code>
+          </td>
+          <td><SvelteMarkdown source={param.description} isInline /></td>
+          <td><code>{param.type}</code></td>
+          <td>
+            {#if param.default}
+              <code>{param.default}</code>
+            {/if}
+          </td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+  <div class="footnote">
+    <dl>
+      <dt><code class="annotation">*</code></dt>
+      <dd>Required</dd>
+
+      <dt><code class="annotation">!</code></dt>
+      <dd>Exposed (can be bound to)</dd>
+    </dl>
+  </div>
+</div>
 
 <style>
+  .table-wrapper {
+    --offset: 0.8rem; /* identical to padding of <code> */
+
+    margin: 2rem 0;
+  }
+
   code {
     white-space: pre-wrap;
     margin: 0;
   }
 
-  .required {
+  .annotation {
     color: var(--black);
   }
 
+  .footnote {
+    margin-top: 0.2rem;
+    margin-left: 0.4rem;
+    font-size: 0.8rem;
+  }
+
+  dt,
+  dd {
+    display: inline;
+  }
+
+  dd {
+    margin-right: 1rem;
+    margin-left: 0.2rem;
+  }
+
   table {
-    margin: 2rem 0;
     display: grid;
     border-collapse: collapse;
     grid-template-columns: auto 4fr 2fr 2fr;
@@ -75,6 +108,6 @@
   th.name,
   th.type,
   th.default {
-    padding-left: 0.8rem; /* identical to padding of <code> */
+    padding-left: var(--offset);
   }
 </style>

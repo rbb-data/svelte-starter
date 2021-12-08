@@ -90,6 +90,7 @@
   /**
    * the search result
    * @type {Item}
+   * @exposed
    */
   export let result = null;
 

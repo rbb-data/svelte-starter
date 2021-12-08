@@ -22,10 +22,16 @@
    * */
   export let height;
 
-  /** width of the canvas (the svg's width minus margins) */
+  /**
+   * width of the canvas (the svg's width minus margins)
+   * @exposed
+   */
   export let boundedWidth = 0;
 
-  /** height of the canvas (the svg's height minus margins) */
+  /**
+   * height of the canvas (the svg's height minus margins)
+   * @exposed
+   */
   export let boundedHeight = 0;
 
   /** size of the margins on each side of the svg */

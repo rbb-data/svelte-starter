@@ -41,7 +41,10 @@
   /** intial slide index */
   export let initialActiveIndex = 0;
 
-  /** index of the currently visible slide */
+  /**
+   * index of the currently visible slide
+   * @exposed
+   */
   export let activeIndex = initialActiveIndex;
 
   $: currSlide = slides[activeIndex];

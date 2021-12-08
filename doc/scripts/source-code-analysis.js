@@ -119,6 +119,12 @@ function extractDoc(sourceFile, typeChecker) {
         symbol.getDocumentationComment(typeChecker)
       );
 
+      // check for the custom @exposed tag
+      const jsDocTags = symbol
+        .getJsDocTags()
+        .filter(({ name }) => name === 'exposed');
+      const isExposed = jsDocTags.length > 0;
+
       // if no type can be inferred, grab the type from the jsdoc tag
       if (type === 'any') {
         const tags = symbol.getJsDocTags(typeChecker);
@@ -140,6 +146,7 @@ function extractDoc(sourceFile, typeChecker) {
         type,
         optional: defaultValue !== null,
         default: defaultValue,
+        isExposed,
       });
     }
 
