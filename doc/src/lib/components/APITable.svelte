@@ -19,7 +19,7 @@
         <td>
           <code>
             {param.name}
-            {param.optional ? '' : '*'}
+            <span class="required">{param.optional ? '' : '*'}</span>
           </code>
         </td>
         <td><SvelteMarkdown source={param.description} isInline /></td>
@@ -38,6 +38,10 @@
   code {
     white-space: pre-wrap;
     margin: 0;
+  }
+
+  .required {
+    color: var(--black);
   }
 
   table {

@@ -22,7 +22,7 @@
 <script>
   import '../style/index.css';
 
-  import NavSection from '$lib/NavSection.svelte';
+  import NavSection from '$lib/components/NavSection.svelte';
 
   export let navSections;
 
@@ -59,7 +59,7 @@
     --padding: 1rem;
 
     display: grid;
-    grid-template-columns: minmax(150px, 20%) 1fr;
+    grid-template-columns: minmax(200px, 20%) 1fr;
     height: 100%;
   }
 

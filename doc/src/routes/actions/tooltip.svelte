@@ -5,8 +5,8 @@
 </script>
 
 <script>
-  import Header from '$lib/Header.svelte';
-  import APITable from '$lib/APITable.svelte';
+  import Header from '$lib/components/Header.svelte';
+  import APITable from '$lib/components/APITable.svelte';
 
   export let meta;
 

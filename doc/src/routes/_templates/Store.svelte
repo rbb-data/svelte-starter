@@ -5,7 +5,7 @@
 </script>
 
 <script>
-  import Header from '$lib/Header.svelte';
+  import Header from '$lib/components/Header.svelte';
 
   export let meta;
 

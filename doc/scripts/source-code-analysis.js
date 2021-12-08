@@ -24,6 +24,7 @@ function isExported(node) {
  * @returns {string}
  */
 function extractJsdocComment(node) {
+  if (!node) return null;
   if (!node.jsDoc) return null;
   if (node.jsDoc.length === 0) return null;
   return node.jsDoc.map((d) => d.comment).join(' ');
@@ -176,9 +177,15 @@ export function extractDocFromJsFile(file) {
  * @returns
  */
 export function extractDocFromSvelteFile(file) {
+  // read name from filename
+  const name = path.basename(file, '.svelte');
+
   // extract the source code within the <script> tag
   const content = fs.readFileSync(file, 'utf-8');
   const match = content.match(/<script.*>([\S\s]*)<\/script>/m);
+
+  if (!match) return { name };
+
   const source = match[1];
 
   const tmpFile = file.replace('.svelte', '.js');
@@ -191,12 +198,9 @@ export function extractDocFromSvelteFile(file) {
 
   fs.unlinkSync(tmpFile);
 
-  // extract component-level jsdoc
-  const name = path.basename(file, '.svelte');
+  // extract information
   const description = extractJsdocComment(sourceFile.statements[0]);
-
   const props = extractDoc(sourceFile, typeChecker);
-
   const data = { name, description, props };
 
   return data;
