@@ -15,13 +15,13 @@
 
 <Header {name} {description} />
 
+<!-- More documentation... use <div class="slim"></div> if you want a slim design -->
+
 {#if slots}
   <b>Slots:</b>
   {#each slots as slot}
     <code>{slot}</code>
   {/each}
 {/if}
-
-<!-- More documentation... -->
 
 <APITable params={props} />

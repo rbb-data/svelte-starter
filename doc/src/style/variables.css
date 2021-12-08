@@ -2,4 +2,5 @@
   --black: hsl(210, 11%, 15%);
   --h1: 1.5rem;
   --h2: 1.25rem;
+  --max-width: 650px;
 }

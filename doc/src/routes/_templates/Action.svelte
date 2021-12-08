@@ -15,6 +15,6 @@
 
 <Header name={`use:${name}`} {description} />
 
-<!-- More documentation... -->
+<!-- More documentation... use <div class="slim"></div> if you want a slim design -->
 
 <APITable {params} />

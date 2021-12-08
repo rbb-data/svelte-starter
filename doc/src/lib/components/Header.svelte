@@ -8,5 +8,7 @@
 <h1><code class="no-style">{name}</code></h1>
 
 {#if description}
-  <SvelteMarkdown source={description} />
+  <div class="slim">
+    <SvelteMarkdown source={description} />
+  </div>
 {/if}

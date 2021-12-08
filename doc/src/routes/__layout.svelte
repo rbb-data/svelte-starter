@@ -58,19 +58,19 @@
 <style>
   .wrapper {
     --padding: 1rem;
-
-    display: grid;
-    grid-template-columns: minmax(200px, 20%) 1fr;
-    height: 100%;
+    --sidebar-width: 280px;
   }
 
   .sidebar {
     height: 100%;
+    width: var(--sidebar-width);
     padding: var(--padding);
     border-right: 2px solid currentColor;
+    position: fixed;
   }
 
   main {
+    margin-left: var(--sidebar-width);
     padding: var(--padding) calc(2 * var(--padding));
   }
 
