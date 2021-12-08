@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'focus.json';
+  const filename = 'data/meta/actions/focus.json';
   export const load = fetchMetaData(filename);
 </script>
 

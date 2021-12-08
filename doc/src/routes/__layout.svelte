@@ -1,6 +1,7 @@
 <script context="module">
   export const load = async ({ fetch }) => {
-    const res = await fetch(`/load/nav.json`);
+    const filename = 'data/nav.json';
+    const res = await fetch(`/load/${encodeURIComponent(filename)}`);
     const navSections = await res.json();
 
     // if successful, pass props to the component

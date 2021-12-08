@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'pannable.json';
+  const filename = 'data/meta/actions/pannable.json';
   export const load = fetchMetaData(filename);
 </script>
 

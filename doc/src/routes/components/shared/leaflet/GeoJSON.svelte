@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'GeoJSON.json';
+  const filename = 'data/meta/components/shared/leaflet/GeoJSON.json';
   export const load = fetchMetaData(filename);
 </script>
 

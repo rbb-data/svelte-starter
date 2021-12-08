@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'ZoomControl.json';
+  const filename = 'data/meta/components/shared/leaflet/ZoomControl.json';
   export const load = fetchMetaData(filename);
 </script>
 

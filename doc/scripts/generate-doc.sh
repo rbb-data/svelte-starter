@@ -33,7 +33,7 @@ for f in $(find $META_DIR -name '*.json'); do
 
   # replace placeholder text
   placeholder=%rbb-data.placeholder%
-  sed -i '' "s/${placeholder}/${item}/g" $route
+  sed -i '' "s@${placeholder}@data/meta/${base}@g" $route
 
   echo "created $route"
 done

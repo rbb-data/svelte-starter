@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'Svg.json';
+  const filename = 'data/meta/components/shared/headless/Svg.json';
   export const load = fetchMetaData(filename);
 </script>
 

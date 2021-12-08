@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'BingLayer.json';
+  const filename = 'data/meta/components/shared/leaflet/BingLayer.json';
   export const load = fetchMetaData(filename);
 </script>
 

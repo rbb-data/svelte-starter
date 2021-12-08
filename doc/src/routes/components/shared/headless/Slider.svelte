@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'Slider.json';
+  const filename = 'data/meta/components/shared/headless/Slider.json';
   export const load = fetchMetaData(filename);
 </script>
 

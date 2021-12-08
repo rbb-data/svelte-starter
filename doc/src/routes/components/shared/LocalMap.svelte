@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'LocalMap.json';
+  const filename = 'data/meta/components/shared/LocalMap.json';
   export const load = fetchMetaData(filename);
 </script>
 

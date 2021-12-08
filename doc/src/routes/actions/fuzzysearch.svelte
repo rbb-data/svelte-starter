@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'fuzzysearch.json';
+  const filename = 'data/meta/actions/fuzzysearch.json';
   export const load = fetchMetaData(filename);
 </script>
 

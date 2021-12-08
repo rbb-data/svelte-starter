@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'prefersReducedMotion.json';
+  const filename = 'data/meta/stores/prefersReducedMotion.json';
   export const load = fetchMetaData(filename);
 </script>
 

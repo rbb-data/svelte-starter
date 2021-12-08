@@ -1,15 +1,4 @@
 import fs from 'fs';
-import path from 'path';
-import glob from 'glob';
-
-function getPath(files, filename) {
-  for (const file of files) {
-    console.log(path.basename(file), filename);
-    if (path.basename(file) === filename) {
-      return file;
-    }
-  }
-}
 
 // construct an error response
 const error = (status, message) => ({
@@ -25,16 +14,11 @@ const error = (status, message) => ({
 // GET /load/[filename]
 export const get = async ({ params }) => {
   const { filename } = params;
-
-  const files = glob.sync('data/**/*.*');
-  const path = getPath(files, filename);
+  const path = decodeURIComponent(filename);
 
   // check if file exists
   if (!fs.existsSync(path)) {
-    const message = [
-      `File ${path} does not exist.`,
-      'Make sure that the file you are referring to lies within the ./data directory.',
-    ];
+    const message = [`File ${path} does not exist.`];
     return error(404, message.join(' '));
   }
 

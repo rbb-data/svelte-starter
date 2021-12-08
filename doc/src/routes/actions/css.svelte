@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'css.json';
+  const filename = 'data/meta/actions/css.json';
   export const load = fetchMetaData(filename);
 </script>
 

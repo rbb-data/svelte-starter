@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'Search.json';
+  const filename = 'data/meta/components/shared/headless/Search.json';
   export const load = fetchMetaData(filename);
 </script>
 
