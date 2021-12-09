@@ -4,7 +4,9 @@
 
   function createSource(componentName, props) {
     const propsStr = Object.entries(props)
-      .map(([key, value]) => `${key}={${value}}`)
+      .map(([key, value]) =>
+        typeof value === 'string' ? `${key}="${value}"` : `${key}={${value}}`
+      )
       .join(' ');
     return `<${componentName} ${propsStr} />`;
   }
