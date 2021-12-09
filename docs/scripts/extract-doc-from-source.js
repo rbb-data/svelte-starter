@@ -9,7 +9,7 @@ import {
   extractDocFromSvelteFile,
 } from './source-code-analysis.js';
 
-import config from '../doc.config.js';
+import config from '../docs.config.js';
 
 const srcPrefix = '../src/lib/';
 const outPrefix = 'data/meta/';

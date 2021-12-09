@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import glob from 'glob';
 
-import config from '../doc.config.js';
+import config from '../docs.config.js';
 
 /**
  * @param {string} path
