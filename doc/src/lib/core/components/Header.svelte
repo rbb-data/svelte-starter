@@ -15,10 +15,3 @@
     <SvelteMarkdown source={description} />
   </div>
 {/if}
-
-<style>
-  h1 {
-    font-size: var(--h1);
-    margin-bottom: var(--spacing-small);
-  }
-</style>
