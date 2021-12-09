@@ -10,6 +10,7 @@
 
   import Custom from '$lib/custom/actions/fuzzysearch/Custom.svelte';
 
+  /** @type {Array<{ name: string; description: string; type: string; params: Array<import('$lib/core/types').ParamDoc> }>} */
   export let meta;
 
   const { name, description, params } = meta[0];

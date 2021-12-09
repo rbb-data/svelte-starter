@@ -10,6 +10,7 @@
 
   import Custom from '$lib/custom/components/shared/LocalMap/Custom.svelte';
 
+  /** @type {{ name: string; description: string; props: Array<import('$lib/core/types').ParamDoc>, slots: Array<string> }} */
   export let meta;
 
   const { name, description, props, slots } = meta;

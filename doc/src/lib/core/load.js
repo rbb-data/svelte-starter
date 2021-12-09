@@ -1,3 +1,7 @@
+/**
+ * @param {string} filename
+ * @returns {import('@sveltejs/kit').Load}
+ */
 export function fetchMetaData(filename) {
   return async ({ fetch }) => {
     const res = await fetch(`/load/${encodeURIComponent(filename)}`);

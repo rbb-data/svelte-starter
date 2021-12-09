@@ -1,7 +1,10 @@
 <script>
   import SvelteMarkdown from 'svelte-markdown';
 
+  /** @type {string} */
   export let name;
+
+  /** @type {string} */
   export let description = '';
 </script>
 
@@ -12,3 +15,10 @@
     <SvelteMarkdown source={description} />
   </div>
 {/if}
+
+<style>
+  h1 {
+    font-size: var(--h1);
+    margin-bottom: var(--spacing-small);
+  }
+</style>

@@ -1,6 +1,7 @@
 <script>
   import SvelteMarkdown from 'svelte-markdown';
 
+  /** @type {Array<import('$lib/core/types').ParamDoc>} */
   export let params;
 </script>
 
@@ -50,9 +51,7 @@
 
 <style>
   .table-wrapper {
-    --offset: 0.8rem; /* identical to padding of <code> */
-
-    margin: 2rem 0;
+    margin: var(--spacing-large) 0;
   }
 
   code {
@@ -76,7 +75,7 @@
   }
 
   dd {
-    margin-right: 1rem;
+    margin-right: var(--spacing-small);
     margin-left: 0.2rem;
   }
 
@@ -110,6 +109,6 @@
   th.name,
   th.type,
   th.default {
-    padding-left: var(--offset);
+    padding-left: var(--code-padding-h);
   }
 </style>

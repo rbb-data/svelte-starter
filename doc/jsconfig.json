@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
+    "checkJs": true,
     "baseUrl": ".",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
     "paths": {
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"]

@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 // construct an error response
+/** @type {(status: number, message: string) => { status: number; body: {error: {status: number; message: string}} }} */
 const error = (status, message) => ({
   status,
   body: {
@@ -12,6 +13,7 @@ const error = (status, message) => ({
 });
 
 // GET /load/[filename]
+/** @type {import('@sveltejs/kit').RequestHandler} */
 export const get = async ({ params }) => {
   const { filename } = params;
   const path = decodeURIComponent(filename);

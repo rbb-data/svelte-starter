@@ -3,14 +3,18 @@
   import 'prismjs/components/prism-typescript';
   import 'prism-svelte';
 
+  /** @type {string} */
   export let source;
+
+  /** @type {keyof import('prismjs').Languages} */
   export let language;
+
   export let inline = false;
 
   const highlight = Prism.highlight(
     source,
     Prism.languages[language],
-    language
+    /** @type {string} */ (language)
   );
 </script>
 

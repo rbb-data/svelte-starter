@@ -1,4 +1,5 @@
 <script context="module">
+  /** @type {import('@sveltejs/kit').Load} */
   export const load = async ({ fetch }) => {
     const filename = 'data/nav.json';
     const res = await fetch(`/load/${encodeURIComponent(filename)}`);
@@ -25,8 +26,17 @@
 
   import NavSection from '$lib/core/components/NavSection.svelte';
 
+  /**
+   * @typedef {'component' | 'action' | 'store'} NavItemType
+   */
+
+  /** @type {Array<{ heading: string; urlPrefix: string; type: NavItemType; items: string[] }>} */
   export let navSections;
 
+  /**
+   * @param {NavItemType} type
+   * @returns {(item: string) => string}
+   */
   function format(type) {
     switch (type) {
       case 'component':
@@ -41,14 +51,16 @@
 
 <div class="wrapper">
   <div class="sidebar">
-    <a href="/" class="logo">
-      <img src="/rbb24Logo.png" alt="rbb|24 logo" />
-    </a>
-    <nav>
-      {#each navSections as navSection}
-        <NavSection {...navSection} format={format(navSection.type)} />
-      {/each}
-    </nav>
+    <div>
+      <a href="/" class="logo">
+        <img src="/rbb24Logo.png" alt="rbb|24 logo" />
+      </a>
+      <nav>
+        {#each navSections as navSection}
+          <NavSection {...navSection} format={format(navSection.type)} />
+        {/each}
+      </nav>
+    </div>
   </div>
   <main>
     <slot />
@@ -57,21 +69,24 @@
 
 <style>
   .wrapper {
-    --padding: 1rem;
-    --sidebar-width: 280px;
+    display: grid;
+    grid-template-columns: minmax(200px, 20%) 1fr;
+
+    height: 100%;
   }
 
   .sidebar {
     height: 100%;
-    width: var(--sidebar-width);
-    padding: var(--padding);
+    padding: var(--spacing-small);
     border-right: 2px solid currentColor;
+  }
+
+  .sidebar div {
     position: fixed;
   }
 
   main {
-    margin-left: var(--sidebar-width);
-    padding: var(--padding) calc(2 * var(--padding));
+    padding: var(--spacing-small) var(--spacing-large);
   }
 
   .logo {
@@ -85,6 +100,6 @@
   }
 
   nav {
-    margin-top: 1rem;
+    margin-top: var(--spacing-small);
   }
 </style>

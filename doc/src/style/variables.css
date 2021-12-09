@@ -1,6 +1,13 @@
 :root {
   --black: hsl(210, 11%, 15%);
+
+  --text-width: 650px;
+
+  --spacing-small: 1rem;
+  --spacing-large: 2rem;
+
   --h1: 1.5rem;
-  --h2: 1.25rem;
-  --max-width: 650px;
+
+  --code-padding-h: 0.8rem;
+  --code-padding-v: 0.3rem;
 }

@@ -1,3 +1,5 @@
+/* adapted from https://github.com/sveltejs/svelte/blob/dafbdc286eef3de2243088a9a826e6899e20465c/site/static/prism.css */
+
 /*
 -----------------------------------------------
 	syntax-highlighting [prism]
@@ -52,7 +54,7 @@ code:not(.no-style) {
   border-radius: 0.3em;
   white-space: nowrap;
   color: #444;
-  padding: 0.3rem 0.8rem;
+  padding: var(--code-padding-v) var(--code-padding-h);
   margin: 0 0.2rem;
   top: -0.1rem;
   background: #eff8ff;

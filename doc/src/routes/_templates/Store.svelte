@@ -9,6 +9,7 @@
 
   import Custom from '$lib/custom/%rbb-data.placeholder%/Custom.svelte';
 
+  /** @type {Array<import('$lib/core/types').ParamDoc>} */
   export let meta;
 
   const { name, description, type } = meta[0];

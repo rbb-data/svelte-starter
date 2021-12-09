@@ -3,9 +3,16 @@
 
   import { activePage } from '$lib/core/stores';
 
+  /** @type {string} */
   export let heading;
+
+  /** @type {string} */
   export let urlPrefix = '/';
+
+  /** @type {(d: string) => string} */
   export let format = (d) => d;
+
+  /** @type {Array<string>} */
   export let items = [];
 
   $: items.sort();
@@ -38,7 +45,7 @@
 
 <style>
   section {
-    margin-bottom: 1rem;
+    margin-bottom: var(--spacing-small);
   }
 
   .heading {

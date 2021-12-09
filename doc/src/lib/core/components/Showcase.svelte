@@ -1,5 +1,6 @@
 <script>
-  export let filename;
+  /** @type {string} */
+  export let filename = undefined;
 </script>
 
 <div class="wrapper">
@@ -14,7 +15,7 @@
 
 <style>
   .wrapper {
-    margin: 2rem 0;
+    margin: var(--spacing-large) 0;
   }
 
   .wrapper code {
@@ -23,8 +24,8 @@
 
   .side-by-side {
     display: grid;
-    grid-template-columns: var(--max-width) 1fr;
-    column-gap: 1rem;
+    grid-template-columns: var(--text-width) 1fr;
+    column-gap: var(--spacing-small);
   }
 
   .side-by-side > :global(*) {
