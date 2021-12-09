@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "build": "svelte-kit build",
+    "deploy": "npm run build && gh-pages -t -d build",
     "doc:extract": "rm -rf data/meta && node scripts/extract-doc-from-source.js",
     "doc:generate": "scripts/generate-doc.sh",
     "doc:nav": "node scripts/update-navigation.js",
@@ -13,6 +14,8 @@
     "@sveltejs/adapter-static": "^1.0.0-next.21",
     "@sveltejs/kit": "next",
     "@types/prismjs": "^1.16.6",
+    "dotenv": "^10.0.0",
+    "gh-pages": "^3.2.3",
     "glob": "^7.2.0",
     "prism-svelte": "^0.4.7",
     "prismjs": "^1.25.0",

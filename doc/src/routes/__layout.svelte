@@ -22,9 +22,10 @@
 </script>
 
 <script>
-  import '../style/index.css';
-
+  import { base, assets } from '$app/paths';
   import NavSection from '$lib/core/components/NavSection.svelte';
+
+  import '../style/index.css';
 
   /** @type {Array<import('$lib/core/types').NavSection>} */
   export let navSections;
@@ -48,8 +49,8 @@
 <div class="wrapper">
   <div class="sidebar">
     <div>
-      <a href="/" class="logo">
-        <img src="/rbb24Logo.png" alt="rbb|24 logo" />
+      <a href="{base}/" class="logo">
+        <img src="{assets}/rbb24Logo.png" alt="rbb|24 logo" />
       </a>
       <nav>
         {#each navSections as navSection}

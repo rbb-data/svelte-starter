@@ -1,4 +1,5 @@
 <script>
+  import { base } from '$app/paths';
   import { page } from '$app/stores';
 
   import { activePage } from '$lib/core/stores';
@@ -34,7 +35,8 @@
         <a
           class="no-style"
           class:active={$activePage === [urlPrefix, item].join('/')}
-          href={[urlPrefix, item].join('/')}
+          href={base + [urlPrefix, item].join('/')}
+          sveltekit:prefetch
         >
           <code class="no-style">{format(item)}</code>
         </a>
