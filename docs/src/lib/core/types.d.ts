@@ -10,7 +10,7 @@ export interface ParamDoc {
 export type SvelteType = 'component' | 'action' | 'store';
 
 export interface NavSection {
-  heading: string;
+  heading?: string;
   urlPrefix: string;
   type: SvelteType;
   items: string[];

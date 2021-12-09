@@ -5,7 +5,7 @@
   import { activePage } from '$lib/core/stores';
 
   /** @type {string} */
-  export let heading;
+  export let heading = undefined;
 
   /** @type {string} */
   export let urlPrefix = '/';
@@ -35,7 +35,9 @@
 </script>
 
 <section>
-  <span class="heading">{heading}</span>
+  {#if heading}
+    <span class="heading">{heading}</span>
+  {/if}
   <ul>
     {#each items as item}
       <li>
