@@ -4,8 +4,8 @@ node_modules
 /.svelte-kit
 /package
 google-credentials.json
-/doc/data
-/doc/build
-/doc/.svelte-kit
-/doc/out*
+/docs/data
+/docs/build
+/docs/.svelte-kit
+/docs/out*
 *.local
