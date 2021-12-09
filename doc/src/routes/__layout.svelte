@@ -41,9 +41,9 @@
 
 <div class="wrapper">
   <div class="sidebar">
-    <div class="logo">
+    <a href="/" class="logo">
       <img src="/rbb24Logo.png" alt="rbb|24 logo" />
-    </div>
+    </a>
     <nav>
       {#each navSections as navSection}
         <NavSection {...navSection} format={format(navSection.type)} />
