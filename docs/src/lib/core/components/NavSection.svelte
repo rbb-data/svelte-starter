@@ -36,7 +36,7 @@
           class="no-style"
           class:active={$activePage === [urlPrefix, item].join('/')}
           href={base + [urlPrefix, item].join('/')}
-          sveltekit:prefetch
+          rel="external"
         >
           <code class="no-style">{format(item)}</code>
         </a>
