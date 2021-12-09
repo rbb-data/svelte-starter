@@ -6,3 +6,12 @@ export interface ParamDoc {
   default: string;
   isExposed: boolean;
 }
+
+export type SvelteType = 'component' | 'action' | 'store';
+
+export interface NavSection {
+  heading: string;
+  urlPrefix: string;
+  type: SvelteType;
+  items: string[];
+}

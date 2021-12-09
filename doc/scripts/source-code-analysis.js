@@ -53,6 +53,7 @@ function createProgramFromFile(file, compilerOptions) {
  * @returns {any}
  */
 function extractDoc(sourceFile, typeChecker) {
+  /** @type {Record<string,boolean>} */
   const isExport = {};
   const data = [];
 

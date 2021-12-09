@@ -5,6 +5,8 @@ import glob from 'glob';
 function main() {
   // read navigation meta data
   const filename = 'data/nav.json';
+
+  /** @type {Array<import('$lib/core/types').NavSection>} */
   const navSections = JSON.parse(fs.readFileSync(filename, 'utf-8'));
 
   // collect all documentation files
@@ -17,11 +19,13 @@ function main() {
     };
   });
 
+  /** @type {Record<string, import('$lib/core/types').NavSection>} */
   const navSectionsDict = {};
   navSections.forEach((navSection) => {
     navSectionsDict[navSection.urlPrefix] = navSection;
   });
 
+  /** @type {Record<string,string[]>} */
   const filesDict = {};
   files.forEach(({ urlPrefix, filename }) => {
     if (!filesDict[urlPrefix]) filesDict[urlPrefix] = [];

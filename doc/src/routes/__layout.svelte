@@ -26,15 +26,11 @@
 
   import NavSection from '$lib/core/components/NavSection.svelte';
 
-  /**
-   * @typedef {'component' | 'action' | 'store'} NavItemType
-   */
-
-  /** @type {Array<{ heading: string; urlPrefix: string; type: NavItemType; items: string[] }>} */
+  /** @type {Array<import('$lib/core/types').NavSection>} */
   export let navSections;
 
   /**
-   * @param {NavItemType} type
+   * @param {import('$lib/core/types').SvelteType} type
    * @returns {(item: string) => string}
    */
   function format(type) {

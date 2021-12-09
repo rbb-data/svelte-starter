@@ -14,6 +14,11 @@ import config from '../doc.config.js';
 const srcPrefix = '../src/lib/';
 const outPrefix = 'data/meta/';
 
+/**
+ * Creates missing directories along the path
+ * @param {string} path
+ * @returns {void}
+ */
 export function makeDirectories(path) {
   if (fs.existsSync(path)) return;
   const dirs = path.split('/').slice(0, -1);
@@ -25,6 +30,12 @@ export function makeDirectories(path) {
   }
 }
 
+/**
+ * true if `file` should be ignored
+ * @param {string} file
+ * @param {string[]} folders - folders to ignore
+ * @returns {boolean}
+ */
 function ignore(file, folders = []) {
   // ignore index files
   const basename = path.basename(file);
