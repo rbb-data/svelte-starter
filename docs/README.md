@@ -32,3 +32,17 @@ The documentation at http://localhost:3000/ should now be populated with content
 ## Build and deploy
 
 `npm run build` builds the app into `./build` and `npm run deploy` deploys the app to GitHub pages.
+
+## Why do this ourselves?
+
+### Why not [Storybook](https://storybook.js.org/)?
+
+- If the documented module lives outside of the Storybook workspace[^1], Storybook does not pick up types defined in the source code (there is a workaround for React libraries but not for Svelte). Defining types twice, once in the source and again in the documentation, is tedious, and will almost certainly lead to a mismatch between the code and the documentation eventually.
+- Storybook and SvelteKit specifically do not integrate well. Storybook bundles code with webpack, SvelteKit integrates deeply with Vite. As a result, Storybook can't make sense of some features that are Vite-dependent, such as environment variables. Though it is possible to bundle Storybook code with Vite, this doesn't support some Storybook features (e.g. component-level descriptions).
+- Finally, Storybook documents _component_ libraries but Svelte needs more than that. Documenting stores and actions is possible in Storybook (stories can be anything really) but it's awkward
+
+### What about Storybook alternatives?
+
+There aren't many documenting tools that focus on Svelte and SvelteKit (to be fair, at the time of writing SvelteKit hasn't even hit 1.0). There is [svench](https://github.com/rixo/svench) but it's very early stages, more like a proof of concept at the moment. There are few libraries that generate documentation from source files in the form of json and/or markdown files but none support both, typescript and jsdoc.
+
+[^1]: Separating the starter template from its documentation is important for many reasons: (i) someone who's using this template for their work is not interested in cloning documentation that comes along with it (esp. if the documentation dependencies are as heavy as Storybook's); (ii) the documentation convolutes the "actual" template code (this is especially true for `package.json`); (iii) most importantly, dependencies are mixed up which makes it very difficult to make informed decisions about the severity of a vulnerability
