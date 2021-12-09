@@ -5,18 +5,10 @@
     const res = await fetch(`/load/${encodeURIComponent(filename)}`);
     const navSections = await res.json();
 
-    // if successful, pass props to the component
-    if (res.ok)
-      return {
-        props: {
-          navSections,
-        },
-      };
-
-    // throw an error otherwise
     return {
-      status: res.status,
-      error: new Error(navSections.error.message),
+      props: {
+        navSections: res.ok ? navSections : [],
+      },
     };
   };
 </script>
@@ -28,7 +20,7 @@
   import '../style/index.css';
 
   /** @type {Array<import('$lib/core/types').NavSection>} */
-  export let navSections;
+  export let navSections = [];
 
   /**
    * @param {import('$lib/core/types').SvelteType} type
