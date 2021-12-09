@@ -2,7 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import ts from 'typescript';
 
-const compilerOptions = { allowJs: true, checkJs: true };
+const compilerOptions = {
+  checkJs: true,
+  baseUrl: '.',
+  resolveJsonModule: true,
+  paths: {
+    $lib: ['../src/lib'],
+    '$lib/*': ['../src/lib/*'],
+  },
+};
 
 /**
  * Check if a function or variable is exported
