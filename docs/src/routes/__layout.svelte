@@ -15,6 +15,8 @@
 
 <script>
   import { base, assets } from '$app/paths';
+  import { activePage } from '$lib/core/stores';
+
   import NavSection from '$lib/core/components/NavSection.svelte';
 
   import '../style/index.css';
@@ -41,7 +43,7 @@
 <div class="wrapper">
   <div class="sidebar">
     <div>
-      <a href="{base}/" class="logo">
+      <a href="{base}/" class="logo" on:click={() => activePage.set(null)}>
         <img src="{assets}/rbb24Logo.png" alt="rbb|24 logo" />
       </a>
       <nav>

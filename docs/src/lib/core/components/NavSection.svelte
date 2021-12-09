@@ -1,6 +1,7 @@
 <script>
   import { base } from '$app/paths';
   import { page } from '$app/stores';
+  import { dev } from '$app/env';
 
   import { activePage } from '$lib/core/stores';
 
@@ -17,11 +18,6 @@
   export let items = [];
 
   function handleNavigation() {
-    if ($page.path === '/') {
-      activePage.set(null);
-      return;
-    }
-
     const splitPath = $page.path.split('/');
     const currentUrlPrefix = splitPath.slice(0, -1).join('/');
     if (urlPrefix === currentUrlPrefix) {
@@ -40,12 +36,12 @@
   {/if}
   <ul>
     {#each items as item}
-      <li>
+      <li on:click={() => activePage.set([urlPrefix, item].join('/'))}>
         <a
           class="no-style"
           class:active={$activePage === [urlPrefix, item].join('/')}
           href={base + [urlPrefix, item].join('/')}
-          rel="external"
+          rel={dev ? '' : 'external'}
         >
           <code class="no-style">{format(item)}</code>
         </a>
