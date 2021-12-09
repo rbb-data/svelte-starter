@@ -48,6 +48,10 @@ function main() {
     pagesToRemove.forEach((page) => {
       navSection.items = navSection.items.filter((item) => item !== page);
       fs.unlinkSync(`src/routes/${urlPrefix}/${page}.svelte`);
+      fs.rmSync(`src/lib/custom/${urlPrefix}/${page}`, {
+        recursive: true,
+        force: true,
+      });
       console.log('removed', page);
     });
   }

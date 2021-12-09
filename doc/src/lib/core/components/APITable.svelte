@@ -19,13 +19,11 @@
         <tr>
           <td>
             <code>
-              {param.name}
-              {#if !param.optional}
-                <span class="annotation">*</span>
-              {/if}
-              {#if param.isExposed}
-                <span class="annotation">!</span>
-              {/if}
+              {param.name}{#if !param.optional}<span class="annotation"
+                  >&nbsp;*</span
+                >{/if}{#if param.isExposed}<span class="annotation"
+                  >&nbsp;!</span
+                >{/if}
             </code>
           </td>
           <td><SvelteMarkdown source={param.description} isInline /></td>

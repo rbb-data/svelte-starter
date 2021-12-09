@@ -1,12 +1,14 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/load.js';
+  import { fetchMetaData } from '$lib/core/load.js';
   const filename = 'data/meta/components/shared/headless/Tabs.json';
   export const load = fetchMetaData(filename);
 </script>
 
 <script>
-  import Header from '$lib/components/Header.svelte';
-  import APITable from '$lib/components/APITable.svelte';
+  import Header from '$lib/core/components/Header.svelte';
+  import APITable from '$lib/core/components/APITable.svelte';
+
+  import Custom from '$lib/custom/components/shared/headless/Tabs/Custom.svelte';
 
   export let meta;
 
@@ -15,7 +17,9 @@
 
 <Header {name} {description} />
 
-<!-- More documentation... use <div class="slim"></div> if you want a slim design -->
+<div class="custom">
+  <Custom {meta} />
+</div>
 
 {#if slots}
   <b>Slots:</b>
@@ -25,3 +29,9 @@
 {/if}
 
 <APITable params={props} />
+
+<style>
+  .custom {
+    margin: 2rem 0;
+  }
+</style>

@@ -1,12 +1,14 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/load.js';
+  import { fetchMetaData } from '$lib/core/load.js';
   const filename = 'data/meta/actions/css.json';
   export const load = fetchMetaData(filename);
 </script>
 
 <script>
-  import Header from '$lib/components/Header.svelte';
-  import APITable from '$lib/components/APITable.svelte';
+  import Header from '$lib/core/components/Header.svelte';
+  import APITable from '$lib/core/components/APITable.svelte';
+
+  import Custom from '$lib/custom/actions/css/Custom.svelte';
 
   export let meta;
 
@@ -15,6 +17,14 @@
 
 <Header name={`use:${name}`} {description} />
 
-<!-- More documentation... use <div class="slim"></div> if you want a slim design -->
+<div class="custom">
+  <Custom {meta} />
+</div>
 
 <APITable {params} />
+
+<style>
+  .custom {
+    margin: 2rem 0;
+  }
+</style>

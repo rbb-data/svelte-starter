@@ -1,7 +1,7 @@
 <script>
   import { page } from '$app/stores';
 
-  import { activePage } from '$lib/stores';
+  import { activePage } from '$lib/core/stores';
 
   export let heading;
   export let urlPrefix = '/';

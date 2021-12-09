@@ -4,12 +4,9 @@ META_DIR=data/meta
 
 for f in $(find $META_DIR -name '*.json'); do
   base=${f#"$META_DIR/"}
-  filename="${base##*/}"
-  item="${filename%.json}"
-  route="src/routes/${base%.json}.svelte"
-
-  # skip if route exists
-  [ -f "$route" ] && continue
+  item="${base%.json}"
+  route="src/routes/${item}.svelte"
+  custom="src/lib/custom/${item}/Custom.svelte"
 
   # retrieve appropriate template svelte file
   template=""
@@ -33,7 +30,13 @@ for f in $(find $META_DIR -name '*.json'); do
 
   # replace placeholder text
   placeholder=%rbb-data.placeholder%
-  sed -i '' "s@${placeholder}@data/meta/${base}@g" $route
+  sed -i '' "s@${placeholder}@${item}@g" $route
+
+  # skip if custom route exists
+  [ -f "$custom" ] && continue
+
+  # create empty custom component
+  mkdir -p "${custom%/*}" && touch "$custom"
 
   echo "created $route"
 done

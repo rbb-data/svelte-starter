@@ -1,11 +1,13 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/load.js';
+  import { fetchMetaData } from '$lib/core/load.js';
   const filename = 'data/meta/stores/prefersReducedMotion.json';
   export const load = fetchMetaData(filename);
 </script>
 
 <script>
-  import Header from '$lib/components/Header.svelte';
+  import Header from '$lib/core/components/Header.svelte';
+
+  import Custom from '$lib/custom/stores/prefersReducedMotion/Custom.svelte';
 
   export let meta;
 
@@ -18,4 +20,12 @@
   <b>Type:</b> <code>{type}</code>
 </p>
 
-<!-- More documentation... use <div class="slim"></div> if you want a slim design -->
+<div class="custom">
+  <Custom {meta} />
+</div>
+
+<style>
+  .custom {
+    margin: 2rem 0;
+  }
+</style>

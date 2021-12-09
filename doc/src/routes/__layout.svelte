@@ -23,7 +23,7 @@
 <script>
   import '../style/index.css';
 
-  import NavSection from '$lib/components/NavSection.svelte';
+  import NavSection from '$lib/core/components/NavSection.svelte';
 
   export let navSections;
 

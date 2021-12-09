@@ -40,6 +40,7 @@ pre[class*='language-'] {
   padding: 1.5rem 2rem;
   margin: 0.8rem 0 2.4rem;
   border-radius: 0.4rem;
+  height: fit-content;
 }
 
 :not(pre) > code[class*='language-'],
