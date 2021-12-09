@@ -16,15 +16,22 @@
   /** @type {Array<string>} */
   export let items = [];
 
-  $: items.sort();
+  function handleNavigation() {
+    if ($page.path === '/') {
+      activePage.set(null);
+      return;
+    }
 
-  $: {
     const splitPath = $page.path.split('/');
     const currentUrlPrefix = splitPath.slice(0, -1).join('/');
     if (urlPrefix === currentUrlPrefix) {
       activePage.set($page.path);
     }
   }
+
+  $: items.sort();
+
+  $: handleNavigation();
 </script>
 
 <section>
