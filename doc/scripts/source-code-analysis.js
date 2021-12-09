@@ -2,15 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import ts from 'typescript';
 
-const compilerOptions = {
-  checkJs: true,
-  baseUrl: '.',
-  resolveJsonModule: true,
-  paths: {
-    $lib: ['../src/lib'],
-    '$lib/*': ['../src/lib/*'],
-  },
-};
+// grab compiler options from jsconfig
+const jsConfig = JSON.parse(fs.readFileSync('../jsconfig.json', 'utf8'));
+const compilerOptions = jsConfig.compilerOptions;
+compilerOptions.baseUrl = '..';
 
 /**
  * Check if a function or variable is exported
