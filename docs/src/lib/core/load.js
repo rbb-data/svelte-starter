@@ -4,7 +4,9 @@
  */
 export function fetchMetaData(filename) {
   return async ({ fetch }) => {
-    const res = await fetch(`/load/${encodeURIComponent(filename)}`);
+    const res = await fetch(
+      `/svelte-starter/load/${encodeURIComponent(filename)}`
+    );
     const meta = await res.json();
 
     // if successful, pass props to the component

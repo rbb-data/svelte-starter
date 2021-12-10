@@ -2,7 +2,9 @@
   /** @type {import('@sveltejs/kit').Load} */
   export const load = async ({ fetch }) => {
     const filename = 'data/nav.json';
-    const res = await fetch(`/load/${encodeURIComponent(filename)}`);
+    const res = await fetch(
+      `/svelte-starter/load/${encodeURIComponent(filename)}`
+    );
     const navSections = await res.json();
 
     return {
