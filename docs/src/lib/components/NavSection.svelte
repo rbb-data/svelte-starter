@@ -41,7 +41,6 @@
           class="no-style"
           class:active={$activePage === [urlPrefix, item].join('/')}
           href={base + ['/docs' + urlPrefix, item].join('/')}
-          rel={dev ? '' : 'external'}
         >
           <code class="no-style">{format(item)}</code>
         </a>
