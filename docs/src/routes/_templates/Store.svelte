@@ -1,5 +1,5 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/load.js';
+  import { fetchMetaData } from '$lib/fetchMetaData.js';
   const filename = 'data/meta/%rbb-data.placeholder%.json';
   export const load = fetchMetaData(filename);
 </script>
