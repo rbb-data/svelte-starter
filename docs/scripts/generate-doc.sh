@@ -5,8 +5,8 @@ META_DIR=data/meta
 for f in $(find $META_DIR -name '*.json'); do
   base=${f#"$META_DIR/"}
   item="${base%.json}"
-  route="src/routes/${item}.svelte"
-  custom="src/lib/custom/${item}/Custom.svelte"
+  route="src/routes/docs/${item}/index.svelte"
+  custom="src/routes/docs/${item}/_/Custom.svelte"
 
   # retrieve appropriate template svelte file
   template=""

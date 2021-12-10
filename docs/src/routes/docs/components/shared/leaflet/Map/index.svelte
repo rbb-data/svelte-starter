@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/load.js';
-  const filename = 'data/meta/%rbb-data.placeholder%.json';
+  const filename = 'data/meta/components/shared/leaflet/Map.json';
   export const load = fetchMetaData(filename);
 </script>
 
@@ -10,19 +10,26 @@
 
   import Custom from './_/Custom.svelte';
 
-  /** @type {Array<{ name: string; description: string; type: string; params: Array<import('$lib/types').ParamDoc> }>} */
+  /** @type {{ name: string; description: string; props: Array<import('$lib/types').ParamDoc>, slots: Array<string> }} */
   export let meta;
 
-  const { name, description, params } = meta[0];
+  const { name, description, props, slots } = meta;
 </script>
 
-<Header name={`use:${name}`} {description} />
+<Header {name} {description} />
 
 <div class="custom">
   <Custom {meta} />
 </div>
 
-<APITable {params} />
+{#if slots}
+  <b>Slots:</b>
+  {#each slots as slot}
+    <code>{slot}</code>
+  {/each}
+{/if}
+
+<APITable params={props} />
 
 <style>
   .custom {

@@ -17,17 +17,17 @@
 
 <script>
   import { base, assets } from '$app/paths';
-  import { activePage } from '$lib/core/stores';
+  import { activePage } from '$lib/stores';
 
-  import NavSection from '$lib/core/components/NavSection.svelte';
+  import NavSection from '$lib/components/NavSection.svelte';
 
   import '../style/index.css';
 
-  /** @type {Array<import('$lib/core/types').NavSection>} */
+  /** @type {Array<import('$lib/types').NavSection>} */
   export let navSections = [];
 
   /**
-   * @param {import('$lib/core/types').SvelteType} type
+   * @param {import('$lib/types').SvelteType} type
    * @returns {(item: string) => string}
    */
   function format(type) {

@@ -6,7 +6,7 @@ import config from '../docs.config.js';
 
 /**
  * @param {string} path
- * @returns {import('$lib/core/types').SvelteType}
+ * @returns {import('$lib/types').SvelteType}
  */
 function getTypeFromPath(path) {
   if (path.startsWith('/action')) return 'action';
@@ -15,7 +15,7 @@ function getTypeFromPath(path) {
 }
 
 /**
- * @param {import('$lib/core/types').NavSection} navSection
+ * @param {import('$lib/types').NavSection} navSection
  * @param {string} page
  */
 function addPage(navSection, page, verbose = true) {
@@ -25,7 +25,7 @@ function addPage(navSection, page, verbose = true) {
 }
 
 /**
- * @param {import('$lib/core/types').NavSection} navSection
+ * @param {import('$lib/types').NavSection} navSection
  * @param {string} page
  */
 function removePage(navSection, page, verbose = true) {
@@ -42,7 +42,7 @@ function main() {
   // read navigation meta data
   const filename = 'data/nav.json';
 
-  /** @type {Array<import('$lib/core/types').NavSection>} */
+  /** @type {Array<import('$lib/types').NavSection>} */
   let navSections = fs.existsSync(filename)
     ? JSON.parse(fs.readFileSync(filename, 'utf-8'))
     : [];
@@ -57,7 +57,7 @@ function main() {
     };
   });
 
-  /** @type {Record<string, import('$lib/core/types').NavSection>} */
+  /** @type {Record<string, import('$lib/types').NavSection>} */
   const navSectionsDict = {};
   navSections.forEach((navSection) => {
     navSectionsDict[navSection.urlPrefix] = navSection;
@@ -81,7 +81,7 @@ function main() {
   );
 
   for (const [urlPrefix, pages] of Object.entries(filesDict)) {
-    /** @type {import('$lib/core/types').NavSection} */
+    /** @type {import('$lib/types').NavSection} */
     let navSection;
 
     if (!navSectionsDict[urlPrefix]) {

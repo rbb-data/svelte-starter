@@ -1,15 +1,15 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/core/load.js';
+  import { fetchMetaData } from '$lib/load.js';
   const filename = 'data/meta/%rbb-data.placeholder%.json';
   export const load = fetchMetaData(filename);
 </script>
 
 <script>
-  import Header from '$lib/core/components/Header.svelte';
+  import Header from '$lib/components/Header.svelte';
 
-  import Custom from '$lib/custom/%rbb-data.placeholder%/Custom.svelte';
+  import Custom from './_/Custom.svelte';
 
-  /** @type {Array<import('$lib/core/types').ParamDoc>} */
+  /** @type {Array<import('$lib/types').ParamDoc>} */
   export let meta;
 
   const { name, description, type } = meta[0];
