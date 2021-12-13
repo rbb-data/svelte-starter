@@ -167,12 +167,19 @@ async function autocomplete(query, config = {}) {
  *   documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md))
  */
 export default function geolocalization(node, config) {
-  /** @type {Feature[]} */
+  /** @type {{ location: Point; properties: Feature['properties'] }[]} */
   let suggestions = [];
 
   const queryOpenRouteService = debounce(
     async (query, config) => {
-      suggestions = await autocomplete(query, config);
+      const features = await autocomplete(query, config);
+      suggestions = features.map(({ geometry, properties }) => ({
+        location: {
+          lat: geometry.coordinates[1],
+          lng: geometry.coordinates[0],
+        },
+        properties,
+      }));
     },
     300,
     { leading: true, trailing: true }
