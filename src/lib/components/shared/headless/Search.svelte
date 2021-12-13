@@ -25,22 +25,22 @@
   import { px } from '$lib/helpers/utils';
 
   /** @typedef {any} Item */
-  /** @typedef {Record<string, any>} SearchOptions */
+  /** @typedef {Record<string, any>} SearchConfig */
 
   /**
    * Svelte action to perform search on key strokes; must expose a custom event
    * `search` of type `CustomEvent<{ suggestions: Array<Item> }>`
    *
-   * @type {(node: HTMLInputElement, options: SearchOptions) => any}
+   * @type {(node: HTMLInputElement, options: SearchConfig) => any}
    */
   export let search;
 
   /**
    * options for the search action
    *
-   * @type {SearchOptions}
+   * @type {SearchConfig}
    */
-  export let searchOptions = undefined;
+  export let searchConfig = undefined;
 
   /**
    * format a data item for display
@@ -161,7 +161,7 @@
         type="search"
         {placeholder}
         autocomplete="off"
-        use:search={searchOptions}
+        use:search={searchConfig}
         on:search={handleSearch}
         bind:this={inputElement}
       />

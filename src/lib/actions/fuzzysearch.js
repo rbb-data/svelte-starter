@@ -3,9 +3,9 @@ import fuzzysort from 'fuzzysort';
 /** @typedef {string | Record<string, unknown>} Item */
 
 /**
- * Implements fuzzy searching on an input element
+ * Implements fuzzy searching on an input field
  *
- * @param {HTMLInputElement} node - input element for search
+ * @param {HTMLInputElement} node - input field for search
  * @param {Object} options - search options
  * @param {Item[]} options.data - array of objects or strings to search through
  * @param {string} [options.key] - key to search on if `data` is an array of objects
