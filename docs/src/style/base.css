@@ -1,0 +1,12 @@
+h1 {
+  font-size: var(--h1);
+  margin-bottom: var(--spacing-small);
+}
+
+p {
+  margin-bottom: var(--spacing-small);
+}
+
+.slim {
+  max-width: var(--text-width);
+}

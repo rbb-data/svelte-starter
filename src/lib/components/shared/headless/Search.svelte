@@ -31,7 +31,6 @@
 
   /**
    * the data to search through
-   * @required
    * @type {Array<Item>}
    */
   export let data;
@@ -91,6 +90,7 @@
   /**
    * the search result
    * @type {Item}
+   * @exposed
    */
   export let result = null;
 

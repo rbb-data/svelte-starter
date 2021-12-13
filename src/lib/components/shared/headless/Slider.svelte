@@ -22,32 +22,28 @@
 
   /**
    * list of slides
-   * @type {Array<import('$lib/types').Component>}
-   * @required
+   * @type {Array<{ component: typeof import('svelte').SvelteComponent, props: Record<string, unknown> }>}
    */
   export let slides;
 
   /**
    * function that determines the previous slide
    * @type {(index: number) => number | null}
-   * @required
    */
   export let prev;
 
   /**
    * function that determines the next slide
    * @type {(index: number) => number | null}
-   * @required
    */
   export let next;
 
-  /**
-   * intial slide index
-   */
+  /** intial slide index */
   export let initialActiveIndex = 0;
 
   /**
    * index of the currently visible slide
+   * @exposed
    */
   export let activeIndex = initialActiveIndex;
 

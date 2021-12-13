@@ -1,9 +1,10 @@
-<!--
-  @component
-
-  Renderless component that adds GeoJSON to a Leaflet map
--->
 <script>
+  /**
+   * Renderless component that adds GeoJSON to a Leaflet map
+   *
+   * @component
+   */
+
   import { onMount, getContext } from 'svelte';
   import { browser } from '$app/env';
 
@@ -13,11 +14,13 @@
   const map = getContext(key)();
 
   /**
+   * geo data in GeoJSON format
    * @type {import('geojson').GeoJsonObject}
    */
   export let data;
 
   /**
+   * leaflet options to render GeoJSON (see https://leafletjs.com/reference.html#geojson)
    * @type {import('leaflet').GeoJSONOptions}
    */
   export let options = undefined;

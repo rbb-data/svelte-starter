@@ -1,11 +1,9 @@
-<!--
-  @component
-
-  Bing-powered Leaflet map of Berlin or Brandenburg
-
-  [Docs](https://github.com/rbb-data/svelte-starter/wiki/Docs#localmap)
--->
 <script>
+  /**
+   * Bing-powered Leaflet map of Berlin or Brandenburg
+   *
+   * @component
+   */
   import Map from './leaflet/Map.svelte';
   import BingLayer from './leaflet/BingLayer.svelte';
   import GeoJson from './leaflet/GeoJSON.svelte';
@@ -26,7 +24,7 @@
    */
   export let location;
 
-  // if true, show Berlin's Bezirke or Brandenburg's Kreise
+  /** if true, show Berlin's Bezirke or Brandenburg's Kreise */
   export let showDistricts = false;
 
   /**
@@ -36,16 +34,14 @@
   export let styleSheet = undefined;
 
   /**
-   * map options for the mask
+   * map options for the mask (see https://leafletjs.com/examples/geojson/)
    * @type {import('leaflet').GeoJSONOptions}
-   * @see https://leafletjs.com/examples/geojson/
    */
   export let maskOptions = undefined;
 
   /**
-   * map options for districts
+   * map options for districts (see https://leafletjs.com/examples/geojson/)
    * @type {import('leaflet').GeoJSONOptions}
-   * @see https://leafletjs.com/examples/geojson/
    */
   export let districtOptions = undefined;
 

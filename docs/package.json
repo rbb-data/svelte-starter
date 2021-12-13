@@ -1,0 +1,27 @@
+{
+  "name": "doc",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "deploy": "npm run build && gh-pages -t -d build",
+    "extract-from-source": "rm -rf data/meta && node scripts/extract-doc-from-source.js",
+    "generate-pages": "scripts/generate-doc.sh",
+    "update-navigation": "node scripts/update-navigation.js",
+    "update": "npm run extract-from-source && npm run generate-pages && npm run update-navigation"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^1.0.0-next.21",
+    "@sveltejs/kit": "next",
+    "@types/prismjs": "^1.16.6",
+    "dotenv": "^10.0.0",
+    "gh-pages": "^3.2.3",
+    "glob": "^7.2.0",
+    "prism-svelte": "^0.4.7",
+    "prismjs": "^1.25.0",
+    "svelte": "^3.44.0",
+    "svelte-markdown": "^0.1.14",
+    "typescript": "^4.5.2"
+  },
+  "type": "module"
+}

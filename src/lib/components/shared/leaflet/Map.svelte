@@ -1,9 +1,10 @@
-<!--
-  @component
-
-  Renders a Leaflet map
--->
 <script>
+  /**
+   * Renders a Leaflet map
+   *
+   * @component
+   */
+
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';
 
@@ -19,9 +20,8 @@
   export let height;
 
   /**
-   * map options
+   * map options (see https://leafletjs.com/reference.html#map)
    * @type {import('leaflet').MapOptions}
-   * @see https://leafletjs.com/reference.html#map
    */
   export let options = undefined;
 
@@ -35,7 +35,8 @@
   const defaultOptions = { zoomControl: false };
   options = { ...defaultOptions, ...options };
 
-  const mapId = 'map';
+  /** @type {HTMLElement} */
+  let mapRef;
 
   /** @type {import('leaflet').Map} */
   let map;
@@ -48,7 +49,7 @@
     // leaflet needs to be loaded dynamically as it interacts with the DOM
     const L = (await import('leaflet')).default;
 
-    map = L.map(mapId, options);
+    map = L.map(mapRef, options);
 
     // zoom map to fit bounds
     if (fitBounds) map.fitBounds(fitBounds);
@@ -61,7 +62,7 @@
   });
 </script>
 
-<div id={mapId} use:css={{ height: px(height) }}>
+<div class="map" bind:this={mapRef} use:css={{ height: px(height) }}>
   {#if map}
     <slot />
   {/if}
@@ -70,7 +71,7 @@
 <style>
   @import 'leaflet/dist/leaflet.css';
 
-  #map {
+  .map {
     height: var(--height);
   }
 </style>

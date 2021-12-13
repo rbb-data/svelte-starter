@@ -15,7 +15,7 @@ cd $(dirname $0)/..
 [ "$(git log --oneline | wc -l)" -eq 1 ] || exit 0
 
 # remove documentation
-[ -d doc ] && rm -rf doc/
+[ -d docs ] && rm -rf docs/
 
 # substitute '{project-name}' with the current folder name
 sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html

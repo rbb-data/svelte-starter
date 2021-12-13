@@ -8,11 +8,10 @@
  *
  * @template Props
  * @param {HTMLElement | SVGElement} node - the element that triggers rendering of a component
- * @param {Object} tooltip
+ * @param {Object} tooltip - specification of the component to render on demand
  * @param {string} tooltip.id - id of the component to render
  * @param {typeof import('svelte').SvelteComponent} tooltip.Component - component to render
  * @param {Partial<Options<Props>>} [tooltip.options] - options passed to `Component` on creation
- * @return {import('$lib/types').ActionReturn<Props>}
  */
 export default function tooltipable(node, tooltip) {
   const { id, Component } = tooltip;

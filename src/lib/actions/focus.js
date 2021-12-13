@@ -3,7 +3,6 @@
  *
  * @param {HTMLElement} node - the node to focus/blur
  * @param {boolean} active - if true, focus the node, otherwise blur it
- * @return {import('$lib/types').ActionReturn<boolean>}
  */
 export default function focus(node, active) {
   function setFocus() {
@@ -13,6 +12,7 @@ export default function focus(node, active) {
   setFocus();
 
   return {
+    /** @type {(newActive: boolean) => void} */
     update(newActive) {
       active = newActive;
       setFocus();
