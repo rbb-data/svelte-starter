@@ -93,6 +93,7 @@ This repo provides some useful helpers to quickly build interactive interfaces. 
 - `use:css`: dynamically sets CSS variables
 - `use:focus`: sets focus or blur on an element
 - `use:fuzzysearch`: fuzzy searches input from a user against a dataset (using [`fuzzysort`](https://github.com/farzher/fuzzysort))
+- `use:geolocalization`: allows to search and geocode locations
 - `use:pannable`: makes an element "pannable", i.e. recognizes when an element is interacted with and tracks a pointer's position
 - `use:tooltip`: creates and destroys a (tooltip) component on interaction with an element
 
@@ -104,7 +105,8 @@ This repo provides some useful helpers to quickly build interactive interfaces. 
 
 Headless components are essentially unstyled, higher-order components that "orchestrate" provided content in a specific way. They typically consume other components (either through slots or props) and connect them in useful ways.
 
-- `Search`: implements an input field that facilitates client-side fuzzy searching
+- `LocalSearch`: implements a search field that allows to search and geocode a location in Berlin or Brandenburg
+- `Search`: implements a search field
 - `Slider`: renders a single slide at a time and allows to navigate back and forth through swipe gestures or mouse clicks
 - `Svg`: simple SVG container that implements a common chart sizing pattern
 - `Tabs`: makes content selectable
@@ -117,10 +119,10 @@ Variables in `.env` are public and loaded in all cases. Sensitive variables shou
 
 If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains example files for both environments, `.env.development.example` and `.env.production.example`, so that you can simply rename `.env.*.example` to `.env.*.local` and add the keys.
 
-| Environment variable     | Description                                                | Sensitive? |
-| ------------------------ | ---------------------------------------------------------- | ---------- |
-| VITE_OPENROUTSERVICE_KEY | Access to [openrouteservice](https://openrouteservice.org) | yes        |
-| VITE_BING_KEY            | Access to Bing maps                                        | yes        |
+| Environment variable       | Description                                                | Sensitive? |
+| -------------------------- | ---------------------------------------------------------- | ---------- |
+| `VITE_OPENROUTSERVICE_KEY` | Access to [openrouteservice](https://openrouteservice.org) | yes        |
+| `VITE_BING_KEY`            | Allows to render Bing-powered maps                         | yes        |
 
 ## Build and deploy
 

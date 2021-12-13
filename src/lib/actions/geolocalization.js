@@ -166,7 +166,7 @@ async function autocomplete(query, config = {}) {
 }
 
 /**
- * Implements geolocalization on an input field
+ * Allows to search and geocode locations
  *
  * @param {HTMLInputElement} node - input field for search
  * @param {SearchOptions} [options] - search options (for available search
