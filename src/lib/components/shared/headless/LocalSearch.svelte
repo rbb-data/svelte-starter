@@ -29,6 +29,14 @@
   /** maximum number of suggestions */
   export let limit = 8;
 
+  /**
+   * the search result
+   *
+   * @type {import('$lib/actions/geolocalization').Suggestion}
+   * @exposed
+   */
+  export let result;
+
   const coords = coordsMap[location];
 
   /** @type {import('$lib/actions/geolocalization').OpenRouteServiceConfig} */
@@ -43,4 +51,9 @@
   };
 </script>
 
-<Search search={geolocalization} searchConfig={config} {...$$restProps} />
+<Search
+  search={geolocalization}
+  searchConfig={config}
+  {...$$restProps}
+  bind:result
+/>

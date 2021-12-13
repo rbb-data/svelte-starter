@@ -88,6 +88,8 @@ import debounce from 'lodash.debounce';
  * }} OpenRouteServiceQueryParams
  */
 
+/** @typedef {{ location: Point; properties: Feature['properties'] }} Suggestion */
+
 /**
  * Construct a URI string from an object
  *
@@ -167,7 +169,7 @@ async function autocomplete(query, config = {}) {
  *   documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md))
  */
 export default function geolocalization(node, config) {
-  /** @type {{ location: Point; properties: Feature['properties'] }[]} */
+  /** @type {Suggestion[]} */
   let suggestions = [];
 
   const queryOpenRouteService = debounce(
