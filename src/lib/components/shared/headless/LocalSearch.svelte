@@ -1,4 +1,10 @@
 <script>
+  /**
+   * Search and geocode locations in Berlin or Brandenburg
+   *
+   * @component
+   */
+
   import Search from './Search.svelte';
   import geolocalization from '$lib/actions/geolocalization';
 
@@ -20,7 +26,16 @@
   export let layers;
 
   /**
-   * sources used for the search by openrouteservice
+   * format feature for display
+   *
+   * @type {(
+   *   feature: import('$lib/actions/geolocalization').Feature
+   * ) => string}
+   */
+  export let format;
+
+  /**
+   * geo service sources used by openrouteservice
    *
    * @type {import('$lib/actions/geolocalization').Source[]}
    */
@@ -35,25 +50,31 @@
    * @type {import('$lib/actions/geolocalization').Suggestion}
    * @exposed
    */
-  export let result;
+  export let result = null;
 
   const coords = coordsMap[location];
 
-  /** @type {import('$lib/actions/geolocalization').OpenRouteServiceConfig} */
-  $: config = {
-    sources,
-    layers,
-    size: limit,
-    focusPoint: coords.center,
-    boundaryRect: coords.bounds,
-    boundaryCountry: 'DE',
-    lang: 'de',
+  /** @type {import('$lib/actions/geolocalization').SearchOptions} */
+  $: searchConfig = {
+    openRouteServiceConfig: {
+      sources,
+      layers,
+      size: limit,
+      focusPoint: coords.center,
+      boundaryRect: coords.bounds,
+      boundaryCountry: 'DE',
+      lang: 'de',
+    },
+    // make sure the retrieved locations are actually in Berlin or Brandenburg
+    keepFeature: (feature) =>
+      feature.properties.region.toLowerCase() === location,
   };
 </script>
 
 <Search
   search={geolocalization}
-  searchConfig={config}
+  {searchConfig}
+  {format}
   {...$$restProps}
   bind:result
 />

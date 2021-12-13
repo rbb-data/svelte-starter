@@ -88,6 +88,13 @@ import debounce from 'lodash.debounce';
  * }} OpenRouteServiceQueryParams
  */
 
+/**
+ * @typedef {{
+ *   openRouteServiceConfig?: OpenRouteServiceConfig;
+ *   keepFeature?: (feature: Feature) => boolean;
+ * }} SearchOptions
+ */
+
 /** @typedef {{ location: Point; properties: Feature['properties'] }} Suggestion */
 
 /**
@@ -116,8 +123,6 @@ async function autocomplete(query, config = {}) {
     api_key: /** @type {string} */ (import.meta.env.VITE_OPENROUTSERVICE_KEY),
     sources: ['openstreetmap'],
     size: 8,
-    'boundary.country': 'DE',
-    lang: 'de',
   };
 
   /** @type {OpenRouteServiceQueryParams} */
@@ -164,24 +169,29 @@ async function autocomplete(query, config = {}) {
  * Implements geolocalization on an input field
  *
  * @param {HTMLInputElement} node - input field for search
- * @param {OpenRouteServiceConfig} config - openrouteservice configuration (see
- *   [Pelias'
+ * @param {SearchOptions} [options] - search options (for available search
+ *   configurations, see [Pelias'
  *   documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md))
  */
-export default function geolocalization(node, config) {
+export default function geolocalization(
+  node,
+  options = { keepFeature: () => true }
+) {
   /** @type {Suggestion[]} */
   let suggestions = [];
 
   const queryOpenRouteService = debounce(
-    async (query, config) => {
+    async (query, config, keepFeature) => {
       const features = await autocomplete(query, config);
-      suggestions = features.map(({ geometry, properties }) => ({
-        location: {
-          lat: geometry.coordinates[1],
-          lng: geometry.coordinates[0],
-        },
-        properties,
-      }));
+      suggestions = features
+        .filter(keepFeature)
+        .map(({ geometry, properties }) => ({
+          location: {
+            lat: geometry.coordinates[1],
+            lng: geometry.coordinates[0],
+          },
+          properties,
+        }));
     },
     300,
     { leading: true, trailing: true }
@@ -191,7 +201,8 @@ export default function geolocalization(node, config) {
   function handleInput(event) {
     queryOpenRouteService(
       /** @type {HTMLInputElement} */ (event.target).value,
-      config
+      options.openRouteServiceConfig,
+      options.keepFeature
     );
 
     node.dispatchEvent(

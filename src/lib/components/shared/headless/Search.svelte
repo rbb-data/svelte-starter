@@ -43,7 +43,7 @@
   export let searchConfig = undefined;
 
   /**
-   * format a data item for display
+   * format suggestion for display
    *
    * @type {(d: Item) => string}
    */
