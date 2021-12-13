@@ -19,7 +19,7 @@ import debounce from 'lodash.debounce';
  *   | 'postalcode'} Layer
  */
 
-/** @typedef {{ lat: number; lon: number }} Point */
+/** @typedef {{ lat: number; lng: number }} Point */
 
 /**
  * @typedef {{
@@ -60,9 +60,10 @@ import debounce from 'lodash.debounce';
  *   layers?: Layer[];
  *   size?: number;
  *   focusPoint?: Point;
- *   boundaryRect?: { min: Point; max: Point };
+ *   boundaryRect?: { topleft: Point; bottomright: Point };
  *   boundaryCircle?: { center: Point; radius: number };
  *   boundaryCountry?: string;
+ *   lang?: string;
  * }} OpenRouteServiceConfig
  */
 
@@ -126,17 +127,17 @@ async function autocomplete(query, config = {}) {
   if (config.size) params.size = config.size;
   if (config.focusPoint) {
     params['focus.point.lat'] = config.focusPoint.lat;
-    params['focus.point.lon'] = config.focusPoint.lon;
+    params['focus.point.lon'] = config.focusPoint.lng;
   }
   if (config.boundaryRect) {
-    params['boundary.rect.min_lat'] = config.boundaryRect.min.lat;
-    params['boundary.rect.min_lon'] = config.boundaryRect.min.lon;
-    params['boundary.rect.max_lat'] = config.boundaryRect.max.lat;
-    params['boundary.rect.max_lon'] = config.boundaryRect.max.lon;
+    params['boundary.rect.min_lat'] = config.boundaryRect.bottomright.lat;
+    params['boundary.rect.min_lon'] = config.boundaryRect.topleft.lng;
+    params['boundary.rect.max_lat'] = config.boundaryRect.topleft.lat;
+    params['boundary.rect.max_lon'] = config.boundaryRect.bottomright.lng;
   }
   if (config.boundaryCircle) {
     params['boundary.circle.lat'] = config.boundaryCircle.center.lat;
-    params['boundary.circle.lon'] = config.boundaryCircle.center.lon;
+    params['boundary.circle.lon'] = config.boundaryCircle.center.lng;
     params['boundary.circle.radius'] = config.boundaryCircle.radius;
   }
   if (config.boundaryCountry) {
