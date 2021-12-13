@@ -4,6 +4,7 @@ const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
 
 /**
  * Readable store that is true if the user prefers reduced motion
+ *
  * @type {import('svelte/store').Readable<boolean>}
  */
 const prefersReducedMotion = readable(

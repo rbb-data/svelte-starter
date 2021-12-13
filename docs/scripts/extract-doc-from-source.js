@@ -16,6 +16,7 @@ const outPrefix = 'data/meta/';
 
 /**
  * Creates missing directories along the path
+ *
  * @param {string} path
  * @returns {void}
  */
@@ -32,6 +33,7 @@ export function makeDirectories(path) {
 
 /**
  * true if `file` should be ignored
+ *
  * @param {string} file
  * @param {string[]} folders - folders to ignore
  * @returns {boolean}

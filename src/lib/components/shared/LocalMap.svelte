@@ -14,12 +14,14 @@
 
   /**
    * height of the map
+   *
    * @type {number}
    */
   export let height;
 
   /**
    * region to show
+   *
    * @type {'berlin' | 'brandenburg'}
    */
   export let location;
@@ -29,18 +31,21 @@
 
   /**
    * if given, styles are passed to the Bing layer
-   * @type {Record<string,string>}
+   *
+   * @type {Record<string, string>}
    */
   export let styleSheet = undefined;
 
   /**
    * map options for the mask (see https://leafletjs.com/examples/geojson/)
+   *
    * @type {import('leaflet').GeoJSONOptions}
    */
   export let maskOptions = undefined;
 
   /**
    * map options for districts (see https://leafletjs.com/examples/geojson/)
+   *
    * @type {import('leaflet').GeoJSONOptions}
    */
   export let districtOptions = undefined;

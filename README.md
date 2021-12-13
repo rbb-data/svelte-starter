@@ -111,11 +111,16 @@ Headless components are essentially unstyled, higher-order components that "orch
 
 ## Environment variables
 
-Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables.
+Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables. Environment variables prefixed with `VITE_` are exposed to client-side code.
 
-Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git.
+Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
 
 If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains example files for both environments, `.env.development.example` and `.env.production.example`, so that you can simply rename `.env.*.example` to `.env.*.local` and add the keys.
+
+| Environment variable     | Description                                                | Sensitive? |
+| ------------------------ | ---------------------------------------------------------- | ---------- |
+| VITE_OPENROUTSERVICE_KEY | Access to [openrouteservice](https://openrouteservice.org) | yes        |
+| VITE_BING_KEY            | Access to Bing maps                                        | yes        |
 
 ## Build and deploy
 

@@ -9,7 +9,7 @@
 
   import Custom from './_/Custom.svelte';
 
-  /** @type {Array<import('$lib/types').ParamDoc>} */
+  /** @type {import('$lib/types').ParamDoc[]} */
   export let meta;
 
   const { name, description, type } = meta[0];

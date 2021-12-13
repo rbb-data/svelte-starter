@@ -1,11 +1,11 @@
 <script>
   /**
-   * The `Tabs` component makes content selectable.
-   * The active tab is tracked internally and marked by adding the class `.active`
-   * (no default styles are applied to the active element however).
+   * The `Tabs` component makes content selectable. The active tab is tracked
+   * internally and marked by adding the class `.active` (no default styles are
+   * applied to the active element however).
    *
-   * `Tabs` exposes to slot props, `tab` and `active`.
-   * `tab` is an element in `tabs` and `active` is true if `tab` is currently selected.
+   * `Tabs` exposes to slot props, `tab` and `active`. `tab` is an element in
+   * `tabs` and `active` is true if `tab` is currently selected.
    *
    * @component
    */
@@ -14,7 +14,8 @@
 
   /**
    * list of tabs
-   * @type {Array<any>}
+   *
+   * @type {any[]}
    */
   export let tabs;
 
@@ -22,18 +23,15 @@
   export let initialIndex = 0;
 
   /**
-   * if true, minimal styling is applied to highlight
-   * the selected tab for debugging purposes;
-   * however, this is not recommended for production use
+   * if true, minimal styling is applied to highlight the selected tab for
+   * debugging purposes; however, this is not recommended for production use
    */
   export let debug = false;
 
   // the index of the active tab
   let activeIndex = initialIndex;
 
-  /**
-   * @param {KeyboardEvent} e
-   */
+  /** @param {KeyboardEvent} e */
   function handleKeyDown(e) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     const toLeft = e.key === 'ArrowLeft';

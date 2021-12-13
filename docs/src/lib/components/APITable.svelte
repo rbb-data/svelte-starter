@@ -1,7 +1,7 @@
 <script>
   import SvelteMarkdown from 'svelte-markdown';
 
-  /** @type {Array<import('$lib/types').ParamDoc>} */
+  /** @type {import('$lib/types').ParamDoc[]} */
   export let params;
 </script>
 

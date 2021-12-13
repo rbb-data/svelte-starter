@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/fetchMetaData.js';
-  const filename = 'data/meta/components/shared/headless/Tabs.json';
+  const filename = 'data/meta/actions/geolocalization.json';
   export const load = fetchMetaData(filename);
 </script>
 
@@ -14,29 +14,22 @@
    * @type {{
    *   name: string;
    *   description: string;
-   *   props: import('$lib/types').ParamDoc[];
-   *   slots: string[];
-   * }}
+   *   type: string;
+   *   params: import('$lib/types').ParamDoc[];
+   * }[]}
    */
   export let meta;
 
-  const { name, description, props, slots } = meta;
+  const { name, description, params } = meta[0];
 </script>
 
-<Header {name} {description} />
+<Header name={`use:${name}`} {description} />
 
 <div class="custom">
   <Custom {meta} />
 </div>
 
-{#if slots}
-  <b>Slots:</b>
-  {#each slots as slot}
-    <code>{slot}</code>
-  {/each}
-{/if}
-
-<APITable params={props} />
+<APITable {params} />
 
 <style>
   .custom {

@@ -1,12 +1,17 @@
 /**
  * @typedef {Record<string, unknown>} MapElementStyle
- * @typedef {{ version?: string, settings?: MapElementStyle, elements?: Record<string, MapElementStyle> }} MapStyleSheet
+ *
+ * @typedef {{
+ *   version?: string;
+ *   settings?: MapElementStyle;
+ *   elements?: Record<string, MapElementStyle>;
+ * }} MapStyleSheet
  */
 
 /**
- * Transforms a MapStyleSheet object into a string
- * that can be consumed by Microsoft's API
- * (see https://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements)
+ * Transforms a MapStyleSheet object into a string that can be consumed by
+ * Microsoft's API (see
+ * https://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements)
  *
  * @param {MapStyleSheet} mapStyleSheet - Microsoft's MapStyleSheet object
  * @returns {string} string representation of `mapStyleSheet`

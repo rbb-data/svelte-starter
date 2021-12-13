@@ -49,9 +49,9 @@
   import '../style/index.css';
 
   // these props are loaded on the server
-  /** @type {Array<{ x: number; y: number }>} */
+  /** @type {{ x: number; y: number }[]} */
   export let data;
-  /** @type {{header: { title: string, subtitle: string }}} */
+  /** @type {{ header: { title: string; subtitle: string } }} */
   export let config;
 
   const { header } = config;

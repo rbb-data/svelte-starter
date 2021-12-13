@@ -1,6 +1,6 @@
 <script context="module">
   import { fetchMetaData } from '$lib/fetchMetaData.js';
-  const filename = 'data/meta/components/shared/headless/Tabs.json';
+  const filename = 'data/meta/components/shared/headless/LocalSearch.json';
   export const load = fetchMetaData(filename);
 </script>
 

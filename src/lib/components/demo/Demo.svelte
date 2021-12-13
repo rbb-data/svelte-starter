@@ -6,7 +6,7 @@
 
   import DraggableCircle from './DraggableCircle.svelte';
 
-  /** @type {Array<{ x: number; y: number }>} */
+  /** @type {{ x: number; y: number }[]} */
   export let data;
 
   /** @type {{ title: string; subtitle: string }} */

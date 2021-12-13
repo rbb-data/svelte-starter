@@ -2,7 +2,7 @@
   "name": "doc",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "svelte-kit dev --port 6006",
     "build": "svelte-kit build",
     "deploy": "npm run build && gh-pages -t -d build",
     "extract-from-source": "rm -rf data/meta && node scripts/extract-doc-from-source.js",

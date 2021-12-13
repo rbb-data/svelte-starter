@@ -1,9 +1,11 @@
 <script>
   /**
    * `Svg` is a SVG container that implements a common pattern for sizing charts
-   * (check out [Amelia Wattenberger's blog post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)).
+   * (check out [Amelia Wattenberger's blog
+   * post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)).
    *
-   * Typically, one would bind to the internally managed `boundedWidth` and `boundedHeight`.
+   * Typically, one would bind to the internally managed `boundedWidth` and
+   * `boundedHeight`.
    *
    * @component
    */
@@ -12,24 +14,28 @@
 
   /**
    * width of the svg
+   *
    * @type {number}
    */
   export let width;
 
   /**
    * height of the svg
+   *
    * @type {number}
-   * */
+   */
   export let height;
 
   /**
    * width of the canvas (the svg's width minus margins)
+   *
    * @exposed
    */
   export let boundedWidth = 0;
 
   /**
    * height of the canvas (the svg's height minus margins)
+   *
    * @exposed
    */
   export let boundedHeight = 0;

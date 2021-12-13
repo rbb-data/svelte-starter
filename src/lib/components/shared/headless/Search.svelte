@@ -1,19 +1,19 @@
 <script>
   /**
-   * `Search` implements an input field that facilitates client-side fuzzy searching
-   * (via [fuzzysort](https://github.com/farzher/fuzzysort)).
-   * The setup includes a reset and submit button as well as the necessary event management
-   * for an accessible search experience.
+   * `Search` implements an input field that facilitates searching. The setup
+   * includes a reset and submit button as well as the necessary event
+   * management for an accessible search experience.
    *
-   * As headless components don't control styling, this renders a _browser-styled_ form
-   * containing an input field as well as a reset and submit button by default.
+   * As headless components don't control styling, this renders a
+   * *browser-styled* form containing an input field as well as a reset and
+   * submit button by default.
    *
    * **Note:** By default the currently selected suggestion is not highlighted.
-   * Setting `debug` to `true` applies minimal styling to the highlighted selection
-   * for debugging purposes (however, this is not meant for production!).
+   * Setting `debug` to `true` applies minimal styling to the highlighted
+   * selection for debugging purposes (however, this is not meant for production!).
    *
-   * Custom reset und submit buttons can be passed as props. If you do so,
-   * make sure to add the appropriate types, or the form will not work as expected.
+   * Custom reset und submit buttons can be passed as props. If you do so, make
+   * sure to add the appropriate types, or the form will not work as expected.
    *
    * **A11y:** If you replace the inside of a button with an icon, make sure to
    * add an `aria-label` to the button for a11y reasons.
@@ -21,90 +21,73 @@
    * @component
    */
 
-  import fuzzysearch from '$lib/actions/fuzzysearch';
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
 
-  /**
-   * @typedef {string | Record<string,any>} Item
-   */
+  /** @typedef {any} Item */
+  /** @typedef {Record<string, any>} SearchConfig */
 
   /**
-   * the data to search through
-   * @type {Array<Item>}
+   * Svelte action to perform search on key strokes; must expose a custom event
+   * `search` of type `CustomEvent<{ suggestions: Array<Item> }>`
+   *
+   * @type {(node: HTMLInputElement, options: SearchConfig) => any}
    */
-  export let data;
+  export let search;
 
   /**
-   * the key to search on if the data is an array of objects
-   * @type {string}
+   * options for the search action
+   *
+   * @type {SearchConfig}
    */
-  export let key = undefined;
+  export let searchConfig = undefined;
 
   /**
-   * format a data item for display
-   * @type {(d: any) => string}
+   * format suggestion for display
+   *
+   * @type {(d: Item) => string}
    */
   export let format = (d) => d;
 
-  /**
-   * the maximum number of suggestions to display
-   */
-  export let nSuggestions = 8;
-
-  /**
-   * the placeholder text to display
-   */
+  /** the placeholder text to display */
   export let placeholder = 'Placeholder';
 
-  /**
-   * if true, the label is hidden visually (but is still accessible)
-   */
+  /** if true, the label is hidden visually (but is still accessible) */
   export let hideLabel = false;
 
-  /**
-   * the label to display
-   */
+  /** the label to display */
   export let label = 'Label';
 
-  /**
-   * if true, no reset button is rendered
-   */
+  /** if true, no reset button is rendered */
   export let hideResetButton = false;
 
-  /**
-   * the reset button label
-   */
+  /** the reset button label */
   export let resetButtonLabel = 'Reset';
 
-  /**
-   * if true, no submit button is rendered
-   */
+  /** if true, no submit button is rendered */
   export let hideSubmitButton = false;
 
-  /**
-   * the submit button label
-   */
+  /** the submit button label */
   export let submitButtonLabel = 'Submit';
 
   /**
    * the search result
+   *
    * @type {Item}
    * @exposed
    */
   export let result = null;
 
   /**
-   * if true, minimal styling is applied to highlight
-   * the selected suggestion for debugging purposes;
-   * however, this is not recommended for production use
+   * if true, minimal styling is applied to highlight the selected suggestion
+   * for debugging purposes; however, this is not recommended for production use
    */
   export let debug = false;
 
   /** @type {HTMLInputElement} */
   let inputElement;
 
-  /** @type {Array<Item>} */
+  /** @type {Item[]} */
   let suggestions = [];
 
   /** @type {number} */
@@ -126,9 +109,7 @@
     discardSuggestions();
   }
 
-  /**
-   * @param {Event} e
-   */
+  /** @param {Event} e */
   function handleSubmit(e) {
     e.preventDefault();
     if (highlightedElement === null) return;
@@ -140,9 +121,7 @@
     discardSuggestions();
   }
 
-  /**
-   * @param {KeyboardEvent} e
-   */
+  /** @param {KeyboardEvent} e */
   function handleKeyDown(e) {
     if (e.key === 'Escape') {
       result = null;
@@ -162,9 +141,7 @@
     up ? highlightedIndex-- : highlightedIndex++;
   }
 
-  /**
-   * @param {CustomEvent<{ suggestions: Array<Item> }>} e
-   */
+  /** @param {CustomEvent<{ suggestions: Item[] }>} e */
   function handleSearch(e) {
     suggestions = e.detail.suggestions;
     highlightedIndex = suggestions.length > 0 ? 0 : null;
@@ -184,7 +161,7 @@
         type="search"
         {placeholder}
         autocomplete="off"
-        use:fuzzysearch={{ data, key, limit: nSuggestions }}
+        use:search={searchConfig}
         on:search={handleSearch}
         bind:this={inputElement}
       />

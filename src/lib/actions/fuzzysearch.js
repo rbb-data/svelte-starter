@@ -1,15 +1,13 @@
 import fuzzysort from 'fuzzysort';
 
-/**
- * @typedef {string | Record<string, unknown>} Item
- */
+/** @typedef {string | Record<string, unknown>} Item */
 
 /**
- * Implements fuzzy searching on an input element
+ * Implements fuzzy searching on an input field
  *
- * @param {HTMLInputElement} node - input element for search
+ * @param {HTMLInputElement} node - input field for search
  * @param {Object} options - search options
- * @param {Array<Item>} options.data - array of objects or strings to search through
+ * @param {Item[]} options.data - array of objects or strings to search through
  * @param {string} [options.key] - key to search on if `data` is an array of objects
  * @param {number} [options.limit] - max number of results to return
  */
@@ -20,12 +18,12 @@ export default function fuzzysearch(node, options) {
   // by default, return all results
   if (!limit) limit = Infinity;
 
-  /** @type {Array<Item>} */
+  /** @type {Item[]} */
   let suggestions = [];
 
   /**
    * @param {string} query
-   * @returns {Array<Item>}
+   * @returns {Item[]}
    */
   function search(query) {
     const results = fuzzysort.go(query, data, { key, limit });
@@ -39,9 +37,7 @@ export default function fuzzysearch(node, options) {
     return suggestions;
   }
 
-  /**
-   * @param {Event} event
-   */
+  /** @param {Event} event */
   function handleInput(event) {
     suggestions = search(/** @type {HTMLInputElement} */ (event.target).value);
 
@@ -67,9 +63,7 @@ export default function fuzzysearch(node, options) {
     node.removeEventListener('change', handleChange);
   }
 
-  /**
-   * @param {KeyboardEvent} event
-   */
+  /** @param {KeyboardEvent} event */
   function handleKeyDown(event) {
     if (event.key !== 'Escape') return;
     event.preventDefault();

@@ -21,7 +21,7 @@
 
   import '../style/index.css';
 
-  /** @type {Array<import('$lib/types').NavSection>} */
+  /** @type {import('$lib/types').NavSection[]} */
   export let navSections = [];
 
   /**

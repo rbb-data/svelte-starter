@@ -4,7 +4,7 @@
 
   /**
    * @param {string} componentName
-   * @param {Record<string,any>} props
+   * @param {Record<string, any>} props
    * @returns {string}
    */
   function createSource(componentName, props) {
@@ -22,7 +22,7 @@
   /** @type {typeof import('svelte').SvelteComponent} */
   export let component;
 
-  /** @type {Record<string,any>} */
+  /** @type {Record<string, any>} */
   export let props;
 
   $: source = createSource(componentName, props);

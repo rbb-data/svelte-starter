@@ -5,7 +5,7 @@
   import css from '$lib/actions/css';
   import { translate } from '$lib/helpers/utils';
 
-  /** @type {Array<'n' | 's' | 'e' | 'w'>} */
+  /** @type {('n' | 's' | 'e' | 'w')[]} */
   export let orientations = ['n', 'w', 's', 'e'];
 
   export let offset = 10;

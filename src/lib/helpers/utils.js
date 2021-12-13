@@ -1,7 +1,7 @@
 /**
  * Constructs a translate(x,y) string for use with the `transform` CSS property
  *
- * @param {Array<number>} xy - x and y transforms
+ * @param {number[]} xy - x and y transforms
  * @returns {string} string that can be used in CSS to translate an element
  */
 export function translate(xy) {
