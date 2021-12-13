@@ -21,7 +21,6 @@
    * @component
    */
 
-  import fuzzysearch from '$lib/actions/fuzzysearch';
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
 
@@ -34,6 +33,12 @@
    * @type {Array<Item>}
    */
   export let data;
+
+  /**
+   * Svelte action to search through the data
+   * @type {(node: HTMLInputElement, options: { data: Array<Item>, key?: string, limit?: number }) => any}
+   */
+  export let search;
 
   /**
    * the key to search on if the data is an array of objects
@@ -184,7 +189,7 @@
         type="search"
         {placeholder}
         autocomplete="off"
-        use:fuzzysearch={{ data, key, limit: nSuggestions }}
+        use:search={{ data, key, limit: nSuggestions }}
         on:search={handleSearch}
         bind:this={inputElement}
       />
