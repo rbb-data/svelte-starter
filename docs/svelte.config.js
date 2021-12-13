@@ -13,7 +13,7 @@ const config = {
     paths: {
       base: dev ? '' : process.env.BASE_PATH,
     },
-    router: false,
+    router: dev,
   },
 };
 
