@@ -1,8 +1,7 @@
 <script>
   /**
-   * `Search` implements an input field that facilitates client-side fuzzy
-   * searching (via [fuzzysort](https://github.com/farzher/fuzzysort)). The
-   * setup includes a reset and submit button as well as the necessary event
+   * `Search` implements an input field that facilitates searching. The setup
+   * includes a reset and submit button as well as the necessary event
    * management for an accessible search experience.
    *
    * As headless components don't control styling, this renders a
@@ -25,41 +24,30 @@
   import css from '$lib/actions/css';
   import { px } from '$lib/helpers/utils';
 
-  /** @typedef {string | Record<string, any>} Item */
+  /** @typedef {any} Item */
+  /** @typedef {Record<string, any>} SearchOptions */
 
   /**
-   * the data to search through
+   * Svelte action to perform search on key strokes; must expose a custom event
+   * `search` of type `CustomEvent<{ suggestions: Array<Item> }>`
    *
-   * @type {Item[]}
-   */
-  export let data;
-
-  /**
-   * Svelte action to search through the data
-   *
-   * @type {(
-   *   node: HTMLInputElement,
-   *   options: { data: Item[]; key?: string; limit?: number }
-   * ) => any}
+   * @type {(node: HTMLInputElement, options: SearchOptions) => any}
    */
   export let search;
 
   /**
-   * the key to search on if the data is an array of objects
+   * options for the search action
    *
-   * @type {string}
+   * @type {SearchOptions}
    */
-  export let key = undefined;
+  export let searchOptions = undefined;
 
   /**
    * format a data item for display
    *
-   * @type {(d: any) => string}
+   * @type {(d: Item) => string}
    */
   export let format = (d) => d;
-
-  /** the maximum number of suggestions to display */
-  export let nSuggestions = 8;
 
   /** the placeholder text to display */
   export let placeholder = 'Placeholder';
@@ -173,7 +161,7 @@
         type="search"
         {placeholder}
         autocomplete="off"
-        use:search={{ data, key, limit: nSuggestions }}
+        use:search={searchOptions}
         on:search={handleSearch}
         bind:this={inputElement}
       />
