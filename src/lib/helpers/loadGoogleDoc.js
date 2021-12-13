@@ -58,7 +58,8 @@ async function loadGoogleDoc(
 /**
  * Transform Google Doc object into content string
  *
- * @param {import('googleapis/build/src/apis/docs/v1').docs_v1.Schema$Document} document Google Doc object
+ * @param {import('googleapis/build/src/apis/docs/v1').docs_v1.Schema$Document} document
+ *   Google Doc object
  * @param preserveStyles if true, preserve some formatting
  * @returns sanitized doc contents
  */
@@ -96,7 +97,8 @@ function parseGoogleDoc(document, preserveStyles = false) {
 /**
  * Parse Google doc element
  *
- * @param {import('googleapis/build/src/apis/docs/v1').docs_v1.Schema$ParagraphElement} element Google doc element
+ * @param {import('googleapis/build/src/apis/docs/v1').docs_v1.Schema$ParagraphElement} element
+ *   Google doc element
  * @param preserveStyles if true, preserve some formatting
  * @returns content parsed as HTML
  */

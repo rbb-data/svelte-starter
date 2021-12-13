@@ -10,7 +10,14 @@
 
   import Custom from './_/Custom.svelte';
 
-  /** @type {{ name: string; description: string; props: Array<import('$lib/types').ParamDoc>, slots: Array<string> }} */
+  /**
+   * @type {{
+   *   name: string;
+   *   description: string;
+   *   props: import('$lib/types').ParamDoc[];
+   *   slots: string[];
+   * }}
+   */
   export let meta;
 
   const { name, description, props, slots } = meta;

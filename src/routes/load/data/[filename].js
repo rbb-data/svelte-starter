@@ -12,7 +12,7 @@ export const get = async ({ params }) => {
   const path = `data/${filename}`;
   const extension = extname(filename).slice(1);
 
-  /** @type {Record<string, (s: string) => Record<any,any>>} */
+  /** @type {Record<string, (s: string) => Record<any, any>>} */
   const parse = {
     json: JSON.parse,
     yaml: yaml.parse,

@@ -15,6 +15,7 @@
 
   /**
    * position of the zoom control
+   *
    * @type {'topleft' | 'topright' | 'bottomleft' | 'bottomright'}
    */
   export let position = 'topright';

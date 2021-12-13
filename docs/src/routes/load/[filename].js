@@ -1,7 +1,15 @@
 import fs from 'fs';
 
 // construct an error response
-/** @type {(status: number, message: string) => { status: number; body: {error: {status: number; message: string}} }} */
+/**
+ * @type {(
+ *   status: number,
+ *   message: string
+ * ) => {
+ *   status: number;
+ *   body: { error: { status: number; message: string } };
+ * }}
+ */
 const error = (status, message) => ({
   status,
   body: {

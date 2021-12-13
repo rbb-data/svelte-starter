@@ -1,7 +1,6 @@
 <script>
   /**
-   * Renderless component that implements a Leaflet layer
-   * that renders a Bing map
+   * Renderless component that implements a Leaflet layer that renders a Bing map
    *
    * @component
    */
@@ -19,16 +18,28 @@
   const map = getContext(key)();
 
   /**
-   * type of imagery (see https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters)
-   * @type {'Aerial' | 'AerialWithLabelsOnDemand' | 'CanvasDark' | 'CanvasLight' | 'CanvasGray' | 'RoadOnDemand'}
+   * type of imagery (see
+   * https://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters)
+   *
+   * @type {| 'Aerial'
+   *   | 'AerialWithLabelsOnDemand'
+   *   | 'CanvasDark'
+   *   | 'CanvasLight'
+   *   | 'CanvasGray'
+   *   | 'RoadOnDemand'}
    */
   export let type = 'CanvasGray';
 
-  /** culture code (see https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes) */
+  /**
+   * culture code (see
+   * https://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes)
+   */
   export let culture = 'de-DE';
 
   /**
-   * style sheet (see https://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements)
+   * style sheet (see
+   * https://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements)
+   *
    * @type {import('$lib/helpers/leaflet/toStyleString').MapStyleSheet}
    */
   export let styleSheet = {};

@@ -1,17 +1,27 @@
 /**
  * @template Props
- * @typedef {{ target: Element | ShadowRoot, anchor?: Element, props?: Props, context?: Map<any, any>, hydrate?: boolean, intro?: boolean }} Options<Props>
+ * @typedef {{
+ *   target: Element | ShadowRoot;
+ *   anchor?: Element;
+ *   props?: Props;
+ *   context?: Map<any, any>;
+ *   hydrate?: boolean;
+ *   intro?: boolean;
+ * }} Options<Props>
  */
 
 /**
  * Renders a (tooltip) component on interaction with `node`
  *
  * @template Props
- * @param {HTMLElement | SVGElement} node - the element that triggers rendering of a component
+ * @param {HTMLElement | SVGElement} node - the element that triggers rendering
+ *   of a component
  * @param {Object} tooltip - specification of the component to render on demand
  * @param {string} tooltip.id - id of the component to render
- * @param {typeof import('svelte').SvelteComponent} tooltip.Component - component to render
- * @param {Partial<Options<Props>>} [tooltip.options] - options passed to `Component` on creation
+ * @param {typeof import('svelte').SvelteComponent} tooltip.Component -
+ *   component to render
+ * @param {Partial<Options<Props>>} [tooltip.options] - options passed to
+ *   `Component` on creation
  */
 export default function tooltipable(node, tooltip) {
   const { id, Component } = tooltip;

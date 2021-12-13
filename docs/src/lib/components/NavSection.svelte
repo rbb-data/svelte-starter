@@ -14,7 +14,7 @@
   /** @type {(d: string) => string} */
   export let format = (d) => d;
 
-  /** @type {Array<string>} */
+  /** @type {string[]} */
   export let items = [];
 
   function handleNavigation() {

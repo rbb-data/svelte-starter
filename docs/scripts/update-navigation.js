@@ -42,7 +42,7 @@ function main() {
   // read navigation meta data
   const filename = 'data/nav.json';
 
-  /** @type {Array<import('$lib/types').NavSection>} */
+  /** @type {import('$lib/types').NavSection[]} */
   let navSections = fs.existsSync(filename)
     ? JSON.parse(fs.readFileSync(filename, 'utf-8'))
     : [];
@@ -63,7 +63,7 @@ function main() {
     navSectionsDict[navSection.urlPrefix] = navSection;
   });
 
-  /** @type {Record<string,string[]>} */
+  /** @type {Record<string, string[]>} */
   const filesDict = {};
   files.forEach(({ urlPrefix, filename }) => {
     if (!filesDict[urlPrefix]) filesDict[urlPrefix] = [];

@@ -1,13 +1,11 @@
-/**
- * @typedef {'mouse' | 'pen' | 'touch'} PointerType
- */
+/** @typedef {'mouse' | 'pen' | 'touch'} PointerType */
 
 /**
  * Make an element pannable
  *
  * @param {HTMLElement | SVGElement} node - the element to make pannable
  * @param {Object} options - options
- * @param {Array<PointerType>} [options.ignorePointers] - a list of pointer types to ignore
+ * @param {PointerType[]} [options.ignorePointers] - a list of pointer types to ignore
  */
 export default function pannable(
   node,
@@ -23,9 +21,7 @@ export default function pannable(
   /** @type {number} */
   let pointerId;
 
-  /**
-   * @param {PointerEvent} event
-   */
+  /** @param {PointerEvent} event */
   function handleStart(event) {
     if (!event.isPrimary) return;
     if (
@@ -51,9 +47,7 @@ export default function pannable(
     window.addEventListener('pointercancel', handleEnd);
   }
 
-  /**
-   * @param {PointerEvent} event
-   */
+  /** @param {PointerEvent} event */
   function handleMove(event) {
     if (event.pointerId !== pointerId) return;
 
@@ -71,9 +65,7 @@ export default function pannable(
     );
   }
 
-  /**
-   * @param {PointerEvent} event
-   */
+  /** @param {PointerEvent} event */
   function handleEnd(event) {
     if (event.pointerId !== pointerId) return;
 
@@ -100,14 +92,21 @@ export default function pannable(
 }
 
 /**
- * Creates a function that updates an element's coordinates
- * according to the information exposed by some custom event
+ * Creates a function that updates an element's coordinates according to the
+ * information exposed by some custom event
  *
- * @param {import('svelte/store').Writable<number | { x: number, y: number }>} coords - a writable store that exposes an element's position
+ * @param {import('svelte/store').Writable<
+ *   number | { x: number; y: number }
+ * >} coords
+ *   - a writable store that exposes an element's position
+ *
  * @param {Object} options
- * @param {'xy' | 'x' | 'y'} [options.axis] - the axis to move along (`x` or `y`), or `xy` for no restrictions (default)
- * @param {{ top?: number, right?: number, bottom?: number, left?: number }} [options.bounds] - if given, the element is restricted to move within these bounds
- * @returns {(event: CustomEvent<{ dx: number, dy: number }>) => void}
+ * @param {'xy' | 'x' | 'y'} [options.axis] - the axis to move along (`x` or
+ *   `y`), or `xy` for no restrictions (default)
+ * @param {{ top?: number; right?: number; bottom?: number; left?: number }} [options.bounds]
+ *   - if given, the element is restricted to move within these bounds
+ *
+ * @returns {(event: CustomEvent<{ dx: number; dy: number }>) => void}
  */
 
 export function drag(coords, options = { axis: 'xy' }) {

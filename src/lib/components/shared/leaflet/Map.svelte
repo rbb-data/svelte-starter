@@ -15,18 +15,21 @@
 
   /**
    * height of the map
+   *
    * @type {number}
    */
   export let height;
 
   /**
    * map options (see https://leafletjs.com/reference.html#map)
+   *
    * @type {import('leaflet').MapOptions}
    */
   export let options = undefined;
 
   /**
    * if given, the map will zoom in on the given bounds
+   *
    * @type {import('leaflet').LatLngBoundsLiteral}
    */
   export let fitBounds = undefined;

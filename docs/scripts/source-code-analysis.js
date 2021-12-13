@@ -9,6 +9,7 @@ compilerOptions.baseUrl = '..';
 
 /**
  * Check if a function or variable is exported
+ *
  * @param {import('typescript').Node} node
  * @returns {boolean}
  */
@@ -23,6 +24,7 @@ function isExported(node) {
 
 /**
  * Extract jsdoc comment from `node`
+ *
  * @param {import('typescript').Node} node
  * @returns {string}
  */
@@ -35,9 +37,14 @@ function extractJsdocComment(node) {
 
 /**
  * Create Typescript AST and types from file
+ *
  * @param {string} file
  * @param {import('typescript').CompilerOptions} compilerOptions
- * @returns {{ program: import('typescript').Program, sourceFile: import('typescript').SourceFile, typeChecker: import('typescript').TypeChecker }}
+ * @returns {{
+ *   program: import('typescript').Program;
+ *   sourceFile: import('typescript').SourceFile;
+ *   typeChecker: import('typescript').TypeChecker;
+ * }}
  */
 function createProgramFromFile(file, compilerOptions) {
   const program = ts.createProgram([file], compilerOptions);
@@ -48,12 +55,13 @@ function createProgramFromFile(file, compilerOptions) {
 
 /**
  * Extract information from a source file using Typescript's AST and type checker
+ *
  * @param {import('typescript').SourceFile} sourceFile
  * @param {import('typescript').TypeChecker} typeChecker
  * @returns {any}
  */
 function extractDoc(sourceFile, typeChecker) {
-  /** @type {Record<string,boolean>} */
+  /** @type {Record<string, boolean>} */
   const isExport = {};
   const data = [];
 
@@ -170,6 +178,7 @@ function extractDoc(sourceFile, typeChecker) {
 
 /**
  * Extract documentation from a javascript file
+ *
  * @param {string} file
  * @returns
  */
@@ -184,6 +193,7 @@ export function extractDocFromJsFile(file) {
 
 /**
  * Extract documentation from a svelte file
+ *
  * @param {string} file
  * @returns
  */

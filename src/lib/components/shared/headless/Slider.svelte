@@ -1,11 +1,11 @@
 <script>
   /**
-   * `Slider` renders a single component at a time and provides the necessary functionality
-   * to navigate back and forth through swipe gestures (on touch devices) or mouse clicks
-   * (on desktop).
+   * `Slider` renders a single component at a time and provides the necessary
+   * functionality to navigate back and forth through swipe gestures (on touch
+   * devices) or mouse clicks (on desktop).
    *
-   * `Slider` keeps track of the active slide internally. Binding to this prop (`activeIndex`)
-   * is a common pattern.
+   * `Slider` keeps track of the active slide internally. Binding to this prop
+   * (`activeIndex`) is a common pattern.
    *
    * `prev` and `next` determine the index of the previous and next slide;
    * returning `null` means there is no slide to go to.
@@ -22,18 +22,24 @@
 
   /**
    * list of slides
-   * @type {Array<{ component: typeof import('svelte').SvelteComponent, props: Record<string, unknown> }>}
+   *
+   * @type {{
+   *   component: typeof import('svelte').SvelteComponent;
+   *   props: Record<string, unknown>;
+   * }[]}
    */
   export let slides;
 
   /**
    * function that determines the previous slide
+   *
    * @type {(index: number) => number | null}
    */
   export let prev;
 
   /**
    * function that determines the next slide
+   *
    * @type {(index: number) => number | null}
    */
   export let next;
@@ -43,6 +49,7 @@
 
   /**
    * index of the currently visible slide
+   *
    * @exposed
    */
   export let activeIndex = initialActiveIndex;
@@ -64,6 +71,7 @@
 
   /**
    * x coordinate on touchstart
+   *
    * @type {number}
    */
   let startX;
@@ -80,16 +88,12 @@
   // animatedX mirrors x
   $: animatedX.set($x);
 
-  /**
-   * @param {boolean} navigateBackward
-   */
+  /** @param {boolean} navigateBackward */
   function canNavigate(navigateBackward) {
     return (navigateBackward && prevSlide) || (!navigateBackward && nextSlide);
   }
 
-  /**
-   * @param {boolean} navigateBackward
-   */
+  /** @param {boolean} navigateBackward */
   function navigateAndReset(navigateBackward) {
     // transition to the next (or previous) slide
     animate = true;
@@ -103,9 +107,7 @@
     }, 500);
   }
 
-  /**
-   * @param {MouseEvent} e
-   */
+  /** @param {MouseEvent} e */
   function handleClick(e) {
     const { clientX } = e;
 
@@ -116,9 +118,7 @@
     navigateAndReset(navigateBackward);
   }
 
-  /**
-   * @param {KeyboardEvent} e
-   */
+  /** @param {KeyboardEvent} e */
   function handleKeyDown(e) {
     if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
     const navigateBackward = e.key === 'ArrowLeft';
@@ -126,16 +126,12 @@
     navigateAndReset(navigateBackward);
   }
 
-  /**
-   * @param {CustomEvent<{ x: number; y: number }>} e
-   */
+  /** @param {CustomEvent<{ x: number; y: number }>} e */
   function handlePanStart(e) {
     startX = e.detail.x;
   }
 
-  /**
-   * @param {CustomEvent<{ x: number; y: number }>} e
-   */
+  /** @param {CustomEvent<{ x: number; y: number }>} e */
   function handlePanEnd(e) {
     const endX = e.detail.x;
     const diff = endX - startX;
