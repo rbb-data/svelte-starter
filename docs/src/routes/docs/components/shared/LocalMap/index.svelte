@@ -8,7 +8,7 @@
   import Header from '$lib/components/Header.svelte';
   import APITable from '$lib/components/APITable.svelte';
 
-  import Custom from './_/Custom.svelte';
+  import Custom from './_/Custom.svelte.md';
 
   /**
    * @type {{
@@ -23,18 +23,20 @@
   const { name, description, props, slots } = meta;
 </script>
 
-<Header {name} {description} />
+<div class="slim">
+  <Header {name} {description} />
 
-<div class="custom">
-  <Custom {meta} />
+  <div class="custom">
+    <Custom {meta} />
+  </div>
+
+  {#if slots}
+    <b>Slots:</b>
+    {#each slots as slot}
+      <code>{slot}</code>
+    {/each}
+  {/if}
 </div>
-
-{#if slots}
-  <b>Slots:</b>
-  {#each slots as slot}
-    <code>{slot}</code>
-  {/each}
-{/if}
 
 <APITable params={props} />
 

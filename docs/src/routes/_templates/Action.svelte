@@ -8,7 +8,7 @@
   import Header from '$lib/components/Header.svelte';
   import APITable from '$lib/components/APITable.svelte';
 
-  import Custom from './_/Custom.svelte';
+  import Custom from './_/Custom.svelte.md';
 
   /**
    * @type {{
@@ -23,10 +23,14 @@
   const { name, description, params } = meta[0];
 </script>
 
-<Header name={`use:${name}`} {description} />
+/* eslint-disable */
 
-<div class="custom">
-  <Custom {meta} />
+<div class="slim">
+  <Header name={`use:${name}`} {description} />
+
+  <div class="custom">
+    <Custom {meta} />
+  </div>
 </div>
 
 <APITable {params} />

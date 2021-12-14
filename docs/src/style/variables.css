@@ -1,6 +1,7 @@
 :root {
   --black: hsl(210, 11%, 15%);
 
+  --sidebar-width: 280px;
   --text-width: 650px;
 
   --spacing-small: 1rem;

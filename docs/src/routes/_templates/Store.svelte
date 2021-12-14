@@ -7,7 +7,7 @@
 <script>
   import Header from '$lib/components/Header.svelte';
 
-  import Custom from './_/Custom.svelte';
+  import Custom from './_/Custom.svelte.md';
 
   /** @type {import('$lib/types').ParamDoc[]} */
   export let meta;
@@ -15,14 +15,16 @@
   const { name, description, type } = meta[0];
 </script>
 
-<Header name={'$' + name} {description} />
+<div class="slim">
+  <Header name={'$' + name} {description} />
 
-<p>
-  <b>Type:</b> <code>{type}</code>
-</p>
+  <p>
+    <b>Type:</b> <code>{type}</code>
+  </p>
 
-<div class="custom">
-  <Custom {meta} />
+  <div class="custom">
+    <Custom {meta} />
+  </div>
 </div>
 
 <style>

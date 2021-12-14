@@ -10,3 +10,7 @@ p {
 .slim {
   max-width: var(--text-width);
 }
+
+.wide {
+  width: calc(100vw - var(--sidebar-width) - 2 * var(--spacing-large));
+}
