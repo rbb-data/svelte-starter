@@ -165,6 +165,11 @@ async function autocomplete(query, config = {}) {
     .catch((err) => console.error(err));
 }
 
+const defaultOptions = {
+  keepFeature: () => true,
+  openrouteserviceConfig: { boundaryCountry: 'DE', lang: 'de', size: 8 },
+};
+
 /**
  * Allows to search and geocode locations if applied to an input field
  *
@@ -175,20 +180,8 @@ async function autocomplete(query, config = {}) {
  *   [openrouteservice](https://openrouteservice.org) (see [Pelias'
  *   documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md))
  */
-export default function geolocalization(
-  node,
-  options = {
-    keepFeature: () => true,
-    openrouteserviceConfig: { boundaryCountry: 'DE', lang: 'de', size: 8 },
-  }
-) {
-  if (!options.openrouteserviceConfig)
-    options.openrouteserviceConfig = {
-      boundaryCountry: 'DE',
-      lang: 'de',
-      size: 8,
-    };
-  if (!options.keepFeature) options.keepFeature = () => true;
+export default function geolocalization(node, options = defaultOptions) {
+  options = { ...defaultOptions, ...options };
 
   /** @type {Suggestion[]} */
   let suggestions = [];

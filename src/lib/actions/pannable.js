@@ -1,5 +1,8 @@
 /** @typedef {'mouse' | 'pen' | 'touch'} PointerType */
 
+/** @type {{ ignorePointers: PointerType[] }} */
+const defaultOptions = { ignorePointers: [] };
+
 /**
  * Makes an element pannable
  *
@@ -7,12 +10,9 @@
  * @param {{ ignorePointers: PointerType[] }} [options] - options where
  *   `ignorePointes` is a list of pointer types to ignore
  */
-export default function pannable(
-  node,
-  options = {
-    ignorePointers: [],
-  }
-) {
+export default function pannable(node, options = defaultOptions) {
+  const { ignorePointers } = { ...defaultOptions, ...options };
+
   /** @type {number} */
   let x;
   /** @type {number} */
@@ -24,11 +24,7 @@ export default function pannable(
   /** @param {PointerEvent} event */
   function handleStart(event) {
     if (!event.isPrimary) return;
-    if (
-      options.ignorePointers.includes(
-        /** @type PointerType */ (event.pointerType)
-      )
-    )
+    if (ignorePointers.includes(/** @type PointerType */ (event.pointerType)))
       return;
 
     x = event.clientX;
