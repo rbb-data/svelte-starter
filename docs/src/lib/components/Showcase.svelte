@@ -1,11 +1,11 @@
 <script>
   /** @type {string} */
-  export let filename = undefined;
+  export let title = undefined;
 </script>
 
 <div class="wrapper">
-  {#if filename}
-    <code class="no-style">{filename}</code>
+  {#if title}
+    <code class="title no-style">{title}</code>
   {/if}
   <div class="side-by-side">
     <slot name="left" />
@@ -18,7 +18,7 @@
     margin: var(--spacing-large) 0;
   }
 
-  .wrapper code {
+  .wrapper .title {
     margin-left: 2rem;
   }
 

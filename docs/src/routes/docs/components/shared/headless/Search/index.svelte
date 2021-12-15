@@ -38,6 +38,8 @@
   {/if}
 </div>
 
+<h2>API</h2>
+
 <APITable params={props} />
 
 <style>

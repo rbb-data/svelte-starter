@@ -17,18 +17,21 @@
   }
 
   /** @type {string} */
+  export let title = undefined;
+
+  /** @type {string} */
   export let componentName;
 
   /** @type {typeof import('svelte').SvelteComponent} */
   export let component;
 
   /** @type {Record<string, any>} */
-  export let props;
+  export let props = {};
 
   $: source = createSource(componentName, props);
 </script>
 
-<Showcase>
+<Showcase {title}>
   <Snippet slot="left" {source} language="svelte" />
   <svelte:component this={component} slot="right" {...props} />
 </Showcase>

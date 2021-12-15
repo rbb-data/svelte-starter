@@ -62,8 +62,8 @@
   .wrapper {
     display: grid;
     grid-template-columns: var(--sidebar-width) 1fr;
-
     height: 100%;
+    overflow-x: hidden;
   }
 
   .sidebar {

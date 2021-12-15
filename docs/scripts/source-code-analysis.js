@@ -92,7 +92,7 @@ function extractDoc(sourceFile, typeChecker) {
         let comment = jsDoc ? jsDoc.comment : null;
         // remove the '-' that parameter descriptions usually start with
         if (comment && comment.trim().startsWith('-')) {
-          comment = comment.slice(1).trim();
+          comment = comment.trim().slice(1).trim();
         }
 
         return {

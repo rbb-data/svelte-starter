@@ -40,7 +40,7 @@ pre[class*='language-'] {
 pre[class*='language-'] {
   overflow: auto;
   padding: 1.5rem 2rem;
-  margin: 0.8rem 0 2.4rem;
+  margin: 1rem 0;
   border-radius: 0.4rem;
   height: fit-content;
 }
@@ -50,9 +50,8 @@ pre[class*='language-'] {
   background: var(--background);
 }
 
-code:not(.no-style) {
+:not(pre) > code:not(.no-style) {
   border-radius: 0.3em;
-  white-space: nowrap;
   color: #444;
   padding: var(--code-padding-v) var(--code-padding-h);
   margin: 0 0.2rem;

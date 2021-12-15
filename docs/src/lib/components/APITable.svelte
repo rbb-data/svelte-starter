@@ -51,7 +51,7 @@
 
 <style>
   .table-wrapper {
-    margin: var(--spacing-large) 0;
+    margin: var(--spacing-small) 0;
   }
 
   code {
@@ -82,7 +82,7 @@
   table {
     display: grid;
     border-collapse: collapse;
-    grid-template-columns: auto 4fr 2fr 2fr;
+    grid-template-columns: auto 4fr 4fr 2fr;
   }
 
   thead,

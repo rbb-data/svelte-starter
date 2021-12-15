@@ -3,7 +3,18 @@ h1 {
   margin-bottom: var(--spacing-small);
 }
 
+h2 {
+  font-size: var(--h2);
+  margin-top: var(--spacing-large);
+  margin-bottom: calc(var(--spacing-small) / 2);
+}
+
 p {
+  margin-bottom: var(--spacing-small);
+}
+
+ul,
+ol {
   margin-bottom: var(--spacing-small);
 }
 

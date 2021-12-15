@@ -23,8 +23,6 @@
   const { name, description, params } = meta[0];
 </script>
 
-/* eslint-disable */
-
 <div class="slim">
   <Header name={`use:${name}`} {description} />
 
@@ -32,6 +30,8 @@
     <Custom {meta} />
   </div>
 </div>
+
+<h2>API</h2>
 
 <APITable {params} />
 
