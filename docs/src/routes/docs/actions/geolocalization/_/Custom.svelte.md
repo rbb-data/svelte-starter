@@ -2,7 +2,7 @@ This action queries [openrouteservice's autocomplete API](https://openrouteservi
 
 ```svelte
 <input
-  use:geolocalization={{ openRouteServiceConfig: myConfig }}
+  use:geolocalization={{ openrouteserviceConfig: myConfig }}
   on:search={(e) => console.log('current suggestions:', e.detail.suggestions)}
   on:result={(e) => console.log('user-selected result:', e.detail.result)}
 />
@@ -17,7 +17,7 @@ where `Suggestion` is defined as `{ location: Point; properties: Feature['proper
 
 ## Configuring openrouteservice
 
-By default, few restrictions are applied to the location search (see API table). However, openrouteservice can be fully configured by passing `openRouteServiceConfig` that is defined as:
+By default, few restrictions are applied to the location search (see API table). However, openrouteservice can be fully configured by passing `openrouteserviceConfig` that is defined as:
 
 ```javascript
 {

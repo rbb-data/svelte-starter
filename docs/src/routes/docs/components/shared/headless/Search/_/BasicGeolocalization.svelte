@@ -18,7 +18,7 @@
 <Search
   search={geolocalization}
   searchConfig={{
-    openRouteServiceConfig: {
+    openrouteserviceConfig: {
       sources: ['osm'],
       layers: ['address'],
       boundaryCountry: 'DE',
