@@ -15,6 +15,11 @@
   const { name, description, type } = meta[0];
 </script>
 
+<!--
+  DANGER: This file is OVERWRITTEN each time `npm run update` is run
+  If you want to add custom documentation, edit ./_/Custom.svelte.md
+-->
+
 <div class="slim">
   <Header name={'$' + name} {description} />
 

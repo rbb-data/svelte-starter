@@ -23,6 +23,11 @@
   const { name, description, props, slots } = meta;
 </script>
 
+<!--
+  DANGER: This file is OVERWRITTEN each time `npm run update` is run
+  If you want to add custom documentation, edit ./_/Custom.svelte.md
+-->
+
 <div class="slim">
   <Header {name} {description} />
 
