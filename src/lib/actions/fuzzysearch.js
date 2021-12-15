@@ -5,15 +5,15 @@ import fuzzysort from 'fuzzysort';
 /**
  * Implements fuzzy searching on an input field
  *
- * @param {HTMLInputElement} node - input field for search
- * @param {Object} options - search options
- * @param {Item[]} options.data - array of objects or strings to search through
- * @param {string} [options.key] - key to search on if `data` is an array of objects
- * @param {number} [options.limit] - max number of results to return
+ * @param {HTMLInputElement} node - search field
+ * @param {{ data: Item[]; key: string; limit: number }} searchOptions - search
+ *   options where `data` is an array of objects or strings to search through,
+ *   `key` is the key to search on if `data` is an array of objects, and `limit`
+ *   is the maximum number of results to return
  */
-export default function fuzzysearch(node, options) {
-  const { data, key } = options;
-  let { limit } = options;
+export default function fuzzysearch(node, searchOptions) {
+  const { data, key } = searchOptions;
+  let { limit } = searchOptions;
 
   // by default, return all results
   if (!limit) limit = Infinity;

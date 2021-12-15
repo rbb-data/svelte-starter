@@ -1,11 +1,11 @@
 /** @typedef {'mouse' | 'pen' | 'touch'} PointerType */
 
 /**
- * Make an element pannable
+ * Makes an element pannable
  *
  * @param {HTMLElement | SVGElement} node - the element to make pannable
- * @param {Object} options - options
- * @param {PointerType[]} [options.ignorePointers] - a list of pointer types to ignore
+ * @param {{ ignorePointers: PointerType[] }} [options] - options where
+ *   `ignorePointes` is a list of pointer types to ignore
  */
 export default function pannable(
   node,
@@ -100,7 +100,9 @@ export default function pannable(
  * >} coords
  *   - a writable store that exposes an element's position
  *
- * @param {Object} options
+ * @param {Object} [options] - drag options where `axis` is the axis to drag
+ *   along and `bounds` - if given - restricts the element to move within the
+ *   given bounds
  * @param {'xy' | 'x' | 'y'} [options.axis] - the axis to move along (`x` or
  *   `y`), or `xy` for no restrictions (default)
  * @param {{ top?: number; right?: number; bottom?: number; left?: number }} [options.bounds]

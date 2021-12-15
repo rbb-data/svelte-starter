@@ -11,23 +11,25 @@
  */
 
 /**
- * Renders a (tooltip) component on interaction with `node`
+ * Renders a (tooltip) component on interaction with an element
  *
  * @template Props
  * @param {HTMLElement | SVGElement} node - the element that triggers rendering
  *   of a component
- * @param {Object} tooltip - specification of the component to render on demand
- * @param {string} tooltip.id - id of the component to render
- * @param {typeof import('svelte').SvelteComponent} tooltip.Component -
- *   component to render
- * @param {Partial<Options<Props>>} [tooltip.options] - options passed to
- *   `Component` on creation
+ * @param {{
+ *   id: string;
+ *   Component: typeof import('svelte').SvelteComponent;
+ *   options: Partial<Options<Props>>;
+ * }} tooltipComp
+ *   - the component to render on demand where `id` is a unique id of the rendered
+ *       markup, `Component` is the component class to render, and `options` are
+ *       passed to `Component` on creation
  */
-export default function tooltipable(node, tooltip) {
-  const { id, Component } = tooltip;
+export default function tooltip(node, tooltipComp) {
+  const { id, Component } = tooltipComp;
 
   // attach to body by default
-  const options = tooltip.options || {};
+  const options = tooltipComp.options || {};
   options.target = options.target || document.body;
 
   /** @type {import('svelte').SvelteComponent} */

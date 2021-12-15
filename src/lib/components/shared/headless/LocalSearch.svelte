@@ -54,7 +54,7 @@
 
   const coords = coordsMap[location];
 
-  /** @type {import('$lib/actions/geolocalization').SearchOptions} */
+  /** @type {import('$lib/actions/geolocalization').Options} */
   $: searchConfig = {
     openRouteServiceConfig: {
       sources,
