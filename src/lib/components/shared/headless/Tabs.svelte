@@ -1,11 +1,6 @@
 <script>
   /**
-   * The `Tabs` component makes content selectable. The active tab is tracked
-   * internally and marked by adding the class `.active` (no default styles are
-   * applied to the active element however).
-   *
-   * `Tabs` exposes to slot props, `tab` and `active`. `tab` is an element in
-   * `tabs` and `active` is true if `tab` is currently selected.
+   * Renders a list of selectable tabs
    *
    * @component
    */
@@ -23,13 +18,17 @@
   export let initialIndex = 0;
 
   /**
+   * index of the active tab
+   *
+   * @exposed
+   */
+  export let activeIndex = initialIndex;
+
+  /**
    * if true, minimal styling is applied to highlight the selected tab for
    * debugging purposes; however, this is not recommended for production use
    */
   export let debug = false;
-
-  // the index of the active tab
-  let activeIndex = initialIndex;
 
   /** @param {KeyboardEvent} e */
   function handleKeyDown(e) {

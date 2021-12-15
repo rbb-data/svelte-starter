@@ -7,7 +7,7 @@
 <script>
   import Header from '$lib/components/Header.svelte';
 
-  import Custom from './_/Custom.svelte';
+  import Custom from './_/Custom.svelte.md';
 
   /** @type {import('$lib/types').ParamDoc[]} */
   export let meta;
@@ -15,14 +15,21 @@
   const { name, description, type } = meta[0];
 </script>
 
-<Header name={'$' + name} {description} />
+<!--
+  DANGER: This file is OVERWRITTEN each time `npm run update` is run
+  If you want to add custom documentation, edit ./_/Custom.svelte.md
+-->
 
-<p>
-  <b>Type:</b> <code>{type}</code>
-</p>
+<div class="slim">
+  <Header name={'$' + name} {description} />
 
-<div class="custom">
-  <Custom {meta} />
+  <p>
+    <b>Type:</b> <code>{type}</code>
+  </p>
+
+  <div class="custom">
+    <Custom {meta} />
+  </div>
 </div>
 
 <style>

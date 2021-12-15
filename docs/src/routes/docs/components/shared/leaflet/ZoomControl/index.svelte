@@ -8,7 +8,7 @@
   import Header from '$lib/components/Header.svelte';
   import APITable from '$lib/components/APITable.svelte';
 
-  import Custom from './_/Custom.svelte';
+  import Custom from './_/Custom.svelte.md';
 
   /**
    * @type {{
@@ -23,18 +23,27 @@
   const { name, description, props, slots } = meta;
 </script>
 
-<Header {name} {description} />
+<!--
+  DANGER: This file is OVERWRITTEN each time `npm run update` is run
+  If you want to add custom documentation, edit ./_/Custom.svelte.md
+-->
 
-<div class="custom">
-  <Custom {meta} />
+<div class="slim">
+  <Header {name} {description} />
+
+  <div class="custom">
+    <Custom {meta} />
+  </div>
+
+  {#if slots}
+    <b>Slots:</b>
+    {#each slots as slot}
+      <code>{slot}</code>
+    {/each}
+  {/if}
 </div>
 
-{#if slots}
-  <b>Slots:</b>
-  {#each slots as slot}
-    <code>{slot}</code>
-  {/each}
-{/if}
+<h2>API</h2>
 
 <APITable params={props} />
 

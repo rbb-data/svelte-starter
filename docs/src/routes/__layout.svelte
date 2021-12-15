@@ -61,9 +61,9 @@
 <style>
   .wrapper {
     display: grid;
-    grid-template-columns: minmax(200px, 20%) 1fr;
-
+    grid-template-columns: var(--sidebar-width) 1fr;
     height: 100%;
+    overflow-x: hidden;
   }
 
   .sidebar {

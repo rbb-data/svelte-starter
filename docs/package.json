@@ -17,6 +17,7 @@
     "dotenv": "^10.0.0",
     "gh-pages": "^3.2.3",
     "glob": "^7.2.0",
+    "mdsvex": "^0.9.8",
     "prism-svelte": "^0.4.7",
     "prismjs": "^1.25.0",
     "svelte": "^3.44.0",

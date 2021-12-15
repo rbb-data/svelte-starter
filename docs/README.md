@@ -27,8 +27,24 @@ The documentation at http://localhost:3000/ should now be populated with content
 `npm run update` does three things:
 
 - `npm run extract-from-source`: analyses the source code in `../src/lib` and - for each analysed file - writes meta data to `data/meta`. The directory structure of `data/meta` mirrors the structure of `../src/lib` exactly. You can choose to exclude folders in `../src/lib` from the documentation by specifying `ignoreFolders` in `docs.config.json`.
-- `npm run generate-pages`: generates documentation pages in `src/routes/docs` using the template files defined in `src/routes/_templates`. Each documentation page pulls in the relevant data from `data/meta` and displays some basic information, such as the name, a general description and an API table (this information has been recovered from the source files). Each documentation page also imports and renders a custom documentation component that is set up in `src/routes/docs/path/to/MyComponent/_/Custom.svelte` as an empty file. Note that index files in `src/routes/doc` are overwritten each time `generate-pages` is run. Custom documentation components however are preserved over time.
+- `npm run generate-pages`: generates documentation pages in `src/routes/docs` using the template files defined in `src/routes/_templates`. Each documentation page pulls in the relevant data from `data/meta` and displays some basic information, such as the name, a general description and an API table (this information has been recovered from the source files). Each documentation page also imports and renders a custom documentation component that is set up in `src/routes/docs/path/to/MyComponent/_/Custom.svelte.md` as an empty file. Note the file's extensions, `.svelte.md`; this means you can use markdown as well as Svelte code in these files. **Note**: Index files in `src/routes/doc` are overwritten each time `generate-pages` is run. Custom documentation components however are preserved over time.
 - `npm run update-navigation`: populates the navigation bar by writing to `data/nav.json` that is consumed by the layout page (defined at `src/routes/__layout.svelte`). Components/actions/stores that live in the same folder are assumed to belong to the same section. Specifying `sections` in `docs.config.js` allows to name sections by matching the directory path to the desired name.
+
+## How to add documentation
+
+Let's say you implemented a new shared component `MyComponent` that you want to document. For the most basic (automatically generated) documentation, run:
+
+```
+npm run update
+```
+
+Done! At this point, the documentation page will list your component and render an automatically created documentation page with some basic information about your component (recovered from its source). To reiterate, this is what `npm run update` does for you:
+
+- writes a file with relevant meta information sourced from `MyComponent.svelte` to `data/meta/components/shared/MyComponent.json`
+- adds an entry for `MyComponent` in `data/nav.json` that controls the navigation sidebar on the documentation page
+- creates a pre-filled route at `src/routes/docs/components/shared/MyComponent/index.svelte` and an empty customization component at `src/routes/docs/components/shared/MyComponent/_/Custom.svelte.md`
+
+If you want to add some custom documentation, edit `src/routes/docs/components/shared/MyComponent/_/Custom.svelte.md`. This is a [`MDsveX`](https://github.com/pngwn/MDsveX) file (note its extension `.svelte.md`), which means you can conveniently use Markdown as well as Svelte syntax. The docs' component library at `src/lib/components` provides a handful of components that help you write meaningful documentation, including code samples and snippets.
 
 ## Build and deploy
 

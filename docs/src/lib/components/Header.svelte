@@ -11,7 +11,5 @@
 <h1><code class="no-style">{name}</code></h1>
 
 {#if description}
-  <div class="slim">
-    <SvelteMarkdown source={description} />
-  </div>
+  <i><SvelteMarkdown source={description} /></i>
 {/if}

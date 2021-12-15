@@ -4,12 +4,6 @@
    * functionality to navigate back and forth through swipe gestures (on touch
    * devices) or mouse clicks (on desktop).
    *
-   * `Slider` keeps track of the active slide internally. Binding to this prop
-   * (`activeIndex`) is a common pattern.
-   *
-   * `prev` and `next` determine the index of the previous and next slide;
-   * returning `null` means there is no slide to go to.
-   *
    * @component
    */
 
@@ -63,6 +57,12 @@
     .map((slide, i) => ({ slide, key: i === 0 ? 'prev' : 'next' }))
     .filter(({ slide }) => slide);
 
+  /** @type {HTMLElement} */
+  let sliderElement;
+
+  // x coordinate of the slider
+  $: posX = sliderElement ? sliderElement.getBoundingClientRect().left : 0;
+
   // dimensions of the slider
   let width = 0;
   let height = 0;
@@ -77,8 +77,8 @@
   let startX;
 
   // thresholds that filter out small movements
-  $: minX = 0.33 * width;
-  $: maxX = 0.66 * width;
+  $: minX = posX + 0.33 * width;
+  $: maxX = posX + 0.66 * width;
   const minDiff = 20;
 
   // tracks movement
@@ -153,6 +153,7 @@
 <div
   class="slider"
   aria-roledescription="carousel"
+  bind:this={sliderElement}
   bind:clientWidth={width}
   use:css={{ height: px(height) }}
   on:keydown={handleKeyDown}

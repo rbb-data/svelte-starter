@@ -1,8 +1,8 @@
 /**
- * Dynamically set CSS `variables` on `node`
+ * Dynamically sets CSS variables on an element
  *
- * @param {HTMLElement | SVGElement} node - the node to set the CSS variable on
- * @param {Record<string, string | number>} variables - the variables to set
+ * @param {HTMLElement | SVGElement} node - the element to set the variables on
+ * @param {Record<string, string | number>} variables - the CSS variables to set
  */
 function css(node, variables) {
   function setCssVariables() {

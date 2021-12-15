@@ -14,7 +14,7 @@ const config = {
       base: dev ? '' : process.env.BASE_PATH,
     },
     package: {
-      exports: (path) => ['index.js', 'actions/index.js'].includes(path),
+      exports: (path) => ['index.js'].includes(path),
     },
   },
 };

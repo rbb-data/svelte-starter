@@ -3,7 +3,8 @@ import { readable } from 'svelte/store';
 const reducedMotionQuery = '(prefers-reduced-motion: reduce)';
 
 /**
- * Readable store that is true if the user prefers reduced motion
+ * Readable store that is true if the user has requested to minimize the amount
+ * of non-essential motion
  *
  * @type {import('svelte/store').Readable<boolean>}
  */

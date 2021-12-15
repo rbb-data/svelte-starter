@@ -1,7 +1,6 @@
 <script>
   import { base } from '$app/paths';
   import { page } from '$app/stores';
-  import { dev } from '$app/env';
 
   import { activePage } from '$lib/stores';
 
@@ -18,10 +17,11 @@
   export let items = [];
 
   function handleNavigation() {
-    const splitPath = $page.path.split('/');
+    const path = $page.path.replace('/docs', '');
+    const splitPath = path.split('/');
     const currentUrlPrefix = splitPath.slice(0, -1).join('/');
     if (urlPrefix === currentUrlPrefix) {
-      activePage.set($page.path);
+      activePage.set(path);
     }
   }
 

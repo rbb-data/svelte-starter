@@ -90,9 +90,9 @@ import debounce from 'lodash.debounce';
 
 /**
  * @typedef {{
- *   openRouteServiceConfig?: OpenRouteServiceConfig;
+ *   openrouteserviceConfig?: OpenRouteServiceConfig;
  *   keepFeature?: (feature: Feature) => boolean;
- * }} SearchOptions
+ * }} Options
  */
 
 /** @typedef {{ location: Point; properties: Feature['properties'] }} Suggestion */
@@ -165,18 +165,24 @@ async function autocomplete(query, config = {}) {
     .catch((err) => console.error(err));
 }
 
+const defaultOptions = {
+  keepFeature: () => true,
+  openrouteserviceConfig: { boundaryCountry: 'DE', lang: 'de', size: 8 },
+};
+
 /**
- * Allows to search and geocode locations
+ * Allows to search and geocode locations if applied to an input field
  *
- * @param {HTMLInputElement} node - input field for search
- * @param {SearchOptions} [options] - search options (for available search
- *   configurations, see [Pelias'
+ * @param {HTMLInputElement} node - search field
+ * @param {Options} [options] - options where `keepFeature` can be used to
+ *   filter retrieved features and `openrouteserviceConfig` specifies the
+ *   configuration when requesting data from
+ *   [openrouteservice](https://openrouteservice.org) (see [Pelias'
  *   documentation](https://github.com/pelias/documentation/blob/master/autocomplete.md))
  */
-export default function geolocalization(
-  node,
-  options = { keepFeature: () => true }
-) {
+export default function geolocalization(node, options = defaultOptions) {
+  options = { ...defaultOptions, ...options };
+
   /** @type {Suggestion[]} */
   let suggestions = [];
 
@@ -201,7 +207,7 @@ export default function geolocalization(
   function handleInput(event) {
     queryOpenRouteService(
       /** @type {HTMLInputElement} */ (event.target).value,
-      options.openRouteServiceConfig,
+      options.openrouteserviceConfig,
       options.keepFeature
     );
 

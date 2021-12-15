@@ -1,11 +1,6 @@
 <script>
   /**
-   * `Svg` is a SVG container that implements a common pattern for sizing charts
-   * (check out [Amelia Wattenberger's blog
-   * post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity)).
-   *
-   * Typically, one would bind to the internally managed `boundedWidth` and
-   * `boundedHeight`.
+   * SVG container that implements a common pattern for sizing charts
    *
    * @component
    */
