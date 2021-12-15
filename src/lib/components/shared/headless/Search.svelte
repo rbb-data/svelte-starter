@@ -4,20 +4,6 @@
    * includes a reset and submit button as well as the necessary event
    * management for an accessible search experience.
    *
-   * As headless components don't control styling, this renders a
-   * *browser-styled* form containing an input field as well as a reset and
-   * submit button by default.
-   *
-   * **Note:** By default the currently selected suggestion is not highlighted.
-   * Setting `debug` to `true` applies minimal styling to the highlighted
-   * selection for debugging purposes (however, this is not meant for production!).
-   *
-   * Custom reset und submit buttons can be passed as props. If you do so, make
-   * sure to add the appropriate types, or the form will not work as expected.
-   *
-   * **A11y:** If you replace the inside of a button with an icon, make sure to
-   * add an `aria-label` to the button for a11y reasons.
-   *
    * @component
    */
 

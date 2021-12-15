@@ -8,8 +8,12 @@
     <code class="title no-style">{title}</code>
   {/if}
   <div class="side-by-side">
-    <slot name="left" />
-    <slot name="right" />
+    <div>
+      <slot name="left" />
+    </div>
+    <div>
+      <slot name="right" />
+    </div>
   </div>
 </div>
 
@@ -20,6 +24,7 @@
 
   .wrapper .title {
     margin-left: 2rem;
+    font-weight: bold;
   }
 
   .side-by-side {

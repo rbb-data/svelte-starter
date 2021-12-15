@@ -10,8 +10,8 @@ This action queries [openrouteservice's autocomplete API](https://openrouteservi
 
 **Dispatched events:** `search` `result`
 
-- `search` is dispatched on the input event and exposes the current list of suggestions (of type `Suggestion[]`)
-- `result` is dispatched on the change event and exposes the user-selected result if any (of type `Suggestion | null`)
+- `search` is dispatched when the user types and exposes the current list of suggestions (of type `Suggestion[]`)
+- `result` is dispatched when the user selects a suggestion and exposes the user-selected result if any (of type `Suggestion | null`)
 
 where `Suggestion` is defined as `{ location: Point; properties: Feature['properties'] }` with feature properties such as name, street, housenumber, postalcode, and many more.
 
@@ -19,7 +19,7 @@ where `Suggestion` is defined as `{ location: Point; properties: Feature['proper
 
 By default, few restrictions are applied to the location search (see API table). However, openrouteservice can be fully configured by passing `openRouteServiceConfig` that is defined as:
 
-```typescript
+```javascript
 {
   // see https://github.com/pelias/documentation/blob/master/autocomplete.md#sources
   sources?: Array<'openstreetmap' | 'openaddresses' | 'geonames' | 'whosonfirst'>;

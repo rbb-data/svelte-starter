@@ -20,13 +20,23 @@
   {/if}
   <div class="snippets">
     {#if script}
-      <Snippet title="script" source={script} language="javascript" />
+      <Snippet
+        title="script"
+        boldTitle={false}
+        source={script}
+        language="javascript"
+      />
     {/if}
     {#if markup}
-      <Snippet title="markup" source={markup} language="html" />
+      <Snippet
+        title="markup"
+        boldTitle={false}
+        source={markup}
+        language="svelte"
+      />
     {/if}
     {#if style}
-      <Snippet title="style" source={style} language="css" />
+      <Snippet title="style" boldTitle={false} source={style} language="css" />
     {/if}
   </div>
 </div>

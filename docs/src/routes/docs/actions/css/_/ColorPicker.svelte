@@ -5,15 +5,13 @@
 </script>
 
 <div>
-  <div>
-    <label for="color-picker">Pick a color</label>
-    <!-- store the user-selected color in the 'color' variable -->
-    <input type="color" id="color-picker" name="color" bind:value={color} />
-  </div>
-
-  <!-- the user-selected color is dynamically set on this div -->
-  <div class="dynamic-color" use:css={{ color }} />
+  <label for="color-picker">Pick a color</label>
+  <!-- store the user-selected color in the 'color' variable -->
+  <input type="color" id="color-picker" name="color" bind:value={color} />
 </div>
+
+<!-- the user-selected color is dynamically set on this div -->
+<div class="dynamic-color" use:css={{ color }} />
 
 <style>
   .dynamic-color {

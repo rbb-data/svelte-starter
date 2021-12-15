@@ -12,5 +12,5 @@ The `data` argument that is passed to `fuzzysearch` can either be a list of stri
 
 **Dispatched events:** `search` `result`
 
-- `search` is dispatched on the input event and exposes the current list of suggestions (of type `Item[]`)
-- `result` is dispatched on the change event and exposes the user-selected result if any (of type `Item | null`)
+- `search` is dispatched when the user types and exposes the current list of suggestions (of type `Item[]`)
+- `result` is dispatched when the user selects a suggestion and exposes the user-selected result (of type `Item | null`)

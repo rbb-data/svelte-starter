@@ -188,6 +188,7 @@ export default function geolocalization(
       lang: 'de',
       size: 8,
     };
+  if (!options.keepFeature) options.keepFeature = () => true;
 
   /** @type {Suggestion[]} */
   let suggestions = [];

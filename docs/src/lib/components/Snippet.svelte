@@ -1,6 +1,5 @@
 <script>
   import Prism from 'prismjs';
-  import 'prismjs/components/prism-typescript';
   import 'prism-svelte';
 
   /** @type {string} */
@@ -11,6 +10,8 @@
 
   /** @type {string} */
   export let title = undefined;
+
+  export let boldTitle = true;
 
   export let inline = false;
 
@@ -26,20 +27,28 @@
     {@html highlight}
   </code>
 {:else}
-  {#if title}
-    <code class="title no-style">{title}</code>
-  {/if}
-  <pre
-    class={`language-${language}`}>
+  <div class="wrapper">
+    {#if title}
+      <code class="title no-style" class:bold={boldTitle}>
+        {title}
+      </code>
+    {/if}
+    <pre
+      class={`language-${language}`}>
     <code class="no-style">
       {@html highlight}
     </code>
   </pre>
+  </div>
 {/if}
 
 <style>
   .title {
     margin-left: 2rem;
+  }
+
+  .title.bold {
+    font-weight: bold;
   }
 
   pre {

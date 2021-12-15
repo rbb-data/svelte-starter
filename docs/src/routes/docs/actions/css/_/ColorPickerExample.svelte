@@ -4,8 +4,7 @@
 
   import ColorPicker from './ColorPicker.svelte';
 
-  const script = `import { css } from '$lib/actions/css';
-let color = '#F0F8FF';`;
+  const script = `let color = '#F0F8FF';`;
 
   const markup = `<div>
   <label for="color-picker">Pick a color</label>

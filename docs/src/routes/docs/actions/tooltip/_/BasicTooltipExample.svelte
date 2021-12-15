@@ -4,9 +4,7 @@
 
   import Basic from './Basic.svelte';
 
-  const script = `import { tooltip } from '@rbb-data/svelte-starter/actions';
-
-// can render anything but is typically absolutley positioned
+  const script = `// can render anything but is typically absolutley positioned
 import Tooltip from './Tooltip.svelte';`;
 
   const markup = `<!-- 'Tooltip' must render markup id'ed by 'tooltip'-->

@@ -18,6 +18,6 @@ div {
 
 ## Example
 
-Check out this working example of a dynamically updating background color based on a user's input:
+Check out this example of an element whose background color is controlled by user input:
 
 <ColorPickerExample />
