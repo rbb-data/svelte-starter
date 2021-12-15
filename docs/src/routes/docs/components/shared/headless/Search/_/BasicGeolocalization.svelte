@@ -1,6 +1,5 @@
 <script>
-  import { Search } from '@rbb-data/svelte-starter';
-  import { geolocalization } from '@rbb-data/svelte-starter/actions';
+  import { Search, geolocalization } from '@rbb-data/svelte-starter';
 
   /** @type {import('@rbb-data/svelte-starter/actions/geolocalization').Suggestion} */
   let result;

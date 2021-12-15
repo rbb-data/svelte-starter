@@ -1,5 +1,5 @@
 <script>
-  import { tooltip } from '@rbb-data/svelte-starter/actions';
+  import { tooltip } from '@rbb-data/svelte-starter';
 
   // can render anything but is typically absolutley positioned
   import Tooltip from './Tooltip.svelte';

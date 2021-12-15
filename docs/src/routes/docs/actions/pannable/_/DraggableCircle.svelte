@@ -1,7 +1,7 @@
 <script>
   import { writable } from 'svelte/store';
 
-  import { pannable, drag } from '@rbb-data/svelte-starter/actions';
+  import { pannable, drag } from '@rbb-data/svelte-starter';
 
   const radius = 20;
 

@@ -1,6 +1,5 @@
 <script>
-  import { Tabs } from '@rbb-data/svelte-starter';
-  import { css } from '@rbb-data/svelte-starter/actions';
+  import { Tabs, css } from '@rbb-data/svelte-starter';
 
   const tabs = [
     { label: 'Label #1', color: 'steelblue' },

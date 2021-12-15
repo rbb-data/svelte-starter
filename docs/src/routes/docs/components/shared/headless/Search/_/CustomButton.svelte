@@ -1,6 +1,5 @@
 <script>
-  import { Search } from '@rbb-data/svelte-starter';
-  import { fuzzysearch } from '@rbb-data/svelte-starter/actions';
+  import { Search, fuzzysearch } from '@rbb-data/svelte-starter';
 
   const bezirke = [
     'Mitte',

@@ -1,5 +1,5 @@
 <script>
-  import { css } from '@rbb-data/svelte-starter/actions';
+  import { css } from '@rbb-data/svelte-starter';
 
   /** @type {string} */
   export let label;

@@ -1,5 +1,5 @@
 <script>
-  import { css } from '@rbb-data/svelte-starter/actions';
+  import { css } from '@rbb-data/svelte-starter';
 
   let color = '#FFD700';
 </script>
