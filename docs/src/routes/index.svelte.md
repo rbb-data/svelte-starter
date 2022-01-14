@@ -1,6 +1,6 @@
 # @rbb-data/svelte-starter
 
-To do...
+To do..
 
 ## Headless components
 

@@ -4,4 +4,4 @@ node_modules
 /.svelte-kit
 /package
 *.local
-/data
+/src/data

@@ -12,11 +12,10 @@ const config = {
   extensions: ['.svelte', '.svelte.md'],
   preprocess: mdsvex({ extensions: ['.svelte.md'] }),
   kit: {
-    adapter: adapter({ pages: process.env.BUILD_DIR }),
+    adapter: adapter(),
     paths: {
       base: dev ? '' : process.env.BASE_PATH,
     },
-    router: dev,
   },
 };
 
