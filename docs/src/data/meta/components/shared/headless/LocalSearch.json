@@ -1,0 +1,54 @@
+{
+  "name": "LocalSearch",
+  "description": "Search and geocode locations in Berlin or Brandenburg",
+  "props": [
+    {
+      "name": "location",
+      "description": "region to search in",
+      "type": "\"berlin\" | \"brandenburg\"",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "layers",
+      "description": "layers to search through (see\nhttps://github.com/pelias/documentation/blob/master/autocomplete.md#layers)",
+      "type": "Layer[]",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "format",
+      "description": "format feature for display",
+      "type": "(feature: Feature) => string",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "sources",
+      "description": "geo service sources used by openrouteservice",
+      "type": "Source[]",
+      "optional": true,
+      "default": "['openstreetmap']",
+      "isExposed": false
+    },
+    {
+      "name": "limit",
+      "description": "maximum number of suggestions",
+      "type": "number",
+      "optional": true,
+      "default": "8",
+      "isExposed": false
+    },
+    {
+      "name": "result",
+      "description": "the search result",
+      "type": "Suggestion",
+      "optional": true,
+      "default": "null",
+      "isExposed": true
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "name": "geolocalization",
+    "description": "Allows to search and geocode locations if applied to an input field",
+    "type": "(node: HTMLInputElement, options?: Options) => { destroy(): void; }",
+    "params": [
+      {
+        "name": "node",
+        "type": "HTMLInputElement",
+        "description": "search field",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "options",
+        "type": "Options",
+        "description": "options where `keepFeature` can be used to\nfilter retrieved features and `openrouteserviceConfig` specifies the\nconfiguration when requesting data from\n[openrouteservice](https://openrouteservice.org) (see [Pelias'\ndocumentation](https://github.com/pelias/documentation/blob/master/autocomplete.md))",
+        "optional": true,
+        "default": "defaultOptions"
+      }
+    ]
+  }
+]

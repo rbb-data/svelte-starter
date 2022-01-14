@@ -1,0 +1,41 @@
+{
+  "name": "Tabs",
+  "description": "Renders a list of selectable tabs",
+  "props": [
+    {
+      "name": "tabs",
+      "description": "list of tabs",
+      "type": "any[]",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "initialIndex",
+      "description": "initial index of the active tab",
+      "type": "number",
+      "optional": true,
+      "default": "0",
+      "isExposed": false
+    },
+    {
+      "name": "activeIndex",
+      "description": "index of the active tab",
+      "type": "number",
+      "optional": true,
+      "default": "initialIndex",
+      "isExposed": true
+    },
+    {
+      "name": "debug",
+      "description": "if true, minimal styling is applied to highlight the selected tab for\ndebugging purposes; however, this is not recommended for production use",
+      "type": "boolean",
+      "optional": true,
+      "default": "false",
+      "isExposed": false
+    }
+  ],
+  "slots": [
+    "default"
+  ]
+}

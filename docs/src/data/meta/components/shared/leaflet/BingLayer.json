@@ -1,0 +1,30 @@
+{
+  "name": "BingLayer",
+  "description": "Renderless component that implements a Leaflet layer that renders a Bing map",
+  "props": [
+    {
+      "name": "type",
+      "description": "type of imagery (see\nhttps://docs.microsoft.com/en-us/bingmaps/rest-services/imagery/get-imagery-metadata#template-parameters)",
+      "type": "\"Aerial\" | \"AerialWithLabelsOnDemand\" | \"CanvasDark\" | \"CanvasLight\" | \"CanvasGray\" | \"RoadOnDemand\"",
+      "optional": true,
+      "default": "'CanvasGray'",
+      "isExposed": false
+    },
+    {
+      "name": "culture",
+      "description": "culture code (see\nhttps://docs.microsoft.com/en-us/bingmaps/rest-services/common-parameters-and-types/supported-culture-codes)",
+      "type": "string",
+      "optional": true,
+      "default": "'de-DE'",
+      "isExposed": false
+    },
+    {
+      "name": "styleSheet",
+      "description": "style sheet (see\nhttps://docs.microsoft.com/en-us/bingmaps/styling/map-style-sheet-entries#settings-and-elements)",
+      "type": "MapStyleSheet",
+      "optional": true,
+      "default": "{}",
+      "isExposed": false
+    }
+  ]
+}

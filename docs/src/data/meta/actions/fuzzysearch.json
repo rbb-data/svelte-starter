@@ -1,0 +1,23 @@
+[
+  {
+    "name": "fuzzysearch",
+    "description": " Implements fuzzy searching on an input field",
+    "type": "(node: HTMLInputElement, searchOptions: { data: Item[]; key?: string; limit?: number; }) => { destroy(): void; }",
+    "params": [
+      {
+        "name": "node",
+        "type": "HTMLInputElement",
+        "description": "search field",
+        "optional": false,
+        "default": null
+      },
+      {
+        "name": "searchOptions",
+        "type": "{ data: Item[]; key?: string; limit?: number; }",
+        "description": "search options where `data` is an array of objects or strings to search\nthrough, `key` is the key to search on if `data` is an array of objects,\nand `limit` is the maximum number of results to return",
+        "optional": false,
+        "default": null
+      }
+    ]
+  }
+]

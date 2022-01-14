@@ -1,0 +1,106 @@
+{
+  "name": "Search",
+  "description": "`Search` implements an input field that facilitates searching. The setup\nincludes a reset and submit button as well as the necessary event\nmanagement for an accessible search experience.",
+  "props": [
+    {
+      "name": "search",
+      "description": "Svelte action to perform search on key strokes; must expose a custom event\n`search` of type `CustomEvent<{ suggestions: Array<Item> }>`",
+      "type": "(node: HTMLInputElement, options: SearchConfig) => any",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "searchConfig",
+      "description": "options for the search action",
+      "type": "SearchConfig",
+      "optional": true,
+      "default": "undefined",
+      "isExposed": false
+    },
+    {
+      "name": "format",
+      "description": "format suggestion for display",
+      "type": "(d: any) => string",
+      "optional": true,
+      "default": "(d) => d",
+      "isExposed": false
+    },
+    {
+      "name": "placeholder",
+      "description": "the placeholder text to display",
+      "type": "string",
+      "optional": true,
+      "default": "'Placeholder'",
+      "isExposed": false
+    },
+    {
+      "name": "hideLabel",
+      "description": "if true, the label is hidden visually (but is still accessible)",
+      "type": "boolean",
+      "optional": true,
+      "default": "false",
+      "isExposed": false
+    },
+    {
+      "name": "label",
+      "description": "the label to display",
+      "type": "string",
+      "optional": true,
+      "default": "'Label'",
+      "isExposed": false
+    },
+    {
+      "name": "hideResetButton",
+      "description": "if true, no reset button is rendered",
+      "type": "boolean",
+      "optional": true,
+      "default": "false",
+      "isExposed": false
+    },
+    {
+      "name": "resetButtonLabel",
+      "description": "the reset button label",
+      "type": "string",
+      "optional": true,
+      "default": "'Reset'",
+      "isExposed": false
+    },
+    {
+      "name": "hideSubmitButton",
+      "description": "if true, no submit button is rendered",
+      "type": "boolean",
+      "optional": true,
+      "default": "false",
+      "isExposed": false
+    },
+    {
+      "name": "submitButtonLabel",
+      "description": "the submit button label",
+      "type": "string",
+      "optional": true,
+      "default": "'Submit'",
+      "isExposed": false
+    },
+    {
+      "name": "result",
+      "description": "the search result",
+      "type": "Item",
+      "optional": true,
+      "default": "null",
+      "isExposed": true
+    },
+    {
+      "name": "debug",
+      "description": "if true, minimal styling is applied to highlight the selected suggestion\nfor debugging purposes; however, this is not recommended for production use",
+      "type": "boolean",
+      "optional": true,
+      "default": "false",
+      "isExposed": false
+    }
+  ],
+  "slots": [
+    "reset-button",
+    "submit-button"
+  ]
+}

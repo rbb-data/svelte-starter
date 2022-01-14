@@ -1,0 +1,57 @@
+{
+  "name": "Svg",
+  "description": "SVG container that implements a common pattern for sizing charts",
+  "props": [
+    {
+      "name": "width",
+      "description": "width of the svg",
+      "type": "number",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "height",
+      "description": "height of the svg",
+      "type": "number",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "boundedWidth",
+      "description": "width of the canvas (the svg's width minus margins)",
+      "type": "number",
+      "optional": true,
+      "default": "0",
+      "isExposed": true
+    },
+    {
+      "name": "boundedHeight",
+      "description": "height of the canvas (the svg's height minus margins)",
+      "type": "number",
+      "optional": true,
+      "default": "0",
+      "isExposed": true
+    },
+    {
+      "name": "margin",
+      "description": "size of the margins on each side of the svg",
+      "type": "{ top: number; right: number; bottom: number; left: number; }",
+      "optional": true,
+      "default": "{\n    top: 0,\n    right: 0,\n    bottom: 0,\n    left: 0,\n  }",
+      "isExposed": false
+    },
+    {
+      "name": "debug",
+      "description": "if true, show the svg's outline and highlight canvas",
+      "type": "boolean",
+      "optional": true,
+      "default": "false",
+      "isExposed": false
+    }
+  ],
+  "slots": [
+    "default"
+  ]
+}

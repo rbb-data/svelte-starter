@@ -1,7 +1,14 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/fetchMetaData.js';
-  const filename = 'data/meta/%rbb-data.placeholder%.json';
-  export const load = fetchMetaData(filename);
+  export const load = async () => {
+    const meta = (await import('$lib/../data/meta/%rbb-data.placeholder%.json'))
+      .default;
+
+    return {
+      props: {
+        meta,
+      },
+    };
+  };
 </script>
 
 <script>

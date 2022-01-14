@@ -1,0 +1,54 @@
+[
+  {
+    "heading": "Stores",
+    "urlPrefix": "/stores",
+    "type": "store",
+    "items": [
+      "prefersReducedMotion"
+    ]
+  },
+  {
+    "heading": "Actions",
+    "urlPrefix": "/actions",
+    "type": "action",
+    "items": [
+      "css",
+      "focus",
+      "fuzzysearch",
+      "geolocalization",
+      "pannable",
+      "tooltip"
+    ]
+  },
+  {
+    "heading": "Components",
+    "urlPrefix": "/components/shared",
+    "type": "component",
+    "items": [
+      "LocalMap"
+    ]
+  },
+  {
+    "heading": "Headless Components",
+    "urlPrefix": "/components/shared/headless",
+    "type": "component",
+    "items": [
+      "LocalSearch",
+      "Search",
+      "Slider",
+      "Svg",
+      "Tabs"
+    ]
+  },
+  {
+    "heading": "Leaflet Components",
+    "urlPrefix": "/components/shared/leaflet",
+    "type": "component",
+    "items": [
+      "BingLayer",
+      "GeoJSON",
+      "Map",
+      "ZoomControl"
+    ]
+  }
+]

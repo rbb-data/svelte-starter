@@ -1,0 +1,22 @@
+{
+  "name": "GeoJSON",
+  "description": "Renderless component that adds GeoJSON to a Leaflet map",
+  "props": [
+    {
+      "name": "data",
+      "description": "geo data in GeoJSON format",
+      "type": "GeoJsonObject",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "options",
+      "description": "leaflet options to render GeoJSON (see https://leafletjs.com/reference.html#geojson)",
+      "type": "GeoJSONOptions<any>",
+      "optional": true,
+      "default": "undefined",
+      "isExposed": false
+    }
+  ]
+}

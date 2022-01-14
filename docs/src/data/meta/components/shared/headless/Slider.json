@@ -1,0 +1,46 @@
+{
+  "name": "Slider",
+  "description": "`Slider` renders a single component at a time and provides the necessary\nfunctionality to navigate back and forth through swipe gestures (on touch\ndevices) or mouse clicks (on desktop).",
+  "props": [
+    {
+      "name": "slides",
+      "description": "list of slides",
+      "type": "{ component: typeof SvelteComponentDev; props: Record<string, unknown>; }[]",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "prev",
+      "description": "function that determines the previous slide",
+      "type": "(index: number) => number",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "next",
+      "description": "function that determines the next slide",
+      "type": "(index: number) => number",
+      "optional": false,
+      "default": null,
+      "isExposed": false
+    },
+    {
+      "name": "initialActiveIndex",
+      "description": "intial slide index",
+      "type": "number",
+      "optional": true,
+      "default": "0",
+      "isExposed": false
+    },
+    {
+      "name": "activeIndex",
+      "description": "index of the currently visible slide",
+      "type": "number",
+      "optional": true,
+      "default": "initialActiveIndex",
+      "isExposed": true
+    }
+  ]
+}
