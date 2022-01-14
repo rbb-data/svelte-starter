@@ -1,3 +1,4 @@
+/** @type {{ ignoreFolders: string[]; sections: Record<string, string> }} */
 const config = {
   ignoreFolders: ['assets', 'helpers', 'components/demo'],
   sections: {
