@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-META_DIR=src/data/meta
+META_DIR=data/meta
 
 for f in $(find $META_DIR -name '*.json'); do
   base=${f#"$META_DIR/"}

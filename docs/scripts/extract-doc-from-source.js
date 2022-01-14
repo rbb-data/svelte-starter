@@ -12,7 +12,7 @@ import {
 import config from '../docs.config.js';
 
 const srcPrefix = '../src/lib/';
-const outPrefix = 'src/data/meta/';
+const outPrefix = 'data/meta/';
 
 /**
  * Creates missing directories along the path

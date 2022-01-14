@@ -1,14 +1,7 @@
 <script context="module">
-  export const load = async () => {
-    const meta = (await import('$lib/../data/meta/components/shared/leaflet/BingLayer.json'))
-      .default;
-
-    return {
-      props: {
-        meta,
-      },
-    };
-  };
+  import { fetchMetaData } from '$lib/fetchMetaData.js';
+  const filename = 'data/meta/components/shared/leaflet/BingLayer.json';
+  export const load = fetchMetaData(filename);
 </script>
 
 <script>

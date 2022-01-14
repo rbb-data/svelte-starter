@@ -40,7 +40,7 @@ function removePage(navSection, page, verbose = true) {
 
 function main() {
   // read navigation meta data
-  const filename = 'src/data/nav.json';
+  const filename = 'data/nav.json';
 
   /** @type {import('$lib/types').NavSection[]} */
   let navSections = fs.existsSync(filename)
@@ -48,7 +48,7 @@ function main() {
     : [];
 
   // collect all documentation files
-  const prefix = 'src/data/meta';
+  const prefix = 'data/meta';
   const files = glob.sync(`${prefix}/**/*.json`).map((file) => {
     const f = file.replace(prefix, '');
     return {

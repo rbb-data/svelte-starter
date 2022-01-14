@@ -1,14 +1,7 @@
 <script context="module">
-  export const load = async () => {
-    const meta = (await import('$lib/../data/meta/actions/pannable.json'))
-      .default;
-
-    return {
-      props: {
-        meta,
-      },
-    };
-  };
+  import { fetchMetaData } from '$lib/fetchMetaData.js';
+  const filename = 'data/meta/actions/pannable.json';
+  export const load = fetchMetaData(filename);
 </script>
 
 <script>
