@@ -1,7 +1,14 @@
 <script context="module">
-  import { fetchMetaData } from '$lib/fetchMetaData.js';
-  const filename = 'data/meta/components/shared/headless/LocalSearch.json';
-  export const load = fetchMetaData(filename);
+  export const load = async () => {
+    const meta = (await import('$lib/../data/meta/components/shared/headless/LocalSearch.json'))
+      .default;
+
+    return {
+      props: {
+        meta,
+      },
+    };
+  };
 </script>
 
 <script>
