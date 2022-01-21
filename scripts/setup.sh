@@ -12,7 +12,11 @@ cd $(dirname $0)/..
 
 # skip when the project was not templated
 [ $(basename $(pwd)) = 'svelte-starter' ] && exit 0
-[ "$(git log --oneline | wc -l)" -eq 1 ] || exit 0
+
+# prevent script from running multiple times
+if [ -d .git ]; then
+  [ "$(git log --oneline | wc -l)" -eq 1 ] || exit 0
+fi
 
 # remove documentation
 [ -d docs ] && rm -rf docs/
