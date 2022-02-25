@@ -189,6 +189,7 @@
 <style>
   .suggestions {
     position: relative;
+    z-index: 1;
   }
 
   ul {

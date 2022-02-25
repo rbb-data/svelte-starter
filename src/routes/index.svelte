@@ -46,8 +46,6 @@
 <script>
   import Demo from '$lib/components/demo/Demo.svelte';
 
-  import '../style/index.css';
-
   // these props are loaded on the server
   /** @type {{ x: number; y: number }[]} */
   export let data;
