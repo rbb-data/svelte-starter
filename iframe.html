@@ -6,29 +6,24 @@
   sized properly. If you don't want this, simply remove the script tags.
 -->
 
-<iframe
-  title="To do: Insert title"
-  loading="lazy"
-  width="100%"
-  height="600"
-  id="rbb-data--{project-name}"
-  src="https://www.rbb-online.de/static/rbb/rbb-data/{project-name}/"
-></iframe>
 <style>
   /* explained here: https://github.com/davidjbradshaw/iframe-resizer#typical-setup */
   #rbb-data--{project-name} {
     width: 1px;
     min-width: 100%;
-  }
-  /* fix position in app */
-  @media screen and (max-width: 630px) {
-    #rbb-data--{project-name} {
-      width: 100%; /* full width in app */
-      margin-left: 0; /* center in app */
-    }
+    border: 0;
   }
 </style>
-<script src="https://storage.googleapis.com/rbb-data-static/iframe-resizer/iframeResizer.min.js"></script>
+<iframe
+  id="rbb-data--{project-name}"
+  src="https://storage.googleapis.com/rbb-data-static/{project-name}/index.html"
+  title="IMPORTANT: ADD TITLE"
+  loading="lazy"
+  width="100%"
+  scrolling="no"
+  frameborder="0"
+></iframe>
+<script src="https://storage.googleapis.com/rbb-data-static/lib/iframe-resizer/iframe-resizer.js"></script>
 <script>
-  iFrameResize({}, '#rbb-data--{project-name}');
+  rbbData.resizeIframe('rbb-data--{project-name}');
 </script>

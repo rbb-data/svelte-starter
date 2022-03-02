@@ -5,10 +5,13 @@
     <link rel="icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     %svelte.head%
+    <!-- both needed for the iframe resizer script below -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=ResizeObserver"></script>
+    <script src="https://storage.googleapis.com/rbb-data-static/lib/lodash.throttle.js"></script>
   </head>
   <body>
     <div id="svelte">%svelte.body%</div>
-    <!-- iFrame resizer script -->
-    <script src="https://storage.googleapis.com/rbb-data-static/iframe-resizer/iframeResizer.contentWindow.min.js"></script>
+    <!-- iframe resizer script that notifies a parent window of changes to the body's height -->
+    <script src="https://storage.googleapis.com/rbb-data-static/lib/iframe-resizer/iframe-resizer.notify.js"></script>
   </body>
 </html>
