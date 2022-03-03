@@ -156,7 +156,7 @@ The deployed file will be available at https://storage.googleapis.com/rbb-data-s
 
 `iframe.html` contains a snippet for you to copy-paste into your article. Make sure to give the iframe an appropriate title.
 
-[David J. Bradshaw's iFrame Resizer script](https://github.com/davidjbradshaw/iframe-resizer) is supported by default. If you don't need this, simply remove the corresponding script tags in `iframe.html` and `src/app.html`.
+[A custom iframe resizer script](https://github.com/rbb-data/iframe-sizer-script) is supported by default that works on the web and in the rbb|24 app. If app support is not needed, use [David J. Bradshaw's resizer script](https://github.com/davidjbradshaw/iframe-resizer) instead. If you don't need any resizing, simply remove the corresponding script tags in `iframe.html` and `src/app.html`.
 
 ## Design tokens
 
