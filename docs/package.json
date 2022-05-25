@@ -11,17 +11,17 @@
     "update": "npm run extract-from-source && npm run generate-pages && npm run update-navigation"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^1.0.0-next.21",
-    "@sveltejs/kit": "next",
+    "@sveltejs/adapter-static": "1.0.0-next.21",
+    "@sveltejs/kit": "1.0.0-next.196",
     "@types/prismjs": "^1.16.6",
     "dotenv": "^10.0.0",
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^4.0.0",
     "glob": "^7.2.0",
     "mdsvex": "^0.9.8",
     "prism-svelte": "^0.4.7",
     "prismjs": "^1.25.0",
     "svelte": "^3.44.0",
-    "svelte-markdown": "^0.1.14",
+    "svelte-markdown": "^0.2.2",
     "typescript": "^4.5.2"
   },
   "type": "module"
