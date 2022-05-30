@@ -5,9 +5,10 @@ import path from 'path';
 import dotenv from 'dotenv';
 import archieml from 'archieml';
 
-import loadGoogleDoc from './_loadGoogleDoc.js';
+import { loadGoogleDoc } from './_loadFromGoogle.js';
 
 async function main() {
+  // read doc id from environment
   const googleDocId = process.env.GOOGLE_DOC_ID;
   if (!googleDocId) {
     process.stderr.write(
@@ -16,6 +17,7 @@ async function main() {
     process.exit(1);
   }
 
+  // read private key from environment
   const privateKey = process.env.GOOGLE_DOC_PRIVATE_KEY;
   if (!privateKey) {
     process.stderr.write(
@@ -24,10 +26,11 @@ async function main() {
     process.exit(1);
   }
 
+  // parse command line arguments
   const args = process.argv.slice(2);
   const preserveStyles = args.length > 0 && args[0] === '--preserve-styles';
 
-  const root = process.cwd();
+  // parse doc contents
   let content;
   try {
     content = await loadGoogleDoc(googleDocId, privateKey, preserveStyles);
@@ -40,9 +43,15 @@ async function main() {
     process.exit(1);
   }
 
+  // turn doc contents into structured data using ArchieML
   const googleDoc = archieml.load(content);
-  const out = './src/data/googleDoc.json';
-  fs.writeFileSync(path.join(root, out), JSON.stringify(googleDoc, null, 2));
+
+  // write to file
+  const out = 'src/data/google-doc.json';
+  fs.writeFileSync(
+    path.join(process.cwd(), out),
+    JSON.stringify(googleDoc, null, 2)
+  );
   process.stdout.write(`Written to ${out}\n`);
 }
 

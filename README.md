@@ -66,9 +66,17 @@ git push -u origin main
 - Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
 - Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env` to the doc's id
 - Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (TODO: Link)
-- Run `npm run update-google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/googleDoc.json`)
+- Run `npm run update-google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/google-doc.json`)
 
 By default, some formatting is preserved when loading the doc, including: bold, italic, underline, superscript, subscript, links. Anything else is stripped ("sanitized") for security reasons.
+
+## Connect to Google sheet
+
+- Create a google sheet
+- Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
+- Grab the sheet's id from its url and set `GOOGLE_SHEET_ID` in `.env` to the sheet's id
+- Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (TODO: Link)
+- Run `npm run update-google-sheets` (will parse the spreadsheet and write data to `src/data/google-sheets-{sheet-name}.csv`, where `{sheet-name}` is the name of the sheet and one file is generated for every sheet in the given spreadsheet)
 
 ## Helpers
 

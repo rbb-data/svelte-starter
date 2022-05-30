@@ -18,7 +18,8 @@
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "style-dictionary": "style-dictionary build --config style-dictionary/config.json && npm run format",
-    "update-google-doc": "node scripts/update-google-doc.js --preserve-styles"
+    "update-google-doc": "node scripts/update-google-doc.js --preserve-styles",
+    "update-google-sheets": "node scripts/update-google-sheets.js"
   },
   "dependencies": {
     "d3-array": "^3.1.1",

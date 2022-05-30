@@ -11,16 +11,84 @@ import sanitizeHtml from 'sanitize-html';
  * @param preserveStyles if true, preserve some formatting
  * @returns {Promise<string>} sanitized doc contents
  */
-export default async function loadGoogleDoc(
+export async function loadGoogleDoc(
   documentId,
   privateKey,
   preserveStyles = false
 ) {
-  const client = await connect(privateKey);
+  const auth = await authorize(privateKey);
+  const client = google.docs({ version: 'v1', auth });
   const { data } = await client.documents.get({
     documentId,
   });
   return parseGoogleDoc(data, preserveStyles);
+}
+
+/**
+ * Load data from a Google spreadsheet
+ *
+ * @param {string} spreadsheetId Google sheets ID
+ * @param {string} privateKey Google doc private key
+ */
+export async function loadGoogleSheet(spreadsheetId, privateKey) {
+  const auth = await authorize(privateKey);
+  const client = google.sheets({ version: 'v4', auth });
+  const { data } = await client.spreadsheets.get({
+    spreadsheetId,
+    includeGridData: true,
+  });
+  return parseGoogleSheets(data);
+}
+
+/**
+ * @param {import('googleapis/build/src/apis/sheets/v4').sheets_v4.Schema$Spreadsheet} spreadsheet
+ *   Google Doc spreadsheet object
+ */
+function parseGoogleSheets(spreadsheet) {
+  if (!spreadsheet.sheets) return {};
+
+  const sheets = {};
+  for (const sheet of spreadsheet.sheets) {
+    const { title } = sheet.properties;
+    const sheetName = title.toLowerCase().replace(' ', '-');
+    sheets[sheetName] = parseGoogleSheet(sheet);
+  }
+
+  return sheets;
+}
+
+/**
+ * @param {import('googleapis/build/src/apis/sheets/v4').sheets_v4.Schema$Sheet} sheet
+ *   Google Doc sheet object
+ */
+function parseGoogleSheet(sheet) {
+  if (
+    !sheet.data ||
+    sheet.data.length === 0 ||
+    sheet.data[0].rowData.length === 0
+  )
+    return [];
+
+  const sheetRows = sheet.data[0].rowData;
+
+  let columnNames = [];
+  for (const col of sheetRows[0].values) {
+    columnNames.push(col.formattedValue);
+  }
+
+  let data = [];
+  for (let rowIndex = 1; rowIndex < sheetRows.length; rowIndex++) {
+    const sheetRow = sheetRows[rowIndex];
+    let dataRow = {};
+    for (let colIndex = 0; colIndex < columnNames.length; colIndex++) {
+      if (!sheetRow.values) continue;
+      const cell = sheetRow.values[colIndex];
+      dataRow[columnNames[colIndex]] = cell ? cell.formattedValue : undefined;
+    }
+    data.push(dataRow);
+  }
+
+  return data;
 }
 
 /**
@@ -43,16 +111,17 @@ async function sanitize(input, preserveStyles = false) {
  * @param {string} privateKey Google doc private key
  * @returns authenticated Google doc client
  */
-async function connect(privateKey) {
-  const auth = await google.auth.getClient({
-    scopes: ['https://www.googleapis.com/auth/documents.readonly'],
+function authorize(privateKey) {
+  return google.auth.getClient({
+    scopes: [
+      'https://www.googleapis.com/auth/documents.readonly',
+      'https://www.googleapis.com/auth/spreadsheets.readonly',
+    ],
     credentials: {
       client_email: 'connect@rbb-datenteam.iam.gserviceaccount.com',
       private_key: privateKey,
     },
   });
-
-  return google.docs({ version: 'v1', auth });
 }
 
 /**
