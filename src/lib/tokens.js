@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Mon, 30 May 2022 15:07:01 GMT */
+/** Do not edit directly Generated on Mon, 30 May 2022 16:24:49 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
