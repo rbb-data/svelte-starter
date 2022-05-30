@@ -1,7 +1,8 @@
 {
-  "header": {
-    "title": "<b>Ein Aussagesatz oder notfalls eine Kurzbeschreibung</b>",
-    "subtitle": "Angabe der Metrik und Erklärung der Grafik"
+  "title": "Demo",
+  "person": {
+    "name": "Amanda",
+    "age": "26"
   },
   "listOfStrings": [
     "Erstes <b>Element</b>",
