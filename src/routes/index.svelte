@@ -8,7 +8,7 @@
   <h1>{googleDoc.title}</h1>
 
   <p>
-    Dieser Code lädt beispielhaft lokale Daten und ist zudem mit einem
+    Dieser Code lädt beispielhaft lokale Daten und ist mit einem
     <a
       href="https://docs.google.com/document/d/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A"
       target="_blank"
@@ -33,6 +33,7 @@
   </p>
 
   <table>
+    <caption>Lokale Daten</caption>
     <thead>
       <tr>
         <th>x</th>
@@ -57,6 +58,7 @@
   </p>
 
   <table>
+    <caption>Google Sheet</caption>
     <thead>
       <tr>
         <th>col1</th>
@@ -130,8 +132,9 @@
 
   table {
     font-family: monospace;
-    margin: var(--s-rem-2) 0;
+    margin: var(--s-rem-2) auto;
     border: 1px solid;
+    min-width: 100px;
 
     th,
     td {
