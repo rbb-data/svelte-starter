@@ -1,0 +1,24 @@
+@import './tokens.scss';
+
+@mixin breakpoint($mode) {
+  @if $mode == narrow {
+    @media (max-width: #{$bp-xs - 1}) {
+      @content;
+    }
+  }
+  @if $mode == mobile {
+    @media (max-width: #{$bp-sm - 1}) {
+      @content;
+    }
+  }
+  @if $mode == tablet {
+    @media (max-width: #{$bp-md - 1}) {
+      @content;
+    }
+  }
+  @if $mode == laptop {
+    @media (min-width: #{$bp-lg}) {
+      @content;
+    }
+  }
+}

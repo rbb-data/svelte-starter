@@ -1,0 +1,90 @@
+/* partly taken from https://github.com/andy-piccalilli/modern-css-reset (MIT licensed)
+and https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+@import './tokens.css';
+@import './mixins.scss';
+@import './fonts.css';
+
+/* remove animations and transitions for people that prefer not to see them */
+@mixin use-reduced-motion {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+* {
+  margin: 0;
+
+  @media (prefers-reduced-motion: reduce) {
+    @include use-reduced-motion;
+  }
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+
+    @media (prefers-reduced-motion: reduce) {
+      @include use-reduced-motion;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--c-gray-500);
+    outline-offset: 2px;
+  }
+}
+
+body {
+  font-family: 'Interstate', sans-serif;
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+.appearance-none {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* removes user agent styles */
+.reset {
+  all: unset;
+  box-sizing: border-box;
+}
+
+/* content is _visually_ hidden but still accessbile to screen readers */
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
+
+.slant {
+  clip-path: polygon(
+    var(--slant) 0,
+    100% 0,
+    calc(100% - var(--slant)) 100%,
+    0 100%
+  );
+
+  &:first-of-type {
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant)) 100%, 0 100%);
+  }
+
+  &:last-of-type {
+    clip-path: polygon(var(--slant) 0, 100% 0, 100% 100%, 0 100%);
+  }
+}

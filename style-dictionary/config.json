@@ -11,6 +11,16 @@
         }
       ]
     },
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "src/style/",
+      "files": [
+        {
+          "destination": "tokens.scss",
+          "format": "scss/variables"
+        }
+      ]
+    },
     "js": {
       "transformGroup": "js",
       "transforms": [
