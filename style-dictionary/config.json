@@ -6,7 +6,7 @@
       "buildPath": "src/style/",
       "files": [
         {
-          "destination": "variables.css",
+          "destination": "tokens.css",
           "format": "css/variables"
         }
       ]
@@ -16,13 +16,13 @@
       "transforms": [
         "attribute/cti",
         "name/cti/camel",
-        "size/rem",
+        "size/unitless",
         "color/hex"
       ],
-      "buildPath": "src/style/",
+      "buildPath": "src/lib/",
       "files": [
         {
-          "destination": "variables.js",
+          "destination": "tokens.js",
           "format": "javascript/es6"
         }
       ]

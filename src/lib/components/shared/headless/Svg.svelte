@@ -5,7 +5,7 @@
    * @component
    */
 
-  import { translate } from '$lib/helpers/utils';
+  import { translate } from '$lib/utils';
 
   /**
    * width of the svg

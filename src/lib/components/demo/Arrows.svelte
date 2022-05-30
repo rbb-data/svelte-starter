@@ -3,7 +3,7 @@
 
   import Arrow from './Arrow.svelte';
   import css from '$lib/actions/css';
-  import { translate } from '$lib/helpers/utils';
+  import { translate } from '$lib/utils';
 
   /** @type {('n' | 's' | 'e' | 'w')[]} */
   export let orientations = ['n', 'w', 's', 'e'];

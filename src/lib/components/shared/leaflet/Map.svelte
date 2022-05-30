@@ -9,7 +9,7 @@
   import { browser } from '$app/env';
 
   import css from '$lib/actions/css';
-  import { px } from '$lib/helpers/utils';
+  import { px } from '$lib/utils';
 
   import { key } from '$lib/assets/leaflet';
 

@@ -1,12 +1,12 @@
 {
   "header": {
-    "title": "Ein Aussagesatz oder notfalls eine Kurzbeschreibung",
+    "title": "<b>Ein Aussagesatz oder notfalls eine Kurzbeschreibung</b>",
     "subtitle": "Angabe der Metrik und Erklärung der Grafik"
   },
   "listOfStrings": [
-    "Erstes Element",
-    "Zweites Element",
-    "Drittes Element"
+    "Erstes <b>Element</b>",
+    "Zweites <i>Element</i>",
+    "Drittes <u>Element</u>"
   ],
   "arrayOfObjects": [
     {

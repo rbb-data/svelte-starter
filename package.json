@@ -17,8 +17,8 @@
     "deploy:google-cloud": "npm run build:google-cloud && gsutil -m rsync -rd build/ gs://rbb-data-static/{project-name}",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "style-dictionary": "style-dictionary build --config style-dictionary/config.json && npm run format",
-    "update-google-doc": "node scripts/update-google-doc.js --preserve-styles",
+    "update-tokens": "node style-dictionary/build.cjs && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/**/tokens.{css,js}",
+    "update-google-doc": "node scripts/update-google-doc.js --preserve-styles && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/data/google-doc.json",
     "update-google-sheets": "node scripts/update-google-sheets.js"
   },
   "dependencies": {

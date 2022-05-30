@@ -4,7 +4,7 @@
   import Arrows from './Arrows.svelte';
 
   import pannable, { drag } from '$lib/actions/pannable';
-  import { translate } from '$lib/helpers/utils';
+  import { translate } from '$lib/utils';
 
   // initial x and y coordinates
   /** @type {number} */
