@@ -4,8 +4,9 @@ const StyleDictionary = require('style-dictionary');
 StyleDictionary.registerTransform({
   name: 'size/unitless',
   type: 'value',
-  matcher: (token) => token.attributes.category === 'breakpoint',
-  transformer: (token) => +token.value.replace(/\D/g, ''),
+  matcher: (token) =>
+    ['bp', 's', 'font-size', 'line-height'].includes(token.attributes.category),
+  transformer: (token) => +token.value.replace('px', '').replace('rem', ''),
 });
 
 // apply the configuration

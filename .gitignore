@@ -8,3 +8,4 @@ node_modules
 /docs/.svelte-kit
 /docs/out*
 *.local
+static/fonts

@@ -2,7 +2,7 @@
 and https://www.joshwcomeau.com/css/custom-css-reset/ */
 
 @import './fonts';
-@import './variables';
+@import './tokens';
 
 *,
 *::before,
