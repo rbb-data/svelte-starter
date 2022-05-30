@@ -1,0 +1,21 @@
+{
+  "header": {
+    "title": "<b>Ein Aussagesatz oder notfalls eine Kurzbeschreibung</b>",
+    "subtitle": "Angabe der Metrik und Erklärung der Grafik"
+  },
+  "listOfStrings": [
+    "Erstes <b>Element</b>",
+    "Zweites <i>Element</i>",
+    "Drittes <u>Element</u>"
+  ],
+  "arrayOfObjects": [
+    {
+      "name": "Amanda",
+      "age": "26"
+    },
+    {
+      "name": "Tessa",
+      "age": "30"
+    }
+  ]
+}

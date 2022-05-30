@@ -60,25 +60,15 @@ git branch -M main
 git push -u origin main
 ```
 
-## Loading data
-
-- Move your data file to `./data`
-- Fetch `/load/data/my-data-file.csv` in SvelteKit's [`load`](https://kit.svelte.dev/docs#loading) function (see `src/routes/index.svelte`)
-
-Supported file formats are `*.json`, `*.yaml` and `*.csv`. If you want to add support for another format, just add an appropriate parser in `src/routes/load/data/[filename].ts`.
-
 ## Connect to Google doc
 
 - Create a google doc
 - Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
-- Grab the doc's id from its url
-- Fetch `/load/google-doc/my-google-doc-id` in SvelteKit's [`load`](https://kit.svelte.dev/docs#loading) function (see `src/routes/index.svelte`)
+- Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env` to the doc's id
+- Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (TODO: Link)
+- Run `npm run update-google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/googleDoc.json`)
 
-By default any formatting is ignored when loading the doc. To preserve some formatting fetch from `/load/google-doc/my-google-doc-id?preserve-styles` instead. Supported styles are: bold, italic, underline, superscript, subscript. As well as linked content. Anything else is stripped ("sanitized") for security reasons.
-
-The response is a json object with the contents of your doc parsed as [ArchieML](http://archieml.org).
-
-The Google credentials necessary to access docs that are shared with _connect@rbb-datenteam.iam.gserviceaccount.com_ should be stored in a json file named `google-credentials.json`. Secrets are not stored in version control; let one of your colleagues know, if you need them :)
+By default, some formatting is preserved when loading the doc, including: bold, italic, underline, superscript, subscript, links. Anything else is stripped ("sanitized") for security reasons.
 
 ## Helpers
 

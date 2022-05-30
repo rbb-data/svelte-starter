@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    %svelte.head%
+    %sveltekit.head%
     <!-- both needed for the iframe resizer script below -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=ResizeObserver"></script>
     <script src="https://storage.googleapis.com/rbb-data-static/lib/lodash.throttle.js"></script>
   </head>
   <body>
-    <div id="svelte">%svelte.body%</div>
+    <div id="svelte">%sveltekit.body%</div>
     <!-- iframe resizer script that notifies a parent window of changes to the body's height -->
     <script src="https://storage.googleapis.com/rbb-data-static/lib/iframe-resizer/iframe-resizer.notify.min.js"></script>
   </body>

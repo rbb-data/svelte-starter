@@ -1,8 +1,27 @@
 // adapted from https://github.com/rdmurphy/doc-to-archieml (MIT licensed)
 
-import fs from 'fs';
 import { google } from 'googleapis';
 import sanitizeHtml from 'sanitize-html';
+
+/**
+ * Load content from a Google doc
+ *
+ * @param {string} documentId Google doc ID
+ * @param {string} privateKey Google doc private key
+ * @param preserveStyles if true, preserve some formatting
+ * @returns {Promise<string>} sanitized doc contents
+ */
+export default async function loadGoogleDoc(
+  documentId,
+  privateKey,
+  preserveStyles = false
+) {
+  const client = await connect(privateKey);
+  const { data } = await client.documents.get({
+    documentId,
+  });
+  return parseGoogleDoc(data, preserveStyles);
+}
 
 /**
  * Sanitize HTML
@@ -21,38 +40,19 @@ async function sanitize(input, preserveStyles = false) {
 /**
  * Connect to Google Docs
  *
- * @param {string} keyFile path to secret credential file
+ * @param {string} privateKey Google doc private key
  * @returns authenticated Google doc client
  */
-async function connect(keyFile) {
+async function connect(privateKey) {
   const auth = await google.auth.getClient({
     scopes: ['https://www.googleapis.com/auth/documents.readonly'],
-    keyFile,
+    credentials: {
+      client_email: 'connect@rbb-datenteam.iam.gserviceaccount.com',
+      private_key: privateKey,
+    },
   });
 
   return google.docs({ version: 'v1', auth });
-}
-
-/**
- * Load content from a Google doc
- *
- * @param {string} documentId Google doc ID
- * @param preserveStyles if true, preserve some formatting
- * @returns {Promise<string>} sanitized doc contents
- */
-async function loadGoogleDoc(
-  documentId,
-  preserveStyles = false,
-  keyFile = 'google-credentials.json'
-) {
-  // check if credentials file exists
-  if (!fs.existsSync(keyFile)) return null;
-
-  const client = await connect(keyFile);
-  const { data } = await client.documents.get({
-    documentId,
-  });
-  return parseGoogleDoc(data, preserveStyles);
 }
 
 /**
@@ -171,5 +171,3 @@ function wrap(content, tag) {
 
   return [ws.start, `<${tag}>`, content.trim(), `</${tag}>`, ws.end].join('');
 }
-
-export default loadGoogleDoc;
