@@ -3,9 +3,9 @@ node_modules
 /build
 /.svelte-kit
 /package
-google-credentials.json
 /docs/data
 /docs/build
 /docs/.svelte-kit
 /docs/out*
 *.local
+static/fonts

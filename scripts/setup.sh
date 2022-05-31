@@ -22,4 +22,4 @@ fi
 [ -d docs ] && rm -rf docs/
 
 # substitute '{project-name}' with the current folder name
-sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
+sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html scripts/deploy-to-gc-storage.sh

@@ -1,13 +1,11 @@
 {
+  "extends": "./.svelte-kit/tsconfig.json",
   "compilerOptions": {
-    "checkJs": true,
-    "baseUrl": ".",
-    "noImplicitAny": true,
-    "resolveJsonModule": true,
     "paths": {
       "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"]
+      "$lib/*": ["src/lib/*"],
+      "$data": ["src/data"],
+      "$data/*": ["src/data/*"]
     }
-  },
-  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"]
+  }
 }

@@ -8,7 +8,7 @@
    */
 
   import css from '$lib/actions/css';
-  import { px } from '$lib/helpers/utils';
+  import { px } from '$lib/utils';
 
   /** @typedef {any} Item */
   /** @typedef {Record<string, any>} SearchConfig */

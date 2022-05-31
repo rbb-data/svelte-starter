@@ -1,4 +1,7 @@
+import path from 'path';
 import adapter from '@sveltejs/adapter-static';
+import preprocess from 'svelte-preprocess';
+import dsv from '@rollup/plugin-dsv';
 
 import dotenv from 'dotenv';
 
@@ -16,7 +19,24 @@ const config = {
     package: {
       exports: (path) => ['index.js'].includes(path),
     },
+    prerender: { default: true },
+    vite: {
+      plugins: [dsv()],
+
+      resolve: {
+        alias: {
+          $data: path.resolve('./src/data'),
+        },
+      },
+    },
   },
+
+  preprocess: [
+    preprocess({
+      scss: true,
+      postcss: true,
+    }),
+  ],
 };
 
 export default config;

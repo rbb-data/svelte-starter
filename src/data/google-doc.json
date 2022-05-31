@@ -1,0 +1,22 @@
+{
+  "title": "Demo",
+  "person": {
+    "name": "Amanda",
+    "age": "26"
+  },
+  "listOfStrings": [
+    "Erstes <b>Element</b>",
+    "Zweites <i>Element</i>",
+    "Drittes <u>Element</u>"
+  ],
+  "arrayOfObjects": [
+    {
+      "name": "Amanda",
+      "age": "26"
+    },
+    {
+      "name": "Tessa",
+      "age": "30"
+    }
+  ]
+}

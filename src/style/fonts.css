@@ -2,24 +2,34 @@
   font-family: 'Interstate';
   font-style: normal;
   font-weight: 400;
-  src: url('https://www.rbb24.de/basis/webfont/b850db31-9043-48a9-9105-f6215999635a-3.woff')
-    format('woff');
+  src: local('Interstate'),
+    url('fonts/rbb_V2_Interstate-Light.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interstate';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Interstate'),
+    url('fonts/rbb_V2_Interstate-Regular.woff') format('woff');
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Interstate';
   font-style: normal;
   font-weight: 700;
-  src: url('https://www.rbb24.de/basis/webfont/3d6b9143-eb88-4451-80b0-7d05bd58b8a1-3.woff')
-    format('woff');
+  src: local('Interstate'),
+    url('fonts/rbb_V2_Interstate-Bold.woff') format('woff');
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Interstate-Condensed';
+  font-family: 'Interstate';
   font-style: normal;
   font-weight: 900;
-  src: url('https://www.rbb24.de/basis/webfont/19201dd5-5c2a-4dbd-9079-47bf6ea093f0-5.woff2')
-      format('woff2'),
-    url('https://www.rbb-online.de/basis/webfont/19201dd5-5c2a-4dbd-9079-47bf6ea093f0-3.woff')
-      format('woff');
+  src: local('Interstate') url('fonts/rbb_V2_Interstate-Black.woff')
+    format('woff');
+  font-display: swap;
 }

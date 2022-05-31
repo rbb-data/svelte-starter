@@ -12,7 +12,7 @@
 
   import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
-  import { px } from '$lib/helpers/utils';
+  import { px } from '$lib/utils';
 
   /**
    * list of slides
