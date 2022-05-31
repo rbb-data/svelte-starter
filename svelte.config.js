@@ -31,7 +31,12 @@ const config = {
     },
   },
 
-  preprocess: [preprocess()],
+  preprocess: [
+    preprocess({
+      scss: true,
+      postcss: true,
+    }),
+  ],
 };
 
 export default config;
