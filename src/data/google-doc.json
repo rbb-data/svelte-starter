@@ -5,9 +5,9 @@
     "age": "26"
   },
   "listOfStrings": [
-    "Erstes <b>Element</b>",
-    "Zweites <i>Element</i>",
-    "Drittes <u>Element</u>"
+    "Erstes Element",
+    "Zweites Element",
+    "Drittes Element"
   ],
   "arrayOfObjects": [
     {

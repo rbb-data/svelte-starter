@@ -7,16 +7,16 @@ import sanitizeHtml from 'sanitize-html';
  * Load content from a Google doc
  *
  * @param {string} documentId Google doc ID
- * @param {string} privateKey Google doc private key
+ * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
  * @param preserveStyles if true, preserve some formatting
  * @returns {Promise<string>} sanitized doc contents
  */
 export async function loadGoogleDoc(
   documentId,
-  privateKey,
+  credentials,
   preserveStyles = false
 ) {
-  const auth = await authorize(privateKey);
+  const auth = await authorize(credentials);
   const client = google.docs({ version: 'v1', auth });
   const { data } = await client.documents.get({
     documentId,
@@ -28,10 +28,10 @@ export async function loadGoogleDoc(
  * Load data from a Google spreadsheet
  *
  * @param {string} spreadsheetId Google sheets ID
- * @param {string} privateKey Google doc private key
+ * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
  */
-export async function loadGoogleSheet(spreadsheetId, privateKey) {
-  const auth = await authorize(privateKey);
+export async function loadGoogleSheet(spreadsheetId, credentials) {
+  const auth = await authorize(credentials);
   const client = google.sheets({ version: 'v4', auth });
   const { data } = await client.spreadsheets.get({
     spreadsheetId,
@@ -108,18 +108,18 @@ async function sanitize(input, preserveStyles = false) {
 /**
  * Connect to Google Docs
  *
- * @param {string} privateKey Google doc private key
+ * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
  * @returns authenticated Google doc client
  */
-function authorize(privateKey) {
+function authorize(credentials) {
   return google.auth.getClient({
     scopes: [
       'https://www.googleapis.com/auth/documents.readonly',
       'https://www.googleapis.com/auth/spreadsheets.readonly',
     ],
     credentials: {
-      client_email: 'connect@rbb-datenteam.iam.gserviceaccount.com',
-      private_key: privateKey,
+      client_email: credentials.clientEmail,
+      private_key: credentials.privateKey,
     },
   });
 }

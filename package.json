@@ -16,9 +16,10 @@
     "deploy:dj1": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/{project-name}/",
     "predeploy:gc-storage": "npm run build:gc-storage",
     "deploy:gc-storage": "scripts/deploy-to-gc-storage.sh",
-    "update-tokens": "node style-dictionary/build.cjs && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/**/tokens.{css,js}",
-    "update-google-doc": "node scripts/update-google-doc.js --preserve-styles && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/data/google-doc.json",
-    "update-google-sheets": "node scripts/update-google-sheets.js"
+    "update:all": "npm run update:google-doc; npm run update:google-sheets; npm run update:tokens",
+    "update:google-doc": "node scripts/update-google-doc.js --preserve-styles && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/data/google-doc.json",
+    "update:google-sheets": "node scripts/update-google-sheets.js",
+    "update:tokens": "node style-dictionary/build.cjs && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/**/tokens.{css,js}"
   },
   "dependencies": {
     "d3-array": "^3.1.1",

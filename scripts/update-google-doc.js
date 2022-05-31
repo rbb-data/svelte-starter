@@ -17,11 +17,20 @@ async function main() {
     process.exit(1);
   }
 
+  // read Google client email from environment
+  const clientEmail = process.env.GOOGLE_CONNECT_EMAIL;
+  if (!clientEmail) {
+    process.stderr.write(
+      'Google client email is missing. Set `GOOGLE_CONNECT_EMAIL` in .env.local.\n'
+    );
+    process.exit(1);
+  }
+
   // read private key from environment
-  const privateKey = process.env.GOOGLE_DOC_PRIVATE_KEY;
+  const privateKey = process.env.GOOGLE_CONNECT_KEY;
   if (!privateKey) {
     process.stderr.write(
-      'Credentials are missing. Set `GOOGLE_DOC_PRIVATE_KEY` in .env.local.\n'
+      'Credentials are missing. Set `GOOGLE_CONNECT_KEY` in .env.local.\n'
     );
     process.exit(1);
   }
@@ -30,10 +39,16 @@ async function main() {
   const args = process.argv.slice(2);
   const preserveStyles = args.length > 0 && args[0] === '--preserve-styles';
 
+  await loadGoogleDoc(googleDocId, { clientEmail, privateKey }, preserveStyles);
+
   // parse doc contents
   let content;
   try {
-    content = await loadGoogleDoc(googleDocId, privateKey, preserveStyles);
+    content = await loadGoogleDoc(
+      googleDocId,
+      { clientEmail, privateKey },
+      preserveStyles
+    );
   } catch {
     process.stderr.write(
       "Content from Google doc couldn't be loaded. " +

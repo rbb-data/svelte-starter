@@ -55,7 +55,7 @@ and obtain a local copy of the repo.
 - Create a Google doc
 - Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
 - Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env`
-- Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
+- Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
 - Run `npm run update-google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/google-doc.json`)
 - Import data from `src/data/google-doc.json`
 
@@ -66,7 +66,7 @@ By default, some formatting is preserved when loading the doc, including: bold, 
 - Create a Google sheet
 - Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
 - Grab the sheet's id from its url and set `GOOGLE_SHEET_ID` in `.env`
-- Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
+- Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
 - Run `npm run update-google-sheets` (will parse the spreadsheet and write data to `src/data/google-sheets-{sheet-name}.csv`, one file is generated for every sheet in the given spreadsheet)
 - Import data from `src/data/google-sheets-{sheet-name}.csv`
 
@@ -105,16 +105,17 @@ Headless components are essentially unstyled, higher-order components that "orch
 
 Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables. Environment variables prefixed with `VITE_` are exposed to client-side code.
 
-| Environment variable       | Description                                                            | Default                                      | File                     | Sensitive? |
-| -------------------------- | ---------------------------------------------------------------------- | -------------------------------------------- | ------------------------ | ---------- |
-| `BASE_PATH`                | Specifies where the app is served from                                 | /{project-name}                              | `.env`                   | no         |
-| `BUILD_DIR`                | The directory to write prerendered pages to                            | build                                        | `.env`                   | no         |
-| `GOOGLE_DOC_ID`            | Id of the connected Google doc                                         | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A | `.env`                   | no         |
-| `GOOGLE_SHEET_ID`          | Id of the connected Google sheet                                       | 1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04 | `.env`                   | no         |
-| `VITE_OPENROUTSERVICE_KEY` | Private key to access [openrouteservice](https://openrouteservice.org) |                                              | `.env.local`             | yes        |
-| `GOOGLE_DOC_PRIVATE_KEY`   | Private key to access Google docs and sheets                           |                                              | `.env.local`             | yes        |
-| `VITE_BING_KEY`            | Allows to render Bing-powered maps (in development)                    |                                              | `.env.development.local` | yes        |
-| `VITE_BING_KEY`            | Allows to render Bing-powered maps (in production)                     |                                              | `.env.production.local`  | yes        |
+| Environment variable       | Description                                                            | Default                                             | File                     | Sensitive? |
+| -------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------- | ------------------------ | ---------- |
+| `BASE_PATH`                | Specifies where the app is served from                                 | /{project-name}                                     | `.env`                   | no         |
+| `BUILD_DIR`                | The directory to write prerendered pages to                            | build                                               | `.env`                   | no         |
+| `GOOGLE_DOC_ID`            | Id of the connected Google doc                                         | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`                   | no         |
+| `GOOGLE_SHEET_ID`          | Id of the connected Google sheet                                       | 1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04        | `.env`                   | no         |
+| `VITE_OPENROUTSERVICE_KEY` | Private key to access [openrouteservice](https://openrouteservice.org) |                                                     | `.env.local`             | yes        |
+| `GOOGLE_CONNECT_EMAIL`     | Email address to share Google doc/sheet with                           | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env.local`             | no         |
+| `GOOGLE_CONNECT_KEY`       | Private key to access Google docs and sheets                           |                                                     | `.env.local`             | yes        |
+| `VITE_BING_KEY`            | Allows to render Bing-powered maps (in development)                    |                                                     | `.env.development.local` | yes        |
+| `VITE_BING_KEY`            | Allows to render Bing-powered maps (in production)                     |                                                     | `.env.production.local`  | yes        |
 
 Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
 
