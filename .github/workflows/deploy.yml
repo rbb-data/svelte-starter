@@ -1,0 +1,44 @@
+name: Deploy to Google Cloud Storage
+
+on:
+  # trigger action manually
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    # only run deploy action in copies of the template repo
+    if: ${{ github.repository != 'rbb-data/svelte-starter' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17
+
+      - name: Create key file
+        run: |
+          touch .env.local
+          echo GOOGLE_CONNECT_KEY=$GOOGLE_CONNECT_KEY >> .env.local
+        env:
+          GOOGLE_CONNECT_KEY: ${{ secrets.GOOGLE_CONNECT_KEY }}
+
+      - name: Install
+        run: npm install
+
+      - name: Update data
+        run: npm run update:all
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: ${{ secrets.GC_STORAGE_CREDENTIALS }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+
+      - name: Deploy
+        run: npm run deploy:gc-storage
