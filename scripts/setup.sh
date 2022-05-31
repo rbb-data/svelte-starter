@@ -7,6 +7,9 @@
 # print every executed line and abort when one fails
 set -ex
 
+# skip when running in CI
+[ -z "$CI" ] || exit 0
+
 # make sure to run from project root
 cd $(dirname $0)/..
 
