@@ -1,4 +1,4 @@
-# rbb-data svelte-starter
+# rbb-data/svelte-starter
 
 This template serves as a starting point to create data visualizations with [Svelte](https://svelte.dev/). It is built on top of [SvelteKit](https://kit.svelte.dev/).
 
@@ -32,7 +32,13 @@ npm run dev
 
 Your app is then available at http://localhost:3000/. Edit `src/routes/index.svelte` to see changes.
 
-**Note:** SvelteKit requires `node>=14.13`. If you get an error message on `npm install` that an "engine is unsupported", update your node version and try again.
+> **Note**
+>
+> The starter references fonts that are not stored in version control. You can download them from the [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
+
+> **Note**
+>
+> SvelteKit requires `node>=14.13`. If you get an error message on `npm install` that an "engine is unsupported", update your node version and try again.
 
 ### Alternatively, do it the old school way
 
@@ -48,7 +54,7 @@ and obtain a local copy of the repo.
 
 - Create a Google doc
 - Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
-- Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env` to the doc's id
+- Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env`
 - Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
 - Run `npm run update-google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/google-doc.json`)
 - Import data from `src/data/google-doc.json`
@@ -59,7 +65,7 @@ By default, some formatting is preserved when loading the doc, including: bold, 
 
 - Create a Google sheet
 - Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
-- Grab the sheet's id from its url and set `GOOGLE_SHEET_ID` in `.env` to the sheet's id
+- Grab the sheet's id from its url and set `GOOGLE_SHEET_ID` in `.env`
 - Add credentials by setting `GOOGLE_DOC_PRIVATE_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
 - Run `npm run update-google-sheets` (will parse the spreadsheet and write data to `src/data/google-sheets-{sheet-name}.csv`, one file is generated for every sheet in the given spreadsheet)
 - Import data from `src/data/google-sheets-{sheet-name}.csv`
@@ -99,10 +105,6 @@ Headless components are essentially unstyled, higher-order components that "orch
 
 Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables. Environment variables prefixed with `VITE_` are exposed to client-side code.
 
-Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
-
-If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains example files for both environments, `.env.development.example` and `.env.production.example`, so that you can simply rename `.env.*.example` to `.env.*.local` and add the keys.
-
 | Environment variable       | Description                                                            | Default                                      | File                     | Sensitive? |
 | -------------------------- | ---------------------------------------------------------------------- | -------------------------------------------- | ------------------------ | ---------- |
 | `BASE_PATH`                | Specifies where the app is served from                                 | /{project-name}                              | `.env`                   | no         |
@@ -113,6 +115,10 @@ If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. B
 | `GOOGLE_DOC_PRIVATE_KEY`   | Private key to access Google docs and sheets                           |                                              | `.env.local`             | yes        |
 | `VITE_BING_KEY`            | Allows to render Bing-powered maps (in development)                    |                                              | `.env.development.local` | yes        |
 | `VITE_BING_KEY`            | Allows to render Bing-powered maps (in production)                     |                                              | `.env.production.local`  | yes        |
+
+Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
+
+If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains example files for both environments, `.env.development.example` and `.env.production.example`, so that you can simply rename `.env.*.example` to `.env.*.local` and add the keys.
 
 Secrets and private keys are not stored in version control but you'll find them in our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
 
@@ -138,9 +144,11 @@ Creates a build that can be deployed to rbb's static server.
 
 Builds the app for production and uploads the build to the `dj1` dev server. The deployed file will be available at https://dj1.app.rbb-cloud.de/cool-project-name (assuming you named your project `cool-project-name`).
 
-**Note:** You need a certificate to access the server. If you don't have one yet your colleagues will gladly help you out.
+You need a certificate to access the server. If you don't have one yet your colleagues will gladly help you out.
 
-**Note:** The script uses [rsync](https://rsync.samba.org/) to efficiently synchronize changes between your local build and the target folder. The version of `rsync` that ships with macOS is out of date, so please install a recent version via [homebrew](https://brew.sh/) or [nix](https://nixos.org/guides/install-nix.html).
+> **Note**
+>
+> The script uses [rsync](https://rsync.samba.org/) to efficiently synchronize changes between your local build and the target folder. The version of `rsync` that ships with macOS is out of date, so please install a recent version via [homebrew](https://brew.sh/) or [nix](https://nixos.org/guides/install-nix.html).
 
 ### `npm run deploy:gc-storage`
 
