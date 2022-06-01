@@ -7,16 +7,18 @@ on:
 
 jobs:
   deploy:
-    # only run deploy action in copies of the template repo
-    if: ${{ github.repository != 'rbb-data/svelte-starter' }}
+    # only run deploy action on first commit in copies of the template repo
+    if: ${{ github.repository != 'rbb-data/svelte-starter' && github.event.head_commit.message == 'Initial commit' }}
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
 
-      - name: Run setup script
-        run: scripts/setup.sh
+      - name: Setup repo
+        run: |
+          [ -d docs ] && rm -rf docs/
+          sed -i 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
 
       - name: Commit and push
         run: |-

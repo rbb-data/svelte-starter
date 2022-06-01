@@ -46,6 +46,7 @@ If you don't want to automatically link a GitHub repo, you can instead run
 
 ```bash
 npx degit rbb-data/svelte-starter cool-project-name
+scripts/setup.sh
 ```
 
 and obtain a local copy of the repo.
