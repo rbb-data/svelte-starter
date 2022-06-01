@@ -17,9 +17,10 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          node-version: 17
+          node-version: 16
+          cache: 'npm'
 
-      - name: Create key file
+      - name: Create .env.local file
         run: |
           touch .env.local
           echo GOOGLE_CONNECT_KEY=$GOOGLE_CONNECT_KEY >> .env.local
@@ -27,7 +28,7 @@ jobs:
           GOOGLE_CONNECT_KEY: ${{ secrets.GOOGLE_CONNECT_KEY }}
 
       - name: Install
-        run: npm install
+        run: npm ci
 
       - name: Update data
         run: npm run update:all
