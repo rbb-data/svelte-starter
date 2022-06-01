@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
 
-# this script is meant to run once after having cloned the repository.
-# because it is setup in `.scripts.postinstall` in `package.json`, it will
-# automatically run when doing an `npm install`.
+# this script is meant to run once after having cloned the repository
 
 # print every executed line and abort when one fails
 set -ex
-
-# skip when running in CI
-[ -z "$CI" ] || exit 0
 
 # make sure to run from project root
 cd $(dirname $0)/..

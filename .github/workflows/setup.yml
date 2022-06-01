@@ -1,0 +1,27 @@
+name: Setup templated project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    # only run deploy action in copies of the template repo
+    if: ${{ github.repository != 'rbb-data/svelte-starter' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Run setup script
+        run: scripts/setup.sh
+
+      - name: Commit and push
+        run: |-
+          git diff
+          git config --global user.email "setup-bot@example.com"
+          git config --global user.name "setup-bot"
+          git diff --quiet || (git add --all && git commit -m "setup")
+          git push
