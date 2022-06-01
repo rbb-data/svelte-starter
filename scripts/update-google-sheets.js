@@ -43,7 +43,7 @@ async function main() {
     process.stderr.write(
       "Content from Google sheet couldn't be loaded. " +
         "Check that (i) the sheet's id is correct (specified as `GOOGLE_SHEET_ID` in .env) and " +
-        '(ii) the email address connect@rbb-datenteam.iam.gserviceaccount.com is given read permission.\n'
+        '(ii) the email address connect@rbb-data-api-access.iam.gserviceaccount.com is given read permission.\n'
     );
     process.exit(1);
   }

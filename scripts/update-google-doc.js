@@ -53,7 +53,7 @@ async function main() {
     process.stderr.write(
       "Content from Google doc couldn't be loaded. " +
         "Check that (i) the doc's id is correct (specified as `GOOGLE_DOC_ID` in .env) and " +
-        '(ii) the email address connect@rbb-datenteam.iam.gserviceaccount.com is given read permission.\n'
+        '(ii) the email address connect@rbb-data-api-access.iam.gserviceaccount.com is given read permission.\n'
     );
     process.exit(1);
   }

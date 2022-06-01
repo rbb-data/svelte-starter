@@ -5,8 +5,9 @@ This template serves as a starting point to create data visualizations with [Sve
 **Features:**
 
 - Static builds that can be hosted on a static file server
-- Fetching content from [ArchieML](http://archieml.org)-formatted Google docs and Google sheets
-- Easy deployment to rbb’s static servers and Google Cloud Storage
+- Loading data from Google sheets
+- Fetching structured data from [ArchieML](http://archieml.org)-formatted Google docs
+- Easy deployment to Google Cloud Storage and rbb’s static servers
 - Pre-generated iframe snippet to embed build into a foreign website with [a resizer script](https://github.com/rbb-data/iframe-sizer-script) supported by default
 - [Style Dictionary](https://amzn.github.io/style-dictionary/#/) as a single source of truth for design tokens
 - Component library, documented at https://rbb-data.github.io/svelte-starter/
@@ -16,15 +17,15 @@ This template serves as a starting point to create data visualizations with [Sve
 To create a new project, click the `Use this template` button above. You can then clone into your new project by running
 
 ```bash
-git clone https://github.com/rbb-data/cool-project-name.git
+git clone https://github.com/rbb-data/my-cool-project.git
 ```
 
-assuming you named your repo `cool-project-name`.
+assuming you named your repo `my-cool-project`.
 
 Install the app and start the development server:
 
 ```bash
-cd cool-project-name
+cd my-cool-project
 npm install
 npm run dev
 ```
@@ -40,47 +41,55 @@ Your app is then available at http://localhost:3000/. Edit `src/routes/index.sve
 If you don't want to automatically link a GitHub repo, you can instead run
 
 ```bash
-npx degit rbb-data/svelte-starter cool-project-name
-scripts/setup.sh
+npx degit rbb-data/svelte-starter my-cool-project
 ```
 
 and obtain a local copy of the repo.
 
-## Connect to Google doc
+Run the setup script:
+
+```bash
+cd my-cool-project
+scripts/setup.sh
+```
+
+## Connect to external resources
+
+### Connect to Google doc
 
 - Create a Google doc
-- Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
+- Grant read access to _connect@rbb-data-api-access.iam.gserviceaccount.com_
 - Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env`
 - Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
-- Run `npm run update-google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/google-doc.json`)
+- Run `npm run update:google-doc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/google-doc.json`)
 - Import data from `src/data/google-doc.json`
 
 By default, some formatting is preserved when loading the doc, including: bold, italic, underline, superscript, subscript and links. Anything else is stripped ("sanitized") for security reasons.
 
-## Connect to Google sheet
+### Connect to Google sheet
 
 - Create a Google sheet
-- Grant read access to _connect@rbb-datenteam.iam.gserviceaccount.com_
+- Grant read access to _connect@rbb-data-api-access.iam.gserviceaccount.com_
 - Grab the sheet's id from its url and set `GOOGLE_SHEET_ID` in `.env`
 - Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
-- Run `npm run update-google-sheets` (will parse the spreadsheet and write data to `src/data/google-sheets-{sheet-name}.csv`, one file is generated for every sheet in the given spreadsheet)
+- Run `npm run update:google-sheets` (will parse the spreadsheet and write to `src/data/google-sheets-{sheet-name}.csv`, one file is generated for every sheet in the given spreadsheet)
 - Import data from `src/data/google-sheets-{sheet-name}.csv`
 
 ## Build and deploy
 
 This repo supports three build targets:
 
-- Google Cloud Storage: Run `npm run deploy:gc-storage` to deploy to https://storage.googleapis.com/rbb-data-static/cool-project-name/index.html
-- rbb's dev server (dj1): Run `npm run deploy:dj1` to deploy to https://dj1.app.rbb-cloud.de/cool-project-name
+- Google Cloud Storage: Run `npm run deploy:gc-storage` to deploy to https://storage.googleapis.com/rbb-data-static/my-cool-project/index.html
+- rbb's dev server (dj1): Run `npm run deploy:dj1` to deploy to https://dj1.app.rbb-cloud.de/my-cool-project
 - rbb's static server: Run `npm run build:rbb-online` and move build files manually to rbb's static server
 
 ### Using GitHub actions
 
-[This GitHub action](https://github.com/rbb-data/svelte-starter/actions/workflows/deploy.yml) deploys the app to Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/cool-project-name-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy to main page (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/cool-project-name/index.html instead.
+[This GitHub action](https://github.com/rbb-data/svelte-starter/actions/workflows/deploy.yml) deploys the app to the Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/my-cool-project-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy to main page (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/my-cool-project/index.html instead.
 
 > **Note**
 >
-> The credentials necessary for deploying to the cloud are stored as organization secrets that can only be accessed by public repositories. If your repository is private, make sure to add the necessary secrets on the repository level. You'll find the secrets in the [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
+> The credentials necessary for deploying to the cloud are stored as organization secrets that can only be accessed by public repositories. If your repository is private, make sure to add the necessary secrets on the repository level. You'll find the secrets in our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
 
 ## Helpers
 
@@ -118,8 +127,8 @@ Headless components are essentially unstyled, higher-order components that "orch
 Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables. Environment variables prefixed with `VITE_` are exposed to client-side code.
 
 | Environment variable       | Description                                                            | Default                                             | File                     | Sensitive? |
-| -------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------- | ------------------------ | ---------- |
-| `BASE_PATH`                | Specifies where the app is served from                                 | /{project-name}                                     | `.env`                   | no         |
+| :------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------- | :----------------------- | :--------- |
+| `BASE_PATH`                | Specifies where the app is served from                                 | /my-cool-project                                    | `.env`                   | no         |
 | `BUILD_DIR`                | The directory to write prerendered pages to                            | build                                               | `.env`                   | no         |
 | `GOOGLE_CONNECT_EMAIL`     | Email address to share Google doc/sheet with                           | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env`                   | no         |
 | `GOOGLE_DOC_ID`            | Id of the connected Google doc                                         | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`                   | no         |
@@ -155,7 +164,7 @@ Creates a build that can be deployed to rbb's static server.
 
 ### `npm run deploy:dj1`
 
-Builds the app for production and uploads the build to the `dj1` dev server. The deployed file will be available at https://dj1.app.rbb-cloud.de/cool-project-name (assuming you named your project `cool-project-name`).
+Builds the app for production and uploads the build to the `dj1` dev server. The deployed file will be available at https://dj1.app.rbb-cloud.de/my-cool-project (assuming you named your project `my-cool-project`).
 
 You need a certificate to access the server. If you don't have one yet your colleagues will gladly help you out.
 
@@ -167,19 +176,27 @@ You need a certificate to access the server. If you don't have one yet your coll
 
 Builds the app for production and uploads the files to the Google Cloud Storage `rbb-data-static`. You'll need Google Cloud's command line tools `gcloud` and `gsutil` installed and configured (for installation instructions, see https://cloud.google.com/sdk/docs/install).
 
-The deployed file will be available at https://storage.googleapis.com/rbb-data-static/cool-project-name/index.html (assuming you named your project `cool-project-name`).
+The deployed file will be available at https://storage.googleapis.com/rbb-data-static/my-cool-project/index.html (assuming you named your project `my-cool-project`).
 
-### `npm run update-tokens`
+### `npm run deploy:gc-storage--experimental`
+
+Same as `npm run deploy:gc-storage` but deploys to https://storage.googleapis.com/rbb-data-static/my-cool-project-experimental/index.html (note the `-experimental` suffix).
+
+### `npm run update:tokens`
 
 Builds design tokens into CSS, SCSS and javascript files, see [Design tokens](https://github.com/rbb-data/svelte-starter#design-tokens).
 
-### `npm run update-google-doc`
+### `npm run update:google-doc`
 
 Reads the connected Google doc and writes to `src/data/google-doc.json`, see [Connect to Google doc](https://github.com/rbb-data/svelte-starter#connect-to-google-doc).
 
-### `npm run update-google-sheets`
+### `npm run update:google-sheets`
 
 Reads the connected Google sheet and writes to `src/data/google-sheet-*.csv`, see [Connect to Google sheet](https://github.com/rbb-data/svelte-starter#connect-to-google-sheet).
+
+### `npm run update:all`
+
+Updates style tokens and all data sources.
 
 ### `npm run lint`
 
@@ -197,4 +214,4 @@ Formats files using `prettier`.
 
 ## Design tokens
 
-Design tokens live in `style-dictionary/tokens.json`. `npm run update-tokens` builds CSS, SCSS files into `src/style` and a javascript file into `src/lib` (powered by [Style Dictionary](https://amzn.github.io/style-dictionary/#/)).
+Design tokens live in `style-dictionary/tokens.json`. `npm run update:tokens` builds CSS, SCSS files into `src/style` and a javascript file into `src/lib` (powered by [Style Dictionary](https://amzn.github.io/style-dictionary/#/)).
