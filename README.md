@@ -7,7 +7,6 @@ This template serves as a starting point to create data visualizations with [Sve
 - Static builds that can be hosted on a static file server
 - Fetching content from [ArchieML](http://archieml.org)-formatted Google docs and Google sheets
 - Easy deployment to rbb’s static servers and Google Cloud Storage
-- Supports [SCSS](https://sass-lang.com/) and [PostCSS](https://postcss.org/)+[Autoprefixer](https://github.com/postcss/autoprefixer)
 - Pre-generated iframe snippet to embed build into a foreign website with [a resizer script](https://github.com/rbb-data/iframe-sizer-script) supported by default
 - [Style Dictionary](https://amzn.github.io/style-dictionary/#/) as a single source of truth for design tokens
 - Component library, documented at https://rbb-data.github.io/svelte-starter/
@@ -71,6 +70,22 @@ By default, some formatting is preserved when loading the doc, including: bold, 
 - Run `npm run update-google-sheets` (will parse the spreadsheet and write data to `src/data/google-sheets-{sheet-name}.csv`, one file is generated for every sheet in the given spreadsheet)
 - Import data from `src/data/google-sheets-{sheet-name}.csv`
 
+## Build and deploy
+
+This repo supports three build targets:
+
+- Google Cloud Storage: Run `npm run deploy:gc-storage` to deploy to https://storage.googleapis.com/rbb-data-static/cool-project-name/index.html
+- rbb's dev server (dj1): Run `npm run deploy:dj1` to deploy to https://dj1.app.rbb-cloud.de/cool-project-name
+- rbb's static server: Run `npm run build:rbb-online` and move build files manually to rbb's static server
+
+### Using GitHub actions
+
+[This GitHub action](https://github.com/rbb-data/svelte-starter/actions/workflows/deploy.yml) deploys the app to Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/cool-project-name-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy to main page (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/cool-project-name/index.html instead.
+
+> **Note**
+>
+> The credentials necessary for deploying to the cloud are stored as organization secrets that can only be accessed by public repositories. If your repository is private, make sure to add the necessary secrets on the repository level. You'll find the secrets in the [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
+
 ## Helpers
 
 This repo provides some useful helpers to quickly build interactive interfaces. The [documentation](https://rbb-data.github.io/svelte-starter/) provides a more in-depth description of each helper.
@@ -124,7 +139,7 @@ If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. B
 
 Secrets and private keys are not stored in version control but you'll find them in our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
 
-## Build and deploy
+## Scripts
 
 ### `npm run dev`
 

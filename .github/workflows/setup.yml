@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  setup:
     # only run deploy action on first commit in copies of the template repo
     if: ${{ github.repository != 'rbb-data/svelte-starter' && github.event.head_commit.message == 'Initial commit' }}
     runs-on: ubuntu-latest
