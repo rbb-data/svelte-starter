@@ -33,10 +33,6 @@ Your app is then available at http://localhost:3000/. Edit `src/routes/index.sve
 
 > **Note**
 >
-> The starter references fonts that are not stored in version control. You can download them from the [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
-
-> **Note**
->
 > SvelteKit requires `node>=14.13`. If you get an error message on `npm install` that an "engine is unsupported", update your node version and try again.
 
 ### Alternatively, do it the old school way
