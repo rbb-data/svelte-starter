@@ -21,7 +21,7 @@ async function main() {
   const clientEmail = process.env.GOOGLE_CONNECT_EMAIL;
   if (!clientEmail) {
     process.stderr.write(
-      'Google client email is missing. Set `GOOGLE_CONNECT_EMAIL` in .env.local.\n'
+      'Google client email is missing. Set `GOOGLE_CONNECT_EMAIL` in .env.\n'
     );
     process.exit(1);
   }

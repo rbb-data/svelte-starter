@@ -21,7 +21,7 @@ async function main() {
   const clientEmail = process.env.GOOGLE_CONNECT_EMAIL;
   if (!clientEmail) {
     process.stderr.write(
-      'Google client email is missing. Set `GOOGLE_CONNECT_EMAIL` in .env.local.\n'
+      'Google client email is missing. Set `GOOGLE_CONNECT_EMAIL` in .env.\n'
     );
     process.exit(1);
   }
@@ -38,8 +38,6 @@ async function main() {
   // parse command line arguments
   const args = process.argv.slice(2);
   const preserveStyles = args.length > 0 && args[0] === '--preserve-styles';
-
-  await loadGoogleDoc(googleDocId, { clientEmail, privateKey }, preserveStyles);
 
   // parse doc contents
   let content;
