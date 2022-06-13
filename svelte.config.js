@@ -26,6 +26,15 @@ const config = {
       resolve: {
         alias: {
           $data: path.resolve('./src/data'),
+          $shared: path.resolve('./src/lib/components/shared'),
+        },
+      },
+
+      css: {
+        preprocessorOptions: {
+          scss: {
+            additionalData: '@use "src/style/mixins.scss" as *;',
+          },
         },
       },
     },
@@ -33,7 +42,9 @@ const config = {
 
   preprocess: [
     preprocess({
-      scss: true,
+      scss: {
+        prependData: '@use "src/style/mixins.scss" as *;',
+      },
       postcss: true,
     }),
   ],
