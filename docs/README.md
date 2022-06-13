@@ -14,13 +14,13 @@ npm install
 npm run dev
 ```
 
-If you head to http://localhost:3000/, you'll see an empty layout page. To pull in documentation from `svelte-starter`, run
+If you head to http://localhost:6006/, you'll see an empty layout page. To pull in documentation from `svelte-starter`, run
 
 ```bash
 npm run update
 ```
 
-The documentation at http://localhost:3000/ should now be populated with content.
+The documentation at http://localhost:6006/ should now be populated with content.
 
 ## How this works
 

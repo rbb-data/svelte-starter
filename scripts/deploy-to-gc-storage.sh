@@ -24,9 +24,9 @@ dst=gs://rbb-data-static/$base_path
 gsutil -q stat ${dst}/* && gsutil -m rm -r $dst
 
 # compress and upload files
-gsutil -m cp -r -z html,css,js,svg,woff build/ $dst
+gsutil -m cp -r -z html,css,js,png,svg,woff build/ $dst
 
 # configure caching
 gsutil setmeta -h 'Cache-Control:no-store' ${dst}/**/*.{html,js,css}
-# gsutil setmeta -h 'Cache-Control:public, max-age=31536000' ${dst}/**/*.svg
-# gsutil setmeta -h 'Cache-Control:public, max-age=31536000' ${dst}/**/*.woff
+gsutil setmeta -h 'Cache-Control:public, max-age=31536000' ${dst}/**/*.png
+# gsutil setmeta -h 'Cache-Control:public, max-age=31536000' ${dst}/**/*.{svg,woff}

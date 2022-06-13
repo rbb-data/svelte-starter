@@ -6,7 +6,7 @@ StyleDictionary.registerTransform({
   type: 'value',
   matcher: (token) =>
     ['bp', 's', 'font-size'].includes(token.attributes.category),
-  transformer: (token) => +token.value.replace('px', '').replace('rem', ''),
+  transformer: (token) => +token.value.replace(/[a-z]/gim, ''),
 });
 
 // apply the configuration

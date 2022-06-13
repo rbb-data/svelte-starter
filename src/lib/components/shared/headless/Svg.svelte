@@ -51,7 +51,14 @@
   $: boundedHeight = height - margin.top - margin.bottom;
 </script>
 
-<svg class:debug {width} {height} viewBox={[0, 0, width, height].join(' ')}>
+<svg
+  {width}
+  {height}
+  viewBox={[0, 0, width, height].join(' ')}
+  class:debug
+  {...$$restProps}
+>
+  <slot />
   <g transform={translate([margin.left, margin.top])}>
     {#if debug}
       <rect width={boundedWidth} height={boundedHeight} fill="aliceblue" />

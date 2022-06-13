@@ -55,7 +55,7 @@ select {
 }
 
 /* content is _visually_ hidden but still accessible to screen readers */
-.visually-hidden {
+.visually-hidden:not(:focus):not(:active) {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
