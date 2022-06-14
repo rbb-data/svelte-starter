@@ -26,7 +26,7 @@ jobs:
 
       # this is necessary to ensure .svelte-kit/dev/ exists
       - name: Spin up dev server
-        run: npm run dev
+        run: ( npm run dev ) & sleep 60 ; kill $!
 
       - name: Deploy storybook
         run: npm run storybook:deploy
