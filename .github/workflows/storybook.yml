@@ -24,9 +24,9 @@ jobs:
       - name: Install
         run: npm ci
 
-      # this is necessary to ensure .svelte-kit/ exists
-      - name: Build app
-        run: npm run build
+      # this is necessary to ensure .svelte-kit/dev/ exists
+      - name: Spin up dev server
+        run: npm run dev
 
       - name: Deploy storybook
         run: npm run storybook:deploy
