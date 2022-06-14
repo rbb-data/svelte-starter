@@ -1,5 +1,10 @@
 @import './tokens.scss';
 
+@mixin focus {
+  outline: 2px solid var(--c-gray-500);
+  outline-offset: 2px;
+}
+
 @mixin breakpoint($mode) {
   @if $mode == narrow {
     @media (max-width: #{$bp-xs - 1}) {
@@ -21,4 +26,12 @@
       @content;
     }
   }
+}
+
+/* remove animations and transitions for people that prefer not to see them */
+@mixin use-reduced-motion {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
 }

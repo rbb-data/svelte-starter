@@ -5,7 +5,9 @@
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"],
       "$data": ["src/data"],
-      "$data/*": ["src/data/*"]
+      "$data/*": ["src/data/*"],
+      "$shared": ["src/lib/components/shared"],
+      "$shared/*": ["src/lib/components/shared"]
     }
   }
 }

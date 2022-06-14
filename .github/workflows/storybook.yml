@@ -1,0 +1,28 @@
+name: Deploy storybook
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    # only run deploy action in the template repo itself
+    if: ${{ github.repository == 'rbb-data/svelte-starter' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: Install
+        run: npm ci
+
+      - name: Deploy storybook
+        run: npm run storybook:deploy
