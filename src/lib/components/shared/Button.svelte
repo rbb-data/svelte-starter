@@ -20,10 +20,11 @@
 
 <button
   type="button"
+  class:reset={true}
+  class:disabled
   on:click={handlePress}
   on:touchstart|preventDefault={handlePress}
   {...$$restProps}
-  class={'reset ' + ($$restProps['class'] || '')}
   disabled={false}
   aria-disabled={disabled}
 >
@@ -38,7 +39,7 @@
       @include focus;
     }
 
-    &[aria-disabled='true'] {
+    &.disabled {
       cursor: not-allowed;
     }
   }
