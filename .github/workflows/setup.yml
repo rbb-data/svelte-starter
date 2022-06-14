@@ -15,9 +15,18 @@ jobs:
       - name: Check out repo
         uses: actions/checkout@v3
 
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
       - name: Setup repo
         run: |
-          [ -d docs ] && rm -rf docs/
+          rm -rf .storybook/
+          rm -f src/**/*.stories.*
+          node scripts/remove-storybook-deps.js
+
           sed -i 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
 
       - name: Commit and push

@@ -58,7 +58,7 @@
   class:debug
   {...$$restProps}
 >
-  <slot />
+  <slot name="header" />
   <g transform={translate([margin.left, margin.top])}>
     {#if debug}
       <rect width={boundedWidth} height={boundedHeight} fill="aliceblue" />

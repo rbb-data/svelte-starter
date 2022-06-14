@@ -3,9 +3,5 @@ node_modules
 /build
 /.svelte-kit
 /package
-/docs/data
-/docs/build
-/docs/.svelte-kit
-/docs/out*
 *.local
 static/fonts

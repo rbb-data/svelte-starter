@@ -9,7 +9,9 @@ set -ex
 cd $(dirname $0)/..
 
 # remove documentation
-[ -d docs ] && rm -rf docs/
+rm -rf .storybook/
+rm -f src/**/*.stories.*
+node scripts/remove-storybook-deps.js
 
 # substitute '{project-name}' with the current folder name
 sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
