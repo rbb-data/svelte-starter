@@ -5,3 +5,5 @@ node_modules
 /package
 *.local
 static/fonts
+/out*
+/docs-build

@@ -29,6 +29,7 @@ module.exports = {
       $data: path.resolve('./src/data'),
       $shared: path.resolve('./src/lib/components/shared'),
     };
+    config.base = '/svelte-starter/';
     return config;
   },
 };
