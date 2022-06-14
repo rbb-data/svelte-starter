@@ -24,7 +24,7 @@ module.exports = {
   },
   async viteFinal(config) {
     config.resolve.alias = {
-      $app: path.resolve('./.svelte-kit/dev/runtime/app'),
+      $app: path.resolve('./.svelte-kit/runtime/app'),
       $lib: path.resolve('./src/lib'),
       $data: path.resolve('./src/data'),
       $shared: path.resolve('./src/lib/components/shared'),
