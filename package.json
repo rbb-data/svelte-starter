@@ -22,7 +22,7 @@
     "update:tokens": "node style-dictionary/build.cjs && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/**/tokens.{css,scss,js}",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook -o docs-build",
-    "storybook:deploy": ".scripts/deploy-storybook.sh"
+    "storybook:deploy": "scripts/deploy-storybook.sh"
   },
   "dependencies": {
     "d3-array": "^3.1.1",
