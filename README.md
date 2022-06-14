@@ -10,7 +10,7 @@ This template serves as a starting point to create data visualizations with [Sve
 - Easy deployment to Google Cloud Storage and rbb’s static servers
 - Pre-generated iframe snippet to embed build into a foreign website with [a resizer script](https://github.com/rbb-data/iframe-sizer-script) supported by default
 - [Style Dictionary](https://amzn.github.io/style-dictionary/#/) as a single source of truth for design tokens
-- Component library, documented at https://rbb-data.github.io/svelte-starter/
+- (Component library, documented at https://rbb-data.github.io/svelte-starter/)
 
 ## Get started
 

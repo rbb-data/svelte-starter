@@ -34,13 +34,13 @@
 <style lang="scss">
   button {
     cursor: pointer;
+  }
 
-    &:focus-visible {
-      @include focus;
-    }
+  button:focus-visible {
+    @include focus;
+  }
 
-    &.disabled {
-      cursor: not-allowed;
-    }
+  button.disabled {
+    cursor: not-allowed;
   }
 </style>
