@@ -29,6 +29,4 @@ jobs:
         run: ( npm run dev ) & sleep 60 ; kill $!
 
       - name: Deploy storybook
-        run: npm run storybook:deploy -- --ci
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npm run storybook:deploy
