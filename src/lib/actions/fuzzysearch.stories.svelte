@@ -28,11 +28,13 @@
 <Meta title="Actions/use:fuzzysearch" />
 
 <Story name="Basic">
+  <label for="search-district">Wähle einen Berliner Bezirk</label>
   <input
+    id="search-district"
     use:fuzzysearch={{ data }}
     on:search={(e) => (suggestions = e.detail.suggestions)}
     on:result={(e) => (result = e.detail.result)}
-    placeholder="Wähle einen Berliner Bezirk"
+    placeholder="z.B.Mitte"
   />
 
   <div>
@@ -42,11 +44,13 @@
 </Story>
 
 <Story name="Limit the number of suggestions">
+  <label for="search-district">Wähle einen Berliner Bezirk</label>
   <input
+    id="search-district"
     use:fuzzysearch={{ data, limit: 3 }}
     on:search={(e) => (suggestions = e.detail.suggestions)}
     on:result={(e) => (result = e.detail.result)}
-    placeholder="Wähle einen Berliner Bezirk"
+    placeholder="z.B. Mitte"
   />
 
   <div>
@@ -56,11 +60,13 @@
 </Story>
 
 <Story name="Search a list of objects">
+  <label for="search-district">Wähle einen Berliner Bezirk</label>
   <input
+    id="search-district"
     use:fuzzysearch={{ data: complexData, key: 'name' }}
     on:search={(e) => (suggestions = e.detail.suggestions)}
     on:result={(e) => (complexResult = e.detail.result)}
-    placeholder="Wähle einen Berliner Bezirk"
+    placeholder="z.B. Mitte"
   />
 
   <div>
@@ -68,3 +74,13 @@
     Result: {complexResult.name} ({complexResult.id})
   </div>
 </Story>
+
+<style>
+  label {
+    display: block;
+  }
+
+  input {
+    margin-bottom: 1rem;
+  }
+</style>
