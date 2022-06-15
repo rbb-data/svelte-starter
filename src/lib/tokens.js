@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Wed, 01 Jun 2022 11:41:09 GMT */
+/** Do not edit directly Generated on Wed, 15 Jun 2022 14:42:34 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -28,7 +28,10 @@ export const lineHeightXs = 1.15;
 export const lineHeightSm = 1.35;
 export const lineHeightBase = 1.5;
 export const fontWeightNormal = 400;
+export const fontWeightMedium = 500;
 export const fontWeightBold = 700;
+export const fontWeightBlack = 900;
+export const cRbb = '#E61A1A';
 export const cBlue100 = '#D6E6F5';
 export const cBlue200 = '#8CC3F2';
 export const cBlue300 = '#4AA0D9';
@@ -103,3 +106,15 @@ export const cCategoryGray = '#AAA493';
 export const cCategoryOrange = '#F2A335';
 export const cCategoryRed = '#EA693E';
 export const cCategoryPurple = '#821423';
+export const cPairBlueLight = '#D6E6F5';
+export const cPairBlueDark = '#1479B8';
+export const cPairGrayLight = '#EAEAEA';
+export const cPairGrayDark = '#2E2B29';
+export const cPairTurquoiseLight = '#D3EEEC';
+export const cPairTurquoiseDark = '#1F767A';
+export const cPairPurpleLight = '#D6D6EB';
+export const cPairPurpleDark = '#72589D';
+export const cPairOrangeLight = '#FBEDD0';
+export const cPairOrangeDark = '#B3661A';
+export const cPairRedLight = '#D3EEEC';
+export const cPairRedDark = '#E61A1A';

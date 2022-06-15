@@ -11,9 +11,27 @@
 @font-face {
   font-family: 'Interstate';
   font-style: normal;
+  font-weight: 500;
+  src: local('Interstate'),
+    url('fonts/rbb_V2_Interstate-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interstate';
+  font-style: normal;
   font-weight: 700;
   src: local('Interstate'),
     url('https://www.rbb24.de/basis/webfont/3d6b9143-eb88-4451-80b0-7d05bd58b8a1-3.woff')
       format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Interstate';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Interstate'),
+    url('fonts/rbb_V2_Interstate-Black.woff') format('woff');
   font-display: swap;
 }
