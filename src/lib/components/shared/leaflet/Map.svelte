@@ -8,7 +8,6 @@
   import { onMount, setContext } from 'svelte';
   import { browser } from '$app/env';
 
-  import css from '$lib/actions/css';
   import { px } from '$lib/utils';
 
   import { key } from '$lib/assets/leaflet';
@@ -65,7 +64,7 @@
   });
 </script>
 
-<div class="map" bind:this={mapRef} use:css={{ height: px(height) }}>
+<div class="map" bind:this={mapRef} style:--height={px(height)}>
   {#if map}
     <slot />
   {/if}

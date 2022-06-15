@@ -10,7 +10,6 @@
   import { writable } from 'svelte/store';
   import { spring } from 'svelte/motion';
 
-  import css from '$lib/actions/css';
   import pannable, { drag } from '$lib/actions/pannable';
   import { px } from '$lib/utils';
 
@@ -155,20 +154,15 @@
   aria-roledescription="carousel"
   bind:this={sliderElement}
   bind:clientWidth={width}
-  use:css={{ height: px(height) }}
   on:keydown={handleKeyDown}
   on:click={handleClick}
   use:pannable={{ ignorePointers: ['mouse'] }}
   on:panstart={handlePanStart}
   on:panmove={drag(x)}
   on:panend={handlePanEnd}
+  style:--height={px(height)}
 >
-  <div
-    class="content"
-    use:css={{
-      'translate-x': px(animate ? $animatedX : $x),
-    }}
-  >
+  <div class="content" style:translate-x={px(animate ? $animatedX : $x)}>
     <!-- visible content -->
     <div
       class="inner"

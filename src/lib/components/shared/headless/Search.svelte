@@ -7,7 +7,6 @@
    * @component
    */
 
-  import css from '$lib/actions/css';
   import { px } from '$lib/utils';
 
   /** @typedef {any} Item */
@@ -170,7 +169,7 @@
     {/if}
   </form>
 
-  <div class="suggestions" use:css={{ 'input-width': px(inputWidth) }}>
+  <div class="suggestions" style:--input-width={px(inputWidth)}>
     <ul>
       {#each suggestions as suggestion, i}
         <li
