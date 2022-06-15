@@ -12,7 +12,7 @@ cd $(dirname $0)/..
 rm -rf .storybook/
 rm -f src/**/*.stories.*
 rm -f .github/workflows/storybook.yml
-node scripts/remove-storybook-deps.js
+node scripts/remove-storybook.js
 
 # substitute '{project-name}' with the current folder name
 sed -i '' 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
