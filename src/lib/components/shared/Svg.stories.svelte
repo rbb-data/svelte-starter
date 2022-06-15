@@ -7,7 +7,7 @@
   let boundedHeight;
 </script>
 
-<Meta title="Svg" component={Svg} />
+<Meta title="Components/Svg" component={Svg} />
 
 <Story name="Basic">
   <Svg width={100} height={100}>

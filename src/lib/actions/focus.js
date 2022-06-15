@@ -6,7 +6,7 @@
  */
 export default function focus(node, active) {
   function setFocus() {
-    active ? node.focus() : node.blur();
+    if (active) node.focus();
   }
 
   setFocus();
