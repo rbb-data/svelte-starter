@@ -5,6 +5,70 @@
   outline-offset: 2px;
 }
 
+@mixin typography($element) {
+  @if $element == header {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-xl);
+    color: var(--c-ui-gray-500);
+  }
+  @if $element == teaser {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-lg);
+    color: var(--c-ui-gray-500);
+  }
+  @if $element == text {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-sm);
+    color: var(--c-ui-gray-500);
+  }
+  @if $element == chart-title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-xs);
+    color: var(--c-ui-gray-500);
+  }
+  @if $element == chart-description {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-2xs);
+    color: var(--c-ui-gray-500);
+  }
+  @if $element == chart-annotation {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-2xs);
+    color: var(--c-chart-annotation);
+  }
+  @if $element == chart-legend {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-2xs);
+    color: var(--c-ui-gray-500);
+  }
+  @if $element == axis-title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-3xs);
+    color: var(--c-chart-axis-text);
+  }
+  @if $element == axis-value {
+    font-weight: var(--font-weight-light);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-3xs);
+    color: var(--c-chart-axis-text);
+  }
+  @if $element == chart-source {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-3xs);
+    color: var(--c-ui-gray-300);
+  }
+}
+
 @mixin breakpoint($mode) {
   @if $mode == narrow {
     @media (max-width: #{$bp-xs - 1}) {
