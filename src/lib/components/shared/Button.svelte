@@ -74,11 +74,7 @@
   <slot />
 </button>
 
-<style lang="scss">
-  button:focus-visible {
-    @include focus;
-  }
-
+<style>
   button {
     --color: black;
     --background-color: transparent;

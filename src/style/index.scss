@@ -43,6 +43,10 @@ select {
 .reset {
   all: unset;
   box-sizing: border-box;
+
+  &:focus-visible {
+    @include focus;
+  }
 }
 
 /* content is _visually_ hidden but still accessible to screen readers */
@@ -58,6 +62,8 @@ select {
 }
 
 .slant {
+  --slant: 6px;
+
   clip-path: polygon(
     var(--slant) 0,
     100% 0,
