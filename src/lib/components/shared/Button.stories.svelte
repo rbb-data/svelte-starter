@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import { cGreen100, cGreen400 } from '$lib/tokens';
+  import { cGreen400 } from '$lib/tokens';
   import Button from './Button.svelte';
 </script>
 
@@ -18,19 +18,19 @@
 </Story>
 
 <Story name="Preset color">
-  <Button colorScheme="gray" on:press={() => console.log('clicked')}>
+  <Button accentColor="beige" on:press={() => console.log('clicked')}>
     Primary
   </Button>
   <Button
     type="secondary"
-    colorScheme="gray"
+    accentColor="beige"
     on:press={() => console.log('clicked')}
   >
     Secondary
   </Button>
   <Button
     type="tertiary"
-    colorScheme="gray"
+    accentColor="beige"
     on:press={() => console.log('clicked')}
   >
     Tertiary
@@ -38,20 +38,19 @@
 </Story>
 
 <Story name="Custom color">
-  <Button
-    colorPair={{ light: cGreen100, dark: cGreen400 }}
-    on:press={() => console.log('clicked')}>Primary</Button
+  <Button customColor={cGreen400} on:press={() => console.log('clicked')}
+    >Primary</Button
   >
   <Button
     type="secondary"
-    colorPair={{ light: cGreen100, dark: cGreen400 }}
+    customColor={cGreen400}
     on:press={() => console.log('clicked')}
   >
     Secondary
   </Button>
   <Button
     type="tertiary"
-    colorPair={{ light: cGreen100, dark: cGreen400 }}
+    customColor={cGreen400}
     on:press={() => console.log('clicked')}
   >
     Tertiary
@@ -65,5 +64,65 @@
   </Button>
   <Button type="tertiary" disabled on:press={() => console.log('clicked')}>
     Tertiary
+  </Button>
+</Story>
+
+<Story name="Disabled (processing)">
+  <Button
+    disabled
+    feedback="processing"
+    on:press={() => console.log('clicked')}
+  >
+    Primary
+  </Button>
+  <Button
+    type="secondary"
+    feedback="processing"
+    disabled
+    on:press={() => console.log('clicked')}
+  >
+    Secondary
+  </Button>
+</Story>
+
+<Story name="Disabled (done)">
+  <Button disabled feedback="done" on:press={() => console.log('clicked')}>
+    Primary
+  </Button>
+  <Button
+    type="secondary"
+    feedback="done"
+    disabled
+    on:press={() => console.log('clicked')}
+  >
+    Secondary
+  </Button>
+</Story>
+
+<Story name="Disabled (success)">
+  <Button disabled feedback="success" on:press={() => console.log('clicked')}>
+    Primary
+  </Button>
+  <Button
+    type="secondary"
+    feedback="success"
+    disabled
+    on:press={() => console.log('clicked')}
+  >
+    Secondary
+  </Button>
+</Story>
+
+<Story name="Disabled (error)">
+  <Button disabled feedback="error" on:press={() => console.log('clicked')}>
+    Primary
+  </Button>
+  <Button
+    type="secondary"
+    feedback="error"
+    disabled
+    on:press={() => console.log('clicked')}
+  >
+    Secondary
   </Button>
 </Story>
