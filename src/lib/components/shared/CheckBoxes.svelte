@@ -106,7 +106,7 @@
   {/each}
 </fieldset>
 
-<style>
+<style lang="scss">
   fieldset {
     width: 100%;
     border: 0;
@@ -126,11 +126,11 @@
 
     display: flex;
     align-items: center;
-  }
 
-  label.disabled {
-    cursor: default;
-    opacity: 0.3;
+    &.disabled {
+      cursor: default;
+      opacity: 0.3;
+    }
   }
 
   input[type='checkbox'] {
@@ -141,34 +141,34 @@
     margin-right: var(--s-px-2);
     border: 1px solid currentColor;
     position: relative;
-  }
 
-  input[type='checkbox']:checked {
-    background-color: var(--c-accent);
-    border: 1px solid var(--c-accent);
-  }
+    &:checked {
+      background-color: var(--c-accent);
+      border: 1px solid var(--c-accent);
+    }
 
-  input[type='checkbox']:checked::before {
-    content: '';
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    top: 0;
-    height: 50%;
-    width: 50%;
-    background-color: white;
-  }
+    &:checked::before {
+      content: '';
+      position: absolute;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      top: 0;
+      height: 50%;
+      width: 50%;
+      background-color: white;
+    }
 
-  @supports (
-    clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)
-  ) {
-    input[type='checkbox']:checked::before {
-      height: 80%;
-      width: 80%;
-      clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%);
+    @supports (
+      clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)
+    ) {
+      &:checked::before {
+        height: 80%;
+        width: 80%;
+        clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%);
+      }
     }
   }
 </style>

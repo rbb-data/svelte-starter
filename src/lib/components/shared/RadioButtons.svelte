@@ -106,7 +106,7 @@
   {/each}
 </fieldset>
 
-<style>
+<style lang="scss">
   fieldset {
     width: 100%;
     border: 0;
@@ -126,11 +126,11 @@
 
     display: flex;
     align-items: center;
-  }
 
-  label.disabled {
-    cursor: default;
-    opacity: 0.3;
+    &.disabled {
+      cursor: default;
+      opacity: 0.3;
+    }
   }
 
   input[type='radio'] {
@@ -142,10 +142,10 @@
     margin-right: var(--s-px-2);
     border-radius: 50%;
     border: 1px solid black;
-  }
 
-  input[type='radio']:checked {
-    border: 5px solid var(--c-accent);
-    background-color: white;
+    &:checked {
+      border: 5px solid var(--c-accent);
+      background-color: white;
+    }
   }
 </style>

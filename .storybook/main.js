@@ -1,4 +1,5 @@
 const path = require('path');
+const preprocess = require('svelte-preprocess');
 
 module.exports = {
   stories: [
@@ -16,7 +17,14 @@ module.exports = {
     builder: '@storybook/builder-vite',
   },
   svelteOptions: {
-    preprocess: import('../svelte.config.js').preprocess,
+    preprocess: [
+      preprocess({
+        scss: {
+          prependData: '@use "../src/style/mixins.scss" as *;',
+        },
+        postcss: true,
+      }),
+    ],
   },
   features: {
     // unfortunately, storyStoreV7 doesn't work with stories authored as *.svelte files
@@ -28,6 +36,13 @@ module.exports = {
       $lib: path.resolve('./src/lib'),
       $data: path.resolve('./src/data'),
       $shared: path.resolve('./src/lib/components/shared'),
+    };
+    config.css = {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "../src/style/mixins.scss" as *;',
+        },
+      },
     };
     config.base = '/svelte-starter/';
     return config;

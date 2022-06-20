@@ -86,124 +86,136 @@
   {/if}
 </HeadlessButton>
 
-<style>
-  :global(.button) {
-    --color: var(--c-ui-gray-500);
-    --background-color: transparent;
-    --c-accent-transparent: rgba(
-      var(--c-accent-r),
-      var(--c-accent-g),
-      var(--c-accent-b),
-      0.3
-    );
-    --icon-size: 1.6em;
-    --icon-padding: var(--s-px-1);
+<style lang="scss">
+  :global {
+    .button {
+      --color: var(--c-ui-gray-500);
+      --background-color: transparent;
+      --c-accent-transparent: rgba(
+        var(--c-accent-r),
+        var(--c-accent-g),
+        var(--c-accent-b),
+        0.3
+      );
+      --icon-size: 1.6em;
+      --icon-padding: var(--s-px-1);
 
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-regular);
-    padding: var(--s-px-2) var(--s-px-4);
-    text-transform: uppercase;
-    text-align: center;
-    white-space: nowrap;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-regular);
+      padding: var(--s-px-2) var(--s-px-4);
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
 
-    color: var(--color);
-    background-color: var(--background-color);
-  }
+      color: var(--color);
+      background-color: var(--background-color);
 
-  :global(.button.primary) {
-    --color: #ffffff;
-    --background-color: var(--c-accent);
-  }
+      &.primary {
+        --color: #ffffff;
+        --background-color: var(--c-accent);
+      }
 
-  :global(.button.secondary) {
-    --color: var(--c-accent);
-    --border-color: var(--c-accent);
+      &.secondary {
+        --color: var(--c-accent);
+        --border-color: var(--c-accent);
 
-    outline: 1px solid var(--border-color);
-    outline-offset: -1px;
-  }
+        outline: 1px solid var(--border-color);
+        outline-offset: -1px;
+      }
 
-  :global(.button.tertiary) {
-    --color: var(--c-accent);
-  }
+      &.tertiary {
+        --color: var(--c-accent);
+      }
 
-  :global(.button.disabled.show-feedback) {
-    opacity: 1;
-    --color: var(--c-ui-gray-500);
-  }
+      &.disabled {
+        &.show-feedback {
+          opacity: 1;
+          --color: var(--c-ui-gray-500);
+        }
 
-  :global(.button.disabled.processing) {
-    --color: var(--c-ui-gray-400);
-  }
+        &.processing {
+          --color: var(--c-ui-gray-400);
 
-  :global(.button.disabled.processing.primary) {
-    --background-color: var(--c-accent-transparent);
-  }
+          &.primary {
+            --background-color: var(--c-accent-transparent);
+          }
 
-  :global(.button.disabled.processing.secondary) {
-    --border-color: var(--c-accent-transparent);
-  }
+          &.secondary {
+            --border-color: var(--c-accent-transparent);
+          }
+        }
 
-  :global(.button.disabled.done.primary) {
-    --background-color: var(--c-ui-gray-100);
-  }
+        &.done {
+          &.primary {
+            --background-color: var(--c-ui-gray-100);
+          }
 
-  :global(.button.disabled.done.secondary) {
-    --border-color: #bfbfbf;
-  }
+          &.secondary {
+            --border-color: #bfbfbf;
+          }
+        }
 
-  :global(.button.disabled.success.primary) {
-    --background-color: var(--c-quality-positive);
-  }
+        &.success {
+          &.primary {
+            --background-color: var(--c-quality-positive);
+          }
 
-  :global(.button.disabled.success.secondary) {
-    --background-color: #d3eeda;
-    --border-color: #396a56;
-    --color: #396a56;
-  }
+          &.secondary {
+            --background-color: #d3eeda;
+            --border-color: #396a56;
+            --color: #396a56;
+          }
 
-  :global(.button.disabled.success.tertiary) {
-    --color: #396a56;
-  }
+          &.tertiary {
+            --color: #396a56;
+          }
+        }
 
-  :global(.button.disabled.error.primary) {
-    --background-color: #ea693e;
-  }
+        &.error {
+          &.primary {
+            --background-color: #ea693e;
+          }
 
-  :global(.button.disabled.error.secondary) {
-    --background-color: #f3dace;
-    --border-color: var(--c-rbb-burgundy);
-    --color: var(--c-rbb-burgundy);
-  }
+          &.secondary {
+            --background-color: #f3dace;
+            --border-color: var(--c-rbb-burgundy);
+            --color: var(--c-rbb-burgundy);
+          }
 
-  :global(.button.disabled.error.tertiary) {
-    --color: var(--c-rbb-burgundy);
-  }
+          &.tertiary {
+            --color: var(--c-rbb-burgundy);
+          }
+        }
+      }
 
-  :global(.button.show-icon .content) {
-    position: relative;
-    margin-left: calc(
-      var(--icon-size) + var(--icon-padding)
-    ); /* reserve space for the icon */
-  }
+      &.show-icon {
+        .content {
+          position: relative;
+          margin-left: calc(
+            var(--icon-size) + var(--icon-padding)
+          ); /* reserve space for the icon */
+        }
 
-  :global(.button svg) {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
+        svg {
+          width: var(--icon-size);
+          height: var(--icon-size);
+          left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
 
-    /* vertically align the icon */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+          /* vertically align the icon */
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
 
-  :global(.button svg path) {
-    fill: var(--color);
-  }
+          path {
+            fill: var(--color);
+          }
+        }
 
-  :global(.button.show-icon.processing svg) {
-    animation: spin 1.5s linear infinite;
+        &.processing svg {
+          animation: spin 1.5s linear infinite;
+        }
+      }
+    }
   }
 
   @keyframes spin {

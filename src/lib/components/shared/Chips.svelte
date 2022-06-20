@@ -91,33 +91,29 @@
   <slot {option} {checked} />
 </CheckBoxes>
 
-<style>
-  :global(fieldset.chips input[type='checkbox']) {
-    /* TODO: @include visually-hidden */
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-  }
+<style lang="scss">
+  :global {
+    fieldset.chips {
+      input[type='checkbox'] {
+        @include visually-hidden;
+      }
 
-  :global(fieldset.chips label) {
-    display: inline-block;
-    width: max-content;
-    border-radius: 15px;
-    padding: var(--s-px-2) var(--s-px-4);
-    color: var(--c-ui-gray-400);
-  }
+      label {
+        display: inline-block;
+        width: max-content;
+        border-radius: 15px;
+        padding: var(--s-px-2) var(--s-px-4);
+        color: var(--c-ui-gray-400);
 
-  :global(fieldset.chips label + label) {
-    margin-left: var(--s-px-2);
-  }
+        &.checked {
+          background-color: var(--c-accent);
+          color: var(--c-ui-gray-500);
+        }
+      }
 
-  :global(fieldset.chips label.checked) {
-    background-color: var(--c-accent);
-    color: var(--c-ui-gray-500);
+      label + label {
+        margin-left: var(--s-px-2);
+      }
+    }
   }
 </style>

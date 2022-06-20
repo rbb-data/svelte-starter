@@ -15,10 +15,6 @@
 
   import css from '$lib/actions/css';
 
-  // To make sure the button remains focusable – even when disabled –
-  // we ignore the HTML attribute "disabled" and instead implement
-  // disabled buttons via ARIA semantics.
-
   /** disables the button accessibly */
   export let disabled = false;
 
@@ -51,13 +47,13 @@
   <slot />
 </button>
 
-<style>
+<style lang="scss">
   button {
     cursor: pointer;
-  }
 
-  button.disabled {
-    cursor: default;
-    opacity: 0.3;
+    &.disabled {
+      cursor: default;
+      opacity: 0.3;
+    }
   }
 </style>
