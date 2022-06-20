@@ -126,3 +126,23 @@
     Secondary
   </Button>
 </Story>
+
+<Story name="Hide default icon">
+  <Button
+    disabled
+    feedback="processing"
+    hideFeedbackIcon
+    on:press={() => console.log('clicked')}
+  >
+    Primary
+  </Button>
+  <Button
+    type="secondary"
+    feedback="processing"
+    disabled
+    hideFeedbackIcon
+    on:press={() => console.log('clicked')}
+  >
+    Secondary
+  </Button>
+</Story>

@@ -6,6 +6,9 @@
    */
 
   import HeadlessButton from '$shared/headless/Button.svelte';
+  import CheckIcon from '$shared/icons/Check.svelte';
+  import XmarkIcon from '$shared/icons/Xmark.svelte';
+  import ProcessingIcon from '$shared/icons/Processing.svelte';
 
   import { capitalize, hex2rgba } from '$lib/utils';
   import * as colors from '$lib/tokens';
@@ -37,12 +40,18 @@
    */
   export let feedback = undefined;
 
+  /** don't render default feedback icon */
+  export let hideFeedbackIcon = false;
+
+  $: showFeedbackIcon =
+    !hideFeedbackIcon && type !== 'tertiary' && feedback && feedback !== 'done';
   $: classes = [
     'button',
     'reset',
     type,
     feedback && 'show-feedback',
     feedback,
+    showFeedbackIcon && 'show-icon',
   ].filter((c) => c);
 
   $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
@@ -61,7 +70,20 @@
     'c-accent-b': colorRgb[2],
   }}
 >
-  <slot />
+  {#if showFeedbackIcon}
+    <div class="content">
+      {#if feedback === 'processing'}
+        <ProcessingIcon />
+      {:else if feedback === 'success'}
+        <CheckIcon />
+      {:else if feedback === 'error'}
+        <XmarkIcon />
+      {/if}
+      <slot />
+    </div>
+  {:else}
+    <slot />
+  {/if}
 </HeadlessButton>
 
 <style>
@@ -74,6 +96,8 @@
       var(--c-accent-b),
       0.3
     );
+    --icon-size: 1.6em;
+    --icon-padding: var(--s-px-1);
 
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-regular);
@@ -154,5 +178,40 @@
 
   :global(.button.disabled.error.tertiary) {
     --color: var(--c-rbb-burgundy);
+  }
+
+  :global(.button.show-icon .content) {
+    position: relative;
+    margin-left: calc(
+      var(--icon-size) + var(--icon-padding)
+    ); /* reserve space for the icon */
+  }
+
+  :global(.button svg) {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
+
+    /* vertically align the icon */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  :global(.button svg path) {
+    fill: var(--color);
+  }
+
+  :global(.button.show-icon.processing svg) {
+    animation: spin 1.5s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: translateY(-50%) rotate(0deg);
+    }
+    to {
+      transform: translateY(-50%) rotate(360deg);
+    }
   }
 </style>
