@@ -1,4 +1,10 @@
 <script>
+  /**
+   * Primary, secondary and tertiary buttons
+   *
+   * @component
+   */
+
   import HeadlessButton from '$shared/headless/Button.svelte';
 
   import { capitalize, hex2rgba } from '$lib/utils';
@@ -8,14 +14,14 @@
   export let type = 'primary';
 
   /**
-   * accent color; maps to a pre-defined color
+   * maps to a pre-defined color
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
   export let accentColor = 'blue';
 
   /**
-   * custom color; if given, overwrites `accentColor`
+   * if given, overwrites `accentColor`
    *
    * @type {string}
    */

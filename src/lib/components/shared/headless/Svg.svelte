@@ -1,6 +1,8 @@
 <script>
   /**
-   * SVG container that implements a common pattern for sizing charts
+   * SVG container that implements a common pattern for sizing charts, see
+   * [Amelia Wattenberger's blog
+   * post](https://wattenberger.com/blog/react-and-d3#sizing-responsivity).
    *
    * @component
    */
@@ -21,6 +23,14 @@
    */
   export let height;
 
+  /** size of the margins on each side of the svg */
+  export let margin = {
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+  };
+
   /**
    * width of the canvas (the svg's width minus margins)
    *
@@ -34,14 +44,6 @@
    * @exposed
    */
   export let boundedHeight = 0;
-
-  /** size of the margins on each side of the svg */
-  export let margin = {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  };
 
   /** if true, show the svg's outline and highlight canvas */
   export let debug = false;
