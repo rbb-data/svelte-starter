@@ -1,6 +1,6 @@
 <script>
   /**
-   * Group of vertically aligned radio buttons.
+   * Group of vertically aligned check boxes.
    *
    * The rendered markup is:
    *
@@ -10,7 +10,7 @@
    *     <!-- label -->
    *   </legend>
    *   <label>
-   *     <input role="radio" />
+   *     <input role="checkbox" />
    *     <!-- slot -->
    *   </label>
    * </fieldset>
@@ -37,11 +37,11 @@
   export let options;
 
   /**
-   * Currently selected value, must be returned by `getValue`
+   * Currently selected values, all entries must be returned by `getValue`
    *
-   * @type {any}
+   * @type {any[]}
    */
-  export let selectedValue;
+  export let selectedValues = [];
 
   /**
    * Label of the radio group
@@ -63,7 +63,7 @@
   /**
    * Maps a option to its value
    *
-   * @param {(option: any) => any}
+   * @param {(option: any) => string}
    */
   export let getValue = (option) => option;
 
@@ -84,9 +84,9 @@
   {/if}
   {#each options as option}
     {@const v = getValue(option)}
-    {@const isChecked = v === selectedValue}
+    {@const isChecked = selectedValues.includes(v)}
     <label class:checked={isChecked}>
-      <input type="radio" name={id} bind:group={selectedValue} value={v} />
+      <input type="checkbox" name={id} bind:group={selectedValues} value={v} />
       <slot {option} checked={isChecked} />
     </label>
   {/each}
@@ -114,19 +114,42 @@
     align-items: center;
   }
 
-  input[type='radio'] {
+  input[type='checkbox'] {
     appearance: none;
-    background-color: #fff; /* for iOS */
-
     width: 1.2em;
     height: 1.2em;
+    background-color: transparent;
     margin-right: var(--s-px-2);
-    border-radius: 50%;
-    border: 1px solid black;
+    border: 1px solid currentColor;
+    position: relative;
   }
 
-  input[type='radio']:checked {
-    border: 5px solid var(--c-accent);
+  input[type='checkbox']:checked {
+    background-color: var(--c-accent);
+    border: 1px solid var(--c-accent);
+  }
+
+  input[type='checkbox']:checked::before {
+    content: '';
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    top: 0;
+    height: 50%;
+    width: 50%;
     background-color: white;
+  }
+
+  @supports (
+    clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)
+  ) {
+    input[type='checkbox']:checked::before {
+      height: 80%;
+      width: 80%;
+      clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%);
+    }
   }
 </style>
