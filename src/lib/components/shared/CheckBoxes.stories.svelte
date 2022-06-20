@@ -19,7 +19,7 @@
 
 <Story name="Basic">
   <CheckBoxes
-    id="my-radio-buttons--basic"
+    id="my-check-boxes"
     {options}
     label="Wähle Regionen"
     let:option
@@ -37,7 +37,7 @@
 
 <Story name="Initially selected value">
   <CheckBoxes
-    id="my-radio-buttons--selected-value"
+    id="my-check-boxes"
     {options}
     label="Wähle Regionen"
     let:option
@@ -53,9 +53,28 @@
   </div>
 </Story>
 
+<Story name="Disabled option">
+  <CheckBoxes
+    id="my-check-boxes"
+    {options}
+    label="Wähle Regionen"
+    isDisabled={(option) => option === 'Berlin'}
+    let:option
+    bind:selectedValues
+  >
+    {option}
+  </CheckBoxes>
+  <div>
+    Selected value:
+    {#if selectedValues.length > 0}
+      {selectedValues}
+    {/if}
+  </div>
+</Story>
+
 <Story name="Complex options">
   <CheckBoxes
-    id="my-radio-buttons--complex-options"
+    id="my-check-boxes"
     options={complexOptions}
     label="Wähle Regionen"
     getValue={(option) => option.value}
@@ -74,7 +93,7 @@
 
 <Story name="Custom accent color">
   <CheckBoxes
-    id="my-radio-buttons--custom-accent-color"
+    id="my-check-boxes"
     {options}
     accentColor="beige"
     label="Wähle Regionen"
@@ -93,7 +112,7 @@
 
 <Story name="Hide label visually">
   <CheckBoxes
-    id="my-radio-buttons--custom-accent-color"
+    id="my-check-boxes"
     {options}
     label="Wähle Regionen"
     hideLabelVisually
@@ -113,7 +132,7 @@
 <Story name="External label">
   <div id="select-region-label">Wähle eine Region</div>
   <CheckBoxes
-    id="my-radio-buttons--custom-accent-color"
+    id="my-check-boxes"
     {options}
     aria-labelledby="select-region-label"
     let:option

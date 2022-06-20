@@ -61,11 +61,18 @@
   export let accentColor = 'blue';
 
   /**
-   * Maps a option to its value
+   * Maps an option to its value
    *
    * @param {(option: any) => any}
    */
   export let getValue = (option) => option;
+
+  /**
+   * disable individual options
+   *
+   * @param {(option: any) => boolean}
+   */
+  export let isDisabled = () => false;
 
   $: color = colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = colors[`c${capitalize(accentColor)}100`];
@@ -84,10 +91,17 @@
   {/if}
   {#each options as option}
     {@const v = getValue(option)}
-    {@const isChecked = v === selectedValue}
-    <label class:checked={isChecked}>
-      <input type="radio" name={id} bind:group={selectedValue} value={v} />
-      <slot {option} checked={isChecked} />
+    {@const checked = v === selectedValue}
+    {@const disabled = isDisabled(option)}
+    <label class:checked class:disabled>
+      <input
+        type="radio"
+        name={id}
+        bind:group={selectedValue}
+        value={v}
+        {disabled}
+      />
+      <slot {option} {checked} />
     </label>
   {/each}
 </fieldset>
@@ -112,6 +126,11 @@
 
     display: flex;
     align-items: center;
+  }
+
+  label.disabled {
+    cursor: default;
+    opacity: 0.3;
   }
 
   input[type='radio'] {

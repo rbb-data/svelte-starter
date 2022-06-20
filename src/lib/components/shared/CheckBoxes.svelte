@@ -67,6 +67,13 @@
    */
   export let getValue = (option) => option;
 
+  /**
+   * disable individual options
+   *
+   * @param {(option: any) => boolean}
+   */
+  export let isDisabled = () => false;
+
   $: color = colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = colors[`c${capitalize(accentColor)}100`];
 </script>
@@ -84,10 +91,17 @@
   {/if}
   {#each options as option}
     {@const v = getValue(option)}
-    {@const isChecked = selectedValues.includes(v)}
-    <label class:checked={isChecked}>
-      <input type="checkbox" name={id} bind:group={selectedValues} value={v} />
-      <slot {option} checked={isChecked} />
+    {@const checked = selectedValues.includes(v)}
+    {@const disabled = isDisabled(option)}
+    <label class:checked class:disabled>
+      <input
+        type="checkbox"
+        name={id}
+        bind:group={selectedValues}
+        value={v}
+        {disabled}
+      />
+      <slot {option} {checked} />
     </label>
   {/each}
 </fieldset>
@@ -112,6 +126,11 @@
 
     display: flex;
     align-items: center;
+  }
+
+  label.disabled {
+    cursor: default;
+    opacity: 0.3;
   }
 
   input[type='checkbox'] {
