@@ -53,6 +53,28 @@
   </div>
 </Story>
 
+<Story name="Update option on selection">
+  <RadioButtons
+    id="my-radio-buttons"
+    {options}
+    label="Wähle eine Region"
+    let:option
+    let:checked
+    bind:selectedValue={selectedValueInitiallySet}
+  >
+    {option}
+    {#if checked}
+      (checked)
+    {/if}
+  </RadioButtons>
+  <div>
+    Selected value:
+    {#if selectedValueInitiallySet}
+      {selectedValueInitiallySet}
+    {/if}
+  </div>
+</Story>
+
 <Story name="Disabled option">
   <RadioButtons
     id="my-radio-buttons"
