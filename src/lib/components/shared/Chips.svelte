@@ -77,6 +77,13 @@
   export let customColorLight;
 
   /**
+   * if given, overwrites the `accentColor` shade that is used for the focus rind
+   *
+   * @type {string}
+   */
+  export let customColorFocus;
+
+  /**
    * Maps an option to its value
    *
    * @param {(option: any) => string}
@@ -91,6 +98,8 @@
   export let isDisabled = () => false;
 
   const color = customColor || colors[`c${capitalize(accentColor)}300`];
+  const colorFocus =
+    customColorFocus || colors['cUiAccent' + capitalize(accentColor)];
 </script>
 
 <CheckBoxes
@@ -103,6 +112,7 @@
   {accentColor}
   customColor={color}
   {customColorLight}
+  customColorFocus={colorFocus}
   {getValue}
   {isDisabled}
   let:option
@@ -125,15 +135,16 @@
         border-radius: 15px;
         padding: var(--s-px-2) var(--s-px-4);
         color: var(--c-ui-gray-400);
+        margin-right: var(--s-px-2);
+
+        &:last-of-type {
+          margin-right: 0;
+        }
 
         &.checked {
           background-color: var(--c-accent);
           color: var(--c-ui-gray-500);
         }
-      }
-
-      label + label {
-        margin-left: var(--s-px-2);
       }
     }
   }

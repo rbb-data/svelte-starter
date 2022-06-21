@@ -23,38 +23,38 @@
   import { capitalize } from '$lib/utils';
 
   /**
-   * Globally unique id
+   * globally unique id
    *
    * @type {string}
    */
   export let id;
 
   /**
-   * List of options
+   * list of options
    *
    * @type {string[] | Record<any, any>[]}
    */
   export let options;
 
   /**
-   * Currently selected values, all entries must be returned by `getValue`
+   * currently selected values, all entries must be returned by `getValue`
    *
    * @type {any[]}
    */
   export let selectedValues = [];
 
   /**
-   * Label of the radio group
+   * label of the radio group
    *
    * @type {string}
    */
   export let label;
 
-  /** Hide label visually but keep it around for screen readers */
+  /** hide label visually but keep it around for screen readers */
   export let hideLabelVisually = false;
 
   /**
-   * Maps to pre-defined colors (dark and light shade)
+   * maps to pre-defined colors (dark and light shade)
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
@@ -75,14 +75,21 @@
   export let customColorLight;
 
   /**
-   * Maps an option to its value
+   * if given, overwrites the `accentColor` shade that is used for the focus rind
+   *
+   * @type {string}
+   */
+  export let customColorFocus;
+
+  /**
+   * maps an option to its value
    *
    * @param {(option: any) => string}
    */
   export let getValue = (option) => option;
 
   /**
-   * disable individual options based on a condition
+   * disables individual options based on a condition
    *
    * @param {(option: any) => boolean}
    */
@@ -90,6 +97,7 @@
 
   $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = customColorLight || colors[`c${capitalize(accentColor)}100`];
+  $: colorFocus = customColorFocus || color;
 
   let focusedValue = null;
 </script>
@@ -98,6 +106,7 @@
   aria-orientation="vertical"
   style:--c-accent={color}
   style:--c-accent-light={colorLight}
+  style:--c-accent-focus={colorFocus}
   {...$$restProps}
 >
   {#if label}
@@ -151,7 +160,7 @@
     align-items: center;
 
     &.focused {
-      @include focus(var(--c-accent));
+      @include focus(var(--c-accent-focus));
     }
 
     &.disabled {
@@ -170,7 +179,7 @@
     position: relative;
 
     &:focus {
-      @include focus(var(--c-accent), var(--c-accent-light));
+      @include focus(var(--c-accent-focus), var(--c-accent-light));
     }
 
     &:focus:not(:focus-visible),
