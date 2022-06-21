@@ -44,9 +44,9 @@
 {#each tabs as tab, i}
   {@const active = i === activeIndex}
   <div
-    id="{id}-tabpanel"
+    id="{id}--tabpanel-{i}"
     role="tabpanel"
-    aria-labelledby="{id}-tab"
+    aria-labelledby="{id}--tab-{i}"
     aria-expanded={active}
     tabindex={active ? 0 : -1}
     style:--c-accent-focus={colorFocus}

@@ -94,10 +94,10 @@
   {#each tabs as tab, i}
     {@const active = i === activeIndex}
     <button
-      id="{id}-tab"
+      id="{id}--tab-{i}"
       role="tab"
       class="reset"
-      aria-controls="{id}-tabpanel"
+      aria-controls="{id}--tabpanel-{i}"
       aria-selected={active}
       tabindex={active ? 0 : -1}
       bind:this={buttons[i]}
