@@ -24,7 +24,7 @@
   label="Wähle eine Region"
   hideLabelVisually
   options={regions}
-  getValue={(option) => option.value}
+  getOptionValue={(option) => option.value}
   let:option
   bind:selectedValue={selectedRegion}
 >

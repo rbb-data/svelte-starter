@@ -1,10 +1,20 @@
 <script>
+  /**
+   * `<Tabs />` and `<TabPanels />` work together to orchestrate horizontally
+   * aligned tabs. This component controls the tabs itself (i.e. the clickable
+   * elements rendered as buttons).
+   *
+   * **Note:** Must be used in conjunction with `<TabPanels />`
+   *
+   * @component
+   */
+
   import press from '$lib/actions/press';
   import * as colors from '$lib/tokens';
   import { capitalize } from '$lib/utils';
 
   /**
-   * unique id, must match the id of the associated TabPanels element
+   * globally unique id, must match the id of the associated TabPanels element
    *
    * @type {string}
    */
@@ -25,14 +35,14 @@
   export let activeIndex = 0;
 
   /**
-   * maps to pre-defined colors (dark and light shade)
+   * maps to pre-defined colors
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
   export let accentColor = 'blue';
 
   /**
-   * if given, overwrites the `accentColor`
+   * if given, overwrites the accent color
    *
    * @type {string}
    */
@@ -46,7 +56,7 @@
   export let customColorLight = undefined;
 
   /**
-   * if given, overwrites the `accentColor` shade that is used for the focus ring
+   * if given, overwrites the shade that is used for the focus ring
    *
    * @type {string}
    */
@@ -85,6 +95,7 @@
 
 <div
   role="tablist"
+  aria-orientation="horizontal"
   style:--c-accent={color}
   style:--c-accent-light={colorLight}
   style:--c-accent-focus={colorFocus}

@@ -15,7 +15,30 @@
   let selectedValueInitiallySet = 'Berlin';
 </script>
 
-<Meta title="Components/RadioButtons" component={RadioButtons} />
+<Meta
+  title="Components/RadioButtons"
+  component={RadioButtons}
+  argTypes={{
+    id: {
+      type: { required: true },
+    },
+    options: {
+      type: { required: true },
+    },
+    getOptionValue: {
+      table: {
+        type: { summary: '(option: any) => any' },
+        defaultValue: { summary: '(option) => option' },
+      },
+    },
+    isOptionDisabled: {
+      table: {
+        type: { summary: '(option: any) => boolean' },
+        defaultValue: { summary: '(option) => false' },
+      },
+    },
+  }}
+/>
 
 <Story name="Basic">
   <RadioButtons
@@ -27,15 +50,15 @@
   >
     {option}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValue}
-      {selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="Initially selected value">
+<Story name="Specify initially selected value">
   <RadioButtons
     id="my-radio-buttons"
     {options}
@@ -45,10 +68,10 @@
   >
     {option}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValueInitiallySet}
-      {selectedValueInitiallySet}
+      <i>{selectedValueInitiallySet}</i>
     {/if}
   </div>
 </Story>
@@ -60,17 +83,17 @@
     label="Wähle eine Region"
     let:option
     let:checked
-    bind:selectedValue={selectedValueInitiallySet}
+    bind:selectedValue
   >
     {option}
     {#if checked}
       (checked)
     {/if}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
-    {#if selectedValueInitiallySet}
-      {selectedValueInitiallySet}
+    {#if selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
@@ -80,16 +103,16 @@
     id="my-radio-buttons"
     {options}
     label="Wähle eine Region"
-    isDisabled={(option) => option === 'Berlin'}
+    isOptionDisabled={(option) => option === 'Berlin'}
     let:option
     bind:selectedValue
   >
     {option}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValue}
-      {selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
@@ -99,16 +122,16 @@
     id="my-radio-buttons"
     options={complexOptions}
     label="Wähle eine Region"
-    getValue={(option) => option.value}
+    getOptionValue={(option) => option.value}
     let:option
     bind:selectedValue
   >
     {option.label}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValue}
-      {selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
@@ -124,10 +147,10 @@
   >
     {option}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValue}
-      {selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
@@ -143,15 +166,15 @@
   >
     {option}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValue}
-      {selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="External label">
+<Story name="External label via aria-labelledby">
   <div id="select-region-label">Wähle eine Region</div>
   <RadioButtons
     id="my-radio-buttons"
@@ -162,10 +185,19 @@
   >
     {option}
   </RadioButtons>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValue}
-      {selectedValue}
+      <i>{selectedValue}</i>
     {/if}
   </div>
 </Story>
+
+<style>
+  .result {
+    margin-top: var(--s-px-5);
+    font-size: var(--font-size-sm);
+    border-top: 1px dashed var(--c-ui-gray-400);
+    padding-top: var(--s-px-1);
+  }
+</style>

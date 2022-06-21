@@ -1,9 +1,19 @@
 <script>
+  /**
+   * `<Tabs />` and `<TabPanels />` work together to orchestrate horizontally
+   * aligned tabs. This component controls the _tab panels_ (i.e. the content
+   * that is associated with a tab).
+   *
+   * **Note:** Must be used in conjunction with `<Tabs />`
+   *
+   * @component
+   */
+
   import * as colors from '$lib/tokens';
   import { capitalize } from '$lib/utils';
 
   /**
-   * unique id, must match the id of the associated Tabs element
+   * globally unique id, must match the id of the associated Tabs element
    *
    * @type {string}
    */
@@ -31,7 +41,7 @@
   export let accentColor = 'blue';
 
   /**
-   * if given, overwrites the `accentColor` shade that is used for the focus ring
+   * if given, overwrites the shade that is used for the focus ring
    *
    * @type {string}
    */

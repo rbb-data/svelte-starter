@@ -9,7 +9,7 @@
     { label: 'Komponente Fünf', value: 5 },
   ];
 
-  const isDisabled = (option) => option.value === 2;
+  const isOptionDisabled = (option) => option.value === 2;
 
   let selectedComponents = [1, 4];
 </script>
@@ -18,16 +18,16 @@
   id="check-boxes--choose-components"
   label="Wähle eine oder mehrere Komponenten:"
   {options}
-  getValue={(option) => option.value}
+  getOptionValue={(option) => option.value}
   accentColor="purple"
   customColorLight="transparent"
-  {isDisabled}
+  {isOptionDisabled}
   let:option
   bind:selectedValues={selectedComponents}
 >
   {option.label}
 
-  {#if isDisabled(option)}
+  {#if isOptionDisabled(option)}
     &nbsp;<i>(nicht auswählbar)</i>
   {/if}
 </CheckBoxes>

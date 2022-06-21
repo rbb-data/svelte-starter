@@ -16,8 +16,8 @@
 </script>
 
 <Meta
-  title="Components/Tabs"
-  component={Tabs}
+  title="Components/TabPanels"
+  component={TabPanels}
   argTypes={{
     id: {
       type: { required: true },

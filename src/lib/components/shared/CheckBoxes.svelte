@@ -7,7 +7,7 @@
    * ```html
    * <fieldset>
    *   <legend>
-   *     <!-- label -->
+   *     <!-- label (if given) -->
    *   </legend>
    *   <label>
    *     <input role="checkbox" />
@@ -32,25 +32,27 @@
   /**
    * list of options
    *
-   * @type {string[] | Record<any, any>[]}
+   * @type {any[]}
    */
   export let options;
 
   /**
-   * currently selected values, all entries must be returned by `getValue`
+   * currently selected values
    *
    * @type {any[]}
    */
   export let selectedValues = [];
 
   /**
-   * label of the radio group
+   * label of the input group
+   *
+   * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
    *
    * @type {string}
    */
   export let label;
 
-  /** hide label visually but keep it around for screen readers */
+  /** hides label visually but keeps it around for screen readers */
   export let hideLabelVisually = false;
 
   /**
@@ -61,39 +63,39 @@
   export let accentColor = 'blue';
 
   /**
-   * if given, overwrites the dark shade of `accentColor`
+   * if given, overwrites the dark shade of the accent color
    *
    * @type {string}
    */
   export let customColor = undefined;
 
   /**
-   * if given, overwrites the light shade of `accentColor`
+   * if given, overwrites the light shade of the accent color
    *
    * @type {string}
    */
   export let customColorLight = undefined;
 
   /**
-   * if given, overwrites the `accentColor` shade that is used for the focus ring
+   * if given, overwrites the shade that is used for the focus ring
    *
    * @type {string}
    */
   export let customColorFocus = undefined;
 
   /**
-   * maps an option to its value
+   * function that maps an option to its value
    *
    * @param {(option: any) => string}
    */
-  export let getValue = (option) => option;
+  export let getOptionValue = (option) => option;
 
   /**
-   * disables individual options based on a condition
+   * function that maps an option to `true` if disabled
    *
    * @param {(option: any) => boolean}
    */
-  export let isDisabled = () => false;
+  export let isOptionDisabled = () => false;
 
   $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = customColorLight || colors[`c${capitalize(accentColor)}100`];
@@ -116,9 +118,9 @@
     </legend>
   {/if}
   {#each options as option}
-    {@const v = getValue(option)}
+    {@const v = getOptionValue(option)}
     {@const checked = selectedValues.includes(v)}
-    {@const disabled = isDisabled(option)}
+    {@const disabled = isOptionDisabled(option)}
     {@const focused = v === focusedValue}
     <label class:focused class:checked class:disabled>
       <input

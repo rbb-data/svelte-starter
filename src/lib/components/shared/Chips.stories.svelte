@@ -15,40 +15,68 @@
   let selectedValuesInitiallySet = ['Berlin', 'Brandenburg'];
 </script>
 
-<Meta title="Components/Chips" component={Chips} />
+<Meta
+  title="Components/Chips"
+  component={Chips}
+  argTypes={{
+    id: {
+      type: { required: true },
+    },
+    options: {
+      type: { required: true },
+    },
+    selectedValues: {
+      table: {
+        defaultValue: { summary: '[]' },
+      },
+    },
+    getOptionValue: {
+      table: {
+        type: { summary: '(option: any) => any' },
+        defaultValue: { summary: '(option) => option' },
+      },
+    },
+    isOptionDisabled: {
+      table: {
+        type: { summary: '(option: any) => boolean' },
+        defaultValue: { summary: '(option) => false' },
+      },
+    },
+  }}
+/>
 
 <Story name="Basic">
   <Chips
     id="my-chips"
     {options}
-    label="Wähle Regionen"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues
   >
     {option}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="Initially selected value">
+<Story name="Specify initially selected values">
   <Chips
     id="my-chips"
     {options}
-    label="Wähle Regionen"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues={selectedValuesInitiallySet}
   >
     {option}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValuesInitiallySet.length > 0}
-      {selectedValuesInitiallySet}
+      <i>{selectedValuesInitiallySet}</i>
     {/if}
   </div>
 </Story>
@@ -57,7 +85,7 @@
   <Chips
     id="my-chips"
     {options}
-    label="Wähle Regionen"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
     let:checked
     bind:selectedValues
@@ -67,10 +95,10 @@
       (checked)
     {/if}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
@@ -79,17 +107,17 @@
   <Chips
     id="my-chips"
     {options}
-    label="Wähle Regionen"
-    isDisabled={(option) => option === 'Berlin'}
+    label="Wähle eine oder mehrere Regionen:"
+    isOptionDisabled={(option) => option === 'Berlin'}
     let:option
     bind:selectedValues
   >
     {option}
   </Chips>
-  <div>
+  <div class="result">
     Selected value:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
@@ -98,17 +126,17 @@
   <Chips
     id="my-chips"
     options={complexOptions}
-    label="Wähle Regionen"
-    getValue={(option) => option.value}
+    label="Wähle eine oder mehrere Regionen:"
+    getOptionValue={(option) => option.value}
     let:option
     bind:selectedValues
   >
     {option.label}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
@@ -117,17 +145,17 @@
   <Chips
     id="my-chips"
     {options}
-    accentColor="beige"
-    label="Wähle Regionen"
+    accentColor="purple"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues
   >
     {option}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
@@ -136,23 +164,23 @@
   <Chips
     id="my-chips"
     {options}
-    label="Wähle Regionen"
+    label="Wähle eine oder mehrere Regionen:"
     hideLabelVisually
     let:option
     bind:selectedValues
   >
     {option}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="External label">
-  <div id="select-region-label">Wähle eine Region</div>
+<Story name="External label via aria-labelledby">
+  <div id="select-region-label">Wähle eine oder mehrere Regionen:</div>
   <Chips
     id="my-chips"
     {options}
@@ -162,10 +190,19 @@
   >
     {option}
   </Chips>
-  <div>
+  <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
-      {selectedValues}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
+
+<style>
+  .result {
+    margin-top: var(--s-px-5);
+    font-size: var(--font-size-sm);
+    border-top: 1px dashed var(--c-ui-gray-400);
+    padding-top: var(--s-px-1);
+  }
+</style>

@@ -34,13 +34,16 @@
   export let disabled = false;
 
   /**
-   * optionally show feedback after an interaction; only applicable to disabled buttons
+   * optionally shows feedback after an interaction; only applicable to disabled buttons
    *
    * @type {'processing' | 'done' | 'success' | 'error'}
    */
   export let feedback = undefined;
 
-  /** don't render default feedback icon */
+  /**
+   * if true, shows feedback without rendering a default icon for
+   * `processing`/`success`/`error`
+   */
   export let hideFeedbackIcon = false;
 
   $: showFeedbackIcon =
