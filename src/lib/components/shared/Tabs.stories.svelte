@@ -25,6 +25,12 @@
     tabs: {
       type: { required: true },
     },
+    isTabDisabled: {
+      table: {
+        type: { summary: '(tab: any) => boolean' },
+        defaultValue: { summary: '(tab) => false' },
+      },
+    },
   }}
 />
 
@@ -102,6 +108,23 @@
 
   <TabPanels id="my-unique-tabs-id" tabs={complexTabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab.label} with data {tab.data}</div>
+  </TabPanels>
+</Story>
+
+<Story name="Disabled tab">
+  <Tabs
+    id="my-unique-tabs-id"
+    aria-label="Wähle einen Tab"
+    {tabs}
+    isTabDisabled={(tab) => tab === 'Tab 3'}
+    let:tab
+    bind:activeIndex
+  >
+    {tab}
+  </Tabs>
+
+  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+    <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 

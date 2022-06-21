@@ -105,6 +105,23 @@
   </TabPanels>
 </Story>
 
+<Story name="Disabled tab">
+  <Tabs
+    id="my-unique-tabs-id"
+    aria-label="Wähle einen Tab"
+    {tabs}
+    isTabDisabled={(tab) => tab === 'Tab 3'}
+    let:tab
+    bind:activeIndex
+  >
+    {tab}
+  </Tabs>
+
+  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+    <div class="panel">Panel for {tab}</div>
+  </TabPanels>
+</Story>
+
 <Story name="Custom accent color">
   <Tabs
     id="my-unique-tabs-id"

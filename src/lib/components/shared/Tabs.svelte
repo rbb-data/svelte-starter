@@ -11,7 +11,7 @@
 
   import press from '$lib/actions/press';
   import * as colors from '$lib/tokens';
-  import { capitalize } from '$lib/utils';
+  import { capitalize, hex2rgba } from '$lib/utils';
 
   /**
    * globally unique id, must match the id of the associated TabPanels element
@@ -33,6 +33,9 @@
    * @type {number}
    */
   export let activeIndex = 0;
+
+  /** if true, render rbb-like slants */
+  export let slants = true;
 
   /**
    * maps to pre-defined colors
@@ -62,15 +65,22 @@
    */
   export let customColorFocus = undefined;
 
-  /** if true, render rbb-like slants */
-  export let slants = true;
+  /**
+   * function that maps a tab to `true` if disabled
+   *
+   * @param {(tab: any) => boolean}
+   */
+  export let isTabDisabled = () => false;
 
   $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = customColorLight || colors.cUiGray100;
   $: colorFocus = customColorFocus || color;
+  $: colorLightRgb = hex2rgba(colorLight);
 
   /** @type {HTMLButtonElement[]} */
   let buttons = [];
+
+  let focusedIndex = activeIndex;
 
   function handleKeyDown(e) {
     if (!['Home', 'End', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
@@ -82,14 +92,15 @@
         case 'End':
           return tabs.length - 1;
         case 'ArrowLeft':
-          return activeIndex - 1 >= 0 ? activeIndex - 1 : tabs.length - 1;
+          return focusedIndex - 1 >= 0 ? focusedIndex - 1 : tabs.length - 1;
         case 'ArrowRight':
-          return activeIndex + 1 < tabs.length ? activeIndex + 1 : 0;
+          return focusedIndex + 1 < tabs.length ? focusedIndex + 1 : 0;
       }
     };
 
     const nextIndex = getNextIndex(e.key);
     buttons[nextIndex].focus();
+    focusedIndex = nextIndex;
   }
 </script>
 
@@ -99,22 +110,34 @@
   style:--c-accent={color}
   style:--c-accent-light={colorLight}
   style:--c-accent-focus={colorFocus}
+  style:--c-accent-light-r={colorLightRgb[0]}
+  style:--c-accent-light-g={colorLightRgb[1]}
+  style:--c-accent-light-b={colorLightRgb[2]}
   class:slants
   {...$$restProps}
 >
   {#each tabs as tab, i}
     {@const active = i === activeIndex}
+    {@const disabled = isTabDisabled(tab)}
     <button
       id="{id}--tab-{i}"
       role="tab"
       class="reset"
       aria-controls="{id}--tabpanel-{i}"
       aria-selected={active}
+      aria-disabled={disabled}
       tabindex={active ? 0 : -1}
       bind:this={buttons[i]}
-      on:focus={() => (activeIndex = i)}
+      on:focus={() => {
+        if (disabled) return;
+        activeIndex = i;
+        focusedIndex = activeIndex;
+      }}
       on:keydown={handleKeyDown}
-      use:press={(e) => e.currentTarget.focus()}
+      use:press={(e) => {
+        if (disabled) return;
+        e.currentTarget.focus();
+      }}
     >
       <span>
         <slot {tab} {active} />
@@ -125,6 +148,13 @@
 
 <style lang="scss">
   [role='tablist'] {
+    --c-accent-light-transparent: rgba(
+      var(--c-accent-light-r),
+      var(--c-accent-light-g),
+      var(--c-accent-light-b),
+      0.3
+    );
+
     width: 100%;
     display: flex;
 
@@ -149,6 +179,17 @@
         background-color: var(--c-accent);
         color: #ffffff;
         z-index: 1;
+      }
+
+      &[aria-disabled='true'] {
+        cursor: default;
+        background-color: var(--c-accent-light-transparent);
+        color: rgba(
+          89,
+          89,
+          89,
+          0.3
+        ); /* var(--c-ui-gray-400) with 0.3 opacity */
       }
     }
   }
