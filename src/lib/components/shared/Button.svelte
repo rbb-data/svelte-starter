@@ -102,7 +102,7 @@
 
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-regular);
-      padding: var(--s-px-2) var(--s-px-4);
+      padding: var(--s-px-3) var(--s-px-4);
       text-transform: uppercase;
       text-align: center;
       white-space: nowrap;

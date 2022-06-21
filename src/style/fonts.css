@@ -13,7 +13,7 @@
   font-style: normal;
   font-weight: 500;
   src: local('Interstate'),
-    url('fonts/rbb_V2_Interstate-Regular.woff') format('woff');
+    url('/fonts/rbb_V2_Interstate-Regular.woff') format('woff');
   font-display: swap;
 }
 
@@ -32,6 +32,6 @@
   font-style: normal;
   font-weight: 900;
   src: local('Interstate'),
-    url('fonts/rbb_V2_Interstate-Black.woff') format('woff');
+    url('/fonts/rbb_V2_Interstate-Black.woff') format('woff');
   font-display: swap;
 }

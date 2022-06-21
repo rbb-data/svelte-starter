@@ -65,21 +65,21 @@
    *
    * @type {string}
    */
-  export let customColor;
+  export let customColor = undefined;
 
   /**
    * if given, overwrites the light shade of `accentColor`
    *
    * @type {string}
    */
-  export let customColorLight;
+  export let customColorLight = undefined;
 
   /**
    * if given, overwrites the `accentColor` shade that is used for the focus rind
    *
    * @type {string}
    */
-  export let customColorFocus;
+  export let customColorFocus = undefined;
 
   /**
    * maps an option to its value
@@ -103,6 +103,7 @@
 </script>
 
 <fieldset
+  {id}
   aria-orientation="vertical"
   style:--c-accent={color}
   style:--c-accent-light={colorLight}
@@ -146,12 +147,18 @@
     padding: 0;
   }
 
+  legend {
+    font-weight: var(--font-weight-regular);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--s-px-2);
+  }
+
   label {
     display: block;
     cursor: pointer;
     padding: var(--s-px-2);
     background-color: var(--c-accent-light);
-    margin: var(--s-px-1) 0;
+    margin: var(--s-px-2) 0;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-regular);
     white-space: nowrap;

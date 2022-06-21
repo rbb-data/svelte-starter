@@ -67,21 +67,21 @@
    *
    * @type {string}
    */
-  export let customColor;
+  export let customColor = undefined;
 
   /**
    * if given, overwrites the light shade of `accentColor`
    *
    * @type {string}
    */
-  export let customColorLight;
+  export let customColorLight = undefined;
 
   /**
    * if given, overwrites the `accentColor` shade that is used for the focus rind
    *
    * @type {string}
    */
-  export let customColorFocus;
+  export let customColorFocus = undefined;
 
   /**
    * Maps an option to its value
@@ -135,7 +135,7 @@
         border-radius: 15px;
         padding: var(--s-px-2) var(--s-px-4);
         color: var(--c-ui-gray-400);
-        margin-right: var(--s-px-2);
+        margin: var(--s-px-2) var(--s-px-2) 0 0;
 
         &:last-of-type {
           margin-right: 0;
