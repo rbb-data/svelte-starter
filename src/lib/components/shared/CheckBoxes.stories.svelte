@@ -35,7 +35,7 @@
   </div>
 </Story>
 
-<Story name="Initially selected value">
+<Story name="Initially selected values">
   <CheckBoxes
     id="my-check-boxes"
     {options}

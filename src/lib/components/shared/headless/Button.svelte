@@ -6,7 +6,7 @@
    * - The `on:click` and `on:touchstart` are unified to an `on:press` event for a
    *   snappier mobile experience
    * - The native disabled attribute is ignored in favour of ARIA semantics to
-   *   ensure the button remains focusable, even when disabled
+   *   ensure the button remains focusable when disabled
    *
    * @component
    */

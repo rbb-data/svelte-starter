@@ -68,7 +68,7 @@
   export let getValue = (option) => option;
 
   /**
-   * disable individual options
+   * disable individual options based on a condition
    *
    * @param {(option: any) => boolean}
    */
@@ -76,6 +76,8 @@
 
   $: color = colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = colors[`c${capitalize(accentColor)}100`];
+
+  let focusedValue = null;
 </script>
 
 <fieldset
@@ -93,13 +95,20 @@
     {@const v = getValue(option)}
     {@const checked = v === selectedValue}
     {@const disabled = isDisabled(option)}
-    <label class:checked class:disabled>
+    {@const focused = v === focusedValue}
+    <label class:focused class:checked class:disabled>
       <input
         type="radio"
         name={id}
-        bind:group={selectedValue}
         value={v}
         {disabled}
+        bind:group={selectedValue}
+        on:focus={(e) => {
+          if (e.currentTarget.matches(':focus-visible')) {
+            focusedValue = v;
+          }
+        }}
+        on:blur={() => (focusedValue = null)}
       />
       <slot {option} {checked} />
     </label>
@@ -127,6 +136,10 @@
     display: flex;
     align-items: center;
 
+    &.focused {
+      @include focus(var(--c-accent));
+    }
+
     &.disabled {
       cursor: default;
       opacity: 0.3;
@@ -135,13 +148,20 @@
 
   input[type='radio'] {
     appearance: none;
-    background-color: #fff; /* for iOS */
 
     width: 1.2em;
     height: 1.2em;
     margin-right: var(--s-px-2);
     border-radius: 50%;
     border: 1px solid black;
+
+    &:focus {
+      @include focus(var(--c-accent));
+    }
+
+    &:focus-visible {
+      box-shadow: none;
+    }
 
     &:checked {
       border: 5px solid var(--c-accent);

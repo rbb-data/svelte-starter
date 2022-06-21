@@ -60,14 +60,14 @@
   export let accentColor = 'blue';
 
   /**
-   * Maps a option to its value
+   * Maps an option to its value
    *
    * @param {(option: any) => string}
    */
   export let getValue = (option) => option;
 
   /**
-   * disable individual options
+   * disable individual options based on a condition
    *
    * @param {(option: any) => boolean}
    */

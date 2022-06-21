@@ -1,8 +1,7 @@
 @import './tokens.scss';
 
-@mixin focus {
-  outline: 2px solid var(--c-beige-500);
-  outline-offset: 2px;
+@mixin focus($focusColor: $c-ui-accent-blue, $paddingColor: #ffffff) {
+  box-shadow: 0 0 0px 2px $paddingColor, 0 0 0px 4px $focusColor;
 }
 
 @mixin typography($element) {

@@ -110,6 +110,10 @@
       color: var(--color);
       background-color: var(--background-color);
 
+      &:focus-visible {
+        @include focus(var(--c-accent));
+      }
+
       &.primary {
         --color: #ffffff;
         --background-color: var(--c-accent);
@@ -146,6 +150,8 @@
         }
 
         &.done {
+          --c-accent: var(--c-ui-gray-300) !important;
+
           &.primary {
             --background-color: var(--c-ui-gray-100);
           }
@@ -156,34 +162,31 @@
         }
 
         &.success {
-          &.primary {
-            --background-color: var(--c-quality-positive);
-          }
-
-          &.secondary {
-            --background-color: #d3eeda;
-            --border-color: #396a56;
-            --color: #396a56;
-          }
-
-          &.tertiary {
-            --color: #396a56;
-          }
+          --c-accent: #396a56 !important;
+          --c-accent-medium: var(--c-quality-positive);
+          --c-accent-light: #d3eeda;
         }
 
         &.error {
+          --c-accent: var(--c-rbb-burgundy) !important;
+          --c-accent-medium: #ea693e;
+          --c-accent-light: var(--c-rbb-burgundy);
+        }
+
+        &.success,
+        &.error {
           &.primary {
-            --background-color: #ea693e;
+            --background-color: var(--c-accent-medium);
           }
 
           &.secondary {
-            --background-color: #f3dace;
-            --border-color: var(--c-rbb-burgundy);
-            --color: var(--c-rbb-burgundy);
+            --background-color: var(-c-accent-light);
+            --border-color: var(--c-accent);
+            --color: var(--c-accent);
           }
 
           &.tertiary {
-            --color: var(--c-rbb-burgundy);
+            --color: var(--c-accent);
           }
         }
       }

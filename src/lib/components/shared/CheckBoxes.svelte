@@ -61,14 +61,14 @@
   export let accentColor = 'blue';
 
   /**
-   * Maps a option to its value
+   * Maps an option to its value
    *
    * @param {(option: any) => string}
    */
   export let getValue = (option) => option;
 
   /**
-   * disable individual options
+   * disable individual options based on a condition
    *
    * @param {(option: any) => boolean}
    */
@@ -76,6 +76,8 @@
 
   $: color = colors['cUiAccent' + capitalize(accentColor)];
   $: colorLight = colors[`c${capitalize(accentColor)}100`];
+
+  let focusedValue = null;
 </script>
 
 <fieldset
@@ -93,13 +95,20 @@
     {@const v = getValue(option)}
     {@const checked = selectedValues.includes(v)}
     {@const disabled = isDisabled(option)}
-    <label class:checked class:disabled>
+    {@const focused = v === focusedValue}
+    <label class:focused class:checked class:disabled>
       <input
         type="checkbox"
         name={id}
-        bind:group={selectedValues}
         value={v}
         {disabled}
+        bind:group={selectedValues}
+        on:focus={(e) => {
+          if (e.currentTarget.matches(':focus-visible')) {
+            focusedValue = v;
+          }
+        }}
+        on:blur={() => (focusedValue = null)}
       />
       <slot {option} {checked} />
     </label>
@@ -127,6 +136,10 @@
     display: flex;
     align-items: center;
 
+    &.focused {
+      @include focus(var(--c-accent));
+    }
+
     &.disabled {
       cursor: default;
       opacity: 0.3;
@@ -141,6 +154,14 @@
     margin-right: var(--s-px-2);
     border: 1px solid currentColor;
     position: relative;
+
+    &:focus {
+      @include focus(var(--c-accent));
+    }
+
+    &:focus-visible {
+      box-shadow: none;
+    }
 
     &:checked {
       background-color: var(--c-accent);
@@ -159,12 +180,10 @@
       height: 50%;
       width: 50%;
       background-color: white;
-    }
 
-    @supports (
-      clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)
-    ) {
-      &:checked::before {
+      @supports (
+        clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)
+      ) {
         height: 80%;
         width: 80%;
         clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%);
