@@ -132,8 +132,20 @@
       }
 
       &.disabled {
+        &:not(.show-feedback) {
+          &.primary {
+            --background-color: var(--c-accent-transparent);
+          }
+          &.secondary {
+            --color: var(--c-accent-transparent);
+            --border-color: var(--c-accent-transparent);
+          }
+          &.tertiary {
+            --color: var(--c-accent-transparent);
+          }
+        }
+
         &.show-feedback {
-          opacity: 1;
           --color: var(--c-ui-gray-500);
         }
 
