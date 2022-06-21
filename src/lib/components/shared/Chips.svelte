@@ -21,6 +21,9 @@
 
   import CheckBoxes from './CheckBoxes.svelte';
 
+  import * as colors from '$lib/tokens';
+  import { capitalize } from '$lib/utils';
+
   /**
    * Globally unique id
    *
@@ -53,11 +56,25 @@
   export let hideLabelVisually = false;
 
   /**
-   * Maps to a pre-defined color
+   * Maps to pre-defined colors (dark and light shade)
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
   export let accentColor = 'blue';
+
+  /**
+   * if given, overwrites the dark shade of `accentColor`
+   *
+   * @type {string}
+   */
+  export let customColor;
+
+  /**
+   * if given, overwrites the light shade of `accentColor`
+   *
+   * @type {string}
+   */
+  export let customColorLight;
 
   /**
    * Maps an option to its value
@@ -72,6 +89,8 @@
    * @param {(option: any) => boolean}
    */
   export let isDisabled = () => false;
+
+  const color = customColor || colors[`c${capitalize(accentColor)}300`];
 </script>
 
 <CheckBoxes
@@ -82,6 +101,8 @@
   {label}
   {hideLabelVisually}
   {accentColor}
+  customColor={color}
+  {customColorLight}
   {getValue}
   {isDisabled}
   let:option

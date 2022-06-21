@@ -54,11 +54,25 @@
   export let hideLabelVisually = false;
 
   /**
-   * Maps to a pre-defined color
+   * Maps to pre-defined colors (dark and light shade)
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
   export let accentColor = 'blue';
+
+  /**
+   * if given, overwrites the dark shade of `accentColor`
+   *
+   * @type {string}
+   */
+  export let customColor;
+
+  /**
+   * if given, overwrites the light shade of `accentColor`
+   *
+   * @type {string}
+   */
+  export let customColorLight;
 
   /**
    * Maps an option to its value
@@ -74,8 +88,8 @@
    */
   export let isDisabled = () => false;
 
-  $: color = colors['cUiAccent' + capitalize(accentColor)];
-  $: colorLight = colors[`c${capitalize(accentColor)}100`];
+  $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
+  $: colorLight = customColorLight || colors[`c${capitalize(accentColor)}100`];
 
   let focusedValue = null;
 </script>
@@ -156,9 +170,10 @@
     position: relative;
 
     &:focus {
-      @include focus(var(--c-accent));
+      @include focus(var(--c-accent), var(--c-accent-light));
     }
 
+    &:focus:not(:focus-visible),
     &:focus-visible {
       box-shadow: none;
     }
