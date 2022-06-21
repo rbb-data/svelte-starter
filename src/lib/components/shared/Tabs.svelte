@@ -1,4 +1,8 @@
 <script>
+  import press from '$lib/actions/press';
+  import * as colors from '$lib/tokens';
+  import { capitalize } from '$lib/utils';
+
   /**
    * unique id, must match the id of the associated TabPanels element
    *
@@ -19,6 +23,38 @@
    * @type {number}
    */
   export let activeIndex = 0;
+
+  /**
+   * maps to pre-defined colors (dark and light shade)
+   *
+   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   */
+  export let accentColor = 'blue';
+
+  /**
+   * if given, overwrites the dark shade of `accentColor`
+   *
+   * @type {string}
+   */
+  export let customColor = undefined;
+
+  /**
+   * if given, overwrites the light shade of `accentColor`
+   *
+   * @type {string}
+   */
+  export let customColorLight = undefined;
+
+  /**
+   * if given, overwrites the `accentColor` shade that is used for the focus rind
+   *
+   * @type {string}
+   */
+  export let customColorFocus = undefined;
+
+  $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
+  $: colorLight = customColorLight || 'transparent';
+  $: colorFocus = customColorFocus || color;
 
   /** @type {HTMLButtonElement[]} */
   let buttons = [];
@@ -44,58 +80,63 @@
   }
 </script>
 
-<div role="tablist" {...$$restProps}>
+<div
+  role="tablist"
+  style:--c-accent={color}
+  style:--c-accent-light={colorLight}
+  style:--c-accent-focus={colorFocus}
+  {...$$restProps}
+>
   {#each tabs as tab, i}
-    {@const isActive = i === activeIndex}
+    {@const active = i === activeIndex}
     <button
-      type="button"
       id="{id}-tab"
       role="tab"
       class="reset"
       aria-controls="{id}-tabpanel"
-      aria-selected={isActive}
-      tabindex={isActive ? 0 : -1}
+      aria-selected={active}
+      tabindex={active ? 0 : -1}
       bind:this={buttons[i]}
       on:focus={() => (activeIndex = i)}
-      on:click={(e) => e.currentTarget.focus()}
-      on:touchstart|preventDefault={(e) => e.currentTarget.focus()}
       on:keydown={handleKeyDown}
+      use:press={(e) => e.currentTarget.focus()}
     >
-      <slot {tab} />
+      <slot {tab} {active} />
     </button>
   {/each}
 </div>
 
-<style>
+<style lang="scss">
   [role='tablist'] {
     width: 100%;
     display: flex;
   }
 
   [role='tab'] {
-    --color: var(--c-gray-500);
-    --background-color: var(--c-gray-100);
-    --font-weight: var(--font-weight-normal);
-
     flex: 1;
     font-size: var(--font-size-xs);
-    padding: var(--s-px-2) var(--s-px-4);
+    padding: var(--s-px-3) var(--s-px-4);
     text-align: center;
     white-space: nowrap;
     cursor: pointer;
 
-    color: var(--color);
-    background-color: var(--background-color);
-    font-weight: var(--font-weight);
-  }
+    color: var(--c-ui-gray-400);
+    font-weight: var(--font-weight-regular);
+    border-bottom: 2px solid #bfbfbf;
+    background-color: var(--c-accent-light);
 
-  [role='tab'] + [role='tab'] {
-    margin-left: var(--s-px-1);
-  }
+    &:focus-visible {
+      @include focus(var(--c-accent-focus));
+    }
 
-  [role='tab'][aria-selected='true'] {
-    --font-weight: var(--font-weight-bold);
-    --background-color: steelblue;
-    --color: white;
+    & + [role='tab'] {
+      margin-left: var(--s-px-1);
+    }
+
+    &[aria-selected='true'] {
+      font-weight: var(--font-weight-bold);
+      border-bottom-color: var(--c-accent);
+      color: var(--c-ui-gray-500);
+    }
   }
 </style>

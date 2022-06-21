@@ -1,4 +1,7 @@
 <script>
+  import * as colors from '$lib/tokens';
+  import { capitalize } from '$lib/utils';
+
   /**
    * unique id, must match the id of the associated Tabs element
    *
@@ -19,19 +22,43 @@
    * @type {number}
    */
   export let activeIndex;
+
+  /**
+   * maps to pre-defined colors (dark and light shade)
+   *
+   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   */
+  export let accentColor = 'blue';
+
+  /**
+   * if given, overwrites the `accentColor` shade that is used for the focus rind
+   *
+   * @type {string}
+   */
+  export let customColorFocus = undefined;
+
+  $: colorFocus =
+    customColorFocus || colors['cUiAccent' + capitalize(accentColor)];
 </script>
 
 {#each tabs as tab, i}
-  {@const isActive = i === activeIndex}
+  {@const active = i === activeIndex}
   <div
     id="{id}-tabpanel"
     role="tabpanel"
     aria-labelledby="{id}-tab"
-    aria-expanded={isActive}
-    tabindex={isActive ? 0 : -1}
+    aria-expanded={active}
+    tabindex={active ? 0 : -1}
+    style:--c-accent-focus={colorFocus}
   >
-    {#if isActive}
+    {#if active}
       <slot {tab} />
     {/if}
   </div>
 {/each}
+
+<style lang="scss">
+  [role='tabpanel']:focus-visible {
+    @include focus(var(--c-accent-focus));
+  }
+</style>
