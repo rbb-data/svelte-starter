@@ -117,6 +117,29 @@
   </TabPanels>
 </Story>
 
+<Story name="Without slants">
+  <Tabs
+    id="my-unique-tabs-id"
+    aria-label="Wähle einen Tab"
+    {tabs}
+    slants={false}
+    let:tab
+    bind:activeIndex
+  >
+    {tab}
+  </Tabs>
+
+  <TabPanels
+    id="my-unique-tabs-id"
+    {tabs}
+    {activeIndex}
+    accentColor="purple"
+    let:tab
+  >
+    <div class="panel">Panel for {tab}</div>
+  </TabPanels>
+</Story>
+
 <Story name="Visual label">
   <div id="tabs-label">Meine Tabs</div>
   <Tabs

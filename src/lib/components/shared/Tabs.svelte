@@ -32,28 +32,31 @@
   export let accentColor = 'blue';
 
   /**
-   * if given, overwrites the dark shade of `accentColor`
+   * if given, overwrites the `accentColor`
    *
    * @type {string}
    */
   export let customColor = undefined;
 
   /**
-   * if given, overwrites the light shade of `accentColor`
+   * if given, overwrites the default gray (used as background color)
    *
    * @type {string}
    */
   export let customColorLight = undefined;
 
   /**
-   * if given, overwrites the `accentColor` shade that is used for the focus rind
+   * if given, overwrites the `accentColor` shade that is used for the focus ring
    *
    * @type {string}
    */
   export let customColorFocus = undefined;
 
+  /** if true, render rbb-like slants */
+  export let slants = true;
+
   $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
-  $: colorLight = customColorLight || 'transparent';
+  $: colorLight = customColorLight || colors.cUiGray100;
   $: colorFocus = customColorFocus || color;
 
   /** @type {HTMLButtonElement[]} */
@@ -85,6 +88,7 @@
   style:--c-accent={color}
   style:--c-accent-light={colorLight}
   style:--c-accent-focus={colorFocus}
+  class:slants
   {...$$restProps}
 >
   {#each tabs as tab, i}
@@ -101,7 +105,9 @@
       on:keydown={handleKeyDown}
       use:press={(e) => e.currentTarget.focus()}
     >
-      <slot {tab} {active} />
+      <span>
+        <slot {tab} {active} />
+      </span>
     </button>
   {/each}
 </div>
@@ -110,33 +116,84 @@
   [role='tablist'] {
     width: 100%;
     display: flex;
+
+    [role='tab'] {
+      flex: 1;
+      font-size: var(--font-size-xs);
+      padding: var(--s-px-3) var(--s-px-4);
+      text-align: center;
+      white-space: nowrap;
+      cursor: pointer;
+
+      color: var(--c-ui-gray-400);
+      font-weight: var(--font-weight-regular);
+      background-color: var(--c-accent-light);
+
+      &:focus-visible {
+        @include focus(var(--c-accent-focus));
+      }
+
+      &[aria-selected='true'] {
+        font-weight: var(--font-weight-bold);
+        background-color: var(--c-accent);
+        color: #ffffff;
+        z-index: 1;
+      }
+    }
   }
 
-  [role='tab'] {
-    flex: 1;
-    font-size: var(--font-size-xs);
-    padding: var(--s-px-3) var(--s-px-4);
-    text-align: center;
-    white-space: nowrap;
-    cursor: pointer;
+  [role='tablist'].slants {
+    position: relative;
 
-    color: var(--c-ui-gray-400);
-    font-weight: var(--font-weight-regular);
-    border-bottom: 2px solid #bfbfbf;
-    background-color: var(--c-accent-light);
+    /* can't use overflow: hidden here since that would cut off the focus ring;
+    instead, two psuedo elements are rendered above the overflowing content on both sides  */
 
-    &:focus-visible {
-      @include focus(var(--c-accent-focus));
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 12px; /* arbitrary value, depends on the degree of skewing */
+      height: calc(
+        100% + 8px
+      ); /* height plus focus ring on top and bottom (2x 4px) */
+      background-color: white;
+      z-index: 2;
     }
 
-    & + [role='tab'] {
+    &::before {
+      left: 0;
+      transform: translate(-100%, -4px);
+    }
+
+    &::after {
+      right: 0;
+      transform: translate(100%, -4px);
+    }
+
+    [role='tab'] {
+      transform: skew(-10deg);
+      transform-origin: center;
+
+      &:first-child {
+        transform-origin: top;
+      }
+
+      &:last-child {
+        transform-origin: bottom;
+      }
+
+      span {
+        /* unskew text content */
+        transform: skew(10deg);
+        display: inline-block;
+      }
+    }
+  }
+
+  [role='tablist']:not(.slants) {
+    [role='tab'] + [role='tab'] {
       margin-left: var(--s-px-1);
-    }
-
-    &[aria-selected='true'] {
-      font-weight: var(--font-weight-bold);
-      border-bottom-color: var(--c-accent);
-      color: var(--c-ui-gray-500);
     }
   }
 </style>

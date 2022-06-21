@@ -73,22 +73,3 @@ select {
 .visually-hidden:not(:focus):not(:active) {
   @include visually-hidden;
 }
-
-.slant {
-  --slant: 6px;
-
-  clip-path: polygon(
-    var(--slant) 0,
-    100% 0,
-    calc(100% - var(--slant)) 100%,
-    0 100%
-  );
-
-  &:first-of-type {
-    clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant)) 100%, 0 100%);
-  }
-
-  &:last-of-type {
-    clip-path: polygon(var(--slant) 0, 100% 0, 100% 100%, 0 100%);
-  }
-}

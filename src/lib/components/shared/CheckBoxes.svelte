@@ -75,7 +75,7 @@
   export let customColorLight = undefined;
 
   /**
-   * if given, overwrites the `accentColor` shade that is used for the focus rind
+   * if given, overwrites the `accentColor` shade that is used for the focus ring
    *
    * @type {string}
    */
