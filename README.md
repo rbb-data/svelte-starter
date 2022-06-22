@@ -130,21 +130,17 @@ Headless components are essentially unstyled, higher-order components that "orch
 
 Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables. Environment variables prefixed with `VITE_` are exposed to client-side code.
 
-| Environment variable       | Description                                                            | Default                                             | File                     | Sensitive? |
-| :------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------- | :----------------------- | :--------- |
-| `BASE_PATH`                | Specifies where the app is served from                                 | /my-cool-project                                    | `.env`                   | no         |
-| `BUILD_DIR`                | The directory to write prerendered pages to                            | build                                               | `.env`                   | no         |
-| `GOOGLE_CONNECT_EMAIL`     | Email address to share Google doc/sheet with                           | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env`                   | no         |
-| `GOOGLE_DOC_ID`            | Id of the connected Google doc                                         | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`                   | no         |
-| `GOOGLE_SHEET_ID`          | Id of the connected Google sheet                                       | 1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04        | `.env`                   | no         |
-| `VITE_OPENROUTSERVICE_KEY` | Private key to access [openrouteservice](https://openrouteservice.org) |                                                     | `.env.local`             | yes        |
-| `GOOGLE_CONNECT_KEY`       | Private key to access Google docs and sheets                           |                                                     | `.env.local`             | yes        |
-| `VITE_BING_KEY`            | Allows to render Bing-powered maps (in development)                    |                                                     | `.env.development.local` | yes        |
-| `VITE_BING_KEY`            | Allows to render Bing-powered maps (in production)                     |                                                     | `.env.production.local`  | yes        |
+| Environment variable       | Description                                                            | Default                                             | File         | Sensitive? |
+| :------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------- | :----------- | :--------- |
+| `BASE_PATH`                | Specifies where the app is served from                                 | /my-cool-project                                    | `.env`       | no         |
+| `BUILD_DIR`                | The directory to write prerendered pages to                            | build                                               | `.env`       | no         |
+| `GOOGLE_CONNECT_EMAIL`     | Email address to share Google doc/sheet with                           | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env`       | no         |
+| `GOOGLE_DOC_ID`            | Id of the connected Google doc                                         | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`       | no         |
+| `GOOGLE_SHEET_ID`          | Id of the connected Google sheet                                       | 1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04        | `.env`       | no         |
+| `VITE_OPENROUTSERVICE_KEY` | Private key to access [openrouteservice](https://openrouteservice.org) |                                                     | `.env.local` | yes        |
+| `GOOGLE_CONNECT_KEY`       | Private key to access Google docs and sheets                           |                                                     | `.env.local` | yes        |
 
 Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
-
-If you use a Bing layer in a Leaflet map, you'll need to set the Bing API key. Bing has different keys for development and production, so you'll need to set the appropriate keys in `.env.development.local` (loaded in development) and `.env.production.local` (loaded in production). This repo contains example files for both environments, `.env.development.example` and `.env.production.example`, so that you can simply rename `.env.*.example` to `.env.*.local` and add the keys.
 
 Secrets and private keys are not stored in version control but you'll find them in our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
 
