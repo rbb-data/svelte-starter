@@ -4,6 +4,8 @@
   import googleSheetData from '$data/google-sheet-example.csv';
   // @ts-ignore
   import localData from '$data/example-data.csv';
+
+  import Table from '$comps/shared/Table.svelte';
 </script>
 
 <h1>{googleDoc.title}</h1>
@@ -33,23 +35,17 @@
   und werden als <code>localData</code> importiert:
 </p>
 
-<table>
-  <caption>Lokale Daten</caption>
-  <thead>
-    <tr>
-      <th>x</th>
-      <th>y</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each localData as row}
-      <tr>
-        <td>{row.x}</td>
-        <td>{row.y}</td>
-      </tr>
-    {/each}
-  </tbody>
-</table>
+<div class="table-wrapper">
+  <Table
+    data={localData}
+    columns={[
+      { name: 'x', getValue: (d) => d.x },
+      { name: 'y', getValue: (d) => d.y },
+    ]}
+    caption="Lokale Daten"
+    highlightFirstColumn={false}
+  />
+</div>
 
 <h2>Google Sheet</h2>
 
@@ -58,23 +54,17 @@
   und wird als <code>googleSheetData</code> importiert:
 </p>
 
-<table>
-  <caption>Google Sheet</caption>
-  <thead>
-    <tr>
-      <th>col1</th>
-      <th>col2</th>
-    </tr>
-  </thead>
-  <tbody>
-    {#each googleSheetData as row}
-      <tr>
-        <td>{row.col1}</td>
-        <td>{row.col2}</td>
-      </tr>
-    {/each}
-  </tbody>
-</table>
+<div class="table-wrapper">
+  <Table
+    data={googleSheetData}
+    columns={[
+      { name: 'col1', getValue: (d) => d.col1 },
+      { name: 'col2', getValue: (d) => d.col2 },
+    ]}
+    caption="Google Sheet"
+    highlightFirstColumn={false}
+  />
+</div>
 
 <h2>Google doc</h2>
 
@@ -125,23 +115,10 @@
     margin-bottom: var(--s-rem-1);
   }
 
-  table {
-    font-family: monospace;
-    margin: var(--s-rem-2) auto;
-    border: 1px solid;
-    min-width: 100px;
-
-    th,
-    td {
-      border: 1px solid;
-    }
-
-    thead th {
-      text-align: left;
-    }
-
-    tbody td {
-      text-align: right;
-    }
+  .table-wrapper {
+    max-width: 200px;
+    margin: var(--s-px-4) auto;
+    background-color: var(--c-ui-gray-100);
+    padding: var(--s-px-2) var(--s-px-4);
   }
 </style>

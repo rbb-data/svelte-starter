@@ -1,6 +1,6 @@
 <script>
   /**
-   * Primary, secondary and tertiary buttons
+   * Primary, secondary and tertiary buttons.
    *
    * @component
    */
