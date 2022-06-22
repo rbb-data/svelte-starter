@@ -20,7 +20,7 @@
   /**
    * maps to a pre-defined color
    *
-   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {'blue' | 'black' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
   export let accentColor = 'blue';
 
@@ -74,12 +74,12 @@
 <button
   type="button"
   class:disabled
-  class={classes.join(' ') + ($$restProps.class ? ' ' + $$restProps.class : '')}
   style:--c-accent={color}
   style:--c-accent-transparent={colorTransparent}
   on:click={handlePress}
   on:touchstart|preventDefault={handlePress}
   {...$$restProps}
+  class={classes.join(' ') + ($$restProps.class ? ' ' + $$restProps.class : '')}
   disabled={false}
   aria-disabled={disabled}
 >

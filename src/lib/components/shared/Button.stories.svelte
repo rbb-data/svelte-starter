@@ -18,19 +18,19 @@
 </Story>
 
 <Story name="Preset color">
-  <Button accentColor="beige" on:press={() => console.log('clicked')}>
+  <Button accentColor="black" on:press={() => console.log('clicked')}>
     Primary
   </Button>
   <Button
     type="secondary"
-    accentColor="beige"
+    accentColor="black"
     on:press={() => console.log('clicked')}
   >
     Secondary
   </Button>
   <Button
     type="tertiary"
-    accentColor="beige"
+    accentColor="black"
     on:press={() => console.log('clicked')}
   >
     Tertiary

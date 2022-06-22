@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Wed, 22 Jun 2022 07:08:41 GMT */
+/** Do not edit directly Generated on Wed, 22 Jun 2022 09:29:01 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -142,7 +142,7 @@ export const cUiGray300 = '#8C8C8C';
 export const cUiGray400 = '#595959';
 export const cUiGray500 = '#000000';
 export const cUiAccentBlue = '#1479B8';
-export const cUiAccentBeige = '#333333';
+export const cUiAccentBlack = '#333333';
 export const cUiAccentTurquoise = '#1F767A';
 export const cUiAccentPurple = '#7050A5';
 export const cUiAccentYellow = '#AC6115';

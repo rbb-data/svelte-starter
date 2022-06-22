@@ -7,14 +7,14 @@
   /**
    * @type {(
    *   | 'blue'
-   *   | 'beige'
+   *   | 'black'
    *   | 'turquoise'
    *   | 'purple'
    *   | 'yellow'
    *   | 'red'
    * )[]}
    */
-  const colors = ['blue', 'beige', 'turquoise', 'purple', 'yellow', 'red'];
+  const colors = ['blue', 'black', 'turquoise', 'purple', 'yellow', 'red'];
 
   /** @type {('done' | 'success' | 'error' | 'processing')[]} */
   const feedbacks = ['done', 'success', 'error'];

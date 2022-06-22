@@ -60,7 +60,7 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
-   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {'blue' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
   export let colorScheme = 'blue';
 
