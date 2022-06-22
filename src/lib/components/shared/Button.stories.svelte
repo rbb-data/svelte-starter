@@ -5,7 +5,7 @@
   import Button from './Button.svelte';
 </script>
 
-<Meta title="Components/Button" component={Button} />
+<Meta title="User Interface/Button" component={Button} />
 
 <Story name="Basic">
   <Button on:press={() => console.log('clicked')}>Primary</Button>

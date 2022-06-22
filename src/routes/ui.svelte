@@ -1,5 +1,5 @@
 <script>
-  import Button from '$shared/Button.svelte';
+  import Button from '$comps/shared/Button.svelte';
 
   /** @type {('primary' | 'secondary' | 'tertiary')[]} */
   const types = ['primary', 'secondary', 'tertiary'];

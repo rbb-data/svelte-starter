@@ -11,7 +11,7 @@
 
   import press from '$lib/actions/press';
   import * as colors from '$lib/tokens';
-  import { capitalize, hex2rgba } from '$lib/utils';
+  import { capitalize, computeTransparentColor } from '$lib/utils';
 
   /**
    * globally unique id, must match the id of the associated TabPanels element
@@ -72,13 +72,6 @@
   const getTabColor = (entry, tab) =>
     (typeof entry === 'function' && entry(tab)) || null;
 
-  /** @param {string} colorHex */
-  const getTransparentColor = (colorHex) => {
-    if (!colorHex) return null;
-    const colorRgb = hex2rgba(colorHex);
-    return `rgba(${colorRgb.slice(0, 3)}, 0.3)`;
-  };
-
   $: color =
     getColor(customColors.accent) ||
     // @ts-ignore
@@ -122,7 +115,7 @@
   style:--c-accent={color}
   style:--c-light={colorLight}
   style:--c-focus={colorFocus}
-  style:--c-light-transparent={getTransparentColor(colorLight)}
+  style:--c-light-transparent={computeTransparentColor(colorLight)}
   class:slants
   {...$$restProps}
 >
@@ -140,7 +133,7 @@
       style:--c-accent={getTabColor(customColors.accent, tab)}
       style:--c-light={getTabColor(customColors.light, tab)}
       style:--c-focus={getTabColor(customColors.focus, tab)}
-      style:--c-light-transparent={getTransparentColor(
+      style:--c-light-transparent={computeTransparentColor(
         getTabColor(customColors.light, tab)
       )}
       bind:this={buttons[i]}

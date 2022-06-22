@@ -70,6 +70,18 @@ export function scaleLinear() {
 }
 
 /**
+ * Transforms a hex color to its rgba equivalent with some given opacity
+ *
+ * @param {string} colorHex
+ * @param {number} opacity
+ */
+export const computeTransparentColor = (colorHex, opacity = 0.3) => {
+  if (!colorHex) return null;
+  const colorRgb = hex2rgba(colorHex);
+  return `rgba(${colorRgb.slice(0, 3)}, ${opacity})`;
+};
+
+/**
  * Convert hex to rgba colors
  *
  * from
@@ -77,7 +89,7 @@ export function scaleLinear() {
  *
  * @param {string} hex
  */
-export const hex2rgba = (hex) => {
+const hex2rgba = (hex) => {
   const RE_HEX = /^#?([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
   const RE_HEXA = /^#?([A-Fa-f0-9]{8}|[A-Fa-f0-9]{4})$/;
 

@@ -1,8 +1,8 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Tabs from '$shared/Tabs.svelte';
-  import TabPanels from '$shared/TabPanels.svelte';
+  import Tabs from './Tabs.svelte';
+  import TabPanels from './TabPanels.svelte';
 
   import {
     cUiAccentYellow,
@@ -50,7 +50,7 @@
 </script>
 
 <Meta
-  title="Components/Tabs"
+  title="User Interface/Tabs"
   component={Tabs}
   argTypes={{
     id: {

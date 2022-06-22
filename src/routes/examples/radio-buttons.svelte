@@ -1,6 +1,6 @@
 <script>
-  import RadioButtons from '$shared/RadioButtons.svelte';
-  import Button from '$shared/Button.svelte';
+  import RadioButtons from '$comps/shared/RadioButtons.svelte';
+  import Button from '$comps/shared/Button.svelte';
 
   const SVG_BASEPATH =
     'https://storage.googleapis.com/rbb-data-static/therapy-interactive/icons';

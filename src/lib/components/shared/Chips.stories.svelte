@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Chips from '$shared/Chips.svelte';
+  import Chips from './Chips.svelte';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -17,7 +17,7 @@
 </script>
 
 <Meta
-  title="Components/Chips"
+  title="User Interface/Chips"
   component={Chips}
   argTypes={{
     id: {

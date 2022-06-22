@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import RadioButtons from '$shared/RadioButtons.svelte';
+  import RadioButtons from './RadioButtons.svelte';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -17,7 +17,7 @@
 </script>
 
 <Meta
-  title="Components/RadioButtons"
+  title="User Interface/RadioButtons"
   component={RadioButtons}
   argTypes={{
     id: {

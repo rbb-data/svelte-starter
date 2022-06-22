@@ -5,8 +5,8 @@
    * @component
    */
 
-  import Search from './Search.svelte';
-  import geolocalization from '$lib/actions/geolocalization';
+  import Search from './_Search.svelte';
+  import geolocalization from '$actions/geolocalization';
 
   import coordsMap from '$lib/assets/geo/coords.json';
 

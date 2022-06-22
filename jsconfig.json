@@ -9,8 +9,14 @@
       "$lib/*": ["src/lib/*"],
       "$data": ["src/data"],
       "$data/*": ["src/data/*"],
-      "$shared": ["src/lib/components/shared"],
-      "$shared/*": ["src/lib/components/shared/*"]
+      "$comps": ["src/lib/components"],
+      "$comps/*": ["src/lib/components/*"],
+      "$actions": ["src/lib/actions"],
+      "$actions/*": ["src/lib/actions/*"],
+      "$stores": ["src/lib/stores"],
+      "$stores/*": ["src/lib/stores/*"],
+      "$icons": ["src/lib/components/shared/icons"],
+      "$icons/*": ["src/lib/components/shared/icons/*"]
     }
   }
 }
