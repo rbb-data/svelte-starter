@@ -9,6 +9,7 @@
     { label: 'Komponente Fünf', value: 5 },
   ];
 
+  /** @param {typeof options[0]} option */
   const isOptionDisabled = (option) => option.value === 2;
 
   let selectedComponents = [1, 4];

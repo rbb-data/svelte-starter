@@ -1,6 +1,8 @@
 <script>
   import googleDoc from '$data/google-doc.json';
+  // @ts-ignore
   import googleSheetData from '$data/google-sheet-example.csv';
+  // @ts-ignore
   import localData from '$data/example-data.csv';
 </script>
 
@@ -40,7 +42,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each localData as row, i}
+    {#each localData as row}
       <tr>
         <td>{row.x}</td>
         <td>{row.y}</td>
@@ -65,7 +67,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each googleSheetData as row, i}
+    {#each googleSheetData as row}
       <tr>
         <td>{row.col1}</td>
         <td>{row.col2}</td>

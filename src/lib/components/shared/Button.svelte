@@ -13,7 +13,7 @@
   import { capitalize, hex2rgba } from '$lib/utils';
   import * as colors from '$lib/tokens';
 
-  /** @type {'primary' | 'sencondary' | 'tertiary'} */
+  /** @type {'primary' | 'secondary' | 'tertiary'} */
   export let type = 'primary';
 
   /**
@@ -57,6 +57,7 @@
     showFeedbackIcon && 'show-icon',
   ].filter((c) => c);
 
+  // @ts-ignore
   $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
   $: colorRgb = hex2rgba(color);
 </script>

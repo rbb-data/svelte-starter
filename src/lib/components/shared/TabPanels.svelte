@@ -43,11 +43,13 @@
   /**
    * sets CSS variables `--c-focus`
    *
-   * @type {{ focus: string | (tab: any) => string }}
+   * @type {{ focus?: string | ((tab: any) => string) }}
    */
   export let customColors = {};
 
+  /** @type {(entry: string | ((tab: any) => string), tab: any) => string} */
   const getColor = (entry, tab) => {
+    // @ts-ignore
     if (!entry) return colors['cUiAccent' + capitalize(colorScheme)];
     if (typeof entry === 'string') return entry;
     if (typeof entry === 'function') return entry(tab);

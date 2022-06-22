@@ -88,6 +88,7 @@ export const hex2rgba = (hex) => {
     }
     // expand short-notation to full six-digit
     if (hex.length === 3) {
+      // @ts-ignore
       hex = hex.split('');
       hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
@@ -106,6 +107,7 @@ export const hex2rgba = (hex) => {
     }
     // expand short-notation to full eight-digit
     if (hex.length === 4) {
+      // @ts-ignore
       hex = hex.split('');
       hex =
         hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];

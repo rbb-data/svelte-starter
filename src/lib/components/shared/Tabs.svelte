@@ -47,21 +47,32 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
    *
-   * @type {{ accent: string | (tab: any) => string; light: string | (tab: any) => string; focus: string | (tab: any) => string }}
+   * @type {{
+   *   accent?: string | ((tab: any) => string);
+   *   light?: string | ((tab: any) => string);
+   *   focus?: string | ((tab: any) => string);
+   * }}
    */
   export let customColors = {};
 
   /**
    * function that maps a tab to `true` if disabled
    *
-   * @param {(tab: any) => boolean}
+   * @type {(tab: any) => boolean}
    */
   export let isTabDisabled = () => false;
 
+  /** @param {string | ((tab: any) => string)} entry */
   const getColor = (entry) => typeof entry === 'string' && entry;
+
+  /**
+   * @param {string | ((tab: any) => string)} entry
+   * @param {any} tab
+   */
   const getTabColor = (entry, tab) =>
     (typeof entry === 'function' && entry(tab)) || null;
 
+  /** @param {string} colorHex */
   const getTransparentColor = (colorHex) => {
     if (!colorHex) return null;
     const colorRgb = hex2rgba(colorHex);
@@ -70,6 +81,7 @@
 
   $: color =
     getColor(customColors.accent) ||
+    // @ts-ignore
     colors['cUiAccent' + capitalize(colorScheme)];
   $: colorLight = getColor(customColors.light) || colors.cUiGray100;
   $: colorFocus = getColor(customColors.focus) || color;
@@ -79,9 +91,11 @@
 
   let focusedIndex = activeIndex;
 
+  /** @param {KeyboardEvent} e */
   function handleKeyDown(e) {
-    if (!['Home', 'End', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    /** @typedef {'Home' | 'End' | 'ArrowLeft' | 'ArrowRight'} AllowedKey */
 
+    /** @param {AllowedKey} keyPressed */
     const getNextIndex = (keyPressed) => {
       switch (keyPressed) {
         case 'Home':
@@ -95,7 +109,8 @@
       }
     };
 
-    const nextIndex = getNextIndex(e.key);
+    if (!['Home', 'End', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    const nextIndex = getNextIndex(/** @type {AllowedKey} */ (e.key));
     buttons[nextIndex].focus();
     focusedIndex = nextIndex;
   }
@@ -137,7 +152,7 @@
       on:keydown={handleKeyDown}
       use:press={(e) => {
         if (disabled) return;
-        e.currentTarget.focus();
+        /** @type {HTMLButtonElement} */ (e.currentTarget).focus();
       }}
     >
       <span>

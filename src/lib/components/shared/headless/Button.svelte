@@ -21,12 +21,13 @@
   /**
    * CSS variables to be added to the button
    *
-   * @type {Record<string, string>}
+   * @type {Record<string, string | number>}
    */
   export let cssVars = {};
 
   const dispatch = createEventDispatcher();
 
+  /** @param {Event} e */
   function handlePress(e) {
     if (disabled) return;
     dispatch('press', { event: e });

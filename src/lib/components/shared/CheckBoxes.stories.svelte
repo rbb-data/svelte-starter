@@ -11,6 +11,7 @@
     { label: 'Land', value: 'country' },
   ];
 
+  /** @type {string[]} */
   let selectedValues = [];
   let selectedValuesInitiallySet = ['Berlin', 'Brandenburg'];
 </script>
@@ -20,9 +21,11 @@
   component={CheckBoxes}
   argTypes={{
     id: {
+      // @ts-ignore
       type: { required: true },
     },
     options: {
+      // @ts-ignore
       type: { required: true },
     },
     selectedValues: {
@@ -32,13 +35,11 @@
     },
     getOptionValue: {
       table: {
-        type: { summary: '(option: any) => any' },
         defaultValue: { summary: '(option) => option' },
       },
     },
     isOptionDisabled: {
       table: {
-        type: { summary: '(option: any) => boolean' },
         defaultValue: { summary: '(option) => false' },
       },
     },

@@ -16,6 +16,7 @@
     { label: 'Land', value: 'land', svgFilename: 'country.svg' },
   ];
 
+  /** @type {string} */
   let selectedRegion;
 </script>
 

@@ -50,7 +50,7 @@
    *
    * @type {string}
    */
-  export let label;
+  export let label = undefined;
 
   /** hides label visually but keep it around for screen readers */
   export let hideLabelVisually = false;
@@ -65,30 +65,33 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
    *
-   * @type {{ accent: string; light: string; focus: string }}
+   * @type {{ accent?: string; light?: string; focus?: string }}
    */
   export let customColors = {};
 
   /**
    * function that maps an option to its value
    *
-   * @param {(option: any) => string}
+   * @type {(option: any) => any}
    */
   export let getOptionValue = (option) => option;
 
   /**
    * function that maps an option to `true` if disabled
    *
-   * @param {(option: any) => boolean}
+   * @type {(option: any) => boolean}
    */
   export let isOptionDisabled = () => false;
 
   $: color =
+    // @ts-ignore
     customColors.accent || colors['cUiAccent' + capitalize(colorScheme)];
   $: colorLight =
+    // @ts-ignore
     customColors.light || colors[`c${capitalize(colorScheme)}100`];
   $: colorFocus = customColors.focus || color;
 
+  /** @type {any} */
   let focusedValue = null;
 </script>
 

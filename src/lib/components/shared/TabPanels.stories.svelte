@@ -20,6 +20,7 @@
     { label: 'Tab 3', data: [3, 4, 5] },
   ];
 
+  /** @param {string} tab */
   function getAccentColor(tab) {
     switch (tab) {
       case 'Tab 1':
@@ -31,6 +32,7 @@
     }
   }
 
+  /** @param {string} tab */
   function getLightColor(tab) {
     switch (tab) {
       case 'Tab 1':
@@ -42,6 +44,7 @@
     }
   }
 
+  /** @type {number} */
   let activeIndex;
   let activeIndexInitallySelected = 1;
 </script>
@@ -51,9 +54,11 @@
   component={TabPanels}
   argTypes={{
     id: {
+      // @ts-ignore
       type: { required: true },
     },
     tabs: {
+      // @ts-ignore
       type: { required: true },
     },
   }}
@@ -141,7 +146,7 @@
     id="my-unique-tabs-id"
     aria-label="Wähle einen Tab"
     {tabs}
-    isTabDisabled={(tab) => tab === 'Tab 3'}
+    isTabDisabled={(/** @type {string} */ tab) => tab === 'Tab 3'}
     let:tab
     bind:activeIndex
   >

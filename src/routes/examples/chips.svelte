@@ -15,6 +15,7 @@
     'Angefochten',
   ];
 
+  /** @type {string[]} */
   let selectedCriterions = ['In Kraft getreten'];
 </script>
 

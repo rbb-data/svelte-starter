@@ -67,26 +67,28 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
    *
-   * @type {{ accent: string; light: string; focus: string }}
+   * @type {{ accent?: string; light?: string; focus?: string }}
    */
   export let customColors = {};
 
   /**
    * function that maps an option to its value
    *
-   * @param {(option: any) => string}
+   * @type {(option: any) => any}
    */
   export let getOptionValue = (option) => option;
 
   /**
    * function that maps an option to `true` if disabled
    *
-   * @param {(option: any) => boolean}
+   * @type {(option: any) => boolean}
    */
   export let isOptionDisabled = () => false;
 
+  // @ts-ignore
   const color = customColors.accent || colors[`c${capitalize(colorScheme)}300`];
   const colorFocus =
+    // @ts-ignore
     customColors.focus || colors['cUiAccent' + capitalize(colorScheme)];
 </script>
 

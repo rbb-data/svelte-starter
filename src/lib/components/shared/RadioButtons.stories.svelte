@@ -11,6 +11,7 @@
     { label: 'Land', value: 'country' },
   ];
 
+  /** @type {string} */
   let selectedValue;
   let selectedValueInitiallySet = 'Berlin';
 </script>
@@ -20,20 +21,20 @@
   component={RadioButtons}
   argTypes={{
     id: {
+      // @ts-ignore
       type: { required: true },
     },
     options: {
+      // @ts-ignore
       type: { required: true },
     },
     getOptionValue: {
       table: {
-        type: { summary: '(option: any) => any' },
         defaultValue: { summary: '(option) => option' },
       },
     },
     isOptionDisabled: {
       table: {
-        type: { summary: '(option: any) => boolean' },
         defaultValue: { summary: '(option) => false' },
       },
     },

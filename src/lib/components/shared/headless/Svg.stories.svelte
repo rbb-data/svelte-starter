@@ -3,8 +3,8 @@
 
   import Svg from './Svg.svelte';
 
-  let boundedWidth;
-  let boundedHeight;
+  let boundedWidth = 0;
+  let boundedHeight = 0;
 </script>
 
 <Meta title="Headless/Svg" component={Svg} />

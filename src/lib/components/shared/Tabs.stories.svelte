@@ -20,6 +20,7 @@
     { label: 'Tab 3', data: [3, 4, 5] },
   ];
 
+  /** @param {string} tab */
   function getAccentColor(tab) {
     switch (tab) {
       case 'Tab 1':
@@ -31,6 +32,7 @@
     }
   }
 
+  /** @param {string} tab */
   function getLightColor(tab) {
     switch (tab) {
       case 'Tab 1':
@@ -42,6 +44,7 @@
     }
   }
 
+  /** @type {number} */
   let activeIndex;
   let activeIndexInitallySelected = 1;
 </script>
@@ -51,14 +54,15 @@
   component={Tabs}
   argTypes={{
     id: {
+      // @ts-ignore
       type: { required: true },
     },
     tabs: {
+      // @ts-ignore
       type: { required: true },
     },
     isTabDisabled: {
       table: {
-        type: { summary: '(tab: any) => boolean' },
         defaultValue: { summary: '(tab) => false' },
       },
     },
