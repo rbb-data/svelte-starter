@@ -110,6 +110,7 @@
 </script>
 
 <div
+  {id}
   role="tablist"
   aria-orientation="horizontal"
   style:--c-accent={color}
@@ -126,6 +127,8 @@
       id="{id}--tab-{i}"
       role="tab"
       class="reset"
+      class:active
+      class:disabled
       aria-controls="{id}--tabpanel-{i}"
       aria-selected={active}
       aria-disabled={disabled}
@@ -176,14 +179,14 @@
         @include focus(var(--c-focus));
       }
 
-      &[aria-selected='true'] {
+      &.active {
         font-weight: var(--font-weight-bold);
         background-color: var(--c-accent);
         color: #ffffff;
         z-index: 1;
       }
 
-      &[aria-disabled='true'] {
+      &.disabled {
         cursor: default;
         background-color: var(--c-light-transparent);
         color: rgba(
