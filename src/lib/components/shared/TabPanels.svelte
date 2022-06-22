@@ -34,21 +34,24 @@
   export let activeIndex;
 
   /**
-   * maps to pre-defined colors (dark and light shade)
+   * sets CSS variable `--c-focus` to a pre-defined color
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
-  export let accentColor = 'blue';
+  export let colorScheme = 'blue';
 
   /**
-   * if given, overwrites the shade that is used for the focus ring
+   * sets CSS variables `--c-focus`
    *
-   * @type {string}
+   * @type {{ focus: string | (tab: any) => string }}
    */
-  export let customColorFocus = undefined;
+  export let customColors = {};
 
-  $: colorFocus =
-    customColorFocus || colors['cUiAccent' + capitalize(accentColor)];
+  const getColor = (entry, tab) => {
+    if (!entry) return colors['cUiAccent' + capitalize(colorScheme)];
+    if (typeof entry === 'string') return entry;
+    if (typeof entry === 'function') return entry(tab);
+  };
 </script>
 
 {#each tabs as tab, i}
@@ -59,7 +62,7 @@
     aria-labelledby="{id}--tab-{i}"
     aria-expanded={active}
     tabindex={active ? 0 : -1}
-    style:--c-accent-focus={colorFocus}
+    style:--c-accent-focus={getColor(customColors.focus, tab)}
   >
     {#if active}
       <slot {tab} />

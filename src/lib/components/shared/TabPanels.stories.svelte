@@ -4,12 +4,43 @@
   import Tabs from '$shared/Tabs.svelte';
   import TabPanels from '$shared/TabPanels.svelte';
 
+  import {
+    cUiAccentYellow,
+    cUiAccentPurple,
+    cUiAccentTurquoise,
+    cYellow100,
+    cPurple100,
+    cTurquoise100,
+  } from '$lib/tokens';
+
   const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
   const complexTabs = [
     { label: 'Tab 1', data: [1, 2, 3] },
     { label: 'Tab 2', data: [2, 3, 4] },
     { label: 'Tab 3', data: [3, 4, 5] },
   ];
+
+  function getAccentColor(tab) {
+    switch (tab) {
+      case 'Tab 1':
+        return cUiAccentYellow;
+      case 'Tab 2':
+        return cUiAccentPurple;
+      case 'Tab 3':
+        return cUiAccentTurquoise;
+    }
+  }
+
+  function getLightColor(tab) {
+    switch (tab) {
+      case 'Tab 1':
+        return cYellow100;
+      case 'Tab 2':
+        return cPurple100;
+      case 'Tab 3':
+        return cTurquoise100;
+    }
+  }
 
   let activeIndex;
   let activeIndexInitallySelected = 1;
@@ -127,7 +158,7 @@
     id="my-unique-tabs-id"
     aria-label="Wähle einen Tab"
     {tabs}
-    accentColor="purple"
+    colorScheme="purple"
     let:tab
     bind:activeIndex
   >
@@ -138,7 +169,60 @@
     id="my-unique-tabs-id"
     {tabs}
     {activeIndex}
-    accentColor="purple"
+    colorScheme="purple"
+    let:tab
+  >
+    <div class="panel">Panel for {tab}</div>
+  </TabPanels>
+</Story>
+
+<Story name="Custom tab colors">
+  <Tabs
+    id="my-unique-tabs-id"
+    aria-label="Wähle einen Tab"
+    {tabs}
+    customColors={{
+      accent: getAccentColor,
+      focus: getAccentColor,
+    }}
+    let:tab
+    bind:activeIndex
+  >
+    {tab}
+  </Tabs>
+
+  <TabPanels
+    id="my-unique-tabs-id"
+    {tabs}
+    {activeIndex}
+    customColors={{ focus: getAccentColor }}
+    let:tab
+  >
+    <div class="panel">Panel for {tab}</div>
+  </TabPanels>
+</Story>
+
+<Story name="Customize all colors">
+  <Tabs
+    id="my-unique-tabs-id"
+    aria-label="Wähle einen Tab"
+    {tabs}
+    customColors={{
+      accent: getAccentColor,
+      light: getLightColor,
+      focus: getAccentColor,
+    }}
+    let:tab
+    bind:activeIndex
+  >
+    {tab}
+  </Tabs>
+
+  <TabPanels
+    id="my-unique-tabs-id"
+    {tabs}
+    {activeIndex}
+    customColors={{ focus: getAccentColor }}
     let:tab
   >
     <div class="panel">Panel for {tab}</div>

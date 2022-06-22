@@ -38,32 +38,18 @@
   export let slants = true;
 
   /**
-   * maps to pre-defined colors
+   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
-  export let accentColor = 'blue';
+  export let colorScheme = 'blue';
 
   /**
-   * if given, overwrites the accent color
+   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
    *
-   * @type {string}
+   * @type {{ accent: string | (tab: any) => string; light: string | (tab: any) => string; focus: string | (tab: any) => string }}
    */
-  export let customColor = undefined;
-
-  /**
-   * if given, overwrites the default gray (used as background color)
-   *
-   * @type {string}
-   */
-  export let customColorLight = undefined;
-
-  /**
-   * if given, overwrites the shade that is used for the focus ring
-   *
-   * @type {string}
-   */
-  export let customColorFocus = undefined;
+  export let customColors = {};
 
   /**
    * function that maps a tab to `true` if disabled
@@ -72,10 +58,21 @@
    */
   export let isTabDisabled = () => false;
 
-  $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
-  $: colorLight = customColorLight || colors.cUiGray100;
-  $: colorFocus = customColorFocus || color;
-  $: colorLightRgb = hex2rgba(colorLight);
+  const getColor = (entry) => typeof entry === 'string' && entry;
+  const getTabColor = (entry, tab) =>
+    (typeof entry === 'function' && entry(tab)) || null;
+
+  const getTransparentColor = (colorHex) => {
+    if (!colorHex) return null;
+    const colorRgb = hex2rgba(colorHex);
+    return `rgba(${colorRgb.slice(0, 3)}, 0.3)`;
+  };
+
+  $: color =
+    getColor(customColors.accent) ||
+    colors['cUiAccent' + capitalize(colorScheme)];
+  $: colorLight = getColor(customColors.light) || colors.cUiGray100;
+  $: colorFocus = getColor(customColors.focus) || color;
 
   /** @type {HTMLButtonElement[]} */
   let buttons = [];
@@ -108,11 +105,9 @@
   role="tablist"
   aria-orientation="horizontal"
   style:--c-accent={color}
-  style:--c-accent-light={colorLight}
-  style:--c-accent-focus={colorFocus}
-  style:--c-accent-light-r={colorLightRgb[0]}
-  style:--c-accent-light-g={colorLightRgb[1]}
-  style:--c-accent-light-b={colorLightRgb[2]}
+  style:--c-light={colorLight}
+  style:--c-focus={colorFocus}
+  style:--c-light-transparent={getTransparentColor(colorLight)}
   class:slants
   {...$$restProps}
 >
@@ -127,6 +122,12 @@
       aria-selected={active}
       aria-disabled={disabled}
       tabindex={active ? 0 : -1}
+      style:--c-accent={getTabColor(customColors.accent, tab)}
+      style:--c-light={getTabColor(customColors.light, tab)}
+      style:--c-focus={getTabColor(customColors.focus, tab)}
+      style:--c-light-transparent={getTransparentColor(
+        getTabColor(customColors.light, tab)
+      )}
       bind:this={buttons[i]}
       on:focus={() => {
         if (disabled) return;
@@ -148,13 +149,6 @@
 
 <style lang="scss">
   [role='tablist'] {
-    --c-accent-light-transparent: rgba(
-      var(--c-accent-light-r),
-      var(--c-accent-light-g),
-      var(--c-accent-light-b),
-      0.3
-    );
-
     width: 100%;
     display: flex;
 
@@ -168,10 +162,10 @@
 
       color: var(--c-ui-gray-400);
       font-weight: var(--font-weight-regular);
-      background-color: var(--c-accent-light);
+      background-color: var(--c-light);
 
       &:focus-visible {
-        @include focus(var(--c-accent-focus));
+        @include focus(var(--c-focus));
       }
 
       &[aria-selected='true'] {
@@ -183,7 +177,7 @@
 
       &[aria-disabled='true'] {
         cursor: default;
-        background-color: var(--c-accent-light-transparent);
+        background-color: var(--c-light-transparent);
         color: rgba(
           89,
           89,
@@ -197,7 +191,7 @@
   [role='tablist'].slants {
     position: relative;
 
-    /* can't use overflow: hidden here since that would cut off the focus ring;
+    /* can't use `overflow: hidden` here since that would cut off the focus ring;
     instead, two psuedo elements are rendered above the overflowing content on both sides  */
 
     &::before,
@@ -208,8 +202,8 @@
       width: 12px; /* arbitrary value, depends on the degree of skewing */
       height: calc(
         100% + 8px
-      ); /* height plus focus ring on top and bottom (2x 4px) */
-      background-color: white;
+      ); /* height plus focus ring on top and bottom (2*4px) */
+      background-color: #ffffff;
       z-index: 2;
     }
 
