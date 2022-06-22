@@ -19,8 +19,8 @@
   label="Wähle eine oder mehrere Komponenten:"
   {options}
   getOptionValue={(option) => option.value}
-  accentColor="purple"
-  customColorLight="transparent"
+  colorScheme="purple"
+  customColors={{ light: 'transparent' }}
   {isOptionDisabled}
   let:option
   bind:selectedValues={selectedComponents}

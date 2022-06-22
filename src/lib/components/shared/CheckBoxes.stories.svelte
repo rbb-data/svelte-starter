@@ -145,7 +145,7 @@
   <CheckBoxes
     id="my-check-boxes"
     {options}
-    accentColor="beige"
+    colorScheme="beige"
     label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues

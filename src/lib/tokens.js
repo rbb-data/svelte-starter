@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Thu, 16 Jun 2022 11:51:00 GMT */
+/** Do not edit directly Generated on Wed, 22 Jun 2022 07:08:41 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -76,7 +76,7 @@ export const cRed200 = '#F0A385';
 export const cRed300 = '#EA693E';
 export const cRed400 = '#BD3C28';
 export const cRed500 = '#821423';
-export const cYellow100 = '#E61A1A';
+export const cYellow100 = '#FBEDD0';
 export const cYellow200 = '#F9C986';
 export const cYellow300 = '#F2A335';
 export const cYellow400 = '#D6841F';

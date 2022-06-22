@@ -22,8 +22,8 @@
   id="chips--choose-criterions"
   label="Wähle deine Kriterien:"
   options={criterions}
-  accentColor="turquoise"
-  customColorLight={cUiGray100}
+  colorScheme="turquoise"
+  customColors={{ light: cUiGray100 }}
   bind:selectedValues={selectedCriterions}
   let:option
   let:checked

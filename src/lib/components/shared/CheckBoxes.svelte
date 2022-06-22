@@ -56,32 +56,18 @@
   export let hideLabelVisually = false;
 
   /**
-   * maps to pre-defined colors (dark and light shade)
+   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
-  export let accentColor = 'blue';
+  export let colorScheme = 'blue';
 
   /**
-   * if given, overwrites the dark shade of the accent color
+   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
    *
-   * @type {string}
+   * @type {{ accent: string; light: string; focus: string }}
    */
-  export let customColor = undefined;
-
-  /**
-   * if given, overwrites the light shade of the accent color
-   *
-   * @type {string}
-   */
-  export let customColorLight = undefined;
-
-  /**
-   * if given, overwrites the shade that is used for the focus ring
-   *
-   * @type {string}
-   */
-  export let customColorFocus = undefined;
+  export let customColors = {};
 
   /**
    * function that maps an option to its value
@@ -97,9 +83,11 @@
    */
   export let isOptionDisabled = () => false;
 
-  $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
-  $: colorLight = customColorLight || colors[`c${capitalize(accentColor)}100`];
-  $: colorFocus = customColorFocus || color;
+  $: color =
+    customColors.accent || colors['cUiAccent' + capitalize(colorScheme)];
+  $: colorLight =
+    customColors.light || colors[`c${capitalize(colorScheme)}100`];
+  $: colorFocus = customColors.focus || color;
 
   let focusedValue = null;
 </script>
@@ -108,8 +96,8 @@
   {id}
   aria-orientation="vertical"
   style:--c-accent={color}
-  style:--c-accent-light={colorLight}
-  style:--c-accent-focus={colorFocus}
+  style:--c-light={colorLight}
+  style:--c-focus={colorFocus}
   {...$$restProps}
 >
   {#if label}
@@ -159,7 +147,7 @@
     display: block;
     cursor: pointer;
     padding: var(--s-px-2);
-    background-color: var(--c-accent-light);
+    background-color: var(--c-light);
     margin: var(--s-px-2) 0;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-regular);
@@ -169,7 +157,7 @@
     align-items: center;
 
     &.focused {
-      @include focus(var(--c-accent-focus));
+      @include focus(var(--c-focus));
     }
 
     &.disabled {
@@ -188,7 +176,7 @@
     position: relative;
 
     &:focus {
-      @include focus(var(--c-accent-focus), var(--c-accent-light));
+      @include focus(var(--c-focus), var(--c-light));
     }
 
     &:focus:not(:focus-visible),
@@ -212,7 +200,7 @@
       top: 0;
       height: 50%;
       width: 50%;
-      background-color: white;
+      background-color: #ffffff;
 
       @supports (
         clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)

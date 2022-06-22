@@ -145,7 +145,7 @@
   <Chips
     id="my-chips"
     {options}
-    accentColor="purple"
+    colorScheme="purple"
     label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues

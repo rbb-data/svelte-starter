@@ -58,32 +58,18 @@
   export let hideLabelVisually = false;
 
   /**
-   * maps to pre-defined colors (dark and light shade)
+   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
    * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
    */
-  export let accentColor = 'blue';
+  export let colorScheme = 'blue';
 
   /**
-   * if given, overwrites the dark shade of the accent color
+   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
    *
-   * @type {string}
+   * @type {{ accent: string; light: string; focus: string }}
    */
-  export let customColor = undefined;
-
-  /**
-   * if given, overwrites the light shade of the accent color
-   *
-   * @type {string}
-   */
-  export let customColorLight = undefined;
-
-  /**
-   * if given, overwrites the shade that is used for the focus ring
-   *
-   * @type {string}
-   */
-  export let customColorFocus = undefined;
+  export let customColors = {};
 
   /**
    * function that maps an option to its value
@@ -99,9 +85,9 @@
    */
   export let isOptionDisabled = () => false;
 
-  const color = customColor || colors[`c${capitalize(accentColor)}300`];
+  const color = customColors.accent || colors[`c${capitalize(colorScheme)}300`];
   const colorFocus =
-    customColorFocus || colors['cUiAccent' + capitalize(accentColor)];
+    customColors.focus || colors['cUiAccent' + capitalize(colorScheme)];
 </script>
 
 <CheckBoxes
@@ -111,10 +97,8 @@
   {options}
   {label}
   {hideLabelVisually}
-  {accentColor}
-  customColor={color}
-  {customColorLight}
-  customColorFocus={colorFocus}
+  {colorScheme}
+  customColors={{ accent: color, light: customColors.light, focus: colorFocus }}
   {getOptionValue}
   {isOptionDisabled}
   let:option

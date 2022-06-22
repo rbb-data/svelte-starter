@@ -140,7 +140,7 @@
   <RadioButtons
     id="my-radio-buttons"
     {options}
-    accentColor="beige"
+    colorScheme="beige"
     label="Wähle eine Region"
     let:option
     bind:selectedValue
