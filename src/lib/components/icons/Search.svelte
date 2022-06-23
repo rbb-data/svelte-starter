@@ -1,8 +1,28 @@
-<svg width="32" height="32" fill="none" viewBox="0 0 32 32">
+<script>
+  /** @type {string} */
+  export let title = undefined;
+
+  export let id = 'search-icon--title';
+
+  export let color = '#000000';
+</script>
+
+<svg
+  width="32"
+  height="32"
+  fill="none"
+  viewBox="0 0 32 32"
+  style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+  aria-labelledby={title && id}
+  aria-hidden={title === undefined}
+>
+  {#if title}
+    <title {id}>{title}</title>
+  {/if}
   <path
     fill-rule="evenodd"
     clip-rule="evenodd"
     d="m18.98 30.005 1.95-.427-1.77-8.089C23.13 20.164 26 16.414 26 12c0-5.52-4.48-10-10-10S6 6.48 6 12c0 5.519 4.48 10 10 10 .41 0 .81-.025 1.21-.073l1.77 8.078ZM16 4c4.41 0 8 3.584 8 8 0 4.415-3.59 8-8 8s-8-3.585-8-8c0-4.416 3.59-8 8-8Zm6.02 8.017c0-3.319-2.7-6.014-6.02-6.014v2c2.22 0 4.02 1.799 4.02 4.014h2Z"
-    fill="#000"
+    fill={color}
   />
 </svg>
