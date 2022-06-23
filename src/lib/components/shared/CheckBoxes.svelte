@@ -204,25 +204,7 @@
     }
 
     &:checked::before {
-      content: '';
-      position: absolute;
-      margin: auto;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      overflow: hidden;
-      top: 0;
-      height: 50%;
-      width: 50%;
-      background-color: #ffffff;
-
-      @supports (
-        clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%)
-      ) {
-        height: 80%;
-        width: 80%;
-        clip-path: polygon(15% 50%, 5% 61%, 35% 100%, 90% 0, 75% 0, 34% 75%);
-      }
+      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 32 32' style='fill:white;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2'%0A%3E%3Cpath d='M7.199 20.599 13.489 29h1.182L24.923 4.384l-1.847-.768-9.326 22.395-4.95-6.61-1.601 1.198Z' /%3E%3C/svg%3E%0A");
     }
   }
 </style>
