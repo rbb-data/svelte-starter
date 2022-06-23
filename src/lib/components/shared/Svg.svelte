@@ -53,24 +53,30 @@
   $: boundedHeight = height - margin.top - margin.bottom;
 </script>
 
-<svg
-  {width}
-  {height}
-  viewBox={[0, 0, width, height].join(' ')}
-  class:debug
-  {...$$restProps}
->
-  <slot name="header" />
-  <g transform={translate([margin.left, margin.top])}>
-    {#if debug}
-      <rect width={boundedWidth} height={boundedHeight} fill="aliceblue" />
-    {/if}
-    <slot />
-  </g>
-</svg>
+{#if width}
+  <svg
+    {width}
+    {height}
+    viewBox={[0, 0, width, height].join(' ')}
+    class:debug
+    {...$$restProps}
+  >
+    <slot name="header" />
+    <g transform={translate([margin.left, margin.top])}>
+      {#if debug}
+        <rect width={boundedWidth} height={boundedHeight} fill="aliceblue" />
+      {/if}
+      <slot />
+    </g>
+  </svg>
+{/if}
 
-<style>
-  svg.debug {
-    outline: black dashed 1px;
+<style lang="scss">
+  svg {
+    overflow: visible;
+
+    &.debug {
+      outline: black dashed 1px;
+    }
   }
 </style>

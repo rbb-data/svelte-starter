@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Wed, 22 Jun 2022 09:29:01 GMT */
+/** Do not edit directly Generated on Wed, 22 Jun 2022 17:02:50 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -155,8 +155,8 @@ export const cChangeNeutral = '#DFDED2';
 export const cChangeIncrease = '#F2A335';
 export const cQualityNegative = '#BD3C28';
 export const cQualityPositive = '#98CDAA';
-export const cChartNullLine = '#000000';
-export const cChartAxisLine = '#C0C0C0';
-export const cChartAxisText = '#8C8C8C';
+export const cChartAxis = '#000000';
+export const cChartGrid = '#C0C0C0';
+export const cChartTick = '#8C8C8C';
 export const cChartArea = '#EBEBEB';
 export const cChartAnnotation = '#595959';

@@ -86,14 +86,14 @@
 />
 
 <Story name="Basic">
-  <Table {data} {columns} caption="Meine Tabelle" />
+  <Table {data} {columns} caption="Titel Datensatz" />
 </Story>
 
 <Story name="No highlights">
   <Table
     {data}
     {columns}
-    caption="Meine Tabelle"
+    caption="Titel Datensatz"
     highlightFirstColumn={false}
   />
 </Story>
@@ -103,7 +103,7 @@
     {data}
     columns={columnsWithClasses}
     class="custom-table"
-    caption="Meine Tabelle"
+    caption="Titel Datensatz"
   />
 </Story>
 
@@ -112,7 +112,7 @@
     {data}
     columns={columnsWithCustomClasses}
     class="custom-table"
-    caption="Meine Tabelle"
+    caption="Titel Datensatz"
   />
 </Story>
 
