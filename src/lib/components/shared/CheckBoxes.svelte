@@ -121,7 +121,18 @@
         {disabled}
         bind:group={selectedValues}
         on:focus={(e) => {
-          if (e.currentTarget.matches(':focus-visible')) {
+          const node = e.currentTarget;
+          // @ts-ignore
+          const matches = node.matches || node.matchesSelector;
+
+          // some browsers throw a SyntaxError if an invalid
+          // (or unsupported) pseudo-selector is used
+          try {
+            if (matches.call(node, ':focus-visible')) {
+              focusedValue = v;
+            }
+          } catch (error) {
+            // if :focus-visibile is not supported, focus in any case
             focusedValue = v;
           }
         }}

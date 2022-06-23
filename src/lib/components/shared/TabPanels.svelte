@@ -9,6 +9,8 @@
    * @component
    */
 
+  import { onMount } from 'svelte';
+
   import * as colors from '$lib/tokens';
   import { capitalize } from '$lib/utils';
 
@@ -54,6 +56,14 @@
     if (typeof entry === 'string') return entry;
     if (typeof entry === 'function') return entry(tab);
   };
+
+  onMount(() => {
+    if (!document.getElementById(id)) {
+      console.warn(
+        'rbb-data/svelte-starter: The id of <TabPanel {id} /> does not match the id of <Tab />.'
+      );
+    }
+  });
 </script>
 
 {#each tabs as tab, i}

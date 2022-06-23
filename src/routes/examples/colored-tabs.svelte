@@ -42,7 +42,7 @@
 </script>
 
 <Tabs
-  id="subtle-tabs"
+  id="colored-tabs"
   aria-label="Wähle einen Tab"
   slants={false}
   {tabs}
@@ -58,13 +58,13 @@
   {tab}
 </Tabs>
 
-<TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+<TabPanels id="colored-tabs" {tabs} {activeIndex} let:tab>
   <div class="panel">Panel for {tab}</div>
 </TabPanels>
 
 <style lang="scss">
   :global {
-    #subtle-tabs {
+    #colored-tabs {
       [role='tab'] {
         background-color: #ffffff;
         border-bottom: 2px solid var(--c-accent);

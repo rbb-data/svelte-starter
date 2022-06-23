@@ -21,7 +21,7 @@
   {tab}
 </Tabs>
 
-<TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+<TabPanels id="subtle-tabs" {tabs} {activeIndex} let:tab>
   <div class="panel">Panel for {tab}</div>
 </TabPanels>
 
