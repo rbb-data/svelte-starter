@@ -29,7 +29,7 @@ const config = {
           $comps: path.resolve('./src/lib/components'),
           $actions: path.resolve('./src/lib/actions'),
           $stores: path.resolve('./src/lib/stores'),
-          $icons: path.resolve('./src/lib/components/shared/icons'),
+          $icons: path.resolve('./src/lib/components/icons'),
         },
       },
 

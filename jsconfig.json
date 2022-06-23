@@ -15,8 +15,8 @@
       "$actions/*": ["src/lib/actions/*"],
       "$stores": ["src/lib/stores"],
       "$stores/*": ["src/lib/stores/*"],
-      "$icons": ["src/lib/components/shared/icons"],
-      "$icons/*": ["src/lib/components/shared/icons/*"]
+      "$icons": ["src/lib/components/icons"],
+      "$icons/*": ["src/lib/components/icons/*"]
     }
   }
 }

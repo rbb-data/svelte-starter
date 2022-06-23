@@ -8,7 +8,7 @@
   import { createEventDispatcher } from 'svelte';
 
   import CheckIcon from '$icons/Check.svelte';
-  import XmarkIcon from '$icons/Xmark.svelte';
+  import XmarkIcon from '$icons/ErrorClose.svelte';
   import ProcessingIcon from '$icons/Processing.svelte';
 
   import { capitalize, computeTransparentColor } from '$lib/utils';
@@ -103,7 +103,7 @@
   button {
     --color: var(--c-ui-gray-500);
     --background-color: transparent;
-    --icon-size: 1.6em;
+    --icon-size: 1.8em;
     --icon-padding: var(--s-px-1);
 
     font-size: var(--font-size-xs);

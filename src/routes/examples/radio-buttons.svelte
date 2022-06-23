@@ -1,19 +1,18 @@
 <script>
+  import { base } from '$app/paths';
+
   import RadioButtons from '$comps/shared/RadioButtons.svelte';
   import Button from '$comps/shared/Button.svelte';
 
-  const SVG_BASEPATH =
-    'https://storage.googleapis.com/rbb-data-static/therapy-interactive/icons';
-
   const regions = [
-    { label: 'Berlin', value: 'berlin', svgFilename: 'berlin.svg' },
+    { label: 'Berlin', value: 'berlin', svgFilename: 'Berlin.svg' },
     {
       label: 'Brandenburg',
       value: 'brandenburg',
-      svgFilename: 'brandenburg.svg',
+      svgFilename: 'Brandenburg.svg',
     },
-    { label: 'Stadt', value: 'stadt', svgFilename: 'city.svg' },
-    { label: 'Land', value: 'land', svgFilename: 'country.svg' },
+    { label: 'Stadt', value: 'stadt', svgFilename: 'City.svg' },
+    { label: 'Land', value: 'land', svgFilename: 'Countryside.svg' },
   ];
 
   /** @type {string} */
@@ -37,7 +36,7 @@
     {/if}
   </span>
 
-  <img src="{SVG_BASEPATH}/{option.svgFilename}" alt="" />
+  <img src="{base}/icons/{option.svgFilename}" alt="" />
 </RadioButtons>
 
 <Button class="button--call-therapist">Termin vereinbaren</Button>
