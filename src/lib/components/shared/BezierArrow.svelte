@@ -152,7 +152,7 @@
   };
 </script>
 
-<g class="arrow" style:--color={color}>
+<g class="arrow" style:--color={color} {...$$restProps}>
   {#if debug}
     <g class="debug">
       {#each [sHandle, eHandle] as coords}
