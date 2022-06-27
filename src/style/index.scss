@@ -57,7 +57,7 @@ select {
 /* removes user agent styles */
 .reset {
   all: unset;
-  box-sizing: inherit;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
