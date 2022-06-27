@@ -14,7 +14,7 @@
   .top {
     margin: var(--s-px-4) var(--s-px-3) var(--s-px-6) var(--s-px-3);
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
   }
 
   .bottom {

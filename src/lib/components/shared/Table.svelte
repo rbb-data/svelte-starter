@@ -66,7 +66,7 @@
 
     caption {
       text-transform: uppercase;
-      font-weight: var(--font-weight-regular);
+      font-weight: var(--font-weight-semi-bold);
       text-align: left;
       margin-bottom: var(--s-px-2);
     }
@@ -78,7 +78,7 @@
     top: 0;
 
     th {
-      font-weight: var(--font-weight-regular);
+      font-weight: var(--font-weight-semi-bold);
 
       &:first-of-type {
         text-align: center;
@@ -93,10 +93,10 @@
   tbody tr {
     th {
       text-align: center;
-      font-weight: var(--font-weight-light);
+      font-weight: var(--font-weight-regular);
 
       &.highlight {
-        font-weight: var(--font-weight-regular);
+        font-weight: var(--font-weight-semi-bold);
         text-align: left;
       }
     }

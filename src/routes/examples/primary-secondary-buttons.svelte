@@ -15,7 +15,7 @@
     margin: var(--s-px-4) auto var(--s-px-6) auto;
     text-align: center;
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     max-width: 300px;
   }
 

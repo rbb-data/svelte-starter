@@ -152,7 +152,7 @@
   }
 
   legend {
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-sm);
     margin-bottom: var(--s-px-2);
   }
@@ -164,7 +164,7 @@
     background-color: var(--c-light);
     margin: var(--s-px-2) 0;
     font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     white-space: nowrap;
 
     display: flex;

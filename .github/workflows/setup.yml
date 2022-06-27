@@ -25,7 +25,6 @@ jobs:
         run: |
           rm -rf .storybook/
           rm -f .github/workflows/storybook.yml
-          find src -name '*.stories.*' -type f -delete
           node scripts/remove-storybook.js
 
           sed -i 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html

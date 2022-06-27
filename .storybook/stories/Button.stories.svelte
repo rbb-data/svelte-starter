@@ -1,11 +1,12 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
+  import Button from '$comps/shared/Button.svelte';
+
   import { cGreen400 } from '$lib/tokens';
-  import Button from './Button.svelte';
 </script>
 
-<Meta title="User Interface/Button" component={Button} />
+<Meta title="UI/Button" component={Button} />
 
 <Story name="Basic">
   <Button on:press={() => console.log('clicked')}>Primary</Button>

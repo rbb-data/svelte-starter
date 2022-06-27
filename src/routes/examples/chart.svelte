@@ -206,6 +206,7 @@
     </g>
 
     <Arrow
+      class="arrow"
       {...computeArrowCoords(
         [x(dHighlight.month), y(dHighlight.rain)],
         [

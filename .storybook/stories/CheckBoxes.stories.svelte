@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import RadioButtons from './RadioButtons.svelte';
+  import CheckBoxes from '$comps/shared/CheckBoxes.svelte';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -11,14 +11,14 @@
     { label: 'Land', value: 'country' },
   ];
 
-  /** @type {string} */
-  let selectedValue;
-  let selectedValueInitiallySet = 'Berlin';
+  /** @type {string[]} */
+  let selectedValues = [];
+  let selectedValuesInitiallySet = ['Berlin', 'Brandenburg'];
 </script>
 
 <Meta
-  title="User Interface/RadioButtons"
-  component={RadioButtons}
+  title="UI/CheckBoxes"
+  component={CheckBoxes}
   argTypes={{
     id: {
       // @ts-ignore
@@ -27,6 +27,11 @@
     options: {
       // @ts-ignore
       type: { required: true },
+    },
+    selectedValues: {
+      table: {
+        defaultValue: { summary: '[]' },
+      },
     },
     getOptionValue: {
       table: {
@@ -42,154 +47,154 @@
 />
 
 <Story name="Basic">
-  <RadioButtons
-    id="my-radio-buttons"
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
-    bind:selectedValue
+    bind:selectedValues
   >
     {option}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="Specify initially selected value">
-  <RadioButtons
-    id="my-radio-buttons"
+<Story name="Specify initially selected values">
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
-    bind:selectedValue={selectedValueInitiallySet}
+    bind:selectedValues={selectedValuesInitiallySet}
   >
     {option}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValueInitiallySet}
-      <i>{selectedValueInitiallySet}</i>
+    Selected values:
+    {#if selectedValuesInitiallySet.length > 0}
+      <i>{selectedValuesInitiallySet}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Update option on selection">
-  <RadioButtons
-    id="my-radio-buttons"
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
     let:checked
-    bind:selectedValue
+    bind:selectedValues
   >
     {option}
     {#if checked}
       (checked)
     {/if}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Disabled option">
-  <RadioButtons
-    id="my-radio-buttons"
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     isOptionDisabled={(option) => option === 'Berlin'}
     let:option
-    bind:selectedValue
+    bind:selectedValues
   >
     {option}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
     Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Complex options">
-  <RadioButtons
-    id="my-radio-buttons"
+  <CheckBoxes
+    id="my-check-boxes"
     options={complexOptions}
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     getOptionValue={(option) => option.value}
     let:option
-    bind:selectedValue
+    bind:selectedValues
   >
     {option.label}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Custom accent color">
-  <RadioButtons
-    id="my-radio-buttons"
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
     colorScheme="yellow"
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     let:option
-    bind:selectedValue
+    bind:selectedValues
   >
     {option}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Hide label visually">
-  <RadioButtons
-    id="my-radio-buttons"
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
-    label="Wähle eine Region"
+    label="Wähle eine oder mehrere Regionen:"
     hideLabelVisually
     let:option
-    bind:selectedValue
+    bind:selectedValues
   >
     {option}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="External label via aria-labelledby">
-  <div id="select-region-label">Wähle eine Region</div>
-  <RadioButtons
-    id="my-radio-buttons"
+  <div id="select-region-label">Wähle eine oder mehrere Regionen:</div>
+  <CheckBoxes
+    id="my-check-boxes"
     {options}
     aria-labelledby="select-region-label"
     let:option
-    bind:selectedValue
+    bind:selectedValues
   >
     {option}
-  </RadioButtons>
+  </CheckBoxes>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
     {/if}
   </div>
 </Story>

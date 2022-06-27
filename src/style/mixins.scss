@@ -22,7 +22,7 @@
     color: var(--c-ui-gray-500);
   }
   @if $element == text {
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-sm);
     line-height: var(--line-height-sm);
     color: var(--c-ui-gray-500);
@@ -35,7 +35,7 @@
     margin-bottom: var(--s-px-1);
   }
   @if $element == chart-description {
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-xs);
     line-height: var(--line-height-2xs);
     color: var(--c-ui-gray-500);
@@ -50,7 +50,7 @@
     fill: var(--c-chart-annotation);
   }
   @if $element == chart-legend {
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-regular);
     font-size: var(--font-size-xs);
     line-height: var(--line-height-2xs);
     color: var(--c-ui-gray-500);
@@ -62,13 +62,13 @@
     fill: var(--c-chart-tick);
   }
   @if $element == axis-value {
-    font-weight: var(--font-weight-light);
+    font-weight: var(--font-weight-regular);
     font-size: var(--font-size-xs);
     line-height: var(--line-height-3xs);
     fill: var(--c-chart-tick);
   }
   @if $element == chart-source {
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-xs);
     line-height: var(--line-height-3xs);
     color: var(--c-ui-gray-300);

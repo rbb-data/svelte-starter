@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Mon, 27 Jun 2022 07:42:43 GMT */
+/** Do not edit directly Generated on Mon, 27 Jun 2022 12:20:26 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -34,8 +34,8 @@ export const lineHeightNone = 1;
 export const lineHeightTight = 1.15;
 export const lineHeightSnug = 1.35;
 export const lineHeightNormal = 1.5;
-export const fontWeightLight = 400;
-export const fontWeightRegular = 500;
+export const fontWeightRegular = 400;
+export const fontWeightSemiBold = 500;
 export const fontWeightBold = 700;
 export const fontWeightBlack = 900;
 export const shadowSm = '0 0 6px 0 rgba(0, 0, 0, 0.1)';

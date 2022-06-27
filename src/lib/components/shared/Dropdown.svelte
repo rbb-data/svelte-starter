@@ -272,7 +272,7 @@
     width: 100%;
     position: relative;
     font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
   }
 
   .select {

@@ -1,13 +1,13 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Svg from './Svg.svelte';
+  import Svg from '$comps/shared/Svg.svelte';
 
   let boundedWidth = 0;
   let boundedHeight = 0;
 </script>
 
-<Meta title="Data Viz/Svg" component={Svg} />
+<Meta title="Viz/Svg" component={Svg} />
 
 <Story name="Basic">
   <Svg width={100} height={100}>

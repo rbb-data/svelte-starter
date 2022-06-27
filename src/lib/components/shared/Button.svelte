@@ -8,7 +8,7 @@
   import { createEventDispatcher } from 'svelte';
 
   import CheckIcon from '$icons/Check.svelte';
-  import XmarkIcon from '$icons/ErrorClose.svelte';
+  import ErrorCloseIcon from '$icons/ErrorClose.svelte';
   import ProcessingIcon from '$icons/Processing.svelte';
 
   import { capitalize, computeTransparentColor } from '$lib/utils';
@@ -90,7 +90,7 @@
       {:else if feedback === 'success'}
         <CheckIcon />
       {:else if feedback === 'error'}
-        <XmarkIcon />
+        <ErrorCloseIcon />
       {/if}
       <slot />
     </div>
@@ -107,7 +107,7 @@
     --icon-padding: var(--s-px-1);
 
     font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-regular);
+    font-weight: var(--font-weight-semi-bold);
     padding: var(--s-px-3) var(--s-px-4);
     text-transform: uppercase;
     text-align: center;

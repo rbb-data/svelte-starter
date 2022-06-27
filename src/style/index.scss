@@ -14,7 +14,7 @@ and https://www.joshwcomeau.com/css/custom-css-reset/ */
 
   &::before,
   &::after {
-    box-sizing: border-box;
+    box-sizing: inherit;
 
     @media (prefers-reduced-motion: reduce) {
       @include use-reduced-motion;
@@ -37,6 +37,10 @@ and https://www.joshwcomeau.com/css/custom-css-reset/ */
   }
 }
 
+html {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Interstate', sans-serif;
   line-height: var(--line-height-base);
@@ -53,7 +57,7 @@ select {
 /* removes user agent styles */
 .reset {
   all: unset;
-  box-sizing: border-box;
+  box-sizing: inherit;
 
   &:focus {
     outline: none;

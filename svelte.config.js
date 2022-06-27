@@ -16,9 +16,6 @@ const config = {
     paths: {
       base: dev ? '' : process.env.BASE_PATH,
     },
-    package: {
-      exports: (path) => ['index.js'].includes(path),
-    },
     prerender: { default: true },
     vite: {
       plugins: [dsv()],

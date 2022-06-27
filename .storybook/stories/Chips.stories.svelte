@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import CheckBoxes from './CheckBoxes.svelte';
+  import Chips from '$comps/shared/Chips.svelte';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -17,8 +17,8 @@
 </script>
 
 <Meta
-  title="User Interface/CheckBoxes"
-  component={CheckBoxes}
+  title="UI/Chips"
+  component={Chips}
   argTypes={{
     id: {
       // @ts-ignore
@@ -47,15 +47,15 @@
 />
 
 <Story name="Basic">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
     label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues
   >
     {option}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
@@ -65,15 +65,15 @@
 </Story>
 
 <Story name="Specify initially selected values">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
     label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues={selectedValuesInitiallySet}
   >
     {option}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValuesInitiallySet.length > 0}
@@ -83,8 +83,8 @@
 </Story>
 
 <Story name="Update option on selection">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
     label="Wähle eine oder mehrere Regionen:"
     let:option
@@ -95,7 +95,7 @@
     {#if checked}
       (checked)
     {/if}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
@@ -105,8 +105,8 @@
 </Story>
 
 <Story name="Disabled option">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
     label="Wähle eine oder mehrere Regionen:"
     isOptionDisabled={(option) => option === 'Berlin'}
@@ -114,7 +114,7 @@
     bind:selectedValues
   >
     {option}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected value:
     {#if selectedValues.length > 0}
@@ -124,8 +124,8 @@
 </Story>
 
 <Story name="Complex options">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     options={complexOptions}
     label="Wähle eine oder mehrere Regionen:"
     getOptionValue={(option) => option.value}
@@ -133,7 +133,7 @@
     bind:selectedValues
   >
     {option.label}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
@@ -143,16 +143,16 @@
 </Story>
 
 <Story name="Custom accent color">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
-    colorScheme="yellow"
+    colorScheme="purple"
     label="Wähle eine oder mehrere Regionen:"
     let:option
     bind:selectedValues
   >
     {option}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
@@ -162,8 +162,8 @@
 </Story>
 
 <Story name="Hide label visually">
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
     label="Wähle eine oder mehrere Regionen:"
     hideLabelVisually
@@ -171,7 +171,7 @@
     bind:selectedValues
   >
     {option}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValues.length > 0}
@@ -182,15 +182,15 @@
 
 <Story name="External label via aria-labelledby">
   <div id="select-region-label">Wähle eine oder mehrere Regionen:</div>
-  <CheckBoxes
-    id="my-check-boxes"
+  <Chips
+    id="my-chips"
     {options}
     aria-labelledby="select-region-label"
     let:option
     bind:selectedValues
   >
     {option}
-  </CheckBoxes>
+  </Chips>
   <div class="result">
     Selected values:
     {#if selectedValues.length > 0}

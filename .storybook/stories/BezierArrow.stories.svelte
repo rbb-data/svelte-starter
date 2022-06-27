@@ -1,12 +1,12 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Svg from './Svg.svelte';
-  import BezierArrow from './BezierArrow.svelte';
+  import Svg from '$comps/shared/Svg.svelte';
+  import BezierArrow from '$comps/shared/BezierArrow.svelte';
 </script>
 
 <Meta
-  title="Data Viz/BezierArrow"
+  title="Viz/BezierArrow"
   component={BezierArrow}
   argTypes={{
     start: {

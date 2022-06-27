@@ -11,7 +11,6 @@ cd $(dirname $0)/..
 # remove documentation
 rm -rf .storybook/
 rm -f .github/workflows/storybook.yml
-find src -name '*.stories.*' -type f -delete
 node scripts/remove-storybook.js
 
 # substitute '{project-name}' with the current folder name

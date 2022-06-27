@@ -172,7 +172,7 @@
       cursor: pointer;
 
       color: var(--c-ui-gray-400);
-      font-weight: var(--font-weight-regular);
+      font-weight: var(--font-weight-semi-bold);
       background-color: var(--c-light);
 
       &:focus-visible {

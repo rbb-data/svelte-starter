@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Table from './Table.svelte';
+  import Table from '$comps/shared/Table.svelte';
 
   function r(min = 0, max = 20) {
     min = Math.ceil(min);
@@ -78,7 +78,7 @@
 </script>
 
 <Meta
-  title="Data Viz/Table"
+  title="Viz/Table"
   component={Table}
   argTypes={{
     data: {
