@@ -20,47 +20,58 @@
     { year: 2015, a: r(), b: r(), c: r() },
   ];
 
+  /**
+   * @typedef {{
+   *   name: string;
+   *   getValue: (d: typeof data[0]) => number;
+   *   class?: string;
+   * }} Column
+   */
+
+  /** @type {Column[]} */
   const columns = [
-    { name: 'Jahr', getValue: (/** @type {typeof data[0]} */ d) => d.year },
-    { name: 'Katgorie A', getValue: (/** @type {typeof data[0]} */ d) => d.a },
-    { name: 'Katgorie B', getValue: (/** @type {typeof data[0]} */ d) => d.b },
-    { name: 'Katgorie C', getValue: (/** @type {typeof data[0]} */ d) => d.c },
+    { name: 'Jahr', getValue: (d) => d.year },
+    { name: 'Katgorie A', getValue: (d) => d.a },
+    { name: 'Katgorie B', getValue: (d) => d.b },
+    { name: 'Katgorie C', getValue: (d) => d.c },
   ];
 
+  /** @type {Column[]} */
   const columnsWithClasses = [
-    { name: 'Jahr', getValue: (/** @type {typeof data[0]} */ d) => d.year },
+    { name: 'Jahr', getValue: (d) => d.year },
     {
       name: 'Katgorie A',
-      getValue: (/** @type {typeof data[0]} */ d) => d.a,
+      getValue: (d) => d.a,
       class: 'align-right',
     },
     {
       name: 'Katgorie B',
-      getValue: (/** @type {typeof data[0]} */ d) => d.b,
+      getValue: (d) => d.b,
       class: 'align-right',
     },
     {
       name: 'Katgorie C',
-      getValue: (/** @type {typeof data[0]} */ d) => d.c,
+      getValue: (d) => d.c,
       class: 'align-right',
     },
   ];
 
+  /** @type {Column[]} */
   const columnsWithCustomClasses = [
-    { name: 'Jahr', getValue: (/** @type {typeof data[0]} */ d) => d.year },
+    { name: 'Jahr', getValue: (d) => d.year },
     {
       name: 'Katgorie A',
-      getValue: (/** @type {typeof data[0]} */ d) => d.a,
+      getValue: (d) => d.a,
       class: 'cat-a',
     },
     {
       name: 'Katgorie B',
-      getValue: (/** @type {typeof data[0]} */ d) => d.b,
+      getValue: (d) => d.b,
       class: 'cat-b',
     },
     {
       name: 'Katgorie C',
-      getValue: (/** @type {typeof data[0]} */ d) => d.c,
+      getValue: (d) => d.c,
       class: 'cat-c',
     },
   ];

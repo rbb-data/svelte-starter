@@ -2,12 +2,12 @@
   import '../style/index.scss';
 </script>
 
-<div class="wrapper">
+<main>
   <slot />
-</div>
+</main>
 
 <style>
-  .wrapper {
+  main {
     max-width: 800px;
     margin: 0 auto;
   }

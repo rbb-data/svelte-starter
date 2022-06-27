@@ -41,7 +41,7 @@
    *
    * @type {any}
    */
-  export let selectedValue = undefined;
+  export let selectedValue;
 
   /**
    * label of the input group
