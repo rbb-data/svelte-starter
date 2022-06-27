@@ -4,6 +4,10 @@
   box-shadow: 0 0 0px 2px $paddingColor, 0 0 0px 4px $focusColor;
 }
 
+@mixin focus-inset($focusColor: $c-ui-accent-blue) {
+  box-shadow: inset 0 0 0px 2px $focusColor;
+}
+
 @mixin typography($element) {
   @if $element == header {
     font-weight: var(--font-weight-bold);

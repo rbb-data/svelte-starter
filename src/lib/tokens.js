@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Wed, 22 Jun 2022 17:02:50 GMT */
+/** Do not edit directly Generated on Mon, 27 Jun 2022 07:42:43 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -38,6 +38,7 @@ export const fontWeightLight = 400;
 export const fontWeightRegular = 500;
 export const fontWeightBold = 700;
 export const fontWeightBlack = 900;
+export const shadowSm = '0 0 6px 0 rgba(0, 0, 0, 0.1)';
 export const cRbbRed = '#E61A1A'; // rbb's primary color
 export const cRbbBurgundy = '#821423';
 export const cRbbNeutral = '#DFDED2';
