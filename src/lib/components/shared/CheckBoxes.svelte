@@ -190,11 +190,6 @@
     position: relative;
 
     &:focus {
-      @include focus(var(--c-focus), var(--c-light));
-    }
-
-    &:focus:not(:focus-visible),
-    &:focus-visible {
       box-shadow: none;
     }
 

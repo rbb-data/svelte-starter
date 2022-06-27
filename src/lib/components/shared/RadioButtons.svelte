@@ -190,11 +190,6 @@
     border: 1px solid black;
 
     &:focus {
-      @include focus(var(--c-focus), var(--c-light));
-    }
-
-    &:focus:not(:focus-visible),
-    &:focus-visible {
       box-shadow: none;
     }
 
