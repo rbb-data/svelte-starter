@@ -203,7 +203,7 @@
     position: relative;
 
     /* can't use `overflow: hidden` here since that would cut off the focus ring;
-    instead, two psuedo elements are rendered above the overflowing content on both sides  */
+    instead, two pseudo elements are rendered above the overflowing content on both sides  */
 
     &::before,
     &::after {

@@ -19,8 +19,8 @@
   ];
 
   /** @type {string[]} */
-  let selectedValue;
-  let selectedValueInitiallySet = 'Sommer';
+  let selectedOption;
+  let selectedOptionInitiallySet = 'Sommer';
 </script>
 
 <Meta
@@ -39,12 +39,7 @@
       // @ts-ignore
       type: { required: true },
     },
-    getOptionValue: {
-      table: {
-        defaultValue: { summary: '(option) => option' },
-      },
-    },
-    getOptionLabel: {
+    formatOption: {
       table: {
         defaultValue: { summary: '(option) => option' },
       },
@@ -63,15 +58,15 @@
       id="my-unique-dropdown-id"
       {options}
       placeholder="Jahreszeiten"
-      bind:selectedValue
+      bind:selectedOption
       let:option
     >
       {option}
     </Dropdown>
     <div class="result">
       Selected value:
-      {#if selectedValue}
-        <i>{selectedValue}</i>
+      {#if selectedOption}
+        <i>{selectedOption}</i>
       {/if}
     </div>
   </div>
@@ -84,15 +79,15 @@
       {options}
       placeholder="Jahreszeiten"
       isOpen
-      bind:selectedValue
+      bind:selectedOption
       let:option
     >
       {option}
     </Dropdown>
     <div class="result">
       Selected value:
-      {#if selectedValue}
-        <i>{selectedValue}</i>
+      {#if selectedOption}
+        <i>{selectedOption}</i>
       {/if}
     </div>
   </div>
@@ -104,15 +99,15 @@
       id="my-unique-dropdown-id"
       {options}
       placeholder="Jahreszeiten"
-      bind:selectedValue={selectedValueInitiallySet}
+      bind:selectedOption={selectedOptionInitiallySet}
       let:option
     >
       {option}
     </Dropdown>
     <div class="result">
       Selected value:
-      {#if selectedValueInitiallySet}
-        <i>{selectedValueInitiallySet}</i>
+      {#if selectedOptionInitiallySet}
+        <i>{selectedOptionInitiallySet}</i>
       {/if}
     </div>
   </div>
@@ -124,17 +119,16 @@
       id="my-unique-dropdown-id"
       options={complexOptions}
       placeholder="Jahreszeiten"
-      getOptionValue={(option) => option.value}
-      getOptionLabel={(option) => option.label}
-      bind:selectedValue
+      formatOption={(option) => option.label}
+      bind:selectedOption
       let:option
     >
       {option.label}
     </Dropdown>
     <div class="result">
       Selected value:
-      {#if selectedValue}
-        <i>{selectedValue}</i>
+      {#if selectedOption}
+        <pre>{JSON.stringify(selectedOption, null, 2)}</pre>
       {/if}
     </div>
   </div>
@@ -147,15 +141,15 @@
       options={groupedOptions}
       placeholder="Jahreszeiten"
       getOptionGroup={(option) => (option === 'Alle Jahreszeiten' ? 1 : 0)}
-      bind:selectedValue
+      bind:selectedOption
       let:option
     >
       {option}
     </Dropdown>
     <div class="result">
       Selected value:
-      {#if selectedValue}
-        <i>{selectedValue}</i>
+      {#if selectedOption}
+        <i>{selectedOption}</i>
       {/if}
     </div>
   </div>
@@ -163,7 +157,7 @@
 
 <style>
   .wrapper {
-    height: 200px;
+    height: 250px;
   }
 
   .result {

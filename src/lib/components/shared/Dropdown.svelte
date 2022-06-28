@@ -9,9 +9,11 @@
   import { ascending } from 'd3-array';
 
   import DropdownIcon from '$icons/Dropdown.svelte';
+  import CheckIcon from '$icons/Check.svelte';
 
   import press from '$actions/press';
   import typeahead from '$actions/typeahead';
+  import { getNextIndexInList } from '$lib/utils';
 
   /**
    * globally unique id
@@ -38,25 +40,19 @@
   export let isOpen = false;
 
   /**
-   * currently selected value
+   * currently selected item
    *
    * @type {any}
    */
-  export let selectedValue = undefined;
+  export let selectedOption = undefined;
 
   /**
-   * function that maps an option to its value
+   * format an option; a selected option is formatted and displayed in the
+   * combobox (should be the same formatting applied to the options itself)
    *
    * @type {(option: any) => any}
    */
-  export let getOptionValue = (option) => option;
-
-  /**
-   * function that maps an option to its label
-   *
-   * @type {(option: any) => any}
-   */
-  export let getOptionLabel = (option) => option;
+  export let formatOption = (option) => option;
 
   /**
    * function that maps an option to its group; groups are visually separated
@@ -81,17 +77,15 @@
 
   /** @type {(option: any) => boolean} */
   $: isFirstInGroup = (option) => {
-    const index = sortedOptions.findIndex(
-      (o) => getOptionValue(o) === getOptionValue(option)
-    );
+    const index = sortedOptions.indexOf(option);
     if (index <= 0) return false;
 
     const previousOption = sortedOptions[index - 1];
     return getOptionGroup(previousOption) !== getOptionGroup(option);
   };
 
-  $: focusedIndex = selectedValue
-    ? options.findIndex((o) => getOptionValue(o) === selectedValue)
+  $: focusedIndex = selectedOption
+    ? options.indexOf(selectedOption)
     : undefined;
 
   $: if (
@@ -103,7 +97,7 @@
 
   /** @param {any} value */
   function selectOption(value) {
-    selectedValue = value;
+    selectedOption = value;
     closePopup();
   }
 
@@ -117,7 +111,7 @@
     if (e.key === 'Escape') {
       if (isOpen) isOpen = false;
       else {
-        selectedValue = undefined;
+        selectedOption = undefined;
         focusedIndex = undefined;
       }
       return;
@@ -133,30 +127,6 @@
         focusedIndex = nextIndex;
       });
     }
-  }
-
-  /** @param {KeyboardEvent} e */
-  function navigateBetweenOptions(e) {
-    /** @typedef {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} AllowedKey */
-
-    /** @param {AllowedKey} keyPressed */
-    const getNextIndex = (keyPressed) => {
-      switch (keyPressed) {
-        case 'Home':
-          return 0;
-        case 'End':
-          return options.length - 1;
-        case 'ArrowUp':
-          return focusedIndex - 1 >= 0 ? focusedIndex - 1 : focusedIndex;
-        case 'ArrowDown':
-          return focusedIndex + 1 < options.length
-            ? focusedIndex + 1
-            : focusedIndex;
-      }
-    };
-
-    const nextIndex = getNextIndex(/** @type {AllowedKey} */ (e.key));
-    focusedIndex = nextIndex;
   }
 </script>
 
@@ -174,11 +144,13 @@
 
 <div {id} class="dropdown">
   <button
+    role="combobox"
     class="select reset"
     type="button"
     aria-haspopup="listbox"
-    aria-controls="{id}--listbox"
+    aria-controls={isOpen ? `${id}--listbox` : null}
     aria-expanded={isOpen}
+    aria-autocomplete="none"
     bind:this={selectElement}
     use:press={() => {
       isOpen = !isOpen;
@@ -192,18 +164,16 @@
     use:typeahead={{
       handleInput: (input) => {
         const option = options.find((o) =>
-          getOptionValue(o).toLowerCase().startsWith(input)
+          formatOption(o).toLowerCase().startsWith(input)
         );
         if (!option) return;
-        selectedValue = getOptionValue(option);
+        selectedOption = option;
       },
     }}
     on:keydown={handleKeyDown}
   >
-    {#if selectedValue}
-      {getOptionLabel(
-        options.find((option) => getOptionValue(option) === selectedValue)
-      )}
+    {#if selectedOption}
+      {formatOption(selectedOption)}
     {:else}
       {placeholder}
     {/if}
@@ -218,25 +188,23 @@
       use:typeahead={{
         handleInput: (input) => {
           const index = options.findIndex((o) =>
-            getOptionValue(o).toLowerCase().startsWith(input)
+            formatOption(o).toLowerCase().startsWith(input)
           );
-          console.log(input, index);
           if (index < 0) return;
           focusedIndex = index;
         },
       }}
     >
       {#each options as option, i}
-        {@const v = getOptionValue(option)}
-        {@const selected = selectedValue === v}
+        {@const selected = selectedOption === option}
         <li
           role="option"
           aria-selected={selected}
           class:selected
           class:separator={isFirstInGroup(option)}
-          tabindex={selected || (!selectedValue && i === 0) ? 0 : -1}
+          tabindex={selected || (!selectedOption && i === 0) ? 0 : -1}
           bind:this={optionElements[i]}
-          use:press={() => selectOption(v)}
+          use:press={() => selectOption(option)}
           on:keydown|preventDefault={(e) => {
             if (e.key === 'Escape') {
               closePopup();
@@ -244,16 +212,23 @@
             }
 
             if (e.key === 'Enter' || e.key === 'Spacebar' || e.key === ' ') {
-              selectOption(v);
+              selectOption(option);
               return;
             }
 
             if (['Home', 'End', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-              navigateBetweenOptions(e);
+              focusedIndex = getNextIndexInList(
+                /** @type {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} */ (e.key),
+                focusedIndex,
+                options.length
+              );
             }
           }}
         >
           <slot {option} {selected} />
+          {#if selected}
+            <CheckIcon />
+          {/if}
         </li>
       {/each}
     </ul>
@@ -332,19 +307,17 @@
   }
 
   :global {
-    .select {
-      svg {
-        width: var(--icon-size);
-        height: var(--icon-size);
-        position: absolute;
-        top: 50%;
-        right: var(--icon-padding-right);
-        transform: translateY(-50%);
-      }
+    .dropdown svg {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      position: absolute;
+      top: 50%;
+      right: var(--icon-padding-right);
+      transform: translateY(-50%);
+    }
 
-      &[aria-expanded='true'] svg {
-        transform: translateY(-50%) rotate(180deg);
-      }
+    .select[aria-expanded='true'] svg {
+      transform: translateY(-50%) rotate(180deg);
     }
   }
 </style>

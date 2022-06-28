@@ -1,3 +1,5 @@
+import fuzzysort from 'fuzzysort';
+
 /**
  * Constructs a translate(x,y) string for use with the `transform` CSS property
  *
@@ -82,6 +84,26 @@ export const computeTransparentColor = (colorHex, opacity = 0.3) => {
 };
 
 /**
+ * Search a data list with a given query using fuzzy matching
+ *
+ * @template T
+ * @param {string} query
+ * @param {T[]} data
+ * @param {{ key?: string; limit?: number }} options
+ */
+export function fuzzysearch(query, data, { key, limit = 5 } = {}) {
+  const results = fuzzysort.go(query, data, { key, limit });
+
+  const suggestions = [];
+  for (let i = 0; i < results.length; i++) {
+    const result = results[i];
+    suggestions.push(key ? result.obj : result.target);
+  }
+
+  return suggestions;
+}
+
+/**
  * Convert hex to rgba colors
  *
  * from
@@ -138,3 +160,24 @@ const hex2rgba = (hex) => {
 
   throw new Error(`unknown hex color: ${hex}`);
 };
+
+/**
+ * Helper to navigate through list items using arrow keys
+ *
+ * @typedef {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} Key
+ * @param {Key} key
+ * @param {number} index
+ * @param {number} length
+ */
+export function getNextIndexInList(key, index, length) {
+  switch (key) {
+    case 'Home':
+      return 0;
+    case 'End':
+      return length - 1;
+    case 'ArrowUp':
+      return index - 1 >= 0 ? index - 1 : index;
+    case 'ArrowDown':
+      return index + 1 < length ? index + 1 : index;
+  }
+}
