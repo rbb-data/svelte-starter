@@ -5,7 +5,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { csvFormat } from 'd3-dsv';
 
-import { loadGoogleSheet } from './_loadFromGoogle.js';
+import { loadGoogleSheet } from './_load-from-google.js';
 
 async function main() {
   // read sheet id from environment

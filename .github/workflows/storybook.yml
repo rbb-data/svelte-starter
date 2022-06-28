@@ -26,7 +26,7 @@ jobs:
         run: ( npm run dev ) & sleep 30 ; kill $!
 
       - name: Build
-        run: npm run storybook:build
+        run: npm run docs:build
 
       - name: Deploy storybook
         uses: JamesIves/github-pages-deploy-action@v4.3.3

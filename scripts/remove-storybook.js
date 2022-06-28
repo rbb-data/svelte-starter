@@ -32,9 +32,7 @@ function removeDeps(pck) {
 
 function removeScripts(pck) {
   const scripts = Object.keys(pck.scripts);
-  const scriptsToRemove = scripts.filter((script) =>
-    script.startsWith('storybook')
-  );
+  const scriptsToRemove = scripts.filter((script) => script.startsWith('docs'));
 
   for (const script of scriptsToRemove) {
     if (pck.scripts[script]) {
