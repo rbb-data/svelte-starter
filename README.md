@@ -98,8 +98,6 @@ src
 ├── data
 ├── lib
 │   ├── actions  -- Svelte actions, see https://svelte.dev/tutorial/actions
-│   ├── assets  -- additional data
-│   │   └── geo
 │   ├── components
 │   │   ├── icons  -- list of icons as Svelte components
 │   │   └── shared  -- component library, see https://rbb-data.github.io/svelte-starter/
