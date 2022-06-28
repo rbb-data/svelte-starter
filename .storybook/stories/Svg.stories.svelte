@@ -7,7 +7,25 @@
   let boundedHeight = 0;
 </script>
 
-<Meta title="Viz/Svg" component={Svg} />
+<Meta
+  title="Viz/Svg"
+  component={Svg}
+  argTypes={{
+    width: {
+      // @ts-ignore
+      type: { required: true },
+    },
+    height: {
+      // @ts-ignore
+      type: { required: true },
+    },
+    margin: {
+      table: {
+        defaultValue: { summary: '{ top: 0, right: 0, bottom: 0, left: 0 }' },
+      },
+    },
+  }}
+/>
 
 <Story name="Basic">
   <Svg width={100} height={100}>

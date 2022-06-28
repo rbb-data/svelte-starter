@@ -2,6 +2,22 @@
   /**
    * Input widget with an associated popup for suggestions.
    *
+   * The rendered markup is composed of:
+   *
+   * - `div.search`: assigned the given id
+   * - `div.search form`
+   * - `div.search form label`
+   * - `div.search form div.input-wrapper`
+   * - `div.search form div.input-wrapper input[role="combobox"]`: assigned the id
+   *   `{id}--input`, inferred from the given id
+   * - `div.search form div.input-wrapper button[type="submit"]`
+   * - `div.search ul[role="listbox"]`: assigned the id `{id}--listbox`, inferred
+   *   from the given id
+   * - `div.search ul[role="listbox"] li[role="option"]`: with classes `.focused`
+   *   and `.selected` applied appropriately
+   *
+   * **Note:** The focus ring is implemented via `box-shadow`.
+   *
    * @component
    */
 
@@ -364,18 +380,16 @@
     }
   }
 
-  :global {
-    .search svg {
-      width: var(--icon-size);
-      height: var(--icon-size);
-      position: absolute;
-      top: 50%;
-      right: var(--icon-padding);
-      transform: translateY(-50%);
-    }
+  .search :global(svg) {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    position: absolute;
+    top: 50%;
+    right: var(--icon-padding);
+    transform: translateY(-50%);
+  }
 
-    .search button[type='submit'] svg {
-      transform: translateY(-50%) skew(10deg);
-    }
+  button[type='submit'] :global(svg) {
+    transform: translateY(-50%) skew(10deg);
   }
 </style>

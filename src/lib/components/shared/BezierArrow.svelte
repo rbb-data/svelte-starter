@@ -1,4 +1,15 @@
 <script>
+  /**
+   * Bézier curve, to be embedded within an SVG.
+   *
+   * A Bézier curve is defined by a start and end point, as well as two control
+   * points, one for each end. See
+   * [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#b%C3%A9zier_curves)
+   * for more information.
+   *
+   * @component
+   */
+
   import { cUiGray500 } from '$lib/tokens';
 
   /**

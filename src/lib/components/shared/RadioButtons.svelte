@@ -2,19 +2,15 @@
   /**
    * Group of vertically aligned radio buttons.
    *
-   * The rendered markup is:
+   * The rendered markup is composed of:
    *
-   * ```html
-   * <fieldset>
-   *   <legend>
-   *     <!-- label (if given) -->
-   *   </legend>
-   *   <label>
-   *     <input role="radio" />
-   *     <!-- slot -->
-   *   </label>
-   * </fieldset>
-   * ```
+   * - `fieldset`: assigned the given id
+   * - `fieldset legend`
+   * - `fieldset label`: with classes `.focused`, `.checked` and `.disabled`
+   *   applied appropriately
+   * - `fieldset label input[type="radio"]`
+   *
+   * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * @component
    */

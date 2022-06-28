@@ -1,6 +1,6 @@
 <script>
   /**
-   * Basic table component.
+   * Basic table.
    *
    * @component
    */

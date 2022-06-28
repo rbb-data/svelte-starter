@@ -15,7 +15,7 @@
 </div>
 
 <style lang="scss">
-  :global {
+  .wrapper :global {
     .custom-button {
       width: 100%;
       text-transform: none !important;

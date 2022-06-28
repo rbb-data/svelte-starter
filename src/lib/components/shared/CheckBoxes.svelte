@@ -2,19 +2,15 @@
   /**
    * Group of vertically aligned check boxes.
    *
-   * The rendered markup is:
+   * The rendered markup is composed of:
    *
-   * ```html
-   * <fieldset>
-   *   <legend>
-   *     <!-- label (if given) -->
-   *   </legend>
-   *   <label>
-   *     <input role="checkbox" />
-   *     <!-- slot -->
-   *   </label>
-   * </fieldset>
-   * ```
+   * - `fieldset`: assigned the given id
+   * - `fieldset legend`
+   * - `fieldset label`: with classes `.focused`, `.checked` and `.disabled`
+   *   applied appropriately
+   * - `fieldset label input[type="checkbox"]`
+   *
+   * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * @component
    */

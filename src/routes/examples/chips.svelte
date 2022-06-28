@@ -19,27 +19,29 @@
   let selectedCriterions = ['In Kraft getreten'];
 </script>
 
-<Chips
-  id="chips--choose-criterions"
-  label="Wähle deine Kriterien:"
-  options={criterions}
-  colorScheme="turquoise"
-  customColors={{ light: cUiGray100 }}
-  bind:selectedValues={selectedCriterions}
-  let:option
-  let:checked
->
-  <div class="check-box" class:checked>
-    {#if checked}
-      <CheckIcon />
-    {/if}
-    <span class="content">{option}</span>
-  </div>
-</Chips>
+<div class="wrapper">
+  <Chips
+    id="chips--choose-criterions"
+    label="Wähle deine Kriterien:"
+    options={criterions}
+    colorScheme="turquoise"
+    customColors={{ light: cUiGray100 }}
+    bind:selectedValues={selectedCriterions}
+    let:option
+    let:checked
+  >
+    <div class="check-box" class:checked>
+      {#if checked}
+        <CheckIcon />
+      {/if}
+      <span class="content">{option}</span>
+    </div>
+  </Chips>
 
-<Button accentColor="turquoise" class="chips--show-results">
-  Ergebnisse anzeigen
-</Button>
+  <Button accentColor="turquoise" class="chips--show-results">
+    Ergebnisse anzeigen
+  </Button>
+</div>
 
 <style lang="scss">
   .check-box {
@@ -70,10 +72,8 @@
     }
   }
 
-  :global {
-    .chips--show-results {
-      width: 100%;
-      margin-top: var(--s-px-5);
-    }
+  .wrapper :global(.chips--show-results) {
+    width: 100%;
+    margin-top: var(--s-px-5);
   }
 </style>

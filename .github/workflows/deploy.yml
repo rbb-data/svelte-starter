@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       deploy_to_main_path:
-        description: 'Deploy to main page (DANGER)'
+        description: 'Deploy for production (DANGER)'
         required: true
         default: false
         type: boolean

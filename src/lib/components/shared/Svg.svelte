@@ -34,16 +34,16 @@
   /**
    * width of the canvas (the svg's width minus margins)
    *
-   * @exposed
+   * @type {number}
    */
-  export let boundedWidth = 0;
+  export let boundedWidth = undefined;
 
   /**
    * height of the canvas (the svg's height minus margins)
    *
-   * @exposed
+   * @type {number}
    */
-  export let boundedHeight = 0;
+  export let boundedHeight = undefined;
 
   /** if true, show the svg's outline and highlight canvas */
   export let debug = false;

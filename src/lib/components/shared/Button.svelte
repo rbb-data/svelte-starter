@@ -2,6 +2,8 @@
   /**
    * Primary, secondary and tertiary buttons.
    *
+   * **Note:** The focus ring is implemented via `box-shadow`.
+   *
    * @component
    */
 
@@ -58,7 +60,6 @@
   $: showFeedbackIcon =
     !hideFeedbackIcon && type !== 'tertiary' && feedback && feedback !== 'done';
   $: classes = [
-    'button',
     'reset',
     type,
     feedback && 'show-feedback',
@@ -221,30 +222,23 @@
       }
     }
   }
+  button.show-icon :global(svg) {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
 
-  :global {
-    .button.show-icon {
-      svg {
-        width: var(--icon-size);
-        height: var(--icon-size);
-        left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
+    /* vertically align the icon */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-        /* vertically align the icon */
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
+  button.show-icon :global(svg path) {
+    fill: var(--color);
+  }
 
-        path {
-          fill: var(--color);
-        }
-      }
-
-      &.processing {
-        svg {
-          animation: spin 1.5s linear infinite;
-        }
-      }
-    }
+  button.processing :global(svg) {
+    animation: spin 1.5s linear infinite;
   }
 
   @keyframes spin {

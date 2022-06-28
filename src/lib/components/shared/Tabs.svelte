@@ -6,6 +6,14 @@
    *
    * **Note:** Must be used in conjunction with `<TabPanels />`
    *
+   * The rendered markup is composed of:
+   *
+   * - `div[role="tablist"]`: assigned the given id
+   * - `div[role="tablist"] button[role="tab"]`: with classes `.active` and
+   *   `.disabled` applied appropriately
+   *
+   * **Note:** The focus ring is implemented via `box-shadow`.
+   *
    * @component
    */
 

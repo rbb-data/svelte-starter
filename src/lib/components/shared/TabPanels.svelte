@@ -6,6 +6,8 @@
    *
    * **Note:** Must be used in conjunction with `<Tabs />`
    *
+   * **Note:** The focus ring is implemented via `box-shadow`.
+   *
    * @component
    */
 

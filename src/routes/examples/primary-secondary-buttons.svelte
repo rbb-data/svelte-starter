@@ -23,10 +23,8 @@
     display: flex;
     width: 100%;
     justify-content: center;
-  }
 
-  :global {
-    .bottom {
+    :global {
       & > * {
         flex: 1;
         max-width: 120px;

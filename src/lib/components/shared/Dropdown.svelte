@@ -2,6 +2,17 @@
   /**
    * Dropdown menu to select a single value. Optionally, available options can be grouped.
    *
+   * The rendered markup is composed of:
+   *
+   * - `div.dropdown`: assigned the given id
+   * - `div.dropdown button[role="combobox"]`
+   * - `div.dropdown ul[role="listbox"]`: assigned the id `{id}--listbox`,
+   *   inferred from the given id
+   * - `div.dropdown ul[role="listbox"] li[role="option"]`: with classes
+   *   `.selected` and `.separator` applied appropriately
+   *
+   * **Note:** The focus ring is implemented via `box-shadow`.
+   *
    * @component
    */
 
@@ -326,22 +337,20 @@
     }
   }
 
-  :global {
-    .dropdown svg {
-      width: var(--icon-size);
-      height: var(--icon-size);
-      position: absolute;
-      top: 50%;
-      right: var(--icon-padding-right);
-      transform: translateY(-50%);
-    }
+  .dropdown :global(svg) {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    position: absolute;
+    top: 50%;
+    right: var(--icon-padding-right);
+    transform: translateY(-50%);
+  }
 
-    .select[aria-disabled='true'] svg {
-      opacity: 0.3;
-    }
+  .select[aria-disabled='true'] :global(svg) {
+    opacity: 0.3;
+  }
 
-    .select[aria-expanded='true'] svg {
-      transform: translateY(-50%) rotate(180deg);
-    }
+  .select[aria-expanded='true'] :global(svg) {
+    transform: translateY(-50%) rotate(180deg);
   }
 </style>

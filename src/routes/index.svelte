@@ -10,104 +10,123 @@
 
 <h1>{googleDoc.title}</h1>
 
-<p>
-  Dieser Code lädt beispielhaft lokale Daten und ist mit einem
-  <a
-    href="https://docs.google.com/document/d/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A"
-    target="_blank"
-  >
-    Google doc
-  </a>
-  und einem
-  <a
-    href="https://docs.google.com/spreadsheets/d/1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04"
-    target="_blank"
-  >
-    Google sheet
-  </a>
-  verbunden.
-</p>
+<h2>Daten</h2>
 
-<h2>Lokale Daten</h2>
+<p>Dieser Code ist mit drei Datenquellen verbunden:</p>
 
-<p>
-  Die lokalen Daten liegen in <code>src/data/example-data.csv</code>
-  und werden als <code>localData</code> importiert:
-</p>
-
-<div class="table-wrapper">
-  <Table
-    data={localData}
-    columns={[
-      { name: 'x', getValue: (d) => d.x },
-      { name: 'y', getValue: (d) => d.y },
-    ]}
-    caption="Lokale Daten"
-    highlightFirstColumn={false}
-  />
-</div>
-
-<h2>Google Sheet</h2>
-
-<p>
-  Das Google sheet liegt in <code>src/data/google-sheet-example.csv</code>
-  und wird als <code>googleSheetData</code> importiert:
-</p>
-
-<div class="table-wrapper">
-  <Table
-    data={googleSheetData}
-    columns={[
-      { name: 'col1', getValue: (d) => d.col1 },
-      { name: 'col2', getValue: (d) => d.col2 },
-    ]}
-    caption="Google Sheet"
-    highlightFirstColumn={false}
-  />
-</div>
-
-<h2>Google doc</h2>
-
-<p>
-  Das Google doc liegt in <code>src/data/google-doc.json</code>
-  und wird als <code>googleDoc</code> importiert. Ein paar Beispiele:
-</p>
-
-<h3>Einfaches Objekt</h3>
-{googleDoc.person.name} ({googleDoc.person.age})
-
-<h3>Liste von Strings</h3>
 <ul>
-  {#each googleDoc.listOfStrings as textBlock}
-    <li>{@html textBlock}</li>
-  {/each}
+  <li>
+    Lokale Daten: <code>src/data/example-data.csv</code>
+  </li>
+  <li>
+    <a
+      href="https://docs.google.com/spreadsheets/d/1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04"
+      target="_blank"
+    >
+      Google sheet:
+    </a>
+    <code>src/data/google-sheet-example.csv</code>
+  </li>
+  <li>
+    <a
+      href="https://docs.google.com/document/d/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A"
+      target="_blank"
+    >
+      Google doc:
+    </a>
+    <code>src/data/google-doc.json</code>
+  </li>
 </ul>
 
-<h3>Liste von Objekten</h3>
-<ol>
-  {#each googleDoc.arrayOfObjects as person}
-    <li>{person.name} ({person.age})</li>
-  {/each}
-</ol>
+<div class="tables">
+  <div class="table-wrapper">
+    <Table
+      data={localData}
+      columns={[
+        { name: 'x', getValue: (d) => d.x },
+        { name: 'y', getValue: (d) => d.y },
+      ]}
+      caption="Lokale Daten"
+      highlightFirstColumn={false}
+    />
+  </div>
+
+  <div class="table-wrapper">
+    <Table
+      data={googleSheetData}
+      columns={[
+        { name: 'col1', getValue: (d) => d.col1 },
+        { name: 'col2', getValue: (d) => d.col2 },
+      ]}
+      caption="Google Sheet"
+      highlightFirstColumn={false}
+    />
+  </div>
+</div>
+
+<h3>Google doc Daten:</h3>
+
+<ul>
+  <li>
+    Einfaches Objekt: <i>{googleDoc.person.name} ({googleDoc.person.age})</i>
+  </li>
+  <li>
+    Liste von Strings:
+    <i>
+      {#each googleDoc.listOfStrings as textBlock, i}
+        {@html textBlock}
+        {#if i < googleDoc.listOfStrings.length - 1}
+          /&nbsp;
+        {/if}
+      {/each}
+    </i>
+  </li>
+  <li>
+    Liste von Objekten:
+    <i>
+      {#each googleDoc.arrayOfObjects as person, i}
+        {person.name} ({person.age})
+        {#if i < googleDoc.arrayOfObjects.length - 1}
+          /&nbsp;
+        {/if}
+      {/each}
+    </i>
+  </li>
+</ul>
+
+<h2>Beispiele</h2>
+
+<ul>
+  <li><a href="examples/chart">examples/chart</a></li>
+  <li><a href="examples/check-boxes">examples/check-boxes</a></li>
+  <li><a href="examples/chips">examples/chips</a></li>
+  <li><a href="examples/colored-tabs">examples/colored-tabs</a></li>
+  <li><a href="examples/custom-buttons">examples/custom-buttons</a></li>
+  <li>
+    <a href="examples/primary-secondary-buttons"
+      >examples/primary-secondary-buttons</a
+    >
+  </li>
+  <li><a href="examples/radio-buttons">examples/radio-buttons</a></li>
+  <li><a href="examples/subtle-tabs">examples/subtle-tabs</a></li>
+  <li><a href="examples/tertiary-buttons">examples/tertiary-buttons</a></li>
+</ul>
 
 <style lang="scss">
   h1 {
     font-size: calc(1.5 * var(--font-size-base));
+    margin-bottom: var(--s-rem-4);
   }
 
   h2 {
     font-size: calc(1.25 * var(--font-size-base));
     margin-top: var(--s-rem-6);
+    margin-bottom: var(--s-rem-2);
   }
 
   h3 {
     font-size: var(--font-size-base);
     margin-top: var(--s-rem-3);
-  }
-
-  h1,
-  h2,
-  h3 {
     margin-bottom: var(--s-rem-1);
   }
 
@@ -115,7 +134,20 @@
     margin-bottom: var(--s-rem-1);
   }
 
+  ul {
+    margin: var(--s-rem-2) 0 var(--s-rem-4) 0;
+
+    li + li {
+      margin-top: var(--s-rem-1);
+    }
+  }
+
+  .tables {
+    display: flex;
+  }
+
   .table-wrapper {
+    flex-grow: 1;
     max-width: 200px;
     margin: var(--s-px-4) auto;
     background-color: var(--c-ui-gray-100);
