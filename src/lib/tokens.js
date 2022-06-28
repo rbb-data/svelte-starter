@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Tue, 28 Jun 2022 15:09:57 GMT */
+/** Do not edit directly Generated on Tue, 28 Jun 2022 16:03:22 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -24,12 +24,12 @@ export const fontSizeXs = 0.75; // 12px
 export const fontSizeSm = 0.875; // 14px
 export const fontSizeBase = 1; // 16px
 export const fontSizeLg = 1.125; // 18px
-export const lineHeight3xs = '0.875rem'; // 14px
-export const lineHeight2xs = '1rem'; // 16px
-export const lineHeightXs = '1.125rem'; // 18px
-export const lineHeightSm = '1.25rem'; // 20px
-export const lineHeightLg = '1.375rem'; // 22px
-export const lineHeightXl = '1.5rem'; // 24px
+export const lineHeight3xs = 0.875; // 14px
+export const lineHeight2xs = 1; // 16px
+export const lineHeightXs = 1.125; // 18px
+export const lineHeightSm = 1.25; // 20px
+export const lineHeightLg = 1.375; // 22px
+export const lineHeightXl = 1.5; // 24px
 export const lineHeightNone = 1;
 export const lineHeightTight = 1.15;
 export const lineHeightSnug = 1.35;
