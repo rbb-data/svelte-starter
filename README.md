@@ -111,15 +111,14 @@ src
 
 Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-scenes frontend tooling that powers SvelteKit. See [Vite's documentation](https://vitejs.dev/guide/env-and-mode.html) for more information on how Vite treats environment variables. Environment variables prefixed with `VITE_` are exposed to client-side code.
 
-| Environment variable       | Description                                                            | Default                                             | File         | Sensitive? |
-| :------------------------- | :--------------------------------------------------------------------- | :-------------------------------------------------- | :----------- | :--------- |
-| `BASE_PATH`                | Specifies where the app is served from                                 | /my-cool-project                                    | `.env`       | no         |
-| `BUILD_DIR`                | The directory to write prerendered pages to                            | build                                               | `.env`       | no         |
-| `GOOGLE_CONNECT_EMAIL`     | Email address to share Google doc/sheet with                           | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env`       | no         |
-| `GOOGLE_DOC_ID`            | Id of the connected Google doc                                         | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`       | no         |
-| `GOOGLE_SHEET_ID`          | Id of the connected Google sheet                                       | 1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04        | `.env`       | no         |
-| `VITE_OPENROUTSERVICE_KEY` | Private key to access [openrouteservice](https://openrouteservice.org) |                                                     | `.env.local` | yes        |
-| `GOOGLE_CONNECT_KEY`       | Private key to access Google docs and sheets                           |                                                     | `.env.local` | yes        |
+| Environment variable   | Description                                  | Default                                             | File         | Sensitive? |
+| :--------------------- | :------------------------------------------- | :-------------------------------------------------- | :----------- | :--------- |
+| `BASE_PATH`            | Specifies where the app is served from       | /rbb-data-static/my-cool-project                    | `.env`       | no         |
+| `BUILD_DIR`            | The directory to write prerendered pages to  | build                                               | `.env`       | no         |
+| `GOOGLE_CONNECT_EMAIL` | Email address to share Google doc/sheet with | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env`       | no         |
+| `GOOGLE_DOC_ID`        | Id of the connected Google doc               | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`       | no         |
+| `GOOGLE_SHEET_ID`      | Id of the connected Google sheet             | 1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04        | `.env`       | no         |
+| `GOOGLE_CONNECT_KEY`   | Private key to access Google docs and sheets |                                                     | `.env.local` | yes        |
 
 Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
 
