@@ -61,6 +61,9 @@
    */
   export let getOptionGroup = () => 0;
 
+  /** if true, disables the input accessibly */
+  export let disabled = false;
+
   /** @type {number} */
   let focusedIndex;
 
@@ -108,6 +111,8 @@
 
   /** @param {KeyboardEvent} e */
   function handleKeyDown(e) {
+    if (disabled) return;
+
     if (e.key === 'Escape') {
       if (isOpen) isOpen = false;
       else {
@@ -151,8 +156,11 @@
     aria-controls={isOpen ? `${id}--listbox` : null}
     aria-expanded={isOpen}
     aria-autocomplete="none"
+    aria-disabled={disabled}
+    disabled={false}
     bind:this={selectElement}
     use:press={() => {
+      if (disabled) return;
       isOpen = !isOpen;
       if (isOpen) {
         tick().then(() => {
@@ -163,6 +171,7 @@
     }}
     use:typeahead={{
       handleInput: (input) => {
+        if (disabled) return;
         const option = options.find((o) =>
           formatOption(o).toLowerCase().startsWith(input)
         );
@@ -264,6 +273,17 @@
     &:focus-visible {
       @include focus(var(--c-ui-gray-500));
     }
+
+    &[aria-disabled='true'] {
+      color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(
+        235,
+        235,
+        235,
+        0.3
+      ); /* var(--c-ui-gray-100) with opacity 0.3 */
+      cursor: default;
+    }
   }
 
   ul {
@@ -314,6 +334,10 @@
       top: 50%;
       right: var(--icon-padding-right);
       transform: translateY(-50%);
+    }
+
+    .select[aria-disabled='true'] svg {
+      opacity: 0.3;
     }
 
     .select[aria-expanded='true'] svg {

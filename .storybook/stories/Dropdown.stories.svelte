@@ -155,6 +155,27 @@
   </div>
 </Story>
 
+<Story name="Disabled">
+  <div class="wrapper">
+    <Dropdown
+      id="my-unique-dropdown-id"
+      {options}
+      placeholder="Jahreszeiten"
+      disabled
+      bind:selectedOption
+      let:option
+    >
+      {option}
+    </Dropdown>
+    <div class="result">
+      Selected value:
+      {#if selectedOption}
+        <i>{selectedOption}</i>
+      {/if}
+    </div>
+  </div>
+</Story>
+
 <style>
   .wrapper {
     height: 250px;
