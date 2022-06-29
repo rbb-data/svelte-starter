@@ -246,6 +246,15 @@
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
 
+    :global(.select.focus-visible) {
+      @include focus(var(--c-ui-gray-500));
+    }
+
+    :global([role='listbox'] [role='option'].focus-visible) {
+      @include focus-inset(var(--c-ui-gray-500));
+      z-index: 1;
+    }
+
     :global(svg) {
       width: var(--icon-size);
       height: var(--icon-size);
@@ -266,10 +275,6 @@
     background-color: var(--c-ui-gray-100);
     cursor: pointer;
     position: relative;
-
-    &.focus-visible {
-      @include focus(var(--c-ui-gray-500));
-    }
 
     &[aria-expanded='true'] :global(svg) {
       transform: translateY(-50%) rotate(180deg);
@@ -308,11 +313,6 @@
       color: var(--c-ui-gray-400);
       cursor: pointer;
       position: relative;
-
-      &.focus-visible {
-        @include focus-inset(var(--c-ui-gray-500));
-        z-index: 1;
-      }
 
       &.selected {
         color: var(--c-ui-gray-500);

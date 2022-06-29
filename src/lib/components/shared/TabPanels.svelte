@@ -85,7 +85,7 @@
 {/each}
 
 <style lang="scss">
-  [role='tabpanel'].focus-visible {
+  [role='tabpanel'] :global(.focus-visible) {
     @include focus(var(--c-accent-focus));
   }
 </style>
