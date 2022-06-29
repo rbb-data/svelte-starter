@@ -268,6 +268,15 @@
     position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
+
+    :global(svg) {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      position: absolute;
+      top: 50%;
+      right: var(--icon-padding-right);
+      transform: translateY(-50%);
+    }
   }
 
   .select {
@@ -285,7 +294,12 @@
       @include focus(var(--c-ui-gray-500));
     }
 
+    &[aria-expanded='true'] :global(svg) {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
     &[aria-disabled='true'] {
+      cursor: default;
       color: rgba(0, 0, 0, 0.3);
       background-color: rgba(
         235,
@@ -293,7 +307,10 @@
         235,
         0.3
       ); /* var(--c-ui-gray-100) with opacity 0.3 */
-      cursor: default;
+
+      :global(svg) {
+        opacity: 0.3;
+      }
     }
   }
 
@@ -338,22 +355,5 @@
         left: calc(var(--padding-h) - var(--s-px-1));
       }
     }
-  }
-
-  .dropdown :global(svg) {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    position: absolute;
-    top: 50%;
-    right: var(--icon-padding-right);
-    transform: translateY(-50%);
-  }
-
-  .select[aria-disabled='true'] :global(svg) {
-    opacity: 0.3;
-  }
-
-  .select[aria-expanded='true'] :global(svg) {
-    transform: translateY(-50%) rotate(180deg);
   }
 </style>

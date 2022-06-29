@@ -19,15 +19,6 @@ export function px(n) {
 }
 
 /**
- * Formats a number in German format
- *
- * @param {number} n
- */
-export function toGermanString(n) {
-  return n.toLocaleString('de-DE');
-}
-
-/**
  * Capitalizes the first letter of a string
  *
  * @param {string} str

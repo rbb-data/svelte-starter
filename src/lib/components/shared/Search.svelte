@@ -267,6 +267,7 @@
 
 <style lang="scss">
   .search {
+    --c-background: #ffffff;
     --padding-v: var(--s-px-2);
     --padding-h: var(--s-px-4);
     --icon-size: 1.6em;
@@ -277,6 +278,15 @@
     position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
+
+    :global(svg) {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      position: absolute;
+      top: 50%;
+      right: var(--icon-padding);
+      transform: translateY(-50%);
+    }
   }
 
   .input-wrapper {
@@ -293,7 +303,7 @@
       height: calc(
         100% + 8px
       ); /* height plus focus ring on top and bottom (2*4px) */
-      background-color: #ffffff;
+      background-color: var(--c-background);
       z-index: 2;
       right: 0;
       transform: translate(100%, -4px);
@@ -350,6 +360,10 @@
     transform: skew(-10deg);
     transform-origin: bottom;
     background-color: var(--c-accent);
+
+    :global(svg) {
+      transform: translateY(-50%) skew(10deg);
+    }
   }
 
   ul {
@@ -383,18 +397,5 @@
         background-color: var(--c-ui-gray-100);
       }
     }
-  }
-
-  .search :global(svg) {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    position: absolute;
-    top: 50%;
-    right: var(--icon-padding);
-    transform: translateY(-50%);
-  }
-
-  button[type='submit'] :global(svg) {
-    transform: translateY(-50%) skew(10deg);
   }
 </style>

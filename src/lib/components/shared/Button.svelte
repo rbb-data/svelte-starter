@@ -169,6 +169,10 @@
         &.secondary {
           --border-color: var(--c-accent-transparent);
         }
+
+        :global(svg) {
+          animation: spin 1.5s linear infinite;
+        }
       }
 
       &.done {
@@ -220,25 +224,24 @@
           var(--icon-size) + var(--icon-padding)
         ); /* reserve space for the icon */
       }
+
+      :global {
+        svg {
+          width: var(--icon-size);
+          height: var(--icon-size);
+          left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
+
+          /* vertically align the icon */
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        svg path {
+          fill: var(--color);
+        }
+      }
     }
-  }
-  button.show-icon :global(svg) {
-    width: var(--icon-size);
-    height: var(--icon-size);
-    left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
-
-    /* vertically align the icon */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  button.show-icon :global(svg path) {
-    fill: var(--color);
-  }
-
-  button.processing :global(svg) {
-    animation: spin 1.5s linear infinite;
   }
 
   @keyframes spin {

@@ -168,97 +168,94 @@
 
 <style lang="scss">
   [role='tablist'] {
+    --c-background: #ffffff;
+
     width: 100%;
     display: flex;
 
-    [role='tab'] {
-      flex: 1;
-      font-size: var(--font-size-xs);
-      padding: var(--s-px-3) var(--s-px-4);
-      text-align: center;
-      white-space: nowrap;
-      cursor: pointer;
+    &:not(.slants) {
+      [role='tab'] + [role='tab'] {
+        margin-left: var(--s-px-1);
+      }
+    }
 
-      color: var(--c-ui-gray-400);
-      font-weight: var(--font-weight-semi-bold);
-      background-color: var(--c-light);
+    &.slants {
+      position: relative;
 
-      &.focus-visible {
-        @include focus(var(--c-focus));
+      /* can't use `overflow: hidden` here since that would cut off the focus ring;
+      instead, two pseudo elements are rendered above the overflowing content on both sides  */
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 12px; /* arbitrary value, depends on the degree of skewing */
+        height: calc(
+          100% + 8px
+        ); /* height plus focus ring on top and bottom (2*4px) */
+        background-color: var(--c-background);
+        z-index: 2;
       }
 
-      &.active {
-        font-weight: var(--font-weight-bold);
-        background-color: var(--c-accent);
-        color: #ffffff;
-        z-index: 1;
+      &::before {
+        left: 0;
+        transform: translate(-100%, -4px);
       }
 
-      &.disabled {
-        cursor: default;
-        background-color: var(--c-light-transparent);
-        color: rgba(
-          89,
-          89,
-          89,
-          0.3
-        ); /* var(--c-ui-gray-400) with 0.3 opacity */
+      &::after {
+        right: 0;
+        transform: translate(100%, -4px);
+      }
+
+      [role='tab'] {
+        transform: skew(-10deg);
+        transform-origin: center;
+
+        &:first-child {
+          transform-origin: top;
+        }
+
+        &:last-child {
+          transform-origin: bottom;
+        }
+
+        span {
+          /* unskew text content */
+          transform: skew(10deg);
+          display: inline-block;
+        }
       }
     }
   }
 
-  [role='tablist'].slants {
-    position: relative;
+  [role='tab'] {
+    flex: 1;
+    font-size: var(--font-size-xs);
+    padding: var(--s-px-3) var(--s-px-4);
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
 
-    /* can't use `overflow: hidden` here since that would cut off the focus ring;
-    instead, two pseudo elements are rendered above the overflowing content on both sides  */
+    color: var(--c-ui-gray-400);
+    font-weight: var(--font-weight-semi-bold);
+    background-color: var(--c-light);
 
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 12px; /* arbitrary value, depends on the degree of skewing */
-      height: calc(
-        100% + 8px
-      ); /* height plus focus ring on top and bottom (2*4px) */
-      background-color: #ffffff;
-      z-index: 2;
+    &.focus-visible {
+      @include focus(var(--c-focus));
     }
 
-    &::before {
-      left: 0;
-      transform: translate(-100%, -4px);
+    &.active {
+      font-weight: var(--font-weight-bold);
+      background-color: var(--c-accent);
+      color: #ffffff;
+      z-index: 1;
     }
 
-    &::after {
-      right: 0;
-      transform: translate(100%, -4px);
-    }
-
-    [role='tab'] {
-      transform: skew(-10deg);
-      transform-origin: center;
-
-      &:first-child {
-        transform-origin: top;
-      }
-
-      &:last-child {
-        transform-origin: bottom;
-      }
-
-      span {
-        /* unskew text content */
-        transform: skew(10deg);
-        display: inline-block;
-      }
-    }
-  }
-
-  [role='tablist']:not(.slants) {
-    [role='tab'] + [role='tab'] {
-      margin-left: var(--s-px-1);
+    &.disabled {
+      cursor: default;
+      background-color: var(--c-light-transparent);
+      color: rgba(89, 89, 89, 0.3); /* var(--c-ui-gray-400) with 0.3 opacity */
     }
   }
 </style>
