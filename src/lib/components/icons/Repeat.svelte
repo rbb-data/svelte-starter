@@ -1,0 +1,28 @@
+<script>
+  /** @type {string} */
+  export let title = undefined;
+
+  export let id = 'repeat-icon--title';
+
+  export let color = '#000000';
+</script>
+
+<svg
+  width="32"
+  height="32"
+  fill="none"
+  viewBox="0 0 32 32"
+  style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+  aria-labelledby={title && id}
+  aria-hidden={title === undefined}
+>
+  {#if title}
+    <title {id}>{title}</title>
+  {/if}
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M8.88 10.398c1.75-2.055 4.18-3.375 7.13-3.375 5.51 0 9.99 4.477 9.99 9.991 0 5.514-4.48 9.991-9.99 9.991s-9.99-4.477-9.99-9.991h-2c0 6.618 5.37 11.991 11.99 11.991S28 23.632 28 17.014c0-6.618-5.37-11.991-11.99-11.991-2.85 0-5.29.999-7.24 2.659l.76-3.454L7.57 3.8l-1.74 7.977 7.98 1.745.42-1.954-5.35-1.17Z"
+    fill={color}
+  />
+</svg>

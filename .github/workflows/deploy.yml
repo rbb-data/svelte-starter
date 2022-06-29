@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       deploy_to_main_path:
-        description: 'Deploy to main page (DANGER)'
+        description: 'Deploy for production (DANGER)'
         required: true
         default: false
         type: boolean
@@ -48,11 +48,11 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0
 
       - name: Deploy to main page
-        run: npm run deploy:gc-storage
+        run: npm run deploy
         if: ${{ github.event.inputs.deploy_to_main_path == 'true' }}
 
       - name: Deploy to experimental page
-        run: npm run deploy:gc-storage--experimental
+        run: npm run deploy--experimental
         if: ${{ github.event.inputs.deploy_to_main_path == 'false' }}
 
       - name: Import environment variables

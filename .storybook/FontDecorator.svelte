@@ -8,6 +8,6 @@
 
 <style>
   div {
-    font-family: Interstate;
+    font-family: 'Interstate', sans-serif;
   }
 </style>

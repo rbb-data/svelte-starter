@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# this script is meant to run once after having cloned the repository
+# this script is meant to run on setup in templated projects
 
 # print every executed line and abort when one fails
 set -ex
@@ -11,7 +11,6 @@ cd $(dirname $0)/..
 # remove documentation
 rm -rf .storybook/
 rm -f .github/workflows/storybook.yml
-find src -name '*.stories.*' -type f -delete
 node scripts/remove-storybook.js
 
 # substitute '{project-name}' with the current folder name

@@ -1,33 +1,32 @@
 {
   "name": "@rbb-data/svelte-starter",
-  "version": "0.1.5",
+  "version": "0.0.1",
+  "private": "true",
   "type": "module",
   "license": "MIT",
   "scripts": {
     "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "deploy": "npm run build && scripts/deploy-to-gc.sh {project-name}",
+    "deploy--experimental": "BASE_PATH=/rbb-data-static/{project-name}-experimental npm run build && scripts/deploy-to-gc.sh {project-name}-experimental",
+    "update:gd": "node scripts/update-google-doc.js --preserve-styles && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/data/google-doc.json",
+    "update:gs": "node scripts/update-google-sheets.js",
+    "update:tokens": "node style-dictionary/build.cjs && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/**/tokens.{css,scss,js}",
+    "update:all": "npm run update:gd; npm run update:gs; npm run update:tokens",
+    "docs": "start-storybook --docs -p 6006 -s ./static --no-open",
+    "docs:build": "build-storybook --docs -o docs-build -s ./static",
+    "docs:deploy": "scripts/deploy-docs.sh",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "build": "svelte-kit build",
-    "build:gc-storage": "BASE_PATH=/rbb-data-static/{project-name} npm run build",
-    "build:rbb-online": "BASE_PATH=/static/rbb/rbb-data/{project-name} BUILD_DIR={project-name} npm run build",
-    "predeploy:dj1": "npm run build",
-    "predeploy:gc-storage": "npm run build:gc-storage",
-    "deploy:dj1": "rsync -srvP --rsync-path='sudo rsync' -e 'ssh -i ~/.ssh/rbb-data.pem' build/ linux@rbb-dj-dev.app.rbb-cloud.de:/var/www/{project-name}/",
-    "deploy:gc-storage": "scripts/deploy-to-gc-storage.sh {project-name}",
-    "deploy:gc-storage--experimental": "BASE_PATH=/rbb-data-static/{project-name}-experimental npm run build && scripts/deploy-to-gc-storage.sh {project-name}-experimental",
-    "update:all": "npm run update:google-doc; npm run update:google-sheets; npm run update:tokens",
-    "update:google-doc": "node scripts/update-google-doc.js --preserve-styles && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/data/google-doc.json",
-    "update:google-sheets": "node scripts/update-google-sheets.js",
-    "update:tokens": "node style-dictionary/build.cjs && npx prettier --ignore-path .gitignore --write --plugin-search-dir=. ./src/**/tokens.{css,scss,js}",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook -o docs-build",
-    "storybook:deploy": "scripts/deploy-storybook.sh"
+    "check": "svelte-check --tsconfig ./jsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "dependencies": {
     "d3-array": "^3.1.1",
     "d3-scale": "^4.0.2",
+    "d3-shape": "^3.1.0",
+    "focus-visible": "^5.2.0",
     "fuzzysort": "^1.1.4",
-    "leaflet": "^1.7.1",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
@@ -46,8 +45,7 @@
     "@types/d3-array": "^3.0.2",
     "@types/d3-dsv": "^3.0.0",
     "@types/d3-scale": "^4.0.2",
-    "@types/geojson": "^7946.0.8",
-    "@types/leaflet": "^1.7.6",
+    "@types/d3-shape": "^3.1.0",
     "@types/sanitize-html": "^2.5.0",
     "archieml": "^0.4.2",
     "autoprefixer": "^10.4.4",
@@ -67,11 +65,11 @@
     "sass": "^1.49.11",
     "style-dictionary": "^3.0.3",
     "svelte": "^3.48.0",
+    "svelte-check": "^2.8.0",
     "svelte-loader": "^3.1.3",
     "svelte-preprocess": "^4.10.5",
     "svelte2tsx": "^0.4.10",
-    "typescript": "^4.5.2",
-    "yaml": "^1.10.2"
+    "typescript": "^4.5.2"
   },
   "overrides": {
     "node-forge": "^1.0.0"

@@ -14,16 +14,30 @@ and https://www.joshwcomeau.com/css/custom-css-reset/ */
 
   &::before,
   &::after {
-    box-sizing: border-box;
+    box-sizing: inherit;
 
     @media (prefers-reduced-motion: reduce) {
       @include use-reduced-motion;
     }
   }
 
-  &:focus-visible {
+  &:focus {
+    outline: none;
     @include focus;
   }
+
+  /* only show focus ring when appropriate */
+  &:focus:not(.focus-visible) {
+    box-shadow: none;
+  }
+
+  &.focus-visible {
+    @include focus;
+  }
+}
+
+html {
+  box-sizing: border-box;
 }
 
 body {
@@ -43,33 +57,22 @@ select {
 .reset {
   all: unset;
   box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    @include focus;
+  }
+
+  &:focus:not(.focus-visible) {
+    box-shadow: none;
+  }
+
+  &.focus-visible {
+    @include focus;
+  }
 }
 
 /* content is _visually_ hidden but still accessible to screen readers */
 .visually-hidden:not(:focus):not(:active) {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-}
-
-.slant {
-  clip-path: polygon(
-    var(--slant) 0,
-    100% 0,
-    calc(100% - var(--slant)) 100%,
-    0 100%
-  );
-
-  &:first-of-type {
-    clip-path: polygon(0 0, 100% 0, calc(100% - var(--slant)) 100%, 0 100%);
-  }
-
-  &:last-of-type {
-    clip-path: polygon(var(--slant) 0, 100% 0, 100% 100%, 0 100%);
-  }
+  @include visually-hidden;
 }

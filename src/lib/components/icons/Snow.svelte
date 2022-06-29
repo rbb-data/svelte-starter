@@ -1,0 +1,28 @@
+<script>
+  /** @type {string} */
+  export let title = undefined;
+
+  export let id = 'snow-icon--title';
+
+  export let color = '#000000';
+</script>
+
+<svg
+  width="32"
+  height="32"
+  fill="none"
+  viewBox="0 0 32 32"
+  style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"
+  aria-labelledby={title && id}
+  aria-hidden={title === undefined}
+>
+  {#if title}
+    <title {id}>{title}</title>
+  {/if}
+  <path
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="m15 11.343-.66.657h-.93L11 9.586V5H9v2.586L6.81 5.393 5.39 6.808 7.59 9H5v2l4.59-.001L12 13.414v.929l-.66.657H7.41l-2.7-2.707-1.42 1.414L4.59 15H2v2h2.59l-1.3 1.293 1.42 1.414L7.41 17h3.93l.66.657v.929l-2.41 2.415L5 21v2h2.59l-2.2 2.192 1.42 1.415L9 24.414V27h2v-4.586L13.41 20h.93l.66.649v3.937l-2.71 2.707 1.42 1.414L15 27.414V30h2v-2.587l1.31 1.315 1.42-1.414L17 24.587v-3.93l.66-.657h.93L21 22.415V27h2v-2.586l2.19 2.193 1.42-1.415L24.41 23H27v-2h-4.59L20 18.586v-.929l.66-.657h3.93l2.72 2.728 1.42-1.414L27.41 17H30v-2h-2.59l1.32-1.314-1.42-1.414L24.59 15h-3.93l-.66-.657v-.929L22.41 11H27V9h-2.59l2.2-2.192-1.42-1.415L23 7.586V5h-2v4.585L18.59 12h-.93l-.66-.657v-3.93l2.71-2.706-1.42-1.414L17 4.587V2h-2v2.586c-.62-.618-1.29-1.293-1.29-1.293l-1.42 1.414L15 7.414v3.929Z"
+    fill={color}
+  />
+</svg>

@@ -12,6 +12,8 @@
   </head>
   <body>
     <div id="svelte">%sveltekit.body%</div>
+    <!-- polyfill for :focus-visible pseudo class -->
+    <script src="/node_modules/focus-visible/dist/focus-visible.min.js"></script>
     <!-- iframe resizer script that notifies a parent window of changes to the body's height -->
     <script src="https://storage.googleapis.com/rbb-data-static/lib/iframe-resizer/iframe-resizer.notify.min.js"></script>
   </body>

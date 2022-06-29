@@ -1,11 +1,16 @@
 #!/usr/bin/env node
 
+/**
+ * This script loads and parses content from a Google sheet. The parsed data
+ * tables are then written to `src/data/google-sheet-*.csv`.
+ */
+
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { csvFormat } from 'd3-dsv';
 
-import { loadGoogleSheet } from './_loadFromGoogle.js';
+import { loadGoogleSheet } from './_load-from-google.js';
 
 async function main() {
   // read sheet id from environment
