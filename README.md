@@ -34,10 +34,6 @@ Your app is then available at http://localhost:3000/. Edit `src/routes/index.sve
 
 > **Note**
 >
-> rbb|24's Interstate font files are not checked into version control but can be downloaded from our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647). Store the downloaded files under `.static/fonts/`.
-
-> **Note**
->
 > SvelteKit requires `node>=14.13`. If you get an error message on `npm install` that an "engine is unsupported", update your node version and try again.
 
 ### Alternatively, do it the old school way
