@@ -103,9 +103,9 @@
   <li><a href="examples/colored-tabs">examples/colored-tabs</a></li>
   <li><a href="examples/custom-buttons">examples/custom-buttons</a></li>
   <li>
-    <a href="examples/primary-secondary-buttons"
-      >examples/primary-secondary-buttons</a
-    >
+    <a href="examples/primary-secondary-buttons">
+      examples/primary-secondary-buttons
+    </a>
   </li>
   <li><a href="examples/radio-buttons">examples/radio-buttons</a></li>
   <li><a href="examples/subtle-tabs">examples/subtle-tabs</a></li>

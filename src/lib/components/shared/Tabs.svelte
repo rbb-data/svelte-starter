@@ -14,6 +14,11 @@
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
+   * **Note:** Slants make the tabs overflow but `overflow:hidden` can't be used
+   * as that would cut off the focus ring. Instead, pseudo elements are rendered
+   * that hide the overflowing content. Their color defaults to white but can be
+   * overwritten by setting the CSS variable `--c-background`.
+   *
    * @component
    */
 

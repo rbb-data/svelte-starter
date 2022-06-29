@@ -18,6 +18,11 @@
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
+   * **Note:** The slant makes the search button overflow but `overflow:hidden`
+   * can't be used as that would cut off the focus ring. Instead, a pseudo
+   * element is rendered that hides the overflowing content. Its color defaults
+   * to white but can be overwritten by setting the CSS variable `--c-background`.
+   *
    * @component
    */
 
