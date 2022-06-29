@@ -13,12 +13,12 @@
    * - `div.search form div.input-wrapper button[type="submit"]`
    * - `div.search ul[role="listbox"]`: assigned the id `{id}--listbox`, inferred
    *   from the given id
-   * - `div.search ul[role="listbox"] li[role="option"]`: with classes `.focused`
-   *   and `.selected` applied appropriately
+   * - `div.search ul[role="listbox"] li[role="option"]`: with classes `.focused`,
+   *   `.highlighted` and `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
-   * **Note:** The slant makes the search button overflow but `overflow:hidden`
+   * **Note:** The slant makes the search button overflow but `overflow: hidden`
    * can't be used as that would cut off the focus ring. Instead, a pseudo
    * element is rendered that hides the overflowing content. Its color defaults
    * to white but can be overwritten by setting the CSS variable `--c-background`.
@@ -104,6 +104,9 @@
   /** @type {number} */
   let focusedIndex;
 
+  /** @type {number} */
+  let highlightedIndex;
+
   /** @type {HTMLElement[]} */
   let suggestionElements = [];
 
@@ -133,6 +136,8 @@
   $: if (!isOpen) focusedIndex = undefined;
   $: if (!inputValue) discardSuggestions();
 
+  $: highlightedIndex = focusedIndex;
+
   // focus selected option briefly to make sure it is scrolled into view
   $: if (focusedIndex !== undefined && suggestionElements[focusedIndex]) {
     const element = suggestionElements[focusedIndex];
@@ -148,8 +153,7 @@
   }
 
   function submit() {
-    selectedSuggestion = suggestions[focusedIndex];
-    // TODO: don't trigger search after this
+    selectedSuggestion = suggestions[highlightedIndex];
     inputValue = formatSuggestion(selectedSuggestion);
     tick().then(discardSuggestions);
   }
@@ -157,7 +161,7 @@
   /** @param {Event} e */
   function handleSubmit(e) {
     e.preventDefault();
-    if (focusedIndex === undefined) return;
+    if (highlightedIndex === undefined) return;
     submit();
   }
 
@@ -233,6 +237,11 @@
           : null}
         bind:this={inputElement}
         bind:value={inputValue}
+        on:input={() => {
+          let selectedIndex = suggestions.indexOf(selectedSuggestion);
+          if (selectedIndex < 0) selectedIndex = undefined;
+          highlightedIndex = selectedIndex || focusedIndex || 0;
+        }}
         {...$$restProps}
       />
 
@@ -245,12 +254,14 @@
   {#if isOpen}
     <ul id="{id}--listbox" role="listbox" aria-orientation="vertical">
       {#each suggestions as suggestion, i}
-        {@const selected = selectedSuggestion === suggestion}
         {@const focused = focusedIndex === i}
+        {@const highlighted = highlightedIndex === i}
+        {@const selected = selectedSuggestion === suggestion}
         <li
           id="{id}--option-{i}"
           role="option"
           class:focused
+          class:highlighted
           class:selected
           aria-selected={selected}
           bind:this={suggestionElements[i]}
@@ -259,6 +270,11 @@
             submit();
             inputElement.focus();
           }}
+          on:mouseenter={() => (highlightedIndex = i)}
+          on:mouseleave={() => (highlightedIndex = undefined)}
+          on:touchstart={() => (highlightedIndex = i)}
+          on:touchend={() => (highlightedIndex = undefined)}
+          on:touchcancel={() => (highlightedIndex = undefined)}
         >
           <slot {suggestion} {selected} />
           {#if selected}
@@ -365,6 +381,7 @@
     transform: skew(-10deg);
     transform-origin: bottom;
     background-color: var(--c-accent);
+    cursor: pointer;
 
     :global(svg) {
       transform: translateY(-50%) skew(10deg);
@@ -395,10 +412,10 @@
       }
 
       &.selected {
-        font-weight: var(--font-weight-bold);
+        color: var(--c-ui-gray-500);
       }
 
-      &:hover {
+      &.highlighted {
         background-color: var(--c-ui-gray-100);
       }
     }

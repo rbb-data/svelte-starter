@@ -338,7 +338,7 @@
       }
 
       &.selected {
-        font-weight: var(--font-weight-bold);
+        color: var(--c-ui-gray-500);
       }
 
       &:hover {
