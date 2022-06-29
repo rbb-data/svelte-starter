@@ -183,7 +183,7 @@
       font-weight: var(--font-weight-semi-bold);
       background-color: var(--c-light);
 
-      &:focus-visible {
+      &.focus-visible {
         @include focus(var(--c-focus));
       }
 

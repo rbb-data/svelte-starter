@@ -304,8 +304,9 @@
     width: 100%;
     padding: var(--padding-v) var(--padding-h);
     background-color: var(--c-ui-gray-100);
+    font-size: var(--font-size-base);
 
-    &:focus-visible {
+    &.focus-visible {
       @include focus(var(--c-accent));
     }
 
@@ -313,6 +314,7 @@
       color: var(--c-ui-gray-400);
       opacity: 1;
       font-style: italic;
+      font-size: var(--font-size-sm);
     }
 
     /* hide clear button in Chrome */
@@ -373,7 +375,10 @@
         z-index: 1;
       }
 
-      &.selected,
+      &.selected {
+        font-weight: var(--font-weight-bold);
+      }
+
       &:hover {
         background-color: var(--c-ui-gray-100);
       }

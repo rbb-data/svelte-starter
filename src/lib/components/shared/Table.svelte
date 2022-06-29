@@ -74,6 +74,7 @@
 
   thead tr {
     border-bottom: 2px solid var(--c-ui-gray-500);
+    vertical-align: bottom;
     position: sticky;
     top: 0;
 

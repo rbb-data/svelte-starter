@@ -21,18 +21,17 @@ and https://www.joshwcomeau.com/css/custom-css-reset/ */
     }
   }
 
-  /* fallback for browsers that don't support :focus-visible */
   &:focus {
     outline: none;
     @include focus;
   }
 
-  /* only show focus rung when appropriate */
-  &:focus:not(:focus-visible) {
+  /* only show focus ring when appropriate */
+  &:focus:not(.focus-visible) {
     box-shadow: none;
   }
 
-  &:focus-visible {
+  &.focus-visible {
     @include focus;
   }
 }
@@ -64,11 +63,11 @@ select {
     @include focus;
   }
 
-  &:focus:not(:focus-visible) {
+  &:focus:not(.focus-visible) {
     box-shadow: none;
   }
 
-  &:focus-visible {
+  &.focus-visible {
     @include focus;
   }
 }

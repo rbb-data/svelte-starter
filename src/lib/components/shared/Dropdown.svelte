@@ -281,7 +281,7 @@
     cursor: pointer;
     position: relative;
 
-    &:focus-visible {
+    &.focus-visible {
       @include focus(var(--c-ui-gray-500));
     }
 
@@ -315,12 +315,15 @@
       cursor: pointer;
       position: relative;
 
-      &:focus-visible {
+      &.focus-visible {
         @include focus-inset(var(--c-ui-gray-500));
         z-index: 1;
       }
 
-      &.selected,
+      &.selected {
+        font-weight: var(--font-weight-bold);
+      }
+
       &:hover {
         background-color: var(--c-ui-gray-100);
       }

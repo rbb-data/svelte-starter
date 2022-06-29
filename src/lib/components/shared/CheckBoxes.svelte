@@ -118,17 +118,7 @@
         bind:group={selectedValues}
         on:focus={(e) => {
           const node = e.currentTarget;
-          // @ts-ignore
-          const matches = node.matches || node.matchesSelector;
-
-          // some browsers throw a SyntaxError if an invalid
-          // (or unsupported) pseudo-selector is used
-          try {
-            if (matches.call(node, ':focus-visible')) {
-              focusedValue = v;
-            }
-          } catch (error) {
-            // if :focus-visibile is not supported, focus in any case
+          if (node.classList.contains('focus-visible')) {
             focusedValue = v;
           }
         }}
@@ -178,6 +168,7 @@
 
   input[type='checkbox'] {
     appearance: none;
+    border-radius: 0;
     width: 1.2em;
     height: 1.2em;
     background-color: transparent;
