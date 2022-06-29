@@ -10,13 +10,6 @@
     { label: 'Herbst', value: 'autumn' },
     { label: 'Winter', value: 'winter' },
   ];
-  const groupedOptions = [
-    'Frühling',
-    'Sommer',
-    'Herbst',
-    'Winter',
-    'Alle Jahreszeiten',
-  ];
 
   /** @type {string[]} */
   let selectedOption;
