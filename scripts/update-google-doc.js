@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/**
+ * This script loads and parses content from a Google doc. ArchieML-parsed
+ * content is then written to `src/data/google-doc.json`.
+ */
+
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';

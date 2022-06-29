@@ -1,5 +1,4 @@
-// exports helper functions to load and parse content from Google docs and sheets
-//
+// helper functions to load and parse content from Google docs and sheets
 // adapted from https://github.com/rdmurphy/doc-to-archieml (MIT licensed)
 
 import { google } from 'googleapis';

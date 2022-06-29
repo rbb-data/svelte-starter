@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# this script deploys the build to Google Cloud Storage
+# this script deploys the build to Google Cloud Storage.
+# it is meant to run after `npm run build`
 
-# print every executed line
 set -x
 
 # make sure to run from project root

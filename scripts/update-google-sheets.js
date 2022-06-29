@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+/**
+ * This script loads and parses content from a Google sheet. The parsed data
+ * tables are then written to `src/data/google-sheet-*.csv`.
+ */
+
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';

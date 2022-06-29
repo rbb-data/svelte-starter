@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# deploy docs to GitHub pages
+# deploy documentation site to GitHub pages
 
 set -ex
 

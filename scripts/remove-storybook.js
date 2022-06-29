@@ -1,5 +1,11 @@
 #!/usr/bin/env node
 
+/**
+ * Remove storybook-related content from `package.json`. Removed are
+ * storybook-related npm scripts and dependencies. This is usually run on setup
+ * to remove documentation from templated projects.
+ */
+
 import fs from 'fs';
 import path from 'path';
 
