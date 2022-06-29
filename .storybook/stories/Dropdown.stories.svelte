@@ -44,11 +44,6 @@
         defaultValue: { summary: '(option) => option' },
       },
     },
-    getOptionGroup: {
-      table: {
-        defaultValue: { summary: '() => 0' },
-      },
-    },
   }}
 />
 
@@ -129,27 +124,6 @@
       Selected value:
       {#if selectedOption}
         <pre>{JSON.stringify(selectedOption, null, 2)}</pre>
-      {/if}
-    </div>
-  </div>
-</Story>
-
-<Story name="Grouped options">
-  <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
-      options={groupedOptions}
-      placeholder="Jahreszeiten"
-      getOptionGroup={(option) => (option === 'Alle Jahreszeiten' ? 1 : 0)}
-      bind:selectedOption
-      let:option
-    >
-      {option}
-    </Dropdown>
-    <div class="result">
-      Selected value:
-      {#if selectedOption}
-        <i>{selectedOption}</i>
       {/if}
     </div>
   </div>

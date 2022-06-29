@@ -1,6 +1,6 @@
 <script>
   /**
-   * Dropdown menu to select a single value. Optionally, available options can be grouped.
+   * Dropdown menu to select a single value
    *
    * The rendered markup is composed of:
    *
@@ -8,8 +8,8 @@
    * - `div.dropdown button[role="combobox"]`
    * - `div.dropdown ul[role="listbox"]`: assigned the id `{id}--listbox`,
    *   inferred from the given id
-   * - `div.dropdown ul[role="listbox"] li[role="option"]`: with classes
-   *   `.selected` and `.separator` applied appropriately
+   * - `div.dropdown ul[role="listbox"] li[role="option"]`: with class `.selected`
+   *   applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -17,7 +17,6 @@
    */
 
   import { tick } from 'svelte';
-  import { ascending } from 'd3-array';
 
   import DropdownIcon from '$icons/Dropdown.svelte';
   import CheckIcon from '$icons/Check.svelte';
@@ -65,13 +64,6 @@
    */
   export let formatOption = (option) => option;
 
-  /**
-   * function that maps an option to its group; groups are visually separated
-   *
-   * @type {(option: any) => number}
-   */
-  export let getOptionGroup = () => 0;
-
   /** if true, disables the input accessibly */
   export let disabled = false;
 
@@ -83,20 +75,6 @@
 
   /** @type {HTMLElement[]} */
   let optionElements = [];
-
-  // sort options according to their groups
-  $: sortedOptions = options
-    .slice()
-    .sort((a, b) => ascending(getOptionGroup(a), getOptionGroup(b)));
-
-  /** @type {(option: any) => boolean} */
-  $: isFirstInGroup = (option) => {
-    const index = sortedOptions.indexOf(option);
-    if (index <= 0) return false;
-
-    const previousOption = sortedOptions[index - 1];
-    return getOptionGroup(previousOption) !== getOptionGroup(option);
-  };
 
   $: focusedIndex = selectedOption
     ? options.indexOf(selectedOption)
@@ -221,7 +199,6 @@
           role="option"
           aria-selected={selected}
           class:selected
-          class:separator={isFirstInGroup(option)}
           tabindex={selected || (!selectedOption && i === 0) ? 0 : -1}
           bind:this={optionElements[i]}
           use:press={() => selectOption(option)}
@@ -343,16 +320,6 @@
 
       &:hover {
         background-color: var(--c-ui-gray-100);
-      }
-
-      &.separator::before {
-        content: '';
-        width: calc(100% - 2 * var(--padding-h) + 2 * var(--s-px-1));
-        height: 1px;
-        background-color: var(--c-ui-gray-400);
-        position: absolute;
-        top: 0;
-        left: calc(var(--padding-h) - var(--s-px-1));
       }
     }
   }
