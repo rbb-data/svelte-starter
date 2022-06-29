@@ -186,7 +186,11 @@
     }
 
     &:checked::before {
-      content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 32 32' style='fill:white;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2'%0A%3E%3Cpath d='M7.199 20.599 13.489 29h1.182L24.923 4.384l-1.847-.768-9.326 22.395-4.95-6.61-1.601 1.198Z' /%3E%3C/svg%3E%0A");
+      content: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' style='fill:white;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2'%3E%3Cpath style='fill:none' d='M0 0h32v32H0z'/%3E%3Cpath d='M14.078 18.772 9.6 12.8l-3.2 2.4L13 24h2.133l10.461-13.791-3.187-2.417-8.329 10.98Z'/%3E%3C/svg%3E");
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translate(0.5px, 1.5px);
     }
   }
 </style>
