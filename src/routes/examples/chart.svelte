@@ -54,13 +54,19 @@
   const summer = [6, 9];
 
   /** @type {import('d3-shape').Line<typeof data[0]>} */
+  // @ts-ignore not sure why this doesn't work
   $: lineRain = d3line()
+    // @ts-ignore
     .x((d) => x(d.month))
+    // @ts-ignore
     .y((d) => y(d.rain));
 
   /** @type {import('d3-shape').Line<typeof data[0]>} */
+  // @ts-ignore not sure why this doesn't work
   $: lineRainAvg = d3line()
+    // @ts-ignore
     .x((d) => x(d.month))
+    // @ts-ignore
     .y((d) => y(d.rainAvg));
 
   const annotationOffset = [-tokens.sPx6, tokens.sPx6];

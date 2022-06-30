@@ -13,8 +13,8 @@
   import ErrorCloseIcon from '$icons/ErrorClose.svelte';
   import ProcessingIcon from '$icons/Processing.svelte';
 
-  import { capitalize, computeTransparentColor } from '$lib/utils';
-  import * as colors from '$lib/tokens';
+  import { cAccentId, computeTransparentColor } from '$lib/utils';
+  import * as tokens from '$lib/tokens';
 
   /** @type {'primary' | 'secondary' | 'tertiary'} */
   export let type = 'primary';
@@ -22,14 +22,14 @@
   /**
    * maps to a pre-defined color
    *
-   * @type {'blue' | 'black' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {import('$lib/types').AccentColor}
    */
   export let accentColor = 'blue';
 
   /**
    * if given, overwrites `accentColor`
    *
-   * @type {string}
+   * @type {string | undefined}
    */
   export let customColor = undefined;
 
@@ -39,7 +39,7 @@
   /**
    * optionally shows feedback after an interaction; only applicable to disabled buttons
    *
-   * @type {'processing' | 'done' | 'success' | 'error'}
+   * @type {'processing' | 'done' | 'success' | 'error' | undefined}
    */
   export let feedback = undefined;
 
@@ -67,8 +67,8 @@
     showFeedbackIcon && 'show-icon',
   ].filter((c) => c);
 
-  // @ts-ignore
-  $: color = customColor || colors['cUiAccent' + capitalize(accentColor)];
+  $: color =
+    customColor || /** @type {string} */ (tokens[cAccentId(accentColor)]);
   $: colorTransparent = computeTransparentColor(color);
 </script>
 

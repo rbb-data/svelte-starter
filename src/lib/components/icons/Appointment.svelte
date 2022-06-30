@@ -1,5 +1,5 @@
 <script>
-  /** @type {string} */
+  /** @type {string | undefined} */
   export let title = undefined;
 
   export let id = 'appointment-icon-title';

@@ -13,8 +13,8 @@
 
   import { onMount } from 'svelte';
 
-  import * as colors from '$lib/tokens';
-  import { capitalize } from '$lib/utils';
+  import * as tokens from '$lib/tokens';
+  import { cAccentId } from '$lib/utils';
 
   /**
    * globally unique id, must match the id of the associated Tabs element
@@ -40,7 +40,7 @@
   /**
    * sets CSS variable `--c-focus` to a pre-defined color
    *
-   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
    */
   export let colorScheme = 'blue';
 
@@ -51,13 +51,15 @@
    */
   export let customColors = {};
 
-  /** @type {(entry: string | ((tab: any) => string), tab: any) => string} */
-  const getColor = (entry, tab) => {
-    // @ts-ignore
-    if (!entry) return colors['cUiAccent' + capitalize(colorScheme)];
+  /**
+   * @param {string | ((tab: any) => string) | undefined} entry
+   * @param {any} tab
+   */
+  function getColor(entry, tab) {
+    if (!entry) return tokens[cAccentId(colorScheme)];
     if (typeof entry === 'string') return entry;
     if (typeof entry === 'function') return entry(tab);
-  };
+  }
 
   onMount(() => {
     if (!document.getElementById(id)) {

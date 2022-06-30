@@ -24,7 +24,12 @@
 
   import press from '$lib/actions/press';
   import * as colors from '$lib/tokens';
-  import { capitalize, computeTransparentColor } from '$lib/utils';
+  import {
+    cAccentId,
+    computeTransparentColor,
+    getIndexBefore,
+    getIndexAfter,
+  } from '$lib/utils';
 
   /**
    * globally unique id, must match the id of the associated TabPanels element
@@ -53,7 +58,7 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
-   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
    */
   export let colorScheme = 'blue';
 
@@ -75,20 +80,17 @@
    */
   export let isTabDisabled = () => false;
 
-  /** @param {string | ((tab: any) => string)} entry */
+  /** @param {string | ((tab: any) => string) | undefined} entry */
   const getColor = (entry) => typeof entry === 'string' && entry;
 
   /**
-   * @param {string | ((tab: any) => string)} entry
+   * @param {string | ((tab: any) => string) | undefined} entry
    * @param {any} tab
    */
   const getTabColor = (entry, tab) =>
     (typeof entry === 'function' && entry(tab)) || null;
 
-  $: color =
-    getColor(customColors.accent) ||
-    // @ts-ignore
-    colors['cUiAccent' + capitalize(colorScheme)];
+  $: color = getColor(customColors.accent) || colors[cAccentId(colorScheme)];
   $: colorLight = getColor(customColors.light) || colors.cUiGray100;
   $: colorFocus = getColor(customColors.focus) || color;
 
@@ -109,9 +111,9 @@
         case 'End':
           return tabs.length - 1;
         case 'ArrowLeft':
-          return focusedIndex - 1 >= 0 ? focusedIndex - 1 : tabs.length - 1;
+          return getIndexBefore(focusedIndex, tabs.length, { circular: true });
         case 'ArrowRight':
-          return focusedIndex + 1 < tabs.length ? focusedIndex + 1 : 0;
+          return getIndexAfter(focusedIndex, tabs.length, { circular: true });
       }
     };
 
@@ -150,7 +152,7 @@
       style:--c-light={getTabColor(customColors.light, tab)}
       style:--c-focus={getTabColor(customColors.focus, tab)}
       style:--c-light-transparent={computeTransparentColor(
-        getTabColor(customColors.light, tab)
+        getTabColor(customColors.light, tab) || ''
       )}
       bind:this={buttons[i]}
       on:focus={() => {

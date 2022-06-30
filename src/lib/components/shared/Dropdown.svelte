@@ -23,7 +23,7 @@
 
   import press from '$actions/press';
   import typeahead from '$actions/typeahead';
-  import { getNextIndexInList } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from '$lib/utils';
 
   /**
    * globally unique id
@@ -67,7 +67,7 @@
   /** if true, disables the input accessibly */
   export let disabled = false;
 
-  /** @type {number} */
+  /** @type {number | undefined} */
   let focusedIndex;
 
   /** @type {HTMLElement} */
@@ -112,6 +112,7 @@
     }
 
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
       isOpen = true;
 
       tick().then(() => {
@@ -203,23 +204,30 @@
           bind:this={optionElements[i]}
           use:press={() => selectOption(option)}
           on:keydown|preventDefault={(e) => {
-            if (e.key === 'Escape') {
-              closePopup();
+            switch (e.key) {
+              case 'Escape':
+                closePopup();
+                return;
+              case 'Enter':
+              case 'Spacebar':
+              case ' ':
+                selectOption(option);
+                return;
+              case 'Home':
+                focusedIndex = 0;
+                return;
+              case 'End':
+                focusedIndex = options.length - 1;
+            }
+
+            if (focusedIndex === undefined) {
+              focusedIndex = 0;
               return;
             }
 
-            if (e.key === 'Enter' || e.key === 'Spacebar' || e.key === ' ') {
-              selectOption(option);
-              return;
-            }
-
-            if (['Home', 'End', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-              focusedIndex = getNextIndexInList(
-                /** @type {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} */ (e.key),
-                focusedIndex,
-                options.length
-              );
-            }
+            const getNextIndex =
+              e.key === 'ArrowUp' ? getIndexBefore : getIndexAfter;
+            focusedIndex = getNextIndex(focusedIndex, options.length);
           }}
         >
           <slot {option} {selected} />

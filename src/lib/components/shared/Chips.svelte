@@ -17,8 +17,8 @@
 
   import CheckBoxes from './CheckBoxes.svelte';
 
-  import * as colors from '$lib/tokens';
-  import { capitalize } from '$lib/utils';
+  import * as tokens from '$lib/tokens';
+  import { c300Id, cAccentId } from '$lib/utils';
 
   /**
    * globally unique id
@@ -46,7 +46,7 @@
    *
    * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
    *
-   * @type {string}
+   * @type {string | undefined}
    */
   export let label = undefined;
 
@@ -56,7 +56,7 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
-   * @type {'blue' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
    */
   export let colorScheme = 'blue';
 
@@ -81,11 +81,11 @@
    */
   export let isOptionDisabled = () => false;
 
-  // @ts-ignore
-  const color = customColors.accent || colors[`c${capitalize(colorScheme)}300`];
+  const color =
+    customColors.accent || /** @type {string} */ (tokens[c300Id(colorScheme)]);
   const colorFocus =
-    // @ts-ignore
-    customColors.focus || colors['cUiAccent' + capitalize(colorScheme)];
+    customColors.focus ||
+    /** @type {string} */ (tokens[cAccentId(colorScheme)]);
 </script>
 
 <CheckBoxes
@@ -96,7 +96,11 @@
   {label}
   {hideLabelVisually}
   {colorScheme}
-  customColors={{ accent: color, light: customColors.light, focus: colorFocus }}
+  customColors={{
+    accent: color,
+    light: customColors.light,
+    focus: colorFocus,
+  }}
   {getOptionValue}
   {isOptionDisabled}
   let:option

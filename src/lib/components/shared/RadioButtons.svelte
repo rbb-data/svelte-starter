@@ -15,8 +15,8 @@
    * @component
    */
 
-  import * as colors from '$lib/tokens';
-  import { capitalize } from '$lib/utils';
+  import * as tokens from '$lib/tokens';
+  import { cAccentId, c100Id } from '$lib/utils';
 
   /**
    * globally unique id
@@ -44,7 +44,7 @@
    *
    * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
    *
-   * @type {string}
+   * @type {string | undefined}
    */
   export let label = undefined;
 
@@ -54,7 +54,7 @@
   /**
    * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
    *
-   * @type {'blue' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
    */
   export let colorScheme = 'blue';
 
@@ -79,12 +79,8 @@
    */
   export let isOptionDisabled = () => false;
 
-  $: color =
-    // @ts-ignore
-    customColors.accent || colors['cUiAccent' + capitalize(colorScheme)];
-  $: colorLight =
-    // @ts-ignore
-    customColors.light || colors[`c${capitalize(colorScheme)}100`];
+  $: color = customColors.accent || tokens[cAccentId(colorScheme)];
+  $: colorLight = customColors.light || tokens[c100Id(colorScheme)];
   $: colorFocus = customColors.focus || color;
 
   /** @type {any} */
