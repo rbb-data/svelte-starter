@@ -43,14 +43,14 @@
   /**
    * start bezier handle coordinates; if given, `startHandleOffset` is ignored
    *
-   * @type {number[]}
+   * @type {number[] | undefined}
    */
   export let startHandle = undefined;
 
   /**
    * end bezier handle coordinates; if given, `endHandleOffset` is ignored
    *
-   * @type {number[]}
+   * @type {number[] | undefined}
    */
   export let endHandle = undefined;
 
@@ -64,7 +64,7 @@
   /**
    * length of the arrow head
    *
-   * @type {number}
+   * @type {number | undefined}
    */
   export let headLength = undefined;
 

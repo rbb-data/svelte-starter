@@ -83,15 +83,47 @@ export const computeTransparentColor = (colorHex, opacity = 0.3) => {
  * @param {{ key?: string; limit?: number }} options
  */
 export function fuzzysearch(query, data, { key, limit = 5 } = {}) {
+  // @ts-ignore
   const results = fuzzysort.go(query, data, { key, limit });
 
   const suggestions = [];
   for (let i = 0; i < results.length; i++) {
     const result = results[i];
+    // @ts-ignore
     suggestions.push(key ? result.obj : result.target);
   }
 
   return suggestions;
+}
+
+/**
+ * @param {import('$lib/types').AccentColor} accentColor
+ * @returns {import('$lib/types').TokenKey}
+ */
+export function cAccentId(accentColor) {
+  return /** @type {import('$lib/types').TokenKey} */ (
+    'cUiAccent' + capitalize(accentColor)
+  );
+}
+
+/**
+ * @param {Exclude<import('$lib/types').AccentColor, 'black'>} accentColor
+ * @returns {import('$lib/types').TokenKey}
+ */
+export function c100Id(accentColor) {
+  return /** @type {import('$lib/types').TokenKey} */ (
+    `c${capitalize(accentColor)}100`
+  );
+}
+
+/**
+ * @param {Exclude<import('$lib/types').AccentColor, 'black'>} accentColor
+ * @returns {import('$lib/types').TokenKey}
+ */
+export function c300Id(accentColor) {
+  return /** @type {import('$lib/types').TokenKey} */ (
+    `c${capitalize(accentColor)}300`
+  );
 }
 
 /**
@@ -153,22 +185,21 @@ const hex2rgba = (hex) => {
 };
 
 /**
- * Helper to navigate through list items using arrow keys
- *
- * @typedef {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} Key
- * @param {Key} key
  * @param {number} index
  * @param {number} length
+ * @param {{ circular?: boolean }} options
  */
-export function getNextIndexInList(key, index, length) {
-  switch (key) {
-    case 'Home':
-      return 0;
-    case 'End':
-      return length - 1;
-    case 'ArrowUp':
-      return index - 1 >= 0 ? index - 1 : index;
-    case 'ArrowDown':
-      return index + 1 < length ? index + 1 : index;
-  }
+export function getIndexBefore(index, length, { circular = false } = {}) {
+  const fallback = circular ? length - 1 : index;
+  return index - 1 >= 0 ? index - 1 : fallback;
+}
+
+/**
+ * @param {number} index
+ * @param {number} length
+ * @param {{ circular?: boolean }} options
+ */
+export function getIndexAfter(index, length, { circular = false } = {}) {
+  const fallback = circular ? 0 : index;
+  return index + 1 < length ? index + 1 : fallback;
 }

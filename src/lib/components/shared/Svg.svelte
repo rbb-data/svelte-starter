@@ -34,14 +34,14 @@
   /**
    * width of the canvas (the svg's width minus margins)
    *
-   * @type {number}
+   * @type {number | undefined}
    */
   export let boundedWidth = undefined;
 
   /**
    * height of the canvas (the svg's height minus margins)
    *
-   * @type {number}
+   * @type {number | undefined}
    */
   export let boundedHeight = undefined;
 

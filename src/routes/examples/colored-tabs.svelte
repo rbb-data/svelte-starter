@@ -26,6 +26,7 @@
       case 'Tab 3':
         return cUiAccentYellow;
     }
+    return cUiAccentBlue;
   }
 
   /** @param {typeof tabs[0]} tab */
@@ -38,6 +39,7 @@
       case 'Tab 3':
         return cYellow100;
     }
+    return cBlue100;
   }
 </script>
 

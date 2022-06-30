@@ -23,7 +23,7 @@
 
   import press from '$actions/press';
   import typeahead from '$actions/typeahead';
-  import { getNextIndexInList } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from '$lib/utils';
 
   /**
    * globally unique id
@@ -67,7 +67,7 @@
   /** if true, disables the input accessibly */
   export let disabled = false;
 
-  /** @type {number} */
+  /** @type {number | undefined} */
   let focusedIndex;
 
   /** @type {HTMLElement} */
@@ -112,6 +112,7 @@
     }
 
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
       isOpen = true;
 
       tick().then(() => {
@@ -203,23 +204,30 @@
           bind:this={optionElements[i]}
           use:press={() => selectOption(option)}
           on:keydown|preventDefault={(e) => {
-            if (e.key === 'Escape') {
-              closePopup();
+            switch (e.key) {
+              case 'Escape':
+                closePopup();
+                return;
+              case 'Enter':
+              case 'Spacebar':
+              case ' ':
+                selectOption(option);
+                return;
+              case 'Home':
+                focusedIndex = 0;
+                return;
+              case 'End':
+                focusedIndex = options.length - 1;
+            }
+
+            if (focusedIndex === undefined) {
+              focusedIndex = 0;
               return;
             }
 
-            if (e.key === 'Enter' || e.key === 'Spacebar' || e.key === ' ') {
-              selectOption(option);
-              return;
-            }
-
-            if (['Home', 'End', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-              focusedIndex = getNextIndexInList(
-                /** @type {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} */ (e.key),
-                focusedIndex,
-                options.length
-              );
-            }
+            const getNextIndex =
+              e.key === 'ArrowUp' ? getIndexBefore : getIndexAfter;
+            focusedIndex = getNextIndex(focusedIndex, options.length);
           }}
         >
           <slot {option} {selected} />
@@ -246,6 +254,15 @@
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
 
+    :global(.select.focus-visible) {
+      @include focus(var(--c-ui-gray-500));
+    }
+
+    :global([role='listbox'] [role='option'].focus-visible) {
+      @include focus-inset(var(--c-ui-gray-500));
+      z-index: 1;
+    }
+
     :global(svg) {
       width: var(--icon-size);
       height: var(--icon-size);
@@ -266,10 +283,6 @@
     background-color: var(--c-ui-gray-100);
     cursor: pointer;
     position: relative;
-
-    &.focus-visible {
-      @include focus(var(--c-ui-gray-500));
-    }
 
     &[aria-expanded='true'] :global(svg) {
       transform: translateY(-50%) rotate(180deg);
@@ -308,11 +321,6 @@
       color: var(--c-ui-gray-400);
       cursor: pointer;
       position: relative;
-
-      &.focus-visible {
-        @include focus-inset(var(--c-ui-gray-500));
-        z-index: 1;
-      }
 
       &.selected {
         color: var(--c-ui-gray-500);

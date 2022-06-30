@@ -32,8 +32,8 @@
   import SearchIcon from '$icons/Search.svelte';
 
   import press from '$actions/press';
-  import * as colors from '$lib/tokens';
-  import { capitalize, getNextIndexInList } from '$lib/utils';
+  import * as tokens from '$lib/tokens';
+  import { cAccentId, getIndexBefore, getIndexAfter } from '$lib/utils';
 
   /**
    * globally unique id
@@ -54,7 +54,7 @@
   /**
    * shown in the input field if empty
    *
-   * @type {string}
+   * @type {string | undefined}
    */
   export let placeholder = undefined;
 
@@ -79,7 +79,7 @@
   /**
    * accent color used for the button and the focus ring
    *
-   * @type {'blue' | 'beige' | 'turquoise' | 'purple' | 'yellow' | 'red'}
+   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
    */
   export let accentColor = 'blue';
 
@@ -88,7 +88,7 @@
    *
    * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
    *
-   * @type {string}
+   * @type {string | undefined}
    */
   export let label = undefined;
 
@@ -101,17 +101,16 @@
   /** @type {string} */
   let inputValue;
 
-  /** @type {number} */
+  /** @type {number | undefined} */
   let focusedIndex;
 
-  /** @type {number} */
+  /** @type {number | undefined} */
   let highlightedIndex;
 
   /** @type {HTMLElement[]} */
   let suggestionElements = [];
 
-  // @ts-ignore
-  $: color = colors['cUiAccent' + capitalize(accentColor)];
+  $: color = tokens[cAccentId(accentColor)];
 
   /** @type {any[]} */
   let suggestions = [];
@@ -153,6 +152,7 @@
   }
 
   function submit() {
+    if (highlightedIndex === undefined) return;
     selectedSuggestion = suggestions[highlightedIndex];
     inputValue = formatSuggestion(selectedSuggestion);
     tick().then(discardSuggestions);
@@ -160,8 +160,6 @@
 
   /** @param {Event} e */
   function handleSubmit(e) {
-    e.preventDefault();
-    if (highlightedIndex === undefined) return;
     submit();
   }
 
@@ -192,11 +190,8 @@
         focusedIndex = selectedSuggestion ? selectedIndex : undefined;
       }
     } else {
-      focusedIndex = getNextIndexInList(
-        /** @type {'Home' | 'End' | 'ArrowUp' | 'ArrowDown'} */ (e.key),
-        focusedIndex,
-        suggestions.length
-      );
+      const getNextIndex = e.key === 'ArrowUp' ? getIndexBefore : getIndexAfter;
+      focusedIndex = getNextIndex(focusedIndex, suggestions.length);
     }
   }
 </script>
@@ -214,7 +209,7 @@
 />
 
 <div {id} class="search" style:--c-accent={color}>
-  <form on:submit={handleSubmit} on:keydown={handleKeyDown}>
+  <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
     {#if label}
       <label for="{id}--input" class:visually-hidden={hideLabelVisually}>
         {label}
@@ -238,6 +233,7 @@
         bind:this={inputElement}
         bind:value={inputValue}
         on:input={() => {
+          /** @type {number | undefined} */
           let selectedIndex = suggestions.indexOf(selectedSuggestion);
           if (selectedIndex < 0) selectedIndex = undefined;
           highlightedIndex = selectedIndex || focusedIndex || 0;
