@@ -26,8 +26,10 @@ jobs:
           rm -rf .storybook/
           rm -f .github/workflows/storybook.yml
           node scripts/remove-storybook.js
+          node scripts/remove-sections-from-readme.js
 
-          sed -i 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html
+          sed -i 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html README.md
+          sed -i '' '1s/.*/# '"$(basename $(pwd))"'/' README.md
 
       - name: Commit and push
         run: |-
