@@ -17,15 +17,15 @@ This template serves as a starting point to create data visualizations with [Sve
 To create a new project, click the `Use this template` button above. You can then clone into your new project by running
 
 ```bash
-git clone https://github.com/rbb-data/my-cool-project.git
+git clone https://github.com/rbb-data/{project-name}.git
 ```
 
-assuming you named your repo `my-cool-project`.
+where `{project-name}` is the name of the repo you created.
 
 Install the app and start the development server:
 
 ```bash
-cd my-cool-project
+cd {project-name}
 npm install
 npm run dev
 ```
@@ -41,7 +41,7 @@ Your app is then available at http://localhost:3000/. Edit `src/routes/index.sve
 If you don't want to automatically link a GitHub repo, you can instead run
 
 ```bash
-npx degit rbb-data/svelte-starter my-cool-project
+npx degit rbb-data/svelte-starter {project-name}
 ```
 
 and obtain a local copy of the repo.
@@ -49,7 +49,7 @@ and obtain a local copy of the repo.
 Then, run the setup script manually:
 
 ```bash
-cd my-cool-project
+cd {project-name}
 scripts/setup.sh
 ```
 
@@ -77,11 +77,11 @@ By default, some formatting is preserved when loading the doc, including: bold, 
 
 ## Build and deploy
 
-Run `npm run deploy` to deploy to https://storage.googleapis.com/rbb-data-static/my-cool-project/index.html
+Run `npm run deploy` to deploy to https://storage.googleapis.com/rbb-data-static/{project-name}/index.html
 
 ### Using GitHub actions
 
-[This GitHub action](https://github.com/rbb-data/svelte-starter/actions/workflows/deploy.yml) deploys the app to the Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/my-cool-project-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy for production (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/my-cool-project/index.html instead.
+[This GitHub action](https://github.com/rbb-data/svelte-starter/actions/workflows/deploy.yml) deploys the app to the Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/{project-name}-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy for production (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/{project-name}/index.html instead.
 
 > **Note**
 >
@@ -109,7 +109,7 @@ Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-
 
 | Environment variable   | Description                                  | Default                                             | File         | Sensitive? |
 | :--------------------- | :------------------------------------------- | :-------------------------------------------------- | :----------- | :--------- |
-| `BASE_PATH`            | Specifies where the app is served from       | /rbb-data-static/my-cool-project                    | `.env`       | no         |
+| `BASE_PATH`            | Specifies where the app is served from       | /rbb-data-static/{project-name}                     | `.env`       | no         |
 | `BUILD_DIR`            | The directory to write prerendered pages to  | build                                               | `.env`       | no         |
 | `GOOGLE_CONNECT_EMAIL` | Email address to share Google doc/sheet with | connect@rbb-data-api-access.iam.gserviceaccount.com | `.env`       | no         |
 | `GOOGLE_DOC_ID`        | Id of the connected Google doc               | 1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A        | `.env`       | no         |
@@ -134,11 +134,11 @@ Builds the app as a collection of static files into `./build`. Base path and bui
 
 Builds the app for production and uploads the files to the Google Cloud Storage `rbb-data-static`. You'll need Google Cloud's command line tools `gcloud` and `gsutil` installed and configured (for installation instructions, see https://cloud.google.com/sdk/docs/install).
 
-The deployed file will be available at https://storage.googleapis.com/rbb-data-static/my-cool-project/index.html (assuming you named your project `my-cool-project`).
+The deployed file will be available at https://storage.googleapis.com/rbb-data-static/{project-name}/index.html.
 
 ### `npm run deploy--experimental`
 
-Same as `npm run deploy` but deploys to https://storage.googleapis.com/rbb-data-static/my-cool-project-experimental/index.html (note the `-experimental` suffix).
+Same as `npm run deploy` but deploys to https://storage.googleapis.com/rbb-data-static/{project-name}-experimental/index.html (note the `-experimental` suffix).
 
 ### `npm run update:gdoc`
 
