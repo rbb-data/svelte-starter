@@ -60,7 +60,7 @@ scripts/setup.sh
 - Create a Google doc
 - Grant read access to _connect@rbb-data-api-access.iam.gserviceaccount.com_
 - Grab the doc's id from its url and set `GOOGLE_DOC_ID` in `.env`
-- Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
+- Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](#environment-variables))
 - Run `npm run update:gdoc` (will parse Google doc content as [ArchieML](http://archieml.org) and write structured data to `src/data/google-doc.json`)
 - Import data from `src/data/google-doc.json`
 
@@ -71,7 +71,7 @@ By default, some formatting is preserved when loading the doc, including: bold, 
 - Create a Google sheet
 - Grant read access to _connect@rbb-data-api-access.iam.gserviceaccount.com_
 - Grab the sheet's id from its url and set `GOOGLE_SHEET_ID` in `.env`
-- Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](https://github.com/rbb-data/svelte-starter#environment-variables))
+- Add credentials by setting `GOOGLE_CONNECT_KEY` in `.env.local` (see [Environment variables](#environment-variables))
 - Run `npm run update:gsheet` (will parse the spreadsheet and write to `src/data/google-sheets-{sheet-name}.csv`, one file is generated for every sheet in the given spreadsheet)
 - Import data from `src/data/google-sheets-{sheet-name}.csv`
 
@@ -81,7 +81,7 @@ Run `npm run deploy` to deploy to https://storage.googleapis.com/rbb-data-static
 
 ### Using GitHub actions
 
-[This GitHub action](https://github.com/rbb-data/svelte-starter/actions/workflows/deploy.yml) deploys the app to the Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/{project-name}-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy for production (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/{project-name}/index.html instead.
+[This GitHub action](https://github.com/rbb-data/{project-name}/actions/workflows/deploy.yml) deploys the app to the Google Cloud Storage. Clicking on "Run workflow" will trigger the action. By default, the app is deployed to a test page, https://storage.googleapis.com/rbb-data-static/{project-name}-experimenal/index.html (note the `-experimental` suffix). If you're sure what you're doing, tick "Deploy for production (DANGER)" to deploy to https://storage.googleapis.com/rbb-data-static/{project-name}/index.html instead.
 
 > **Note**
 >
@@ -142,15 +142,15 @@ Same as `npm run deploy` but deploys to https://storage.googleapis.com/rbb-data-
 
 ### `npm run update:gdoc`
 
-Reads the connected Google doc and writes to `src/data/google-doc.json`, see [Connect to Google doc](https://github.com/rbb-data/svelte-starter#connect-to-google-doc).
+Reads the connected Google doc and writes to `src/data/google-doc.json`, see [Connect to Google doc](#connect-to-google-doc).
 
 ### `npm run update:gsheet`
 
-Reads the connected Google sheet and writes to `src/data/google-sheet-*.csv`, see [Connect to Google sheet](https://github.com/rbb-data/svelte-starter#connect-to-google-sheet).
+Reads the connected Google sheet and writes to `src/data/google-sheet-*.csv`, see [Connect to Google sheet](#connect-to-google-sheet).
 
 ### `npm run update:tokens`
 
-Builds design tokens into CSS, SCSS and javascript files, see [Design tokens](https://github.com/rbb-data/svelte-starter#design-tokens).
+Builds design tokens into CSS, SCSS and javascript files, see [Design tokens](#design-tokens).
 
 ### `npm run update:all`
 
