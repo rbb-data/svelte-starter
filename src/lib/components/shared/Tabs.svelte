@@ -26,7 +26,7 @@
   import * as colors from '$lib/tokens';
   import {
     cAccentId,
-    computeTransparentColor,
+    makeTransparent,
     getIndexBefore,
     getIndexAfter,
   } from '$lib/utils';
@@ -131,7 +131,7 @@
   style:--c-accent={color}
   style:--c-light={colorLight}
   style:--c-focus={colorFocus}
-  style:--c-light-transparent={computeTransparentColor(colorLight)}
+  style:--c-light-transparent={makeTransparent(colorLight)}
   class:slants
   {...$$restProps}
 >
@@ -151,7 +151,7 @@
       style:--c-accent={getTabColor(customColors.accent, tab)}
       style:--c-light={getTabColor(customColors.light, tab)}
       style:--c-focus={getTabColor(customColors.focus, tab)}
-      style:--c-light-transparent={computeTransparentColor(
+      style:--c-light-transparent={makeTransparent(
         getTabColor(customColors.light, tab) || ''
       )}
       bind:this={buttons[i]}
