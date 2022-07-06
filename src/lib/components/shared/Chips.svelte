@@ -88,7 +88,7 @@
   $: colorFocus = tokens[cAccentId(colorScheme)];
 </script>
 
-<div class="chips">
+<div class="chips" {...$$restProps}>
   <CheckBoxes
     aria-orientation="horizontal"
     {id}
@@ -103,7 +103,6 @@
     let:option
     let:checked
     bind:selectedValues
-    {...$$restProps}
   >
     <slot {option} {checked} />
   </CheckBoxes>

@@ -25,12 +25,12 @@
     label="Wähle deine Kriterien:"
     options={criterions}
     colorScheme="turquoise"
-    customColors={{ light: cUiGray100 }}
+    style="--c-light: {cUiGray100}"
     bind:selectedValues={selectedCriterions}
     let:option
     let:checked
   >
-    <div class="check-box" class:checked>
+    <div class="chip" class:checked>
       {#if checked}
         <CheckIcon />
       {/if}
@@ -44,7 +44,7 @@
 </div>
 
 <style lang="scss">
-  .check-box {
+  .chip {
     --icon-size: 1.6em;
     --icon-padding: var(--s-px-1);
 

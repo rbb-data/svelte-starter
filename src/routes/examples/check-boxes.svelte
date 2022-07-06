@@ -21,7 +21,7 @@
   {options}
   getOptionValue={(option) => option.value}
   colorScheme="purple"
-  customColors={{ light: 'transparent' }}
+  --c-light="transparent"
   {isOptionDisabled}
   let:option
   bind:selectedValues={selectedComponents}
