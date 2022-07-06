@@ -4,11 +4,18 @@
    *
    * The rendered markup is composed of:
    *
-   * - `fieldset`: assigned the given id
-   * - `fieldset legend`
-   * - `fieldset label`: with classes `.focused`, `.checked` and `.disabled`
-   *   applied appropriately
-   * - `fieldset label input[type="checkbox"]`
+   * - `.check-boxes`: assigned the given id
+   * - `.check-boxes .label`: only rendered if prop `label` is given
+   * - `.check-boxes .check-box`: with classes `.focused`, `.checked` and
+   *   `.disabled` applied appropriately
+   * - `.check-boxes .check-box input[type="checkbox"]`
+   * - `.check-boxes .check-box <slot />`
+   *
+   * CSS variables:
+   *
+   * - `--c-accent`: used for selected check boxes
+   * - `--c-light`: used as background color
+   * - `--c-focus`: used for the focus ring
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -59,13 +66,6 @@
   export let colorScheme = 'blue';
 
   /**
-   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
-   *
-   * @type {{ accent?: string; light?: string; focus?: string }}
-   */
-  export let customColors = {};
-
-  /**
    * function that maps an option to its value
    *
    * @type {(option: any) => any}
@@ -79,24 +79,21 @@
    */
   export let isOptionDisabled = () => false;
 
-  $: color = customColors.accent || tokens[cAccentId(colorScheme)];
-  $: colorLight = customColors.light || tokens[c100Id(colorScheme)];
-  $: colorFocus = customColors.focus || color;
-
   /** @type {any} */
   let focusedValue = null;
 </script>
 
 <fieldset
   {id}
+  class:check-boxes={true}
   aria-orientation="vertical"
-  style:--c-accent={color}
-  style:--c-light={colorLight}
-  style:--c-focus={colorFocus}
+  style:--c-accent-default={tokens[cAccentId(colorScheme)] || null}
+  style:--c-light-default={tokens[c100Id(colorScheme)] || null}
+  style:--c-focus-default={tokens[cAccentId(colorScheme)] || null}
   {...$$restProps}
 >
   {#if label}
-    <legend class:visually-hidden={hideLabelVisually}>
+    <legend class="label" class:visually-hidden={hideLabelVisually}>
       {label}
     </legend>
   {/if}
@@ -105,7 +102,7 @@
     {@const checked = selectedValues.includes(v)}
     {@const disabled = isOptionDisabled(option)}
     {@const focused = v === focusedValue}
-    <label class:focused class:checked class:disabled>
+    <label class="check-box" class:focused class:checked class:disabled>
       <input
         type="checkbox"
         name={id}
@@ -126,24 +123,31 @@
 </fieldset>
 
 <style lang="scss">
-  fieldset {
+  .check-boxes {
+    --_c-accent: var(
+      --c-accent,
+      var(--c-accent-default, var(--c-ui-accent-blue))
+    );
+    --_c-light: var(--c-light, var(--c-light-default, var(--c-blue-100)));
+    --_c-focus: var(--c-focus, var(--c-focus-default, var(--c-ui-accent-blue)));
+
     width: 100%;
     border: 0;
     margin: 0;
     padding: 0;
   }
 
-  legend {
+  .label {
     font-weight: var(--font-weight-semi-bold);
     font-size: var(--font-size-sm);
     margin-bottom: var(--s-px-2);
   }
 
-  label {
+  .check-box {
     display: block;
     cursor: pointer;
     padding: var(--s-px-2);
-    background-color: var(--c-light);
+    background-color: var(--_c-light);
     margin: var(--s-px-2) 0;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semi-bold);
@@ -153,7 +157,7 @@
     align-items: center;
 
     &.focused {
-      @include focus(var(--c-focus));
+      @include focus(var(--_c-focus));
     }
 
     &.disabled {
@@ -177,8 +181,8 @@
     }
 
     &:checked {
-      background-color: var(--c-accent);
-      border: 1px solid var(--c-accent);
+      background-color: var(--_c-accent);
+      border: 1px solid var(--_c-accent);
     }
 
     &:checked::before {

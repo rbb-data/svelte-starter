@@ -2,6 +2,7 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import RadioButtons from '$comps/shared/RadioButtons.svelte';
+  import { cUiAccentYellow, cBeige100, cUiAccentPurple } from '$lib/tokens';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -137,12 +138,52 @@
   </div>
 </Story>
 
-<Story name="Custom accent color">
+<Story name="Custom color scheme">
   <RadioButtons
     id="my-radio-buttons"
     {options}
     colorScheme="yellow"
     label="Wähle eine Region"
+    let:option
+    bind:selectedValue
+  >
+    {option}
+  </RadioButtons>
+  <div class="result">
+    Selected value:
+    {#if selectedValue}
+      <i>{selectedValue}</i>
+    {/if}
+  </div>
+</Story>
+
+<Story name="Custom accent color">
+  <RadioButtons
+    id="my-radio-buttons"
+    {options}
+    label="Wähle eine Region"
+    --c-accent={cUiAccentYellow}
+    let:option
+    bind:selectedValue
+  >
+    {option}
+  </RadioButtons>
+  <div class="result">
+    Selected value:
+    {#if selectedValue}
+      <i>{selectedValue}</i>
+    {/if}
+  </div>
+</Story>
+
+<Story name="Customise all colors">
+  <RadioButtons
+    id="my-radio-buttons"
+    {options}
+    label="Wähle eine Region"
+    --c-accent={cUiAccentYellow}
+    --c-light={cBeige100}
+    --c-focus={cUiAccentPurple}
     let:option
     bind:selectedValue
   >

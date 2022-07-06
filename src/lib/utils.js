@@ -19,6 +19,19 @@ export function px(n) {
 }
 
 /**
+ * Construct a string of css variable definitions for use in a `style` tag
+ *
+ * @param {Record<string, string>} vars
+ */
+export function cssVars(vars) {
+  let s = '';
+  for (var key in vars) {
+    s += `${key}: ${vars[key]}; `;
+  }
+  return s;
+}
+
+/**
  * Capitalizes the first letter of a string
  *
  * @param {string} str

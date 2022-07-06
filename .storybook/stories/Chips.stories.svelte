@@ -2,6 +2,8 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import Chips from '$comps/shared/Chips.svelte';
+  import { cUiAccentYellow, cBeige100, cUiAccentPurple } from '$lib/tokens';
+  import { cssVars } from '$lib/utils';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -142,12 +144,54 @@
   </div>
 </Story>
 
-<Story name="Custom accent color">
+<Story name="Custom color scheme">
   <Chips
     id="my-chips"
     {options}
     colorScheme="purple"
     label="Wähle eine oder mehrere Regionen:"
+    let:option
+    bind:selectedValues
+  >
+    {option}
+  </Chips>
+  <div class="result">
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
+    {/if}
+  </div>
+</Story>
+
+<Story name="Custom accent color">
+  <Chips
+    id="my-chips"
+    {options}
+    label="Wähle eine oder mehrere Regionen:"
+    style="--c-accent: {cUiAccentYellow}"
+    let:option
+    bind:selectedValues
+  >
+    {option}
+  </Chips>
+  <div class="result">
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
+    {/if}
+  </div>
+</Story>
+
+<Story name="Customise all colors">
+  <Chips
+    id="my-chips"
+    {options}
+    label="Wähle eine oder mehrere Regionen:"
+    style={cssVars({
+      '--c-accent': cUiAccentYellow,
+      '--c-light': cBeige100,
+      '--c-focus': cUiAccentPurple,
+    })}
     let:option
     bind:selectedValues
   >

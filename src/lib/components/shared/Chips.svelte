@@ -4,11 +4,21 @@
    *
    * The rendered markup is composed of:
    *
-   * - `fieldset`: assigned the given id
-   * - `fieldset legend`
-   * - `fieldset label`: with classes `.focused`, `.checked` and `.disabled`
-   *   applied appropriately
-   * - `fieldset label input[type="checkbox"]`
+   * - `.chips .check-boxes`: assigned the given id
+   * - `.chips .check-boxes .label`: only rendered if prop `label` is given
+   * - `.chips .check-boxes .check-box`: with classes `.focused`, `.checked` and
+   *   `.disabled` applied appropriately
+   * - `.chips .check-boxes .check-box input[type="checkbox"]`
+   * - `.chips .check-boxes .check-box <slot />`
+   *
+   * CSS variables:
+   *
+   * - `--c-accent`: used for selected chips
+   * - `--c-light`: used as background color
+   * - `--c-focus`: used for the focus ring
+   *
+   * **Note:**: The exposed CSS variables can only be passed through the `style`
+   * tag. Passing these CSS variables as `--props` has no effect.
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -61,13 +71,6 @@
   export let colorScheme = 'blue';
 
   /**
-   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
-   *
-   * @type {{ accent?: string; light?: string; focus?: string }}
-   */
-  export let customColors = {};
-
-  /**
    * function that maps an option to its value
    *
    * @type {(option: any) => any}
@@ -81,58 +84,52 @@
    */
   export let isOptionDisabled = () => false;
 
-  const color =
-    customColors.accent || /** @type {string} */ (tokens[c300Id(colorScheme)]);
-  const colorFocus =
-    customColors.focus ||
-    /** @type {string} */ (tokens[cAccentId(colorScheme)]);
+  $: color = tokens[c300Id(colorScheme)];
+  $: colorFocus = tokens[cAccentId(colorScheme)];
 </script>
 
-<CheckBoxes
-  class="chips"
-  aria-orientation="horizontal"
-  {id}
-  {options}
-  {label}
-  {hideLabelVisually}
-  {colorScheme}
-  customColors={{
-    accent: color,
-    light: customColors.light,
-    focus: colorFocus,
-  }}
-  {getOptionValue}
-  {isOptionDisabled}
-  let:option
-  let:checked
-  bind:selectedValues
->
-  <slot {option} {checked} />
-</CheckBoxes>
+<div class="chips">
+  <CheckBoxes
+    aria-orientation="horizontal"
+    {id}
+    {options}
+    {label}
+    {hideLabelVisually}
+    {colorScheme}
+    {getOptionValue}
+    {isOptionDisabled}
+    --c-accent={color}
+    --c-focus={colorFocus}
+    let:option
+    let:checked
+    bind:selectedValues
+    {...$$restProps}
+  >
+    <slot {option} {checked} />
+  </CheckBoxes>
+</div>
 
 <style lang="scss">
-  :global {
-    fieldset.chips {
-      input[type='checkbox'] {
-        @include visually-hidden;
+  .chips :global {
+    .check-boxes input[type='checkbox'] {
+      @include visually-hidden;
+    }
+
+    .check-box {
+      display: inline-block;
+      width: max-content;
+      border-radius: 15px;
+      padding: var(--s-px-2) var(--s-px-4);
+      color: var(--c-ui-gray-400);
+      margin: var(--s-px-2) var(--s-px-2) 0 0;
+
+      &:last-of-type {
+        margin-right: 0;
       }
 
-      label {
-        display: inline-block;
-        width: max-content;
-        border-radius: 15px;
-        padding: var(--s-px-2) var(--s-px-4);
-        color: var(--c-ui-gray-400);
-        margin: var(--s-px-2) var(--s-px-2) 0 0;
-
-        &:last-of-type {
-          margin-right: 0;
-        }
-
-        &.checked {
-          background-color: var(--c-accent);
-          color: var(--c-ui-gray-500);
-        }
+      &.checked {
+        background-color: var(--c-accent);
+        color: var(--c-ui-gray-500);
       }
     }
   }

@@ -2,6 +2,7 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import CheckBoxes from '$comps/shared/CheckBoxes.svelte';
+  import { cUiAccentYellow, cBeige100, cUiAccentPurple } from '$lib/tokens';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [
@@ -142,12 +143,52 @@
   </div>
 </Story>
 
-<Story name="Custom accent color">
+<Story name="Custom color scheme">
   <CheckBoxes
     id="my-check-boxes"
     {options}
     colorScheme="yellow"
     label="Wähle eine oder mehrere Regionen:"
+    let:option
+    bind:selectedValues
+  >
+    {option}
+  </CheckBoxes>
+  <div class="result">
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
+    {/if}
+  </div>
+</Story>
+
+<Story name="Custom accent color">
+  <CheckBoxes
+    id="my-check-boxes"
+    {options}
+    label="Wähle eine oder mehrere Regionen:"
+    --c-accent={cUiAccentYellow}
+    let:option
+    bind:selectedValues
+  >
+    {option}
+  </CheckBoxes>
+  <div class="result">
+    Selected values:
+    {#if selectedValues.length > 0}
+      <i>{selectedValues}</i>
+    {/if}
+  </div>
+</Story>
+
+<Story name="Customise all colors">
+  <CheckBoxes
+    id="my-check-boxes"
+    {options}
+    label="Wähle eine oder mehrere Regionen:"
+    --c-accent={cUiAccentYellow}
+    --c-light={cBeige100}
+    --c-focus={cUiAccentPurple}
     let:option
     bind:selectedValues
   >
