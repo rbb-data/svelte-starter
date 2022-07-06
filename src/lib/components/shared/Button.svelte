@@ -9,10 +9,6 @@
 
   import { createEventDispatcher } from 'svelte';
 
-  import CheckIcon from '$icons/Check.svelte';
-  import ErrorCloseIcon from '$icons/ErrorClose.svelte';
-  import ProcessingIcon from '$icons/Processing.svelte';
-
   import { cAccentId, computeTransparentColor } from '$lib/utils';
   import * as tokens from '$lib/tokens';
 
@@ -43,12 +39,6 @@
    */
   export let feedback = undefined;
 
-  /**
-   * if true, shows feedback without rendering a default icon for
-   * `processing`/`success`/`error`
-   */
-  export let hideFeedbackIcon = false;
-
   const dispatch = createEventDispatcher();
 
   /** @param {Event} e */
@@ -57,14 +47,12 @@
     dispatch('press', { event: e });
   }
 
-  $: showFeedbackIcon =
-    !hideFeedbackIcon && type !== 'tertiary' && feedback && feedback !== 'done';
   $: classes = [
     'reset',
     type,
     feedback && 'show-feedback',
     feedback,
-    showFeedbackIcon && 'show-icon',
+    $$slots.icon && 'show-icon',
   ].filter((c) => c);
 
   $: color =
@@ -84,15 +72,9 @@
   disabled={false}
   aria-disabled={disabled}
 >
-  {#if showFeedbackIcon}
+  {#if $$slots.icon}
     <div class="content">
-      {#if feedback === 'processing'}
-        <ProcessingIcon />
-      {:else if feedback === 'success'}
-        <CheckIcon />
-      {:else if feedback === 'error'}
-        <ErrorCloseIcon />
-      {/if}
+      <slot name="icon" />
       <slot />
     </div>
   {:else}
@@ -241,15 +223,6 @@
           fill: var(--color);
         }
       }
-    }
-  }
-
-  @keyframes spin {
-    from {
-      transform: translateY(-50%) rotate(0deg);
-    }
-    to {
-      transform: translateY(-50%) rotate(360deg);
     }
   }
 </style>

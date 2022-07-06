@@ -92,12 +92,14 @@
   }
 </script>
 
-<h3>Diesjähriger Niederschlag im Sommer deutlich höher als üblich</h3>
+<hgroup>
+  <h3>Diesjähriger Niederschlag im Sommer deutlich höher als üblich</h3>
 
-<p class="description">
-  Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
-  Durchschnitt der Jahre 2000 - 2020 in Berlin.
-</p>
+  <p class="description">
+    Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
+    Durchschnitt der Jahre 2000 - 2020 in Berlin.
+  </p>
+</hgroup>
 
 <div class="chart" bind:clientWidth={width} style:height={px(height)}>
   <Svg
