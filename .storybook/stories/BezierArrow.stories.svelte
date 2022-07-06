@@ -3,6 +3,8 @@
 
   import Svg from '$comps/shared/Svg.svelte';
   import BezierArrow from '$comps/shared/BezierArrow.svelte';
+
+  import { cUiAccentRed } from '$lib/tokens';
 </script>
 
 <Meta
@@ -33,6 +35,22 @@
 <Story name="Basic">
   <Svg width={100} height={100}>
     <BezierArrow start={[0, 0]} end={[100, 100]} />
+  </Svg>
+</Story>
+
+<Story name="Custom color">
+  <Svg width={100} height={100}>
+    <BezierArrow
+      start={[0, 0]}
+      end={[100, 100]}
+      style="--color: {cUiAccentRed}"
+    />
+  </Svg>
+</Story>
+
+<Story name="Thicker stroke">
+  <Svg width={100} height={100}>
+    <BezierArrow start={[0, 0]} end={[100, 100]} style="--width: 2" />
   </Svg>
 </Story>
 
