@@ -14,8 +14,9 @@ cd $(dirname $0)/..
 # read base path from command line
 base_path=$1
 
-# set google cloud project
-gcloud config set project rbb-data-static-file-server
+# set google cloud project if necessary
+cloud_project=rbb-data-static-file-server
+[ $(gcloud config get-value project) = $cloud_project ] || gcloud config set project $cloud_project
 
 # destination folder in google cloud storage
 dst=gs://rbb-data-static/$base_path
