@@ -29,6 +29,8 @@
         return cUiAccentPurple;
       case 'Tab 3':
         return cUiAccentTurquoise;
+      default:
+        return cUiAccentYellow;
     }
   }
 
@@ -41,6 +43,8 @@
         return cPurple100;
       case 'Tab 3':
         return cTurquoise100;
+      default:
+        return cYellow100;
     }
   }
 

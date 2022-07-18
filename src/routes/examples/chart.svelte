@@ -212,7 +212,6 @@
     </g>
 
     <Arrow
-      class="arrow"
       {...computeArrowCoords(
         [x(dHighlight.month), y(dHighlight.rain)],
         [
@@ -220,8 +219,6 @@
           y(dHighlight.rain) + annotationOffset[1] / 2,
         ]
       )}
-      color={tokens.cChartAnnotation}
-      aria-hidden="true"
     />
   </Svg>
 </div>
@@ -342,6 +339,10 @@
       text {
         @include typography(chart-annotation);
       }
+    }
+
+    :global(.arrow) {
+      --color: var(--c-chart-annotation);
     }
   }
 </style>

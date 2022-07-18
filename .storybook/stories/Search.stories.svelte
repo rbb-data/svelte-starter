@@ -87,8 +87,7 @@
   }
 
   const debouncedAutocomplete = debounce(
-    /** @type {(query: string) => Promise<string[]>} */
-    (query) => autocomplete(query),
+    (/** @type {string} */ query) => autocomplete(query),
     300,
     {
       leading: true,

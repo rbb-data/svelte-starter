@@ -158,8 +158,7 @@
     tick().then(discardSuggestions);
   }
 
-  /** @param {Event} e */
-  function handleSubmit(e) {
+  function handleSubmit() {
     submit();
   }
 
