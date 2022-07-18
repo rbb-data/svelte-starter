@@ -104,7 +104,7 @@
     color: var(--_color);
     background-color: var(--_background-color);
 
-    :global(&.focus-visible) {
+    &.focus-visible {
       @include focus(var(--c-accent));
     }
 

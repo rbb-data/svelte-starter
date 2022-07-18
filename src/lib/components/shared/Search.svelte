@@ -351,7 +351,7 @@
     background-color: var(--c-ui-gray-100);
     font-size: var(--font-size-base);
 
-    :global(&.focus-visible) {
+    &.focus-visible {
       @include focus(var(--c-accent));
     }
 
