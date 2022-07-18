@@ -83,6 +83,7 @@ export function scaleLinear() {
  * @param {number} opacity
  */
 export const makeTransparent = (color, opacity = 0.3) => {
+  if (!color) return '';
   const colorObj = new Color(color);
   colorObj.alpha = opacity;
   // @ts-ignore

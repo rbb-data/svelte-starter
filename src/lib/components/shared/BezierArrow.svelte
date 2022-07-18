@@ -9,10 +9,10 @@
    *
    * CSS variables:
    *
-   * - `--color`: color of the arrow (default: black)
-   * - `--width`: stroke width of the arrow (default: 1)
+   * - `--color`: color of the arrow (default: `black`)
+   * - `--width`: stroke width of the arrow (default: `1`)
    *
-   * **Note:**: The exposed CSS variables can only be passed through the `style`
+   * **Note:** The exposed CSS variables can only be passed through the `style`
    * tag. Passing these CSS variables as `--props` has no effect.
    *
    * @component

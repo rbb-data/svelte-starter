@@ -17,7 +17,7 @@
    * - `--c-light`: used as background color
    * - `--c-focus`: used for the focus ring
    *
-   * **Note:**: The exposed CSS variables can only be passed through the `style`
+   * **Note:** The exposed CSS variables can only be passed through the `style`
    * tag. Passing these CSS variables as `--props` has no effect.
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
