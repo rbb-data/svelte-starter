@@ -13,7 +13,7 @@
   import ErrorCloseIcon from '$icons/ErrorClose.svelte';
   import ProcessingIcon from '$icons/Processing.svelte';
 
-  import { cAccentId, computeTransparentColor } from '$lib/utils';
+  import { cAccentId, makeTransparent } from '$lib/utils';
   import * as tokens from '$lib/tokens';
 
   /** @type {'primary' | 'secondary' | 'tertiary'} */
@@ -69,7 +69,7 @@
 
   $: color =
     customColor || /** @type {string} */ (tokens[cAccentId(accentColor)]);
-  $: colorTransparent = computeTransparentColor(color);
+  $: colorTransparent = makeTransparent(color);
 </script>
 
 <button
