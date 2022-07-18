@@ -6,8 +6,6 @@
    *
    * - `--color`: text color
    * - `--background-color`: background color
-   * - `--icon-size`: size of the icon (if applicable)
-   * - `--icon-padding`: padding between icon and text (if applicable)
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -106,7 +104,7 @@
     color: var(--_color);
     background-color: var(--_background-color);
 
-    &.focus-visible {
+    :global(&.focus-visible) {
       @include focus(var(--c-accent));
     }
 

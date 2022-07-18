@@ -254,7 +254,7 @@
       id="my-unique-search-id"
       search={simpleSearch}
       placeholder="z.B. Anna"
-      aria-labelledby="search-label"
+      aria={{ labelledby: 'search-label' }}
       bind:selectedSuggestion
       let:suggestion
     >

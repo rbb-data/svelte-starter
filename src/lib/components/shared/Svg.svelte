@@ -45,6 +45,13 @@
    */
   export let boundedHeight = undefined;
 
+  /**
+   * ARIA attributes
+   *
+   * @type {{ label?: string; labelledby?: string; describedby?: string }}
+   */
+  export let aria = {};
+
   /** if true, show the svg's outline and highlight canvas */
   export let debug = false;
 
@@ -59,7 +66,9 @@
     {height}
     viewBox={[0, 0, width, height].join(' ')}
     class:debug
-    {...$$restProps}
+    aria-label={aria.label}
+    aria-labelledby={aria.labelledby}
+    aria-describedby={aria.describedby}
   >
     <slot name="header" />
     <g transform={translate([margin.left, margin.top])}>

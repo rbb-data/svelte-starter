@@ -4,11 +4,11 @@
    *
    * The rendered markup is composed of:
    *
-   * - `fieldset`: assigned the given id
-   * - `fieldset legend`
-   * - `fieldset label`: with classes `.focused`, `.checked` and `.disabled`
-   *   applied appropriately
-   * - `fieldset label input[type="checkbox"]`
+   * - `.check-boxes`: assigned the given id
+   * - `.check-boxes legend`
+   * - `.check-boxes .check-box`: with classes `.focused`, `.checked` and
+   *   `.disabled` applied appropriately
+   * - `.check-boxes .check-box input[type="checkbox"]`
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -79,6 +79,18 @@
    */
   export let isOptionDisabled = () => false;
 
+  /**
+   * ARIA attributes
+   *
+   * @type {{
+   *   label?: string;
+   *   labelledby?: string;
+   *   describedby?: string;
+   *   orientation?: 'horizontal' | 'vertical';
+   * }}
+   */
+  export let aria = { orientation: 'vertical' };
+
   $: color = customColors.accent || tokens[cAccentId(colorScheme)];
   $: colorLight = customColors.light || tokens[c100Id(colorScheme)];
   $: colorFocus = customColors.focus || color;
@@ -89,11 +101,14 @@
 
 <fieldset
   {id}
-  aria-orientation="vertical"
+  class="check-boxes"
   style:--c-accent={color}
   style:--c-light={colorLight}
   style:--c-focus={colorFocus}
-  {...$$restProps}
+  aria-label={aria.label}
+  aria-labelledby={aria.labelledby}
+  aria-describedby={aria.describedby}
+  aria-orientation={aria.orientation}
 >
   {#if label}
     <legend class:g-visually-hidden={hideLabelVisually}>
@@ -105,7 +120,7 @@
     {@const checked = selectedValues.includes(v)}
     {@const disabled = isOptionDisabled(option)}
     {@const focused = v === focusedValue}
-    <label class:focused class:checked class:disabled>
+    <label class="check-box" class:focused class:checked class:disabled>
       <input
         type="checkbox"
         name={id}

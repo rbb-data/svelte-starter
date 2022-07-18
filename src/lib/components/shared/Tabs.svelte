@@ -8,16 +8,16 @@
    *
    * The rendered markup is composed of:
    *
-   * - `div[role="tablist"]`: assigned the given id
-   * - `div[role="tablist"] button[role="tab"]`: with classes `.active` and
-   *   `.disabled` applied appropriately
+   * - `.tabs`: assigned the given id
+   * - `.tabs .tab`: with classes `.active` and `.disabled` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * **Note:** Slants make the tabs overflow but `overflow: hidden` can't be
-   * used as that would cut off the focus ring. Instead, pseudo elements are
-   * rendered that hide the overflowing content. Their color defaults to white
-   * but can be overwritten by setting the CSS variable `--c-background`.
+   * used on the container element as that would cut off the focus ring.
+   * Instead, pseudo elements are rendered that hide the overflowing content.
+   * Their color defaults to white but can be overwritten by setting the CSS
+   * variable `--c-background`.
    *
    * @component
    */
@@ -80,6 +80,17 @@
    */
   export let isTabDisabled = () => false;
 
+  /**
+   * ARIA attributes
+   *
+   * @type {{
+   *   label?: string;
+   *   labelledby?: string;
+   *   describedby?: string;
+   * }}
+   */
+  export let aria = {};
+
   /** @param {string | ((tab: any) => string) | undefined} entry */
   const getColor = (entry) => typeof entry === 'string' && entry;
 
@@ -126,6 +137,7 @@
 
 <div
   {id}
+  class="tabs"
   role="tablist"
   aria-orientation="horizontal"
   style:--c-accent={color}
@@ -133,7 +145,9 @@
   style:--c-focus={colorFocus}
   style:--c-light-transparent={makeTransparent(colorLight)}
   class:slants
-  {...$$restProps}
+  aria-label={aria.label}
+  aria-labelledby={aria.labelledby}
+  aria-describedby={aria.describedby}
 >
   {#each tabs as tab, i}
     {@const active = i === activeIndex}
@@ -141,7 +155,7 @@
     <button
       id="{id}--tab-{i}"
       role="tab"
-      class="g-reset"
+      class="tab g-reset"
       class:active
       class:disabled
       aria-controls="{id}--tabpanel-{i}"
@@ -248,7 +262,7 @@
     font-weight: var(--font-weight-semi-bold);
     background-color: var(--c-light);
 
-    &.focus-visible {
+    :global(&.focus-visible) {
       @include focus(var(--c-focus));
     }
 

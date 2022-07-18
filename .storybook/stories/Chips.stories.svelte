@@ -185,7 +185,7 @@
   <Chips
     id="my-chips"
     {options}
-    aria-labelledby="select-region-label"
+    aria={{ labelledby: 'select-region-label' }}
     let:option
     bind:selectedValues
   >

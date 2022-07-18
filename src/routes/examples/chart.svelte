@@ -236,7 +236,6 @@
       { name: 'Regenmenge 2000-2020 (in l/qm)', getValue: (d) => d.rainAvg },
     ]}
     caption="Monatliche Regenmenge in Liter pro Quadratmeter in Berlin"
-    class="visually-hidden"
   />
 </VisuallyHidden>
 
