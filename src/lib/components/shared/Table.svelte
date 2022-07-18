@@ -24,7 +24,7 @@
   export let highlightFirstColumn = true;
 </script>
 
-<table {...$$restProps}>
+<table>
   {#if caption}
     <caption>
       {caption}

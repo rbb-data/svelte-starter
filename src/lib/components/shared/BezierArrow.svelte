@@ -7,10 +7,13 @@
    * [MDN](https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths#b%C3%A9zier_curves)
    * for more information.
    *
+   * CSS variables:
+   *
+   * - `--color`: color of the arrow
+   * - `--width`: stroke width of the arrow
+   *
    * @component
    */
-
-  import { cUiGray500 } from '$lib/tokens';
 
   /**
    * start coordinates
@@ -71,9 +74,6 @@
   /** angle of the arrow head */
   export let headAngle = 55;
 
-  /** @type {string} */
-  export let color = cUiGray500;
-
   /** renders bezier handle points for debugging */
   export let debug = false;
 
@@ -110,9 +110,7 @@
    * @param {number[]} endHandle
    */
   const bezierCurve = (start, end, startHandle, endHandle) =>
-    ['M', `${start}`, 'C', `${startHandle}`, `${endHandle}`, `${end}`].join(
-      ' '
-    );
+    ['M', start, 'C', startHandle, endHandle, end].join(' ');
 
   /**
    * @param {number[]} point
@@ -154,6 +152,30 @@
     ].join(' ');
   }
 
+  /**
+   * @param {number[]} start
+   * @param {number[]} end
+   * @param {number[]} startHandle
+   * @param {number[]} endHandle
+   * @param {typeof headAnchor} headAnchor
+   * @param {typeof headOptions} headOptions
+   */
+  function arrow(start, end, startHandle, endHandle, headAnchor, headOptions) {
+    let d = bezierCurve(start, end, startHandle, endHandle);
+
+    if (headAnchor === 'start' || headAnchor === 'both') {
+      const handle = equals(start, startHandle) ? end : startHandle;
+      d += arrowHead(start, handle, headOptions);
+    }
+
+    if (headAnchor === 'end' || headAnchor === 'both') {
+      const handle = equals(end, endHandle) ? start : endHandle;
+      d += arrowHead(end, handle, headOptions);
+    }
+
+    return d;
+  }
+
   $: sHandle = startHandle || addOffset(start, startHandleOffset);
   $: eHandle = endHandle || addOffset(end, endHandleOffset);
 
@@ -163,7 +185,7 @@
   };
 </script>
 
-<g style:--color={color} {...$$restProps}>
+<g class="arrow">
   {#if debug}
     <g class="debug">
       {#each [sHandle, eHandle] as coords}
@@ -175,22 +197,18 @@
     </g>
   {/if}
 
-  <path d={bezierCurve(start, end, sHandle, eHandle)} />
-  {#if headAnchor === 'start' || headAnchor === 'both'}
-    <path
-      d={arrowHead(start, equals(start, sHandle) ? end : sHandle, headOptions)}
-    />
-  {/if}
-  {#if headAnchor === 'end' || headAnchor === 'both'}
-    <path
-      d={arrowHead(end, equals(end, eHandle) ? start : eHandle, headOptions)}
-    />
-  {/if}
+  <path d={arrow(start, end, sHandle, eHandle, headAnchor, headOptions)} />
 </g>
 
 <style lang="scss">
+  .arrow {
+    --_color: var(--color, var(--c-ui-gray-500));
+    --_width: var(--width, 1);
+  }
+
   path {
-    stroke: var(--color);
+    stroke: var(--_color);
+    stroke-width: var(--_width);
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;

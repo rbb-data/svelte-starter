@@ -38,9 +38,7 @@
     </div>
   </Chips>
 
-  <Button accentColor="turquoise" class="chips--show-results">
-    Ergebnisse anzeigen
-  </Button>
+  <Button accentColor="turquoise">Ergebnisse anzeigen</Button>
 </div>
 
 <style lang="scss">
@@ -72,7 +70,7 @@
     }
   }
 
-  .wrapper :global(.chips--show-results) {
+  .wrapper :global(button) {
     width: 100%;
     margin-top: var(--s-px-5);
   }

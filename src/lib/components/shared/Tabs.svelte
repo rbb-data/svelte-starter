@@ -8,16 +8,16 @@
    *
    * The rendered markup is composed of:
    *
-   * - `div[role="tablist"]`: assigned the given id
-   * - `div[role="tablist"] button[role="tab"]`: with classes `.active` and
-   *   `.disabled` applied appropriately
+   * - `.tabs`: assigned the given id
+   * - `.tabs .tab`: with classes `.active` and `.disabled` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * **Note:** Slants make the tabs overflow but `overflow: hidden` can't be
-   * used as that would cut off the focus ring. Instead, pseudo elements are
-   * rendered that hide the overflowing content. Their color defaults to white
-   * but can be overwritten by setting the CSS variable `--c-background`.
+   * used on the container element as that would cut off the focus ring.
+   * Instead, pseudo elements are rendered that hide the overflowing content.
+   * Their color defaults to white but can be overwritten by setting the CSS
+   * variable `--c-background`.
    *
    * @component
    */
@@ -26,7 +26,7 @@
   import * as colors from '$lib/tokens';
   import {
     cAccentId,
-    computeTransparentColor,
+    makeTransparent,
     getIndexBefore,
     getIndexAfter,
   } from '$lib/utils';
@@ -80,6 +80,17 @@
    */
   export let isTabDisabled = () => false;
 
+  /**
+   * ARIA attributes
+   *
+   * @type {{
+   *   label?: string;
+   *   labelledby?: string;
+   *   describedby?: string;
+   * }}
+   */
+  export let aria = {};
+
   /** @param {string | ((tab: any) => string) | undefined} entry */
   const getColor = (entry) => typeof entry === 'string' && entry;
 
@@ -126,14 +137,17 @@
 
 <div
   {id}
+  class="tabs"
   role="tablist"
   aria-orientation="horizontal"
   style:--c-accent={color}
   style:--c-light={colorLight}
   style:--c-focus={colorFocus}
-  style:--c-light-transparent={computeTransparentColor(colorLight)}
+  style:--c-light-transparent={makeTransparent(colorLight)}
   class:slants
-  {...$$restProps}
+  aria-label={aria.label}
+  aria-labelledby={aria.labelledby}
+  aria-describedby={aria.describedby}
 >
   {#each tabs as tab, i}
     {@const active = i === activeIndex}
@@ -141,7 +155,7 @@
     <button
       id="{id}--tab-{i}"
       role="tab"
-      class="reset"
+      class="tab g-reset"
       class:active
       class:disabled
       aria-controls="{id}--tabpanel-{i}"
@@ -151,7 +165,7 @@
       style:--c-accent={getTabColor(customColors.accent, tab)}
       style:--c-light={getTabColor(customColors.light, tab)}
       style:--c-focus={getTabColor(customColors.focus, tab)}
-      style:--c-light-transparent={computeTransparentColor(
+      style:--c-light-transparent={makeTransparent(
         getTabColor(customColors.light, tab) || ''
       )}
       bind:this={buttons[i]}
@@ -248,7 +262,7 @@
     font-weight: var(--font-weight-semi-bold);
     background-color: var(--c-light);
 
-    &.focus-visible {
+    :global(&.focus-visible) {
       @include focus(var(--c-focus));
     }
 

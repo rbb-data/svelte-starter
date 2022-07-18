@@ -4,11 +4,11 @@
    *
    * The rendered markup is composed of:
    *
-   * - `fieldset`: assigned the given id
-   * - `fieldset legend`
-   * - `fieldset label`: with classes `.focused`, `.checked` and `.disabled`
-   *   applied appropriately
-   * - `fieldset label input[type="radio"]`
+   * - `.radio-buttons`: assigned the given id
+   * - `.radio-buttons legend`
+   * - `.radio-buttons .radio-button`: with classes `.focused`, `.checked` and
+   *   `.disabled` applied appropriately
+   * - `.radio-buttons .radio-button input[type="radio"]`
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -79,6 +79,18 @@
    */
   export let isOptionDisabled = () => false;
 
+  /**
+   * ARIA attributes
+   *
+   * @type {{
+   *   label?: string;
+   *   labelledby?: string;
+   *   describedby?: string;
+   *   orientation?: 'horizontal' | 'vertical';
+   * }}
+   */
+  export let aria = { orientation: 'vertical' };
+
   $: color = customColors.accent || tokens[cAccentId(colorScheme)];
   $: colorLight = customColors.light || tokens[c100Id(colorScheme)];
   $: colorFocus = customColors.focus || color;
@@ -89,14 +101,17 @@
 
 <fieldset
   {id}
-  aria-orientation="vertical"
+  class="radio-buttons"
   style:--c-accent={color}
   style:--c-light={colorLight}
   style:--c-focus={colorFocus}
-  {...$$restProps}
+  aria-orientation={aria.orientation}
+  aria-label={aria.label}
+  aria-labelledby={aria.labelledby}
+  aria-describedby={aria.describedby}
 >
   {#if label}
-    <legend class:visually-hidden={hideLabelVisually}>
+    <legend class:g-visually-hidden={hideLabelVisually}>
       {label}
     </legend>
   {/if}
@@ -105,7 +120,7 @@
     {@const checked = v === selectedValue}
     {@const disabled = isOptionDisabled(option)}
     {@const focused = v === focusedValue}
-    <label class:focused class:checked class:disabled>
+    <label class="radio-button" class:focused class:checked class:disabled>
       <input
         type="radio"
         name={id}

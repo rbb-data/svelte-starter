@@ -55,8 +55,7 @@
   <Svg
     width={100}
     height={100}
-    aria-labelledby="my-title"
-    aria-describedby="my-description"
+    aria={{ labelledby: 'my-title', describedby: 'my-description' }}
   >
     <svelte:fragment slot="header">
       <title id="my-title">Titel</title>

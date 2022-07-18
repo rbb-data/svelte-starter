@@ -19,30 +19,32 @@
   let selectedRegion;
 </script>
 
-<RadioButtons
-  id="radio-buttons--choose-region"
-  label="Wähle eine Region"
-  hideLabelVisually
-  options={regions}
-  getOptionValue={(option) => option.value}
-  let:option
-  bind:selectedValue={selectedRegion}
->
-  <span class="content">
-    {option.label}
+<div class="wrapper">
+  <RadioButtons
+    id="radio-buttons--choose-region"
+    label="Wähle eine Region"
+    hideLabelVisually
+    options={regions}
+    getOptionValue={(option) => option.value}
+    let:option
+    bind:selectedValue={selectedRegion}
+  >
+    <span class="content">
+      {option.label}
 
-    {#if option.value === 'stadt' || option.value === 'land'}
-      &nbsp;<i>(anderswo in Deutschland)</i>
-    {/if}
-  </span>
+      {#if option.value === 'stadt' || option.value === 'land'}
+        &nbsp;<i>(anderswo in Deutschland)</i>
+      {/if}
+    </span>
 
-  <img src="{base}/icons/{option.svgFilename}" alt="" />
-</RadioButtons>
+    <img src="{base}/icons/{option.svgFilename}" alt="" />
+  </RadioButtons>
 
-<Button class="button--call-therapist">Termin vereinbaren</Button>
+  <Button>Termin vereinbaren</Button>
+</div>
 
 <style lang="scss">
-  :global {
+  .wrapper :global {
     #radio-buttons--choose-region {
       --icon-size: 1.8em;
       --icon-padding-left: var(--s-px-1);
@@ -69,7 +71,7 @@
       }
     }
 
-    .button--call-therapist {
+    button {
       width: 100%;
       margin-top: var(--s-px-5);
     }

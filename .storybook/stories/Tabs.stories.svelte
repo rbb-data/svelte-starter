@@ -29,6 +29,8 @@
         return cUiAccentPurple;
       case 'Tab 3':
         return cUiAccentTurquoise;
+      default:
+        return cUiAccentYellow;
     }
   }
 
@@ -41,6 +43,8 @@
         return cPurple100;
       case 'Tab 3':
         return cTurquoise100;
+      default:
+        return cYellow100;
     }
   }
 
@@ -72,7 +76,7 @@
 <Story name="Basic">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     let:tab
     bind:activeIndex
@@ -88,7 +92,7 @@
 <Story name="Specify initally selected tab">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     let:tab
     bind:activeIndex={activeIndexInitallySelected}
@@ -109,7 +113,7 @@
 <Story name="Update tab on selection">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     let:tab
     let:active
@@ -129,7 +133,7 @@
 <Story name="Complex tabs">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     tabs={complexTabs}
     let:tab
     let:active
@@ -149,7 +153,7 @@
 <Story name="Disabled tab">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     isTabDisabled={(tab) => tab === 'Tab 3'}
     let:tab
@@ -166,7 +170,7 @@
 <Story name="Custom accent color">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     colorScheme="purple"
     let:tab
@@ -189,7 +193,7 @@
 <Story name="Custom tab colors">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     customColors={{
       accent: getAccentColor,
@@ -215,7 +219,7 @@
 <Story name="Customize all colors">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     customColors={{
       accent: getAccentColor,
@@ -242,7 +246,7 @@
 <Story name="Without slants">
   <Tabs
     id="my-unique-tabs-id"
-    aria-label="Wähle einen Tab"
+    aria={{ label: 'Wähle einen Tab' }}
     {tabs}
     slants={false}
     let:tab
@@ -260,7 +264,7 @@
   <div id="tabs-label">Meine Tabs</div>
   <Tabs
     id="my-unique-tabs-id"
-    aria-labelledby="tabs-label"
+    aria={{ labelledby: 'tabs-label' }}
     {tabs}
     let:tab
     bind:activeIndex

@@ -87,8 +87,7 @@
   }
 
   const debouncedAutocomplete = debounce(
-    /** @type {(query: string) => Promise<string[]>} */
-    (query) => autocomplete(query),
+    (/** @type {string} */ query) => autocomplete(query),
     300,
     {
       leading: true,
@@ -255,7 +254,7 @@
       id="my-unique-search-id"
       search={simpleSearch}
       placeholder="z.B. Anna"
-      aria-labelledby="search-label"
+      aria={{ labelledby: 'search-label' }}
       bind:selectedSuggestion
       let:suggestion
     >

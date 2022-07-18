@@ -4,24 +4,24 @@
    *
    * The rendered markup is composed of:
    *
-   * - `div.search`: assigned the given id
-   * - `div.search form`
-   * - `div.search form label`
-   * - `div.search form div.input-wrapper`
-   * - `div.search form div.input-wrapper input[role="combobox"]`: assigned the id
+   * - `.search`: assigned the given id
+   * - `.search form`
+   * - `.search form label`
+   * - `.search form .input-wrapper`
+   * - `.search form .input-wrapper input[role="combobox"]`: assigned the id
    *   `{id}--input`, inferred from the given id
-   * - `div.search form div.input-wrapper button[type="submit"]`
-   * - `div.search ul[role="listbox"]`: assigned the id `{id}--listbox`, inferred
-   *   from the given id
-   * - `div.search ul[role="listbox"] li[role="option"]`: with classes `.focused`,
-   *   `.highlighted` and `.selected` applied appropriately
+   * - `.search form .input-wrapper button[type="submit"]`
+   * - `.search .suggestions`: assigned the id `{id}--listbox`, inferred from the given id
+   * - `.search .suggestions .suggestion`: with classes `.focused`, `.highlighted`
+   *   and `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * **Note:** The slant makes the search button overflow but `overflow: hidden`
-   * can't be used as that would cut off the focus ring. Instead, a pseudo
-   * element is rendered that hides the overflowing content. Its color defaults
-   * to white but can be overwritten by setting the CSS variable `--c-background`.
+   * can't be used on the container element as that would cut off the focus
+   * ring. Instead, a pseudo element is rendered that hides the overflowing
+   * content. Its color defaults to white but can be overwritten by setting the
+   * CSS variable `--c-background`.
    *
    * @component
    */
@@ -95,6 +95,17 @@
   /** hides label visually but keeps it around for screen readers */
   export let hideLabelVisually = false;
 
+  /**
+   * ARIA attributes
+   *
+   * @type {{
+   *   label?: string;
+   *   labelledby?: string;
+   *   describedby?: string;
+   * }}
+   */
+  export let aria = {};
+
   /** @type {HTMLInputElement} */
   let inputElement;
 
@@ -158,8 +169,7 @@
     tick().then(discardSuggestions);
   }
 
-  /** @param {Event} e */
-  function handleSubmit(e) {
+  function handleSubmit() {
     submit();
   }
 
@@ -211,7 +221,7 @@
 <div {id} class="search" style:--c-accent={color}>
   <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
     {#if label}
-      <label for="{id}--input" class:visually-hidden={hideLabelVisually}>
+      <label for="{id}--input" class:g-visually-hidden={hideLabelVisually}>
         {label}
       </label>
     {/if}
@@ -220,7 +230,7 @@
         id="{id}--input"
         role="combobox"
         type="search"
-        class="reset"
+        class="g-reset"
         {placeholder}
         autocomplete="off"
         aria-haspopup="listbox"
@@ -238,23 +248,31 @@
           if (selectedIndex < 0) selectedIndex = undefined;
           highlightedIndex = selectedIndex || focusedIndex || 0;
         }}
-        {...$$restProps}
+        aria-label={aria.label}
+        aria-labelledby={aria.labelledby}
+        aria-describedby={aria.describedby}
       />
 
-      <button type="submit" class="reset" aria-label="Bestätigen">
+      <button type="submit" class="g-reset" aria-label="Bestätigen">
         <SearchIcon color="#ffffff" />
       </button>
     </div>
   </form>
 
   {#if isOpen}
-    <ul id="{id}--listbox" role="listbox" aria-orientation="vertical">
+    <ul
+      id="{id}--listbox"
+      class="suggestions"
+      role="listbox"
+      aria-orientation="vertical"
+    >
       {#each suggestions as suggestion, i}
         {@const focused = focusedIndex === i}
         {@const highlighted = highlightedIndex === i}
         {@const selected = selectedSuggestion === suggestion}
         <li
           id="{id}--option-{i}"
+          class="suggestion"
           role="option"
           class:focused
           class:highlighted
@@ -333,7 +351,7 @@
     background-color: var(--c-ui-gray-100);
     font-size: var(--font-size-base);
 
-    &.focus-visible {
+    :global(&.focus-visible) {
       @include focus(var(--c-accent));
     }
 

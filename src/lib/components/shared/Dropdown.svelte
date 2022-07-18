@@ -4,12 +4,10 @@
    *
    * The rendered markup is composed of:
    *
-   * - `div.dropdown`: assigned the given id
-   * - `div.dropdown button[role="combobox"]`
-   * - `div.dropdown ul[role="listbox"]`: assigned the id `{id}--listbox`,
-   *   inferred from the given id
-   * - `div.dropdown ul[role="listbox"] li[role="option"]`: with class `.selected`
-   *   applied appropriately
+   * - `.dropdown`: assigned the given id
+   * - `.dropdown button[role="combobox"]`
+   * - `.dropdown .options`: assigned the id `{id}--listbox`, inferred from the given id
+   * - `.dropdown .options .option`: with class `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -140,7 +138,7 @@
 <div {id} class="dropdown">
   <button
     role="combobox"
-    class="select reset"
+    class="select g-reset"
     type="button"
     aria-haspopup="listbox"
     aria-controls={isOpen ? `${id}--listbox` : null}
@@ -182,6 +180,7 @@
   {#if isOpen}
     <ul
       id="{id}--listbox"
+      class="options"
       role="listbox"
       aria-orientation="vertical"
       use:typeahead={{
@@ -197,6 +196,7 @@
       {#each options as option, i}
         {@const selected = selectedOption === option}
         <li
+          class="option"
           role="option"
           aria-selected={selected}
           class:selected

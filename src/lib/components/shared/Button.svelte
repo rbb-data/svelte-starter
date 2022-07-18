@@ -2,6 +2,11 @@
   /**
    * Primary, secondary and tertiary buttons.
    *
+   * CSS variables:
+   *
+   * - `--color`: text color
+   * - `--background-color`: background color
+   *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * @component
@@ -9,11 +14,7 @@
 
   import { createEventDispatcher } from 'svelte';
 
-  import CheckIcon from '$icons/Check.svelte';
-  import ErrorCloseIcon from '$icons/ErrorClose.svelte';
-  import ProcessingIcon from '$icons/Processing.svelte';
-
-  import { cAccentId, computeTransparentColor } from '$lib/utils';
+  import { cAccentId, makeTransparent } from '$lib/utils';
   import * as tokens from '$lib/tokens';
 
   /** @type {'primary' | 'secondary' | 'tertiary'} */
@@ -43,12 +44,6 @@
    */
   export let feedback = undefined;
 
-  /**
-   * if true, shows feedback without rendering a default icon for
-   * `processing`/`success`/`error`
-   */
-  export let hideFeedbackIcon = false;
-
   const dispatch = createEventDispatcher();
 
   /** @param {Event} e */
@@ -57,42 +52,33 @@
     dispatch('press', { event: e });
   }
 
-  $: showFeedbackIcon =
-    !hideFeedbackIcon && type !== 'tertiary' && feedback && feedback !== 'done';
   $: classes = [
-    'reset',
+    'g-reset',
     type,
     feedback && 'show-feedback',
     feedback,
-    showFeedbackIcon && 'show-icon',
+    $$slots.icon && 'show-icon',
   ].filter((c) => c);
 
   $: color =
     customColor || /** @type {string} */ (tokens[cAccentId(accentColor)]);
-  $: colorTransparent = computeTransparentColor(color);
+  $: colorTransparent = makeTransparent(color);
 </script>
 
 <button
   type="button"
+  class={classes.join(' ')}
   class:disabled
   style:--c-accent={color}
   style:--c-accent-transparent={colorTransparent}
   on:click={handlePress}
   on:touchstart|preventDefault={handlePress}
-  {...$$restProps}
-  class={classes.join(' ') + ($$restProps.class ? ' ' + $$restProps.class : '')}
   disabled={false}
   aria-disabled={disabled}
 >
-  {#if showFeedbackIcon}
+  {#if $$slots.icon}
     <div class="content">
-      {#if feedback === 'processing'}
-        <ProcessingIcon />
-      {:else if feedback === 'success'}
-        <CheckIcon />
-      {:else if feedback === 'error'}
-        <ErrorCloseIcon />
-      {/if}
+      <slot name="icon" />
       <slot />
     </div>
   {:else}
@@ -102,10 +88,10 @@
 
 <style lang="scss">
   button {
-    --color: var(--c-ui-gray-500);
-    --background-color: transparent;
-    --icon-size: 1.8em;
-    --icon-padding: var(--s-px-1);
+    --_color: var(--color, var(--c-ui-gray-500));
+    --_background-color: var(--background-color, transparent);
+    --_icon-size: var(--icon-size, 1.8em);
+    --_icon-padding: var(--icon-padding, var(--s-px-1));
 
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semi-bold);
@@ -115,10 +101,10 @@
     white-space: nowrap;
     cursor: pointer;
 
-    color: var(--color);
-    background-color: var(--background-color);
+    color: var(--_color);
+    background-color: var(--_background-color);
 
-    &.focus-visible {
+    :global(&.focus-visible) {
       @include focus(var(--c-accent));
     }
 
@@ -221,15 +207,15 @@
       .content {
         position: relative;
         margin-left: calc(
-          var(--icon-size) + var(--icon-padding)
+          var(--_icon-size) + var(--_icon-padding)
         ); /* reserve space for the icon */
       }
 
       :global {
         svg {
-          width: var(--icon-size);
-          height: var(--icon-size);
-          left: calc(-1 * (var(--icon-size) + var(--icon-padding)));
+          width: var(--_icon-size);
+          height: var(--_icon-size);
+          left: calc(-1 * (var(--_icon-size) + var(--_icon-padding)));
 
           /* vertically align the icon */
           position: absolute;
@@ -238,18 +224,9 @@
         }
 
         svg path {
-          fill: var(--color);
+          fill: var(--_color);
         }
       }
-    }
-  }
-
-  @keyframes spin {
-    from {
-      transform: translateY(-50%) rotate(0deg);
-    }
-    to {
-      transform: translateY(-50%) rotate(360deg);
     }
   }
 </style>

@@ -110,41 +110,37 @@
 </Story>
 
 <Story name="Right-aligned data columns">
-  <Table
-    {data}
-    columns={columnsWithClasses}
-    class="custom-table"
-    caption="Titel Datensatz"
-  />
+  <div class="custom-table">
+    <Table {data} columns={columnsWithClasses} caption="Titel Datensatz" />
+  </div>
 </Story>
 
 <Story name="Customized columns">
-  <Table
-    {data}
-    columns={columnsWithCustomClasses}
-    class="custom-table"
-    caption="Titel Datensatz"
-  />
+  <div class="custom-table">
+    <Table
+      {data}
+      columns={columnsWithCustomClasses}
+      caption="Titel Datensatz"
+    />
+  </div>
 </Story>
 
 <style lang="scss">
-  :global {
-    .custom-table {
-      .align-right {
-        text-align: right !important;
-      }
+  .custom-table :global {
+    .align-right {
+      text-align: right !important;
+    }
 
-      .cat-a {
-        background-color: var(--c-blue-100);
-      }
+    .cat-a {
+      background-color: var(--c-blue-100);
+    }
 
-      .cat-b {
-        background-color: var(--c-purple-100);
-      }
+    .cat-b {
+      background-color: var(--c-purple-100);
+    }
 
-      .cat-c {
-        background-color: var(--c-yellow-100);
-      }
+    .cat-c {
+      background-color: var(--c-yellow-100);
     }
   }
 </style>
