@@ -55,7 +55,7 @@
   }
 
   $: classes = [
-    'reset',
+    'g-reset',
     type,
     feedback && 'show-feedback',
     feedback,

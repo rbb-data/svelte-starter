@@ -96,7 +96,7 @@
   {...$$restProps}
 >
   {#if label}
-    <legend class:visually-hidden={hideLabelVisually}>
+    <legend class:g-visually-hidden={hideLabelVisually}>
       {label}
     </legend>
   {/if}

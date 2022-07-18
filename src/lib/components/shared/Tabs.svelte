@@ -141,7 +141,7 @@
     <button
       id="{id}--tab-{i}"
       role="tab"
-      class="reset"
+      class="g-reset"
       class:active
       class:disabled
       aria-controls="{id}--tabpanel-{i}"

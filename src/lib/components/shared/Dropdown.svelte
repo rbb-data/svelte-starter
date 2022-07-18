@@ -140,7 +140,7 @@
 <div {id} class="dropdown">
   <button
     role="combobox"
-    class="select reset"
+    class="select g-reset"
     type="button"
     aria-haspopup="listbox"
     aria-controls={isOpen ? `${id}--listbox` : null}

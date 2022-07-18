@@ -210,7 +210,7 @@
 <div {id} class="search" style:--c-accent={color}>
   <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
     {#if label}
-      <label for="{id}--input" class:visually-hidden={hideLabelVisually}>
+      <label for="{id}--input" class:g-visually-hidden={hideLabelVisually}>
         {label}
       </label>
     {/if}
@@ -219,7 +219,7 @@
         id="{id}--input"
         role="combobox"
         type="search"
-        class="reset"
+        class="g-reset"
         {placeholder}
         autocomplete="off"
         aria-haspopup="listbox"
@@ -240,7 +240,7 @@
         {...$$restProps}
       />
 
-      <button type="submit" class="reset" aria-label="Bestätigen">
+      <button type="submit" class="g-reset" aria-label="Bestätigen">
         <SearchIcon color="#ffffff" />
       </button>
     </div>

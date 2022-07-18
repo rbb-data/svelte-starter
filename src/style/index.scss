@@ -54,7 +54,7 @@ select {
 }
 
 /* removes user agent styles */
-.reset {
+.g-reset {
   all: unset;
   box-sizing: border-box;
 
@@ -73,6 +73,6 @@ select {
 }
 
 /* content is _visually_ hidden but still accessible to screen readers */
-.visually-hidden:not(:focus):not(:active) {
+.g-visually-hidden:not(:focus):not(:active) {
   @include visually-hidden;
 }
