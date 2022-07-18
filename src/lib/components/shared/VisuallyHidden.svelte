@@ -1,4 +1,14 @@
-<div class="visually-hidden">
+<script>
+  /**
+   * Visually hides content but exposes it to screen readers.
+   *
+   * @component
+   */
+
+  export let debug = false;
+</script>
+
+<div class:visually-hidden={!debug}>
   <slot />
 </div>
 

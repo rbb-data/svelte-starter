@@ -6,6 +6,7 @@
   import Arrow from '$comps/shared/BezierArrow.svelte';
   import VisuallyHidden from '$comps/shared/VisuallyHidden.svelte';
   import Table from '$comps/shared/Table.svelte';
+  import ChartDescriptionForScreenReaders from '$lib/components/shared/ChartDescriptionForScreenReaders.svelte';
 
   import { px, scaleLinear, translate } from '$lib/utils';
   import * as tokens from '$lib/tokens';
@@ -94,37 +95,49 @@
   }
 </script>
 
-<h3>Diesjähriger Niederschlag im Sommer deutlich höher als üblich</h3>
+<ChartDescriptionForScreenReaders
+  title="Diesjähriger Niederschlag im Sommer deutlich höher als üblich"
+  subtitle={`
+    Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
+    Durchschnitt der Jahre 2000 - 2020 in Berlin.
+  `}
+  summary={`
+    Während die Regenmenge in Berlin in den letzten zehn Jahren 25 Liter pro
+    Quadratmeter nie überschritten hat, hat es 2021 im September
+    bis zu 103 Liter pro Quadratmeter geregnet.
+  `}
+  description={`
+    Der Chart zeigt zwei Linien. Die erste Linie zeigt den monatlichen
+    Niederschlag in Liter pro Quadratmeter im Jahr 2021. Die Regenmenge
+    steigt in den Sommermonaten 2021 deutlich an und erreicht einen
+    Höchststand von 103 Liter pro Quadratmeter im September. Das ist deutlich
+    höher als die durchschnittliche Regenmenge in den Sommermonaten der letzten zehn
+    Jahre, wie die zweite Linie zeigt. In diesem Zeitraum hat es auch in den Sommermonaten
+    durchschnittlich nie mehr als 25 Liter pro Quadratmeter geregnet.
+  `}
+  context={`
+    Der Chart basiert auf ausgedachten Daten und dient lediglich als Beispiel
+    für statische Datenvisualisierungen in Svelte.
+  `}
+/>
 
-<p class="description">
-  Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
-  Durchschnitt der Jahre 2000 - 2020 in Berlin.
-</p>
+<hgroup aria-hidden="true">
+  <h3>Diesjähriger Niederschlag im Sommer deutlich höher als üblich</h3>
 
-<div class="chart" bind:clientWidth={width} style:height={px(height)}>
-  <Svg
-    {width}
-    {height}
-    {margin}
-    bind:boundedWidth
-    bind:boundedHeight
-    aria-labelledby="svg-title"
-    aria-describedby="svg-description"
-  >
-    <svelte:fragment slot="header">
-      <title id="svg-title"> Diagramm mit zwei Linien. </title>
-      <desc id="svg-description">
-        Die erste Linie zeigt den monatlichen Niederschlag in Liter pro
-        Quadratmeter 2021 in Berlin. Die Regenmenge steigt in den Sommermonaten
-        2021 deutlich an und erreicht einen Höchststand von 103 Liter pro
-        Quadratmeter im September. Das ist deutlich höher als die
-        durchschnittliche Regenmenge in den Sommermonaten der letzten zehn
-        Jahre. In diesem Zeitraum has es auch in den Sommermonaten
-        durchschnittlich nie mehr als 25 Liter pro Quadratmeter geregnet.
-      </desc>
-    </svelte:fragment>
+  <p class="description">
+    Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
+    Durchschnitt der Jahre 2000 - 2020 in Berlin.
+  </p>
+</hgroup>
 
-    <g class="summer-highlight" aria-hidden="true">
+<div
+  class="chart"
+  bind:clientWidth={width}
+  style:height={px(height)}
+  aria-hidden="true"
+>
+  <Svg {width} {height} {margin} bind:boundedWidth bind:boundedHeight>
+    <g class="summer-highlight">
       <rect
         x={x(summer[0])}
         y={-margin.top}
@@ -140,7 +153,7 @@
       </text>
     </g>
 
-    <g class="axis-y" aria-hidden="true">
+    <g class="axis-y">
       {#each grid as gridValue}
         <g class="tick" transform={translate([0, y(gridValue)])}>
           <line x1={x.range()[0]} x2={x.range()[1]} />
@@ -155,11 +168,7 @@
       </text>
     </g>
 
-    <g
-      class="axis-x"
-      transform={translate([0, boundedHeight])}
-      aria-hidden="true"
-    >
+    <g class="axis-x" transform={translate([0, boundedHeight])}>
       <line class="zero-line" x1={x.range()[0]} x2={x.range()[1]} />
 
       {#each xTicks as tick}
@@ -177,7 +186,7 @@
       {/each}
     </g>
 
-    <g class="shapes" aria-hidden="true">
+    <g class="shapes">
       <g class="rain rain-avg">
         <path d={lineRainAvg(data)} />
         <text
@@ -205,7 +214,6 @@
         -annotationLength + annotationOffset[0],
         annotationOffset[1],
       ])}
-      aria-hidden="true"
     >
       <text x={x(dHighlight.month)} y={y(dHighlight.rain)}>
         September war der
@@ -225,7 +233,7 @@
   </Svg>
 </div>
 
-<div class="source">Quelle</div>
+<div class="source">Quelle: Ausgedachte Daten</div>
 
 <VisuallyHidden>
   <Table
@@ -235,7 +243,7 @@
       { name: 'Regenmenge 2021 (in l/qm)', getValue: (d) => d.rain },
       { name: 'Regenmenge 2000-2020 (in l/qm)', getValue: (d) => d.rainAvg },
     ]}
-    caption="Monatliche Regenmenge in Liter pro Quadratmeter in Berlin"
+    caption="Daten zum Chart: Monatliche Regenmenge in Liter pro Quadratmeter in Berlin"
   />
 </VisuallyHidden>
 
