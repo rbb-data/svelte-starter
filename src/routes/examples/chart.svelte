@@ -4,6 +4,8 @@
 
   import Svg from '$comps/shared/Svg.svelte';
   import Arrow from '$comps/shared/BezierArrow.svelte';
+  import VisuallyHidden from '$comps/shared/VisuallyHidden.svelte';
+  import Table from '$comps/shared/Table.svelte';
 
   import { px, scaleLinear, translate } from '$lib/utils';
   import * as tokens from '$lib/tokens';
@@ -224,6 +226,19 @@
 </div>
 
 <div class="source">Quelle</div>
+
+<VisuallyHidden>
+  <Table
+    {data}
+    columns={[
+      { name: 'Monat', getValue: (d) => d.month },
+      { name: 'Regenmenge 2021 (in l/qm)', getValue: (d) => d.rain },
+      { name: 'Regenmenge 2000-2020 (in l/qm)', getValue: (d) => d.rainAvg },
+    ]}
+    caption="Monatliche Regenmenge in Liter pro Quadratmeter in Berlin"
+    class="visually-hidden"
+  />
+</VisuallyHidden>
 
 <style lang="scss">
   h3 {
