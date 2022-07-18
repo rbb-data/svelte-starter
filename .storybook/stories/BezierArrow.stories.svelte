@@ -36,6 +36,22 @@
   </Svg>
 </Story>
 
+<Story name="Custom color">
+  <Svg width={100} height={100}>
+    <g class="custom-color">
+      <BezierArrow start={[0, 0]} end={[100, 100]} />
+    </g>
+  </Svg>
+</Story>
+
+<Story name="Thicker stroke">
+  <Svg width={100} height={100}>
+    <g class="thicker-stroke">
+      <BezierArrow start={[0, 0]} end={[100, 100]} />
+    </g>
+  </Svg>
+</Story>
+
 <Story name="Debug">
   <Svg width={100} height={100}>
     <BezierArrow start={[0, 0]} end={[100, 100]} debug />
@@ -104,3 +120,13 @@
     />
   </Svg>
 </Story>
+
+<style>
+  .custom-color {
+    --color: var(--c-ui-accent-red);
+  }
+
+  .thicker-stroke {
+    --width: 2;
+  }
+</style>
