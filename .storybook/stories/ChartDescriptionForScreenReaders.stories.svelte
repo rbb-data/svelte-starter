@@ -7,6 +7,16 @@
 <Meta
   title="Viz/ChartDescriptionForScreenReaders"
   component={ChartDescriptionForScreenReaders}
+  argTypes={{
+    title: {
+      // @ts-ignore
+      type: { required: true },
+    },
+    subtitle: {
+      // @ts-ignore
+      type: { required: true },
+    },
+  }}
 />
 
 <Story name="Basic">
