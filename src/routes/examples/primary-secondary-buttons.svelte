@@ -6,8 +6,8 @@
   Treffe eine Entscheidung. Willst du lieber Option A oder Option B?
 </div>
 <div class="bottom">
-  <Button class="left">Option A</Button>
-  <Button class="right" type="secondary">Option B</Button>
+  <Button>Option A</Button>
+  <Button type="secondary">Option B</Button>
 </div>
 
 <style lang="scss">
@@ -30,7 +30,7 @@
         max-width: 120px;
       }
 
-      .left {
+      button:first-of-type {
         margin-right: var(--s-px-2);
       }
     }

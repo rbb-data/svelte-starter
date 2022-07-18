@@ -6,8 +6,8 @@
   Treffe eine Entscheidung. Willst du lieber Option A oder Option B?
 </div>
 <div class="bottom">
-  <Button class="left" type="tertiary" accentColor="purple">Entweder</Button>
-  <Button class="right" type="tertiary" accentColor="purple">Oder</Button>
+  <Button type="tertiary" accentColor="purple">Entweder</Button>
+  <Button type="tertiary" accentColor="purple">Oder</Button>
 </div>
 
 <style lang="scss">
