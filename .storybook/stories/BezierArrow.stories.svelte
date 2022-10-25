@@ -1,8 +1,8 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Svg from '$comps/shared/Svg.svelte';
-  import BezierArrow from '$comps/shared/BezierArrow.svelte';
+  import Svg from '$lib/components/shared/Svg.svelte';
+  import BezierArrow from '$lib/components/shared/BezierArrow.svelte';
 </script>
 
 <Meta

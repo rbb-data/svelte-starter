@@ -33,9 +33,6 @@ module.exports = {
       $app: path.resolve('./.svelte-kit/runtime/app'),
       $lib: path.resolve('./src/lib'),
       $data: path.resolve('./src/data'),
-      $comps: path.resolve('./src/lib/components'),
-      $actions: path.resolve('./src/lib/actions'),
-      $stores: path.resolve('./src/lib/stores'),
       $icons: path.resolve('./src/lib/components/icons'),
     };
     config.css = {

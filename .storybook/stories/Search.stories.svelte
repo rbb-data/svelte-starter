@@ -3,7 +3,7 @@
   import debounce from 'lodash.debounce';
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Search from '$comps/shared/Search.svelte';
+  import Search from '$lib/components/shared/Search.svelte';
   import { fuzzysearch } from '$lib/utils';
 
   const options = [

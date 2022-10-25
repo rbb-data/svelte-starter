@@ -1,5 +1,5 @@
 <script>
-  import CheckBoxes from '$comps/shared/CheckBoxes.svelte';
+  import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
   const options = [
     { label: 'Komponente Eins', value: 1 },

@@ -1,6 +1,6 @@
 <script>
-  import Chips from '$comps/shared/Chips.svelte';
-  import Button from '$comps/shared/Button.svelte';
+  import Chips from '$lib/components/shared/Chips.svelte';
+  import Button from '$lib/components/shared/Button.svelte';
   import CheckIcon from '$icons/Check.svelte';
 
   import { cUiGray100 } from '$lib/tokens';

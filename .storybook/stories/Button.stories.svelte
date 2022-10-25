@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Button from '$comps/shared/Button.svelte';
+  import Button from '$lib/components/shared/Button.svelte';
   import CheckIcon from '$icons/Check.svelte';
   import ErrorCloseIcon from '$icons/ErrorClose.svelte';
   import ProcessingIcon from '$icons/Processing.svelte';

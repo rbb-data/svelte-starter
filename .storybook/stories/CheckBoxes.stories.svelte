@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import CheckBoxes from '$comps/shared/CheckBoxes.svelte';
+  import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [

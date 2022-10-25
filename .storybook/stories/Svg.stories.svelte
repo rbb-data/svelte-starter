@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Svg from '$comps/shared/Svg.svelte';
+  import Svg from '$lib/components/shared/Svg.svelte';
 
   let boundedWidth = 0;
   let boundedHeight = 0;

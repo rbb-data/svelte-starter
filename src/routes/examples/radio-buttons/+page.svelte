@@ -1,8 +1,8 @@
 <script>
   import { base } from '$app/paths';
 
-  import RadioButtons from '$comps/shared/RadioButtons.svelte';
-  import Button from '$comps/shared/Button.svelte';
+  import RadioButtons from '$lib/components/shared/RadioButtons.svelte';
+  import Button from '$lib/components/shared/Button.svelte';
 
   const regions = [
     { label: 'Berlin', value: 'berlin', svgFilename: 'Berlin.svg' },

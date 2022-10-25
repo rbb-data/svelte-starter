@@ -31,7 +31,7 @@
   import CheckIcon from '$icons/Check.svelte';
   import SearchIcon from '$icons/Search.svelte';
 
-  import press from '$actions/press';
+  import press from '$lib/actions/press';
   import * as tokens from '$lib/tokens';
   import { cAccentId, getIndexBefore, getIndexAfter } from '$lib/utils';
 

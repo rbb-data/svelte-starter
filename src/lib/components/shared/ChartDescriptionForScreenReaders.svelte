@@ -5,7 +5,7 @@
    * @component
    */
 
-  import VisuallyHidden from '$comps/shared/VisuallyHidden.svelte';
+  import VisuallyHidden from '$lib/components/shared/VisuallyHidden.svelte';
 
   /** @type {string} */
   export let title;

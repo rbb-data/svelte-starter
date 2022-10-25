@@ -19,8 +19,8 @@
   import DropdownIcon from '$icons/Dropdown.svelte';
   import CheckIcon from '$icons/Check.svelte';
 
-  import press from '$actions/press';
-  import typeahead from '$actions/typeahead';
+  import press from '$lib/actions/press';
+  import typeahead from '$lib/actions/typeahead';
   import { getIndexBefore, getIndexAfter } from '$lib/utils';
 
   /**

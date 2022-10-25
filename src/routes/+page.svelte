@@ -5,7 +5,7 @@
   // @ts-ignore
   import localData from '$data/example-data.csv';
 
-  import Table from '$comps/shared/Table.svelte';
+  import Table from '$lib/components/shared/Table.svelte';
 
   import InternalLink from '$lib/components/shared/InternalLink.svelte';
 </script>

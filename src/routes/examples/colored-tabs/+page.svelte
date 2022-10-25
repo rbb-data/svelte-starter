@@ -1,6 +1,6 @@
 <script>
-  import Tabs from '$comps/shared/Tabs.svelte';
-  import TabPanels from '$comps/shared/TabPanels.svelte';
+  import Tabs from '$lib/components/shared/Tabs.svelte';
+  import TabPanels from '$lib/components/shared/TabPanels.svelte';
 
   import {
     cUiAccentBlue,

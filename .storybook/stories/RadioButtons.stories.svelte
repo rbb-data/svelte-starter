@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import RadioButtons from '$comps/shared/RadioButtons.svelte';
+  import RadioButtons from '$lib/components/shared/RadioButtons.svelte';
 
   const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
   const complexOptions = [

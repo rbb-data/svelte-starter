@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import ChartDescriptionForScreenReaders from '$comps/shared/ChartDescriptionForScreenReaders.svelte';
+  import ChartDescriptionForScreenReaders from '$lib/components/shared/ChartDescriptionForScreenReaders.svelte';
 </script>
 
 <Meta

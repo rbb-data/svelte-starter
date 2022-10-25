@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Dropdown from '$comps/shared/Dropdown.svelte';
+  import Dropdown from '$lib/components/shared/Dropdown.svelte';
 
   const options = ['Frühling', 'Sommer', 'Herbst', 'Winter'];
   const complexOptions = [

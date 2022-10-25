@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import VisuallyHidden from '$comps/shared/VisuallyHidden.svelte';
+  import VisuallyHidden from '$lib/components/shared/VisuallyHidden.svelte';
 </script>
 
 <Meta title="UI/VisuallyHidden" component={VisuallyHidden} />

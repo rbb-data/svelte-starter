@@ -2,10 +2,10 @@
   import { range } from 'd3-array';
   import { line as d3line } from 'd3-shape';
 
-  import Svg from '$comps/shared/Svg.svelte';
-  import Arrow from '$comps/shared/BezierArrow.svelte';
-  import VisuallyHidden from '$comps/shared/VisuallyHidden.svelte';
-  import Table from '$comps/shared/Table.svelte';
+  import Svg from '$lib/components/shared/Svg.svelte';
+  import Arrow from '$lib/components/shared/BezierArrow.svelte';
+  import VisuallyHidden from '$lib/components/shared/VisuallyHidden.svelte';
+  import Table from '$lib/components/shared/Table.svelte';
   import ChartDescriptionForScreenReaders from '$lib/components/shared/ChartDescriptionForScreenReaders.svelte';
 
   import { px, scaleLinear, translate } from '$lib/utils';
