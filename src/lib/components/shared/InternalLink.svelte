@@ -1,6 +1,6 @@
 <script>
   import { base } from '$app/paths';
-  import { dev } from '$app/env';
+  import { dev } from '$app/environment';
 
   /**
    * internal app url that the link points to
