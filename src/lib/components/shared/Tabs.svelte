@@ -155,7 +155,7 @@
     <button
       id="{id}--tab-{i}"
       role="tab"
-      class="tab g-reset"
+      class="[ tab ] [ reset ]"
       class:active
       class:disabled
       aria-controls="{id}--tabpanel-{i}"
@@ -263,7 +263,7 @@
     background-color: var(--c-light);
 
     &.focus-visible {
-      @include focus(var(--c-focus));
+      @include focus;
     }
 
     &.active {

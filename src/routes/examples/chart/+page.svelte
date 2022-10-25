@@ -122,9 +122,11 @@
 />
 
 <hgroup aria-hidden="true">
-  <h3>Diesjähriger Niederschlag im Sommer deutlich höher als üblich</h3>
+  <h3 class="[ chart-title ]">
+    Diesjähriger Niederschlag im Sommer deutlich höher als üblich
+  </h3>
 
-  <p class="description">
+  <p class="[ chart-subtitle ]">
     Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
     Durchschnitt der Jahre 2000 - 2020 in Berlin.
   </p>
@@ -158,12 +160,14 @@
         <g class="tick" transform={translate([0, y(gridValue)])}>
           <line x1={x.range()[0]} x2={x.range()[1]} />
           {#if yTickLabels.includes(gridValue)}
-            <text dx={-yTickLabelPadding}>{gridValue}</text>
+            <text class="[ axis-tick ]" dx={-yTickLabelPadding}
+              >{gridValue}</text
+            >
           {/if}
         </g>
       {/each}
 
-      <text class="label" x={-margin.left} dy={-margin.top}>
+      <text class="[ label ] [ axis-label ]" x={-margin.left} dy={-margin.top}>
         Regen in l/qm
       </text>
     </g>
@@ -176,6 +180,7 @@
           <line y2={xTickLength} stroke="green" />
           {#if xTickLabels.has(tick)}
             <text
+              class="[ axis-tick ]"
               dy="1em"
               transform={translate([0, xTickLength + xTickLabelPadding])}
             >
@@ -215,7 +220,11 @@
         annotationOffset[1],
       ])}
     >
-      <text x={x(dHighlight.month)} y={y(dHighlight.rain)}>
+      <text
+        class="[ chart-annotation ]"
+        x={x(dHighlight.month)}
+        y={y(dHighlight.rain)}
+      >
         September war der
         <tspan x={x(dHighlight.month)} dy="1.15em"> regenreichste Monat </tspan>
       </text>
@@ -233,7 +242,7 @@
   </Svg>
 </div>
 
-<div class="source">Quelle: Ausgedachte Daten</div>
+<div class="[ chart-footer ]">Quelle: Ausgedachte Daten</div>
 
 <VisuallyHidden>
   <Table
@@ -248,39 +257,19 @@
 </VisuallyHidden>
 
 <style lang="scss">
-  h3 {
-    @include typography(chart-title);
-  }
-
-  .description {
-    @include typography(chart-description);
-  }
-
-  .source {
-    @include typography(chart-source);
-  }
-
   .chart {
     --c-accent: var(--c-blue-300);
 
     font-size: var(--font-size-sm);
 
-    .tick text {
-      @include typography(axis-value);
-    }
-
-    .label {
-      @include typography(axis-title);
-    }
-
     .axis-x {
       .zero-line {
-        stroke: var(--c-chart-axis);
+        stroke: var(--c-ui-gray-500);
       }
 
       .tick {
         line {
-          stroke: var(--c-chart-axis);
+          stroke: var(--c-ui-gray-500);
         }
 
         text {
@@ -292,7 +281,7 @@
     .axis-y {
       .tick {
         line {
-          stroke: var(--c-chart-grid);
+          stroke: var(--c-ui-gray-200);
           stroke-width: 0.5px;
         }
 
@@ -309,7 +298,7 @@
 
     .summer-highlight {
       rect {
-        fill: var(--c-chart-area);
+        fill: var(--c-ui-gray-100);
       }
 
       text {
@@ -357,14 +346,8 @@
       }
     }
 
-    .annotation {
-      text {
-        @include typography(chart-annotation);
-      }
-    }
-
     :global(.arrow) {
-      --color: var(--c-chart-annotation);
+      --color: var(--c-ui-gray-400);
     }
   }
 </style>

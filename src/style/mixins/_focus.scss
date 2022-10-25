@@ -1,0 +1,9 @@
+/* renders a focus ring via `box-shadow` (background color must be explicitly set!) */
+@mixin focus {
+  box-shadow: 0 0 0px 2px var(--c-bg), 0 0 0px 4px var(--c-focus);
+}
+
+/* renders a focus ring within the element's border */
+@mixin focus-inset {
+  box-shadow: inset 0 0 0px 2px var(--c-focus);
+}

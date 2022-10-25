@@ -53,7 +53,7 @@
   }
 
   $: classes = [
-    'g-reset',
+    'reset',
     type,
     feedback && 'show-feedback',
     feedback,
@@ -105,7 +105,8 @@
     background-color: var(--_background-color);
 
     &.focus-visible {
-      @include focus(var(--c-accent));
+      --c-focus: var(--c-accent);
+      @include focus;
     }
 
     &.primary {

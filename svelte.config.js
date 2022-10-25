@@ -19,7 +19,8 @@ const config = {
   preprocess: [
     preprocess({
       scss: {
-        prependData: '@use "src/style/mixins.scss" as *;',
+        prependData:
+          '@use "src/style/mixins/_breakpoint.scss" as *; @use "src/style/mixins/_focus.scss" as *; @use "src/style/mixins/_visually-hidden.scss" as *;',
       },
       postcss: true,
     }),

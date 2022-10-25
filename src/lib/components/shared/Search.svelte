@@ -221,7 +221,7 @@
 <div {id} class="search" style:--c-accent={color}>
   <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
     {#if label}
-      <label for="{id}--input" class:g-visually-hidden={hideLabelVisually}>
+      <label for="{id}--input" class:visually-hidden={hideLabelVisually}>
         {label}
       </label>
     {/if}
@@ -230,7 +230,7 @@
         id="{id}--input"
         role="combobox"
         type="search"
-        class="g-reset"
+        class="[ reset ]"
         {placeholder}
         autocomplete="off"
         aria-haspopup="listbox"
@@ -253,7 +253,7 @@
         aria-describedby={aria.describedby}
       />
 
-      <button type="submit" class="g-reset" aria-label="Bestätigen">
+      <button type="submit" class="[ reset ]" aria-label="Bestätigen">
         <SearchIcon color="#ffffff" />
       </button>
     </div>
@@ -262,7 +262,7 @@
   {#if isOpen}
     <ul
       id="{id}--listbox"
-      class="suggestions"
+      class="[ suggestions ] [ shadow-sm ]"
       role="listbox"
       aria-orientation="vertical"
     >
@@ -352,7 +352,8 @@
     font-size: var(--font-size-base);
 
     &.focus-visible {
-      @include focus(var(--c-accent));
+      --c-focus: var(--c-accent);
+      @include focus;
     }
 
     &::placeholder {
@@ -405,7 +406,6 @@
   ul {
     list-style-type: none;
     padding: 0;
-    box-shadow: var(--shadow-sm);
     margin-top: var(--offset);
     position: absolute;
     width: 100%;
@@ -421,7 +421,8 @@
       position: relative;
 
       &.focused {
-        @include focus-inset(var(--c-ui-gray-500));
+        --c-focus: var(--c-ui-gray-500);
+        @include focus-inset;
         z-index: 1;
       }
 

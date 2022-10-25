@@ -111,7 +111,7 @@
   aria-describedby={aria.describedby}
 >
   {#if label}
-    <legend class:g-visually-hidden={hideLabelVisually}>
+    <legend class:visually-hidden={hideLabelVisually}>
       {label}
     </legend>
   {/if}
@@ -168,7 +168,7 @@
     align-items: center;
 
     &.focused {
-      @include focus(var(--c-focus));
+      @include focus;
     }
 
     &.disabled {

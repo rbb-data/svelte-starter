@@ -138,7 +138,7 @@
 <div {id} class="dropdown">
   <button
     role="combobox"
-    class="select g-reset"
+    class="[ select ] [ reset ]"
     type="button"
     aria-haspopup="listbox"
     aria-controls={isOpen ? `${id}--listbox` : null}
@@ -180,7 +180,7 @@
   {#if isOpen}
     <ul
       id="{id}--listbox"
-      class="options"
+      class="[ options ] [ shadow-sm ]"
       role="listbox"
       aria-orientation="vertical"
       use:typeahead={{
@@ -255,11 +255,13 @@
     font-weight: var(--font-weight-semi-bold);
 
     :global(.select.focus-visible) {
-      @include focus(var(--c-ui-gray-500));
+      --c-focus: var(--c-ui-gray-500);
+      @include focus;
     }
 
     :global([role='listbox'] [role='option'].focus-visible) {
-      @include focus-inset(var(--c-ui-gray-500));
+      --c-focus: var(--c-ui-gray-500);
+      @include focus-inset;
       z-index: 1;
     }
 
@@ -307,7 +309,6 @@
   ul {
     list-style-type: none;
     padding: 0;
-    box-shadow: var(--shadow-sm);
     margin-top: var(--offset);
     position: absolute;
     width: 100%;

@@ -21,7 +21,12 @@ function main() {
 
 function removeDeps(pck) {
   const devDeps = Object.keys(pck.devDependencies);
-  let depsToRemove = ['@babel/core', 'babel-loader', 'svelte-loader'];
+  let depsToRemove = [
+    '@babel/core',
+    '@mdx-js/react',
+    'babel-loader',
+    'svelte-loader',
+  ];
   depsToRemove.push(...devDeps.filter((dep) => dep.startsWith('@storybook/')));
 
   for (const dep of depsToRemove) {

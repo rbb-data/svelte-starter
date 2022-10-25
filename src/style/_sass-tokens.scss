@@ -1,10 +1,9 @@
 // Do not edit directly
-// Generated on Thu, 30 Jun 2022 07:52:19 GMT
+// Generated on Tue, 25 Oct 2022 14:55:09 GMT
 
 $bp-xs: 370px; // mobile (narrow)
 $bp-sm: 480px; // mobile
-$bp-md: 768px; // tablet
-$bp-lg: 1024px; // laptop
+$bp-md: 640px; // tablet
 $s-px-1: 4px;
 $s-px-2: 8px;
 $s-px-3: 12px;
@@ -25,13 +24,6 @@ $font-size-xs: 0.75rem; // 12px
 $font-size-sm: 0.875rem; // 14px
 $font-size-base: 1rem; // 16px
 $font-size-lg: 1.125rem; // 18px
-$line-height-3xs: 0.875rem; // 14px
-$line-height-2xs: 1rem; // 16px
-$line-height-xs: 1.125rem; // 18px
-$line-height-sm: 1.25rem; // 20px
-$line-height-lg: 1.375rem; // 22px
-$line-height-xl: 1.5rem; // 24px
-$line-height-none: 1;
 $line-height-tight: 1.15;
 $line-height-snug: 1.35;
 $line-height-normal: 1.5;
@@ -39,7 +31,6 @@ $font-weight-regular: 400;
 $font-weight-semi-bold: 500;
 $font-weight-bold: 700;
 $font-weight-black: 900;
-$shadow-sm: 0 0 6px 0 rgba(0, 0, 0, 0.1);
 $c-rbb-red: #e61a1a; // rbb's primary color
 $c-rbb-burgundy: #821423;
 $c-rbb-neutral: #dfded2;
@@ -157,8 +148,3 @@ $c-change-neutral: #dfded2;
 $c-change-increase: #f2a335;
 $c-quality-negative: #bd3c28;
 $c-quality-positive: #98cdaa;
-$c-chart-axis: #000000;
-$c-chart-grid: #c0c0c0;
-$c-chart-tick: #8c8c8c;
-$c-chart-area: #ebebeb;
-$c-chart-annotation: #595959;

@@ -88,6 +88,7 @@
 
 <style lang="scss">
   [role='tabpanel'] :global(.focus-visible) {
-    @include focus(var(--c-accent-focus));
+    --c-focus: var(--c-accent-focus);
+    @include focus;
   }
 </style>
