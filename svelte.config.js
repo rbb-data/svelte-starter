@@ -14,6 +14,13 @@ const config = {
     paths: {
       base: dev ? '' : process.env.BASE_PATH,
     },
+    alias: {
+      $data: 'src/data',
+      $comps: 'src/lib/components',
+      $actions: 'src/lib/actions',
+      $stores: 'src/lib/stores',
+      $icons: 'src/lib/components/icons',
+    },
   },
 
   preprocess: [

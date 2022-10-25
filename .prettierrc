@@ -3,6 +3,9 @@
   "useTabs": false,
   "tabWidth": 2,
   "printWidth": 80,
+  "plugins": ["prettier-plugin-svelte"],
+  "pluginSearchDirs": ["."],
+  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
   "tsdoc": true,
   "jsdocCapitalizeDescription": false
 }
