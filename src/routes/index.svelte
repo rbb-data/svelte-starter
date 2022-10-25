@@ -6,6 +6,8 @@
   import localData from '$data/example-data.csv';
 
   import Table from '$comps/shared/Table.svelte';
+
+  import InternalLink from '$lib/components/shared/InternalLink.svelte';
 </script>
 
 <h1>{googleDoc.title}</h1>
@@ -22,6 +24,7 @@
     <a
       href="https://docs.google.com/spreadsheets/d/1RPOs51w4kJsvuNg1eT0foVgLau_iI7hmJ-EOGQqBC04"
       target="_blank"
+      rel="noreferrer"
     >
       Google sheet:
     </a>
@@ -31,6 +34,7 @@
     <a
       href="https://docs.google.com/document/d/1wCovwTGxPsPM-ED-D7hCaL5sMUFBy1A8OadVUCDtQ3A"
       target="_blank"
+      rel="noreferrer"
     >
       Google doc:
     </a>
@@ -97,19 +101,43 @@
 <h2>Beispiele</h2>
 
 <ul>
-  <li><a href="examples/chart">examples/chart</a></li>
-  <li><a href="examples/check-boxes">examples/check-boxes</a></li>
-  <li><a href="examples/chips">examples/chips</a></li>
-  <li><a href="examples/colored-tabs">examples/colored-tabs</a></li>
-  <li><a href="examples/custom-buttons">examples/custom-buttons</a></li>
+  <li><InternalLink href="/examples/chart">examples/chart</InternalLink></li>
   <li>
-    <a href="examples/primary-secondary-buttons">
-      examples/primary-secondary-buttons
-    </a>
+    <InternalLink href="/examples/check-boxes"
+      >examples/check-boxes</InternalLink
+    >
   </li>
-  <li><a href="examples/radio-buttons">examples/radio-buttons</a></li>
-  <li><a href="examples/subtle-tabs">examples/subtle-tabs</a></li>
-  <li><a href="examples/tertiary-buttons">examples/tertiary-buttons</a></li>
+  <li><InternalLink href="/examples/chips">examples/chips</InternalLink></li>
+  <li>
+    <InternalLink href="/examples/colored-tabs"
+      >examples/colored-tabs</InternalLink
+    >
+  </li>
+  <li>
+    <InternalLink href="/examples/custom-buttons"
+      >examples/custom-buttons</InternalLink
+    >
+  </li>
+  <li>
+    <InternalLink href="/examples/primary-secondary-buttons">
+      examples/primary-secondary-buttons
+    </InternalLink>
+  </li>
+  <li>
+    <InternalLink href="/examples/radio-buttons"
+      >examples/radio-buttons</InternalLink
+    >
+  </li>
+  <li>
+    <InternalLink href="/examples/subtle-tabs"
+      >examples/subtle-tabs</InternalLink
+    >
+  </li>
+  <li>
+    <InternalLink href="/examples/tertiary-buttons"
+      >examples/tertiary-buttons</InternalLink
+    >
+  </li>
 </ul>
 
 <style lang="scss">

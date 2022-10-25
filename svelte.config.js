@@ -1,7 +1,5 @@
-import path from 'path';
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
-import dsv from '@rollup/plugin-dsv';
 
 import dotenv from 'dotenv';
 
@@ -19,27 +17,6 @@ const config = {
     prerender: { default: true },
     browser: {
       router: false,
-    },
-    vite: {
-      plugins: [dsv()],
-
-      resolve: {
-        alias: {
-          $data: path.resolve('./src/data'),
-          $comps: path.resolve('./src/lib/components'),
-          $actions: path.resolve('./src/lib/actions'),
-          $stores: path.resolve('./src/lib/stores'),
-          $icons: path.resolve('./src/lib/components/icons'),
-        },
-      },
-
-      css: {
-        preprocessorOptions: {
-          scss: {
-            additionalData: '@use "src/style/mixins.scss" as *;',
-          },
-        },
-      },
     },
   },
 
