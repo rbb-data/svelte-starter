@@ -39,7 +39,7 @@ module.exports = {
       preprocessorOptions: {
         scss: {
           additionalData:
-            '@use "src/style/mixins/_breakpoint.scss" as *; @use "src/style/mixins/_focus.scss" as *; @use "src/style/mixins/_visually-hidden.scss" as *;',
+            '@use "../src/style/mixins/_breakpoint.scss" as *; @use "../src/style/mixins/_focus.scss" as *; @use "../src/style/mixins/_visually-hidden.scss" as *;',
         },
       },
     };
