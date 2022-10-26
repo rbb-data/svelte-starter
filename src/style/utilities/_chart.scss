@@ -3,7 +3,7 @@
   font-size: var(--font-size-base);
   line-height: var(--line-height-tight);
   color: var(--c-ui-gray-500);
-  margin-bottom: var(--s-px-1);
+  margin-bottom: var(--s-rem-1);
 }
 
 .chart-subtitle {
@@ -11,7 +11,7 @@
   font-size: var(--font-size-xs);
   line-height: var(--line-height-tight);
   color: var(--c-ui-gray-500);
-  margin-bottom: var(--s-px-4);
+  margin-bottom: var(--s-rem-4);
 }
 
 .chart-footer {
@@ -19,7 +19,7 @@
   font-size: var(--font-size-xs);
   line-height: var(--line-height-tight);
   color: var(--c-ui-gray-300);
-  margin-top: var(--s-px-3);
+  margin-top: var(--s-rem-3);
 }
 
 .chart-legend {
