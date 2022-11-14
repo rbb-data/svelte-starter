@@ -1,9 +1,9 @@
 <script>
   import googleDoc from '$data/google-doc.json';
   // @ts-ignore
-  import googleSheetData from '$data/google-sheet-example.csv';
+  import googleSheetData from '$data/google-sheets/example.csv';
   // @ts-ignore
-  import localData from '$data/example-data.csv';
+  import localData from '$data/local-data.csv';
 
   import Table from '$lib/components/shared/Table.svelte';
 
@@ -18,7 +18,7 @@
 
 <ul>
   <li>
-    Lokale Daten: <code>src/data/example-data.csv</code>
+    Lokale Daten: <code>src/data/local-data.csv</code>
   </li>
   <li>
     <a
@@ -28,7 +28,7 @@
     >
       Google sheet:
     </a>
-    <code>src/data/google-sheet-example.csv</code>
+    <code>src/data/google-sheets/example.csv</code>
   </li>
   <li>
     <a

@@ -54,10 +54,12 @@ async function main() {
   }
 
   // write to file
-  const outFolder = 'src/data';
-  const outPrefix = 'google-sheet';
+  const outFolder = 'src/data/google-sheets';
+  if (!fs.existsSync(outFolder)) {
+    fs.mkdirSync(outFolder);
+  }
   for (const [name, _data] of Object.entries(data)) {
-    const out = path.join(outFolder, `${outPrefix}-${name}.csv`);
+    const out = path.join(outFolder, `${name}.csv`);
     fs.writeFileSync(path.join(process.cwd(), out), csvFormat(_data));
     process.stdout.write(`Written to ${out}\n`);
   }
