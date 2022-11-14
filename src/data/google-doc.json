@@ -1,22 +1,19 @@
 {
-  "title": "Demo",
-  "person": {
-    "name": "Amanda",
-    "age": "26"
+  "TITLE": "Demo",
+  "PARAGRAPH": "Bestimmte Formatierungen werden aus dem Google Doc übernommen. Dazu gehört <b>fetter</b>, <i>kursiver</i>, <u>unterstrichener</u> und <s>durchgestrichener</s> Text. Außerdem <sup>hochgestellter Text</sup> und <sub>Text im Index</sub>. Sowie <a href=\"https://www.rbb24.de/\">Links</a>.",
+  "PERSON": {
+    "NAME": "Amanda",
+    "AGE": "26"
   },
-  "listOfStrings": [
-    "Erstes <b>Element</b>",
-    "Zweites <i>Element</i>",
-    "Drittes <u>Element</u>"
-  ],
-  "arrayOfObjects": [
+  "LIST_OF_STRINGS": ["Erstes Element", "Zweites Element", "Drittes Element"],
+  "ARRAY_OF_OBJECTS": [
     {
-      "name": "Amanda",
-      "age": "26"
+      "NAME": "Amanda",
+      "AGE": "26"
     },
     {
-      "name": "Tessa",
-      "age": "30"
+      "NAME": "Tessa",
+      "AGE": "30"
     }
   ]
 }
