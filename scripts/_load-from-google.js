@@ -74,7 +74,9 @@ function parseGoogleSheet(sheet) {
 
   let columnNames = [];
   for (const col of sheetRows[0].values) {
-    columnNames.push(col.formattedValue);
+    if (col.formattedValue) {
+      columnNames.push(col.formattedValue);
+    }
   }
 
   let data = [];
@@ -86,7 +88,9 @@ function parseGoogleSheet(sheet) {
       const cell = sheetRow.values[colIndex];
       dataRow[columnNames[colIndex]] = cell ? cell.formattedValue : undefined;
     }
-    data.push(dataRow);
+    if (!Object.values(dataRow).every((x) => x === undefined)) {
+      data.push(dataRow);
+  }
   }
 
   return data;
