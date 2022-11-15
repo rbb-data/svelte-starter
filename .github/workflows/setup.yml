@@ -22,14 +22,7 @@ jobs:
           cache: 'npm'
 
       - name: Setup repo
-        run: |
-          rm -rf .storybook/
-          rm -f .github/workflows/storybook.yml
-          node scripts/remove-storybook.js
-          node scripts/update-readme.js
-
-          sed -i 's/{project-name}/'"$(basename $(pwd))"'/g' package.json .env iframe.html README.md
-          sed -i '1s/.*/# '"$(basename $(pwd))"'/' README.md
+        run: scripts/setup.sh
 
       - name: Commit and push
         run: |-

@@ -1,20 +1,46 @@
 #!/usr/bin/env bash
 
-# deploy documentation site to GitHub pages
+usage() {
+  echo -e 'Usage: '"./$(basename $0)"' [--build]
 
-set -ex
+Deploy storybook documentation site to GitHub pages
 
-# build docs
-npm run docs:build
+  --build \t build before deploying
+'
+  exit
+}
 
-# navigate into the build output directory
-cd docs-build
+# show help
+if [[ "${1-}" =~ ^-*h(elp)?$ ]]; then
+  usage
+fi
 
-git init
-git add -A
-git commit -m 'deploy docs'
+set -o errexit  # exit script when a command fails
+set -o nounset  # fail when accessing an unset variable
+set -o pipefail  # treats pipeline command as failed when one command in the pipeline fails 
+set -o xtrace  # prints every command before execution
 
-# push to gh-pages branch
-git push -f git@github.com:rbb-data/svelte-starter.git main:gh-pages
+# make sure to run from project root
+cd $(dirname $0)/..
 
-cd -
+main() {
+  # re-build app if requested
+  if [[ "${1-}" =~ ^-*b(uild)?$ ]]; then
+    npm run docs:build
+  fi
+
+  # navigate into the build output directory
+  cd docs-build
+
+  # commit changes
+  git init
+  git add -A
+  git commit -m 'deploy docs'
+
+  # push to gh-pages branch
+  git push -f git@github.com:rbb-data/svelte-starter.git main:gh-pages
+
+  cd -
+}
+
+main "$@"

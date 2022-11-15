@@ -2,7 +2,7 @@
 
 /**
  * This script loads and parses content from a Google sheet. The parsed data
- * tables are then written to `src/data/google-sheet-*.csv`.
+ * tables are then written to `src/data/google-sheets/*.csv`.
  */
 
 import fs from 'fs';
@@ -10,7 +10,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { csvFormat } from 'd3-dsv';
 
-import { loadGoogleSheet } from './_load-from-google.js';
+import { loadGoogleSheet } from './helpers/load-from-google.js';
 
 async function main() {
   // read sheet id from environment

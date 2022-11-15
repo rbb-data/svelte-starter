@@ -10,7 +10,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import archieml from 'archieml';
 
-import { loadGoogleDoc } from './_load-from-google.js';
+import { loadGoogleDoc } from './helpers/load-from-google.js';
 
 async function main() {
   // read doc id from environment
