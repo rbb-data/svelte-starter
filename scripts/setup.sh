@@ -41,7 +41,7 @@ remove_storybook() {
 
 update_environment_variables() {
   # store current year and month as environment variable
-  sed -i '' 's/{date}/'"$(date '+%Y-%m')"'/g' .env
+  sed -i '' 's/{project-creation-date}/'"$(date '+%Y-%m')"'/g' .env
 
   # substitute '{project-name}' with the actual project name
   sed -i '' 's/{project-name}/'"$project_name"'/g' .env
