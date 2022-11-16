@@ -7,6 +7,7 @@ Initializes newly templated project:
   - fills in environment variables
   - removes storybook
   - updates README
+  - updates iframe snippet
 '
   exit
 }
@@ -41,7 +42,7 @@ remove_storybook() {
 
 update_environment_variables() {
   # store current year and month as environment variable
-  sed -i '' 's/{project-creation-date}/'"$(date '+%Y-%m')"'/g' .env
+  sed -i '' 's/{project-creation-date}/'"$project_creation_date"'/g' .env
 
   # substitute '{project-name}' with the actual project name
   sed -i '' 's/{project-name}/'"$project_name"'/g' .env
@@ -58,9 +59,20 @@ update_readme() {
   sed -i '' '1s/.*/# '"$project_name"'/' README.md
 }
 
+update_iframe_snippet() {
+  # substitute '{project-creation-date}' in the iframe snippet
+  sed -i '' 's/{project-creation-date}/'"$project_creation_date"'/g' iframe.html
+
+  # substitute '{project-name}' in the iframe snippet
+  sed -i '' 's/{project-name}/'"$project_name"'/g' iframe.html
+}
+
 main() {
   # get the current folder name
   project_name=$(basename $(pwd))
+
+  # get the current year and month
+  project_creation_date=$(date '+%Y-%m')
 
   # skip when the project was not templated
   if [[ "$project_name" = 'svelte-starter' ]]; then
@@ -71,9 +83,7 @@ main() {
   remove_storybook
   update_environment_variables
   update_readme
-
-  # substitute '{project-name}' in the iframe snippet
-  sed -i '' 's/{project-name}/'"$project_name"'/g' iframe.html
+  update_iframe_snippet
 }
 
 main "$@"
