@@ -74,7 +74,9 @@
     "vite": "^3.1.4"
   },
   "overrides": {
-    "node-forge": "^1.0.0"
+    "node-forge": "^1.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   },
   "browserslist": [
     ">0.2%",
