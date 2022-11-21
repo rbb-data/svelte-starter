@@ -31,6 +31,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",
+    "@googleapis/docs": "^2.0.0",
+    "@googleapis/sheets": "^4.0.0",
     "@mdx-js/react": "^1.6.22",
     "@rollup/plugin-dsv": "^2.0.3",
     "@storybook/addon-actions": "^6.5.9",
@@ -57,7 +59,7 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
-    "googleapis": "^100.0.0",
+    "google-auth-library": "^8.7.0",
     "postcss": "^8.4.12",
     "postcss-load-config": "^3.1.4",
     "prettier": "^2.4.1",

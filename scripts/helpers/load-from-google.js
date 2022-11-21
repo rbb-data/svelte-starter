@@ -1,7 +1,9 @@
 // helper functions to load and parse content from Google docs and sheets
-// adapted from https://github.com/rdmurphy/doc-to-archieml (MIT licensed)
+// partly adapted from https://github.com/rdmurphy/doc-to-archieml (MIT licensed)
 
-import { google } from 'googleapis';
+import { GoogleAuth } from 'google-auth-library';
+import { docs } from '@googleapis/docs';
+import { sheets } from '@googleapis/sheets';
 import sanitizeHtml from 'sanitize-html';
 
 /**
@@ -18,7 +20,7 @@ export async function loadGoogleDoc(
   preserveStyles = false
 ) {
   const auth = await authorize(credentials);
-  const client = google.docs({ version: 'v1', auth });
+  const client = docs({ version: 'v1', auth });
   const { data } = await client.documents.get({
     documentId,
   });
@@ -33,7 +35,7 @@ export async function loadGoogleDoc(
  */
 export async function loadGoogleSheet(spreadsheetId, credentials) {
   const auth = await authorize(credentials);
-  const client = google.sheets({ version: 'v4', auth });
+  const client = sheets({ version: 'v4', auth });
   const { data } = await client.spreadsheets.get({
     spreadsheetId,
     includeGridData: true,
@@ -90,7 +92,7 @@ function parseGoogleSheet(sheet) {
     }
     if (!Object.values(dataRow).every((x) => x === undefined)) {
       data.push(dataRow);
-  }
+    }
   }
 
   return data;
@@ -103,7 +105,7 @@ function parseGoogleSheet(sheet) {
  * @param preserveStyles if true, allow few decorative tags; else, strip everything
  * @returns clean HTML
  */
-async function sanitize(input, preserveStyles = false) {
+function sanitize(input, preserveStyles = false) {
   return sanitizeHtml(input, {
     allowedTags: preserveStyles ? ['b', 'i', 'u', 's', 'sub', 'sup', 'a'] : [],
     allowedAttributes: preserveStyles ? { a: ['href'] } : {},
@@ -116,8 +118,8 @@ async function sanitize(input, preserveStyles = false) {
  * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
  * @returns authenticated Google doc client
  */
-function authorize(credentials) {
-  return google.auth.getClient({
+async function authorize(credentials) {
+  return new GoogleAuth({
     scopes: [
       'https://www.googleapis.com/auth/documents.readonly',
       'https://www.googleapis.com/auth/spreadsheets.readonly',
@@ -126,7 +128,7 @@ function authorize(credentials) {
       client_email: credentials.clientEmail,
       private_key: credentials.privateKey,
     },
-  });
+  }).getClient();
 }
 
 /**
