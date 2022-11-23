@@ -53,11 +53,19 @@ async function main() {
     process.exit(1);
   }
 
-  // write to file
   const outFolder = 'src/data/google-sheets';
+
+  // create out folder if necessary
   if (!fs.existsSync(outFolder)) {
     fs.mkdirSync(outFolder);
   }
+
+  // remove all files to make sure there are no stale ones
+  fs.readdirSync(outFolder).forEach((file) => {
+    fs.unlinkSync(path.join(outFolder, file));
+  });
+
+  // write data to file
   for (const [name, _data] of Object.entries(data)) {
     const out = path.join(outFolder, `${name}.csv`);
     fs.writeFileSync(path.join(process.cwd(), out), csvFormat(_data));
