@@ -1,7 +1,6 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Svg from '$lib/components/shared/Svg.svelte';
   import BezierArrow from '$lib/components/shared/BezierArrow.svelte';
 </script>
 
@@ -31,35 +30,35 @@
 />
 
 <Story name="Basic">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow start={[0, 0]} end={[100, 100]} />
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Custom color">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <g class="custom-color">
       <BezierArrow start={[0, 0]} end={[100, 100]} />
     </g>
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Thicker stroke">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <g class="thicker-stroke">
       <BezierArrow start={[0, 0]} end={[100, 100]} />
     </g>
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Debug">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow start={[0, 0]} end={[100, 100]} debug />
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Curve (specified by offsetting start and end points)">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow
       start={[0, 0]}
       end={[100, 100]}
@@ -67,11 +66,11 @@
       endHandleOffset={[0, -40]}
       debug
     />
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Curve (start and end handle manually specified)">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow
       start={[0, 0]}
       end={[100, 100]}
@@ -79,11 +78,11 @@
       endHandle={[100, 60]}
       debug
     />
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Arrow heads on both sides">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow
       start={[0, 0]}
       end={[100, 100]}
@@ -92,11 +91,11 @@
       headAnchor="both"
       debug
     />
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Narrow arrow head">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow
       start={[0, 0]}
       end={[100, 100]}
@@ -105,11 +104,11 @@
       headAngle={30}
       debug
     />
-  </Svg>
+  </svg>
 </Story>
 
 <Story name="Large arrow head">
-  <Svg width={100} height={100}>
+  <svg width="100" height="100">
     <BezierArrow
       start={[0, 0]}
       end={[100, 100]}
@@ -118,15 +117,19 @@
       headLength={12}
       debug
     />
-  </Svg>
+  </svg>
 </Story>
 
 <style>
+  svg {
+    overflow: visible;
+  }
+
   .custom-color {
-    --color: var(--c-ui-accent-red);
+    --arrow-color: var(--c-ui-accent-red);
   }
 
   .thicker-stroke {
-    --width: 2;
+    --arrow-width: 2;
   }
 </style>

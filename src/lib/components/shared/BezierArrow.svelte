@@ -9,8 +9,8 @@
    *
    * CSS variables:
    *
-   * - `--color`: color of the arrow
-   * - `--width`: stroke width of the arrow
+   * - `--arrow-color`: color of the arrow _(default: black)_
+   * - `--arrow-width`: stroke width of the arrow _(default: 1)_
    *
    * @component
    */
@@ -202,8 +202,8 @@
 
 <style lang="scss">
   .arrow {
-    --_color: var(--color, var(--c-ui-black));
-    --_width: var(--width, 1);
+    --_color: var(--arrow-color, var(--c-ui-black));
+    --_width: var(--arrow-width, 1);
   }
 
   path {

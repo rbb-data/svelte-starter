@@ -4,8 +4,8 @@
    *
    * CSS variables:
    *
-   * - `--c-accent`: accent color _(default: blue)_
-   * - `--c-mute`: secondary color _(default: white)_
+   * - `--button-color-accent`: accent color _(default: blue)_
+   * - `--button-color-mute`: secondary color _(default: white)_
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -22,8 +22,8 @@
 
 <style lang="scss">
   button {
-    --_c-accent: var(--c-accent, var(--c-ui-accent-blue));
-    --_c-mute: var(--c-mute, white);
+    --_c-accent: var(--button-color-accent, var(--c-ui-accent-blue));
+    --_c-mute: var(--button-color-mute, white);
 
     --_color: var(--_c-mute);
     --_background-color: var(--_c-accent);

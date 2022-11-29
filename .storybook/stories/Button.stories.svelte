@@ -35,21 +35,21 @@
 <Story name="Custom accent color">
   <Button
     on:click={() => console.log('clicked')}
-    --c-accent="var(--c-ui-accent-turquoise)"
+    --button-color-accent="var(--c-ui-accent-turquoise)"
   >
     Primary
   </Button>
   <Button
     type="secondary"
     on:click={() => console.log('clicked')}
-    --c-accent="var(--c-ui-accent-turquoise)"
+    --button-color-accent="var(--c-ui-accent-turquoise)"
   >
     Secondary
   </Button>
   <Button
     type="tertiary"
     on:click={() => console.log('clicked')}
-    --c-accent="var(--c-ui-accent-turquoise)"
+    --button-color-accent="var(--c-ui-accent-turquoise)"
   >
     Tertiary
   </Button>
