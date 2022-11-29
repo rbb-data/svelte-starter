@@ -5,7 +5,7 @@
    * CSS variables:
    *
    * - `--button-color-accent`: accent color _(default: blue)_
-   * - `--button-color-mute`: secondary color _(default: white)_
+   * - `--button-color-secondary`: secondary color _(default: white)_
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -22,13 +22,13 @@
 
 <style lang="scss">
   button {
-    --_c-accent: var(--button-color-accent, var(--c-ui-accent-blue));
-    --_c-mute: var(--button-color-mute, white);
+    --_button-color-accent: var(--button-color-accent, var(--c-ui-accent-blue));
+    --_button-color-secondary: var(--button-color-secondary, white);
 
-    --_color: var(--_c-mute);
-    --_background-color: var(--_c-accent);
+    --_color: var(--_button-color-secondary);
+    --_background-color: var(--_button-color-accent);
 
-    --c-focus: var(--_c-accent);
+    --c-focus: var(--_button-color-accent);
 
     // reset browser defaults
     display: inline-block;
@@ -55,16 +55,16 @@
     }
 
     &[data-type='secondary'] {
-      --_color: var(--_c-accent);
-      --_background-color: var(--_c-mute);
+      --_color: var(--_button-color-accent);
+      --_background-color: var(--_button-color-secondary);
 
-      outline: 1px solid var(--_c-accent);
+      outline: 1px solid var(--_button-color-accent);
       outline-offset: -1px;
     }
 
     &[data-type='tertiary'] {
       --_background-color: transparent;
-      --_color: var(--_c-accent);
+      --_color: var(--_button-color-accent);
     }
   }
 </style>

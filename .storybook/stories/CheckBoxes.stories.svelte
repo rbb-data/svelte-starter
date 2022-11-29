@@ -3,17 +3,9 @@
 
   import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
-  const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
-  const complexOptions = [
-    { label: 'Berlin', value: 'berlin' },
-    { label: 'Brandenburg', value: 'brandenburg' },
-    { label: 'Stadt', value: 'city' },
-    { label: 'Land', value: 'country' },
-  ];
-
   /** @type {string[]} */
-  let selectedValues = [];
-  let selectedValuesInitiallySet = ['Berlin', 'Brandenburg'];
+  let selectedOptions = [];
+  let selectedOptionsInitiallySet = ['Berlin', 'Brandenburg'];
 </script>
 
 <Meta
@@ -28,14 +20,13 @@
       // @ts-ignore
       type: { required: true },
     },
-    selectedValues: {
+    label: {
+      // @ts-ignore
+      type: { required: true },
+    },
+    selectedOptions: {
       table: {
         defaultValue: { summary: '[]' },
-      },
-    },
-    getOptionValue: {
-      table: {
-        defaultValue: { summary: '(option) => option' },
       },
     },
     isOptionDisabled: {
@@ -48,158 +39,146 @@
 
 <Story name="Basic">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
+    id="basic"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
     label="Wähle eine oder mehrere Regionen:"
-    let:option
-    bind:selectedValues
-  >
-    {option}
-  </CheckBoxes>
+    bind:selectedOptions
+  />
   <div class="result">
     Selected values:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{selectedOptions}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Specify initially selected values">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
+    id="check-boxes-with-initial-values"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
     label="Wähle eine oder mehrere Regionen:"
-    let:option
-    bind:selectedValues={selectedValuesInitiallySet}
-  >
-    {option}
-  </CheckBoxes>
+    bind:selectedOptions={selectedOptionsInitiallySet}
+  />
   <div class="result">
     Selected values:
-    {#if selectedValuesInitiallySet.length > 0}
-      <i>{selectedValuesInitiallySet}</i>
+    {#if selectedOptionsInitiallySet.length > 0}
+      <i>{selectedOptionsInitiallySet}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="Update option on selection">
+<Story name="Custom option label">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
+    id="custom-option-label"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
     label="Wähle eine oder mehrere Regionen:"
+    bind:selectedOptions
     let:option
-    let:checked
-    bind:selectedValues
+    let:selected
   >
-    {option}
-    {#if checked}
-      (checked)
+    Hallo, {option}!
+    {#if selected}
+      (selected)
     {/if}
   </CheckBoxes>
   <div class="result">
     Selected values:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{selectedOptions}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Disabled option">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
+    id="disabled-option"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
     label="Wähle eine oder mehrere Regionen:"
     isOptionDisabled={(option) => option === 'Berlin'}
+    bind:selectedOptions
     let:option
-    bind:selectedValues
-  >
-    {option}
-  </CheckBoxes>
+  />
   <div class="result">
     Selected value:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{selectedOptions}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Complex options">
   <CheckBoxes
-    id="my-check-boxes"
-    options={complexOptions}
+    id="complex-options"
+    options={[
+      { label: 'Berlin', value: 'berlin' },
+      { label: 'Brandenburg', value: 'brandenburg' },
+      { label: 'Stadt', value: 'city' },
+      { label: 'Land', value: 'country' },
+    ]}
     label="Wähle eine oder mehrere Regionen:"
-    getOptionValue={(option) => option.value}
+    bind:selectedOptions
     let:option
-    bind:selectedValues
   >
     {option.label}
   </CheckBoxes>
   <div class="result">
     Selected values:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{JSON.stringify(selectedOptions)}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Custom accent color">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
-    colorScheme="yellow"
+    id="custom-accent-color"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
     label="Wähle eine oder mehrere Regionen:"
-    let:option
-    bind:selectedValues
-  >
-    {option}
-  </CheckBoxes>
+    --ui-color-accent="var(--c-ui-accent-purple)"
+    --ui-color-secondary="var(--c-purple-100)"
+    bind:selectedOptions
+  />
   <div class="result">
     Selected values:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{selectedOptions}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Hide label visually">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
+    id="hide-label-visually"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
     label="Wähle eine oder mehrere Regionen:"
     hideLabelVisually
-    let:option
-    bind:selectedValues
-  >
-    {option}
-  </CheckBoxes>
+    bind:selectedOptions
+  />
   <div class="result">
     Selected values:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{selectedOptions}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="External label via aria-labelledby">
-  <div id="select-region-label">Wähle eine oder mehrere Regionen:</div>
+<Story name="Chips">
   <CheckBoxes
-    id="my-check-boxes"
-    {options}
-    aria={{ labelledby: 'select-region-label' }}
-    let:option
-    bind:selectedValues
-  >
-    {option}
-  </CheckBoxes>
+    id="chips"
+    class="chips"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
+    bind:selectedOptions
+  />
   <div class="result">
     Selected values:
-    {#if selectedValues.length > 0}
-      <i>{selectedValues}</i>
+    {#if selectedOptions.length > 0}
+      <i>{selectedOptions}</i>
     {/if}
   </div>
 </Story>
 
-<style>
+<style lang="scss">
   .result {
     margin-top: var(--s-px-5);
     font-size: var(--font-size-sm);

@@ -105,7 +105,6 @@
   style:--c-accent={color}
   style:--c-light={colorLight}
   style:--c-focus={colorFocus}
-  aria-orientation={aria.orientation}
   aria-label={aria.label}
   aria-labelledby={aria.labelledby}
   aria-describedby={aria.describedby}

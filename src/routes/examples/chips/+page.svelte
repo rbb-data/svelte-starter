@@ -1,9 +1,7 @@
 <script>
-  import Chips from '$lib/components/shared/Chips.svelte';
+  import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
   import Button from '$lib/components/shared/Button.svelte';
   import CheckIcon from '$icons/Check.svelte';
-
-  import { cUiGray100 } from '$lib/tokens';
 
   const criterions = [
     'Diskutiert',
@@ -20,28 +18,33 @@
 </script>
 
 <div class="wrapper">
-  <Chips
+  <CheckBoxes
     id="chips--choose-criterions"
+    class="chips"
     label="Wähle deine Kriterien:"
     options={criterions}
-    colorScheme="turquoise"
-    customColors={{ light: cUiGray100 }}
-    bind:selectedValues={selectedCriterions}
+    bind:selectedOptions={selectedCriterions}
     let:option
-    let:checked
+    let:selected
   >
-    <div class="check-box" class:checked>
-      {#if checked}
+    <div class="check-box" class:selected>
+      {#if selected}
         <CheckIcon />
       {/if}
       <span class="content">{option}</span>
     </div>
-  </Chips>
+  </CheckBoxes>
 
-  <Button accentColor="turquoise">Ergebnisse anzeigen</Button>
+  <Button>Ergebnisse anzeigen</Button>
 </div>
 
 <style lang="scss">
+  .wrapper {
+    --button-color-accent: var(--c-ui-accent-turquoise);
+    --ui-color-accent: var(--c-turquoise-300);
+    --ui-color-secondary: var(--c-ui-gray-100);
+  }
+
   .check-box {
     --icon-size: 1.6em;
     --icon-padding: var(--s-px-1);
@@ -63,7 +66,7 @@
       transform: translateY(-50%);
     }
 
-    &.checked {
+    &.selected {
       .content {
         margin-left: calc(var(--icon-size) + var(--icon-padding));
       }

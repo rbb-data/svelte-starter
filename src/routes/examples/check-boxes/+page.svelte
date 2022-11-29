@@ -19,12 +19,9 @@
   id="check-boxes--choose-components"
   label="Wähle eine oder mehrere Komponenten:"
   {options}
-  getOptionValue={(option) => option.value}
-  colorScheme="purple"
-  customColors={{ light: 'transparent' }}
   {isOptionDisabled}
-  let:option
   bind:selectedValues={selectedComponents}
+  let:option
 >
   {option.label}
 

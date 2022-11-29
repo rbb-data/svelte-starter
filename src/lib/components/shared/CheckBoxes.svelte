@@ -2,11 +2,16 @@
   /**
    * Group of vertically aligned check boxes.
    *
+   * CSS variables:
+   *
+   * - `--ui-color-accent`: accent color _(default: blue)_
+   * - `--ui-color-secondary`: secondary color _(default: light blue)_
+   *
    * The rendered markup is composed of:
    *
    * - `.check-boxes`: assigned the given id
    * - `.check-boxes legend`
-   * - `.check-boxes .check-box`: with classes `.focused`, `.checked` and
+   * - `.check-boxes .check-box`: with classes `.focused`, `.selected` and
    *   `.disabled` applied appropriately
    * - `.check-boxes .check-box input[type="checkbox"]`
    *
@@ -14,9 +19,6 @@
    *
    * @component
    */
-
-  import * as tokens from '$lib/tokens';
-  import { cAccentId, c100Id } from '$lib/utils';
 
   /**
    * globally unique id
@@ -33,44 +35,21 @@
   export let options;
 
   /**
+   * label of the input group
+   *
+   * @type {string}
+   */
+  export let label;
+
+  /**
    * currently selected values
    *
    * @type {any[]}
    */
-  export let selectedValues = [];
-
-  /**
-   * label of the input group
-   *
-   * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
-   *
-   * @type {string | undefined}
-   */
-  export let label = undefined;
+  export let selectedOptions = [];
 
   /** hides label visually but keeps it around for screen readers */
   export let hideLabelVisually = false;
-
-  /**
-   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus` to pre-defined colors
-   *
-   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
-   */
-  export let colorScheme = 'blue';
-
-  /**
-   * sets CSS variables `--c-accent`, `--c-light` and `--c-focus`
-   *
-   * @type {{ accent?: string; light?: string; focus?: string }}
-   */
-  export let customColors = {};
-
-  /**
-   * function that maps an option to its value
-   *
-   * @type {(option: any) => any}
-   */
-  export let getOptionValue = (option) => option;
 
   /**
    * function that maps an option to `true` if disabled
@@ -79,73 +58,66 @@
    */
   export let isOptionDisabled = () => false;
 
-  /**
-   * ARIA attributes
-   *
-   * @type {{
-   *   label?: string;
-   *   labelledby?: string;
-   *   describedby?: string;
-   *   orientation?: 'horizontal' | 'vertical';
-   * }}
-   */
-  export let aria = { orientation: 'vertical' };
-
-  $: color = customColors.accent || tokens[cAccentId(colorScheme)];
-  $: colorLight = customColors.light || tokens[c100Id(colorScheme)];
-  $: colorFocus = customColors.focus || color;
-
   /** @type {any} */
-  let focusedValue = null;
+  let focusedOption = null;
+
+  $: console.log($$restProps);
 </script>
 
-<fieldset
-  {id}
-  class="check-boxes"
-  style:--c-accent={color}
-  style:--c-light={colorLight}
-  style:--c-focus={colorFocus}
-  aria-label={aria.label}
-  aria-labelledby={aria.labelledby}
-  aria-describedby={aria.describedby}
-  aria-orientation={aria.orientation}
->
+<fieldset {id} class:check-boxes={true} class={$$restProps.class}>
   {#if label}
     <legend class:visually-hidden={hideLabelVisually}>
       {label}
     </legend>
   {/if}
   {#each options as option}
-    {@const v = getOptionValue(option)}
-    {@const checked = selectedValues.includes(v)}
+    {@const checked = selectedOptions.includes(option)}
     {@const disabled = isOptionDisabled(option)}
-    {@const focused = v === focusedValue}
-    <label class="check-box" class:focused class:checked class:disabled>
+    {@const focused = option === focusedOption}
+    <label
+      class="check-box"
+      class:focused
+      class:checked
+      class:selected={checked}
+      class:disabled
+    >
       <input
         type="checkbox"
         name={id}
-        value={v}
+        value={option}
         {disabled}
-        bind:group={selectedValues}
+        bind:group={selectedOptions}
         on:focus={(e) => {
           const node = e.currentTarget;
           if (node.classList.contains('focus-visible')) {
-            focusedValue = v;
+            focusedOption = option;
           }
         }}
-        on:blur={() => (focusedValue = null)}
+        on:blur={() => (focusedOption = null)}
       />
-      <slot {option} {checked} />
+      <slot {option} selected={checked}>
+        {option}
+      </slot>
     </label>
   {/each}
 </fieldset>
 
 <style lang="scss">
   fieldset {
+    --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
+    --_ui-color-secondary: var(--ui-color-secondary, var(--c-blue-100));
+
+    --c-focus: var(--_ui-color-accent);
+
     width: 100%;
     border: 0;
     margin: 0;
     padding: 0;
+
+    &.chips {
+      --_ui-color-accent: var(--ui-color-accent, var(--c-blue-300));
+      --c-focus: var(--ui-color-accent, var(--c-ui-accent-blue));
+    }
   }
 
   legend {
@@ -156,9 +128,8 @@
 
   label {
     display: block;
-    cursor: pointer;
     padding: var(--s-px-2);
-    background-color: var(--c-light);
+    background-color: var(--_ui-color-secondary);
     margin: var(--s-px-2) 0;
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-semi-bold);
@@ -172,7 +143,6 @@
     }
 
     &.disabled {
-      cursor: default;
       opacity: 0.3;
     }
   }
@@ -192,8 +162,8 @@
     }
 
     &:checked {
-      background-color: var(--c-accent);
-      border: 1px solid var(--c-accent);
+      background-color: var(--_ui-color-accent);
+      border: 1px solid var(--_ui-color-accent);
     }
 
     &:checked::before {
@@ -202,6 +172,31 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) translate(0.5px, 1.5px);
+    }
+  }
+
+  // render check boxes as chips
+  .chips {
+    input[type='checkbox'] {
+      @include visually-hidden;
+    }
+
+    label {
+      display: inline-block;
+      width: max-content;
+      border-radius: 2em;
+      padding: var(--s-px-2) var(--s-px-4);
+      color: var(--c-ui-gray-400);
+      margin: var(--s-px-2) var(--s-px-2) 0 0;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+      &.selected {
+        background-color: var(--_ui-color-accent);
+        color: var(--c-ui-black);
+      }
     }
   }
 </style>
