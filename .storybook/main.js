@@ -44,6 +44,9 @@ module.exports = {
       },
     };
     config.base = '/svelte-starter/';
+    config.optimizeDeps = {
+      exclude: ['fsevents'],
+    };
     return config;
   },
 };
