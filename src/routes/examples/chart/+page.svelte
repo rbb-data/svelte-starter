@@ -264,12 +264,12 @@
 
     .axis-x {
       .zero-line {
-        stroke: var(--c-ui-gray-500);
+        stroke: var(--c-ui-black);
       }
 
       .tick {
         line {
-          stroke: var(--c-ui-gray-500);
+          stroke: var(--c-ui-black);
         }
 
         text {

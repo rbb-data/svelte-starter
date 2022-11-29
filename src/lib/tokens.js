@@ -1,4 +1,4 @@
-/** Do not edit directly Generated on Tue, 25 Oct 2022 14:55:09 GMT */
+/** Do not edit directly Generated on Tue, 29 Nov 2022 13:16:53 GMT */
 
 export const bpXs = 370; // mobile (narrow)
 export const bpSm = 480; // mobile
@@ -117,7 +117,7 @@ export const cMaleToFemale200 = '#399DA2';
 export const cMaleToFemale300 = '#5FBABA';
 export const cMaleToFemale400 = '#9DD8D6';
 export const cMaleToFemale500 = '#DFDED2';
-export const cMaleToFemale600 = '#AFA7D9';
+export const cMaleToFemale600 = '#AEA5DB';
 export const cMaleToFemale700 = '#8C79C3';
 export const cMaleToFemale800 = '#7050A5';
 export const cMaleToFemale900 = '#4C3562';
@@ -128,6 +128,7 @@ export const cCategoryBeige = '#AAA493';
 export const cCategoryYellow = '#F2A335';
 export const cCategoryRed = '#EA693E';
 export const cCategoryPurple = '#4C3562';
+export const cUiBlack = '#000000';
 export const cUiGray100 = '#EBEBEB';
 export const cUiGray200 = '#C0C0C0';
 export const cUiGray300 = '#8C8C8C';
@@ -140,7 +141,7 @@ export const cUiAccentPurple = '#7050A5';
 export const cUiAccentYellow = '#AC6115';
 export const cUiAccentRed = '#E61A1A';
 export const cGenderMale = '#5FBABA';
-export const cGenderFemale = '#72589D';
+export const cGenderFemale = '#7050A5';
 export const cGenderDiverse = '#F9C986';
 export const cChangeDecrease = '#4A9DD9';
 export const cChangeNeutral = '#DFDED2';

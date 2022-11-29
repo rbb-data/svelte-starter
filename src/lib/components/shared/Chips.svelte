@@ -142,7 +142,7 @@
 
       &.checked {
         background-color: var(--c-accent);
-        color: var(--c-ui-gray-500);
+        color: var(--c-ui-black);
       }
     }
   }

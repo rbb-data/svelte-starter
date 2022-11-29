@@ -420,13 +420,13 @@
       position: relative;
 
       &.focused {
-        --c-focus: var(--c-ui-gray-500);
+        --c-focus: var(--c-ui-black);
         @include focus-inset;
         z-index: 1;
       }
 
       &.selected {
-        color: var(--c-ui-gray-500);
+        color: var(--c-ui-black);
       }
 
       &.highlighted {

@@ -72,7 +72,7 @@
         border-bottom: 2px solid var(--c-accent);
 
         &.active {
-          color: var(--c-ui-gray-500);
+          color: var(--c-ui-black);
           background-color: var(--c-light);
         }
 

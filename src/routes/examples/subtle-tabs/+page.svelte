@@ -33,7 +33,7 @@
         border-bottom: 2px solid var(--c-light);
 
         &.active {
-          color: var(--c-ui-gray-500);
+          color: var(--c-ui-black);
           border-bottom-color: var(--c-accent);
         }
 

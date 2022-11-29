@@ -202,7 +202,7 @@
 
 <style lang="scss">
   .arrow {
-    --_color: var(--color, var(--c-ui-gray-500));
+    --_color: var(--color, var(--c-ui-black));
     --_width: var(--width, 1);
   }
 

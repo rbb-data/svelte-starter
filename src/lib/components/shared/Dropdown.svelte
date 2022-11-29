@@ -254,12 +254,12 @@
     font-weight: var(--font-weight-semi-bold);
 
     :global(.select.focus-visible) {
-      --c-focus: var(--c-ui-gray-500);
+      --c-focus: var(--c-ui-black);
       @include focus;
     }
 
     :global([role='listbox'] [role='option'].focus-visible) {
-      --c-focus: var(--c-ui-gray-500);
+      --c-focus: var(--c-ui-black);
       @include focus-inset;
       z-index: 1;
     }
@@ -323,7 +323,7 @@
       position: relative;
 
       &.selected {
-        color: var(--c-ui-gray-500);
+        color: var(--c-ui-black);
       }
 
       &:hover {
