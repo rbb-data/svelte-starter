@@ -25,6 +25,10 @@ const config = {
   build: {
     target: ['chrome68', 'firefox67', 'safari11', 'edge79', 'opera50', 'ios11'],
   },
+
+  optimizeDeps: {
+    exclude: ['fsevents'],
+  },
 };
 
 export default config;
