@@ -43,15 +43,15 @@
    */
   export let placeholder;
 
-  /** true, if the popup is currently shown */
-  export let isOpen = false;
-
   /**
    * currently selected item
    *
    * @type {any}
    */
   export let selectedOption = undefined;
+
+  /** true, if the popup is currently shown */
+  export let isOpen = false;
 
   /**
    * format an option; a selected option is formatted and displayed in the
@@ -229,7 +229,9 @@
             focusedIndex = getNextIndex(focusedIndex, options.length);
           }}
         >
-          <slot {option} {selected} />
+          <slot {option} {selected}>
+            {option}
+          </slot>
           {#if selected}
             <CheckIcon />
           {/if}
@@ -282,7 +284,6 @@
     width: 100%;
     padding: var(--padding-v) var(--padding-r) var(--padding-v) var(--padding-h);
     background-color: var(--c-ui-gray-100);
-    cursor: pointer;
     position: relative;
 
     &[aria-expanded='true'] :global(svg) {
@@ -290,7 +291,6 @@
     }
 
     &[aria-disabled='true'] {
-      cursor: default;
       color: rgba(0, 0, 0, 0.3);
       background-color: rgba(
         235,
@@ -319,7 +319,6 @@
     li {
       padding: var(--padding-v) var(--padding-h);
       color: var(--c-ui-gray-400);
-      cursor: pointer;
       position: relative;
 
       &.selected {
