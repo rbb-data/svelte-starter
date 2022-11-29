@@ -45,20 +45,13 @@
 
 <Tabs
   id="colored-tabs"
-  aria-label="Wähle einen Tab"
+  label="Wähle einen Tab"
   slants={false}
   {tabs}
   isTabDisabled={(tab) => tab === 'Tab 3'}
-  customColors={{
-    accent: getAccentColor,
-    light: getLightColor,
-    focus: getAccentColor,
-  }}
-  let:tab
+  getTabClass={(tab) => tab.toLowerCase().replace(' ', '-')}
   bind:activeIndex
->
-  {tab}
-</Tabs>
+/>
 
 <TabPanels id="colored-tabs" {tabs} {activeIndex} let:tab>
   <div class="panel">Panel for {tab}</div>
@@ -67,22 +60,31 @@
 <style lang="scss">
   :global {
     #colored-tabs {
+      --ui-color-accent: var(--c-ui-black);
+      --ui-color-secondary: var(--c-gray-100);
+
       [role='tab'] {
         background-color: #ffffff;
-        border-bottom: 2px solid var(--c-accent);
+        border-bottom: 2px solid var(--ui-color-accent);
 
         &.active {
           color: var(--c-ui-black);
-          background-color: var(--c-light);
+          background-color: var(--ui-color-secondary);
         }
 
-        &.disabled {
-          border-bottom-color: rgba(
-            191,
-            191,
-            191,
-            0.3
-          ); /* #bfbfbf with 0.3 opacity */
+        &.tab-1 {
+          --ui-color-accent: var(--c-ui-accent-blue);
+          --ui-color-secondary: var(--c-blue-100);
+        }
+
+        &.tab-2 {
+          --ui-color-accent: var(--c-ui-accent-purple);
+          --ui-color-secondary: var(--c-purple-100);
+        }
+
+        &.tab-3 {
+          --ui-color-accent: var(--c-ui-accent-yellow);
+          --ui-color-secondary: var(--c-yellow-100);
         }
       }
     }

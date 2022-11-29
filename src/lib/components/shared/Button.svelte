@@ -50,7 +50,7 @@
     color: var(--_color);
     background-color: var(--_background-color);
 
-    &[disabled] {
+    &:disabled {
       opacity: 0.3;
     }
 
