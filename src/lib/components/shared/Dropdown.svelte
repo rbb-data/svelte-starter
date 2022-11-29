@@ -19,7 +19,6 @@
   import DropdownIcon from '$icons/Dropdown.svelte';
   import CheckIcon from '$icons/Check.svelte';
 
-  import press from '$lib/actions/press';
   import typeahead from '$lib/actions/typeahead';
   import { getIndexBefore, getIndexAfter } from '$lib/utils';
 
@@ -147,7 +146,7 @@
     aria-disabled={disabled}
     disabled={false}
     bind:this={selectElement}
-    use:press={() => {
+    on:click={() => {
       if (disabled) return;
       isOpen = !isOpen;
       if (isOpen) {
@@ -202,7 +201,7 @@
           class:selected
           tabindex={selected || (!selectedOption && i === 0) ? 0 : -1}
           bind:this={optionElements[i]}
-          use:press={() => selectOption(option)}
+          on:click={() => selectOption(option)}
           on:keydown|preventDefault={(e) => {
             switch (e.key) {
               case 'Escape':

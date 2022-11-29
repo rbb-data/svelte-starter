@@ -22,7 +22,6 @@
    * @component
    */
 
-  import press from '$lib/actions/press';
   import * as colors from '$lib/tokens';
   import {
     cAccentId,
@@ -175,7 +174,7 @@
         focusedIndex = activeIndex;
       }}
       on:keydown={handleKeyDown}
-      use:press={(e) => {
+      on:click={(e) => {
         if (disabled) return;
         /** @type {HTMLButtonElement} */ (e.currentTarget).focus();
       }}

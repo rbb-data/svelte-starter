@@ -31,7 +31,6 @@
   import CheckIcon from '$icons/Check.svelte';
   import SearchIcon from '$icons/Search.svelte';
 
-  import press from '$lib/actions/press';
   import * as tokens from '$lib/tokens';
   import { cAccentId, getIndexBefore, getIndexAfter } from '$lib/utils';
 
@@ -279,7 +278,7 @@
           class:selected
           aria-selected={selected}
           bind:this={suggestionElements[i]}
-          use:press={() => {
+          on:click={() => {
             focusedIndex = i;
             submit();
             inputElement.focus();
