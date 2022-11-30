@@ -13,6 +13,7 @@ module.exports = {
   core: {
     builder: '@storybook/builder-vite',
   },
+  staticDirs: ['../static'],
   svelteOptions: {
     preprocess: [
       preprocess({
