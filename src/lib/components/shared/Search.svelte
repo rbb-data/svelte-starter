@@ -8,16 +8,15 @@
    *
    * The rendered markup is composed of:
    *
-   * - `.search`: assigned the given id
-   * - `.search form`
-   * - `.search form label`
-   * - `.search form .input-wrapper`
-   * - `.search form .input-wrapper input[role="combobox"]`: assigned the id
-   *   `{id}--input`, inferred from the given id
-   * - `.search form .input-wrapper button[type="submit"]`
-   * - `.search .suggestions`: assigned the id `{id}--listbox`, inferred from the given id
-   * - `.search .suggestions .suggestion`: with classes `.focused`, `.highlighted`
-   *   and `.selected` applied appropriately
+   * - `.search`: assigned the given id, wrapper element
+   * - `.search__form`: form that wraps the label, input and buttons
+   * - `.search__label`: label
+   * - `.search__field`: input field that wraps the text input and buttons
+   * - `.search__input`: text input
+   * - `.search__button-submit`: submit button
+   * - `.search__suggestions`: list of suggestions (only visible if expanded)
+   * - `.search__suggestion`: with classes `.focused`, `.highlighted` and
+   *   `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -199,22 +198,30 @@
 />
 
 <div {id} class="search">
-  <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
+  <form
+    class="search__form"
+    on:submit|preventDefault={handleSubmit}
+    on:keydown={handleKeyDown}
+  >
     {#if label}
-      <label for="{id}--input" class:visually-hidden={hideLabelVisually}>
+      <label
+        for="{id}__input"
+        class="search__label"
+        class:visually-hidden={hideLabelVisually}
+      >
         {label}
       </label>
     {/if}
-    <div class="input-wrapper">
+    <div class="search__field">
       <input
-        id="{id}--input"
+        id="{id}__input"
+        class="[ search__input ] [ reset ]"
         role="combobox"
         type="search"
-        class="[ reset ]"
         {placeholder}
         autocomplete="off"
         aria-haspopup="listbox"
-        aria-controls={isOpen ? `${id}--listbox` : null}
+        aria-controls={isOpen ? `${id}__listbox` : null}
         aria-expanded={isOpen}
         aria-autocomplete="list"
         aria-activedescendant={focusedIndex
@@ -230,7 +237,11 @@
         }}
       />
 
-      <button type="submit" class="[ reset ]" aria-label="Bestätigen">
+      <button
+        type="submit"
+        class="[ search__button-submit ] [ reset ]"
+        aria-label="Bestätigen"
+      >
         <SearchIcon color="#ffffff" />
       </button>
     </div>
@@ -238,8 +249,8 @@
 
   {#if isOpen}
     <ul
-      id="{id}--listbox"
-      class="[ suggestions ] [ shadow-sm ]"
+      id="{id}__listbox"
+      class="[ search__suggestions ] [ shadow-sm ]"
       role="listbox"
       aria-orientation="vertical"
     >
@@ -249,7 +260,7 @@
         {@const selected = selectedSuggestion === suggestion}
         <li
           id="{id}--option-{i}"
-          class="suggestion"
+          class="search__suggestion"
           role="option"
           class:focused
           class:highlighted
@@ -304,93 +315,93 @@
       right: var(--icon-padding);
       transform: translateY(-50%);
     }
-  }
 
-  .input-wrapper {
-    position: relative;
+    &__label {
+      display: block;
+      font-weight: var(--font-weight-semi-bold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--s-px-2);
+    }
 
-    /* can't use `overflow: hidden` here since that would cut off the focus ring;
+    &__field {
+      position: relative;
+
+      /* can't use `overflow: hidden` here since that would cut off the focus ring;
     instead, two pseudo elements are rendered above the overflowing content on both sides  */
 
-    &::after {
-      content: '';
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 12px; /* arbitrary value, depends on the degree of skewing */
+        height: calc(
+          100% + 8px
+        ); /* height plus focus ring on top and bottom (2*4px) */
+        background-color: var(--c-bg);
+        z-index: 2;
+        right: 0;
+        transform: translate(100%, -4px);
+      }
+    }
+
+    &__input {
+      width: 100%;
+      padding: var(--padding-v) var(--padding-h);
+      background-color: var(--c-ui-gray-100);
+      font-size: var(--font-size-base);
+
+      &::placeholder {
+        color: var(--c-ui-gray-400);
+        opacity: 1;
+        font-style: italic;
+        font-size: var(--font-size-sm);
+      }
+
+      /* hide clear button in Chrome */
+      &::-ms-clear,
+      &::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      /* hide clear button in Safari */
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        display: none;
+      }
+    }
+
+    &__button-submit {
       position: absolute;
       top: 0;
-      width: 12px; /* arbitrary value, depends on the degree of skewing */
-      height: calc(
-        100% + 8px
-      ); /* height plus focus ring on top and bottom (2*4px) */
-      background-color: var(--c-bg);
-      z-index: 2;
       right: 0;
-      transform: translate(100%, -4px);
-    }
-  }
+      height: 100%;
+      width: 54px; /* arbitrary value */
+      transform: skew(-10deg);
+      transform-origin: bottom;
+      background-color: var(--_ui-color-accent);
 
-  input[type='search'] {
-    width: 100%;
-    padding: var(--padding-v) var(--padding-h);
-    background-color: var(--c-ui-gray-100);
-    font-size: var(--font-size-base);
-
-    &::placeholder {
-      color: var(--c-ui-gray-400);
-      opacity: 1;
-      font-style: italic;
-      font-size: var(--font-size-sm);
+      :global(svg) {
+        transform: translateY(-50%) skew(10deg);
+      }
     }
 
-    /* hide clear button in Chrome */
-    &::-ms-clear,
-    &::-ms-reveal {
-      display: none;
-      width: 0;
-      height: 0;
+    &__suggestions {
+      list-style-type: none;
+      padding: 0;
+      margin-top: var(--offset);
+      position: absolute;
+      width: 100%;
+      background-color: #ffffff;
+
+      max-height: 200px;
+      overflow: auto;
     }
 
-    /* hide clear button in Safari */
-    &::-webkit-search-decoration,
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-      display: none;
-    }
-  }
-
-  label {
-    display: block;
-    font-weight: var(--font-weight-semi-bold);
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--s-px-2);
-  }
-
-  button[type='submit'] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 54px; /* arbitrary value */
-    transform: skew(-10deg);
-    transform-origin: bottom;
-    background-color: var(--_ui-color-accent);
-
-    :global(svg) {
-      transform: translateY(-50%) skew(10deg);
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: var(--offset);
-    position: absolute;
-    width: 100%;
-    background-color: #ffffff;
-
-    max-height: 200px;
-    overflow: auto;
-
-    li {
+    &__suggestion {
       padding: var(--padding-v) var(--padding-h);
       color: var(--c-ui-gray-400);
       position: relative;

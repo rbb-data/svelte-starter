@@ -4,6 +4,10 @@
    * aligned tabs. This component controls the _tab panels_ (i.e. the content
    * that is associated with a tab).
    *
+   * The rendered markup is composed of:
+   *
+   * - `.tabpanel`: wrapper element
+   *
    * **Note:** Must be used in conjunction with `<Tabs />`.
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
@@ -47,6 +51,7 @@
   {@const active = i === activeIndex}
   <div
     id="{id}--tabpanel-{i}"
+    class="tab-panel"
     role="tabpanel"
     aria-labelledby="{id}--tab-{i}"
     aria-expanded={active}

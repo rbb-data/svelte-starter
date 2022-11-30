@@ -12,7 +12,7 @@
    * The rendered markup is composed of:
    *
    * - `.tabs`: assigned the given id
-   * - `.tabs .tab`: with classes `.active` and `.disabled` applied appropriately
+   * - `.tabs__tab`: with classes `.active` and `.disabled` applied appropriately
    *
    * **Note:** Must be used in conjunction with `<TabPanels />`.
    *
@@ -121,7 +121,7 @@
       id="{id}--tab-{i}"
       type="button"
       role="tab"
-      class="{className || ''} [ tab ] [ reset ]"
+      class="{className || ''} [ tabs__tab ] [ reset ]"
       class:active
       class:disabled
       aria-controls="{id}--tabpanel-{i}"
@@ -150,7 +150,7 @@
 </div>
 
 <style lang="scss">
-  [role='tablist'] {
+  .tabs {
     --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
     --_ui-color-secondary: var(--ui-color-secondary, var(--c-ui-gray-100));
 
@@ -159,87 +159,89 @@
     width: 100%;
     display: flex;
 
-    &:not(.slants) {
-      [role='tab'] + [role='tab'] {
-        margin-left: var(--s-px-1);
+    &__tab {
+      --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
+      --_ui-color-secondary: var(--ui-color-secondary, var(--c-ui-gray-100));
+
+      --c-focus: var(--_ui-color-accent);
+
+      flex: 1;
+      font-size: var(--font-size-xs);
+      padding: var(--s-px-3) var(--s-px-4);
+      text-align: center;
+      white-space: nowrap;
+
+      color: var(--c-ui-gray-400);
+      font-weight: var(--font-weight-semi-bold);
+      background-color: var(--_ui-color-secondary);
+
+      &.active {
+        font-weight: var(--font-weight-bold);
+        background-color: var(--_ui-color-accent);
+        color: #ffffff;
+        z-index: 1;
+      }
+
+      &.disabled {
+        opacity: 0.3;
       }
     }
 
-    &.slants {
-      position: relative;
-
-      /* can't use `overflow: hidden` here since that would cut off the focus ring;
-      instead, two pseudo elements are rendered above the overflowing content on both sides  */
-
-      &::before,
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 12px; /* arbitrary value, depends on the degree of skewing */
-        height: calc(
-          100% + 8px
-        ); /* height plus focus ring on top and bottom (2*4px) */
-        background-color: var(--c-bg);
-        z-index: 2;
-      }
-
-      &::before {
-        left: 0;
-        transform: translate(-100%, -4px);
-      }
-
-      &::after {
-        right: 0;
-        transform: translate(100%, -4px);
-      }
-
-      [role='tab'] {
-        transform: skew(-10deg);
-        transform-origin: center;
-
-        &:first-child {
-          transform-origin: top;
-        }
-
-        &:last-child {
-          transform-origin: bottom;
-        }
-
-        div {
-          /* unskew text content */
-          transform: skew(10deg);
-          display: inline-block;
-        }
-      }
+    &__tab + &__tab {
+      margin-left: var(--s-px-1);
     }
   }
 
-  [role='tab'] {
-    --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
-    --_ui-color-secondary: var(--ui-color-secondary, var(--c-ui-gray-100));
+  .slants {
+    position: relative;
 
-    --c-focus: var(--_ui-color-accent);
+    /* can't use `overflow: hidden` here since that would cut off the focus ring;
+      instead, two pseudo elements are rendered above the overflowing content on both sides  */
 
-    flex: 1;
-    font-size: var(--font-size-xs);
-    padding: var(--s-px-3) var(--s-px-4);
-    text-align: center;
-    white-space: nowrap;
-
-    color: var(--c-ui-gray-400);
-    font-weight: var(--font-weight-semi-bold);
-    background-color: var(--_ui-color-secondary);
-
-    &.active {
-      font-weight: var(--font-weight-bold);
-      background-color: var(--_ui-color-accent);
-      color: #ffffff;
-      z-index: 1;
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 12px; /* arbitrary value, depends on the degree of skewing */
+      height: calc(
+        100% + 8px
+      ); /* height plus focus ring on top and bottom (2*4px) */
+      background-color: var(--c-bg);
+      z-index: 2;
     }
 
-    &.disabled {
-      opacity: 0.3;
+    &::before {
+      left: 0;
+      transform: translate(-100%, -4px);
+    }
+
+    &::after {
+      right: 0;
+      transform: translate(100%, -4px);
+    }
+
+    .tabs__tab {
+      transform: skew(-10deg);
+      transform-origin: center;
+
+      &:first-child {
+        transform-origin: top;
+      }
+
+      &:last-child {
+        transform-origin: bottom;
+      }
+
+      div {
+        /* unskew text content */
+        transform: skew(10deg);
+        display: inline-block;
+      }
+    }
+
+    .tabs__tab + .tabs__tab {
+      margin-left: 0;
     }
   }
 </style>

@@ -7,6 +7,10 @@
    * - `--button-color-accent`: accent color _(default: blue)_
    * - `--button-color-secondary`: secondary color _(default: white)_
    *
+   * The rendered markup is composed of:
+   *
+   * - `.button`: button
+   *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
    * @component
@@ -16,7 +20,13 @@
   export let type = 'primary';
 </script>
 
-<button type="button" {...$$restProps} on:click data-type={type}>
+<button
+  type="button"
+  class:button={true}
+  {...$$restProps}
+  on:click
+  data-type={type}
+>
   <slot>Button</slot>
 </button>
 

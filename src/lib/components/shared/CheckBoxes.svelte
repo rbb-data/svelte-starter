@@ -7,13 +7,17 @@
    * - `--ui-color-accent`: accent color _(default: blue)_
    * - `--ui-color-secondary`: secondary color _(default: light blue)_
    *
+   * Classes:
+   *
+   * - `.chips`: apply to style as inline chips
+   *
    * The rendered markup is composed of:
    *
-   * - `.check-boxes`: assigned the given id
-   * - `.check-boxes legend`
-   * - `.check-boxes .check-box`: with classes `.focused`, `.selected` and
-   *   `.disabled` applied appropriately
-   * - `.check-boxes .check-box input[type="checkbox"]`
+   * - `.check-boxes`: assigned the given id, wrapper element
+   * - `.check-boxes__label`: label
+   * - `.check-boxes__option`: single option, with classes `.focused`, `.selected`
+   *   and `.disabled` applied appropriately
+   * - `.check-boxes__input`: checkbox input
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -66,7 +70,10 @@
 
 <fieldset {id} class:check-boxes={true} class={$$restProps.class}>
   {#if label}
-    <legend class:visually-hidden={hideLabelVisually}>
+    <legend
+      class="check-boxes__label"
+      class:visually-hidden={hideLabelVisually}
+    >
       {label}
     </legend>
   {/if}
@@ -75,13 +82,14 @@
     {@const disabled = isOptionDisabled(option)}
     {@const focused = option === focusedOption}
     <label
-      class="check-box"
+      class="check-boxes__option"
       class:focused
       class:checked
       class:selected={checked}
       class:disabled
     >
       <input
+        class="check-boxes__input"
         type="checkbox"
         name={id}
         value={option}
@@ -103,7 +111,7 @@
 </fieldset>
 
 <style lang="scss">
-  fieldset {
+  .check-boxes {
     --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
     --_ui-color-secondary: var(--ui-color-secondary, var(--c-blue-100));
 
@@ -114,74 +122,68 @@
     margin: 0;
     padding: 0;
 
-    &.chips {
-      --_ui-color-accent: var(--ui-color-accent, var(--c-blue-300));
-      --c-focus: var(--ui-color-accent, var(--c-ui-accent-blue));
-    }
-  }
-
-  legend {
-    font-weight: var(--font-weight-semi-bold);
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--s-px-2);
-  }
-
-  label {
-    display: block;
-    padding: var(--s-px-2);
-    background-color: var(--_ui-color-secondary);
-    margin: var(--s-px-2) 0;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semi-bold);
-    white-space: nowrap;
-
-    display: flex;
-    align-items: center;
-
-    &.focused {
-      @include focus;
+    &__label {
+      font-weight: var(--font-weight-semi-bold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--s-px-2);
     }
 
-    &.disabled {
-      opacity: 0.3;
-    }
-  }
+    &__option {
+      display: block;
+      padding: var(--s-px-2);
+      background-color: var(--_ui-color-secondary);
+      margin: var(--s-px-2) 0;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semi-bold);
+      white-space: nowrap;
 
-  input[type='checkbox'] {
-    appearance: none;
-    border-radius: 0;
-    width: 1.2em;
-    height: 1.2em;
-    background-color: transparent;
-    margin-right: var(--s-px-2);
-    border: 1px solid currentColor;
-    position: relative;
+      display: flex;
+      align-items: center;
 
-    &:focus {
-      box-shadow: none;
-    }
+      &.focused {
+        @include focus;
+      }
 
-    &:checked {
-      background-color: var(--_ui-color-accent);
-      border: 1px solid var(--_ui-color-accent);
+      &.disabled {
+        opacity: 0.3;
+      }
     }
 
-    &:checked::before {
-      content: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' style='fill:white;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2'%3E%3Cpath style='fill:none' d='M0 0h32v32H0z'/%3E%3Cpath d='M14.078 18.772 9.6 12.8l-3.2 2.4L13 24h2.133l10.461-13.791-3.187-2.417-8.329 10.98Z'/%3E%3C/svg%3E");
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) translate(0.5px, 1.5px);
+    &__input {
+      appearance: none;
+      border-radius: 0;
+      width: 1.2em;
+      height: 1.2em;
+      background-color: transparent;
+      margin-right: var(--s-px-2);
+      border: 1px solid currentColor;
+      position: relative;
+
+      &:focus {
+        box-shadow: none;
+      }
+
+      &:checked {
+        background-color: var(--_ui-color-accent);
+        border: 1px solid var(--_ui-color-accent);
+      }
+
+      &:checked::before {
+        content: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' style='fill:white;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2'%3E%3Cpath style='fill:none' d='M0 0h32v32H0z'/%3E%3Cpath d='M14.078 18.772 9.6 12.8l-3.2 2.4L13 24h2.133l10.461-13.791-3.187-2.417-8.329 10.98Z'/%3E%3C/svg%3E");
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translate(0.5px, 2px);
+      }
     }
   }
 
   // render check boxes as chips
   .chips {
-    input[type='checkbox'] {
-      @include visually-hidden;
-    }
+    --_ui-color-accent: var(--ui-color-accent, var(--c-blue-300));
+    --c-focus: var(--ui-color-accent, var(--c-ui-accent-blue));
 
-    label {
+    .check-boxes__option {
       display: inline-block;
       width: max-content;
       border-radius: 2em;
@@ -197,6 +199,10 @@
         background-color: var(--_ui-color-accent);
         color: var(--c-ui-black);
       }
+    }
+
+    .check-boxes__input {
+      @include visually-hidden;
     }
   }
 </style>

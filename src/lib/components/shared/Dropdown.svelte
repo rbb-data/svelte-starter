@@ -4,10 +4,10 @@
    *
    * The rendered markup is composed of:
    *
-   * - `.dropdown`: assigned the given id
-   * - `.dropdown button[role="combobox"]`
-   * - `.dropdown .options`: assigned the id `{id}--listbox`, inferred from the given id
-   * - `.dropdown .options .option`: with class `.selected` applied appropriately
+   * - `.dropdown`: assigned the given id, wrapper element
+   * - `.dropdown__field`: clickable field
+   * - `.dropdown__options`: list of options (only visible if expanded)
+   * - `.dropdown__option`: with class `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -145,19 +145,23 @@
 />
 
 <div {id} class="dropdown">
-  <div id="{id}--label" class="label" class:visually-hidden={hideLabelVisually}>
+  <div
+    id="{id}__label"
+    class="dropdown__label"
+    class:visually-hidden={hideLabelVisually}
+  >
     {label}
   </div>
   <button
     role="combobox"
-    class="[ select ] [ reset ]"
+    class="[ dropdown__field ] [ reset ]"
     type="button"
     aria-haspopup="listbox"
-    aria-controls={isOpen ? `${id}--listbox` : null}
+    aria-controls={isOpen ? `${id}__listbox` : null}
     aria-expanded={isOpen}
     aria-autocomplete="none"
     aria-disabled={disabled}
-    aria-labelledby="{id}--label"
+    aria-labelledby="{id}__label"
     disabled={false}
     bind:this={selectElement}
     on:click={() => {
@@ -192,8 +196,8 @@
 
   {#if isOpen}
     <ul
-      id="{id}--listbox"
-      class="[ options ] [ shadow-sm ]"
+      id="{id}__listbox"
+      class="[ dropdown__options ] [ shadow-sm ]"
       role="listbox"
       aria-orientation="vertical"
       use:typeahead={{
@@ -209,7 +213,7 @@
       {#each options as option, i}
         {@const selected = selectedOption === option}
         <li
-          class="option"
+          class="dropdown__option"
           role="option"
           aria-selected={selected}
           class:selected
@@ -264,79 +268,62 @@
     --icon-padding-left: var(--s-px-2);
     --offset: var(--s-px-2);
 
+    --c-focus: var(--c-ui-black);
+
     width: 100%;
     position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
 
-    .label {
+    &__label {
       font-weight: var(--font-weight-semi-bold);
       font-size: var(--font-size-sm);
       margin-bottom: var(--s-px-2);
     }
 
-    :global(.select.focus-visible) {
-      --c-focus: var(--c-ui-black);
-      @include focus;
-    }
+    &__field {
+      --padding-r: calc(
+        var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
+      );
 
-    :global([role='listbox'] [role='option'].focus-visible) {
-      --c-focus: var(--c-ui-black);
-      @include focus-inset;
-      z-index: 1;
-    }
+      width: 100%;
+      padding: var(--padding-v) var(--padding-r) var(--padding-v)
+        var(--padding-h);
+      background-color: var(--c-ui-gray-100);
+      position: relative;
 
-    :global(svg) {
-      width: var(--icon-size);
-      height: var(--icon-size);
-      position: absolute;
-      top: 50%;
-      right: var(--icon-padding-right);
-      transform: translateY(-50%);
-    }
-  }
+      &[aria-expanded='true'] :global(svg) {
+        transform: translateY(-50%) rotate(180deg);
+      }
 
-  .select {
-    --padding-r: calc(
-      var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
-    );
+      &[aria-disabled='true'] {
+        color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(
+          235,
+          235,
+          235,
+          0.3
+        ); /* var(--c-ui-gray-100) with opacity 0.3 */
 
-    width: 100%;
-    padding: var(--padding-v) var(--padding-r) var(--padding-v) var(--padding-h);
-    background-color: var(--c-ui-gray-100);
-    position: relative;
-
-    &[aria-expanded='true'] :global(svg) {
-      transform: translateY(-50%) rotate(180deg);
-    }
-
-    &[aria-disabled='true'] {
-      color: rgba(0, 0, 0, 0.3);
-      background-color: rgba(
-        235,
-        235,
-        235,
-        0.3
-      ); /* var(--c-ui-gray-100) with opacity 0.3 */
-
-      :global(svg) {
-        opacity: 0.3;
+        :global(svg) {
+          opacity: 0.3;
+        }
       }
     }
-  }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-    margin-top: var(--offset);
-    position: absolute;
-    width: 100%;
-    background-color: #ffffff;
+    &__options {
+      list-style-type: none;
+      padding: 0;
+      margin-top: var(--offset);
+      position: absolute;
+      width: 100%;
+      background-color: #ffffff;
 
-    max-height: 200px;
-    overflow: auto;
+      max-height: 200px;
+      overflow: auto;
+    }
 
-    li {
+    &__option {
       padding: var(--padding-v) var(--padding-h);
       color: var(--c-ui-gray-400);
       position: relative;
@@ -348,6 +335,20 @@
       &:hover {
         background-color: var(--c-ui-gray-100);
       }
+    }
+
+    :global(.dropdown__option.focus-visible) {
+      @include focus-inset;
+      z-index: 1;
+    }
+
+    :global(svg) {
+      width: var(--icon-size);
+      height: var(--icon-size);
+      position: absolute;
+      top: 50%;
+      right: var(--icon-padding-right);
+      transform: translateY(-50%);
     }
   }
 </style>

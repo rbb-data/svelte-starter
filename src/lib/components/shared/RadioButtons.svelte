@@ -9,11 +9,11 @@
    *
    * The rendered markup is composed of:
    *
-   * - `.radio-buttons`: assigned the given id
-   * - `.radio-buttons legend`
-   * - `.radio-buttons .radio-button`: with classes `.focused`, `.selected` and
-   *   `.disabled` applied appropriately
-   * - `.radio-buttons .radio-button input[type="radio"]`
+   * - `.radio-buttons`: assigned the given id, wrapper element
+   * - `.radio-buttons__label`: label
+   * - `.radio-buttons__option`: single option, with classes `.focused`,
+   *   `.selected` and `.disabled` applied appropriately
+   * - `.radio-buttons__input`: radio input
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -58,17 +58,16 @@
    */
   export let isOptionDisabled = () => false;
 
-  // $: color = customColors.accent || tokens[cAccentId(colorScheme)];
-  // $: colorLight = customColors.light || tokens[c100Id(colorScheme)];
-  // $: colorFocus = customColors.focus || color;
-
   /** @type {any} */
   let focusedOption = null;
 </script>
 
 <fieldset {id} class:radio-buttons={true} class={$$restProps.class}>
   {#if label}
-    <legend class:visually-hidden={hideLabelVisually}>
+    <legend
+      class="radio-buttons__label"
+      class:visually-hidden={hideLabelVisually}
+    >
       {label}
     </legend>
   {/if}
@@ -77,13 +76,14 @@
     {@const disabled = isOptionDisabled(option)}
     {@const focused = option === focusedOption}
     <label
-      class="radio-button"
+      class="radio-buttons__option"
       class:focused
       class:checked
       class:selected={checked}
       class:disabled
     >
       <input
+        class="radio-buttons__input"
         type="radio"
         name={id}
         value={option}
@@ -105,7 +105,7 @@
 </fieldset>
 
 <style lang="scss">
-  fieldset {
+  .radio-buttons {
     --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
     --_ui-color-secondary: var(--ui-color-secondary, var(--c-blue-100));
 
@@ -115,51 +115,51 @@
     border: 0;
     margin: 0;
     padding: 0;
-  }
 
-  legend {
-    font-weight: var(--font-weight-semi-bold);
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--s-px-2);
-  }
-
-  label {
-    display: block;
-    padding: var(--s-px-2);
-    background-color: var(--_ui-color-secondary);
-    margin: var(--s-px-2) 0;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-semi-bold);
-    white-space: nowrap;
-
-    display: flex;
-    align-items: center;
-
-    &.focused {
-      @include focus;
+    &__label {
+      font-weight: var(--font-weight-semi-bold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--s-px-2);
     }
 
-    &.disabled {
-      opacity: 0.3;
+    &__option {
+      display: block;
+      padding: var(--s-px-2);
+      background-color: var(--_ui-color-secondary);
+      margin: var(--s-px-2) 0;
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-semi-bold);
+      white-space: nowrap;
+
+      display: flex;
+      align-items: center;
+
+      &.focused {
+        @include focus;
+      }
+
+      &.disabled {
+        opacity: 0.3;
+      }
     }
-  }
 
-  input[type='radio'] {
-    appearance: none;
+    &__input {
+      appearance: none;
 
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: var(--s-px-2);
-    border-radius: 50%;
-    border: 1px solid black;
+      width: 1.2em;
+      height: 1.2em;
+      margin-right: var(--s-px-2);
+      border-radius: 50%;
+      border: 1px solid black;
 
-    &:focus {
-      box-shadow: none;
-    }
+      &:focus {
+        box-shadow: none;
+      }
 
-    &:checked {
-      border: 5px solid var(--_ui-color-accent);
-      background-color: white;
+      &:checked {
+        border: 5px solid var(--_ui-color-accent);
+        background-color: white;
+      }
     }
   }
 </style>
