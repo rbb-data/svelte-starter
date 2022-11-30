@@ -67,6 +67,11 @@ update_iframe_snippet() {
   sed -i '' 's/{project-name}/'"$project_name"'/g' iframe.html
 }
 
+update_page_title() {
+  # substitute '{project-name}' in the html root file
+  sed -i '' 's/{project-name}/'"$project_name"'/g' src/app.html
+}
+
 main() {
   # get the current folder name
   project_name=$(basename $(pwd))
@@ -84,6 +89,7 @@ main() {
   update_environment_variables
   update_readme
   update_iframe_snippet
+  update_page_title
 }
 
 main "$@"
