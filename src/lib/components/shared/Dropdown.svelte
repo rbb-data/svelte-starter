@@ -30,6 +30,13 @@
   export let id;
 
   /**
+   * visually hidden label
+   *
+   * @type {string}
+   */
+  export let label;
+
+  /**
    * list of options to choose from
    *
    * @type {any[]}
@@ -42,6 +49,9 @@
    * @type {string}
    */
   export let placeholder;
+
+  /** hides label visually but keep it around for screen readers */
+  export let hideLabelVisually = false;
 
   /**
    * currently selected item
@@ -135,6 +145,9 @@
 />
 
 <div {id} class="dropdown">
+  <div id="{id}--label" class="label" class:visually-hidden={hideLabelVisually}>
+    {label}
+  </div>
   <button
     role="combobox"
     class="[ select ] [ reset ]"
@@ -144,6 +157,7 @@
     aria-expanded={isOpen}
     aria-autocomplete="none"
     aria-disabled={disabled}
+    aria-labelledby="{id}--label"
     disabled={false}
     bind:this={selectElement}
     on:click={() => {
@@ -254,6 +268,12 @@
     position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
+
+    .label {
+      font-weight: var(--font-weight-semi-bold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--s-px-2);
+    }
 
     :global(.select.focus-visible) {
       --c-focus: var(--c-ui-black);

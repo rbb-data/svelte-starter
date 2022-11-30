@@ -2,6 +2,10 @@
   /**
    * Input widget with an associated popup for suggestions.
    *
+   * CSS variables:
+   *
+   * - `--ui-color-accent`: accent color _(default: blue)_
+   *
    * The rendered markup is composed of:
    *
    * - `.search`: assigned the given id
@@ -21,7 +25,7 @@
    * can't be used on the container element as that would cut off the focus
    * ring. Instead, a pseudo element is rendered that hides the overflowing
    * content. Its color defaults to white but can be overwritten by setting the
-   * CSS variable `--c-background`.
+   * CSS variable `--c-bg`.
    *
    * @component
    */
@@ -31,8 +35,7 @@
   import CheckIcon from '$icons/Check.svelte';
   import SearchIcon from '$icons/Search.svelte';
 
-  import * as tokens from '$lib/tokens';
-  import { cAccentId, getIndexBefore, getIndexAfter } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from '$lib/utils';
 
   /**
    * globally unique id
@@ -49,6 +52,16 @@
    * @type {(query: string) => any[] | Promise<any[]>}
    */
   export let search;
+
+  /**
+   * label of the input field
+   *
+   * @type {string}
+   */
+  export let label;
+
+  /** hides label visually but keeps it around for screen readers */
+  export let hideLabelVisually = false;
 
   /**
    * shown in the input field if empty
@@ -75,36 +88,6 @@
    */
   export let formatSuggestion = (suggestion) => suggestion;
 
-  /**
-   * accent color used for the button and the focus ring
-   *
-   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
-   */
-  export let accentColor = 'blue';
-
-  /**
-   * label of the input field
-   *
-   * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
-   *
-   * @type {string | undefined}
-   */
-  export let label = undefined;
-
-  /** hides label visually but keeps it around for screen readers */
-  export let hideLabelVisually = false;
-
-  /**
-   * ARIA attributes
-   *
-   * @type {{
-   *   label?: string;
-   *   labelledby?: string;
-   *   describedby?: string;
-   * }}
-   */
-  export let aria = {};
-
   /** @type {HTMLInputElement} */
   let inputElement;
 
@@ -119,8 +102,6 @@
 
   /** @type {HTMLElement[]} */
   let suggestionElements = [];
-
-  $: color = tokens[cAccentId(accentColor)];
 
   /** @type {any[]} */
   let suggestions = [];
@@ -217,7 +198,7 @@
   }}
 />
 
-<div {id} class="search" style:--c-accent={color}>
+<div {id} class="search">
   <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
     {#if label}
       <label for="{id}--input" class:visually-hidden={hideLabelVisually}>
@@ -247,9 +228,6 @@
           if (selectedIndex < 0) selectedIndex = undefined;
           highlightedIndex = selectedIndex || focusedIndex || 0;
         }}
-        aria-label={aria.label}
-        aria-labelledby={aria.labelledby}
-        aria-describedby={aria.describedby}
       />
 
       <button type="submit" class="[ reset ]" aria-label="Bestätigen">
@@ -289,7 +267,9 @@
           on:touchend={() => (highlightedIndex = undefined)}
           on:touchcancel={() => (highlightedIndex = undefined)}
         >
-          <slot {suggestion} {selected} />
+          <slot {suggestion} {selected}>
+            {suggestion}
+          </slot>
           {#if selected}
             <CheckIcon />
           {/if}
@@ -301,7 +281,10 @@
 
 <style lang="scss">
   .search {
-    --c-background: #ffffff;
+    --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
+
+    --c-focus: var(--_ui-color-accent);
+
     --padding-v: var(--s-px-2);
     --padding-h: var(--s-px-4);
     --icon-size: 1.6em;
@@ -337,7 +320,7 @@
       height: calc(
         100% + 8px
       ); /* height plus focus ring on top and bottom (2*4px) */
-      background-color: var(--c-background);
+      background-color: var(--c-bg);
       z-index: 2;
       right: 0;
       transform: translate(100%, -4px);
@@ -349,11 +332,6 @@
     padding: var(--padding-v) var(--padding-h);
     background-color: var(--c-ui-gray-100);
     font-size: var(--font-size-base);
-
-    &.focus-visible {
-      --c-focus: var(--c-accent);
-      @include focus;
-    }
 
     &::placeholder {
       color: var(--c-ui-gray-400);
@@ -394,8 +372,7 @@
     width: 54px; /* arbitrary value */
     transform: skew(-10deg);
     transform-origin: bottom;
-    background-color: var(--c-accent);
-    cursor: pointer;
+    background-color: var(--_ui-color-accent);
 
     :global(svg) {
       transform: translateY(-50%) skew(10deg);
@@ -416,7 +393,6 @@
     li {
       padding: var(--padding-v) var(--padding-h);
       color: var(--c-ui-gray-400);
-      cursor: pointer;
       position: relative;
 
       &.focused {

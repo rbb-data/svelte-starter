@@ -36,6 +36,7 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       bind:selectedOption
@@ -53,6 +54,7 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       isOpen={true}
@@ -71,6 +73,7 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       bind:selectedOption={selectedOptionInitiallySet}
@@ -88,6 +91,7 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
       options={[
         { label: 'Frühling', value: 'spring' },
         { label: 'Sommer', value: 'summer' },
@@ -114,9 +118,29 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       disabled
+      bind:selectedOption
+    />
+    <div class="result">
+      Selected value:
+      {#if selectedOption}
+        <i>{selectedOption}</i>
+      {/if}
+    </div>
+  </div>
+</Story>
+
+<Story name="Hide label visually">
+  <div class="wrapper">
+    <Dropdown
+      id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
+      hideLabelVisually
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
+      placeholder="Jahreszeiten"
       bind:selectedOption
     />
     <div class="result">
