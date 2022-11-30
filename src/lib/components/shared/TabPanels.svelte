@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * `<Tabs />` and `<TabPanels />` work together to orchestrate horizontally
    * aligned tabs. This component controls the _tab panels_ (i.e. the content
@@ -15,28 +15,18 @@
    * @component
    */
 
+  type Tab = $$Generic;
+
   import { onMount } from 'svelte';
 
-  /**
-   * globally unique id, must match the id of the associated Tabs element
-   *
-   * @type {string}
-   */
-  export let id;
+  /** globally unique id, must match the id of the associated Tabs element */
+  export let id: string;
 
-  /**
-   * list of tabs
-   *
-   * @type {any[]}
-   */
-  export let tabs;
+  /** list of tabs */
+  export let tabs: Tab[];
 
-  /**
-   * index of the active tab
-   *
-   * @type {number}
-   */
-  export let activeIndex;
+  /** index of the active tab */
+  export let activeIndex: number;
 
   onMount(() => {
     if (!document.getElementById(id)) {

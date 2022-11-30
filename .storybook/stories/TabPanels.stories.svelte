@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import Tabs from '$lib/components/shared/Tabs.svelte';
@@ -11,8 +11,7 @@
     { label: 'Tab 3', data: [3, 4, 5] },
   ];
 
-  /** @type {number} */
-  let activeIndex;
+  let activeIndex: number;
   let activeIndexInitallySelected = 1;
 </script>
 

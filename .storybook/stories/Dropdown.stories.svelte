@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import Dropdown from '$lib/components/shared/Dropdown.svelte';
 
-  /** @type {string[]} */
-  let selectedOption;
+  let selectedOption: string;
+  let selectedComplexOption: { label: string; value: string };
   let selectedOptionInitiallySet = 'Sommer';
 </script>
 
@@ -100,7 +100,7 @@
       ]}
       placeholder="Jahreszeiten"
       formatOption={(option) => option.label}
-      bind:selectedOption
+      bind:selectedOption={selectedComplexOption}
       let:option
     >
       {option.label}

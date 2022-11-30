@@ -1,24 +1,27 @@
-<script>
+<script lang="ts">
   /**
    * Basic table.
    *
    * @component
    */
 
-  /** @type {any[]} */
-  export let data;
+  type D = $$Generic;
+
+  export let data: D[];
 
   /**
    * specifies the name of a column and the data it holds (`getValue` receives
    * an item in `data`); optionally, define a class name that allows to address
    * the column via CSS
-   *
-   * @type {{ name: string; getValue: (d: any) => any; class?: string }[]}
    */
-  export let columns;
+  export let columns: {
+    name: string;
+    getValue: (d: D) => any;
+    class?: string;
+  }[];
 
-  /** @type {string} */
-  export let caption;
+  /** label */
+  export let caption: string;
 
   /**
    * if true, an entry in the first column serves as label for the respective

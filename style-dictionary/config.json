@@ -32,7 +32,7 @@
       "buildPath": "src/lib/",
       "files": [
         {
-          "destination": "tokens.js",
+          "destination": "tokens.ts",
           "format": "javascript/es6"
         }
       ]

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * `<Tabs />` and `<TabPanels />` work together to orchestrate horizontally
    * aligned tabs. This component controls the tabs itself (i.e. the clickable
@@ -29,63 +29,40 @@
 
   import { getIndexBefore, getIndexAfter } from './helpers';
 
-  /**
-   * globally unique id, must match the id of the associated TabPanels element
-   *
-   * @type {string}
-   */
-  export let id;
+  type Tab = $$Generic;
 
-  /**
-   * list of tabs
-   *
-   * @type {any[]}
-   */
-  export let tabs;
+  /** globally unique id, must match the id of the associated TabPanels element */
+  export let id: string;
 
-  /**
-   * visually hidden label
-   *
-   * @type {string}
-   */
-  export let label;
+  /** list of tabs */
+  export let tabs: Tab[];
 
-  /**
-   * index of the active tab
-   *
-   * @type {number}
-   */
+  /** visually hidden label */
+  export let label: string;
+
+  /** index of the active tab */
   export let activeIndex = 0;
 
   /** if true, render rbb-like slants */
   export let slants = true;
 
-  /**
-   * function that maps a tab to `true` if disabled
-   *
-   * @type {(tab: any) => boolean}
-   */
-  export let isTabDisabled = () => false;
+  /** function that maps a tab to `true` if disabled */
+  export let isTabDisabled: (tab: Tab) => boolean = () => false;
 
   /**
    * function that maps a tab to a classname that will be assigned to the
    * respective tab
-   *
-   * @type {(tab: any) => string | null}
    */
-  export let getTabClass = () => null;
+  export let getTabClass: (tab: Tab) => string | null = () => null;
 
-  /** @type {HTMLButtonElement[]} */
-  let buttons = [];
+  let buttons: HTMLButtonElement[] = [];
 
   let focusedIndex = activeIndex;
 
-  /** @param {KeyboardEvent} e */
-  function handleKeyDown(e) {
-    /** @typedef {'Home' | 'End' | 'ArrowLeft' | 'ArrowRight'} AllowedKey */
+  function handleKeyDown(e: KeyboardEvent) {
+    type AllowedKey = 'Home' | 'End' | 'ArrowLeft' | 'ArrowRight';
 
-    /** @param {AllowedKey} keyPressed */
-    const getNextIndex = (keyPressed) => {
+    const getNextIndex = (keyPressed: AllowedKey) => {
       switch (keyPressed) {
         case 'Home':
           return 0;
@@ -99,7 +76,7 @@
     };
 
     if (!['Home', 'End', 'ArrowLeft', 'ArrowRight'].includes(e.key)) return;
-    const nextIndex = getNextIndex(/** @type {AllowedKey} */ (e.key));
+    const nextIndex = getNextIndex(e.key as AllowedKey);
     buttons[nextIndex].focus();
     focusedIndex = nextIndex;
   }

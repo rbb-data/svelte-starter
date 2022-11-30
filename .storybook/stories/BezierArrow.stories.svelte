@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import BezierArrow from '$lib/components/shared/BezierArrow.svelte';

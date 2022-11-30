@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Group of vertically aligned radio buttons.
    *
@@ -20,46 +20,27 @@
    * @component
    */
 
-  /**
-   * globally unique id
-   *
-   * @type {string}
-   */
-  export let id;
+  type Option = $$Generic;
 
-  /**
-   * list of options
-   *
-   * @type {any[]}
-   */
-  export let options;
+  /** globally unique id */
+  export let id: string;
 
-  /**
-   * label of the input group
-   *
-   * @type {string}
-   */
-  export let label;
+  /** list of options */
+  export let options: Option[];
 
-  /**
-   * currently selected value
-   *
-   * @type {any}
-   */
-  export let selectedOption;
+  /** label of the input group */
+  export let label: string;
+
+  /** currently selected option */
+  export let selectedOption: Option;
 
   /** hides label visually but keep it around for screen readers */
   export let hideLabelVisually = false;
 
-  /**
-   * function that maps an option to `true` if disabled
-   *
-   * @type {(option: any) => boolean}
-   */
-  export let isOptionDisabled = () => false;
+  /** function that maps an option to `true` if disabled */
+  export let isOptionDisabled: (option: Option) => boolean = () => false;
 
-  /** @type {any} */
-  let focusedOption = null;
+  let focusedOption: Option | null = null;
 </script>
 
 <fieldset {id} class:radio-buttons={true} class={$$restProps.class}>

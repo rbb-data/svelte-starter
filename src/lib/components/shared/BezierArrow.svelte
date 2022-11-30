@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Bézier curve, to be embedded within an SVG.
    *
@@ -20,61 +20,29 @@
    * @component
    */
 
-  /**
-   * start coordinates
-   *
-   * @type {number[]}
-   */
-  export let start;
+  /** start coordinates */
+  export let start: number[];
 
-  /**
-   * end coordinates
-   *
-   * @type {number[]}
-   */
-  export let end;
+  /** end coordinates */
+  export let end: number[];
 
-  /**
-   * bezier handle offset from start coordinates
-   *
-   * @type {number[]}
-   */
+  /** bezier handle offset from start coordinates */
   export let startHandleOffset = [0, 0];
 
-  /**
-   * bezier handle offset from end coordinates
-   *
-   * @type {number[]}
-   */
+  /** bezier handle offset from end coordinates */
   export let endHandleOffset = [0, 0];
 
-  /**
-   * start bezier handle coordinates; if given, `startHandleOffset` is ignored
-   *
-   * @type {number[] | undefined}
-   */
-  export let startHandle = undefined;
+  /** start bezier handle coordinates; if given, `startHandleOffset` is ignored */
+  export let startHandle: number[] | undefined = undefined;
 
-  /**
-   * end bezier handle coordinates; if given, `endHandleOffset` is ignored
-   *
-   * @type {number[] | undefined}
-   */
-  export let endHandle = undefined;
+  /** end bezier handle coordinates; if given, `endHandleOffset` is ignored */
+  export let endHandle: number[] | undefined = undefined;
 
-  /**
-   * position of the arrow head
-   *
-   * @type {'start' | 'end' | 'both'}
-   */
-  export let headAnchor = 'end';
+  /** position of the arrow head */
+  export let headAnchor: 'start' | 'end' | 'both' = 'end';
 
-  /**
-   * length of the arrow head
-   *
-   * @type {number | undefined}
-   */
-  export let headLength = undefined;
+  /** length of the arrow head */
+  export let headLength: number | undefined = undefined;
 
   /** angle of the arrow head */
   export let headAngle = 55;
@@ -82,46 +50,29 @@
   /** renders bezier handle points for debugging */
   export let debug = false;
 
-  /**
-   * @param {number[]} p1
-   * @param {number[]} p2
-   */
-  const dist = (p1, p2) =>
+  const dist = (p1: number[], p2: number[]) =>
     Math.sqrt(Math.pow(p2[0] - p1[0], 2) + Math.pow(p2[1] - p1[1], 2));
 
-  /**
-   * @param {number} n
-   * @param {number} min
-   * @param {number} max
-   */
-  const clamp = (n, min = 0, max = 1) => Math.min(Math.max(n, min), max);
+  const clamp = (n: number, min = 0, max = 1) =>
+    Math.min(Math.max(n, min), max);
 
-  /**
-   * @param {number[]} p1
-   * @param {number[]} p2
-   */
-  const equals = (p1, p2) => p1[0] === p2[0] && p1[1] === p2[1];
+  const equals = (p1: number[], p2: number[]) =>
+    p1[0] === p2[0] && p1[1] === p2[1];
 
-  /**
-   * @param {number[]} p
-   * @param {number[]} o
-   */
-  const addOffset = (p, o) => [p[0] + o[0], p[1] + o[1]];
+  const addOffset = (p: number[], o: number[]) => [p[0] + o[0], p[1] + o[1]];
 
-  /**
-   * @param {number[]} start
-   * @param {number[]} end
-   * @param {number[]} startHandle
-   * @param {number[]} endHandle
-   */
-  const bezierCurve = (start, end, startHandle, endHandle) =>
-    ['M', start, 'C', startHandle, endHandle, end].join(' ');
+  const bezierCurve = (
+    start: number[],
+    end: number[],
+    startHandle: number[],
+    endHandle: number[]
+  ) => ['M', start, 'C', startHandle, endHandle, end].join(' ');
 
-  /**
-   * @param {number[]} point
-   * @param {number[]} handle
-   */
-  function arrowHead(point, handle, { length = 4, theta = 45 } = {}) {
+  function arrowHead(
+    point: number[],
+    handle: number[],
+    { length = 4, theta = 45 } = {}
+  ) {
     const xLen = handle[0] - point[0];
     const yLen = handle[1] - point[1];
 
@@ -130,12 +81,7 @@
 
     const mid = [point[0] + xLen * ratio, point[1] + yLen * ratio];
 
-    /**
-     * @param {number[]} p
-     * @param {number[]} pivot
-     * @param {number} theta
-     */
-    function rotate(p, pivot, theta) {
+    function rotate(p: number[], pivot: number[], theta: number) {
       const thetaRad = (theta * Math.PI) / 180;
       return [
         pivot[0] +
@@ -157,25 +103,24 @@
     ].join(' ');
   }
 
-  /**
-   * @param {number[]} start
-   * @param {number[]} end
-   * @param {number[]} startHandle
-   * @param {number[]} endHandle
-   * @param {typeof headAnchor} headAnchor
-   * @param {typeof headOptions} headOptions
-   */
-  function arrow(start, end, startHandle, endHandle, headAnchor, headOptions) {
+  function arrow(
+    start: number[],
+    end: number[],
+    startHandle: number[],
+    endHandle: number[],
+    _headAnchor: typeof headAnchor,
+    _headOptions: typeof headOptions
+  ) {
     let d = bezierCurve(start, end, startHandle, endHandle);
 
-    if (headAnchor === 'start' || headAnchor === 'both') {
+    if (_headAnchor === 'start' || _headAnchor === 'both') {
       const handle = equals(start, startHandle) ? end : startHandle;
-      d += arrowHead(start, handle, headOptions);
+      d += arrowHead(start, handle, _headOptions);
     }
 
-    if (headAnchor === 'end' || headAnchor === 'both') {
+    if (_headAnchor === 'end' || _headAnchor === 'both') {
       const handle = equals(end, endHandle) ? start : endHandle;
-      d += arrowHead(end, handle, headOptions);
+      d += arrowHead(end, handle, _headOptions);
     }
 
     return d;

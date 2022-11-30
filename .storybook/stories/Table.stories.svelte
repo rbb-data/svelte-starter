@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import Table from '$lib/components/shared/Table.svelte';
@@ -20,24 +20,20 @@
     { year: 2015, a: r(), b: r(), c: r() },
   ];
 
-  /**
-   * @typedef {{
-   *   name: string;
-   *   getValue: (d: typeof data[0]) => number;
-   *   class?: string;
-   * }} Column
-   */
+  interface Column {
+    name: string;
+    getValue: (d: typeof data[0]) => number;
+    class?: string;
+  }
 
-  /** @type {Column[]} */
-  const columns = [
+  const columns: Column[] = [
     { name: 'Jahr', getValue: (d) => d.year },
     { name: 'Katgorie A', getValue: (d) => d.a },
     { name: 'Katgorie B', getValue: (d) => d.b },
     { name: 'Katgorie C', getValue: (d) => d.c },
   ];
 
-  /** @type {Column[]} */
-  const columnsWithClasses = [
+  const columnsWithClasses: Column[] = [
     { name: 'Jahr', getValue: (d) => d.year },
     {
       name: 'Katgorie A',
@@ -56,8 +52,7 @@
     },
   ];
 
-  /** @type {Column[]} */
-  const columnsWithCustomClasses = [
+  const columnsWithCustomClasses: Column[] = [
     { name: 'Jahr', getValue: (d) => d.year },
     {
       name: 'Katgorie A',

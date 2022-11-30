@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { csvParse } from 'd3-dsv';
   import debounce from 'lodash.debounce';
   import { Meta, Story } from '@storybook/addon-svelte-csf';
@@ -46,30 +46,24 @@
     },
   ];
 
-  /** @type {string} */
-  let selectedSuggestion;
+  let selectedSuggestion: typeof options[number];
+  let selectedComplexSuggestion: typeof complexOptions[number];
 
-  /** @param {string} query */
-  const simpleSearch = (query) => {
+  const simpleSearch = (query: string) => {
     if (!query) return [];
     return options.filter((o) =>
       o.toLowerCase().startsWith(query.toLowerCase())
     );
   };
 
-  /** @param {string} query */
-  const simpleSearchWithComplexOptions = (query) => {
+  const simpleSearchWithComplexOptions = (query: string) => {
     if (!query) return [];
     return complexOptions.filter((o) =>
       o.name.toLowerCase().startsWith(query.toLowerCase())
     );
   };
 
-  /**
-   * @param {string} query
-   * @param {number} limit
-   */
-  async function autocomplete(query, limit = 5) {
+  async function autocomplete(query: string, limit = 5) {
     const params = new URLSearchParams({
       name: query,
       limit: limit.toString(),
@@ -86,14 +80,10 @@
     return response.map(({ name }) => name);
   }
 
-  const debouncedAutocomplete = debounce(
-    (/** @type {string} */ query) => autocomplete(query),
-    300,
-    {
-      leading: true,
-      trailing: true,
-    }
-  );
+  const debouncedAutocomplete = debounce((query) => autocomplete(query), 300, {
+    leading: true,
+    trailing: true,
+  });
 </script>
 
 <Meta
@@ -146,7 +136,7 @@
       label="Suche nach Namen (mit A)"
       placeholder="z.B. Anna"
       formatSuggestion={(s) => s.name}
-      bind:selectedSuggestion
+      bind:selectedSuggestion={selectedComplexSuggestion}
       let:suggestion
     >
       {suggestion.name}
@@ -186,7 +176,7 @@
       label="Suche nach Namen (mit A)"
       placeholder="z.B. Anna"
       formatSuggestion={(s) => s.name}
-      bind:selectedSuggestion
+      bind:selectedSuggestion={selectedComplexSuggestion}
       let:suggestion
     >
       {suggestion.name}

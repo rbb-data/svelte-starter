@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
   const options = [
@@ -9,10 +9,10 @@
     { label: 'Komponente Fünf', value: 5 },
   ];
 
-  /** @param {typeof options[0]} option */
-  const isOptionDisabled = (option) => option.value === 2;
+  const isOptionDisabled = (option: typeof options[number]) =>
+    option.value === 2;
 
-  let selectedComponents = [1, 4];
+  let selectedComponents = [options[0], options[3]];
 </script>
 
 <CheckBoxes
@@ -20,7 +20,7 @@
   label="Wähle eine oder mehrere Komponenten:"
   {options}
   {isOptionDisabled}
-  bind:selectedValues={selectedComponents}
+  bind:selectedOptions={selectedComponents}
   let:option
 >
   {option.label}

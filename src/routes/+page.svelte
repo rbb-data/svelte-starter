@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   // @ts-ignore
   import googleSheetData from '$data/google-sheets/example.csv';
   // @ts-ignore
