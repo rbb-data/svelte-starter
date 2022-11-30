@@ -1,0 +1,64 @@
+@import 'reset';
+@import 'fonts';
+@import 'tokens';
+
+:root {
+  --c-bg: #ffffff;
+  --c-focus: #000000;
+}
+
+body {
+  line-height: var(--line-height-normal);
+  font-family: 'Interstate', sans-serif;
+  background-color: var(--c-bg);
+}
+
+h1,
+h2,
+h3 {
+  line-height: var(--line-height-tight);
+}
+
+h1 {
+  font-size: var(--font-size-lg);
+}
+
+h2,
+h3 {
+  font-size: var(--font-size-base);
+}
+
+a {
+  color: currentColor;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+:focus {
+  outline: none;
+  @include focus;
+}
+
+/* hide focus ring when it's not supposed to be visible */
+:focus:not(.focus-visible) {
+  box-shadow: none;
+}
+
+.focus-visible {
+  @include focus;
+}
+
+/* mixins */
+@import 'sass-tokens';
+@import 'mixins/breakpoint';
+@import 'mixins/focus';
+@import 'mixins/visually-hidden';
+
+/* utilities */
+@import 'utilities/atomic';
+@import 'utilities/chart';
+@import 'utilities/reset';
+@import 'utilities/shadow';
+@import 'utilities/visually-hidden';

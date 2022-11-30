@@ -9,20 +9,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "strict": true,
-    "paths": {
-      "$lib": ["src/lib"],
-      "$lib/*": ["src/lib/*"],
-      "$data": ["src/data"],
-      "$data/*": ["src/data/*"],
-      "$comps": ["src/lib/components"],
-      "$comps/*": ["src/lib/components/*"],
-      "$actions": ["src/lib/actions"],
-      "$actions/*": ["src/lib/actions/*"],
-      "$stores": ["src/lib/stores"],
-      "$stores/*": ["src/lib/stores/*"],
-      "$icons": ["src/lib/components/icons"],
-      "$icons/*": ["src/lib/components/icons/*"]
-    }
+    "strict": true
   }
 }

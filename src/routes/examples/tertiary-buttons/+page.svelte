@@ -1,13 +1,13 @@
 <script>
-  import Button from '$comps/shared/Button.svelte';
+  import Button from '$lib/components/shared/Button.svelte';
 </script>
 
 <div class="top">
   Treffe eine Entscheidung. Willst du lieber Option A oder Option B?
 </div>
 <div class="bottom">
-  <Button type="tertiary" accentColor="purple">Entweder</Button>
-  <Button type="tertiary" accentColor="purple">Oder</Button>
+  <Button type="tertiary">Entweder</Button>
+  <Button type="tertiary">Oder</Button>
 </div>
 
 <style lang="scss">
@@ -18,6 +18,8 @@
   }
 
   .bottom {
+    --button-color-accent: var(--c-ui-accent-purple);
+
     text-align: right;
   }
 </style>

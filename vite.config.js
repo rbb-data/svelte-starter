@@ -9,9 +9,6 @@ const config = {
   resolve: {
     alias: {
       $data: path.resolve('./src/data'),
-      $comps: path.resolve('./src/lib/components'),
-      $actions: path.resolve('./src/lib/actions'),
-      $stores: path.resolve('./src/lib/stores'),
       $icons: path.resolve('./src/lib/components/icons'),
     },
   },
@@ -19,13 +16,18 @@ const config = {
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@use "src/style/mixins.scss" as *;',
+        additionalData:
+          '@use "src/style/mixins/_breakpoint.scss" as *; @use "src/style/mixins/_focus.scss" as *; @use "src/style/mixins/_visually-hidden.scss" as *;',
       },
     },
   },
 
   build: {
     target: ['chrome68', 'firefox67', 'safari11', 'edge79', 'opera50', 'ios11'],
+  },
+
+  optimizeDeps: {
+    exclude: ['fsevents'],
   },
 };
 

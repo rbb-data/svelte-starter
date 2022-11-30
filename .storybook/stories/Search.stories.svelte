@@ -3,7 +3,7 @@
   import debounce from 'lodash.debounce';
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Search from '$comps/shared/Search.svelte';
+  import Search from '$lib/components/shared/Search.svelte';
   import { fuzzysearch } from '$lib/utils';
 
   const options = [
@@ -108,6 +108,10 @@
       // @ts-ignore
       type: { required: true },
     },
+    label: {
+      // @ts-ignore
+      type: { required: true },
+    },
     formatSuggestion: {
       table: {
         defaultValue: { summary: '(suggestion) => suggestion' },
@@ -124,10 +128,7 @@
       label="Suche nach Namen (mit A)"
       placeholder="z.B. Anna"
       bind:selectedSuggestion
-      let:suggestion
-    >
-      {suggestion}
-    </Search>
+    />
     <div class="result">
       Selected value:
       {#if selectedSuggestion}
@@ -153,7 +154,7 @@
     <div class="result">
       Selected value:
       {#if selectedSuggestion}
-        <pre>{JSON.stringify(selectedSuggestion, null, 2)}</pre>
+        {JSON.stringify(selectedSuggestion, null, 2)}
       {/if}
     </div>
   </div>
@@ -167,10 +168,7 @@
       label="Suche nach Namen (mit A)"
       placeholder="z.B. Anna"
       bind:selectedSuggestion
-      let:suggestion
-    >
-      {suggestion}
-    </Search>
+    />
     <div class="result">
       Selected value:
       {#if selectedSuggestion}
@@ -196,7 +194,7 @@
     <div class="result">
       Selected value:
       {#if selectedSuggestion}
-        <pre>{JSON.stringify(selectedSuggestion, null, 2)}</pre>
+        {JSON.stringify(selectedSuggestion, null, 2)}
       {/if}
     </div>
   </div>
@@ -212,10 +210,7 @@
       label="Suche nach Namen"
       placeholder="z.B. Anna"
       bind:selectedSuggestion
-      let:suggestion
-    >
-      {suggestion}
-    </Search>
+    />
     <div class="result">
       Selected value:
       {#if selectedSuggestion}
@@ -234,36 +229,11 @@
       placeholder="Suche nach Namen (mit A)"
       hideLabelVisually
       bind:selectedSuggestion
-      let:suggestion
-    >
-      {suggestion}
-    </Search>
+    />
     <div class="result">
       Selected value:
       {#if selectedSuggestion}
-        <pre>{JSON.stringify(selectedSuggestion, null, 2)}</pre>
-      {/if}
-    </div>
-  </div>
-</Story>
-
-<Story name="External label">
-  <div class="wrapper">
-    <div id="search-label">Suche nach Namen (mit A)</div>
-    <Search
-      id="my-unique-search-id"
-      search={simpleSearch}
-      placeholder="z.B. Anna"
-      aria={{ labelledby: 'search-label' }}
-      bind:selectedSuggestion
-      let:suggestion
-    >
-      {suggestion}
-    </Search>
-    <div class="result">
-      Selected value:
-      {#if selectedSuggestion}
-        <pre>{JSON.stringify(selectedSuggestion, null, 2)}</pre>
+        {JSON.stringify(selectedSuggestion, null, 2)}
       {/if}
     </div>
   </div>
@@ -271,7 +241,7 @@
 
 <style>
   .wrapper {
-    height: 250px;
+    height: 300px;
   }
 
   .result {

@@ -4,7 +4,11 @@
    * aligned tabs. This component controls the _tab panels_ (i.e. the content
    * that is associated with a tab).
    *
-   * **Note:** Must be used in conjunction with `<Tabs />`
+   * The rendered markup is composed of:
+   *
+   * - `.tabpanel`: wrapper element
+   *
+   * **Note:** Must be used in conjunction with `<Tabs />`.
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -12,9 +16,6 @@
    */
 
   import { onMount } from 'svelte';
-
-  import * as tokens from '$lib/tokens';
-  import { cAccentId } from '$lib/utils';
 
   /**
    * globally unique id, must match the id of the associated Tabs element
@@ -37,30 +38,6 @@
    */
   export let activeIndex;
 
-  /**
-   * sets CSS variable `--c-focus` to a pre-defined color
-   *
-   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
-   */
-  export let colorScheme = 'blue';
-
-  /**
-   * sets CSS variables `--c-focus`
-   *
-   * @type {{ focus?: string | ((tab: any) => string) }}
-   */
-  export let customColors = {};
-
-  /**
-   * @param {string | ((tab: any) => string) | undefined} entry
-   * @param {any} tab
-   */
-  function getColor(entry, tab) {
-    if (!entry) return tokens[cAccentId(colorScheme)];
-    if (typeof entry === 'string') return entry;
-    if (typeof entry === 'function') return entry(tab);
-  }
-
   onMount(() => {
     if (!document.getElementById(id)) {
       console.warn(
@@ -72,22 +49,19 @@
 
 {#each tabs as tab, i}
   {@const active = i === activeIndex}
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex tab panels can be focused -->
   <div
     id="{id}--tabpanel-{i}"
+    class="tab-panel"
     role="tabpanel"
     aria-labelledby="{id}--tab-{i}"
     aria-expanded={active}
     tabindex={active ? 0 : -1}
-    style:--c-accent-focus={getColor(customColors.focus, tab)}
   >
     {#if active}
-      <slot {tab} />
+      <slot {tab}>
+        {tab}
+      </slot>
     {/if}
   </div>
 {/each}
-
-<style lang="scss">
-  [role='tabpanel'] :global(.focus-visible) {
-    @include focus(var(--c-accent-focus));
-  }
-</style>

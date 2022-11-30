@@ -1,0 +1,18 @@
+/* removes user agent styles */
+.reset {
+  all: unset;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    @include focus;
+  }
+
+  &:focus:not(.focus-visible) {
+    box-shadow: none;
+  }
+
+  &.focus-visible {
+    @include focus;
+  }
+}

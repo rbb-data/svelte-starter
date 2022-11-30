@@ -1,19 +1,11 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import RadioButtons from '$comps/shared/RadioButtons.svelte';
-
-  const options = ['Berlin', 'Brandenburg', 'Stadt', 'Land'];
-  const complexOptions = [
-    { label: 'Berlin', value: 'berlin' },
-    { label: 'Brandenburg', value: 'brandenburg' },
-    { label: 'Stadt', value: 'city' },
-    { label: 'Land', value: 'country' },
-  ];
+  import RadioButtons from '$lib/components/shared/RadioButtons.svelte';
 
   /** @type {string} */
-  let selectedValue;
-  let selectedValueInitiallySet = 'Berlin';
+  let selectedOption;
+  let selectedOptionInitiallySet = 'Berlin';
 </script>
 
 <Meta
@@ -28,10 +20,9 @@
       // @ts-ignore
       type: { required: true },
     },
-    getOptionValue: {
-      table: {
-        defaultValue: { summary: '(option) => option' },
-      },
+    label: {
+      // @ts-ignore
+      type: { required: true },
     },
     isOptionDisabled: {
       table: {
@@ -43,153 +34,125 @@
 
 <Story name="Basic">
   <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    label="Wähle eine Region"
-    let:option
-    bind:selectedValue
-  >
-    {option}
-  </RadioButtons>
+    id="basic"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
+    bind:selectedOption
+  />
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedOption}
+      <i>{selectedOption}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="Specify initially selected value">
+<Story name="Specify initially selected values">
   <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    label="Wähle eine Region"
-    let:option
-    bind:selectedValue={selectedValueInitiallySet}
-  >
-    {option}
-  </RadioButtons>
+    id="radio-buttons-with-initial-values"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
+    bind:selectedOption={selectedOptionInitiallySet}
+  />
   <div class="result">
-    Selected value:
-    {#if selectedValueInitiallySet}
-      <i>{selectedValueInitiallySet}</i>
+    Selected values:
+    {#if selectedOptionInitiallySet.length > 0}
+      <i>{selectedOptionInitiallySet}</i>
     {/if}
   </div>
 </Story>
 
-<Story name="Update option on selection">
+<Story name="Custom option label">
   <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    label="Wähle eine Region"
+    id="custom-option-label"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
+    bind:selectedOption
     let:option
-    let:checked
-    bind:selectedValue
+    let:selected
   >
-    {option}
-    {#if checked}
-      (checked)
+    Hallo, {option}!
+    {#if selected}
+      (selected)
     {/if}
   </RadioButtons>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedOption}
+      <i>{selectedOption}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Disabled option">
   <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    label="Wähle eine Region"
+    id="disabled-option"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
     isOptionDisabled={(option) => option === 'Berlin'}
+    bind:selectedOption
     let:option
-    bind:selectedValue
-  >
-    {option}
-  </RadioButtons>
+  />
   <div class="result">
     Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    {#if selectedOption}
+      <i>{selectedOption}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Complex options">
   <RadioButtons
-    id="my-radio-buttons"
-    options={complexOptions}
-    label="Wähle eine Region"
-    getOptionValue={(option) => option.value}
+    id="complex-options"
+    options={[
+      { label: 'Berlin', value: 'berlin' },
+      { label: 'Brandenburg', value: 'brandenburg' },
+      { label: 'Stadt', value: 'city' },
+      { label: 'Land', value: 'country' },
+    ]}
+    label="Wähle eine oder mehrere Regionen:"
+    bind:selectedOption
     let:option
-    bind:selectedValue
   >
     {option.label}
   </RadioButtons>
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedOption}
+      <i>{JSON.stringify(selectedOption)}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Custom accent color">
   <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    colorScheme="yellow"
-    label="Wähle eine Region"
-    let:option
-    bind:selectedValue
-  >
-    {option}
-  </RadioButtons>
+    id="custom-accent-color"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
+    --ui-color-accent="var(--c-ui-accent-purple)"
+    --ui-color-secondary="var(--c-purple-100)"
+    bind:selectedOption
+  />
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedOption}
+      <i>{selectedOption}</i>
     {/if}
   </div>
 </Story>
 
 <Story name="Hide label visually">
   <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    label="Wähle eine Region"
+    id="hide-label-visually"
+    options={['Berlin', 'Brandenburg', 'Stadt', 'Land']}
+    label="Wähle eine oder mehrere Regionen:"
     hideLabelVisually
-    let:option
-    bind:selectedValue
-  >
-    {option}
-  </RadioButtons>
+    bind:selectedOption
+  />
   <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
-    {/if}
-  </div>
-</Story>
-
-<Story name="External label via aria-labelledby">
-  <div id="select-region-label">Wähle eine Region</div>
-  <RadioButtons
-    id="my-radio-buttons"
-    {options}
-    aria={{ labelledby: 'select-region-label' }}
-    let:option
-    bind:selectedValue
-  >
-    {option}
-  </RadioButtons>
-  <div class="result">
-    Selected value:
-    {#if selectedValue}
-      <i>{selectedValue}</i>
+    Selected values:
+    {#if selectedOption}
+      <i>{selectedOption}</i>
     {/if}
   </div>
 </Story>

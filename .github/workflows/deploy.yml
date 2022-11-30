@@ -37,7 +37,7 @@ jobs:
         run: npm ci
 
       - name: Update data
-        run: npm run update:all
+        run: npm run update:data
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v0
@@ -59,7 +59,7 @@ jobs:
         run: cat .env >> $GITHUB_ENV
 
       - name: Add job summary
-        run: echo Deployed to https://storage.googleapis.com/rbb-data-static${BASE_PATH}${SUFFIX}/index.html >> $GITHUB_STEP_SUMMARY
+        run: echo Deployed to https://storage.googleapis.com${BASE_PATH}${SUFFIX}/index.html >> $GITHUB_STEP_SUMMARY
         env:
           BASE_PATH: ${{ env.BASE_PATH }}
           SUFFIX: "${{ github.event.inputs.deploy_to_main_path == 'false' && '-experimental' || '' }}"

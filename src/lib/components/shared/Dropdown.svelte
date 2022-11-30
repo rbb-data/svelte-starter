@@ -4,10 +4,10 @@
    *
    * The rendered markup is composed of:
    *
-   * - `.dropdown`: assigned the given id
-   * - `.dropdown button[role="combobox"]`
-   * - `.dropdown .options`: assigned the id `{id}--listbox`, inferred from the given id
-   * - `.dropdown .options .option`: with class `.selected` applied appropriately
+   * - `.dropdown`: assigned the given id, wrapper element
+   * - `.dropdown__field`: clickable field
+   * - `.dropdown__options`: list of options (only visible if expanded)
+   * - `.dropdown__option`: with class `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -16,12 +16,11 @@
 
   import { tick } from 'svelte';
 
-  import DropdownIcon from '$icons/Dropdown.svelte';
-  import CheckIcon from '$icons/Check.svelte';
+  import DropdownIcon from '$icons/DropdownIcon.svelte';
+  import CheckIcon from '$icons/CheckIcon.svelte';
 
-  import press from '$actions/press';
-  import typeahead from '$actions/typeahead';
-  import { getIndexBefore, getIndexAfter } from '$lib/utils';
+  import typeahead from '$lib/actions/typeahead';
+  import { getIndexBefore, getIndexAfter } from './helpers';
 
   /**
    * globally unique id
@@ -29,6 +28,13 @@
    * @type {string}
    */
   export let id;
+
+  /**
+   * visually hidden label
+   *
+   * @type {string}
+   */
+  export let label;
 
   /**
    * list of options to choose from
@@ -44,8 +50,8 @@
    */
   export let placeholder;
 
-  /** true, if the popup is currently shown */
-  export let isOpen = false;
+  /** hides label visually but keep it around for screen readers */
+  export let hideLabelVisually = false;
 
   /**
    * currently selected item
@@ -53,6 +59,9 @@
    * @type {any}
    */
   export let selectedOption = undefined;
+
+  /** true, if the popup is currently shown */
+  export let isOpen = false;
 
   /**
    * format an option; a selected option is formatted and displayed in the
@@ -136,18 +145,26 @@
 />
 
 <div {id} class="dropdown">
+  <div
+    id="{id}__label"
+    class="dropdown__label"
+    class:visually-hidden={hideLabelVisually}
+  >
+    {label}
+  </div>
   <button
     role="combobox"
-    class="select g-reset"
+    class="[ dropdown__field ] [ reset ]"
     type="button"
     aria-haspopup="listbox"
-    aria-controls={isOpen ? `${id}--listbox` : null}
+    aria-controls={isOpen ? `${id}__listbox` : null}
     aria-expanded={isOpen}
     aria-autocomplete="none"
     aria-disabled={disabled}
+    aria-labelledby="{id}__label"
     disabled={false}
     bind:this={selectElement}
-    use:press={() => {
+    on:click={() => {
       if (disabled) return;
       isOpen = !isOpen;
       if (isOpen) {
@@ -179,8 +196,8 @@
 
   {#if isOpen}
     <ul
-      id="{id}--listbox"
-      class="options"
+      id="{id}__listbox"
+      class="[ dropdown__options ] [ shadow-sm ]"
       role="listbox"
       aria-orientation="vertical"
       use:typeahead={{
@@ -196,13 +213,13 @@
       {#each options as option, i}
         {@const selected = selectedOption === option}
         <li
-          class="option"
+          class="dropdown__option"
           role="option"
           aria-selected={selected}
           class:selected
           tabindex={selected || (!selectedOption && i === 0) ? 0 : -1}
           bind:this={optionElements[i]}
-          use:press={() => selectOption(option)}
+          on:click={() => selectOption(option)}
           on:keydown|preventDefault={(e) => {
             switch (e.key) {
               case 'Escape':
@@ -230,7 +247,9 @@
             focusedIndex = getNextIndex(focusedIndex, options.length);
           }}
         >
-          <slot {option} {selected} />
+          <slot {option} {selected}>
+            {option}
+          </slot>
           {#if selected}
             <CheckIcon />
           {/if}
@@ -249,17 +268,77 @@
     --icon-padding-left: var(--s-px-2);
     --offset: var(--s-px-2);
 
+    --c-focus: var(--c-ui-black);
+
     width: 100%;
     position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
 
-    :global(.select.focus-visible) {
-      @include focus(var(--c-ui-gray-500));
+    &__label {
+      font-weight: var(--font-weight-semi-bold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--s-px-2);
     }
 
-    :global([role='listbox'] [role='option'].focus-visible) {
-      @include focus-inset(var(--c-ui-gray-500));
+    &__field {
+      --padding-r: calc(
+        var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
+      );
+
+      width: 100%;
+      padding: var(--padding-v) var(--padding-r) var(--padding-v)
+        var(--padding-h);
+      background-color: var(--c-ui-gray-100);
+      position: relative;
+
+      &[aria-expanded='true'] :global(svg) {
+        transform: translateY(-50%) rotate(180deg);
+      }
+
+      &[aria-disabled='true'] {
+        color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(
+          235,
+          235,
+          235,
+          0.3
+        ); /* var(--c-ui-gray-100) with opacity 0.3 */
+
+        :global(svg) {
+          opacity: 0.3;
+        }
+      }
+    }
+
+    &__options {
+      list-style-type: none;
+      padding: 0;
+      margin-top: var(--offset);
+      position: absolute;
+      width: 100%;
+      background-color: #ffffff;
+
+      max-height: 200px;
+      overflow: auto;
+    }
+
+    &__option {
+      padding: var(--padding-v) var(--padding-h);
+      color: var(--c-ui-gray-400);
+      position: relative;
+
+      &.selected {
+        color: var(--c-ui-black);
+      }
+
+      &:hover {
+        background-color: var(--c-ui-gray-100);
+      }
+    }
+
+    :global(.dropdown__option.focus-visible) {
+      @include focus-inset;
       z-index: 1;
     }
 
@@ -270,65 +349,6 @@
       top: 50%;
       right: var(--icon-padding-right);
       transform: translateY(-50%);
-    }
-  }
-
-  .select {
-    --padding-r: calc(
-      var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
-    );
-
-    width: 100%;
-    padding: var(--padding-v) var(--padding-r) var(--padding-v) var(--padding-h);
-    background-color: var(--c-ui-gray-100);
-    cursor: pointer;
-    position: relative;
-
-    &[aria-expanded='true'] :global(svg) {
-      transform: translateY(-50%) rotate(180deg);
-    }
-
-    &[aria-disabled='true'] {
-      cursor: default;
-      color: rgba(0, 0, 0, 0.3);
-      background-color: rgba(
-        235,
-        235,
-        235,
-        0.3
-      ); /* var(--c-ui-gray-100) with opacity 0.3 */
-
-      :global(svg) {
-        opacity: 0.3;
-      }
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    box-shadow: var(--shadow-sm);
-    margin-top: var(--offset);
-    position: absolute;
-    width: 100%;
-    background-color: #ffffff;
-
-    max-height: 200px;
-    overflow: auto;
-
-    li {
-      padding: var(--padding-v) var(--padding-h);
-      color: var(--c-ui-gray-400);
-      cursor: pointer;
-      position: relative;
-
-      &.selected {
-        color: var(--c-ui-gray-500);
-      }
-
-      &:hover {
-        background-color: var(--c-ui-gray-100);
-      }
     }
   }
 </style>

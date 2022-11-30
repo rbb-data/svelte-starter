@@ -1,7 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Table from '$comps/shared/Table.svelte';
+  import Table from '$lib/components/shared/Table.svelte';
 
   function r(min = 0, max = 20) {
     min = Math.ceil(min);

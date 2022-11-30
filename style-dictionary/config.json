@@ -6,7 +6,7 @@
       "buildPath": "src/style/",
       "files": [
         {
-          "destination": "tokens.css",
+          "destination": "_tokens.scss",
           "format": "css/variables"
         }
       ]
@@ -16,7 +16,7 @@
       "buildPath": "src/style/",
       "files": [
         {
-          "destination": "tokens.scss",
+          "destination": "_sass-tokens.scss",
           "format": "scss/variables"
         }
       ]

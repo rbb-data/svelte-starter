@@ -1,17 +1,8 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Tabs from '$comps/shared/Tabs.svelte';
-  import TabPanels from '$comps/shared/TabPanels.svelte';
-
-  import {
-    cUiAccentYellow,
-    cUiAccentPurple,
-    cUiAccentTurquoise,
-    cYellow100,
-    cPurple100,
-    cTurquoise100,
-  } from '$lib/tokens';
+  import Tabs from '$lib/components/shared/Tabs.svelte';
+  import TabPanels from '$lib/components/shared/TabPanels.svelte';
 
   const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
   const complexTabs = [
@@ -19,34 +10,6 @@
     { label: 'Tab 2', data: [2, 3, 4] },
     { label: 'Tab 3', data: [3, 4, 5] },
   ];
-
-  /** @param {string} tab */
-  function getAccentColor(tab) {
-    switch (tab) {
-      case 'Tab 1':
-        return cUiAccentYellow;
-      case 'Tab 2':
-        return cUiAccentPurple;
-      case 'Tab 3':
-        return cUiAccentTurquoise;
-      default:
-        return cUiAccentYellow;
-    }
-  }
-
-  /** @param {string} tab */
-  function getLightColor(tab) {
-    switch (tab) {
-      case 'Tab 1':
-        return cYellow100;
-      case 'Tab 2':
-        return cPurple100;
-      case 'Tab 3':
-        return cTurquoise100;
-      default:
-        return cYellow100;
-    }
-  }
 
   /** @type {number} */
   let activeIndex;
@@ -65,43 +28,41 @@
       // @ts-ignore
       type: { required: true },
     },
+    label: {
+      // @ts-ignore
+      type: { required: true },
+    },
     isTabDisabled: {
       table: {
         defaultValue: { summary: '(tab) => false' },
+      },
+    },
+    getTabClass: {
+      table: {
+        defaultValue: { summary: '(tab) => null' },
       },
     },
   }}
 />
 
 <Story name="Basic">
-  <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
-    {tabs}
-    let:tab
-    bind:activeIndex
-  >
-    {tab}
-  </Tabs>
+  <Tabs id="basic" label="Wähle einen Tab" {tabs} bind:activeIndex />
 
-  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+  <TabPanels id="basic" {tabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 
 <Story name="Specify initally selected tab">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="tabs-with-selected-index"
+    label="Wähle einen Tab"
     {tabs}
-    let:tab
     bind:activeIndex={activeIndexInitallySelected}
-  >
-    {tab}
-  </Tabs>
+  />
 
   <TabPanels
-    id="my-unique-tabs-id"
+    id="tabs-with-selected-index"
     {tabs}
     activeIndex={activeIndexInitallySelected}
     let:tab
@@ -110,14 +71,14 @@
   </TabPanels>
 </Story>
 
-<Story name="Update tab on selection">
+<Story name="Custom tab labels">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="custom-tab-labels"
+    label="Wähle einen Tab"
     {tabs}
+    bind:activeIndex
     let:tab
     let:active
-    bind:activeIndex
   >
     {tab}
     {#if active}
@@ -125,160 +86,101 @@
     {/if}
   </Tabs>
 
-  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+  <TabPanels id="custom-tab-labels" {tabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 
 <Story name="Complex tabs">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="complex-tabs"
+    label="Wähle einen Tab"
     tabs={complexTabs}
-    let:tab
-    let:active
     bind:activeIndex
+    let:tab
   >
     {tab.label}
-    {#if active}
-      (active)
-    {/if}
   </Tabs>
 
-  <TabPanels id="my-unique-tabs-id" tabs={complexTabs} {activeIndex} let:tab>
+  <TabPanels id="complex-tabs" tabs={complexTabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab.label} with data {tab.data}</div>
   </TabPanels>
 </Story>
 
 <Story name="Disabled tab">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="disabled-tab"
+    label="Wähle einen Tab"
     {tabs}
     isTabDisabled={(tab) => tab === 'Tab 3'}
-    let:tab
     bind:activeIndex
-  >
-    {tab}
-  </Tabs>
+  />
 
-  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+  <TabPanels id="disabled-tab" {tabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 
 <Story name="Custom accent color">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="custom-accent-color"
+    label="Wähle einen Tab"
     {tabs}
-    colorScheme="purple"
-    let:tab
+    --ui-color-accent="var(--c-ui-accent-purple)"
     bind:activeIndex
-  >
-    {tab}
-  </Tabs>
+  />
 
-  <TabPanels
-    id="my-unique-tabs-id"
-    {tabs}
-    {activeIndex}
-    colorScheme="purple"
-    let:tab
-  >
+  <TabPanels id="custom-accent-color" {tabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 
-<Story name="Custom tab colors">
+<Story name="Customise all colors">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="customise-all-colors"
+    label="Wähle einen Tab"
     {tabs}
-    customColors={{
-      accent: getAccentColor,
-      focus: getAccentColor,
-    }}
-    let:tab
+    getTabClass={(tab) => tab.toLowerCase().replace(' ', '-')}
     bind:activeIndex
-  >
-    {tab}
-  </Tabs>
+  />
 
-  <TabPanels
-    id="my-unique-tabs-id"
-    {tabs}
-    {activeIndex}
-    customColors={{ focus: getAccentColor }}
-    let:tab
-  >
-    <div class="panel">Panel for {tab}</div>
-  </TabPanels>
-</Story>
-
-<Story name="Customize all colors">
-  <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
-    {tabs}
-    customColors={{
-      accent: getAccentColor,
-      light: getLightColor,
-      focus: getAccentColor,
-    }}
-    let:tab
-    bind:activeIndex
-  >
-    {tab}
-  </Tabs>
-
-  <TabPanels
-    id="my-unique-tabs-id"
-    {tabs}
-    {activeIndex}
-    customColors={{ focus: getAccentColor }}
-    let:tab
-  >
+  <TabPanels id="customise-all-colors" {tabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 
 <Story name="Without slants">
   <Tabs
-    id="my-unique-tabs-id"
-    aria={{ label: 'Wähle einen Tab' }}
+    id="without-slants"
+    label="Wähle einen Tab"
     {tabs}
     slants={false}
-    let:tab
     bind:activeIndex
-  >
-    {tab}
-  </Tabs>
+  />
 
-  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
+  <TabPanels id="without-slants" {tabs} {activeIndex} let:tab>
     <div class="panel">Panel for {tab}</div>
   </TabPanels>
 </Story>
 
-<Story name="Visual label">
-  <div id="tabs-label">Meine Tabs</div>
-  <Tabs
-    id="my-unique-tabs-id"
-    aria={{ labelledby: 'tabs-label' }}
-    {tabs}
-    let:tab
-    bind:activeIndex
-  >
-    {tab}
-  </Tabs>
-
-  <TabPanels id="my-unique-tabs-id" {tabs} {activeIndex} let:tab>
-    <div class="panel">Panel for {tab}</div>
-  </TabPanels>
-</Story>
-
-<style>
+<style lang="scss">
   .panel {
     margin: var(--s-px-2) 0;
+  }
+
+  :global {
+    #customise-all-colors {
+      .tab-1 {
+        --ui-color-accent: var(--c-ui-accent-purple);
+      }
+
+      .tab-2 {
+        --ui-color-accent: var(--c-ui-accent-turquoise);
+      }
+
+      .tab-3 {
+        --ui-color-accent: var(--c-ui-accent-yellow);
+      }
+    }
   }
 </style>

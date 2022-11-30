@@ -1,0 +1,17 @@
+@mixin breakpoint($mode) {
+  @if $mode == narrow {
+    @media (max-width: #{$bp-xs - 1}) {
+      @content;
+    }
+  }
+  @if $mode == wide {
+    @media (min-width: #{$bp-sm}) {
+      @content;
+    }
+  }
+  @if $mode == extra-wide {
+    @media (min-width: #{$bp-md}) {
+      @content;
+    }
+  }
+}

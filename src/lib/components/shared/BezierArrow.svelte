@@ -9,8 +9,13 @@
    *
    * CSS variables:
    *
-   * - `--color`: color of the arrow
-   * - `--width`: stroke width of the arrow
+   * - `--arrow-color`: color of the arrow _(default: black)_
+   * - `--arrow-width`: stroke width of the arrow _(default: 1)_
+   *
+   * The rendered markup is composed of:
+   *
+   * - `.arrow`: group
+   * - `.arrow__shape`: path
    *
    * @component
    */
@@ -197,21 +202,24 @@
     </g>
   {/if}
 
-  <path d={arrow(start, end, sHandle, eHandle, headAnchor, headOptions)} />
+  <path
+    class="arrow__shape"
+    d={arrow(start, end, sHandle, eHandle, headAnchor, headOptions)}
+  />
 </g>
 
 <style lang="scss">
   .arrow {
-    --_color: var(--color, var(--c-ui-gray-500));
-    --_width: var(--width, 1);
-  }
+    --_color: var(--arrow-color, var(--c-ui-black));
+    --_width: var(--arrow-width, 1);
 
-  path {
-    stroke: var(--_color);
-    stroke-width: var(--_width);
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
+    &__shape {
+      stroke: var(--_color);
+      stroke-width: var(--_width);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
   }
 
   .debug {

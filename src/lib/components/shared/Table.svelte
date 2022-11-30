@@ -73,7 +73,7 @@
   }
 
   thead tr {
-    border-bottom: 2px solid var(--c-ui-gray-500);
+    border-bottom: 2px solid var(--c-ui-black);
     vertical-align: bottom;
     position: sticky;
     top: 0;

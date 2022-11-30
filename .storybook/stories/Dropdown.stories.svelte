@@ -1,15 +1,7 @@
 <script>
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Dropdown from '$comps/shared/Dropdown.svelte';
-
-  const options = ['Frühling', 'Sommer', 'Herbst', 'Winter'];
-  const complexOptions = [
-    { label: 'Frühling', value: 'spring' },
-    { label: 'Sommer', value: 'summer' },
-    { label: 'Herbst', value: 'autumn' },
-    { label: 'Winter', value: 'winter' },
-  ];
+  import Dropdown from '$lib/components/shared/Dropdown.svelte';
 
   /** @type {string[]} */
   let selectedOption;
@@ -44,13 +36,11 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
-      {options}
+      label="Wähle eine Jahreszeit"
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       bind:selectedOption
-      let:option
-    >
-      {option}
-    </Dropdown>
+    />
     <div class="result">
       Selected value:
       {#if selectedOption}
@@ -60,18 +50,16 @@
   </div>
 </Story>
 
-<Story name="Open">
+<Story name="Initially Open">
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
-      {options}
+      label="Wähle eine Jahreszeit"
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
-      isOpen
+      isOpen={true}
       bind:selectedOption
-      let:option
-    >
-      {option}
-    </Dropdown>
+    />
     <div class="result">
       Selected value:
       {#if selectedOption}
@@ -85,13 +73,11 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
-      {options}
+      label="Wähle eine Jahreszeit"
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       bind:selectedOption={selectedOptionInitiallySet}
-      let:option
-    >
-      {option}
-    </Dropdown>
+    />
     <div class="result">
       Selected value:
       {#if selectedOptionInitiallySet}
@@ -105,7 +91,13 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
-      options={complexOptions}
+      label="Wähle eine Jahreszeit"
+      options={[
+        { label: 'Frühling', value: 'spring' },
+        { label: 'Sommer', value: 'summer' },
+        { label: 'Herbst', value: 'autumn' },
+        { label: 'Winter', value: 'winter' },
+      ]}
       placeholder="Jahreszeiten"
       formatOption={(option) => option.label}
       bind:selectedOption
@@ -116,7 +108,7 @@
     <div class="result">
       Selected value:
       {#if selectedOption}
-        <pre>{JSON.stringify(selectedOption, null, 2)}</pre>
+        {JSON.stringify(selectedOption, null, 2)}
       {/if}
     </div>
   </div>
@@ -126,14 +118,31 @@
   <div class="wrapper">
     <Dropdown
       id="my-unique-dropdown-id"
-      {options}
+      label="Wähle eine Jahreszeit"
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
       placeholder="Jahreszeiten"
       disabled
       bind:selectedOption
-      let:option
-    >
-      {option}
-    </Dropdown>
+    />
+    <div class="result">
+      Selected value:
+      {#if selectedOption}
+        <i>{selectedOption}</i>
+      {/if}
+    </div>
+  </div>
+</Story>
+
+<Story name="Hide label visually">
+  <div class="wrapper">
+    <Dropdown
+      id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
+      hideLabelVisually
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
+      placeholder="Jahreszeiten"
+      bind:selectedOption
+    />
     <div class="result">
       Selected value:
       {#if selectedOption}

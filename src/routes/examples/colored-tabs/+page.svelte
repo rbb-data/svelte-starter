@@ -1,64 +1,22 @@
 <script>
-  import Tabs from '$comps/shared/Tabs.svelte';
-  import TabPanels from '$comps/shared/TabPanels.svelte';
-
-  import {
-    cUiAccentBlue,
-    cUiAccentPurple,
-    cUiAccentYellow,
-    cBlue100,
-    cPurple100,
-    cYellow100,
-  } from '$lib/tokens';
+  import Tabs from '$lib/components/shared/Tabs.svelte';
+  import TabPanels from '$lib/components/shared/TabPanels.svelte';
 
   const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
 
   /** @type {number} */
   let activeIndex;
-
-  /** @param {typeof tabs[0]} tab */
-  function getAccentColor(tab) {
-    switch (tab) {
-      case 'Tab 1':
-        return cUiAccentBlue;
-      case 'Tab 2':
-        return cUiAccentPurple;
-      case 'Tab 3':
-        return cUiAccentYellow;
-    }
-    return cUiAccentBlue;
-  }
-
-  /** @param {typeof tabs[0]} tab */
-  function getLightColor(tab) {
-    switch (tab) {
-      case 'Tab 1':
-        return cBlue100;
-      case 'Tab 2':
-        return cPurple100;
-      case 'Tab 3':
-        return cYellow100;
-    }
-    return cBlue100;
-  }
 </script>
 
 <Tabs
   id="colored-tabs"
-  aria-label="Wähle einen Tab"
+  label="Wähle einen Tab"
   slants={false}
   {tabs}
   isTabDisabled={(tab) => tab === 'Tab 3'}
-  customColors={{
-    accent: getAccentColor,
-    light: getLightColor,
-    focus: getAccentColor,
-  }}
-  let:tab
+  getTabClass={(tab) => tab.toLowerCase().replace(' ', '-')}
   bind:activeIndex
->
-  {tab}
-</Tabs>
+/>
 
 <TabPanels id="colored-tabs" {tabs} {activeIndex} let:tab>
   <div class="panel">Panel for {tab}</div>
@@ -67,22 +25,31 @@
 <style lang="scss">
   :global {
     #colored-tabs {
-      [role='tab'] {
+      --ui-color-accent: var(--c-ui-black);
+      --ui-color-secondary: var(--c-gray-100);
+
+      .tabs__tab {
         background-color: #ffffff;
-        border-bottom: 2px solid var(--c-accent);
+        border-bottom: 2px solid var(--ui-color-accent);
 
         &.active {
-          color: var(--c-ui-gray-500);
-          background-color: var(--c-light);
+          color: var(--c-ui-black);
+          background-color: var(--ui-color-secondary);
         }
 
-        &.disabled {
-          border-bottom-color: rgba(
-            191,
-            191,
-            191,
-            0.3
-          ); /* #bfbfbf with 0.3 opacity */
+        &.tab-1 {
+          --ui-color-accent: var(--c-ui-accent-blue);
+          --ui-color-secondary: var(--c-blue-100);
+        }
+
+        &.tab-2 {
+          --ui-color-accent: var(--c-ui-accent-purple);
+          --ui-color-secondary: var(--c-purple-100);
+        }
+
+        &.tab-3 {
+          --ui-color-accent: var(--c-ui-accent-yellow);
+          --ui-color-secondary: var(--c-yellow-100);
         }
       }
     }

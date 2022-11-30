@@ -2,7 +2,7 @@
 
 /**
  * This script loads and parses content from a Google sheet. The parsed data
- * tables are then written to `src/data/google-sheet-*.csv`.
+ * tables are then written to `src/data/google-sheets/*.csv`.
  */
 
 import fs from 'fs';
@@ -10,7 +10,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { csvFormat } from 'd3-dsv';
 
-import { loadGoogleSheet } from './_load-from-google.js';
+import { loadGoogleSheet } from './helpers/load-from-google.js';
 
 async function main() {
   // read sheet id from environment
@@ -53,11 +53,21 @@ async function main() {
     process.exit(1);
   }
 
-  // write to file
-  const outFolder = 'src/data';
-  const outPrefix = 'google-sheet';
+  const outFolder = 'src/data/google-sheets';
+
+  // create out folder if necessary
+  if (!fs.existsSync(outFolder)) {
+    fs.mkdirSync(outFolder);
+  }
+
+  // remove all files to make sure there are no stale ones
+  fs.readdirSync(outFolder).forEach((file) => {
+    fs.unlinkSync(path.join(outFolder, file));
+  });
+
+  // write data to file
   for (const [name, _data] of Object.entries(data)) {
-    const out = path.join(outFolder, `${outPrefix}-${name}.csv`);
+    const out = path.join(outFolder, `${name}.csv`);
     fs.writeFileSync(path.join(process.cwd(), out), csvFormat(_data));
     process.stdout.write(`Written to ${out}\n`);
   }

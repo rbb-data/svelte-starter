@@ -1,5 +1,5 @@
 <script>
-  import CheckBoxes from '$comps/shared/CheckBoxes.svelte';
+  import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
   const options = [
     { label: 'Komponente Eins', value: 1 },
@@ -19,12 +19,9 @@
   id="check-boxes--choose-components"
   label="Wähle eine oder mehrere Komponenten:"
   {options}
-  getOptionValue={(option) => option.value}
-  colorScheme="purple"
-  customColors={{ light: 'transparent' }}
   {isOptionDisabled}
-  let:option
   bind:selectedValues={selectedComponents}
+  let:option
 >
   {option.label}
 

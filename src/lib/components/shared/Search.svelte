@@ -2,18 +2,21 @@
   /**
    * Input widget with an associated popup for suggestions.
    *
+   * CSS variables:
+   *
+   * - `--ui-color-accent`: accent color _(default: blue)_
+   *
    * The rendered markup is composed of:
    *
-   * - `.search`: assigned the given id
-   * - `.search form`
-   * - `.search form label`
-   * - `.search form .input-wrapper`
-   * - `.search form .input-wrapper input[role="combobox"]`: assigned the id
-   *   `{id}--input`, inferred from the given id
-   * - `.search form .input-wrapper button[type="submit"]`
-   * - `.search .suggestions`: assigned the id `{id}--listbox`, inferred from the given id
-   * - `.search .suggestions .suggestion`: with classes `.focused`, `.highlighted`
-   *   and `.selected` applied appropriately
+   * - `.search`: assigned the given id, wrapper element
+   * - `.search__form`: form that wraps the label, input and buttons
+   * - `.search__label`: label
+   * - `.search__field`: input field that wraps the text input and buttons
+   * - `.search__input`: text input
+   * - `.search__button-submit`: submit button
+   * - `.search__suggestions`: list of suggestions (only visible if expanded)
+   * - `.search__suggestion`: with classes `.focused`, `.highlighted` and
+   *   `.selected` applied appropriately
    *
    * **Note:** The focus ring is implemented via `box-shadow`.
    *
@@ -21,19 +24,17 @@
    * can't be used on the container element as that would cut off the focus
    * ring. Instead, a pseudo element is rendered that hides the overflowing
    * content. Its color defaults to white but can be overwritten by setting the
-   * CSS variable `--c-background`.
+   * CSS variable `--c-bg`.
    *
    * @component
    */
 
   import { tick } from 'svelte';
 
-  import CheckIcon from '$icons/Check.svelte';
-  import SearchIcon from '$icons/Search.svelte';
+  import CheckIcon from '$icons/CheckIcon.svelte';
+  import SearchIcon from '$icons/SearchIcon.svelte';
 
-  import press from '$actions/press';
-  import * as tokens from '$lib/tokens';
-  import { cAccentId, getIndexBefore, getIndexAfter } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from './helpers';
 
   /**
    * globally unique id
@@ -50,6 +51,16 @@
    * @type {(query: string) => any[] | Promise<any[]>}
    */
   export let search;
+
+  /**
+   * label of the input field
+   *
+   * @type {string}
+   */
+  export let label;
+
+  /** hides label visually but keeps it around for screen readers */
+  export let hideLabelVisually = false;
 
   /**
    * shown in the input field if empty
@@ -76,36 +87,6 @@
    */
   export let formatSuggestion = (suggestion) => suggestion;
 
-  /**
-   * accent color used for the button and the focus ring
-   *
-   * @type {Exclude<import('$lib/types').AccentColor, 'black'>}
-   */
-  export let accentColor = 'blue';
-
-  /**
-   * label of the input field
-   *
-   * **note:** if not provided, `aria-labelledby` or `aria-label` must be used instead
-   *
-   * @type {string | undefined}
-   */
-  export let label = undefined;
-
-  /** hides label visually but keeps it around for screen readers */
-  export let hideLabelVisually = false;
-
-  /**
-   * ARIA attributes
-   *
-   * @type {{
-   *   label?: string;
-   *   labelledby?: string;
-   *   describedby?: string;
-   * }}
-   */
-  export let aria = {};
-
   /** @type {HTMLInputElement} */
   let inputElement;
 
@@ -120,8 +101,6 @@
 
   /** @type {HTMLElement[]} */
   let suggestionElements = [];
-
-  $: color = tokens[cAccentId(accentColor)];
 
   /** @type {any[]} */
   let suggestions = [];
@@ -218,23 +197,35 @@
   }}
 />
 
-<div {id} class="search" style:--c-accent={color}>
-  <form on:submit|preventDefault={handleSubmit} on:keydown={handleKeyDown}>
+<div {id} class="search">
+  <form
+    class="search__form"
+    on:submit|preventDefault={handleSubmit}
+    on:keydown={handleKeyDown}
+  >
     {#if label}
-      <label for="{id}--input" class:g-visually-hidden={hideLabelVisually}>
+      <label
+        for="{id}__input"
+        class="search__label"
+        class:visually-hidden={hideLabelVisually}
+      >
         {label}
       </label>
     {/if}
-    <div class="input-wrapper">
+    <div class="search__field">
       <input
-        id="{id}--input"
+        id="{id}__input"
+        class="[ search__input ] [ reset ]"
         role="combobox"
-        type="search"
-        class="g-reset"
+        type="text"
         {placeholder}
         autocomplete="off"
+        spellcheck="false"
+        autocorrect="off"
+        autocapitalize="off"
+        enterkeyhint="done"
         aria-haspopup="listbox"
-        aria-controls={isOpen ? `${id}--listbox` : null}
+        aria-controls={isOpen ? `${id}__listbox` : null}
         aria-expanded={isOpen}
         aria-autocomplete="list"
         aria-activedescendant={focusedIndex
@@ -248,12 +239,13 @@
           if (selectedIndex < 0) selectedIndex = undefined;
           highlightedIndex = selectedIndex || focusedIndex || 0;
         }}
-        aria-label={aria.label}
-        aria-labelledby={aria.labelledby}
-        aria-describedby={aria.describedby}
       />
 
-      <button type="submit" class="g-reset" aria-label="Bestätigen">
+      <button
+        type="submit"
+        class="[ search__button-submit ] [ reset ]"
+        aria-label="Bestätigen"
+      >
         <SearchIcon color="#ffffff" />
       </button>
     </div>
@@ -261,8 +253,8 @@
 
   {#if isOpen}
     <ul
-      id="{id}--listbox"
-      class="suggestions"
+      id="{id}__listbox"
+      class="[ search__suggestions ] [ shadow-sm ]"
       role="listbox"
       aria-orientation="vertical"
     >
@@ -270,16 +262,17 @@
         {@const focused = focusedIndex === i}
         {@const highlighted = highlightedIndex === i}
         {@const selected = selectedSuggestion === suggestion}
+        <!-- svelte-ignore a11y-click-events-have-key-events key events handled by parent -->
         <li
           id="{id}--option-{i}"
-          class="suggestion"
+          class="search__suggestion"
           role="option"
           class:focused
           class:highlighted
           class:selected
           aria-selected={selected}
           bind:this={suggestionElements[i]}
-          use:press={() => {
+          on:click={() => {
             focusedIndex = i;
             submit();
             inputElement.focus();
@@ -290,7 +283,9 @@
           on:touchend={() => (highlightedIndex = undefined)}
           on:touchcancel={() => (highlightedIndex = undefined)}
         >
-          <slot {suggestion} {selected} />
+          <slot {suggestion} {selected}>
+            {suggestion}
+          </slot>
           {#if selected}
             <CheckIcon />
           {/if}
@@ -302,7 +297,10 @@
 
 <style lang="scss">
   .search {
-    --c-background: #ffffff;
+    --_ui-color-accent: var(--ui-color-accent, var(--c-ui-accent-blue));
+
+    --c-focus: var(--_ui-color-accent);
+
     --padding-v: var(--s-px-2);
     --padding-h: var(--s-px-4);
     --icon-size: 1.6em;
@@ -322,111 +320,105 @@
       right: var(--icon-padding);
       transform: translateY(-50%);
     }
-  }
 
-  .input-wrapper {
-    position: relative;
+    &__label {
+      display: block;
+      font-weight: var(--font-weight-semi-bold);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--s-px-2);
+    }
 
-    /* can't use `overflow: hidden` here since that would cut off the focus ring;
+    &__field {
+      position: relative;
+
+      /* can't use `overflow: hidden` here since that would cut off the focus ring;
     instead, two pseudo elements are rendered above the overflowing content on both sides  */
 
-    &::after {
-      content: '';
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 12px; /* arbitrary value, depends on the degree of skewing */
+        height: calc(
+          100% + 8px
+        ); /* height plus focus ring on top and bottom (2*4px) */
+        background-color: var(--c-bg);
+        z-index: 2;
+        right: 0;
+        transform: translate(100%, -4px);
+      }
+    }
+
+    &__input {
+      width: 100%;
+      padding: var(--padding-v) var(--padding-h);
+      background-color: var(--c-ui-gray-100);
+      font-size: var(--font-size-base);
+
+      &::placeholder {
+        color: var(--c-ui-gray-400);
+        opacity: 1;
+        font-style: italic;
+        font-size: var(--font-size-sm);
+      }
+
+      /* hide clear button in Chrome */
+      &::-ms-clear,
+      &::-ms-reveal {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+
+      /* hide clear button in Safari */
+      &::-webkit-search-decoration,
+      &::-webkit-search-cancel-button,
+      &::-webkit-search-results-button,
+      &::-webkit-search-results-decoration {
+        display: none;
+      }
+    }
+
+    &__button-submit {
       position: absolute;
       top: 0;
-      width: 12px; /* arbitrary value, depends on the degree of skewing */
-      height: calc(
-        100% + 8px
-      ); /* height plus focus ring on top and bottom (2*4px) */
-      background-color: var(--c-background);
-      z-index: 2;
       right: 0;
-      transform: translate(100%, -4px);
-    }
-  }
+      height: 100%;
+      width: 54px; /* arbitrary value */
+      transform: skew(-10deg);
+      transform-origin: bottom;
+      background-color: var(--_ui-color-accent);
 
-  input[type='search'] {
-    width: 100%;
-    padding: var(--padding-v) var(--padding-h);
-    background-color: var(--c-ui-gray-100);
-    font-size: var(--font-size-base);
-
-    &.focus-visible {
-      @include focus(var(--c-accent));
+      :global(svg) {
+        transform: translateY(-50%) skew(10deg);
+      }
     }
 
-    &::placeholder {
-      color: var(--c-ui-gray-400);
-      opacity: 1;
-      font-style: italic;
-      font-size: var(--font-size-sm);
+    &__suggestions {
+      list-style-type: none;
+      padding: 0;
+      margin-top: var(--offset);
+      position: absolute;
+      width: 100%;
+      background-color: #ffffff;
+
+      max-height: 200px;
+      overflow: auto;
     }
 
-    /* hide clear button in Chrome */
-    &::-ms-clear,
-    &::-ms-reveal {
-      display: none;
-      width: 0;
-      height: 0;
-    }
-
-    /* hide clear button in Safari */
-    &::-webkit-search-decoration,
-    &::-webkit-search-cancel-button,
-    &::-webkit-search-results-button,
-    &::-webkit-search-results-decoration {
-      display: none;
-    }
-  }
-
-  label {
-    display: block;
-    font-weight: var(--font-weight-semi-bold);
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--s-px-2);
-  }
-
-  button[type='submit'] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: 54px; /* arbitrary value */
-    transform: skew(-10deg);
-    transform-origin: bottom;
-    background-color: var(--c-accent);
-    cursor: pointer;
-
-    :global(svg) {
-      transform: translateY(-50%) skew(10deg);
-    }
-  }
-
-  ul {
-    list-style-type: none;
-    padding: 0;
-    box-shadow: var(--shadow-sm);
-    margin-top: var(--offset);
-    position: absolute;
-    width: 100%;
-    background-color: #ffffff;
-
-    max-height: 200px;
-    overflow: auto;
-
-    li {
+    &__suggestion {
       padding: var(--padding-v) var(--padding-h);
       color: var(--c-ui-gray-400);
-      cursor: pointer;
       position: relative;
 
       &.focused {
-        @include focus-inset(var(--c-ui-gray-500));
+        --c-focus: var(--c-ui-black);
+        @include focus-inset;
         z-index: 1;
       }
 
       &.selected {
-        color: var(--c-ui-gray-500);
+        color: var(--c-ui-black);
       }
 
       &.highlighted {
