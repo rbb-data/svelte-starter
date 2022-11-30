@@ -27,7 +27,7 @@
       --ui-color-accent: var(--c-ui-accent-blue);
       --ui-color-secondary: var(--c-ui-gray-200);
 
-      [role='tab'] {
+      .tabs__tab {
         background-color: #ffffff;
         border-bottom: 2px solid var(--ui-color-secondary);
 

@@ -22,12 +22,12 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch"
   },
   "dependencies": {
-    "colorjs.io": "^0.3.0",
     "d3-array": "^3.1.1",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.1.0",
     "fuzzysort": "^1.1.4",
-    "lodash.debounce": "^4.0.8"
+    "lodash.debounce": "^4.0.8",
+    "match-sorter": "^6.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",

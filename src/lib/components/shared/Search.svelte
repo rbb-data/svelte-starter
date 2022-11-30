@@ -34,7 +34,7 @@
   import CheckIcon from '$icons/Check.svelte';
   import SearchIcon from '$icons/Search.svelte';
 
-  import { getIndexBefore, getIndexAfter } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from './helpers';
 
   /**
    * globally unique id
@@ -217,9 +217,13 @@
         id="{id}__input"
         class="[ search__input ] [ reset ]"
         role="combobox"
-        type="search"
+        type="text"
         {placeholder}
         autocomplete="off"
+        spellcheck="false"
+        autocorrect="off"
+        autocapitalize="off"
+        enterkeyhint="done"
         aria-haspopup="listbox"
         aria-controls={isOpen ? `${id}__listbox` : null}
         aria-expanded={isOpen}
@@ -258,6 +262,7 @@
         {@const focused = focusedIndex === i}
         {@const highlighted = highlightedIndex === i}
         {@const selected = selectedSuggestion === suggestion}
+        <!-- svelte-ignore a11y-click-events-have-key-events key events handled by parent -->
         <li
           id="{id}--option-{i}"
           class="search__suggestion"

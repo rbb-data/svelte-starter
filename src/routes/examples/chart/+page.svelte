@@ -1,11 +1,12 @@
-<script>
+To do
+
+<!-- <script>
   import { range } from 'd3-array';
   import { line as d3line } from 'd3-shape';
 
   import Arrow from '$lib/components/shared/BezierArrow.svelte';
   import Table from '$lib/components/shared/Table.svelte';
 
-  import { px, scaleLinear, translate } from '$lib/utils';
   import * as tokens from '$lib/tokens';
 
   const data = [
@@ -94,7 +95,7 @@
 
 To do
 
-<!-- <ChartDescriptionForScreenReaders
+<ChartDescriptionForScreenReaders
   title="Diesjähriger Niederschlag im Sommer deutlich höher als üblich"
   subtitle={`
     Monatliche Regenmenge in Liter pro Quadratmeter 2021 im Vergleich zum
@@ -253,7 +254,7 @@ To do
     ]}
     caption="Daten zum Chart: Monatliche Regenmenge in Liter pro Quadratmeter in Berlin"
   />
-</VisuallyHidden> -->
+</VisuallyHidden>
 <style lang="scss">
   .chart {
     --c-accent: var(--c-blue-300);
@@ -348,4 +349,4 @@ To do
       --color: var(--c-ui-gray-400);
     }
   }
-</style>
+</style> -->

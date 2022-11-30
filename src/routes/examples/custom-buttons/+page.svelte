@@ -20,10 +20,10 @@
   }
 
   .wrapper :global {
-    button {
+    .button {
       text-transform: none !important;
 
-      & + button {
+      & + .button {
         margin-top: var(--s-px-2);
       }
     }

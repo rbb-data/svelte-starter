@@ -27,7 +27,7 @@
    * @component
    */
 
-  import { getIndexBefore, getIndexAfter } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from './helpers';
 
   /**
    * globally unique id, must match the id of the associated TabPanels element

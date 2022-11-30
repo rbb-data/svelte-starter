@@ -2,45 +2,10 @@
   import Tabs from '$lib/components/shared/Tabs.svelte';
   import TabPanels from '$lib/components/shared/TabPanels.svelte';
 
-  import {
-    cUiAccentBlue,
-    cUiAccentPurple,
-    cUiAccentYellow,
-    cBlue100,
-    cPurple100,
-    cYellow100,
-  } from '$lib/tokens';
-
   const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
 
   /** @type {number} */
   let activeIndex;
-
-  /** @param {typeof tabs[0]} tab */
-  function getAccentColor(tab) {
-    switch (tab) {
-      case 'Tab 1':
-        return cUiAccentBlue;
-      case 'Tab 2':
-        return cUiAccentPurple;
-      case 'Tab 3':
-        return cUiAccentYellow;
-    }
-    return cUiAccentBlue;
-  }
-
-  /** @param {typeof tabs[0]} tab */
-  function getLightColor(tab) {
-    switch (tab) {
-      case 'Tab 1':
-        return cBlue100;
-      case 'Tab 2':
-        return cPurple100;
-      case 'Tab 3':
-        return cYellow100;
-    }
-    return cBlue100;
-  }
 </script>
 
 <Tabs
@@ -63,7 +28,7 @@
       --ui-color-accent: var(--c-ui-black);
       --ui-color-secondary: var(--c-gray-100);
 
-      [role='tab'] {
+      .tabs__tab {
         background-color: #ffffff;
         border-bottom: 2px solid var(--ui-color-accent);
 

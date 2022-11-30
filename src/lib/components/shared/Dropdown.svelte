@@ -20,7 +20,7 @@
   import CheckIcon from '$icons/Check.svelte';
 
   import typeahead from '$lib/actions/typeahead';
-  import { getIndexBefore, getIndexAfter } from '$lib/utils';
+  import { getIndexBefore, getIndexAfter } from './helpers';
 
   /**
    * globally unique id

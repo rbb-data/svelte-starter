@@ -49,6 +49,7 @@
 
 {#each tabs as tab, i}
   {@const active = i === activeIndex}
+  <!-- svelte-ignore a11y-no-noninteractive-tabindex tab panels can be focused -->
   <div
     id="{id}--tabpanel-{i}"
     class="tab-panel"
