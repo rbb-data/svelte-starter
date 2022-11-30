@@ -1,11 +1,10 @@
-<script>
+<script lang="ts">
   import Tabs from '$lib/components/shared/Tabs.svelte';
   import TabPanels from '$lib/components/shared/TabPanels.svelte';
 
   const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
 
-  /** @type {number} */
-  let activeIndex;
+  let activeIndex: number;
 </script>
 
 <Tabs

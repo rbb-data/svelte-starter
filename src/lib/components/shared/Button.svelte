@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Primary, secondary and tertiary buttons.
    *
@@ -16,8 +16,7 @@
    * @component
    */
 
-  /** @type {'primary' | 'secondary' | 'tertiary'} */
-  export let type = 'primary';
+  export let type: 'primary' | 'secondary' | 'tertiary' = 'primary';
 </script>
 
 <button

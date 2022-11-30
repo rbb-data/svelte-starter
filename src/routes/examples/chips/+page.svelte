@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
   import Button from '$lib/components/shared/Button.svelte';
   import CheckIcon from '$icons/CheckIcon.svelte';
@@ -13,7 +13,6 @@
     'Angefochten',
   ];
 
-  /** @type {string[]} */
   let selectedCriterions = ['In Kraft getreten'];
 </script>
 

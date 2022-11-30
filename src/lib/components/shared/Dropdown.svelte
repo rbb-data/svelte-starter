@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Dropdown menu to select a single value
    *
@@ -22,43 +22,25 @@
   import typeahead from '$lib/actions/typeahead';
   import { getIndexBefore, getIndexAfter } from './helpers';
 
-  /**
-   * globally unique id
-   *
-   * @type {string}
-   */
-  export let id;
+  type Option = $$Generic;
 
-  /**
-   * visually hidden label
-   *
-   * @type {string}
-   */
-  export let label;
+  /** globally unique id */
+  export let id: string;
 
-  /**
-   * list of options to choose from
-   *
-   * @type {any[]}
-   */
-  export let options;
+  /** visually hidden label */
+  export let label: string;
 
-  /**
-   * text rendered when no option is selected
-   *
-   * @type {string}
-   */
-  export let placeholder;
+  /** list of options to choose from */
+  export let options: Option[];
+
+  /** text rendered when no option is selected */
+  export let placeholder: string;
 
   /** hides label visually but keep it around for screen readers */
   export let hideLabelVisually = false;
 
-  /**
-   * currently selected item
-   *
-   * @type {any}
-   */
-  export let selectedOption = undefined;
+  /** currently selected option */
+  export let selectedOption: Option | undefined = undefined;
 
   /** true, if the popup is currently shown */
   export let isOpen = false;
@@ -66,22 +48,17 @@
   /**
    * format an option; a selected option is formatted and displayed in the
    * combobox (should be the same formatting applied to the options itself)
-   *
-   * @type {(option: any) => any}
    */
-  export let formatOption = (option) => option;
+  export let formatOption: (option: Option) => any = (option) => option;
 
   /** if true, disables the input accessibly */
   export let disabled = false;
 
-  /** @type {number | undefined} */
-  let focusedIndex;
+  let focusedIndex: number | undefined;
 
-  /** @type {HTMLElement} */
-  let selectElement;
+  let selectElement: HTMLElement;
 
-  /** @type {HTMLElement[]} */
-  let optionElements = [];
+  let optionElements: HTMLElement[] = [];
 
   $: focusedIndex = selectedOption
     ? options.indexOf(selectedOption)
@@ -94,8 +71,7 @@
   )
     optionElements[focusedIndex].focus();
 
-  /** @param {any} value */
-  function selectOption(value) {
+  function selectOption(value: Option) {
     selectedOption = value;
     closePopup();
   }
@@ -105,8 +81,7 @@
     selectElement.focus();
   }
 
-  /** @param {KeyboardEvent} e */
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     if (disabled) return;
 
     if (e.key === 'Escape') {
@@ -130,19 +105,19 @@
       });
     }
   }
-</script>
 
-<svelte:window
-  on:click={(e) => {
-    const node = /** @type {HTMLElement} */ (e.target);
+  function handleClickOutside(e: MouseEvent) {
+    const node = e.target as HTMLElement;
     if (
       node === selectElement ||
       (node.tagName === 'LI' && node.getAttribute('role') === 'option')
     )
       return;
     isOpen = false;
-  }}
-/>
+  }
+</script>
+
+<svelte:window on:click={handleClickOutside} />
 
 <div {id} class="dropdown">
   <div

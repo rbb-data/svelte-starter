@@ -1,17 +1,14 @@
-/**
- * @param {HTMLElement} node
- * @param {{
- *   handleInput: (input: string) => void;
- *   clearAfterMs?: number;
- * }} options
- */
-export default function typeahead(node, { handleInput, clearAfterMs = 600 }) {
+export default function typeahead(
+  node: HTMLElement,
+  {
+    handleInput,
+    clearAfterMs = 600,
+  }: { handleInput: (input: string) => void; clearAfterMs?: number }
+) {
   let input = '';
-  /** @type {number} */
-  let timestamp;
+  let timestamp: number;
 
-  /** @param {KeyboardEvent} e */
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     const ignoredKeys = [
       'Enter',
       ' ',

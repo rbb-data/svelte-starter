@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Input widget with an associated popup for suggestions.
    *
@@ -29,6 +29,8 @@
    * @component
    */
 
+  type Suggestion = $$Generic;
+
   import { tick } from 'svelte';
 
   import CheckIcon from '$icons/CheckIcon.svelte';
@@ -36,74 +38,51 @@
 
   import { getIndexBefore, getIndexAfter } from './helpers';
 
-  /**
-   * globally unique id
-   *
-   * @type {string}
-   */
-  export let id;
+  /** globally unique id */
+  export let id: string;
 
   /**
-   * function that, given a user-specfied query string, yields a list of suggestions
+   * function that, given a user-specfied query string, yields a list of
+   * suggestions
    *
    * can either return the list itself or a promise
-   *
-   * @type {(query: string) => any[] | Promise<any[]>}
    */
-  export let search;
+  export let search: (query: string) => Suggestion[] | Promise<Suggestion[]>;
 
-  /**
-   * label of the input field
-   *
-   * @type {string}
-   */
-  export let label;
+  /** label of the input field */
+  export let label: string;
 
   /** hides label visually but keeps it around for screen readers */
   export let hideLabelVisually = false;
 
-  /**
-   * shown in the input field if empty
-   *
-   * @type {string | undefined}
-   */
-  export let placeholder = undefined;
+  /** shown in the input field if empty */
+  export let placeholder: string | undefined = undefined;
 
   /** true, if the popup is currently shown */
   export let isOpen = false;
 
-  /**
-   * currently selected value
-   *
-   * @type {any}
-   */
-  export let selectedSuggestion;
+  /** currently selected value */
+  export let selectedSuggestion: Suggestion | undefined;
 
   /**
    * format an option; if selected, an option is formatted and displayed in the
    * input field (should be the same formatting applied to the options itself)
-   *
-   * @type {(suggestion: any) => any}
    */
-  export let formatSuggestion = (suggestion) => suggestion;
+  export let formatSuggestion: (suggestion: Suggestion) => any = (suggestion) =>
+    suggestion;
 
-  /** @type {HTMLInputElement} */
-  let inputElement;
+  let inputElement: HTMLInputElement;
+  let inputValue: string;
 
-  /** @type {string} */
-  let inputValue;
+  let focusedIndex: number | undefined;
+  let highlightedIndex: number | undefined;
 
-  /** @type {number | undefined} */
-  let focusedIndex;
+  let suggestionElements: HTMLElement[] = [];
+  let suggestions: Suggestion[] = [];
 
-  /** @type {number | undefined} */
-  let highlightedIndex;
-
-  /** @type {HTMLElement[]} */
-  let suggestionElements = [];
-
-  /** @type {any[]} */
-  let suggestions = [];
+  function isPromise<T>(r: any): r is Promise<T> {
+    return typeof r === 'object' && typeof r.then === 'function';
+  }
 
   $: if (
     !(selectedSuggestion && formatSuggestion(selectedSuggestion) === inputValue)
@@ -111,13 +90,10 @@
     const result = search(inputValue);
 
     // search result is a promise
-    if (
-      typeof result === 'object' &&
-      typeof (/** @type {any} */ (result).then) === 'function'
-    ) {
-      /** @type {Promise<any[]>} */ (result).then((s) => (suggestions = s));
+    if (isPromise(result)) {
+      result.then((s) => (suggestions = s));
     } else {
-      suggestions = /** @type {any[]} */ (result);
+      suggestions = result;
     }
   }
 
@@ -152,8 +128,7 @@
     submit();
   }
 
-  /** @param {KeyboardEvent} e */
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape') {
       selectedSuggestion = undefined;
       discardSuggestions();
@@ -171,7 +146,7 @@
       }
 
       // find the currently selected value in the list of suggestions
-      const selectedIndex = suggestions.indexOf(selectedSuggestion);
+      const selectedIndex = suggestions.indexOf(selectedSuggestion as any);
 
       if (!selectedSuggestion || selectedIndex < 0) {
         focusedIndex = e.key === 'ArrowDown' ? 0 : suggestions.length - 1;
@@ -183,19 +158,27 @@
       focusedIndex = getNextIndex(focusedIndex, suggestions.length);
     }
   }
-</script>
 
-<svelte:window
-  on:click={(e) => {
-    const node = /** @type {HTMLElement} */ (e.target);
+  function handleInput() {
+    let selectedIndex: number | undefined = suggestions.indexOf(
+      selectedSuggestion as any
+    );
+    if (selectedIndex < 0) selectedIndex = undefined;
+    highlightedIndex = selectedIndex || focusedIndex || 0;
+  }
+
+  function handleClickOutside(e: MouseEvent) {
+    const node = e.target as HTMLElement;
     if (
       node.closest(`#${id}`) ||
       (node.tagName === 'LI' && node.getAttribute('role') === 'option')
     )
       return;
     isOpen = false;
-  }}
-/>
+  }
+</script>
+
+<svelte:window on:click={handleClickOutside} />
 
 <div {id} class="search">
   <form
@@ -233,12 +216,7 @@
           : null}
         bind:this={inputElement}
         bind:value={inputValue}
-        on:input={() => {
-          /** @type {number | undefined} */
-          let selectedIndex = suggestions.indexOf(selectedSuggestion);
-          if (selectedIndex < 0) selectedIndex = undefined;
-          highlightedIndex = selectedIndex || focusedIndex || 0;
-        }}
+        on:input={handleInput}
       />
 
       <button

@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
-  /** @type {string[]} */
-  let selectedOptions = [];
+  let selectedOptions: string[] = [];
+  let selectedComplexOptions: { label: string; value: string }[] = [];
   let selectedOptionsInitiallySet = ['Berlin', 'Brandenburg'];
 </script>
 
@@ -96,7 +96,6 @@
     label="Wähle eine oder mehrere Regionen:"
     isOptionDisabled={(option) => option === 'Berlin'}
     bind:selectedOptions
-    let:option
   />
   <div class="result">
     Selected value:
@@ -116,7 +115,7 @@
       { label: 'Land', value: 'country' },
     ]}
     label="Wähle eine oder mehrere Regionen:"
-    bind:selectedOptions
+    bind:selectedComplexOptions
     let:option
   >
     {option.label}

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   /**
    * Group of vertically aligned check boxes.
    *
@@ -24,48 +24,28 @@
    * @component
    */
 
-  /**
-   * globally unique id
-   *
-   * @type {string}
-   */
-  export let id;
+  type Option = $$Generic;
 
-  /**
-   * list of options
-   *
-   * @type {any[]}
-   */
-  export let options;
+  /** globally unique id */
+  export let id: string;
 
-  /**
-   * label of the input group
-   *
-   * @type {string}
-   */
-  export let label;
+  /** list of options */
+  export let options: Option[];
 
-  /**
-   * currently selected values
-   *
-   * @type {any[]}
-   */
-  export let selectedOptions = [];
+  /** label of the input group */
+  export let label: string;
+
+  /** currently selected options */
+  export let selectedOptions: Option[] = [];
 
   /** hides label visually but keeps it around for screen readers */
   export let hideLabelVisually = false;
 
-  /**
-   * function that maps an option to `true` if disabled
-   *
-   * @type {(option: any) => boolean}
-   */
-  export let isOptionDisabled = () => false;
+  /** function that maps an option to `true` if disabled */
+  export let isOptionDisabled: (option: Option) => boolean = () => false;
 
-  /** @type {any} */
-  let focusedOption = null;
-
-  $: console.log($$restProps);
+  // currenly focused option
+  let focusedOption: Option | null = null;
 </script>
 
 <fieldset {id} class:check-boxes={true} class={$$restProps.class}>

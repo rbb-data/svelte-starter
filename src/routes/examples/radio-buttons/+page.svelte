@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { base } from '$app/paths';
 
   import RadioButtons from '$lib/components/shared/RadioButtons.svelte';
@@ -15,8 +15,7 @@
     { label: 'Land', value: 'land', svgFilename: 'Countryside.svg' },
   ];
 
-  /** @type {string} */
-  let selectedRegion;
+  let selectedRegion: typeof regions[number];
 </script>
 
 <div class="wrapper">

@@ -1,10 +1,10 @@
-<script>
+<script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import RadioButtons from '$lib/components/shared/RadioButtons.svelte';
 
-  /** @type {string} */
-  let selectedOption;
+  let selectedOption: string;
+  let selectedComplexOption: { label: string; value: string };
   let selectedOptionInitiallySet = 'Berlin';
 </script>
 
@@ -111,7 +111,7 @@
       { label: 'Land', value: 'country' },
     ]}
     label="Wähle eine oder mehrere Regionen:"
-    bind:selectedOption
+    bind:selectedOption={selectedComplexOption}
     let:option
   >
     {option.label}

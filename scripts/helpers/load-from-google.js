@@ -10,7 +10,8 @@ import sanitizeHtml from 'sanitize-html';
  * Load content from a Google doc
  *
  * @param {string} documentId Google doc ID
- * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
+ * @param {{ clientEmail: string; privateKey: string }} credentials Google
+ *   credentials
  * @param preserveStyles if true, preserve some formatting
  * @returns {Promise<string>} sanitized doc contents
  */
@@ -31,7 +32,8 @@ export async function loadGoogleDoc(
  * Load data from a Google spreadsheet
  *
  * @param {string} spreadsheetId Google sheets ID
- * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
+ * @param {{ clientEmail: string; privateKey: string }} credentials Google
+ *   credentials
  */
 export async function loadGoogleSheet(spreadsheetId, credentials) {
   const auth = await authorize(credentials);
@@ -102,7 +104,8 @@ function parseGoogleSheet(sheet) {
  * Sanitize HTML
  *
  * @param {string} input possibly dirty HTML
- * @param preserveStyles if true, allow few decorative tags; else, strip everything
+ * @param preserveStyles if true, allow few decorative tags; else, strip
+ *   everything
  * @returns clean HTML
  */
 function sanitize(input, preserveStyles = false) {
@@ -115,7 +118,8 @@ function sanitize(input, preserveStyles = false) {
 /**
  * Connect to Google Docs
  *
- * @param {{ clientEmail: string; privateKey: string }} credentials Google credentials
+ * @param {{ clientEmail: string; privateKey: string }} credentials Google
+ *   credentials
  * @returns authenticated Google doc client
  */
 async function authorize(credentials) {

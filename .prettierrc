@@ -5,7 +5,5 @@
   "printWidth": 80,
   "plugins": ["prettier-plugin-svelte"],
   "pluginSearchDirs": ["."],
-  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
-  "tsdoc": true,
-  "jsdocCapitalizeDescription": false
+  "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }
