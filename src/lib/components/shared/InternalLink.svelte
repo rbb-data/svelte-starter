@@ -11,7 +11,7 @@
    */
   export let href;
 
-  $: _href = base + href + (dev ? '' : '/index.html');
+  $: _href = base + href + (dev ? '' : '.html');
 </script>
 
 <a {...$$restProps} href={_href} rel="{$$restProps.rel || ''} external">

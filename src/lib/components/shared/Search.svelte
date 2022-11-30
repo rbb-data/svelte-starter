@@ -31,8 +31,8 @@
 
   import { tick } from 'svelte';
 
-  import CheckIcon from '$icons/Check.svelte';
-  import SearchIcon from '$icons/Search.svelte';
+  import CheckIcon from '$icons/CheckIcon.svelte';
+  import SearchIcon from '$icons/SearchIcon.svelte';
 
   import { getIndexBefore, getIndexAfter } from './helpers';
 

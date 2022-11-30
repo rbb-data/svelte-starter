@@ -16,8 +16,8 @@
 
   import { tick } from 'svelte';
 
-  import DropdownIcon from '$icons/Dropdown.svelte';
-  import CheckIcon from '$icons/Check.svelte';
+  import DropdownIcon from '$icons/DropdownIcon.svelte';
+  import CheckIcon from '$icons/CheckIcon.svelte';
 
   import typeahead from '$lib/actions/typeahead';
   import { getIndexBefore, getIndexAfter } from './helpers';

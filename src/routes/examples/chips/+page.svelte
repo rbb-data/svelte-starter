@@ -1,7 +1,7 @@
 <script>
   import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
   import Button from '$lib/components/shared/Button.svelte';
-  import CheckIcon from '$icons/Check.svelte';
+  import CheckIcon from '$icons/CheckIcon.svelte';
 
   const criterions = [
     'Diskutiert',
