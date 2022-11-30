@@ -44,7 +44,8 @@
   export let id;
 
   /**
-   * function that, given a user-specfied query string, yields a list of suggestions
+   * function that, given a user-specfied query string, yields a list of
+   * suggestions
    *
    * can either return the list itself or a promise
    *

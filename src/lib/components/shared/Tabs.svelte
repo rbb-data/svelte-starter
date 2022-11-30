@@ -68,7 +68,8 @@
   export let isTabDisabled = () => false;
 
   /**
-   * function that maps a tab to a classname that will be assigned to the respective tab
+   * function that maps a tab to a classname that will be assigned to the
+   * respective tab
    *
    * @type {(tab: any) => string | null}
    */

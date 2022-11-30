@@ -20,7 +20,10 @@
   /** @type {string} */
   export let caption;
 
-  /** if true, an entry in the first column serves as label for the respective row */
+  /**
+   * if true, an entry in the first column serves as label for the respective
+   * row
+   */
   export let highlightFirstColumn = true;
 </script>
 
