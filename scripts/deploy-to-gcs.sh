@@ -46,10 +46,10 @@ upload() {
   # files, then re-add and compress them while copying to the cloud.
 
   # remove folder if it exists
-  gsutil -q stat ${cloud_dst}/* && gsutil -m rm -r $cloud_dst
+  gsutil -q stat ${cloud_dst}/* && gsutil rm -r $cloud_dst
 
   # compress and upload files
-  gsutil -m cp -r -z html,css,js "$BUILD_DIR" "$cloud_dst"
+  gsutil cp -r -z html,css,js "$BUILD_DIR" "$cloud_dst"
 
   # configure caching of assets
   gsutil setmeta -h 'Cache-Control:public,max-age=0,no-transform' "$cloud_dst"/**/*.html
