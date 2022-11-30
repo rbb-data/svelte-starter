@@ -52,6 +52,9 @@ update_readme() {
   # update readme
   node scripts/helpers/update-readme.js
 
+  # substitute '{project-creation-date}' with the current date
+  sed -i '' 's/{project-creation-date}/'"$project_creation_date"'/g' README.md
+
   # substitute '{project-name}' with the actual project name
   sed -i '' 's/{project-name}/'"$project_name"'/g' README.md
 

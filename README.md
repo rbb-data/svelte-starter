@@ -8,7 +8,7 @@ This template serves as a starting point to create data visualizations with [Sve
 - Loads data from Google sheets
 - Fetches structured data from [ArchieML](http://archieml.org)-formatted Google docs
 - Easy deployment to rbb's Google Cloud Storage
-- Pre-generated iframe snippet to embed build into a foreign website with [a resizer script](https://github.com/rbb-data/iframe-sizer-script) supported by default
+- Pre-generated iframe snippet to embed page into a foreign website with [a resizer script](https://github.com/rbb-data/iframe-sizer-script) supported by default
 - [Style Dictionary](https://amzn.github.io/style-dictionary/#/) as a single source of truth for design tokens
 - Component library, documented at https://rbb-data.github.io/svelte-starter/
 
@@ -85,7 +85,7 @@ Run `npm run deploy` to deploy to https://storage.googleapis.com/rbb-data-static
 
 > **Note**
 >
-> The credentials necessary for deploying to the cloud are stored as organization secrets that can only be accessed by public repositories. If your repository is private, make sure to add the necessary secrets on the repository level. You'll find the secrets in our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
+> The credentials necessary for deploying to the cloud are stored as organization secrets that can only be accessed by public repositories. If your repository is private, make sure to add the necessary secrets on the repository level. You'll find the secrets in our [wiki](https://confluence.ard.de/pages/viewpage.action?pageId=291537963).
 
 ## Directory structure
 
@@ -98,7 +98,7 @@ src
 │   │   ├── icons  -- list of icons as Svelte components
 │   │   └── shared  -- component library, see https://rbb-data.github.io/svelte-starter/
 │   └── stores  -- Svelte stores, see https://svelte.dev/tutorial/writable-stores
-├── routes  -- pages, filenames map to urls
+├── routes  -- pages, directories map to urls
 │   └── examples  -- examples of polished user interfaces
 └── style  -- global css and scss files
 ```
@@ -120,7 +120,7 @@ Environment variables are handled by [Vite](https://vitejs.dev), the behind-the-
 
 Variables in `.env` are public and loaded in all cases. Sensitive variables should live in a `.env.local` file that is ignored by git. For convenience, `.env.local.example` is an empty template file; simply add the keys and move to `.env.local`.
 
-Secrets and private keys are not stored in version control but you'll find them in our [wiki](https://docs.rbb-online.de/wiki/pages/viewpage.action?pageId=470686647).
+Secrets and private keys are not stored in version control but you'll find them in our [wiki](https://confluence.ard.de/pages/viewpage.action?pageId=291537963).
 
 ## Scripts
 

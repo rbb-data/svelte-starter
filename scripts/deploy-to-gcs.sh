@@ -82,6 +82,9 @@ main() {
   fi
 
   upload
+
+  url=https://storage.googleapis.com"$base_path"/index.html
+  echo -e '\nDeployed to' "$url"
 }
 
 main "$@"
