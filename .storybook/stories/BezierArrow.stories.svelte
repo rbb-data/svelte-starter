@@ -4,30 +4,7 @@
   import BezierArrow from '$lib/components/shared/BezierArrow.svelte';
 </script>
 
-<Meta
-  title="Viz/BezierArrow"
-  component={BezierArrow}
-  argTypes={{
-    start: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    end: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    startHandleOffset: {
-      table: {
-        defaultValue: { summary: '[0, 0]' },
-      },
-    },
-    endHandleOffset: {
-      table: {
-        defaultValue: { summary: '[0, 0]' },
-      },
-    },
-  }}
-/>
+<Meta title="Viz/BezierArrow" component={BezierArrow} />
 
 <Story name="Basic">
   <svg width="100" height="100">

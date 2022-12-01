@@ -8,34 +8,7 @@
   let selectedOptionsInitiallySet = ['Berlin', 'Brandenburg'];
 </script>
 
-<Meta
-  title="UI/CheckBoxes"
-  component={CheckBoxes}
-  argTypes={{
-    id: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    options: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    label: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    selectedOptions: {
-      table: {
-        defaultValue: { summary: '[]' },
-      },
-    },
-    isOptionDisabled: {
-      table: {
-        defaultValue: { summary: '(option) => false' },
-      },
-    },
-  }}
-/>
+<Meta title="UI/CheckBoxes" component={CheckBoxes} />
 
 <Story name="Basic">
   <CheckBoxes

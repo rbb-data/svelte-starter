@@ -8,29 +8,7 @@
   let selectedOptionInitiallySet = 'Sommer';
 </script>
 
-<Meta
-  title="UI/Dropdown"
-  component={Dropdown}
-  argTypes={{
-    id: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    options: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    placeholder: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    formatOption: {
-      table: {
-        defaultValue: { summary: '(option) => option' },
-      },
-    },
-  }}
-/>
+<Meta title="UI/Dropdown" component={Dropdown} />
 
 <Story name="Basic">
   <div class="wrapper">

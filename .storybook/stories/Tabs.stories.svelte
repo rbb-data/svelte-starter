@@ -15,34 +15,7 @@
   let activeIndexInitallySelected = 1;
 </script>
 
-<Meta
-  title="UI/Tabs"
-  component={Tabs}
-  argTypes={{
-    id: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    tabs: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    label: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    isTabDisabled: {
-      table: {
-        defaultValue: { summary: '(tab) => false' },
-      },
-    },
-    getTabClass: {
-      table: {
-        defaultValue: { summary: '(tab) => null' },
-      },
-    },
-  }}
-/>
+<Meta title="UI/Tabs" component={Tabs} />
 
 <Story name="Basic">
   <Tabs id="basic" label="Wähle einen Tab" {tabs} bind:activeIndex />

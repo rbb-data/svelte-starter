@@ -86,29 +86,7 @@
   });
 </script>
 
-<Meta
-  title="UI/Search"
-  component={Search}
-  argTypes={{
-    id: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    search: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    label: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    formatSuggestion: {
-      table: {
-        defaultValue: { summary: '(suggestion) => suggestion' },
-      },
-    },
-  }}
-/>
+<Meta title="UI/Search" component={Search} />
 
 <Story name="Basic">
   <div class="wrapper">
