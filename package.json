@@ -25,7 +25,9 @@
     "d3-array": "^3.1.1",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.1.0",
+    "friendly-charts": "0.0.16",
     "fuzzysort": "^1.1.4",
+    "layercake": "^7.1.0",
     "lodash.debounce": "^4.0.8",
     "match-sorter": "^6.3.1"
   },
