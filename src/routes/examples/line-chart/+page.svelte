@@ -14,6 +14,8 @@
   import AxisX from '$lib/components/layercake/AxisX.svelte';
   import AxisY from '$lib/components/layercake/AxisY.svelte';
 
+  import * as tokens from '$lib/tokens';
+
   const data = [
     { month: 1, rain: 30, rainAvg: 9, label: 'Januar' },
     { month: 2, rain: 25, rainAvg: 8, label: 'Februar' },
@@ -29,21 +31,29 @@
     { month: 12, rain: 63, rainAvg: 8, label: 'Dezember' },
   ];
 
+  // padding on both sides of the x-axis
   const paddingX = 20;
+
+  // padding around chart
   const padding = {
     top: 28,
     right: 28,
     bottom: 28,
     left: 30,
   };
+
+  // account for paddingX on x-axis
   const xRange = ({ width }: { width: number; height: number }) => [
     paddingX,
     width - paddingX,
   ];
+
+  // set lower limit of y-axis to 0 and infer upper-limit from data
   const yDomain = (domain: [number, number]) => [0, domain[1]];
 
-  const colorAccent = 'var(--c-ui-accent-blue)';
-  const colorMute = 'var(--c-ui-gray-400)';
+  // colors
+  const colorAccent = tokens.cUiAccentBlue;
+  const colorMute = tokens.cUiGray400;
 </script>
 
 <div
@@ -172,6 +182,7 @@
   <ChartFooter>Quelle: Ausgedachte Daten</ChartFooter>
 </div>
 
+<!-- visually hidden table for accessibility -->
 <div class="visually-hidden">
   <Table
     {data}
