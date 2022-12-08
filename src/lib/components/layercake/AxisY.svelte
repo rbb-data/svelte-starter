@@ -17,6 +17,7 @@
   export let showDomainLine = false;
   export let showGridLines = true;
   export let showTickLines = false;
+
   export let tickLength = 6;
   export let tickLabelPadding = 8;
 
@@ -39,11 +40,11 @@
   {/if}
   {#each ticks as tick}
     <g transform="translate(0, {$yScale(tick)})">
-      {#if showTickLines}
-        <LineH class="tick-line" x2={tickLength} />
-      {/if}
       {#if showGridLines}
         <LineH class="grid-line" />
+      {/if}
+      {#if showTickLines}
+        <LineH class="tick-line" x2={tickLength} />
       {/if}
       <SvgText
         class="tick"
