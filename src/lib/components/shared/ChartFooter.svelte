@@ -8,7 +8,11 @@
   @component
 -->
 
-<div class="chart-footer">
+<div
+  class:chart-footer={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+>
   <slot>Footer missing</slot>
 </div>
 

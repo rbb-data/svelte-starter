@@ -16,7 +16,13 @@
    * @component
    */
 
-  export let type: 'primary' | 'secondary' | 'tertiary' = 'primary';
+  type Variant = 'primary' | 'secondary' | 'tertiary';
+
+  interface $$Props extends svelte.JSX.HTMLAttributes<HTMLButtonElement> {
+    variant?: Variant;
+  }
+
+  export let variant: Variant = 'primary';
 </script>
 
 <button
@@ -24,9 +30,9 @@
   class:button={true}
   {...$$restProps}
   on:click
-  data-type={type}
+  data-variant={variant}
 >
-  <slot>Button</slot>
+  <slot>Label missing</slot>
 </button>
 
 <style lang="scss">
@@ -63,7 +69,7 @@
       opacity: 0.3;
     }
 
-    &[data-type='secondary'] {
+    &[data-variant='secondary'] {
       --_color: var(--_button-color-accent);
       --_background-color: var(--_button-color-secondary);
 
@@ -71,7 +77,7 @@
       outline-offset: -1px;
     }
 
-    &[data-type='tertiary'] {
+    &[data-variant='tertiary'] {
       --_background-color: transparent;
       --_color: var(--_button-color-accent);
     }

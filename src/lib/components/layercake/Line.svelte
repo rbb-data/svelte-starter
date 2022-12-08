@@ -87,10 +87,4 @@
     stroke: var(--__outline);
     stroke-width: calc(var(--__width) + 2 * var(--__outline-width));
   }
-
-  /* .tick {
-    --__color: var(--_color, var(--color, var(--c-ui-gray-300)));
-    --__width: var(--_width, var(--width, 1));
-    --__outline-width: var(--_outline-width, var(--outline-width, 0));
-  } */
 </style>

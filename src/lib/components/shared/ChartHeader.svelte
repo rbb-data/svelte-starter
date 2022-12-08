@@ -10,7 +10,11 @@
   @component
 -->
 
-<hgroup class="chart-header">
+<hgroup
+  class:chart-header={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+>
   <h2 class="chart-header__title">
     {#if $$slots.default}
       <slot>Title missing</slot>

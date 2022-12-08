@@ -30,7 +30,7 @@
   export let highlightFirstColumn = true;
 </script>
 
-<table>
+<table class:table={true} class={$$restProps.class} style={$$restProps.style}>
   {#if caption}
     <caption>
       {caption}

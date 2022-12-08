@@ -135,7 +135,7 @@
   };
 </script>
 
-<g class="arrow">
+<g class:arrow={true} class={$$restProps.class} style={$$restProps.style}>
   {#if debug}
     <g class="debug">
       {#each [sHandle, eHandle] as coords}
