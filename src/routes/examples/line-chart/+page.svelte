@@ -13,6 +13,7 @@
   import Circle from '$lib/components/layercake/Circle.svelte';
   import AxisX from '$lib/components/layercake/AxisX.svelte';
   import AxisY from '$lib/components/layercake/AxisY.svelte';
+  import AxisLabelY from '$lib/components/layercake/AxisLabelY.svelte';
 
   import * as tokens from '$lib/tokens';
 
@@ -113,15 +114,7 @@
         </AxisX>
 
         <!-- y-axis label -->
-        <SvgText
-          class="label"
-          xOffset={-padding.left}
-          yOffset={-padding.top}
-          xAlign="left"
-          yAlign="top"
-        >
-          Regen in l/qm
-        </SvgText>
+        <AxisLabelY>Regen in l/qm</AxisLabelY>
 
         <!-- lines -->
         <Path
