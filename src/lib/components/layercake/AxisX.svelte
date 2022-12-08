@@ -3,6 +3,7 @@
   import { axis, type AxisOptions } from 'friendly-charts';
 
   import type { LayerCakeContext } from '$lib/components/layercake/types';
+
   import LineH from '$lib/components/layercake/LineH.svelte';
   import LineV from '$lib/components/layercake/LineV.svelte';
   import SvgText from '$lib/components/layercake/SvgText.svelte';
@@ -48,9 +49,6 @@
     {/if}
     {#each ticks as tick}
       <g transform="translate({$xScale(tick)}, 0)">
-        {#if showGridLines}
-          <LineV class="grid-line" transform="translate(0, {-$height})" />
-        {/if}
         {#if showTickLines}
           <LineV
             class={showDomainLine ? 'domain-line' : 'tick-line'}
@@ -61,7 +59,7 @@
           class="tick"
           xAlign="center"
           yAlign="top"
-          yOffset={tickLength + tickLabelPadding}
+          yOffset={tickLabelPadding + (showTickLines ? tickLength : 0)}
           outline="none"
         >
           <slot {tick}>

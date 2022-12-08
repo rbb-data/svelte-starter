@@ -64,6 +64,10 @@
     --_color: var(--chart-color-mute, var(--c-ui-gray-400));
   }
 
+  .zero-line {
+    --_color: var(--chart-color-mute, var(--c-ui-gray-400));
+  }
+
   .tick-line {
     --_color: var(--chart-color-mute, var(--c-ui-gray-300));
   }

@@ -3,6 +3,7 @@
   import { axis, type AxisOptions } from 'friendly-charts';
 
   import type { LayerCakeContext } from '$lib/components/layercake/types';
+
   import LineH from '$lib/components/layercake/LineH.svelte';
   import LineV from '$lib/components/layercake/LineV.svelte';
   import SvgText from '$lib/components/layercake/SvgText.svelte';
@@ -53,7 +54,7 @@
         class="tick"
         xAlign="right"
         yAlign="center"
-        xOffset={-tickLabelPadding}
+        xOffset={-tickLabelPadding - (showTickLines ? tickLength : 0)}
       >
         <slot {tick}>
           {tick}
