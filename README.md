@@ -99,7 +99,7 @@ src
 │   │   └── shared  -- component library, see https://rbb-data.github.io/svelte-starter/
 │   └── stores  -- Svelte stores, see https://svelte.dev/tutorial/writable-stores
 ├── routes  -- pages, directories map to urls
-│   └── examples  -- examples of polished user interfaces
+│   └── examples  -- example charts
 └── style  -- global css and scss files
 ```
 

@@ -3,10 +3,9 @@
   import googleSheetData from '$data/google-sheets/example.csv';
   // @ts-ignore
   import localData from '$data/local-data.csv';
-
   import DOC from '$data/google-doc.json';
 
-  import InternalLink from '$lib/components/shared/InternalLink.svelte';
+  import ListOfExamples from './examples/ListOfExamples.svelte';
 </script>
 
 <h1>{DOC.TITLE}</h1>
@@ -75,47 +74,7 @@
 
 <h2>Beispiele</h2>
 
-<ul>
-  <li>
-    <InternalLink href="/examples/line-chart">examples/line-chart</InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/check-boxes">
-      examples/check-boxes
-    </InternalLink>
-  </li>
-  <li><InternalLink href="/examples/chips">examples/chips</InternalLink></li>
-  <li>
-    <InternalLink href="/examples/colored-tabs">
-      examples/colored-tabs
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/custom-buttons">
-      examples/custom-buttons
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/primary-secondary-buttons">
-      examples/primary-secondary-buttons
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/radio-buttons">
-      examples/radio-buttons
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/subtle-tabs">
-      examples/subtle-tabs
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/tertiary-buttons">
-      examples/tertiary-buttons
-    </InternalLink>
-  </li>
-</ul>
+<ListOfExamples />
 
 <style lang="scss">
   h1 {
