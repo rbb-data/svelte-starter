@@ -44,7 +44,10 @@
         <LineH class="grid-line" />
       {/if}
       {#if showTickLines}
-        <LineH class="tick-line" x2={tickLength} />
+        <LineH
+          class={showDomainLine ? 'domain-line' : 'tick-line'}
+          x2={-tickLength}
+        />
       {/if}
       <SvgText
         class="tick"
