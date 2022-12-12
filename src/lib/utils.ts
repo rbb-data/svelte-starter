@@ -26,22 +26,22 @@ export function getHighestContrastColor(
 }
 
 /** Search a data list with a given query using fuzzy matching */
-export function fuzzysearch<D>(
+export function fuzzysearch<D extends string | Fuzzysort.Prepared>(
   query: string,
   data: D[],
   { key, limit = 5 }: { key?: string; limit?: number } = {}
 ) {
-  // @ts-ignore
+  // @ts-expect-error "key" does not exist in the options type, but it is documented and it works
   const results = fuzzysort.go(query, data, { key, limit });
 
-  const suggestions = [];
+  const suggestions: D[] = [];
   for (let i = 0; i < results.length; i++) {
     const result = results[i];
-    // @ts-ignore
+    // @ts-expect-error not sure why `obj` is not defined on the result
     suggestions.push(key ? result.obj : result.target);
   }
 
-  return suggestions as D[];
+  return suggestions;
 }
 
 /** Search a data list with a given query using a set of deterministic rules */

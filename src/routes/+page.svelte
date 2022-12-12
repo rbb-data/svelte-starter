@@ -1,8 +1,9 @@
 <script lang="ts">
-  // @ts-ignore
+  // @ts-expect-error does not find corresponding type declaration
   import googleSheetData from '$data/google-sheets/example.csv';
-  // @ts-ignore
+  // @ts-expect-error does not find corresponding type declaration
   import localData from '$data/local-data.csv';
+
   import DOC from '$data/google-doc.json';
 
   import ListOfExamples from './examples/ListOfExamples.svelte';
