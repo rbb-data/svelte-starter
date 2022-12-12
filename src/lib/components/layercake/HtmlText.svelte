@@ -111,6 +111,13 @@
     font-size: var(--font-size-xs);
   }
 
+  .category-tick {
+    --__color: var(--_color, var(--color-text, var(--c-ui-gray-500)));
+
+    font-weight: var(--font-weight-semi-bold);
+    font-size: var(--font-size-sm);
+  }
+
   .label {
     --__color: var(--_color, var(--color-text, var(--c-ui-gray-400)));
 

@@ -36,6 +36,7 @@
     cy = get($yGet, data, yIndex);
     try {
       r = get($rGet, data, rIndex);
+      // eslint-disable-next-line no-empty
     } catch {}
   }
 

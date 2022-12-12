@@ -2,6 +2,9 @@
   import { getContext } from 'svelte';
   import { symbol, type SymbolOptions } from 'friendly-charts';
 
+  import SvgText from './SvgText.svelte';
+
+  import { getHighestContrastColor } from '$lib/utils';
   import { get, isStacked } from './utils';
   import type { LayerCakeContext } from './types';
 
@@ -78,6 +81,41 @@
   style:--_opacity={$$restProps.opacity || ''}
   use:symbol={friendly}
 />
+
+{#if data != undefined && ctx != undefined}
+  {#if $$slots.default || $$slots.start}
+    <SvgText
+      class="font-regular"
+      y={y + height / 2}
+      yAlign="center"
+      xOffset={4}
+      outline="none"
+      color={$$restProps.fill || color
+        ? getHighestContrastColor($$restProps.fill || color)
+        : 'black'}
+    >
+      {#if $$slots.default}
+        <slot />
+      {/if}
+      {#if $$slots.start}
+        <slot name="start" />
+      {/if}
+    </SvgText>
+  {/if}
+
+  {#if $$slots.end}
+    <SvgText
+      class="font-regular"
+      y={y + height / 2}
+      x={x + width}
+      yAlign="center"
+      xOffset={4}
+      outline="none"
+    >
+      <slot name="end" />
+    </SvgText>
+  {/if}
+{/if}
 
 <style>
   rect {

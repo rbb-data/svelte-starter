@@ -12,11 +12,12 @@
 </script>
 
 <SvgText
-  class="label"
   x={$width}
   y={$height}
   yOffset={$padding.bottom}
   xAlign="right"
+  {...$$restProps}
+  class="label {$$restProps.class || ''}"
 >
   <slot>Label missing</slot>
 </SvgText>

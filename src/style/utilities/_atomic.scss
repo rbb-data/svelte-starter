@@ -1,3 +1,26 @@
+// Atomic CSS classes are decorated with the `!important` keyword
+// to make sure that they take precedence
+
 .w-full {
-  width: 100%;
+  width: 100% !important;
+}
+
+.font-regular {
+  font-weight: var(--font-weight-regular) !important;
+}
+
+.font-semibold {
+  font-weight: var(--font-weight-semi-bold) !important;
+}
+
+.font-bold {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.font-black {
+  font-weight: var(--font-weight-black) !important;
+}
+
+.font-georgia {
+  font-family: Georgia, serif !important;
 }

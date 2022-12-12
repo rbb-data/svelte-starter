@@ -18,6 +18,7 @@
 
   type Variant = 'primary' | 'secondary' | 'tertiary';
 
+  // eslint-disable-next-line no-undef
   interface $$Props extends svelte.JSX.HTMLAttributes<HTMLButtonElement> {
     variant?: Variant;
   }

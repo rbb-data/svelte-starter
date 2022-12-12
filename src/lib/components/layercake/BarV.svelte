@@ -2,6 +2,9 @@
   import { getContext } from 'svelte';
   import { symbol, type SymbolOptions } from 'friendly-charts';
 
+  import SvgText from './SvgText.svelte';
+
+  import { getHighestContrastColor } from '$lib/utils';
   import { get, isStacked } from './utils';
   import type { LayerCakeContext } from './types';
 
@@ -23,7 +26,8 @@
     xGet: typeof ctx['xGet'],
     yGet: typeof ctx['yGet'],
     xScale: typeof ctx['xScale'],
-    yScale: typeof ctx['yScale'];
+    yScale: typeof ctx['yScale'],
+    ctxHeight: typeof ctx['height'];
 
   $: x = $$restProps.x || 0;
   $: y = $$restProps.y || 0;
@@ -36,6 +40,7 @@
     yGet = ctx.yGet;
     xScale = ctx.xScale;
     yScale = ctx.yScale;
+    ctxHeight = ctx.height;
 
     x = get($xGet, data, xIndex);
 
@@ -46,7 +51,7 @@
       width = yVals[1] - yVals[0];
     } else {
       height = get($yGet, data, yIndex);
-      y = $yScale.range()[0] - height;
+      y = $yScale.range()[1] - height;
     }
 
     if ($xScale.bandwidth) {
@@ -78,6 +83,42 @@
   style:--_opacity={$$restProps.opacity || ''}
   use:symbol={friendly}
 />
+
+{#if data != undefined && ctx != undefined}
+  {#if $$slots.default || $$slots.start}
+    <SvgText
+      class="font-regular"
+      x={x + width / 2}
+      y={$ctxHeight}
+      xAlign="center"
+      yOffset={-4}
+      outline="none"
+      color={$$restProps.fill || color
+        ? getHighestContrastColor($$restProps.fill || color)
+        : 'black'}
+    >
+      {#if $$slots.default}
+        <slot />
+      {/if}
+      {#if $$slots.start}
+        <slot name="start" />
+      {/if}
+    </SvgText>
+  {/if}
+
+  {#if $$slots.end}
+    <SvgText
+      class="font-regular"
+      x={x + width / 2}
+      y={$ctxHeight - height}
+      xAlign="center"
+      yOffset={-4}
+      outline="none"
+    >
+      <slot name="end" />
+    </SvgText>
+  {/if}
+{/if}
 
 <style>
   rect {

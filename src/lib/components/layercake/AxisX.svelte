@@ -12,8 +12,12 @@
 
   const { xScale, height } = getContext<LayerCakeContext<D>>('LayerCake');
 
+  const isCategorical = $xScale.bandwidth != undefined;
+
   export let n: number | undefined = undefined;
-  export let ticks = $xScale.ticks(n) as any[];
+  export let ticks = isCategorical
+    ? $xScale.domain()
+    : ($xScale.ticks(n) as any[]);
 
   export let showDomainLine = true;
   export let showGridLines = false;
@@ -29,13 +33,18 @@
     friendly = {
       label,
       direction: 'x',
-      type: $xScale.bandwidth == undefined ? 'continuous' : 'categorical',
-      ticks: 'text.tick',
+      type: isCategorical ? 'categorical' : 'continuous',
+      ticks: isCategorical ? 'text.category-tick' : 'text.tick',
     };
   }
 </script>
 
-<g class="axis-x" use:axis={friendly}>
+<g
+  class:axis-x={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+  use:axis={friendly}
+>
   {#each ticks as tick}
     <g transform="translate({$xScale(tick)}, 0)">
       {#if showGridLines}
@@ -48,7 +57,11 @@
       <LineH class="domain-line" />
     {/if}
     {#each ticks as tick}
-      <g transform="translate({$xScale(tick)}, 0)">
+      {@const x =
+        $xScale(tick) +
+        ($xScale.bandwidth != undefined ? $xScale.bandwidth() / 2 : 0)}
+
+      <g transform="translate({x}, 0)">
         {#if showTickLines}
           <LineV
             class={showDomainLine ? 'domain-line' : 'tick-line'}
@@ -56,7 +69,7 @@
           />
         {/if}
         <SvgText
-          class="tick"
+          class={isCategorical ? 'category-tick' : 'tick'}
           xAlign="center"
           yAlign="top"
           yOffset={tickLabelPadding + (showTickLines ? tickLength : 0)}
