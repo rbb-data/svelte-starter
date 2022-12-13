@@ -2,6 +2,7 @@
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
   import Button from '$lib/components/shared/Button.svelte';
+  import SearchIcon from '$icons/SearchIcon.svelte';
 </script>
 
 <Meta title="UI/Button" component={Button} />
@@ -52,5 +53,26 @@
     --button-color-accent="var(--c-ui-accent-turquoise)"
   >
     Tertiary
+  </Button>
+</Story>
+
+<Story name="With icon">
+  <Button class="icon" aria-label="Search">
+    <SearchIcon />
+  </Button>
+</Story>
+
+<Story name="Round with icon">
+  <Button class="icon round" aria-label="Search">
+    <SearchIcon />
+  </Button>
+</Story>
+
+<Story name="Icon and text">
+  <Button>
+    <div class="splitter align-center">
+      <SearchIcon />
+      <span>Primary</span>
+    </div>
   </Button>
 </Story>
