@@ -159,6 +159,15 @@ Builds design tokens into CSS, SCSS and javascript files, see [Design tokens](#d
 
 Updates data sources.
 
+### `npm run sync-tokens`
+
+Sync design tokens with colors defined in the [rbb|24 style guide on Figma](https://www.figma.com/file/ADz4iyImo9ikFlsNaOX6MU/Datenteam-Styleguide?node-id=0:1&t=tNhUz2bA2ki7SuSa-0).
+
+- Go to the [style guide](https://www.figma.com/file/ADz4iyImo9ikFlsNaOX6MU/Datenteam-Styleguide?node-id=0:1&t=tNhUz2bA2ki7SuSa-0)
+- Export design tokens (Main menu -> Plugins -> Design Tokens -> Export Design Token File)
+- Drag the exported file from your Downloads folder to `style-dictionary/figma-export.json`
+- Run `npm run sync-tokens`
+
 ### `npm run docs`
 
 Starts the development server for the documentation site. The site is then available at http://localhost:6006/.
@@ -195,4 +204,4 @@ Type-checks the project continuously.
 
 ## Design tokens
 
-Design tokens live in `style-dictionary/tokens.json`. `npm run update:tokens` builds CSS, SCSS files into `src/style` and a javascript file into `src/lib` (powered by [Style Dictionary](https://amzn.github.io/style-dictionary/#/)).
+Design tokens are defined in `style-dictionary/tokens.json`. `npm run update:tokens` builds CSS, SCSS files into `src/style` and a javascript file into `src/lib` (powered by [Style Dictionary](https://amzn.github.io/style-dictionary/#/)). `npm run sync-tokens` syncs tokens with design tokens exported from the [rbb|24 style guide on Figma](https://www.figma.com/file/ADz4iyImo9ikFlsNaOX6MU/Datenteam-Styleguide?node-id=0:1&t=tNhUz2bA2ki7SuSa-0).
