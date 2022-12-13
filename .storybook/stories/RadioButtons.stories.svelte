@@ -8,29 +8,7 @@
   let selectedOptionInitiallySet = 'Berlin';
 </script>
 
-<Meta
-  title="UI/RadioButtons"
-  component={RadioButtons}
-  argTypes={{
-    id: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    options: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    label: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    isOptionDisabled: {
-      table: {
-        defaultValue: { summary: '(option) => false' },
-      },
-    },
-  }}
-/>
+<Meta title="UI/RadioButtons" component={RadioButtons} />
 
 <Story name="Basic">
   <RadioButtons

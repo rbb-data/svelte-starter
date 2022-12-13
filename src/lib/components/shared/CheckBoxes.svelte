@@ -44,11 +44,16 @@
   /** function that maps an option to `true` if disabled */
   export let isOptionDisabled: (option: Option) => boolean = () => false;
 
-  // currenly focused option
+  // currently focused option
   let focusedOption: Option | null = null;
 </script>
 
-<fieldset {id} class:check-boxes={true} class={$$restProps.class}>
+<fieldset
+  {id}
+  class:check-boxes={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+>
   {#if label}
     <legend
       class="check-boxes__label"

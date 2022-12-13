@@ -51,7 +51,7 @@ jobs:
         run: npm run deploy
         if: ${{ github.event.inputs.deploy_to_main_path == 'true' }}
 
-      - name: Deploy to experimental page
+      - name: Deploy to production page
         run: npm run deploy--experimental
         if: ${{ github.event.inputs.deploy_to_main_path == 'false' }}
 

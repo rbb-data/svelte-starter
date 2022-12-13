@@ -72,24 +72,7 @@
   ];
 </script>
 
-<Meta
-  title="Viz/Table"
-  component={Table}
-  argTypes={{
-    data: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    columns: {
-      // @ts-ignore
-      type: { required: true },
-    },
-    caption: {
-      // @ts-ignore
-      type: { required: true },
-    },
-  }}
-/>
+<Meta title="Viz/Table" component={Table} />
 
 <Story name="Basic">
   <Table {data} {columns} caption="Titel Datensatz" />

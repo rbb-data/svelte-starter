@@ -22,10 +22,13 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
   "dependencies": {
+    "chroma-js": "^2.4.2",
     "d3-array": "^3.1.1",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.1.0",
+    "friendly-charts": "0.0.16",
     "fuzzysort": "^1.1.4",
+    "layercake": "^7.1.0",
     "lodash.debounce": "^4.0.8",
     "match-sorter": "^6.3.1"
   },
@@ -45,6 +48,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@sveltejs/adapter-static": "1.0.0-next.46",
     "@sveltejs/kit": "1.0.0-next.525",
+    "@types/chroma-js": "^2.1.4",
     "@types/d3-array": "^3.0.2",
     "@types/d3-dsv": "^3.0.0",
     "@types/d3-scale": "^4.0.2",

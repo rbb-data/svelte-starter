@@ -43,7 +43,12 @@
   let focusedOption: Option | null = null;
 </script>
 
-<fieldset {id} class:radio-buttons={true} class={$$restProps.class}>
+<fieldset
+  {id}
+  class:radio-buttons={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+>
   {#if label}
     <legend
       class="radio-buttons__label"

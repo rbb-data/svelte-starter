@@ -180,7 +180,12 @@
 
 <svelte:window on:click={handleClickOutside} />
 
-<div {id} class="search">
+<div
+  {id}
+  class:search={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+>
   <form
     class="search__form"
     on:submit|preventDefault={handleSubmit}
@@ -198,7 +203,7 @@
     <div class="search__field">
       <input
         id="{id}__input"
-        class="[ search__input ] [ reset ]"
+        class="search__input | reset"
         role="combobox"
         type="text"
         {placeholder}
@@ -221,7 +226,7 @@
 
       <button
         type="submit"
-        class="[ search__button-submit ] [ reset ]"
+        class="search__button-submit | reset"
         aria-label="Bestätigen"
       >
         <SearchIcon color="#ffffff" />
@@ -232,7 +237,7 @@
   {#if isOpen}
     <ul
       id="{id}__listbox"
-      class="[ search__suggestions ] [ shadow-sm ]"
+      class="search__suggestions | shadow-sm"
       role="listbox"
       aria-orientation="vertical"
     >

@@ -8,20 +8,20 @@
 
 <Story name="Basic">
   <Button on:click={() => console.log('clicked')}>Primary</Button>
-  <Button type="secondary" on:click={() => console.log('clicked')}>
+  <Button variant="secondary" on:click={() => console.log('clicked')}>
     Secondary
   </Button>
-  <Button type="tertiary" on:click={() => console.log('clicked')}>
+  <Button variant="tertiary" on:click={() => console.log('clicked')}>
     Tertiary
   </Button>
 </Story>
 
 <Story name="Disabled">
   <Button on:click={() => console.log('clicked')} disabled>Primary</Button>
-  <Button type="secondary" on:click={() => console.log('clicked')} disabled>
+  <Button variant="secondary" on:click={() => console.log('clicked')} disabled>
     Secondary
   </Button>
-  <Button type="tertiary" on:click={() => console.log('clicked')} disabled>
+  <Button variant="tertiary" on:click={() => console.log('clicked')} disabled>
     Tertiary
   </Button>
 </Story>
@@ -40,14 +40,14 @@
     Primary
   </Button>
   <Button
-    type="secondary"
+    variant="secondary"
     on:click={() => console.log('clicked')}
     --button-color-accent="var(--c-ui-accent-turquoise)"
   >
     Secondary
   </Button>
   <Button
-    type="tertiary"
+    variant="tertiary"
     on:click={() => console.log('clicked')}
     --button-color-accent="var(--c-ui-accent-turquoise)"
   >

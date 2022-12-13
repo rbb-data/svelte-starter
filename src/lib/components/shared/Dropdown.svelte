@@ -119,7 +119,12 @@
 
 <svelte:window on:click={handleClickOutside} />
 
-<div {id} class="dropdown">
+<div
+  {id}
+  class:dropdown={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+>
   <div
     id="{id}__label"
     class="dropdown__label"
@@ -129,7 +134,7 @@
   </div>
   <button
     role="combobox"
-    class="[ dropdown__field ] [ reset ]"
+    class="dropdown__field | reset"
     type="button"
     aria-haspopup="listbox"
     aria-controls={isOpen ? `${id}__listbox` : null}
@@ -172,7 +177,7 @@
   {#if isOpen}
     <ul
       id="{id}__listbox"
-      class="[ dropdown__options ] [ shadow-sm ]"
+      class="dropdown__options | shadow-sm"
       role="listbox"
       aria-orientation="vertical"
       use:typeahead={{

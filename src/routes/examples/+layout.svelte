@@ -1,18 +1,27 @@
-<div>
-  <slot />
-</div>
+<script lang="ts">
+  import InternalLink from '$lib/components/shared/InternalLink.svelte';
+</script>
 
-<style>
-  :global(body) {
-    background-color: var(--c-ui-gray-100);
+<nav>
+  <ul>
+    <li>
+      <InternalLink href="/">← Home</InternalLink>
+    </li>
+    <li>
+      <InternalLink href="/examples">← Beispiele</InternalLink>
+    </li>
+  </ul>
+</nav>
+
+<slot />
+
+<style lang="scss">
+  nav {
+    margin-bottom: var(--s-rem-6);
   }
 
-  div {
-    background-color: white;
-    margin: auto;
-    width: max-content;
-    margin-top: var(--s-px-8);
-    padding: var(--s-px-4) var(--s-px-2);
-    width: 400px;
+  ul {
+    list-style: none;
+    padding: 0;
   }
 </style>

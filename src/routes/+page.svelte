@@ -1,12 +1,12 @@
 <script lang="ts">
-  // @ts-ignore
+  // @ts-expect-error does not find corresponding type declaration
   import googleSheetData from '$data/google-sheets/example.csv';
-  // @ts-ignore
+  // @ts-expect-error does not find corresponding type declaration
   import localData from '$data/local-data.csv';
 
   import DOC from '$data/google-doc.json';
 
-  import InternalLink from '$lib/components/shared/InternalLink.svelte';
+  import ListOfExamples from './examples/ListOfExamples.svelte';
 </script>
 
 <h1>{DOC.TITLE}</h1>
@@ -61,24 +61,11 @@
   <li>
     Liste von Strings:
     <i>
-      {#each DOC.LIST_OF_STRINGS as TEXT_BLOCK, i}
-        {@html TEXT_BLOCK}
-        {#if i < DOC.LIST_OF_STRINGS.length - 1}
-          /&nbsp;
-        {/if}
-      {/each}
+      {DOC.LIST_OF_STRINGS}
     </i>
   </li>
   <li>
-    Liste von Objekten:
-    <i>
-      {#each DOC.ARRAY_OF_OBJECTS as PERSON, i}
-        {PERSON.NAME} ({PERSON.AGE})
-        {#if i < DOC.ARRAY_OF_OBJECTS.length - 1}
-          /&nbsp;
-        {/if}
-      {/each}
-    </i>
+    Liste von Objekten: <i>{JSON.stringify(DOC.ARRAY_OF_OBJECTS)}</i>
   </li>
 </ul>
 
@@ -88,45 +75,7 @@
 
 <h2>Beispiele</h2>
 
-<ul>
-  <li><InternalLink href="/examples/chart">examples/chart</InternalLink></li>
-  <li>
-    <InternalLink href="/examples/check-boxes">
-      examples/check-boxes
-    </InternalLink>
-  </li>
-  <li><InternalLink href="/examples/chips">examples/chips</InternalLink></li>
-  <li>
-    <InternalLink href="/examples/colored-tabs">
-      examples/colored-tabs
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/custom-buttons">
-      examples/custom-buttons
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/primary-secondary-buttons">
-      examples/primary-secondary-buttons
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/radio-buttons">
-      examples/radio-buttons
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/subtle-tabs">
-      examples/subtle-tabs
-    </InternalLink>
-  </li>
-  <li>
-    <InternalLink href="/examples/tertiary-buttons">
-      examples/tertiary-buttons
-    </InternalLink>
-  </li>
-</ul>
+<ListOfExamples />
 
 <style lang="scss">
   h1 {

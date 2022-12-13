@@ -90,6 +90,7 @@
   aria-orientation="horizontal"
   aria-label={label}
   class={$$restProps.class}
+  style={$$restProps.style}
 >
   {#each tabs as tab, i}
     {@const active = i === activeIndex}
@@ -99,7 +100,7 @@
       id="{id}--tab-{i}"
       type="button"
       role="tab"
-      class="{className || ''} [ tabs__tab ] [ reset ]"
+      class="{className || ''} | tabs__tab | reset"
       class:active
       class:disabled
       aria-controls="{id}--tabpanel-{i}"
