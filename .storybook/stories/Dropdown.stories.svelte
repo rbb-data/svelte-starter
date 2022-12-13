@@ -111,6 +111,25 @@
   </div>
 </Story>
 
+<Story name="Hide clear button">
+  <div class="wrapper">
+    <Dropdown
+      id="my-unique-dropdown-id"
+      label="Wähle eine Jahreszeit"
+      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
+      placeholder="Jahreszeiten"
+      hideClearButton
+      bind:selectedOption
+    />
+    <div class="result">
+      Selected value:
+      {#if selectedOption}
+        <i>{selectedOption}</i>
+      {/if}
+    </div>
+  </div>
+</Story>
+
 <Story name="Hide label visually">
   <div class="wrapper">
     <Dropdown
