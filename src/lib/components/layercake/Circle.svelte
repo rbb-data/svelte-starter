@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Data-driven `<circle />`
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
   import { symbol, type SymbolOptions } from 'friendly-charts';
 
@@ -66,10 +72,7 @@
 
 <style>
   circle {
-    --__color: var(
-      --_color,
-      var(--chart-color-accent, var(--c-ui-accent-blue))
-    );
+    --__color: var(--_color, var(--chart-color-accent, var(--c-category-blue)));
     --__outline: var(--_outline, var(--chart-outline, white));
     --__outline-width: var(--_outline-width, var(--chart-outline-width, 1));
     --__opacity: var(--_opacity, var(--chart-opacity, 1));

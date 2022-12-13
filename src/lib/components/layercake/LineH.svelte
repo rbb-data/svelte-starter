@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Data-driven `<line />` (horizontal)
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
 
   import type { LayerCakeContext, Accessor } from './types';

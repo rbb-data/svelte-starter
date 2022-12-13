@@ -1,0 +1,39 @@
+<script lang="ts">
+  import { Meta, Story } from '@storybook/addon-svelte-csf';
+  import { LayerCake, Svg } from 'layercake';
+
+  import AreaY0 from '$lib/components/layercake/AreaY0.svelte';
+  import AxisX from '$lib/components/layercake/AxisX.svelte';
+  import AxisY from '$lib/components/layercake/AxisY.svelte';
+  import Path from '$lib/components/layercake/Path.svelte';
+
+  const data = [
+    { x: 0, y: 10 },
+    { x: 10, y: 30 },
+    { x: 20, y: 25 },
+    { x: 30, y: 50 },
+    { x: 40, y: 10 },
+    { x: 50, y: 0 },
+  ];
+</script>
+
+<Meta title="LayerCake/AreaY0" component={AreaY0} />
+
+<Story name="Basic">
+  <div class="layercake">
+    <LayerCake {data} padding={{ left: 20, bottom: 30 }} x="x" y="y">
+      <Svg>
+        <AxisX />
+        <AxisY />
+        <AreaY0 {data} />
+        <Path outline="none" />
+      </Svg>
+    </LayerCake>
+  </div>
+</Story>
+
+<style>
+  .layercake {
+    height: 200px;
+  }
+</style>

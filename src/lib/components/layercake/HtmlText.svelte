@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * HTML text to be rendered above a chart
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
 
   import { get } from './utils';

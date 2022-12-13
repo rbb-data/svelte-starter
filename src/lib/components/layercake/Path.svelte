@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Data-driven `<path />`
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
   import {
     symbol,
@@ -87,10 +93,7 @@
 
 <style>
   g {
-    --__color: var(
-      --_color,
-      var(--chart-color-accent, var(--c-ui-accent-blue))
-    );
+    --__color: var(--_color, var(--chart-color-accent, var(--c-category-blue)));
     --__width: var(--_width, var(--chart-width, 3));
     --__outline: var(--_outline, var(--chart-outline, white));
     --__outline-width: var(--_outline-width, var(--chart-outline-width, 1));

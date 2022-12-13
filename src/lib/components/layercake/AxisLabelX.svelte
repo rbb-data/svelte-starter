@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * X-Axis label
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
 
   import SvgText from './SvgText.svelte';

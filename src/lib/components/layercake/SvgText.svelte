@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Data-driven `<text />`
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
 
   import { get } from './utils';

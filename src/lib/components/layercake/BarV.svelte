@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Vertical bar
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte';
   import { symbol, type SymbolOptions } from 'friendly-charts';
 
@@ -7,6 +13,7 @@
   import { getHighestContrastColor } from '$lib/utils';
   import { get, isStacked } from './utils';
   import type { LayerCakeContext } from './types';
+  import * as tokens from '$lib/tokens';
 
   type D = $$Generic;
 
@@ -93,9 +100,9 @@
       xAlign="center"
       yOffset={-4}
       outline="none"
-      color={$$restProps.fill || color
-        ? getHighestContrastColor($$restProps.fill || color)
-        : 'black'}
+      color={getHighestContrastColor(
+        $$restProps.fill || color || tokens.cCategoryBlue
+      )}
     >
       {#if $$slots.default}
         <slot />
@@ -122,10 +129,7 @@
 
 <style>
   rect {
-    --__color: var(
-      --_color,
-      var(--chart-color-accent, var(--c-ui-accent-blue))
-    );
+    --__color: var(--_color, var(--chart-color-accent, var(--c-category-blue)));
     --__outline: var(--_outline, var(--chart-outline, white));
     --__outline-width: var(--_outline-width, var(--chart-outline-width, 1));
     --__opacity: var(--_opacity, var(--chart-opacity, 1));

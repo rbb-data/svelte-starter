@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Data-driven area between two lines
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte/internal';
   import { symbol, type SymbolOptions } from 'friendly-charts';
   import { area as d3area, type Area } from 'd3-shape';
@@ -60,13 +66,10 @@
 
 <style>
   g {
-    --__color: var(
-      --_color,
-      var(--chart-color-accent, var(--c-ui-accent-blue))
-    );
+    --__color: var(--_color, var(--chart-color-accent, var(--c-category-blue)));
     --__outline: var(--_outline, var(--chart-outline, none));
     --__outline-width: var(--_outline-width, var(--chart-outline-width, 1));
-    --__opacity: var(--_opacity, var(--chart-opacity, 0.8));
+    --__opacity: var(--_opacity, var(--chart-opacity, 0.6));
 
     stroke-linejoin: round;
     stroke-linecap: round;

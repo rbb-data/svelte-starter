@@ -1,4 +1,10 @@
 <script lang="ts">
+  /**
+   * Y-Axis
+   *
+   * @component
+   */
+
   import { getContext } from 'svelte';
   import { axis, type AxisOptions } from 'friendly-charts';
 
