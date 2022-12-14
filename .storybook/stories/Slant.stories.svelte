@@ -4,7 +4,7 @@
   import Slant from '$lib/components/shared/Slant.svelte';
 </script>
 
-<Meta title="Viz/Slant" component={Slant} />
+<Meta title="UI/Slant" component={Slant} />
 
 <Story name="Basic">
   <Slant />
