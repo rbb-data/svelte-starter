@@ -6,6 +6,7 @@
    *
    * - `.dropdown`: assigned the given id, wrapper element
    * - `.dropdown__field`: clickable field
+   * - `.dropdown__button-clear`: clear button
    * - `.dropdown__options`: list of options (only visible if expanded)
    * - `.dropdown__option`: with class `.selected` applied appropriately
    *
@@ -18,6 +19,7 @@
 
   import DropdownIcon from '$icons/DropdownIcon.svelte';
   import CheckIcon from '$icons/CheckIcon.svelte';
+  import ErrorCloseIcon from '$icons/ErrorCloseIcon.svelte';
 
   import typeahead from '$lib/actions/typeahead';
   import { getIndexBefore, getIndexAfter } from './helpers';
@@ -44,6 +46,9 @@
 
   /** true, if the popup is currently shown */
   export let isOpen = false;
+
+  /** render button to clear the selection */
+  export let hideClearButton = false;
 
   /**
    * format an option; a selected option is formatted and displayed in the
@@ -81,15 +86,19 @@
     selectElement.focus();
   }
 
+  function reset() {
+    if (isOpen) isOpen = false;
+    else {
+      selectedOption = undefined;
+      focusedIndex = undefined;
+    }
+  }
+
   function handleKeyDown(e: KeyboardEvent) {
     if (disabled) return;
 
     if (e.key === 'Escape') {
-      if (isOpen) isOpen = false;
-      else {
-        selectedOption = undefined;
-        focusedIndex = undefined;
-      }
+      reset();
       return;
     }
 
@@ -132,47 +141,66 @@
   >
     {label}
   </div>
-  <button
-    role="combobox"
-    class="dropdown__field | reset"
-    type="button"
-    aria-haspopup="listbox"
-    aria-controls={isOpen ? `${id}__listbox` : null}
-    aria-expanded={isOpen}
-    aria-autocomplete="none"
-    aria-disabled={disabled}
-    aria-labelledby="{id}__label"
-    disabled={false}
-    bind:this={selectElement}
-    on:click={() => {
-      if (disabled) return;
-      isOpen = !isOpen;
-      if (isOpen) {
-        tick().then(() => {
-          const nextIndex = focusedIndex || 0;
-          focusedIndex = nextIndex;
-        });
-      }
-    }}
-    use:typeahead={{
-      handleInput: (input) => {
+  <div class="dropdown__button-wrapper">
+    <button
+      role="combobox"
+      class="dropdown__field | reset"
+      type="button"
+      aria-haspopup="listbox"
+      aria-controls={isOpen ? `${id}__listbox` : null}
+      aria-expanded={isOpen}
+      aria-autocomplete="none"
+      aria-disabled={disabled}
+      aria-labelledby="{id}__label"
+      disabled={false}
+      bind:this={selectElement}
+      on:click={() => {
         if (disabled) return;
-        const option = options.find((o) =>
-          formatOption(o).toLowerCase().startsWith(input)
-        );
-        if (!option) return;
-        selectedOption = option;
-      },
-    }}
-    on:keydown={handleKeyDown}
-  >
-    {#if selectedOption}
-      {formatOption(selectedOption)}
-    {:else}
-      {placeholder}
+        isOpen = !isOpen;
+        if (isOpen) {
+          tick().then(() => {
+            const nextIndex = focusedIndex || 0;
+            focusedIndex = nextIndex;
+          });
+        }
+      }}
+      use:typeahead={{
+        handleInput: (input) => {
+          if (disabled) return;
+          const option = options.find((o) =>
+            formatOption(o).toLowerCase().startsWith(input)
+          );
+          if (!option) return;
+          selectedOption = option;
+        },
+      }}
+      on:keydown={handleKeyDown}
+    >
+      <!-- either show the selected option or a placeholder -->
+      {#if selectedOption}
+        {formatOption(selectedOption)}
+      {:else}
+        {placeholder}
+      {/if}
+
+      <!-- indicator icon at the end of the field -->
+      {#if hideClearButton || (!hideClearButton && !selectedOption)}
+        <DropdownIcon />
+      {/if}
+    </button>
+
+    <!-- clear button -->
+    {#if !hideClearButton && selectedOption}
+      <button
+        type="button"
+        class="dropdown__button-clear | reset"
+        aria-label="Zurücksetzen"
+        on:click={() => reset()}
+      >
+        <ErrorCloseIcon />
+      </button>
     {/if}
-    <DropdownIcon />
-  </button>
+  </div>
 
   {#if isOpen}
     <ul
@@ -241,19 +269,25 @@
 
 <style lang="scss">
   .dropdown {
-    --padding-v: var(--s-px-2);
+    --padding-v: var(--s-px-3);
     --padding-h: var(--s-px-4);
     --icon-size: 1.6em;
+    --clear-icon-size: 1.2em;
     --icon-padding-right: var(--s-px-4);
     --icon-padding-left: var(--s-px-2);
     --offset: var(--s-px-2);
 
     --c-focus: var(--c-ui-black);
 
+    --padding-r: calc(
+      var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
+    );
+
     width: 100%;
     position: relative;
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-semi-bold);
+    line-height: var(--line-height-tight);
 
     &__label {
       font-weight: var(--font-weight-semi-bold);
@@ -261,11 +295,11 @@
       margin-bottom: var(--s-px-2);
     }
 
-    &__field {
-      --padding-r: calc(
-        var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
-      );
+    &__button-wrapper {
+      position: relative;
+    }
 
+    &__field {
       width: 100%;
       padding: var(--padding-v) var(--padding-r) var(--padding-v)
         var(--padding-h);
@@ -289,6 +323,15 @@
           opacity: 0.3;
         }
       }
+    }
+
+    &__button-clear {
+      height: 100%;
+      width: var(--padding-r);
+
+      position: absolute;
+      bottom: 0;
+      right: 0;
     }
 
     &__options {
@@ -329,6 +372,15 @@
       top: 50%;
       right: var(--icon-padding-right);
       transform: translateY(-50%);
+    }
+
+    &__button-clear :global(svg) {
+      width: var(--clear-icon-size);
+      height: var(--clear-icon-size);
+
+      // make sure the clear icon aligns with the other icons
+      right: calc(var(--icon-padding-right) + 0.5 * var(--icon-size));
+      transform: translate(50%, -50%);
     }
   }
 </style>

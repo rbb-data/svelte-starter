@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/RectV" component={RectV} />
+<Meta title="Viz/LayerCake/RectV" component={RectV} />
 
 <Story name="Basic">
   <svg width="50" height="50">

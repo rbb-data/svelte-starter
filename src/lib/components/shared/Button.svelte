@@ -6,6 +6,13 @@
    *
    * - `--button-color-accent`: accent color _(default: blue)_
    * - `--button-color-secondary`: secondary color _(default: white)_
+   * - `--icon-height`: height of the icon, only applicable if the content contains an `<img />` or `<svg />` _(default: min(2em, 28px))_
+   * - `--icon-width`: width of the icon, only applicable if the content contains an `<img />` or `<svg />` _(default: auto)_
+   * - `--button-size`: width and height of the button, only applicable if class `icon` is set, _(default: 44px)_
+   *
+   * Classes:
+   *
+   * - `.icon`: render content as icon
    *
    * The rendered markup is composed of:
    *
@@ -23,6 +30,7 @@
     variant?: Variant;
   }
 
+  /** variant */
   export let variant: Variant = 'primary';
 </script>
 
@@ -40,6 +48,9 @@
   button {
     --_button-color-accent: var(--button-color-accent, var(--c-ui-accent-blue));
     --_button-color-secondary: var(--button-color-secondary, white);
+
+    --_icon-height: var(--icon-height, min(2em, 28px));
+    --_icon-width: var(--icon-width, auto);
 
     --_color: var(--_button-color-secondary);
     --_background-color: var(--_button-color-accent);
@@ -81,6 +92,37 @@
     &[data-variant='tertiary'] {
       --_background-color: transparent;
       --_color: var(--_button-color-accent);
+    }
+
+    &.icon {
+      --_button-size: var(--button-size, 44px);
+
+      position: relative;
+      width: var(--_button-size);
+      height: var(--_button-size);
+
+      :global {
+        img,
+        svg {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+
+    :global {
+      img,
+      svg {
+        display: inline-block;
+        height: var(--_icon-height);
+        width: var(--_icon-width);
+      }
+
+      svg path {
+        fill: var(--_color);
+      }
     }
   }
 </style>

@@ -1,0 +1,27 @@
+/* arranges content side-by-side */
+
+.splitter {
+  --_splitter-gap: var(--splitter-gap, var(--s-px-1));
+
+  display: flex;
+
+  > * {
+    flex: 1;
+  }
+
+  > :not(:first-child) {
+    margin-left: var(--_splitter-gap);
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+
+  &.align-top {
+    align-items: flex-start;
+  }
+
+  &.align-bottom {
+    align-items: flex-end;
+  }
+}

@@ -22,7 +22,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/LineV" component={LineV} />
+<Meta title="Viz/LayerCake/LineV" component={LineV} />
 
 <Story name="Basic">
   <svg width="50" height="50">

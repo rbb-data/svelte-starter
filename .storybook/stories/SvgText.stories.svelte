@@ -17,7 +17,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/SvgText" component={SvgText} />
+<Meta title="Viz/LayerCake/SvgText" component={SvgText} />
 
 <Story name="Basic">
   <svg width="150" height="50">

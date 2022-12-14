@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/Path" component={Path} />
+<Meta title="Viz/LayerCake/Path" component={Path} />
 
 <Story name="Basic">
   <svg width="50" height="50">

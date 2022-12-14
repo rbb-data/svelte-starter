@@ -17,7 +17,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/Group" component={Group} />
+<Meta title="Viz/LayerCake/Group" component={Group} />
 
 <Story name="Basic">
   <div class="layercake">
