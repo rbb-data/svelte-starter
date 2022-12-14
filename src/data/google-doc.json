@@ -1,6 +1,6 @@
 {
   "TITLE": "Demo",
-  "PARAGRAPH": "Bestimmte Formatierungen werden aus dem Google Doc übernommen. Dazu gehört <b>fetter</b>, <i>kursiver</i>, <u>unterstrichener</u> und <s>durchgestrichener</s> Text. Außerdem <sup>hochgestellter Text</sup> und <sub>Text im Index</sub>. Sowie <a href=\"https://www.rbb24.de/\">Links</a>.",
+  "PARAGRAPH": "Bestimmte Formatierungen werden aus dem Google Doc übernommen. Dazu gehört <b>fetter</b>, <i>kursiver</i>, <u>unterstrichener</u> und <s>durchgestrichener</s> Text. Außerdem <sup>hochgestellter Text</sup> und <sub>Text im Index</sub>. Sowie <a href=\"https://www.rbb24.de/\">Links</a>. Außerdem können Textbausteine dynamisch eingebaut werden, z.B. {{ DATE }}.",
   "PERSON": {
     "NAME": "Amanda",
     "AGE": "26"

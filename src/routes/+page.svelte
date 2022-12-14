@@ -4,9 +4,11 @@
   // @ts-expect-error does not find corresponding type declaration
   import localData from '$data/local-data.csv';
 
-  import DOC from '$data/google-doc.json';
-
   import ListOfExamples from './examples/ListOfExamples.svelte';
+
+  import DOC from '$data/google-doc.json';
+  import { handlebars } from '$lib/utils';
+  import { DATE } from '$lib/gdoc-placeholders';
 </script>
 
 <h1>{DOC.TITLE}</h1>
@@ -70,7 +72,7 @@
 </ul>
 
 <p>
-  {@html DOC.PARAGRAPH}
+  {@html handlebars(DOC.PARAGRAPH, { DATE: DATE() })}
 </p>
 
 <h2>Beispiele</h2>

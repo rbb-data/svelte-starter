@@ -55,3 +55,14 @@ export function search<D>(
   });
   return results.slice(0, limit);
 }
+
+/** Replace {{ placeholder }} in a template string with values */
+export function handlebars(
+  templateString: string,
+  values: Record<string, any>
+) {
+  return templateString.replace(
+    /{{\s?([^{}\s]*)\s?}}/g,
+    (_, key) => values[key]
+  );
+}
