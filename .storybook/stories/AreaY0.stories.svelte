@@ -17,7 +17,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/AreaY0" component={AreaY0} />
+<Meta title="Viz/LayerCake/AreaY0" component={AreaY0} />
 
 <Story name="Basic">
   <div class="layercake">

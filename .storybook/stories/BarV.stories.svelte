@@ -17,7 +17,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/BarV" component={BarV} />
+<Meta title="Viz/LayerCake/BarV" component={BarV} />
 
 <Story name="Basic">
   <div class="layercake">

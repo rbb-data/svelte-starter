@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/Line" component={Line} />
+<Meta title="Viz/LayerCake/Line" component={Line} />
 
 <Story name="Basic">
   <svg width="50" height="50">

@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/AxisLabelX" component={AxisLabelX} />
+<Meta title="Viz/LayerCake/AxisLabelX" component={AxisLabelX} />
 
 <Story name="Basic">
   <div class="layercake">

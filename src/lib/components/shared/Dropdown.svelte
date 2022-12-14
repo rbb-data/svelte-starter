@@ -6,7 +6,7 @@
    *
    * - `.dropdown`: assigned the given id, wrapper element
    * - `.dropdown__field`: clickable field
-   * - `.dropdown__clear`: clear button
+   * - `.dropdown__button-clear`: clear button
    * - `.dropdown__options`: list of options (only visible if expanded)
    * - `.dropdown__option`: with class `.selected` applied appropriately
    *
@@ -193,7 +193,7 @@
     {#if !hideClearButton && selectedOption}
       <button
         type="button"
-        class="dropdown__clear | reset"
+        class="dropdown__button-clear | reset"
         aria-label="Zurücksetzen"
         on:click={() => reset()}
       >
@@ -279,6 +279,10 @@
 
     --c-focus: var(--c-ui-black);
 
+    --padding-r: calc(
+      var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
+    );
+
     width: 100%;
     position: relative;
     font-size: var(--font-size-sm);
@@ -296,10 +300,6 @@
     }
 
     &__field {
-      --padding-r: calc(
-        var(--icon-size) + var(--icon-padding-left) + var(--icon-padding-right)
-      );
-
       width: 100%;
       padding: var(--padding-v) var(--padding-r) var(--padding-v)
         var(--padding-h);
@@ -325,9 +325,9 @@
       }
     }
 
-    &__clear {
+    &__button-clear {
       height: 100%;
-      width: 44px;
+      width: var(--padding-r);
 
       position: absolute;
       bottom: 0;
@@ -374,7 +374,7 @@
       transform: translateY(-50%);
     }
 
-    &__clear :global(svg) {
+    &__button-clear :global(svg) {
       width: var(--clear-icon-size);
       height: var(--clear-icon-size);
 

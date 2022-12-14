@@ -17,7 +17,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/HtmlText" component={HtmlText} />
+<Meta title="Viz/LayerCake/HtmlText" component={HtmlText} />
 
 <Story name="Basic">
   <div class="layercake">

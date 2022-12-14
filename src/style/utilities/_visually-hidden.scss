@@ -1,4 +1,5 @@
-/* content is _visually_ hidden but still accessible to screen readers */
+/* hide content _visually_ but keeps it accessible to screen readers */
+
 .visually-hidden:not(:focus):not(:active) {
   @include visually-hidden;
 }

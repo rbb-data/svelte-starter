@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/LineH" component={LineH} />
+<Meta title="Viz/LayerCake/LineH" component={LineH} />
 
 <Story name="Basic">
   <svg width="50" height="50">

@@ -16,7 +16,7 @@
   ];
 </script>
 
-<Meta title="LayerCake/Circle" component={Circle} />
+<Meta title="Viz/LayerCake/Circle" component={Circle} />
 
 <Story name="Basic">
   <svg width="50" height="50">

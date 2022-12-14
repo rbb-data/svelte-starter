@@ -1,5 +1,5 @@
-// Atomic CSS classes are decorated with the `!important` keyword
-// to make sure that they take precedence
+/* Atomic CSS classes are decorated with the `!important` keyword
+ to make sure that they always take precedence */
 
 .w-full {
   width: 100% !important;
@@ -7,6 +7,10 @@
 
 .round {
   border-radius: 50% !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1) !important;
 }
 
 .font-regular {
