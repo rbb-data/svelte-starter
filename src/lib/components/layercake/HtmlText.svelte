@@ -26,7 +26,7 @@
   export let xOffset = 0;
   export let yOffset = 0;
 
-  let width: string;
+  let maxWidth: string;
 
   const xTranslate = {
     left: '0px',
@@ -46,8 +46,8 @@
     ctxWidth: typeof ctx['width'],
     padding: typeof ctx['padding'];
 
-  $: left = `${x}px` || '0px';
-  $: top = `${y}px` || '0px';
+  $: left = (typeof x === 'number' ? `${x}px` : x) || '0px';
+  $: top = (typeof y === 'number' ? `${y}px` : y) || '0px';
 
   $: if (data != undefined && ctx != undefined) {
     xGet = ctx.xGet;
@@ -65,7 +65,7 @@
 
     // get max width
     const w = $ctxWidth - l + $padding.right - xOffset;
-    width = `${w}px`;
+    maxWidth = `${w}px`;
   }
 
   $: _xOffset = typeof xOffset === 'number' ? `${xOffset}px` : xOffset;
@@ -76,7 +76,7 @@
   {...$$restProps}
   style:left
   style:top
-  style:width
+  style:max-width={maxWidth}
   style:transform="translate(calc({xTranslate[xAlign]} + {_xOffset}), calc({yTranslate[
     yAlign
   ]} + {_yOffset}))"

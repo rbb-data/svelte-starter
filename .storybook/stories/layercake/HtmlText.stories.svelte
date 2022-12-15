@@ -110,31 +110,20 @@
   </div>
 </Story>
 
-<!-- <Story name="Align on y-axis">
-  <svg width="300" height="100">
-    <Circle cx="75%" cy="50%" color="red" />
-    <SvgText x="75%" y="50%" yAlign="top" outline="none">Top</SvgText>
-
-    <Circle cx="50%" cy="50%" color="red" />
-    <SvgText x="50%" y="50%" yAlign="center" outline="none">Center</SvgText>
-
-    <Circle cx="25%" cy="50%" color="red" />
-    <SvgText x="25%" y="50%" yAlign="bottom" outline="none">Bottom</SvgText>
-  </svg>
-</Story> -->
-
-<!-- <Story name="Within LayerCake">
+<Story name="Within LayerCake">
   <div class="layercake">
     <LayerCake {data} padding={{ left: 20, bottom: 30 }} x="x" y="y">
       <Svg>
         <AxisX />
         <AxisY />
-
-        <SvgText data={data[2]}>Single-line text</SvgText>
       </Svg>
+      <Html>
+        <HtmlText data={data[2]}>Multi-line text</HtmlText>
+      </Html>
     </LayerCake>
   </div>
-</Story> -->
+</Story>
+
 <style>
   .layercake {
     height: 200px;
