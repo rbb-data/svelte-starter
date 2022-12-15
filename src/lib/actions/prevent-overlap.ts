@@ -11,7 +11,7 @@ export default function preventOverlap(
   // no overlap possible
   if (n < 2) return;
 
-  const size = axis === 'x' ? 'width' : ('height' as const);
+  const size: 'width' | 'height' = axis === 'x' ? 'width' : 'height';
 
   const positions: number[] = new Array(n).fill(0);
   const sizes: number[] = new Array(n).fill(0);
@@ -21,7 +21,7 @@ export default function preventOverlap(
     for (let i = 0; i < n; i++) {
       const bbox = getBoundingBox(children[i]);
       positions[i] = bbox[axis] - gap / 2;
-      sizes[i] = bbox[size as 'width' | 'height'] + gap;
+      sizes[i] = bbox[size] + gap;
     }
 
     // compute non-overlapping positions
@@ -49,7 +49,6 @@ export default function preventOverlap(
         if (attr) currValue = +attr;
 
         child.setAttribute(axis, (currValue + diff).toString());
-        console.log('updaing');
       }
     }
   }
