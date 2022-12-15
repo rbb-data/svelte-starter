@@ -16,14 +16,6 @@
    *
    * **Note:** Must be used in conjunction with `<TabPanels />`.
    *
-   * **Note:** The focus ring is implemented via `box-shadow`.
-   *
-   * **Note:** Slants make the tabs overflow but `overflow: hidden` can't be
-   * used on the container element as that would cut off the focus ring.
-   * Instead, pseudo elements are rendered that hide the overflowing content.
-   * Their color defaults to white but can be overwritten by setting the CSS
-   * variable `--c-bg`.
-   *
    * @component
    */
 
@@ -85,7 +77,6 @@
 <div
   {id}
   class:tabs={true}
-  class:slants
   role="tablist"
   aria-orientation="horizontal"
   aria-label={label}
@@ -96,13 +87,17 @@
     {@const active = i === activeIndex}
     {@const disabled = isTabDisabled(tab)}
     {@const className = getTabClass(tab)}
+    {@const slantPosition =
+      i === 0 ? 'right' : i === tabs.length - 1 ? 'left' : 'both'}
     <button
       id="{id}--tab-{i}"
       type="button"
       role="tab"
       class="{className || ''} | tabs__tab | reset"
+      class:slant={slants}
       class:active
       class:disabled
+      data-slant-position={slantPosition}
       aria-controls="{id}--tabpanel-{i}"
       aria-selected={active}
       aria-disabled={disabled}
@@ -169,57 +164,9 @@
     &__tab + &__tab {
       margin-left: var(--s-px-1);
     }
-  }
 
-  .slants {
-    position: relative;
-
-    /* can't use `overflow: hidden` here since that would cut off the focus ring;
-      instead, two pseudo elements are rendered above the overflowing content on both sides  */
-
-    &::before,
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 12px; /* arbitrary value, depends on the degree of skewing */
-      height: calc(
-        100% + 8px
-      ); /* height plus focus ring on top and bottom (2*4px) */
-      background-color: var(--c-bg);
-      z-index: 2;
-    }
-
-    &::before {
-      left: 0;
-      transform: translate(-100%, -4px);
-    }
-
-    &::after {
-      right: 0;
-      transform: translate(100%, -4px);
-    }
-
-    .tabs__tab {
-      transform: skew(-10deg);
-      transform-origin: center;
-
-      &:first-child {
-        transform-origin: top;
-      }
-
-      &:last-child {
-        transform-origin: bottom;
-      }
-
-      div {
-        /* unskew text content */
-        transform: skew(10deg);
-        display: inline-block;
-      }
-    }
-
-    .tabs__tab + .tabs__tab {
+    // remove extra space when using slants
+    :global(.tabs__tab.slant + .tabs__tab.slant) {
       margin-left: 0;
     }
   }

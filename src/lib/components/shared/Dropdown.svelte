@@ -10,8 +10,6 @@
    * - `.dropdown__options`: list of options (only visible if expanded)
    * - `.dropdown__option`: with class `.selected` applied appropriately
    *
-   * **Note:** The focus ring is implemented via `box-shadow`.
-   *
    * @component
    */
 

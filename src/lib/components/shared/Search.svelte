@@ -18,14 +18,6 @@
    * - `.search__suggestion`: with classes `.focused`, `.highlighted` and
    *   `.selected` applied appropriately
    *
-   * **Note:** The focus ring is implemented via `box-shadow`.
-   *
-   * **Note:** The slant makes the search button overflow but `overflow: hidden`
-   * can't be used on the container element as that would cut off the focus
-   * ring. Instead, a pseudo element is rendered that hides the overflowing
-   * content. Its color defaults to white but can be overwritten by setting the
-   * CSS variable `--c-bg`.
-   *
    * @component
    */
 
@@ -226,7 +218,9 @@
 
       <button
         type="submit"
-        class="search__button-submit | reset"
+        class="search__button-submit | slant reset"
+        data-slant-position="left"
+        data-slant-direction="backward"
         aria-label="Bestätigen"
       >
         <SearchIcon color="#ffffff" />
@@ -313,23 +307,6 @@
 
     &__field {
       position: relative;
-
-      /* can't use `overflow: hidden` here since that would cut off the focus ring;
-    instead, two pseudo elements are rendered above the overflowing content on both sides  */
-
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        width: 12px; /* arbitrary value, depends on the degree of skewing */
-        height: calc(
-          100% + 8px
-        ); /* height plus focus ring on top and bottom (2*4px) */
-        background-color: var(--c-bg);
-        z-index: 2;
-        right: 0;
-        transform: translate(100%, -4px);
-      }
     }
 
     &__input {
@@ -368,13 +345,7 @@
       right: 0;
       height: 100%;
       width: 54px; /* arbitrary value */
-      transform: skew(-10deg);
-      transform-origin: bottom;
       background-color: var(--_ui-color-accent);
-
-      :global(svg) {
-        transform: translateY(-50%) skew(10deg);
-      }
     }
 
     &__suggestions {

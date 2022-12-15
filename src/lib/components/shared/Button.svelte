@@ -18,8 +18,6 @@
    *
    * - `.button`: button
    *
-   * **Note:** The focus ring is implemented via `box-shadow`.
-   *
    * @component
    */
 
@@ -76,6 +74,7 @@
 
     color: var(--_color);
     background-color: var(--_background-color);
+    border: 1px solid var(--_button-color-accent);
 
     &:disabled {
       opacity: 0.3;
@@ -84,14 +83,12 @@
     &[data-variant='secondary'] {
       --_color: var(--_button-color-accent);
       --_background-color: var(--_button-color-secondary);
-
-      outline: 1px solid var(--_button-color-accent);
-      outline-offset: -1px;
     }
 
     &[data-variant='tertiary'] {
       --_background-color: transparent;
       --_color: var(--_button-color-accent);
+      border: none;
     }
 
     &.icon {

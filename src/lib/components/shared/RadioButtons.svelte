@@ -15,8 +15,6 @@
    *   `.selected` and `.disabled` applied appropriately
    * - `.radio-buttons__input`: radio input
    *
-   * **Note:** The focus ring is implemented via `box-shadow`.
-   *
    * @component
    */
 
@@ -139,7 +137,7 @@
       border: 1px solid black;
 
       &:focus {
-        box-shadow: none;
+        outline: none;
       }
 
       &:checked {

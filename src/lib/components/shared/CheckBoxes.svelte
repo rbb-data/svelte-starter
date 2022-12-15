@@ -19,8 +19,6 @@
    *   and `.disabled` applied appropriately
    * - `.check-boxes__input`: checkbox input
    *
-   * **Note:** The focus ring is implemented via `box-shadow`.
-   *
    * @component
    */
 
@@ -145,7 +143,7 @@
       position: relative;
 
       &:focus {
-        box-shadow: none;
+        outline: none;
       }
 
       &:checked {

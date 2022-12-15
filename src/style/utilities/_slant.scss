@@ -1,0 +1,67 @@
+/* removes user agent styles */
+
+.slant {
+  // must be set when using .slant
+  --_height: var(--slant-height, 1rem);
+
+  --_slant: var(--slant, 0.25);
+  --_color: var(--slant-text-color, var(--c-ui-black));
+  --_background-color: var(--slant-background-color, var(--c-ui-accent-blue));
+  --_slant-padding: var(--slant-padding, var(--s-px-4));
+  --_straight-padding: var(--straight-padding, var(--s-px-1));
+
+  display: inline-block;
+  min-width: 0.8em;
+  min-height: 1.15em;
+  padding-right: var(--_slant-padding);
+  padding-left: var(--_straight-padding);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semi-bold);
+
+  color: var(--_color);
+  background-color: var(--_background-color);
+
+  --pos: var(--_slant) * var(--_height);
+
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--pos)) 100%, 0 100%);
+
+  &[data-slant-direction='backward'] {
+    clip-path: polygon(0 0, calc(100% - var(--pos)) 0, 100% 100%, 0 100%);
+  }
+
+  &[data-slant-position='left'] {
+    padding-left: var(--_slant-padding);
+    padding-right: var(--_straight-padding);
+
+    clip-path: polygon(calc(var(--pos)) 0, 100% 0, 100% 100%, 0 100%);
+
+    &[data-slant-direction='backward'] {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, calc(var(--pos)) 100%);
+    }
+  }
+
+  &[data-slant-position='both'] {
+    padding-left: var(--_slant-padding);
+    padding-right: var(--_slant-padding);
+
+    clip-path: polygon(
+      calc(var(--pos)) 0,
+      100% 0,
+      calc(100% - var(--pos)) 100%,
+      0 100%
+    );
+
+    &[data-slant-direction='backward'] {
+      clip-path: polygon(
+        0 0,
+        calc(100% - var(--pos)) 0,
+        100% 100%,
+        calc(var(--pos)) 100%
+      );
+    }
+  }
+
+  &.focus-visible {
+    clip-path: none;
+  }
+}

@@ -22,6 +22,18 @@
   <Slant position="both" />
 </Story>
 
+<Story name="Slant on the right (backward)">
+  <Slant position="right" direction="backward" />
+</Story>
+
+<Story name="Slant on the left (backward)">
+  <Slant position="left" direction="backward" />
+</Story>
+
+<Story name="Slant on both sides (backward)">
+  <Slant position="both" direction="backward" />
+</Story>
+
 <Story name="Custom colors">
   <Slant backgroundColor="orange" color="black">Text</Slant>
 </Story>
