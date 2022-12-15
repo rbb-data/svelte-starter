@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     %sveltekit.head%
-    <!-- both needed for the iframe resizer script below -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=ResizeObserver"></script>
+
+    <!-- 
+      Polyfills, loaded only when necessary:
+      - ResizeObserver: needed for the iframe resizer script below
+      - MutationObserver: needed for friendly-charts and used in src/lib/actions/prevent-overlap.ts
+      - Object.fromEntries: needed for layercake 
+    -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=MutationObserver%2CResizeObserver%2CObject.fromEntries"></script>
+
+    <!-- needed for the iframe resizer script below -->
     <script src="https://storage.googleapis.com/rbb-data-static/lib/lodash.throttle.js"></script>
   </head>
   <body>
