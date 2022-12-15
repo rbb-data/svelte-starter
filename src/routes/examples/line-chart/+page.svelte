@@ -15,6 +15,7 @@
   import AxisY from '$lib/components/layercake/AxisY.svelte';
   import AxisLabelY from '$lib/components/layercake/AxisLabelY.svelte';
 
+  import preventOverlap from '$lib/actions/prevent-overlap';
   import * as tokens from '$lib/tokens';
 
   const data = [
@@ -29,7 +30,7 @@
     { month: 9, rain: 103, rainAvg: 8, label: 'September' },
     { month: 10, rain: 23, rainAvg: 4, label: 'Oktober' },
     { month: 11, rain: 26, rainAvg: 4, label: 'November' },
-    { month: 12, rain: 63, rainAvg: 8, label: 'Dezember' },
+    { month: 12, rain: 63, rainAvg: 58, label: 'Dezember' },
   ];
 
   // padding on both sides of the x-axis
@@ -149,25 +150,27 @@
         {/each}
       </Svg>
       <Html>
-        <!-- line labels -->
-        <HtmlText
-          class="line-label"
-          data={data[data.length - 1]}
-          yAlign="center"
-          xOffset={8}
-          color={colorAccent}
-        >
-          2021
-        </HtmlText>
-        <HtmlText
-          data={data[data.length - 1]}
-          yIndex={1}
-          yAlign="center"
-          xOffset={8}
-          color={colorMute}
-        >
-          2000 bis 2020
-        </HtmlText>
+        <div use:preventOverlap={{ axis: 'y' }}>
+          <!-- line labels -->
+          <HtmlText
+            class="line-label"
+            data={data[data.length - 1]}
+            yAlign="center"
+            xOffset={8}
+            color={colorAccent}
+          >
+            2021
+          </HtmlText>
+          <HtmlText
+            data={data[data.length - 1]}
+            yIndex={1}
+            yAlign="center"
+            xOffset={8}
+            color={colorMute}
+          >
+            2000 bis 2020
+          </HtmlText>
+        </div>
       </Html>
     </LayerCake>
   </div>
