@@ -23,11 +23,10 @@
 
   export let xAlign: 'left' | 'center' | 'right' = 'left';
   export let yAlign: 'top' | 'center' | 'bottom' = 'bottom';
-  export let xOffset: string | number = 0;
-  export let yOffset: string | number = 0;
+  export let xOffset = 0;
+  export let yOffset = 0;
 
-  $: _x = typeof x === 'number' ? `${x}px` : x;
-  $: _y = typeof y === 'number' ? `${y}px` : y;
+  let width: string;
 
   const xTranslate = {
     left: '0px',
@@ -42,16 +41,31 @@
   } as const;
 
   const ctx = getContext<LayerCakeContext<D>>('LayerCake');
-  let xGet: typeof ctx['xGet'], yGet: typeof ctx['yGet'];
+  let xGet: typeof ctx['xGet'],
+    yGet: typeof ctx['yGet'],
+    ctxWidth: typeof ctx['width'],
+    padding: typeof ctx['padding'];
 
-  $: left = _x || '0px';
-  $: top = _y || '0px';
+  $: left = `${x}px` || '0px';
+  $: top = `${y}px` || '0px';
 
   $: if (data != undefined && ctx != undefined) {
     xGet = ctx.xGet;
     yGet = ctx.yGet;
-    left = get($xGet, data, xIndex).toString() + 'px';
-    top = get($yGet, data, yIndex).toString() + 'px';
+    ctxWidth = ctx.width;
+    padding = ctx.padding;
+
+    // get left value (x-coordinate)
+    const l = get($xGet, data, xIndex);
+    left = l.toString() + 'px';
+
+    // get top value (y-coordinate)
+    const t = get($yGet, data, yIndex);
+    top = t.toString() + 'px';
+
+    // get max width
+    const w = $ctxWidth - l + $padding.right - xOffset;
+    width = `${w}px`;
   }
 
   $: _xOffset = typeof xOffset === 'number' ? `${xOffset}px` : xOffset;
@@ -62,6 +76,7 @@
   {...$$restProps}
   style:left
   style:top
+  style:width
   style:transform="translate(calc({xTranslate[xAlign]} + {_xOffset}), calc({yTranslate[
     yAlign
   ]} + {_yOffset}))"
