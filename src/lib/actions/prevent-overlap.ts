@@ -2,10 +2,10 @@
  * Prevent overlap of children nodes along the x- or y-axis
  */
 export default function preventOverlap(
-  node: HTMLElement,
+  node: HTMLElement | SVGGraphicsElement,
   { axis, gap = 0 }: { axis: 'x' | 'y'; gap?: number }
 ) {
-  const children = [...node.children] as HTMLElement[];
+  const children = [...node.children];
   const n = children.length;
 
   // no overlap possible
@@ -19,7 +19,7 @@ export default function preventOverlap(
   function updateCoordinates() {
     // get dimensions
     for (let i = 0; i < n; i++) {
-      const bbox = children[i].getBoundingClientRect();
+      const bbox = getBoundingBox(children[i]);
       positions[i] = bbox[axis] - gap / 2;
       sizes[i] = bbox[size as 'width' | 'height'] + gap;
     }
@@ -35,24 +35,34 @@ export default function preventOverlap(
       // no need to update
       if (diff === 0) continue;
 
-      const attribute = axis === 'x' ? 'left' : 'top';
-      const styleString = child.style[attribute];
-      const newStyleString = `calc(${styleString} + ${diff}px)`;
+      if (isHTMLElement(child)) {
+        const attribute = axis === 'x' ? 'left' : 'top';
+        const styleString = child.style[attribute];
+        const newStyleString = `calc(${styleString} + ${diff}px)`;
 
-      // update position
-      child.style[attribute] = newStyleString;
+        // update position
+        child.style[attribute] = newStyleString;
+      } else {
+        // get current value
+        let currValue = 0;
+        const attr = child.getAttribute(axis);
+        if (attr) currValue = +attr;
+
+        child.setAttribute(axis, (currValue + diff).toString());
+        console.log('updaing');
+      }
     }
   }
 
   // run once
   updateCoordinates();
 
-  // update coordinates when the style tag of any of the node changes
+  // update coordinates when tags of any of the node changes
   const observer = new MutationObserver(updateCoordinates);
   observer.observe(node, {
     attributes: true,
     subtree: true,
-    attributeFilter: ['style'],
+    attributeFilter: ['style', 'x', 'y'],
   });
 
   return {
@@ -111,4 +121,18 @@ function computeNonOverlappingPositions(
 
   // return positions in original order
   return order.map((i) => p[i]);
+}
+
+function isHTMLElement(element: Element): element is HTMLElement {
+  return element instanceof HTMLElement;
+}
+
+function isSVGGraphicsElement(element: Element): element is SVGGraphicsElement {
+  return element instanceof SVGGraphicsElement;
+}
+
+function getBoundingBox(element: Element) {
+  if (isHTMLElement(element)) return element.getBoundingClientRect();
+  else if (isSVGGraphicsElement(element)) return element.getBBox();
+  else throw new Error('Unknown element type: ' + element);
 }
