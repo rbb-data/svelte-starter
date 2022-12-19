@@ -358,6 +358,7 @@
       }
     }
 
+    :global(.dropdown__option:focus-visible),
     :global(.dropdown__option.focus-visible) {
       @include focus-inset;
       z-index: 1;

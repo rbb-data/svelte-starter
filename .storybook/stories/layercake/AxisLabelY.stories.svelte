@@ -23,8 +23,6 @@
     <LayerCake {data} padding={{ top: 25, left: 25, bottom: 40 }} x="x" y="y">
       <Svg>
         <AxisY />
-        <AxisX />
-
         <AxisLabelY>Y-Axis</AxisLabelY>
       </Svg>
     </LayerCake>

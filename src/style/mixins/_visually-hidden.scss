@@ -1,3 +1,5 @@
+/* hides content _visually_ but keeps it accessible to screen readers */
+
 @mixin visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);

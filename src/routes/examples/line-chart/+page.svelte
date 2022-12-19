@@ -137,7 +137,7 @@
             color={colorAccent}
             label="{d.label}. {d.rain} Liter pro Quadratmeter Regen"
             parent="line-2021"
-            r="0"
+            opacity="0"
           />
           <Circle
             data={d}
@@ -145,7 +145,7 @@
             color={colorMute}
             label="{d.label}. {d.rainAvg} Liter pro Quadratmeter Regen"
             parent="line-2000-2020"
-            r="0"
+            opacity="0"
           />
         {/each}
       </Svg>

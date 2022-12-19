@@ -13,15 +13,6 @@ const config = {
     },
   },
 
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData:
-          '@use "src/style/mixins/_breakpoint.scss" as *; @use "src/style/mixins/_focus.scss" as *; @use "src/style/mixins/_visually-hidden.scss" as *;',
-      },
-    },
-  },
-
   build: {
     target: ['chrome68', 'firefox67', 'safari11', 'edge79', 'opera50', 'ios11'],
   },

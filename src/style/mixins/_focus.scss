@@ -1,4 +1,4 @@
-/* renders a focus ring via `box-shadow` (background color must be explicitly set!) */
+/* renders a focus ring */
 @mixin focus {
   outline: 2px solid var(--c-focus);
   outline-offset: 2px;

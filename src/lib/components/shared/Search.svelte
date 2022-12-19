@@ -34,7 +34,7 @@
   export let id: string;
 
   /**
-   * function that, given a user-specfied query string, yields a list of
+   * function that, given a user-specified query string, yields a list of
    * suggestions
    *
    * can either return the list itself or a promise
@@ -220,7 +220,6 @@
         type="submit"
         class="search__button-submit | slant reset"
         data-slant-position="left"
-        data-slant-direction="backward"
         aria-label="Bestätigen"
       >
         <SearchIcon color="#ffffff" />

@@ -1,10 +1,11 @@
-/* removes user agent styles */
+/* applies a backward or forward slant on one side
+or on both sides of a container */
 
 .slant {
   // must be set when using .slant
   --_height: var(--slant-height, 1rem);
 
-  --_slant: var(--slant, 0.25);
+  --_slant: var(--slant, 0.33);
   --_color: var(--slant-text-color, var(--c-ui-black));
   --_background-color: var(--slant-background-color, var(--c-ui-accent-blue));
   --_slant-padding: var(--slant-padding, var(--s-px-4));
@@ -61,6 +62,7 @@
     }
   }
 
+  &:focus-visible,
   &.focus-visible {
     clip-path: none;
   }

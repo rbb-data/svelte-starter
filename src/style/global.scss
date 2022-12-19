@@ -1,6 +1,21 @@
 @import 'reset';
 @import 'fonts';
+
+/* tokens */
 @import 'tokens';
+@import 'sass-tokens';
+
+/* mixins */
+@import 'mixins/breakpoint';
+@import 'mixins/focus';
+@import 'mixins/visually-hidden';
+
+/* utilities */
+@import 'utilities/atomic';
+@import 'utilities/reset';
+@import 'utilities/slant';
+@import 'utilities/splitter';
+@import 'utilities/visually-hidden';
 
 :root {
   --c-bg: #ffffff;
@@ -42,23 +57,12 @@ table {
 }
 
 /* hide focus ring when it's not supposed to be visible */
+:focus:not(:focus-visible),
 :focus:not(.focus-visible) {
   outline: none;
 }
 
+:focus-visible,
 .focus-visible {
   @include focus;
 }
-
-/* mixins */
-@import 'sass-tokens';
-@import 'mixins/breakpoint';
-@import 'mixins/focus';
-@import 'mixins/visually-hidden';
-
-/* utilities */
-@import 'utilities/atomic';
-@import 'utilities/reset';
-@import 'utilities/slant';
-@import 'utilities/splitter';
-@import 'utilities/visually-hidden';

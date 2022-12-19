@@ -9,10 +9,12 @@
     @include focus;
   }
 
+  &:focus:not(:focus-visible),
   &:focus:not(.focus-visible) {
     outline: none;
   }
 
+  &:focus-visible,
   &.focus-visible {
     @include focus;
   }

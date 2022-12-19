@@ -36,14 +36,6 @@ module.exports = {
       $data: path.resolve('./src/data'),
       $icons: path.resolve('./src/lib/components/icons'),
     };
-    config.css = {
-      preprocessorOptions: {
-        scss: {
-          additionalData:
-            '@use "../src/style/mixins/_breakpoint.scss" as *; @use "../src/style/mixins/_focus.scss" as *; @use "../src/style/mixins/_visually-hidden.scss" as *;',
-        },
-      },
-    };
     config.base = '/svelte-starter/';
     config.optimizeDeps = {
       exclude: ['fsevents'],

@@ -1,3 +1,5 @@
+import { ascending } from 'd3-array';
+
 /**
  * Prevent overlap of children nodes along the x- or y-axis
  */
@@ -11,7 +13,7 @@ export default function preventOverlap(
   // no overlap possible
   if (n < 2) return;
 
-  const size: 'width' | 'height' = axis === 'x' ? 'width' : 'height';
+  const dimension: 'width' | 'height' = axis === 'x' ? 'width' : 'height';
 
   const positions: number[] = new Array(n).fill(0);
   const sizes: number[] = new Array(n).fill(0);
@@ -21,7 +23,7 @@ export default function preventOverlap(
     for (let i = 0; i < n; i++) {
       const bbox = getBoundingBox(children[i]);
       positions[i] = bbox[axis] - gap / 2;
-      sizes[i] = bbox[size] + gap;
+      sizes[i] = bbox[dimension] + gap;
     }
 
     // compute non-overlapping positions
@@ -36,12 +38,12 @@ export default function preventOverlap(
       if (diff === 0) continue;
 
       if (isHTMLElement(child)) {
-        const attribute = axis === 'x' ? 'left' : 'top';
-        const styleString = child.style[attribute];
+        const key = axis === 'x' ? 'left' : 'top';
+        const styleString = child.style[key];
         const newStyleString = `calc(${styleString} + ${diff}px)`;
 
         // update position
-        child.style[attribute] = newStyleString;
+        child.style[key] = newStyleString;
       } else {
         // get current value
         let currValue = 0;
@@ -78,11 +80,12 @@ function computeNonOverlappingPositions(
 ) {
   if (positions.length < 2) return positions;
 
-  // sort positions
-  let p = positions.slice().sort();
-
-  // remember original order
-  const order = positions.map((_p) => p.indexOf(_p));
+  // sort positions and remember original order
+  const sorted = positions
+    .map((_p, i) => ({ value: _p, index: i }))
+    .sort((a, b) => ascending(a.value, b.value));
+  let p = sorted.map((d) => d.value);
+  const order = sorted.map((d) => d.index);
 
   // sync sizes order with new positions order
   let s = order.map((i) => sizes[i]);
