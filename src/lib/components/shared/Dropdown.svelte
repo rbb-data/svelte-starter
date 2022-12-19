@@ -5,6 +5,7 @@
    * The rendered markup is composed of:
    *
    * - `.dropdown`: assigned the given id, wrapper element
+   * - `.dropdown__label`: label
    * - `.dropdown__field`: clickable field
    * - `.dropdown__button-clear`: clear button
    * - `.dropdown__options`: list of options (only visible if expanded)
@@ -371,6 +372,8 @@
       top: 50%;
       right: var(--icon-padding-right);
       transform: translateY(-50%);
+      touch-action: none;
+      pointer-events: none;
     }
 
     &__button-clear :global(svg) {

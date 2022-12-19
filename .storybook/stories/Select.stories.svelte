@@ -1,41 +1,23 @@
 <script lang="ts">
   import { Meta, Story } from '@storybook/addon-svelte-csf';
 
-  import Dropdown from '$lib/components/shared/Dropdown.svelte';
+  import Select from '$lib/components/shared/Select.svelte';
 
   let selectedOption: string;
   let selectedComplexOption: { label: string; value: string };
   let selectedOptionInitiallySet = 'Sommer';
+
+  $: console.log(selectedComplexOption);
 </script>
 
-<Meta title="UI/Dropdown" component={Dropdown} />
+<Meta title="UI/Select" component={Select} />
 
 <Story name="Basic">
   <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
+    <Select
+      id="my-unique-select-id"
       label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
-      placeholder="Jahreszeiten"
-      bind:selectedOption
-    />
-    <div class="result">
-      Selected value:
-      {#if selectedOption}
-        <i>{selectedOption}</i>
-      {/if}
-    </div>
-  </div>
-</Story>
-
-<Story name="Initially Open">
-  <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
-      label="Wähle eine Jahreszeit"
-      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
-      placeholder="Jahreszeiten"
-      isOpen={true}
       bind:selectedOption
     />
     <div class="result">
@@ -49,11 +31,10 @@
 
 <Story name="Specify initially selected value">
   <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
+    <Select
+      id="my-unique-select-id"
       label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
-      placeholder="Jahreszeiten"
       bind:selectedOption={selectedOptionInitiallySet}
     />
     <div class="result">
@@ -67,8 +48,8 @@
 
 <Story name="Complex options">
   <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
+    <Select
+      id="my-unique-select-id"
       label="Wähle eine Jahreszeit"
       options={[
         { label: 'Frühling', value: 'spring' },
@@ -76,13 +57,11 @@
         { label: 'Herbst', value: 'autumn' },
         { label: 'Winter', value: 'winter' },
       ]}
-      placeholder="Jahreszeiten"
-      formatOption={(option) => option.label}
       bind:selectedOption={selectedComplexOption}
       let:option
     >
       {option.label}
-    </Dropdown>
+    </Select>
     <div class="result">
       Selected value:
       {#if selectedComplexOption}
@@ -94,31 +73,11 @@
 
 <Story name="Disabled">
   <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
+    <Select
+      id="my-unique-select-id"
       label="Wähle eine Jahreszeit"
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
-      placeholder="Jahreszeiten"
       disabled
-      bind:selectedOption
-    />
-    <div class="result">
-      Selected value:
-      {#if selectedOption}
-        <i>{selectedOption}</i>
-      {/if}
-    </div>
-  </div>
-</Story>
-
-<Story name="Hide clear button">
-  <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
-      label="Wähle eine Jahreszeit"
-      options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
-      placeholder="Jahreszeiten"
-      hideClearButton
       bind:selectedOption
     />
     <div class="result">
@@ -132,12 +91,11 @@
 
 <Story name="Hide label visually">
   <div class="wrapper">
-    <Dropdown
-      id="my-unique-dropdown-id"
+    <Select
+      id="my-unique-select-id"
       label="Wähle eine Jahreszeit"
       hideLabelVisually
       options={['Frühling', 'Sommer', 'Herbst', 'Winter']}
-      placeholder="Jahreszeiten"
       bind:selectedOption
     />
     <div class="result">
