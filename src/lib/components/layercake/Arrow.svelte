@@ -1,6 +1,6 @@
 <script lang="ts">
   /**
-   * Bézier curve, to be embedded within an SVG.
+   * Arrow, either as straight line or Bézier curve.
    *
    * A Bézier curve is defined by a start and end point, as well as two control
    * points, one for each end. See
@@ -11,6 +11,7 @@
    *
    * - `--arrow-color`: color of the arrow _(default: black)_
    * - `--arrow-width`: stroke width of the arrow _(default: 1)_
+   * - `--arrow-opacity`: opacity of the arrow _(default: 1)_
    *
    * The rendered markup is composed of:
    *
@@ -20,23 +21,35 @@
    * @component
    */
 
+  import { getContext } from 'svelte/internal';
+
+  import { get } from './utils';
+  import type { LayerCakeContext } from './types';
+
+  type D = $$Generic;
+  type Coords = [number, number];
+
   /** start coordinates */
-  export let start: number[];
+  export let start: Coords = [0, 0];
 
   /** end coordinates */
-  export let end: number[];
+  export let end: Coords = [50, 0];
+
+  export let data: [D, D] | undefined = undefined;
+  export let xIndex = 0;
+  export let yIndex = 0;
 
   /** bezier handle offset from start coordinates */
-  export let startHandleOffset = [0, 0];
+  export let startHandleOffset: [number, number] = [0, 0];
 
   /** bezier handle offset from end coordinates */
-  export let endHandleOffset = [0, 0];
+  export let endHandleOffset: [number, number] = [0, 0];
 
   /** start bezier handle coordinates; if given, `startHandleOffset` is ignored */
-  export let startHandle: number[] | undefined = undefined;
+  export let startHandle: Coords | undefined = undefined;
 
   /** end bezier handle coordinates; if given, `endHandleOffset` is ignored */
-  export let endHandle: number[] | undefined = undefined;
+  export let endHandle: Coords | undefined = undefined;
 
   /** position of the arrow head */
   export let headAnchor: 'start' | 'end' | 'both' = 'end';
@@ -47,30 +60,36 @@
   /** angle of the arrow head */
   export let headAngle = 55;
 
+  export let width: number | undefined = undefined;
+  export let color: string | undefined = undefined;
+  export let opacity: number | undefined = undefined;
+
   /** renders bezier handle points for debugging */
   export let debug = false;
 
-  const dist = (p1: number[], p2: number[]) =>
+  const dist = (p1: Coords, p2: Coords) =>
     Math.sqrt(Math.pow(p2[0] - p1[0], 2) + Math.pow(p2[1] - p1[1], 2));
 
   const clamp = (n: number, min = 0, max = 1) =>
     Math.min(Math.max(n, min), max);
 
-  const equals = (p1: number[], p2: number[]) =>
-    p1[0] === p2[0] && p1[1] === p2[1];
+  const equals = (p1: Coords, p2: Coords) => p1[0] === p2[0] && p1[1] === p2[1];
 
-  const addOffset = (p: number[], o: number[]) => [p[0] + o[0], p[1] + o[1]];
+  const addOffset: (p: Coords, o: Coords) => Coords = (p, o) => [
+    p[0] + o[0],
+    p[1] + o[1],
+  ];
 
   const bezierCurve = (
-    start: number[],
-    end: number[],
-    startHandle: number[],
-    endHandle: number[]
+    start: Coords,
+    end: Coords,
+    startHandle: Coords,
+    endHandle: Coords
   ) => ['M', start, 'C', startHandle, endHandle, end].join(' ');
 
   function arrowHead(
-    point: number[],
-    handle: number[],
+    point: Coords,
+    handle: Coords,
     { length = 4, theta = 45 } = {}
   ) {
     const xLen = handle[0] - point[0];
@@ -79,9 +98,9 @@
     const distance = Math.sqrt(Math.pow(xLen, 2) + Math.pow(yLen, 2));
     const ratio = length / distance;
 
-    const mid = [point[0] + xLen * ratio, point[1] + yLen * ratio];
+    const mid: Coords = [point[0] + xLen * ratio, point[1] + yLen * ratio];
 
-    function rotate(p: number[], pivot: number[], theta: number) {
+    function rotate(p: Coords, pivot: Coords, theta: number) {
       const thetaRad = (theta * Math.PI) / 180;
       return [
         pivot[0] +
@@ -104,10 +123,10 @@
   }
 
   function arrow(
-    start: number[],
-    end: number[],
-    startHandle: number[],
-    endHandle: number[],
+    start: Coords,
+    end: Coords,
+    startHandle: Coords,
+    endHandle: Coords,
     _headAnchor: typeof headAnchor,
     _headOptions: typeof headOptions
   ) {
@@ -126,22 +145,42 @@
     return d;
   }
 
-  $: sHandle = startHandle || addOffset(start, startHandleOffset);
-  $: eHandle = endHandle || addOffset(end, endHandleOffset);
+  const ctx = getContext<LayerCakeContext<D>>('LayerCake');
+  let xGet: typeof ctx['xGet'], yGet: typeof ctx['yGet'];
+
+  $: _start = start;
+  $: _end = end;
+
+  $: _startHandle = startHandle || addOffset(_start, startHandleOffset);
+  $: _endHandle = endHandle || addOffset(_end, endHandleOffset);
 
   $: headOptions = {
     length: headLength || clamp(0.08 * dist(start, end), 4, 8),
     theta: headAngle,
   };
+
+  $: if (data != undefined && ctx != undefined) {
+    xGet = ctx.xGet;
+    yGet = ctx.yGet;
+    _start = [get($xGet, data[0], xIndex), get($yGet, data[0], yIndex)];
+    _end = [get($xGet, data[1], xIndex), get($yGet, data[1], yIndex)];
+  }
 </script>
 
-<g class:arrow={true} class={$$restProps.class} style={$$restProps.style}>
+<g
+  class:arrow={true}
+  class={$$restProps.class}
+  style={$$restProps.style}
+  style:--_color={color || ''}
+  style:--_width={width || ''}
+  style:--_opacity={opacity || ''}
+>
   {#if debug}
     <g class="debug">
-      {#each [sHandle, eHandle] as coords}
+      {#each [_startHandle, _endHandle] as coords}
         <circle cx={coords[0]} cy={coords[1]} r="5" />
       {/each}
-      {#each [[start, sHandle], [end, eHandle]] as [s, e]}
+      {#each [[start, _startHandle], [end, _endHandle]] as [s, e]}
         <line x1={s[0]} y1={s[1]} x2={e[0]} y2={e[1]} />
       {/each}
     </g>
@@ -149,18 +188,19 @@
 
   <path
     class="arrow__shape"
-    d={arrow(start, end, sHandle, eHandle, headAnchor, headOptions)}
+    d={arrow(_start, _end, _startHandle, _endHandle, headAnchor, headOptions)}
   />
 </g>
 
 <style lang="scss">
   .arrow {
-    --_color: var(--arrow-color, var(--c-ui-black));
-    --_width: var(--arrow-width, 1);
+    --__color: var(--_color, var(--arrow-color, var(--c-ui-black)));
+    --__width: var(--_width, var(--arrow-width, 1));
+    --__opacity: var(--_opacity, var(--arrow-opacity, 1));
 
     &__shape {
-      stroke: var(--_color);
-      stroke-width: var(--_width);
+      stroke: var(--__color);
+      stroke-width: var(--__width);
       stroke-linecap: round;
       stroke-linejoin: round;
       fill: none;
