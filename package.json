@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "postbuild": "export $(cat .env | xargs) && cp README.md ${BUILD_DIR}",
     "deploy": "scripts/deploy-to-gcs.sh --build",
     "deploy--experimental": "export $(cat .env | xargs) && scripts/deploy-to-gcs.sh --build /rbb-data-static/${PROJECT_CREATION_DATE}-${PROJECT_NAME}-experimental",
     "update:gdoc": "node scripts/update-google-doc.js --preserve-styles && npx prettier --write --plugin-search-dir=. ./src/data/google-doc.json",
