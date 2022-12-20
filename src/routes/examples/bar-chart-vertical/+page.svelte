@@ -116,6 +116,6 @@
 
 <style lang="scss">
   .layercake {
-    height: 250px;
+    height: 350px;
   }
 </style>

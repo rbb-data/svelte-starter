@@ -52,10 +52,10 @@
     x = get($xGet, data, xIndex);
 
     if (isStacked($ctxData)) {
-      y = get($yGet, data, yIndex);
+      y = get($yGet, data, 1);
 
       const yVals = $yGet(data) as number[];
-      width = yVals[1] - yVals[0];
+      height = yVals[0] - yVals[1];
     } else {
       height = get($yGet, data, yIndex);
       y = $yScale.range()[1] - height;
@@ -96,7 +96,7 @@
     <SvgText
       class="font-regular"
       x={x + width / 2}
-      y={$ctxHeight}
+      y={y + height}
       xAlign="center"
       yOffset={-4}
       outline="none"
@@ -117,7 +117,7 @@
     <SvgText
       class="font-regular"
       x={x + width / 2}
-      y={$ctxHeight - height}
+      {y}
       xAlign="center"
       yOffset={-4}
       outline="none"

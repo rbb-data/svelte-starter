@@ -2,15 +2,23 @@
   import InternalLink from '$lib/components/shared/InternalLink.svelte';
 
   const examples = [
-    { label: 'Liniendiagramm', href: '/examples/line-chart' },
-    { label: 'Scatterplot', href: '/examples/scatter-plot' },
+    { label: 'Line chart', href: '/examples/line-chart' },
+    { label: 'Scatter plot', href: '/examples/scatter-plot' },
     {
-      label: 'Balkendiagramm (horizontal)',
-      href: '/examples/horizontal-bar-chart',
+      label: 'Bar chart',
+      href: '/examples/bar-chart',
     },
     {
-      label: 'Balkendiagramm (vertikal)',
-      href: '/examples/vertical-bar-chart',
+      label: 'Bar chart (vertical)',
+      href: '/examples/bar-chart-vertical',
+    },
+    {
+      label: 'Stacked bar chart',
+      href: '/examples/stacked-bar-chart',
+    },
+    {
+      label: 'Stacked bar chart (vertical)',
+      href: '/examples/stacked-bar-chart-vertical',
     },
   ];
 </script>

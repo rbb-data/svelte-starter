@@ -50,7 +50,7 @@
     y = get($yGet, data, yIndex);
 
     if (isStacked($ctxData)) {
-      x = get($xGet, data, xIndex);
+      x = get($xGet, data, 0);
 
       const xVals = $xGet(data) as number[];
       width = xVals[1] - xVals[0];
@@ -93,6 +93,7 @@
   {#if $$slots.default || $$slots.start}
     <SvgText
       class="font-regular"
+      {x}
       y={y + height / 2}
       yAlign="center"
       xOffset={4}

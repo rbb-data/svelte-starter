@@ -27,7 +27,7 @@
    * if true, an entry in the first column serves as label for the respective
    * row
    */
-  export let highlightFirstColumn = true;
+  export let useRowHeaders = true;
 </script>
 
 <table class:table={true} class={$$restProps.class} style={$$restProps.style}>
@@ -39,11 +39,7 @@
   <thead>
     <tr>
       {#each columns as { name, class: className }}
-        <th
-          class={className}
-          class:highlight={highlightFirstColumn}
-          scope="col"
-        >
+        <th class={className} class:row-header={useRowHeaders} scope="col">
           {name}
         </th>
       {/each}
@@ -52,7 +48,10 @@
   <tbody>
     {#each data as d}
       <tr>
-        <th scope="row" class:highlight={highlightFirstColumn}>
+        <th
+          scope={useRowHeaders ? 'row' : undefined}
+          class:row-header={useRowHeaders}
+        >
           {columns[0].getValue(d)}
         </th>
         {#each columns.slice(1) as { getValue, class: className }}
@@ -90,7 +89,7 @@
       &:first-of-type {
         text-align: center;
 
-        &.highlight {
+        &.row-header {
           text-align: left;
         }
       }
@@ -102,7 +101,7 @@
       text-align: center;
       font-weight: var(--font-weight-regular);
 
-      &.highlight {
+      &.row-header {
         font-weight: var(--font-weight-semi-bold);
         text-align: left;
       }
