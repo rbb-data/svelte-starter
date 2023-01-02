@@ -54,7 +54,7 @@
   const yDomain = (domain: [number, number]) => [0, domain[1]];
 
   // colors
-  const colorAccent = tokens.cUiAccentBlue;
+  const colorAccent = tokens.cCategoryBlue;
   const colorMute = tokens.cUiGray400;
 </script>
 

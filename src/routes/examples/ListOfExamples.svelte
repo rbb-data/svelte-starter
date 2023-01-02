@@ -20,6 +20,10 @@
       label: 'Stacked bar chart (vertical)',
       href: '/examples/stacked-bar-chart-vertical',
     },
+    {
+      label: 'Slope chart',
+      href: '/examples/slope-chart',
+    },
   ];
 </script>
 

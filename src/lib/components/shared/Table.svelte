@@ -16,7 +16,7 @@
    */
   export let columns: {
     name: string;
-    getValue: (d: D) => any;
+    getValue: (d: D, i: number) => any;
     class?: string;
   }[];
 
@@ -46,16 +46,16 @@
     </tr>
   </thead>
   <tbody>
-    {#each data as d}
+    {#each data as d, i}
       <tr>
         <th
           scope={useRowHeaders ? 'row' : undefined}
           class:row-header={useRowHeaders}
         >
-          {columns[0].getValue(d)}
+          {columns[0].getValue(d, i)}
         </th>
         {#each columns.slice(1) as { getValue, class: className }}
-          <td class={className}>{getValue(d)}</td>
+          <td class={className}>{getValue(d, i)}</td>
         {/each}
       </tr>
     {/each}

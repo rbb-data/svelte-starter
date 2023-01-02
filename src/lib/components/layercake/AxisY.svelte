@@ -52,7 +52,7 @@
   use:axis={friendly}
 >
   {#if showDomainLine}
-    <LineV class="tick-line" />
+    <LineV class="domain-line" />
   {/if}
   {#each ticks as tick}
     {@const y =
