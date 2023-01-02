@@ -1,4 +1,4 @@
-import { ascending } from 'd3-array';
+import { ascending, range } from 'd3-array';
 
 /**
  * Prevent overlap of children nodes along the x- or y-axis
@@ -58,13 +58,15 @@ export default function preventOverlap(
   // run once
   updateCoordinates();
 
-  // update coordinates when tags of any of the node changes
-  const observer = new MutationObserver(updateCoordinates);
-  observer.observe(node, {
-    attributes: true,
-    subtree: true,
-    attributeFilter: ['style', 'x', 'y'],
-  });
+  // update when the container size changes
+  const observer = new ResizeObserver(() => updateCoordinates());
+  if (isHTMLElement(node)) {
+    observer.observe(node);
+  } else {
+    // SVG elements like <g /> don't have a size
+    // so we track the parent <svg /> instead
+    observer.observe(node.closest('svg') as SVGElement);
+  }
 
   return {
     destroy: () => {
@@ -76,7 +78,7 @@ export default function preventOverlap(
 function computeNonOverlappingPositions(
   positions: number[],
   sizes: number[],
-  { gap = 0, maxTicks = 1000 }: { gap?: number; maxTicks?: number } = {}
+  { gap = 0, maxTicks = 10 }: { gap?: number; maxTicks?: number } = {}
 ) {
   if (positions.length < 2) return positions;
 
@@ -122,7 +124,7 @@ function computeNonOverlappingPositions(
   }
 
   // return positions in original order
-  return order.map((i) => p[i]);
+  return range(p.length).map((i) => p[order.indexOf(i)]);
 }
 
 function isHTMLElement(element: Element): element is HTMLElement {

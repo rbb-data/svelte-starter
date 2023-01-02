@@ -33,8 +33,7 @@
     xGet: typeof ctx['xGet'],
     yGet: typeof ctx['yGet'],
     xScale: typeof ctx['xScale'],
-    yScale: typeof ctx['yScale'],
-    ctxHeight: typeof ctx['height'];
+    yScale: typeof ctx['yScale'];
 
   $: x = $$restProps.x || 0;
   $: y = $$restProps.y || 0;
@@ -47,19 +46,22 @@
     yGet = ctx.yGet;
     xScale = ctx.xScale;
     yScale = ctx.yScale;
-    ctxHeight = ctx.height;
 
     x = get($xGet, data, xIndex);
 
+    let y0: number;
+    let y1: number;
     if (isStacked($ctxData)) {
-      y = get($yGet, data, 1);
-
       const yVals = $yGet(data) as number[];
-      height = yVals[0] - yVals[1];
+      y0 = yVals[0];
+      y1 = yVals[1];
     } else {
-      height = get($yGet, data, yIndex);
-      y = $yScale.range()[1] - height;
+      y0 = $yScale(0);
+      y1 = get($yGet, data, yIndex);
     }
+
+    height = Math.abs(y1 - y0);
+    y = Math.min(y0, y1);
 
     if ($xScale.bandwidth) {
       width = $xScale.bandwidth();

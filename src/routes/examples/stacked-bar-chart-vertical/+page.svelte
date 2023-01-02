@@ -57,7 +57,7 @@
 
 <div
   use:chart={{
-    type: 'line',
+    type: 'bar',
     title: '.chart-header__title',
     subtitle: '.chart-header__subtitle',
     locale,

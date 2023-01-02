@@ -74,6 +74,7 @@
         xAlign="right"
         yAlign="center"
         xOffset={-tickLabelPadding - (showTickLines ? tickLength : 0)}
+        outline="none"
       >
         <slot {tick}>
           {tick}

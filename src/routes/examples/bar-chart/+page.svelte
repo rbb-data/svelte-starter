@@ -13,7 +13,12 @@
   import * as tokens from '$lib/tokens';
   import { format } from '$lib/utils';
 
-  const data = [
+  type Category = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+
+  const data: {
+    label: Category;
+    value: number;
+  }[] = [
     { label: 'A', value: 0.26 },
     { label: 'B', value: 0.24 },
     { label: 'C', value: 0.17 },
@@ -21,7 +26,7 @@
     { label: 'E', value: 0.06 },
     { label: 'F', value: 0.1 },
     { label: 'G', value: 0.06 },
-  ] as { label: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'; value: number }[];
+  ];
 
   // padding around chart
   const padding = {
@@ -51,7 +56,7 @@
 
 <div
   use:chart={{
-    type: 'line',
+    type: 'bar',
     title: '.chart-header__title',
     subtitle: '.chart-header__subtitle',
     locale,

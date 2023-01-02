@@ -49,15 +49,19 @@
 
     y = get($yGet, data, yIndex);
 
+    let x0: number;
+    let x1: number;
     if (isStacked($ctxData)) {
-      x = get($xGet, data, 0);
-
       const xVals = $xGet(data) as number[];
-      width = xVals[1] - xVals[0];
+      x0 = xVals[0];
+      x1 = xVals[1];
     } else {
-      x = $xScale.range()[0];
-      width = get($xGet, data, xIndex);
+      x0 = $xScale(0);
+      x1 = get($xGet, data, xIndex);
     }
+
+    width = Math.abs(x1 - x0);
+    x = Math.min(x0, x1);
 
     if ($yScale.bandwidth) {
       height = $yScale.bandwidth();

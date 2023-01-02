@@ -45,7 +45,7 @@
 
 <div
   use:chart={{
-    type: 'line',
+    type: 'scatter',
     title: '.chart-header__title',
     subtitle: '.chart-header__subtitle',
     locale,

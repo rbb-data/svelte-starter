@@ -29,10 +29,14 @@
   export let showGridLines = false;
   export let showTickLines = true;
 
+  export let onTop = false;
+
   export let tickLength = 6;
   export let tickLabelPadding = 6;
 
   export let label: AxisOptions['label'] | undefined = undefined;
+
+  $: direction = onTop ? -1 : 1;
 
   let friendly: AxisOptions;
   $: if (label != undefined) {
@@ -58,7 +62,7 @@
       {/if}
     </g>
   {/each}
-  <g transform="translate(0, {$height})">
+  <g transform="translate(0, {onTop ? 0 : $height})">
     {#if showDomainLine}
       <LineH class="domain-line" />
     {/if}
@@ -71,14 +75,15 @@
         {#if showTickLines}
           <LineV
             class={showDomainLine ? 'domain-line' : 'tick-line'}
-            y2={tickLength}
+            y2={direction * tickLength}
           />
         {/if}
         <SvgText
           class={isCategorical ? 'category-tick' : 'tick'}
           xAlign="center"
-          yAlign="top"
-          yOffset={tickLabelPadding + (showTickLines ? tickLength : 0)}
+          yAlign={onTop ? 'bottom' : 'top'}
+          yOffset={direction *
+            (tickLabelPadding + (showTickLines ? tickLength : 0))}
           outline="none"
         >
           <slot {tick}>
