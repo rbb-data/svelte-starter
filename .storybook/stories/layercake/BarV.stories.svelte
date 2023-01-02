@@ -5,7 +5,6 @@
 
   import BarV from '$lib/components/layercake/BarV.svelte';
   import AxisX from '$lib/components/layercake/AxisX.svelte';
-  import AxisY from '$lib/components/layercake/AxisY.svelte';
 
   const data = [
     { category: 'A', value: 10 },
@@ -26,7 +25,6 @@
       padding={{ left: 15, bottom: 30 }}
       xScale={scaleBand().padding(0.15)}
       yDomain={[0, null]}
-      yReverse={false}
       y="value"
       x="category"
     >
@@ -47,7 +45,6 @@
       padding={{ left: 15, bottom: 30 }}
       xScale={scaleBand().padding(0.15)}
       yDomain={[0, null]}
-      yReverse={false}
       y="value"
       x="category"
     >
@@ -63,14 +60,13 @@
   </div>
 </Story>
 
-<Story name="With bar labels at the end">
+<Story name="With bar labels on top">
   <div class="layercake">
     <LayerCake
       {data}
       padding={{ left: 15, bottom: 30 }}
       xScale={scaleBand().padding(0.15)}
       yDomain={[0, null]}
-      yReverse={false}
       y="value"
       x="category"
     >
