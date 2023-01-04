@@ -17,14 +17,13 @@
    * The rendered markup is composed of:
    *
    * - `.button`: button
-   *
-   * @component
    */
+
+  import type { HTMLButtonAttributes } from 'svelte/elements';
 
   type Variant = 'primary' | 'secondary' | 'tertiary';
 
-  // eslint-disable-next-line no-undef
-  interface $$Props extends svelte.JSX.HTMLAttributes<HTMLButtonElement> {
+  interface $$Props extends HTMLButtonAttributes {
     variant?: Variant;
   }
 
@@ -61,6 +60,7 @@
     text-decoration: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    appearance: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); // prevents flash on touch
     user-select: none;
 

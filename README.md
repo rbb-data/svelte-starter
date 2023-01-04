@@ -10,7 +10,7 @@ This template serves as a starting point to create data visualizations with [Sve
 - Easy deployment to rbb's Google Cloud Storage
 - Pre-generated iframe snippet to embed page into a foreign website with [a resizer script](https://github.com/rbb-data/iframe-sizer-script) supported by default
 - [Style Dictionary](https://amzn.github.io/style-dictionary/#/) as a single source of truth for design tokens
-- Component library, documented at https://rbb-data.github.io/svelte-starter/
+- Component library, documented via [Histoire](https://histoire.dev/) at https://rbb-data.github.io/svelte-starter/
 
 ## Get started
 
@@ -168,13 +168,13 @@ Sync design tokens with colors defined in the [rbb|24 style guide on Figma](http
 - Drag the exported file from your Downloads folder to `style-dictionary/figma-export.json`
 - Run `npm run sync-tokens`
 
-### `npm run docs`
+### `npm run docs:dev`
 
 Starts the development server for the documentation site. The site is then available at http://localhost:6006/.
 
 ### `npm run docs:build`
 
-Build the documentation site into `./docs-build` for production.
+Build the documentation site into `./histoire/dist` for production.
 
 ### `npm run docs:deploy`
 

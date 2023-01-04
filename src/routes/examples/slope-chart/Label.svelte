@@ -26,7 +26,7 @@
   .label__value {
     margin-top: calc(0.5 * var(--s-px-1));
     text-shadow: none;
-    color: var(--c-black);
+    color: var(--c-ui-black);
     font-weight: var(--font-weight-regular);
     font-style: italic;
   }

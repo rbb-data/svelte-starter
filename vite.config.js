@@ -6,6 +6,12 @@ import { sveltekit } from '@sveltejs/kit/vite';
 const config = {
   plugins: [sveltekit(), dsv()],
 
+  css: {
+    preprocessorOptions: {
+      scss: true,
+    },
+  },
+
   resolve: {
     alias: {
       $data: path.resolve('./src/data'),

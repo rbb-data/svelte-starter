@@ -14,8 +14,6 @@
    * The rendered markup is composed of:
    *
    * - `.slant`: wrapper element (inline by default)
-   *
-   * @component
    */
 
   import * as tokens from '$lib/tokens';

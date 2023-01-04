@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Data-driven `<line />` (horizontal)
-   *
-   * @component
    */
 
   import { getContext } from 'svelte/internal';

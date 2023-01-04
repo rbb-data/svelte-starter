@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Group of shapes
-   *
-   * @component
    */
 
   import { group, type GroupOptions } from 'friendly-charts';

@@ -17,8 +17,6 @@
    *
    * - `.arrow`: group
    * - `.arrow__shape`: path
-   *
-   * @component
    */
 
   import { getContext } from 'svelte/internal';

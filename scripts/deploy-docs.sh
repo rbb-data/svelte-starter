@@ -3,7 +3,7 @@
 usage() {
   echo -e 'Usage: '"./$(basename $0)"' [--build]
 
-Deploy storybook documentation site to GitHub pages
+Deploy Histoire documentation site to GitHub pages
 
   --build \t build before deploying
 '
@@ -30,7 +30,10 @@ main() {
   fi
 
   # navigate into the build output directory
-  cd docs-build
+  cd .histoire/dist
+
+  # disable jekyll
+  touch .nojekyll
 
   # commit changes
   git init
