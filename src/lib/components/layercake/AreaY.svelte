@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Data-driven area between two lines
-   *
-   * @component
    */
 
   import { getContext } from 'svelte/internal';

@@ -15,8 +15,6 @@
    * - `.tabs__tab`: with classes `.active` and `.disabled` applied appropriately
    *
    * **Note:** Must be used in conjunction with `<TabPanels />`.
-   *
-   * @component
    */
 
   import { getIndexBefore, getIndexAfter } from './helpers';

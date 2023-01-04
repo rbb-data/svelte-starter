@@ -14,8 +14,6 @@
    * - `.radio-buttons__option`: single option, with classes `.focused`,
    *   `.selected` and `.disabled` applied appropriately
    * - `.radio-buttons__input`: radio input
-   *
-   * @component
    */
 
   type Option = $$Generic;
@@ -110,13 +108,16 @@
       display: block;
       padding: var(--s-px-2);
       background-color: var(--_ui-color-secondary);
-      margin: var(--s-px-2) 0;
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-semi-bold);
       white-space: nowrap;
 
       display: flex;
       align-items: center;
+
+      + .radio-buttons__option {
+        margin-top: var(--s-px-2);
+      }
 
       &.focused {
         @include focus;

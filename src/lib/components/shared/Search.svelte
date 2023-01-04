@@ -17,8 +17,6 @@
    * - `.search__suggestions`: list of suggestions (only visible if expanded)
    * - `.search__suggestion`: with classes `.focused`, `.highlighted` and
    *   `.selected` applied appropriately
-   *
-   * @component
    */
 
   type Suggestion = $$Generic;

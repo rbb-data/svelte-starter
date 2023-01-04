@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Y-Axis
-   *
-   * @component
    */
 
   import { getContext } from 'svelte';

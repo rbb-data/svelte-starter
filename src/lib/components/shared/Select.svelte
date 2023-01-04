@@ -7,8 +7,6 @@
    * - `.select`: wrapper element
    * - `.select__label`: label
    * - `.select__field`: clickable selection field
-   *
-   * @component
    */
 
   import DropdownIcon from '$icons/DropdownIcon.svelte';

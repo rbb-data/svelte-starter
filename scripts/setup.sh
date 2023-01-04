@@ -5,7 +5,6 @@ usage() {
 
 Initializes newly templated project:
   - fills in environment variables
-  - removes storybook
   - updates README
   - updates iframe snippet
 '
@@ -25,20 +24,6 @@ set -o xtrace  # prints every command before execution
 # make sure to run from project root
 cd $(dirname $0)/..
 
-
-remove_storybook() {
-  # remove storybook folder
-  rm -rf .storybook/
-  
-  # remove GitHub action to deploy storybook
-  rm -f .github/workflows/storybook.yml
-  
-  # remove storebook dependencien and script from package.json
-  node scripts/helpers/remove-storybook-from-package-file.js
-
-  # remove storybook from readme
-  node scripts/helpers/remove-storybook-from-readme.js
-}
 
 update_environment_variables() {
   # store current year and month as environment variable
@@ -88,7 +73,6 @@ main() {
     exit 1
   fi
 
-  remove_storybook
   update_environment_variables
   update_readme
   update_iframe_snippet

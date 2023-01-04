@@ -9,8 +9,6 @@
    * - `.tabpanel`: wrapper element
    *
    * **Note:** Must be used in conjunction with `<Tabs />`.
-   *
-   * @component
    */
 
   type Tab = $$Generic;

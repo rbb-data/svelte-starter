@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Basic table.
-   *
-   * @component
    */
 
   type D = $$Generic;

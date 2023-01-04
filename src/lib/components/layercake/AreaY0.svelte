@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Data-driven area between a line and an axis
-   *
-   * @component
    */
 
   import { getContext } from 'svelte/internal';

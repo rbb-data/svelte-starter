@@ -26,7 +26,7 @@ export function getHighestContrastColor(
 }
 
 /** Search a data list with a given query using fuzzy matching */
-export function fuzzysearch<D extends string | Fuzzysort.Prepared>(
+export function fuzzysearch<D>(
   query: string,
   data: D[],
   { key, limit = 5 }: { key?: string; limit?: number } = {}

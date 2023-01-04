@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Y-Axis label
-   *
-   * @component
    */
 
   import { getContext } from 'svelte/internal';

@@ -7,8 +7,6 @@
    * - `.chart-legend`: legend, wrapper element
    * - `.chart-legend__item`: legend item
    * - `.chart-legend__item-label`: Label of a legend item
-   *
-   * @component
    */
 
   import Slant from './Slant.svelte';

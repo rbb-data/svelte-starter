@@ -18,8 +18,6 @@
    * - `.check-boxes__option`: single option, with classes `.focused`, `.selected`
    *   and `.disabled` applied appropriately
    * - `.check-boxes__input`: checkbox input
-   *
-   * @component
    */
 
   type Option = $$Generic;
@@ -115,10 +113,13 @@
       display: block;
       padding: var(--s-px-2);
       background-color: var(--_ui-color-secondary);
-      margin: var(--s-px-2) 0;
       font-size: var(--font-size-xs);
       font-weight: var(--font-weight-semi-bold);
       white-space: nowrap;
+
+      + .check-boxes__option {
+        margin-top: var(--s-px-2);
+      }
 
       display: flex;
       align-items: center;
@@ -152,6 +153,7 @@
       }
 
       &:checked::before {
+        // cspell:disable-next-line
         content: url("data:image/svg+xml,%3Csvg width='14' height='14' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' style='fill:white;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2'%3E%3Cpath style='fill:none' d='M0 0h32v32H0z'/%3E%3Cpath d='M14.078 18.772 9.6 12.8l-3.2 2.4L13 24h2.133l10.461-13.791-3.187-2.417-8.329 10.98Z'/%3E%3C/svg%3E");
         position: absolute;
         top: 50%;

@@ -6,8 +6,6 @@
   - `.chart-header`: Header group, wrapper element
   - `.chart-header__title`: title
   - `.chart-header__subtitle`: subtitle
-
-  @component
 -->
 
 <hgroup

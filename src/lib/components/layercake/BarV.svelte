@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Vertical bar
-   *
-   * @component
    */
 
   import { getContext } from 'svelte';

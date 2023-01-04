@@ -10,8 +10,6 @@
    * - `.dropdown__button-clear`: clear button
    * - `.dropdown__options`: list of options (only visible if expanded)
    * - `.dropdown__option`: with class `.selected` applied appropriately
-   *
-   * @component
    */
 
   import { tick } from 'svelte';

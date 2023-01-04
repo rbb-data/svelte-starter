@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Data-driven `<rect />` (horizontal)
-   *
-   * @component
    */
 
   import { getContext } from 'svelte';

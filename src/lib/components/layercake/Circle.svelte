@@ -1,8 +1,6 @@
 <script lang="ts">
   /**
    * Data-driven `<circle />`
-   *
-   * @component
    */
 
   import { getContext } from 'svelte/internal';
