@@ -2272,8 +2272,8 @@ function instanceWatch(source, value, options) {
   }
   return res;
 }
-function createPathGetter(ctx, path2) {
-  const segments = path2.split(".");
+function createPathGetter(ctx, path) {
+  const segments = path.split(".");
   return () => {
     let cur = ctx;
     for (let i2 = 0; i2 < segments.length && cur; i2++) {
@@ -7542,16 +7542,16 @@ function registerPiniaDevtools(app, pinia) {
         if (!inspectedStore) {
           return toastMessage(`store "${payload.nodeId}" not found`, "error");
         }
-        const { path: path2 } = payload;
+        const { path } = payload;
         if (!isPinia(inspectedStore)) {
-          if (path2.length !== 1 || !inspectedStore._customProperties.has(path2[0]) || path2[0] in inspectedStore.$state) {
-            path2.unshift("$state");
+          if (path.length !== 1 || !inspectedStore._customProperties.has(path[0]) || path[0] in inspectedStore.$state) {
+            path.unshift("$state");
           }
         } else {
-          path2.unshift("state");
+          path.unshift("state");
         }
         isTimelineActive = false;
-        payload.set(inspectedStore, path2, payload.state.value);
+        payload.set(inspectedStore, path, payload.state.value);
         isTimelineActive = true;
       }
     });
@@ -7562,15 +7562,15 @@ function registerPiniaDevtools(app, pinia) {
         if (!store) {
           return toastMessage(`store "${storeId}" not found`, "error");
         }
-        const { path: path2 } = payload;
-        if (path2[0] !== "state") {
+        const { path } = payload;
+        if (path[0] !== "state") {
           return toastMessage(`Invalid path for store "${storeId}":
-${path2}
+${path}
 Only state can be modified.`);
         }
-        path2[0] = "$state";
+        path[0] = "$state";
         isTimelineActive = false;
-        payload.set(store, path2, payload.state.value);
+        payload.set(store, path, payload.state.value);
         isTimelineActive = true;
       }
     });
@@ -11396,7 +11396,7 @@ function init_hydrate(target) {
     target.insertBefore(toMove[i2], anchor);
   }
 }
-function append(target, node) {
+function append$1(target, node) {
   target.appendChild(node);
 }
 function append_hydration(target, node) {
@@ -11664,7 +11664,7 @@ function add_resize_listener(node, fn2) {
       unsubscribe = listen(iframe.contentWindow, "resize", fn2);
     };
   }
-  append(node, iframe);
+  append$1(node, iframe);
   return () => {
     if (crossorigin2) {
       unsubscribe();
@@ -15722,6 +15722,276 @@ class Svg extends SvelteComponentDev {
   }
 }
 const ScaledSvg_svelte_svelte_type_style_lang = "";
+function constant(x2) {
+  return function constant2() {
+    return x2;
+  };
+}
+const pi$1 = Math.PI, tau = 2 * pi$1, epsilon = 1e-6, tauEpsilon = tau - epsilon;
+function append(strings) {
+  this._ += strings[0];
+  for (let i2 = 1, n2 = strings.length; i2 < n2; ++i2) {
+    this._ += arguments[i2] + strings[i2];
+  }
+}
+function appendRound(digits) {
+  let d2 = Math.floor(digits);
+  if (!(d2 >= 0))
+    throw new Error(`invalid digits: ${digits}`);
+  if (d2 > 15)
+    return append;
+  const k2 = 10 ** d2;
+  return function(strings) {
+    this._ += strings[0];
+    for (let i2 = 1, n2 = strings.length; i2 < n2; ++i2) {
+      this._ += Math.round(arguments[i2] * k2) / k2 + strings[i2];
+    }
+  };
+}
+class Path {
+  constructor(digits) {
+    this._x0 = this._y0 = this._x1 = this._y1 = null;
+    this._ = "";
+    this._append = digits == null ? append : appendRound(digits);
+  }
+  moveTo(x2, y2) {
+    this._append`M${this._x0 = this._x1 = +x2},${this._y0 = this._y1 = +y2}`;
+  }
+  closePath() {
+    if (this._x1 !== null) {
+      this._x1 = this._x0, this._y1 = this._y0;
+      this._append`Z`;
+    }
+  }
+  lineTo(x2, y2) {
+    this._append`L${this._x1 = +x2},${this._y1 = +y2}`;
+  }
+  quadraticCurveTo(x1, y1, x2, y2) {
+    this._append`Q${+x1},${+y1},${this._x1 = +x2},${this._y1 = +y2}`;
+  }
+  bezierCurveTo(x1, y1, x2, y2, x3, y3) {
+    this._append`C${+x1},${+y1},${+x2},${+y2},${this._x1 = +x3},${this._y1 = +y3}`;
+  }
+  arcTo(x1, y1, x2, y2, r2) {
+    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r2 = +r2;
+    if (r2 < 0)
+      throw new Error(`negative radius: ${r2}`);
+    let x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
+    if (this._x1 === null) {
+      this._append`M${this._x1 = x1},${this._y1 = y1}`;
+    } else if (!(l01_2 > epsilon))
+      ;
+    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r2) {
+      this._append`L${this._x1 = x1},${this._y1 = y1}`;
+    } else {
+      let x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l = r2 * Math.tan((pi$1 - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l / l01, t21 = l / l21;
+      if (Math.abs(t01 - 1) > epsilon) {
+        this._append`L${x1 + t01 * x01},${y1 + t01 * y01}`;
+      }
+      this._append`A${r2},${r2},0,0,${+(y01 * x20 > x01 * y20)},${this._x1 = x1 + t21 * x21},${this._y1 = y1 + t21 * y21}`;
+    }
+  }
+  arc(x2, y2, r2, a0, a1, ccw) {
+    x2 = +x2, y2 = +y2, r2 = +r2, ccw = !!ccw;
+    if (r2 < 0)
+      throw new Error(`negative radius: ${r2}`);
+    let dx = r2 * Math.cos(a0), dy = r2 * Math.sin(a0), x0 = x2 + dx, y0 = y2 + dy, cw = 1 ^ ccw, da2 = ccw ? a0 - a1 : a1 - a0;
+    if (this._x1 === null) {
+      this._append`M${x0},${y0}`;
+    } else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+      this._append`L${x0},${y0}`;
+    }
+    if (!r2)
+      return;
+    if (da2 < 0)
+      da2 = da2 % tau + tau;
+    if (da2 > tauEpsilon) {
+      this._append`A${r2},${r2},0,1,${cw},${x2 - dx},${y2 - dy}A${r2},${r2},0,1,${cw},${this._x1 = x0},${this._y1 = y0}`;
+    } else if (da2 > epsilon) {
+      this._append`A${r2},${r2},0,${+(da2 >= pi$1)},${cw},${this._x1 = x2 + r2 * Math.cos(a1)},${this._y1 = y2 + r2 * Math.sin(a1)}`;
+    }
+  }
+  rect(x2, y2, w2, h2) {
+    this._append`M${this._x0 = this._x1 = +x2},${this._y0 = this._y1 = +y2}h${w2 = +w2}v${+h2}h${-w2}Z`;
+  }
+  toString() {
+    return this._;
+  }
+}
+function withPath(shape) {
+  let digits = 3;
+  shape.digits = function(_) {
+    if (!arguments.length)
+      return digits;
+    if (_ == null) {
+      digits = null;
+    } else {
+      const d2 = Math.floor(_);
+      if (!(d2 >= 0))
+        throw new RangeError(`invalid digits: ${_}`);
+      digits = d2;
+    }
+    return shape;
+  };
+  return () => new Path(digits);
+}
+function array(x2) {
+  return typeof x2 === "object" && "length" in x2 ? x2 : Array.from(x2);
+}
+function Linear(context) {
+  this._context = context;
+}
+Linear.prototype = {
+  areaStart: function() {
+    this._line = 0;
+  },
+  areaEnd: function() {
+    this._line = NaN;
+  },
+  lineStart: function() {
+    this._point = 0;
+  },
+  lineEnd: function() {
+    if (this._line || this._line !== 0 && this._point === 1)
+      this._context.closePath();
+    this._line = 1 - this._line;
+  },
+  point: function(x2, y2) {
+    x2 = +x2, y2 = +y2;
+    switch (this._point) {
+      case 0:
+        this._point = 1;
+        this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
+        break;
+      case 1:
+        this._point = 2;
+      default:
+        this._context.lineTo(x2, y2);
+        break;
+    }
+  }
+};
+function curveLinear(context) {
+  return new Linear(context);
+}
+function x$2(p2) {
+  return p2[0];
+}
+function y$1(p2) {
+  return p2[1];
+}
+function d3line(x2, y2) {
+  var defined = constant(true), context = null, curve = curveLinear, output = null, path = withPath(line);
+  x2 = typeof x2 === "function" ? x2 : x2 === void 0 ? x$2 : constant(x2);
+  y2 = typeof y2 === "function" ? y2 : y2 === void 0 ? y$1 : constant(y2);
+  function line(data) {
+    var i2, n2 = (data = array(data)).length, d2, defined0 = false, buffer2;
+    if (context == null)
+      output = curve(buffer2 = path());
+    for (i2 = 0; i2 <= n2; ++i2) {
+      if (!(i2 < n2 && defined(d2 = data[i2], i2, data)) === defined0) {
+        if (defined0 = !defined0)
+          output.lineStart();
+        else
+          output.lineEnd();
+      }
+      if (defined0)
+        output.point(+x2(d2, i2, data), +y2(d2, i2, data));
+    }
+    if (buffer2)
+      return output = null, buffer2 + "" || null;
+  }
+  line.x = function(_) {
+    return arguments.length ? (x2 = typeof _ === "function" ? _ : constant(+_), line) : x2;
+  };
+  line.y = function(_) {
+    return arguments.length ? (y2 = typeof _ === "function" ? _ : constant(+_), line) : y2;
+  };
+  line.defined = function(_) {
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line) : defined;
+  };
+  line.curve = function(_) {
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), line) : curve;
+  };
+  line.context = function(_) {
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
+  };
+  return line;
+}
+function d3area(x0, y0, y1) {
+  var x1 = null, defined = constant(true), context = null, curve = curveLinear, output = null, path = withPath(area);
+  x0 = typeof x0 === "function" ? x0 : x0 === void 0 ? x$2 : constant(+x0);
+  y0 = typeof y0 === "function" ? y0 : y0 === void 0 ? constant(0) : constant(+y0);
+  y1 = typeof y1 === "function" ? y1 : y1 === void 0 ? y$1 : constant(+y1);
+  function area(data) {
+    var i2, j2, k2, n2 = (data = array(data)).length, d2, defined0 = false, buffer2, x0z = new Array(n2), y0z = new Array(n2);
+    if (context == null)
+      output = curve(buffer2 = path());
+    for (i2 = 0; i2 <= n2; ++i2) {
+      if (!(i2 < n2 && defined(d2 = data[i2], i2, data)) === defined0) {
+        if (defined0 = !defined0) {
+          j2 = i2;
+          output.areaStart();
+          output.lineStart();
+        } else {
+          output.lineEnd();
+          output.lineStart();
+          for (k2 = i2 - 1; k2 >= j2; --k2) {
+            output.point(x0z[k2], y0z[k2]);
+          }
+          output.lineEnd();
+          output.areaEnd();
+        }
+      }
+      if (defined0) {
+        x0z[i2] = +x0(d2, i2, data), y0z[i2] = +y0(d2, i2, data);
+        output.point(x1 ? +x1(d2, i2, data) : x0z[i2], y1 ? +y1(d2, i2, data) : y0z[i2]);
+      }
+    }
+    if (buffer2)
+      return output = null, buffer2 + "" || null;
+  }
+  function arealine() {
+    return d3line().defined(defined).curve(curve).context(context);
+  }
+  area.x = function(_) {
+    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), x1 = null, area) : x0;
+  };
+  area.x0 = function(_) {
+    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), area) : x0;
+  };
+  area.x1 = function(_) {
+    return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : x1;
+  };
+  area.y = function(_) {
+    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), y1 = null, area) : y0;
+  };
+  area.y0 = function(_) {
+    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), area) : y0;
+  };
+  area.y1 = function(_) {
+    return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : y1;
+  };
+  area.lineX0 = area.lineY0 = function() {
+    return arealine().x(x0).y(y0);
+  };
+  area.lineY1 = function() {
+    return arealine().x(x0).y(y1);
+  };
+  area.lineX1 = function() {
+    return arealine().x(x1).y(y0);
+  };
+  area.defined = function(_) {
+    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
+  };
+  area.curve = function(_) {
+    return arguments.length ? (curve = _, context != null && (output = curve(context)), area) : curve;
+  };
+  area.context = function(_) {
+    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), area) : context;
+  };
+  return area;
+}
 let customAlphabet = (alphabet, defaultSize = 21) => {
   return (size2 = defaultSize) => {
     let id2 = "";
@@ -15882,242 +16152,6 @@ function group(node, options) {
   }
   setFriendlyData(node, data);
 }
-const pi$1 = Math.PI, tau = 2 * pi$1, epsilon = 1e-6, tauEpsilon = tau - epsilon;
-function Path() {
-  this._x0 = this._y0 = this._x1 = this._y1 = null;
-  this._ = "";
-}
-function path() {
-  return new Path();
-}
-Path.prototype = path.prototype = {
-  constructor: Path,
-  moveTo: function(x2, y2) {
-    this._ += "M" + (this._x0 = this._x1 = +x2) + "," + (this._y0 = this._y1 = +y2);
-  },
-  closePath: function() {
-    if (this._x1 !== null) {
-      this._x1 = this._x0, this._y1 = this._y0;
-      this._ += "Z";
-    }
-  },
-  lineTo: function(x2, y2) {
-    this._ += "L" + (this._x1 = +x2) + "," + (this._y1 = +y2);
-  },
-  quadraticCurveTo: function(x1, y1, x2, y2) {
-    this._ += "Q" + +x1 + "," + +y1 + "," + (this._x1 = +x2) + "," + (this._y1 = +y2);
-  },
-  bezierCurveTo: function(x1, y1, x2, y2, x3, y3) {
-    this._ += "C" + +x1 + "," + +y1 + "," + +x2 + "," + +y2 + "," + (this._x1 = +x3) + "," + (this._y1 = +y3);
-  },
-  arcTo: function(x1, y1, x2, y2, r2) {
-    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r2 = +r2;
-    var x0 = this._x1, y0 = this._y1, x21 = x2 - x1, y21 = y2 - y1, x01 = x0 - x1, y01 = y0 - y1, l01_2 = x01 * x01 + y01 * y01;
-    if (r2 < 0)
-      throw new Error("negative radius: " + r2);
-    if (this._x1 === null) {
-      this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
-    } else if (!(l01_2 > epsilon))
-      ;
-    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r2) {
-      this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
-    } else {
-      var x20 = x2 - x0, y20 = y2 - y0, l21_2 = x21 * x21 + y21 * y21, l20_2 = x20 * x20 + y20 * y20, l21 = Math.sqrt(l21_2), l01 = Math.sqrt(l01_2), l = r2 * Math.tan((pi$1 - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2), t01 = l / l01, t21 = l / l21;
-      if (Math.abs(t01 - 1) > epsilon) {
-        this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
-      }
-      this._ += "A" + r2 + "," + r2 + ",0,0," + +(y01 * x20 > x01 * y20) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
-    }
-  },
-  arc: function(x2, y2, r2, a0, a1, ccw) {
-    x2 = +x2, y2 = +y2, r2 = +r2, ccw = !!ccw;
-    var dx = r2 * Math.cos(a0), dy = r2 * Math.sin(a0), x0 = x2 + dx, y0 = y2 + dy, cw = 1 ^ ccw, da2 = ccw ? a0 - a1 : a1 - a0;
-    if (r2 < 0)
-      throw new Error("negative radius: " + r2);
-    if (this._x1 === null) {
-      this._ += "M" + x0 + "," + y0;
-    } else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
-      this._ += "L" + x0 + "," + y0;
-    }
-    if (!r2)
-      return;
-    if (da2 < 0)
-      da2 = da2 % tau + tau;
-    if (da2 > tauEpsilon) {
-      this._ += "A" + r2 + "," + r2 + ",0,1," + cw + "," + (x2 - dx) + "," + (y2 - dy) + "A" + r2 + "," + r2 + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
-    } else if (da2 > epsilon) {
-      this._ += "A" + r2 + "," + r2 + ",0," + +(da2 >= pi$1) + "," + cw + "," + (this._x1 = x2 + r2 * Math.cos(a1)) + "," + (this._y1 = y2 + r2 * Math.sin(a1));
-    }
-  },
-  rect: function(x2, y2, w2, h2) {
-    this._ += "M" + (this._x0 = this._x1 = +x2) + "," + (this._y0 = this._y1 = +y2) + "h" + +w2 + "v" + +h2 + "h" + -w2 + "Z";
-  },
-  toString: function() {
-    return this._;
-  }
-};
-function constant(x2) {
-  return function constant2() {
-    return x2;
-  };
-}
-function array(x2) {
-  return typeof x2 === "object" && "length" in x2 ? x2 : Array.from(x2);
-}
-function Linear(context) {
-  this._context = context;
-}
-Linear.prototype = {
-  areaStart: function() {
-    this._line = 0;
-  },
-  areaEnd: function() {
-    this._line = NaN;
-  },
-  lineStart: function() {
-    this._point = 0;
-  },
-  lineEnd: function() {
-    if (this._line || this._line !== 0 && this._point === 1)
-      this._context.closePath();
-    this._line = 1 - this._line;
-  },
-  point: function(x2, y2) {
-    x2 = +x2, y2 = +y2;
-    switch (this._point) {
-      case 0:
-        this._point = 1;
-        this._line ? this._context.lineTo(x2, y2) : this._context.moveTo(x2, y2);
-        break;
-      case 1:
-        this._point = 2;
-      default:
-        this._context.lineTo(x2, y2);
-        break;
-    }
-  }
-};
-function curveLinear(context) {
-  return new Linear(context);
-}
-function x$2(p2) {
-  return p2[0];
-}
-function y$1(p2) {
-  return p2[1];
-}
-function d3line(x2, y2) {
-  var defined = constant(true), context = null, curve = curveLinear, output = null;
-  x2 = typeof x2 === "function" ? x2 : x2 === void 0 ? x$2 : constant(x2);
-  y2 = typeof y2 === "function" ? y2 : y2 === void 0 ? y$1 : constant(y2);
-  function line(data) {
-    var i2, n2 = (data = array(data)).length, d2, defined0 = false, buffer2;
-    if (context == null)
-      output = curve(buffer2 = path());
-    for (i2 = 0; i2 <= n2; ++i2) {
-      if (!(i2 < n2 && defined(d2 = data[i2], i2, data)) === defined0) {
-        if (defined0 = !defined0)
-          output.lineStart();
-        else
-          output.lineEnd();
-      }
-      if (defined0)
-        output.point(+x2(d2, i2, data), +y2(d2, i2, data));
-    }
-    if (buffer2)
-      return output = null, buffer2 + "" || null;
-  }
-  line.x = function(_) {
-    return arguments.length ? (x2 = typeof _ === "function" ? _ : constant(+_), line) : x2;
-  };
-  line.y = function(_) {
-    return arguments.length ? (y2 = typeof _ === "function" ? _ : constant(+_), line) : y2;
-  };
-  line.defined = function(_) {
-    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line) : defined;
-  };
-  line.curve = function(_) {
-    return arguments.length ? (curve = _, context != null && (output = curve(context)), line) : curve;
-  };
-  line.context = function(_) {
-    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
-  };
-  return line;
-}
-function d3area(x0, y0, y1) {
-  var x1 = null, defined = constant(true), context = null, curve = curveLinear, output = null;
-  x0 = typeof x0 === "function" ? x0 : x0 === void 0 ? x$2 : constant(+x0);
-  y0 = typeof y0 === "function" ? y0 : y0 === void 0 ? constant(0) : constant(+y0);
-  y1 = typeof y1 === "function" ? y1 : y1 === void 0 ? y$1 : constant(+y1);
-  function area(data) {
-    var i2, j2, k2, n2 = (data = array(data)).length, d2, defined0 = false, buffer2, x0z = new Array(n2), y0z = new Array(n2);
-    if (context == null)
-      output = curve(buffer2 = path());
-    for (i2 = 0; i2 <= n2; ++i2) {
-      if (!(i2 < n2 && defined(d2 = data[i2], i2, data)) === defined0) {
-        if (defined0 = !defined0) {
-          j2 = i2;
-          output.areaStart();
-          output.lineStart();
-        } else {
-          output.lineEnd();
-          output.lineStart();
-          for (k2 = i2 - 1; k2 >= j2; --k2) {
-            output.point(x0z[k2], y0z[k2]);
-          }
-          output.lineEnd();
-          output.areaEnd();
-        }
-      }
-      if (defined0) {
-        x0z[i2] = +x0(d2, i2, data), y0z[i2] = +y0(d2, i2, data);
-        output.point(x1 ? +x1(d2, i2, data) : x0z[i2], y1 ? +y1(d2, i2, data) : y0z[i2]);
-      }
-    }
-    if (buffer2)
-      return output = null, buffer2 + "" || null;
-  }
-  function arealine() {
-    return d3line().defined(defined).curve(curve).context(context);
-  }
-  area.x = function(_) {
-    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), x1 = null, area) : x0;
-  };
-  area.x0 = function(_) {
-    return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), area) : x0;
-  };
-  area.x1 = function(_) {
-    return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : x1;
-  };
-  area.y = function(_) {
-    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), y1 = null, area) : y0;
-  };
-  area.y0 = function(_) {
-    return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), area) : y0;
-  };
-  area.y1 = function(_) {
-    return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : y1;
-  };
-  area.lineX0 = area.lineY0 = function() {
-    return arealine().x(x0).y(y0);
-  };
-  area.lineY1 = function() {
-    return arealine().x(x0).y(y1);
-  };
-  area.lineX1 = function() {
-    return arealine().x(x1).y(y0);
-  };
-  area.defined = function(_) {
-    return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
-  };
-  area.curve = function(_) {
-    return arguments.length ? (curve = _, context != null && (output = curve(context)), area) : curve;
-  };
-  area.context = function(_) {
-    return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), area) : context;
-  };
-  return area;
-}
 var commonjsGlobal$1 = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
 var fuzzysortExports = {};
 var fuzzysort$1 = {
@@ -16129,517 +16163,530 @@ var fuzzysort$1 = {
   }
 };
 (function(module2) {
-  (function(root2, UMD) {
+  ((root2, UMD) => {
     if (module2.exports)
       module2.exports = UMD();
     else
-      root2.fuzzysort = UMD();
-  })(commonjsGlobal$1, function UMD() {
-    function fuzzysortNew(instanceOptions) {
-      var fuzzysort2 = {
-        single: function(search, target, options) {
-          if (search == "farzher")
-            return { target: "farzher was here (^-^*)/", score: 0, indexes: [0, 1, 2, 3, 4, 5, 6] };
-          if (!search)
-            return null;
-          var preparedSearch = fuzzysort2.getPreparedSearch(search);
-          var searchLowerCodes = preparedSearch.lowerCodes;
-          if (!target)
-            return null;
-          if (!isObj(target))
-            target = fuzzysort2.getPrepared(target);
-          var searchBitmask = preparedSearch.bitmask;
-          if ((searchBitmask & target._bitmask) != searchBitmask)
-            return null;
-          return fuzzysort2.algorithm(searchLowerCodes, target, search.toLowerCase());
-        },
-        go: function(search, targets, options) {
-          if (search == "farzher")
-            return [{ target: "farzher was here (^-^*)/", score: 0, indexes: [0, 1, 2, 3, 4, 5, 6], obj: targets ? targets[0] : null }];
-          if (!search)
-            return options && options.all || instanceOptions && instanceOptions.all ? fuzzysort2.all(search, targets, options) : noResults;
-          var preparedSearch = fuzzysort2.getPreparedSearch(search);
-          var searchLowerCodes = preparedSearch.lowerCodes;
-          searchLowerCodes[0];
-          var searchBitmask = preparedSearch.bitmask;
-          var searchLower = search.toLowerCase();
-          var threshold = options && options.threshold || instanceOptions && instanceOptions.threshold || -9007199254740991;
-          var limit = options && options.limit || instanceOptions && instanceOptions.limit || 9007199254740991;
-          var resultsLen = 0;
-          var limitedCount = 0;
-          var targetsLen = targets.length;
-          if (options && options.keys) {
-            var scoreFn = options.scoreFn || defaultScoreFn;
-            var keys = options.keys;
-            var keysLen = keys.length;
-            for (var i2 = targetsLen - 1; i2 >= 0; --i2) {
-              var obj = targets[i2];
-              var objResults = new Array(keysLen);
-              for (var keyI = keysLen - 1; keyI >= 0; --keyI) {
-                var key = keys[keyI];
-                var target = getValue(obj, key);
-                if (!target) {
-                  objResults[keyI] = null;
-                  continue;
-                }
-                if (!isObj(target))
-                  target = fuzzysort2.getPrepared(target);
-                if ((searchBitmask & target._bitmask) != searchBitmask)
-                  objResults[keyI] = null;
-                else
-                  objResults[keyI] = fuzzysort2.algorithm(searchLowerCodes, target, searchLower);
-              }
-              objResults.obj = obj;
-              var score = scoreFn(objResults);
-              if (score === null)
-                continue;
-              if (score < threshold)
-                continue;
-              objResults.score = score;
-              if (resultsLen < limit) {
-                q2.add(objResults);
-                ++resultsLen;
-              } else {
-                ++limitedCount;
-                if (score > q2.peek().score)
-                  q2.replaceTop(objResults);
-              }
-            }
-          } else if (options && options.key) {
-            var key = options.key;
-            for (var i2 = targetsLen - 1; i2 >= 0; --i2) {
-              var obj = targets[i2];
-              var target = getValue(obj, key);
-              if (!target)
-                continue;
-              if (!isObj(target))
-                target = fuzzysort2.getPrepared(target);
-              if ((searchBitmask & target._bitmask) != searchBitmask)
-                var result = null;
-              else
-                var result = fuzzysort2.algorithm(searchLowerCodes, target, searchLower);
-              if (result === null)
-                continue;
-              if (result.score < threshold)
-                continue;
-              result = { target: result.target, _targetLower: "", _targetLowerCodes: null, _nextBeginningIndexes: null, _bitmask: 0, score: result.score, indexes: result.indexes, obj };
-              if (resultsLen < limit) {
-                q2.add(result);
-                ++resultsLen;
-              } else {
-                ++limitedCount;
-                if (result.score > q2.peek().score)
-                  q2.replaceTop(result);
-              }
-            }
-          } else {
-            for (var i2 = targetsLen - 1; i2 >= 0; --i2) {
-              var target = targets[i2];
-              if (!target)
-                continue;
-              if (!isObj(target))
-                target = fuzzysort2.getPrepared(target);
-              if ((searchBitmask & target._bitmask) != searchBitmask)
-                var result = null;
-              else
-                var result = fuzzysort2.algorithm(searchLowerCodes, target, searchLower);
-              if (result === null)
-                continue;
-              if (result.score < threshold)
-                continue;
-              if (resultsLen < limit) {
-                q2.add(result);
-                ++resultsLen;
-              } else {
-                ++limitedCount;
-                if (result.score > q2.peek().score)
-                  q2.replaceTop(result);
-              }
-            }
-          }
-          if (resultsLen === 0)
-            return noResults;
-          var results = new Array(resultsLen);
-          for (var i2 = resultsLen - 1; i2 >= 0; --i2)
-            results[i2] = q2.poll();
-          results.total = resultsLen + limitedCount;
-          return results;
-        },
-        goAsync: function(search, targets, options) {
-          var p2 = new Promise(function(resolve2, reject) {
-            resolve2(fuzzysort2.go(search, targets, options));
-          });
-          p2.cancel = function() {
-          };
-          return p2;
-        },
-        all: function(search, targets, options) {
-          var results = [];
-          results.total = targets.length;
-          var limit = options && options.limit || instanceOptions && instanceOptions.limit || 9007199254740991;
-          if (options && options.keys) {
-            for (var i2 = 0; i2 < targets.length; i2++) {
-              var obj = targets[i2];
-              var objResults = new Array(options.keys.length);
-              for (var keyI = options.keys.length - 1; keyI >= 0; --keyI) {
-                var target = getValue(obj, options.keys[keyI]);
-                if (!target) {
-                  objResults[keyI] = null;
-                  continue;
-                }
-                if (!isObj(target))
-                  target = fuzzysort2.getPrepared(target);
-                target.score = -9007199254740991;
-                objResults[keyI] = target;
-              }
-              objResults.obj = obj;
-              objResults.score = -9007199254740991;
-              results.push(objResults);
-              if (results.length >= limit)
-                return results;
-            }
-          } else if (options && options.key) {
-            for (var i2 = 0; i2 < targets.length; i2++) {
-              var obj = targets[i2];
-              var target = getValue(obj, options.key);
-              if (!target)
-                continue;
-              if (!isObj(target))
-                target = fuzzysort2.getPrepared(target);
-              target.score = -9007199254740991;
-              var result = target;
-              result = { target: result.target, _targetLower: "", _targetLowerCodes: null, _nextBeginningIndexes: null, _bitmask: 0, score: target.score, indexes: null, obj };
-              results.push(result);
-              if (results.length >= limit)
-                return results;
-            }
-          } else {
-            for (var i2 = 0; i2 < targets.length; i2++) {
-              var target = targets[i2];
-              if (!target)
-                continue;
-              if (!isObj(target))
-                target = fuzzysort2.getPrepared(target);
-              target.score = -9007199254740991;
-              results.push(target);
-              if (results.length >= limit)
-                return results;
-            }
-          }
-          return results;
-        },
-        highlight: function(result, hOpen, hClose) {
-          if (typeof hOpen == "function")
-            return fuzzysort2.highlightCallback(result, hOpen);
-          if (result === null)
-            return null;
-          if (hOpen === void 0)
-            hOpen = "<b>";
-          if (hClose === void 0)
-            hClose = "</b>";
-          var highlighted = "";
-          var matchesIndex = 0;
-          var opened = false;
-          var target = result.target;
-          var targetLen = target.length;
-          var matchesBest = result.indexes;
-          for (var i2 = 0; i2 < targetLen; ++i2) {
-            var char = target[i2];
-            if (matchesBest[matchesIndex] === i2) {
-              ++matchesIndex;
-              if (!opened) {
-                opened = true;
-                highlighted += hOpen;
-              }
-              if (matchesIndex === matchesBest.length) {
-                highlighted += char + hClose + target.substr(i2 + 1);
-                break;
-              }
-            } else {
-              if (opened) {
-                opened = false;
-                highlighted += hClose;
-              }
-            }
-            highlighted += char;
-          }
-          return highlighted;
-        },
-        highlightCallback: function(result, cb) {
-          if (result === null)
-            return null;
-          var target = result.target;
-          var targetLen = target.length;
-          var indexes = result.indexes;
-          var highlighted = "";
-          var matchI = 0;
-          var indexesI = 0;
-          var opened = false;
-          var result = [];
-          for (var i2 = 0; i2 < targetLen; ++i2) {
-            var char = target[i2];
-            if (indexes[indexesI] === i2) {
-              ++indexesI;
-              if (!opened) {
-                opened = true;
-                result.push(highlighted);
-                highlighted = "";
-              }
-              if (indexesI === indexes.length) {
-                highlighted += char;
-                result.push(cb(highlighted, matchI++));
-                highlighted = "";
-                result.push(target.substr(i2 + 1));
-                break;
-              }
-            } else {
-              if (opened) {
-                opened = false;
-                result.push(cb(highlighted, matchI++));
-                highlighted = "";
-              }
-            }
-            highlighted += char;
-          }
-          return result;
-        },
-        prepare: function(target) {
-          if (!target)
-            target = "";
-          var lowerCodes = fuzzysort2.prepareLowerCodes(target);
-          return { target, _targetLower: target.toLowerCase(), _targetLowerCodes: lowerCodes, _nextBeginningIndexes: null, _bitmask: fuzzysort2.prepareBitmask(lowerCodes), score: null, indexes: [0], obj: null };
-        },
-        prepareSlow: function(target) {
-          return fuzzysort2.prepare(target);
-        },
-        prepareSearch: function(search) {
-          if (!search)
-            search = "";
-          var lowerCodes = fuzzysort2.prepareLowerCodes(search);
-          return { lowerCodes, bitmask: fuzzysort2.prepareBitmask(lowerCodes) };
-        },
-        getPrepared: function(target) {
-          if (target.length > 999)
-            return fuzzysort2.prepare(target);
-          var targetPrepared = preparedCache.get(target);
-          if (targetPrepared !== void 0)
-            return targetPrepared;
-          targetPrepared = fuzzysort2.prepare(target);
-          preparedCache.set(target, targetPrepared);
-          return targetPrepared;
-        },
-        getPreparedSearch: function(search) {
-          if (search.length > 999)
-            return fuzzysort2.prepareSearch(search);
-          var searchPrepared = preparedSearchCache.get(search);
-          if (searchPrepared !== void 0)
-            return searchPrepared;
-          searchPrepared = fuzzysort2.prepareSearch(search);
-          preparedSearchCache.set(search, searchPrepared);
-          return searchPrepared;
-        },
-        algorithm: function(searchLowerCodes, prepared, searchLower) {
-          var searchLowerCode = searchLowerCodes[0];
-          var targetLowerCodes = prepared._targetLowerCodes;
-          var searchLen = searchLowerCodes.length;
-          var targetLen = targetLowerCodes.length;
-          var searchI = 0;
-          var targetI = 0;
-          var matchesSimpleLen = 0;
-          for (; ; ) {
-            var isMatch = searchLowerCode === targetLowerCodes[targetI];
-            if (isMatch) {
-              matchesSimple[matchesSimpleLen++] = targetI;
-              ++searchI;
-              if (searchI === searchLen)
-                break;
-              searchLowerCode = searchLowerCodes[searchI];
-            }
-            ++targetI;
-            if (targetI >= targetLen)
-              return null;
-          }
-          var searchI = 0;
-          var successStrict = false;
-          var matchesStrictLen = 0;
-          var nextBeginningIndexes = prepared._nextBeginningIndexes;
-          if (nextBeginningIndexes === null)
-            nextBeginningIndexes = prepared._nextBeginningIndexes = fuzzysort2.prepareNextBeginningIndexes(prepared.target);
-          targetI = matchesSimple[0] === 0 ? 0 : nextBeginningIndexes[matchesSimple[0] - 1];
-          var backtrackCount = 0;
-          if (targetI !== targetLen)
-            for (; ; ) {
-              if (targetI >= targetLen) {
-                if (searchI <= 0)
-                  break;
-                ++backtrackCount;
-                if (backtrackCount > 200)
-                  break;
-                --searchI;
-                var lastMatch = matchesStrict[--matchesStrictLen];
-                targetI = nextBeginningIndexes[lastMatch];
-              } else {
-                var isMatch = searchLowerCodes[searchI] === targetLowerCodes[targetI];
-                if (isMatch) {
-                  matchesStrict[matchesStrictLen++] = targetI;
-                  ++searchI;
-                  if (searchI === searchLen) {
-                    successStrict = true;
-                    break;
-                  }
-                  ++targetI;
-                } else {
-                  targetI = nextBeginningIndexes[targetI];
-                }
-              }
-            }
-          var substringIndex = prepared._targetLower.indexOf(searchLower, matchesSimple[0]);
-          var isSubstring = ~substringIndex;
-          if (isSubstring && !successStrict) {
-            for (var i2 = 0; i2 < matchesSimpleLen; ++i2)
-              matchesSimple[i2] = substringIndex + i2;
-          }
-          var isSubstringBeginning = false;
-          if (isSubstring) {
-            isSubstringBeginning = prepared._nextBeginningIndexes[substringIndex - 1] == substringIndex;
-          }
-          {
-            if (successStrict) {
-              var matchesBest = matchesStrict;
-              var matchesBestLen = matchesStrictLen;
-            } else {
-              var matchesBest = matchesSimple;
-              var matchesBestLen = matchesSimpleLen;
-            }
-            var score = 0;
-            var extraMatchGroupCount = 0;
-            for (var i2 = searchLen - 1; i2 >= 1; --i2) {
-              if (matchesBest[i2] - matchesBest[i2 - 1] !== 1) {
-                score -= matchesBest[i2];
-                ++extraMatchGroupCount;
-              }
-            }
-            var unmatchedDistance = matchesBest[searchLen - 1] - matchesBest[0] - (searchLen - 1);
-            score -= unmatchedDistance * extraMatchGroupCount;
-            if (matchesBest[0] !== 0)
-              score -= matchesBest[0] * 10;
-            if (!successStrict) {
-              score *= 1e3;
-            } else {
-              var uniqueBeginningIndexes = 1;
-              for (var i2 = nextBeginningIndexes[0]; i2 < targetLen; i2 = nextBeginningIndexes[i2])
-                ++uniqueBeginningIndexes;
-              if (uniqueBeginningIndexes > 24)
-                score *= (uniqueBeginningIndexes - 24) * 10;
-            }
-            if (isSubstring)
-              score /= 10;
-            if (isSubstringBeginning)
-              score /= 10;
-            score -= targetLen - searchLen;
-            prepared.score = score;
-            prepared.indexes = new Array(matchesBestLen);
-            for (var i2 = matchesBestLen - 1; i2 >= 0; --i2)
-              prepared.indexes[i2] = matchesBest[i2];
-            return prepared;
-          }
-        },
-        prepareLowerCodes: function(str) {
-          var strLen = str.length;
-          var lowerCodes = [];
-          var lower = str.toLowerCase();
-          for (var i2 = 0; i2 < strLen; ++i2)
-            lowerCodes[i2] = lower.charCodeAt(i2);
-          return lowerCodes;
-        },
-        prepareBeginningIndexes: function(target) {
-          var targetLen = target.length;
-          var beginningIndexes = [];
-          var beginningIndexesLen = 0;
-          var wasUpper = false;
-          var wasAlphanum = false;
-          for (var i2 = 0; i2 < targetLen; ++i2) {
-            var targetCode = target.charCodeAt(i2);
-            var isUpper = targetCode >= 65 && targetCode <= 90;
-            var isAlphanum = isUpper || targetCode >= 97 && targetCode <= 122 || targetCode >= 48 && targetCode <= 57;
-            var isBeginning = isUpper && !wasUpper || !wasAlphanum || !isAlphanum;
-            wasUpper = isUpper;
-            wasAlphanum = isAlphanum;
-            if (isBeginning)
-              beginningIndexes[beginningIndexesLen++] = i2;
-          }
-          return beginningIndexes;
-        },
-        prepareNextBeginningIndexes: function(target) {
-          var targetLen = target.length;
-          var beginningIndexes = fuzzysort2.prepareBeginningIndexes(target);
-          var nextBeginningIndexes = [];
-          var lastIsBeginning = beginningIndexes[0];
-          var lastIsBeginningI = 0;
-          for (var i2 = 0; i2 < targetLen; ++i2) {
-            if (lastIsBeginning > i2) {
-              nextBeginningIndexes[i2] = lastIsBeginning;
-            } else {
-              lastIsBeginning = beginningIndexes[++lastIsBeginningI];
-              nextBeginningIndexes[i2] = lastIsBeginning === void 0 ? targetLen : lastIsBeginning;
-            }
-          }
-          return nextBeginningIndexes;
-        },
-        prepareBitmask: function(lowerCodes) {
-          var bitmask = 0;
-          for (var i2 = lowerCodes.length - 1; i2 >= 0; --i2) {
-            var lowerCode = lowerCodes[i2];
-            var bit = lowerCode >= 97 && lowerCode <= 122 ? lowerCode - 97 : lowerCode >= 48 && lowerCode <= 57 ? 26 : lowerCode === 32 ? 27 : lowerCode <= 127 ? 28 : 29;
-            bitmask |= 1 << bit;
-          }
-          return bitmask;
-        },
-        cleanup,
-        new: fuzzysortNew
-      };
-      return fuzzysort2;
-    }
-    var MyMap = typeof Map === "function" ? Map : function() {
-      var s = /* @__PURE__ */ Object.create(null);
-      this.get = function(k2) {
-        return s[k2];
-      };
-      this.set = function(k2, val) {
-        s[k2] = val;
-        return this;
-      };
-      this.clear = function() {
-        s = /* @__PURE__ */ Object.create(null);
-      };
+      root2["fuzzysort"] = UMD();
+  })(commonjsGlobal$1, (_) => {
+    var single = (search, target) => {
+      if (search == "farzher")
+        return { target: "farzher was here (^-^*)/", score: 0, _indexes: [0] };
+      if (!search || !target)
+        return NULL;
+      var preparedSearch = getPreparedSearch(search);
+      if (!isObj(target))
+        target = getPrepared(target);
+      var searchBitflags = preparedSearch.bitflags;
+      if ((searchBitflags & target._bitflags) !== searchBitflags)
+        return NULL;
+      return algorithm(preparedSearch, target);
     };
-    var preparedCache = new MyMap();
-    var preparedSearchCache = new MyMap();
-    var noResults = [];
-    noResults.total = 0;
-    var matchesSimple = [];
-    var matchesStrict = [];
-    function cleanup() {
+    var go2 = (search, targets, options) => {
+      if (search == "farzher")
+        return [{ target: "farzher was here (^-^*)/", score: 0, _indexes: [0], obj: targets ? targets[0] : NULL }];
+      if (!search)
+        return options && options.all ? all(search, targets, options) : noResults;
+      var preparedSearch = getPreparedSearch(search);
+      var searchBitflags = preparedSearch.bitflags;
+      preparedSearch.containsSpace;
+      var threshold = options && options.threshold || INT_MIN;
+      var limit = options && options["limit"] || INT_MAX;
+      var resultsLen = 0;
+      var limitedCount = 0;
+      var targetsLen = targets.length;
+      if (options && options.key) {
+        var key = options.key;
+        for (var i2 = 0; i2 < targetsLen; ++i2) {
+          var obj = targets[i2];
+          var target = getValue(obj, key);
+          if (!target)
+            continue;
+          if (!isObj(target))
+            target = getPrepared(target);
+          if ((searchBitflags & target._bitflags) !== searchBitflags)
+            continue;
+          var result = algorithm(preparedSearch, target);
+          if (result === NULL)
+            continue;
+          if (result.score < threshold)
+            continue;
+          result = { target: result.target, _targetLower: "", _targetLowerCodes: NULL, _nextBeginningIndexes: NULL, _bitflags: 0, score: result.score, _indexes: result._indexes, obj };
+          if (resultsLen < limit) {
+            q2.add(result);
+            ++resultsLen;
+          } else {
+            ++limitedCount;
+            if (result.score > q2.peek().score)
+              q2.replaceTop(result);
+          }
+        }
+      } else if (options && options.keys) {
+        var scoreFn = options["scoreFn"] || defaultScoreFn;
+        var keys = options.keys;
+        var keysLen = keys.length;
+        for (var i2 = 0; i2 < targetsLen; ++i2) {
+          var obj = targets[i2];
+          var objResults = new Array(keysLen);
+          for (var keyI = 0; keyI < keysLen; ++keyI) {
+            var key = keys[keyI];
+            var target = getValue(obj, key);
+            if (!target) {
+              objResults[keyI] = NULL;
+              continue;
+            }
+            if (!isObj(target))
+              target = getPrepared(target);
+            if ((searchBitflags & target._bitflags) !== searchBitflags)
+              objResults[keyI] = NULL;
+            else
+              objResults[keyI] = algorithm(preparedSearch, target);
+          }
+          objResults.obj = obj;
+          var score = scoreFn(objResults);
+          if (score === NULL)
+            continue;
+          if (score < threshold)
+            continue;
+          objResults.score = score;
+          if (resultsLen < limit) {
+            q2.add(objResults);
+            ++resultsLen;
+          } else {
+            ++limitedCount;
+            if (score > q2.peek().score)
+              q2.replaceTop(objResults);
+          }
+        }
+      } else {
+        for (var i2 = 0; i2 < targetsLen; ++i2) {
+          var target = targets[i2];
+          if (!target)
+            continue;
+          if (!isObj(target))
+            target = getPrepared(target);
+          if ((searchBitflags & target._bitflags) !== searchBitflags)
+            continue;
+          var result = algorithm(preparedSearch, target);
+          if (result === NULL)
+            continue;
+          if (result.score < threshold)
+            continue;
+          if (resultsLen < limit) {
+            q2.add(result);
+            ++resultsLen;
+          } else {
+            ++limitedCount;
+            if (result.score > q2.peek().score)
+              q2.replaceTop(result);
+          }
+        }
+      }
+      if (resultsLen === 0)
+        return noResults;
+      var results = new Array(resultsLen);
+      for (var i2 = resultsLen - 1; i2 >= 0; --i2)
+        results[i2] = q2.poll();
+      results.total = resultsLen + limitedCount;
+      return results;
+    };
+    var highlight = (result, hOpen, hClose) => {
+      if (typeof hOpen === "function")
+        return highlightCallback(result, hOpen);
+      if (result === NULL)
+        return NULL;
+      if (hOpen === void 0)
+        hOpen = "<b>";
+      if (hClose === void 0)
+        hClose = "</b>";
+      var highlighted = "";
+      var matchesIndex = 0;
+      var opened = false;
+      var target = result.target;
+      var targetLen = target.length;
+      var indexes2 = result._indexes;
+      indexes2 = indexes2.slice(0, indexes2.len).sort((a2, b3) => a2 - b3);
+      for (var i2 = 0; i2 < targetLen; ++i2) {
+        var char = target[i2];
+        if (indexes2[matchesIndex] === i2) {
+          ++matchesIndex;
+          if (!opened) {
+            opened = true;
+            highlighted += hOpen;
+          }
+          if (matchesIndex === indexes2.length) {
+            highlighted += char + hClose + target.substr(i2 + 1);
+            break;
+          }
+        } else {
+          if (opened) {
+            opened = false;
+            highlighted += hClose;
+          }
+        }
+        highlighted += char;
+      }
+      return highlighted;
+    };
+    var highlightCallback = (result, cb) => {
+      if (result === NULL)
+        return NULL;
+      var target = result.target;
+      var targetLen = target.length;
+      var indexes2 = result._indexes;
+      indexes2 = indexes2.slice(0, indexes2.len).sort((a2, b3) => a2 - b3);
+      var highlighted = "";
+      var matchI = 0;
+      var indexesI = 0;
+      var opened = false;
+      var result = [];
+      for (var i2 = 0; i2 < targetLen; ++i2) {
+        var char = target[i2];
+        if (indexes2[indexesI] === i2) {
+          ++indexesI;
+          if (!opened) {
+            opened = true;
+            result.push(highlighted);
+            highlighted = "";
+          }
+          if (indexesI === indexes2.length) {
+            highlighted += char;
+            result.push(cb(highlighted, matchI++));
+            highlighted = "";
+            result.push(target.substr(i2 + 1));
+            break;
+          }
+        } else {
+          if (opened) {
+            opened = false;
+            result.push(cb(highlighted, matchI++));
+            highlighted = "";
+          }
+        }
+        highlighted += char;
+      }
+      return result;
+    };
+    var indexes = (result) => result._indexes.slice(0, result._indexes.len).sort((a2, b3) => a2 - b3);
+    var prepare2 = (target) => {
+      if (typeof target !== "string")
+        target = "";
+      var info = prepareLowerInfo(target);
+      return { "target": target, _targetLower: info._lower, _targetLowerCodes: info.lowerCodes, _nextBeginningIndexes: NULL, _bitflags: info.bitflags, "score": NULL, _indexes: [0], "obj": NULL };
+    };
+    var prepareSearch = (search) => {
+      if (typeof search !== "string")
+        search = "";
+      search = search.trim();
+      var info = prepareLowerInfo(search);
+      var spaceSearches = [];
+      if (info.containsSpace) {
+        var searches = search.split(/\s+/);
+        searches = [...new Set(searches)];
+        for (var i2 = 0; i2 < searches.length; i2++) {
+          if (searches[i2] === "")
+            continue;
+          var _info = prepareLowerInfo(searches[i2]);
+          spaceSearches.push({ lowerCodes: _info.lowerCodes, _lower: searches[i2].toLowerCase(), containsSpace: false });
+        }
+      }
+      return { lowerCodes: info.lowerCodes, bitflags: info.bitflags, containsSpace: info.containsSpace, _lower: info._lower, spaceSearches };
+    };
+    var getPrepared = (target) => {
+      if (target.length > 999)
+        return prepare2(target);
+      var targetPrepared = preparedCache.get(target);
+      if (targetPrepared !== void 0)
+        return targetPrepared;
+      targetPrepared = prepare2(target);
+      preparedCache.set(target, targetPrepared);
+      return targetPrepared;
+    };
+    var getPreparedSearch = (search) => {
+      if (search.length > 999)
+        return prepareSearch(search);
+      var searchPrepared = preparedSearchCache.get(search);
+      if (searchPrepared !== void 0)
+        return searchPrepared;
+      searchPrepared = prepareSearch(search);
+      preparedSearchCache.set(search, searchPrepared);
+      return searchPrepared;
+    };
+    var all = (search, targets, options) => {
+      var results = [];
+      results.total = targets.length;
+      var limit = options && options.limit || INT_MAX;
+      if (options && options.key) {
+        for (var i2 = 0; i2 < targets.length; i2++) {
+          var obj = targets[i2];
+          var target = getValue(obj, options.key);
+          if (!target)
+            continue;
+          if (!isObj(target))
+            target = getPrepared(target);
+          target.score = INT_MIN;
+          target._indexes.len = 0;
+          var result = target;
+          result = { target: result.target, _targetLower: "", _targetLowerCodes: NULL, _nextBeginningIndexes: NULL, _bitflags: 0, score: target.score, _indexes: NULL, obj };
+          results.push(result);
+          if (results.length >= limit)
+            return results;
+        }
+      } else if (options && options.keys) {
+        for (var i2 = 0; i2 < targets.length; i2++) {
+          var obj = targets[i2];
+          var objResults = new Array(options.keys.length);
+          for (var keyI = options.keys.length - 1; keyI >= 0; --keyI) {
+            var target = getValue(obj, options.keys[keyI]);
+            if (!target) {
+              objResults[keyI] = NULL;
+              continue;
+            }
+            if (!isObj(target))
+              target = getPrepared(target);
+            target.score = INT_MIN;
+            target._indexes.len = 0;
+            objResults[keyI] = target;
+          }
+          objResults.obj = obj;
+          objResults.score = INT_MIN;
+          results.push(objResults);
+          if (results.length >= limit)
+            return results;
+        }
+      } else {
+        for (var i2 = 0; i2 < targets.length; i2++) {
+          var target = targets[i2];
+          if (!target)
+            continue;
+          if (!isObj(target))
+            target = getPrepared(target);
+          target.score = INT_MIN;
+          target._indexes.len = 0;
+          results.push(target);
+          if (results.length >= limit)
+            return results;
+        }
+      }
+      return results;
+    };
+    var algorithm = (preparedSearch, prepared, allowSpaces = false) => {
+      if (allowSpaces === false && preparedSearch.containsSpace)
+        return algorithmSpaces(preparedSearch, prepared);
+      var searchLower = preparedSearch._lower;
+      var searchLowerCodes = preparedSearch.lowerCodes;
+      var searchLowerCode = searchLowerCodes[0];
+      var targetLowerCodes = prepared._targetLowerCodes;
+      var searchLen = searchLowerCodes.length;
+      var targetLen = targetLowerCodes.length;
+      var searchI = 0;
+      var targetI = 0;
+      var matchesSimpleLen = 0;
+      for (; ; ) {
+        var isMatch = searchLowerCode === targetLowerCodes[targetI];
+        if (isMatch) {
+          matchesSimple[matchesSimpleLen++] = targetI;
+          ++searchI;
+          if (searchI === searchLen)
+            break;
+          searchLowerCode = searchLowerCodes[searchI];
+        }
+        ++targetI;
+        if (targetI >= targetLen)
+          return NULL;
+      }
+      var searchI = 0;
+      var successStrict = false;
+      var matchesStrictLen = 0;
+      var nextBeginningIndexes = prepared._nextBeginningIndexes;
+      if (nextBeginningIndexes === NULL)
+        nextBeginningIndexes = prepared._nextBeginningIndexes = prepareNextBeginningIndexes(prepared.target);
+      targetI = matchesSimple[0] === 0 ? 0 : nextBeginningIndexes[matchesSimple[0] - 1];
+      var backtrackCount = 0;
+      if (targetI !== targetLen)
+        for (; ; ) {
+          if (targetI >= targetLen) {
+            if (searchI <= 0)
+              break;
+            ++backtrackCount;
+            if (backtrackCount > 200)
+              break;
+            --searchI;
+            var lastMatch = matchesStrict[--matchesStrictLen];
+            targetI = nextBeginningIndexes[lastMatch];
+          } else {
+            var isMatch = searchLowerCodes[searchI] === targetLowerCodes[targetI];
+            if (isMatch) {
+              matchesStrict[matchesStrictLen++] = targetI;
+              ++searchI;
+              if (searchI === searchLen) {
+                successStrict = true;
+                break;
+              }
+              ++targetI;
+            } else {
+              targetI = nextBeginningIndexes[targetI];
+            }
+          }
+        }
+      var substringIndex = prepared._targetLower.indexOf(searchLower, matchesSimple[0]);
+      var isSubstring = ~substringIndex;
+      if (isSubstring && !successStrict) {
+        for (var i2 = 0; i2 < matchesSimpleLen; ++i2)
+          matchesSimple[i2] = substringIndex + i2;
+      }
+      var isSubstringBeginning = false;
+      if (isSubstring) {
+        isSubstringBeginning = prepared._nextBeginningIndexes[substringIndex - 1] === substringIndex;
+      }
+      {
+        if (successStrict) {
+          var matchesBest = matchesStrict;
+          var matchesBestLen = matchesStrictLen;
+        } else {
+          var matchesBest = matchesSimple;
+          var matchesBestLen = matchesSimpleLen;
+        }
+        var score = 0;
+        var extraMatchGroupCount = 0;
+        for (var i2 = 1; i2 < searchLen; ++i2) {
+          if (matchesBest[i2] - matchesBest[i2 - 1] !== 1) {
+            score -= matchesBest[i2];
+            ++extraMatchGroupCount;
+          }
+        }
+        var unmatchedDistance = matchesBest[searchLen - 1] - matchesBest[0] - (searchLen - 1);
+        score -= (12 + unmatchedDistance) * extraMatchGroupCount;
+        if (matchesBest[0] !== 0)
+          score -= matchesBest[0] * matchesBest[0] * 0.2;
+        if (!successStrict) {
+          score *= 1e3;
+        } else {
+          var uniqueBeginningIndexes = 1;
+          for (var i2 = nextBeginningIndexes[0]; i2 < targetLen; i2 = nextBeginningIndexes[i2])
+            ++uniqueBeginningIndexes;
+          if (uniqueBeginningIndexes > 24)
+            score *= (uniqueBeginningIndexes - 24) * 10;
+        }
+        if (isSubstring)
+          score /= 1 + searchLen * searchLen * 1;
+        if (isSubstringBeginning)
+          score /= 1 + searchLen * searchLen * 1;
+        score -= targetLen - searchLen;
+        prepared.score = score;
+        for (var i2 = 0; i2 < matchesBestLen; ++i2)
+          prepared._indexes[i2] = matchesBest[i2];
+        prepared._indexes.len = matchesBestLen;
+        return prepared;
+      }
+    };
+    var algorithmSpaces = (preparedSearch, target) => {
+      var seen_indexes = /* @__PURE__ */ new Set();
+      var score = 0;
+      var result = NULL;
+      var first_seen_index_last_search = 0;
+      var searches = preparedSearch.spaceSearches;
+      for (var i2 = 0; i2 < searches.length; ++i2) {
+        var search = searches[i2];
+        result = algorithm(search, target);
+        if (result === NULL)
+          return NULL;
+        score += result.score;
+        if (result._indexes[0] < first_seen_index_last_search) {
+          score -= first_seen_index_last_search - result._indexes[0];
+        }
+        first_seen_index_last_search = result._indexes[0];
+        for (var j2 = 0; j2 < result._indexes.len; ++j2)
+          seen_indexes.add(result._indexes[j2]);
+      }
+      var allowSpacesResult = algorithm(preparedSearch, target, true);
+      if (allowSpacesResult !== NULL && allowSpacesResult.score > score) {
+        return allowSpacesResult;
+      }
+      result.score = score;
+      var i2 = 0;
+      for (let index2 of seen_indexes)
+        result._indexes[i2++] = index2;
+      result._indexes.len = i2;
+      return result;
+    };
+    var prepareLowerInfo = (str) => {
+      var strLen = str.length;
+      var lower = str.toLowerCase();
+      var lowerCodes = [];
+      var bitflags = 0;
+      var containsSpace = false;
+      for (var i2 = 0; i2 < strLen; ++i2) {
+        var lowerCode = lowerCodes[i2] = lower.charCodeAt(i2);
+        if (lowerCode === 32) {
+          containsSpace = true;
+          continue;
+        }
+        var bit = lowerCode >= 97 && lowerCode <= 122 ? lowerCode - 97 : lowerCode >= 48 && lowerCode <= 57 ? 26 : lowerCode <= 127 ? 30 : 31;
+        bitflags |= 1 << bit;
+      }
+      return { lowerCodes, bitflags, containsSpace, _lower: lower };
+    };
+    var prepareBeginningIndexes = (target) => {
+      var targetLen = target.length;
+      var beginningIndexes = [];
+      var beginningIndexesLen = 0;
+      var wasUpper = false;
+      var wasAlphanum = false;
+      for (var i2 = 0; i2 < targetLen; ++i2) {
+        var targetCode = target.charCodeAt(i2);
+        var isUpper = targetCode >= 65 && targetCode <= 90;
+        var isAlphanum = isUpper || targetCode >= 97 && targetCode <= 122 || targetCode >= 48 && targetCode <= 57;
+        var isBeginning = isUpper && !wasUpper || !wasAlphanum || !isAlphanum;
+        wasUpper = isUpper;
+        wasAlphanum = isAlphanum;
+        if (isBeginning)
+          beginningIndexes[beginningIndexesLen++] = i2;
+      }
+      return beginningIndexes;
+    };
+    var prepareNextBeginningIndexes = (target) => {
+      var targetLen = target.length;
+      var beginningIndexes = prepareBeginningIndexes(target);
+      var nextBeginningIndexes = [];
+      var lastIsBeginning = beginningIndexes[0];
+      var lastIsBeginningI = 0;
+      for (var i2 = 0; i2 < targetLen; ++i2) {
+        if (lastIsBeginning > i2) {
+          nextBeginningIndexes[i2] = lastIsBeginning;
+        } else {
+          lastIsBeginning = beginningIndexes[++lastIsBeginningI];
+          nextBeginningIndexes[i2] = lastIsBeginning === void 0 ? targetLen : lastIsBeginning;
+        }
+      }
+      return nextBeginningIndexes;
+    };
+    var cleanup = () => {
       preparedCache.clear();
       preparedSearchCache.clear();
       matchesSimple = [];
       matchesStrict = [];
-    }
-    function defaultScoreFn(a2) {
-      var max2 = -9007199254740991;
-      for (var i2 = a2.length - 1; i2 >= 0; --i2) {
+    };
+    var preparedCache = /* @__PURE__ */ new Map();
+    var preparedSearchCache = /* @__PURE__ */ new Map();
+    var matchesSimple = [];
+    var matchesStrict = [];
+    var defaultScoreFn = (a2) => {
+      var max2 = INT_MIN;
+      var len = a2.length;
+      for (var i2 = 0; i2 < len; ++i2) {
         var result = a2[i2];
-        if (result === null)
+        if (result === NULL)
           continue;
         var score = result.score;
         if (score > max2)
           max2 = score;
       }
-      if (max2 === -9007199254740991)
-        return null;
+      if (max2 === INT_MIN)
+        return NULL;
       return max2;
-    }
-    function getValue(obj, prop) {
+    };
+    var getValue = (obj, prop) => {
       var tmp = obj[prop];
       if (tmp !== void 0)
         return tmp;
@@ -16651,41 +16698,45 @@ var fuzzysort$1 = {
       while (obj && ++i2 < len)
         obj = obj[segs[i2]];
       return obj;
-    }
-    function isObj(x2) {
+    };
+    var isObj = (x2) => {
       return typeof x2 === "object";
-    }
-    var fastpriorityqueue = function() {
-      var r2 = [], o = 0, e3 = {};
-      function n2() {
-        for (var e4 = 0, n3 = r2[e4], c2 = 1; c2 < o; ) {
-          var f2 = c2 + 1;
-          e4 = c2, f2 < o && r2[f2].score < r2[c2].score && (e4 = f2), r2[e4 - 1 >> 1] = r2[e4], c2 = 1 + (e4 << 1);
+    };
+    var INT_MAX = Infinity;
+    var INT_MIN = -INT_MAX;
+    var noResults = [];
+    noResults.total = 0;
+    var NULL = null;
+    var fastpriorityqueue = (r2) => {
+      var e3 = [], o = 0, a2 = {}, v2 = (r3) => {
+        for (var a3 = 0, v3 = e3[a3], c2 = 1; c2 < o; ) {
+          var s = c2 + 1;
+          a3 = c2, s < o && e3[s].score < e3[c2].score && (a3 = s), e3[a3 - 1 >> 1] = e3[a3], c2 = 1 + (a3 << 1);
         }
-        for (var a2 = e4 - 1 >> 1; e4 > 0 && n3.score < r2[a2].score; a2 = (e4 = a2) - 1 >> 1)
-          r2[e4] = r2[a2];
-        r2[e4] = n3;
-      }
-      return e3.add = function(e4) {
-        var n3 = o;
-        r2[o++] = e4;
-        for (var c2 = n3 - 1 >> 1; n3 > 0 && e4.score < r2[c2].score; c2 = (n3 = c2) - 1 >> 1)
-          r2[n3] = r2[c2];
-        r2[n3] = e4;
-      }, e3.poll = function() {
+        for (var f2 = a3 - 1 >> 1; a3 > 0 && v3.score < e3[f2].score; f2 = (a3 = f2) - 1 >> 1)
+          e3[a3] = e3[f2];
+        e3[a3] = v3;
+      };
+      return a2.add = (r3) => {
+        var a3 = o;
+        e3[o++] = r3;
+        for (var v3 = a3 - 1 >> 1; a3 > 0 && r3.score < e3[v3].score; v3 = (a3 = v3) - 1 >> 1)
+          e3[a3] = e3[v3];
+        e3[a3] = r3;
+      }, a2.poll = (r3) => {
         if (0 !== o) {
-          var e4 = r2[0];
-          return r2[0] = r2[--o], n2(), e4;
+          var a3 = e3[0];
+          return e3[0] = e3[--o], v2(), a3;
         }
-      }, e3.peek = function(e4) {
+      }, a2.peek = (r3) => {
         if (0 !== o)
-          return r2[0];
-      }, e3.replaceTop = function(o2) {
-        r2[0] = o2, n2();
-      }, e3;
+          return e3[0];
+      }, a2.replaceTop = (r3) => {
+        e3[0] = r3, v2();
+      }, a2;
     };
     var q2 = fastpriorityqueue();
-    return fuzzysortNew();
+    return { "single": single, "go": go2, "highlight": highlight, "prepare": prepare2, "indexes": indexes, "cleanup": cleanup };
   });
 })(fuzzysort$1);
 const fuzzysort = fuzzysortExports;
@@ -20257,7 +20308,7 @@ async function logEvent(name, argument) {
       event
     });
   } else {
-    const { useEventsStore } = await __vitePreload(() => import("./events-00b312e8.js"), true ? ["assets/events-00b312e8.js","assets/story-f6665c5c.js","assets/config-58fadf80.js"] : void 0);
+    const { useEventsStore } = await __vitePreload(() => import("./events-6240ab2f.js"), true ? ["assets/events-6240ab2f.js","assets/story-582bb2d8.js","assets/config-58fadf80.js"] : void 0);
     useEventsStore().addEvent(event);
   }
 }
@@ -21254,20 +21305,20 @@ const send = (host, params, callback) => {
     callback("abort", 424);
     return;
   }
-  let path2 = getPath(params.provider);
+  let path = getPath(params.provider);
   switch (params.type) {
     case "icons": {
       const prefix = params.prefix;
       const icons = params.icons;
       const iconsList = icons.join(",");
-      path2 += mergeParams(prefix + ".json", {
+      path += mergeParams(prefix + ".json", {
         icons: iconsList
       });
       break;
     }
     case "custom": {
       const uri = params.uri;
-      path2 += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
+      path += uri.slice(0, 1) === "/" ? uri.slice(1) : uri;
       break;
     }
     default:
@@ -21275,7 +21326,7 @@ const send = (host, params, callback) => {
       return;
   }
   let defaultError = 503;
-  fetchModule(host + path2).then((response) => {
+  fetchModule(host + path).then((response) => {
     const status = response.status;
     if (status !== 200) {
       setTimeout(() => {
@@ -22376,27 +22427,27 @@ function warn(msg) {
   console.warn.apply(console, ["[Vue Router warn]: " + msg].concat(args));
 }
 const TRAILING_SLASH_RE = /\/$/;
-const removeTrailingSlash = (path2) => path2.replace(TRAILING_SLASH_RE, "");
+const removeTrailingSlash = (path) => path.replace(TRAILING_SLASH_RE, "");
 function parseURL(parseQuery2, location2, currentLocation = "/") {
-  let path2, query = {}, searchString = "", hash2 = "";
+  let path, query = {}, searchString = "", hash2 = "";
   const hashPos = location2.indexOf("#");
   let searchPos = location2.indexOf("?");
   if (hashPos < searchPos && hashPos >= 0) {
     searchPos = -1;
   }
   if (searchPos > -1) {
-    path2 = location2.slice(0, searchPos);
+    path = location2.slice(0, searchPos);
     searchString = location2.slice(searchPos + 1, hashPos > -1 ? hashPos : location2.length);
     query = parseQuery2(searchString);
   }
   if (hashPos > -1) {
-    path2 = path2 || location2.slice(0, hashPos);
+    path = path || location2.slice(0, hashPos);
     hash2 = location2.slice(hashPos, location2.length);
   }
-  path2 = resolveRelativePath(path2 != null ? path2 : location2, currentLocation);
+  path = resolveRelativePath(path != null ? path : location2, currentLocation);
   return {
-    fullPath: path2 + (searchString && "?") + searchString + hash2,
-    path: path2,
+    fullPath: path + (searchString && "?") + searchString + hash2,
+    path,
     query,
     hash: hash2
   };
@@ -22535,9 +22586,9 @@ function scrollToPosition(position) {
     window.scrollTo(scrollToOptions.left != null ? scrollToOptions.left : window.pageXOffset, scrollToOptions.top != null ? scrollToOptions.top : window.pageYOffset);
   }
 }
-function getScrollKey(path2, delta) {
+function getScrollKey(path, delta) {
   const position = history.state ? history.state.position - delta : -1;
-  return position + path2;
+  return position + path;
 }
 const scrollPositions = /* @__PURE__ */ new Map();
 function saveScrollPosition(key, scrollPosition) {
@@ -22559,8 +22610,8 @@ function createCurrentLocation(base, location2) {
       pathFromHash = "/" + pathFromHash;
     return stripBase(pathFromHash, "");
   }
-  const path2 = stripBase(pathname, base);
-  return path2 + search + hash2;
+  const path = stripBase(pathname, base);
+  return path + search + hash2;
 }
 function useHistoryListeners(base, historyState, currentLocation, replace) {
   let listeners = [];
@@ -22873,8 +22924,8 @@ function tokensToParser(segments, extraOptions) {
   else if (options.strict)
     pattern += "(?:/|$)";
   const re2 = new RegExp(pattern, options.sensitive ? "" : "i");
-  function parse2(path2) {
-    const match = path2.match(re2);
+  function parse2(path) {
+    const match = path.match(re2);
     const params = {};
     if (!match)
       return null;
@@ -22886,15 +22937,15 @@ function tokensToParser(segments, extraOptions) {
     return params;
   }
   function stringify(params) {
-    let path2 = "";
+    let path = "";
     let avoidDuplicatedSlash = false;
     for (const segment of segments) {
-      if (!avoidDuplicatedSlash || !path2.endsWith("/"))
-        path2 += "/";
+      if (!avoidDuplicatedSlash || !path.endsWith("/"))
+        path += "/";
       avoidDuplicatedSlash = false;
       for (const token of segment) {
         if (token.type === 0) {
-          path2 += token.value;
+          path += token.value;
         } else if (token.type === 1) {
           const { value, repeatable, optional } = token;
           const param = value in params ? params[value] : "";
@@ -22905,19 +22956,19 @@ function tokensToParser(segments, extraOptions) {
           if (!text2) {
             if (optional) {
               if (segment.length < 2) {
-                if (path2.endsWith("/"))
-                  path2 = path2.slice(0, -1);
+                if (path.endsWith("/"))
+                  path = path.slice(0, -1);
                 else
                   avoidDuplicatedSlash = true;
               }
             } else
               throw new Error(`Missing required param "${value}"`);
           }
-          path2 += text2;
+          path += text2;
         }
       }
     }
-    return path2 || "/";
+    return path || "/";
   }
   return {
     re: re2,
@@ -22969,14 +23020,14 @@ const ROOT_TOKEN = {
   value: ""
 };
 const VALID_PARAM_RE = /[a-zA-Z0-9_]/;
-function tokenizePath(path2) {
-  if (!path2)
+function tokenizePath(path) {
+  if (!path)
     return [[]];
-  if (path2 === "/")
+  if (path === "/")
     return [[ROOT_TOKEN]];
-  if (!path2.startsWith("/")) {
+  if (!path.startsWith("/")) {
     throw new Error(
-      `Route paths should start with a "/": "${path2}" should be "/${path2}".`
+      `Route paths should start with a "/": "${path}" should be "/${path}".`
     );
   }
   function crash(message) {
@@ -23021,8 +23072,8 @@ function tokenizePath(path2) {
   function addCharToBuffer() {
     buffer2 += char;
   }
-  while (i2 < path2.length) {
-    char = path2[i2++];
+  while (i2 < path.length) {
+    char = path[i2++];
     if (char === "\\" && state !== 2) {
       previousState = state;
       state = 4;
@@ -23139,17 +23190,17 @@ function createRouterMatcher(routes, globalOptions) {
     let matcher;
     let originalMatcher;
     for (const normalizedRecord of normalizedRecords) {
-      const { path: path2 } = normalizedRecord;
-      if (parent && path2[0] !== "/") {
+      const { path } = normalizedRecord;
+      if (parent && path[0] !== "/") {
         const parentPath = parent.record.path;
         const connectingSlash = parentPath[parentPath.length - 1] === "/" ? "" : "/";
-        normalizedRecord.path = parent.record.path + (path2 && connectingSlash + path2);
+        normalizedRecord.path = parent.record.path + (path && connectingSlash + path);
       }
       if (normalizedRecord.path === "*") {
         throw new Error('Catch all routes ("*") must now be defined using a param with a custom regexp.\nSee more at https://next.router.vuejs.org/guide/migration/#removed-star-or-catch-all-routes.');
       }
       matcher = createRouteRecordMatcher(normalizedRecord, parent, options);
-      if (parent && path2[0] === "/")
+      if (parent && path[0] === "/")
         checkMissingParamsInAbsolutePath(matcher, parent);
       if (originalRecord) {
         originalRecord.alias.push(matcher);
@@ -23212,7 +23263,7 @@ function createRouterMatcher(routes, globalOptions) {
   function resolve2(location2, currentLocation) {
     let matcher;
     let params = {};
-    let path2;
+    let path;
     let name;
     if ("name" in location2 && location2.name) {
       matcher = matcherMap.get(location2.name);
@@ -23234,15 +23285,15 @@ function createRouterMatcher(routes, globalOptions) {
         ),
         location2.params && paramsFromLocation(location2.params, matcher.keys.map((k2) => k2.name))
       );
-      path2 = matcher.stringify(params);
+      path = matcher.stringify(params);
     } else if ("path" in location2) {
-      path2 = location2.path;
-      if (!path2.startsWith("/")) {
-        warn(`The Matcher cannot resolve relative paths but received "${path2}". Unless you directly called \`matcher.resolve("${path2}")\`, this is probably a bug in vue-router. Please open an issue at https://new-issue.vuejs.org/?repo=vuejs/router.`);
+      path = location2.path;
+      if (!path.startsWith("/")) {
+        warn(`The Matcher cannot resolve relative paths but received "${path}". Unless you directly called \`matcher.resolve("${path}")\`, this is probably a bug in vue-router. Please open an issue at https://new-issue.vuejs.org/?repo=vuejs/router.`);
       }
-      matcher = matchers.find((m2) => m2.re.test(path2));
+      matcher = matchers.find((m2) => m2.re.test(path));
       if (matcher) {
-        params = matcher.parse(path2);
+        params = matcher.parse(path);
         name = matcher.record.name;
       }
     } else {
@@ -23254,7 +23305,7 @@ function createRouterMatcher(routes, globalOptions) {
         });
       name = matcher.record.name;
       params = assign({}, currentLocation.params, location2.params);
-      path2 = matcher.stringify(params);
+      path = matcher.stringify(params);
     }
     const matched = [];
     let parentMatcher = matcher;
@@ -23264,7 +23315,7 @@ function createRouterMatcher(routes, globalOptions) {
     }
     return {
       name,
-      path: path2,
+      path,
       params,
       matched,
       meta: mergeMetaFields(matched)
@@ -24171,11 +24222,11 @@ function isRouteMatching(route, filter) {
     }
     return false;
   }
-  const path2 = route.record.path.toLowerCase();
-  const decodedPath = decode(path2);
-  if (!filter.startsWith("/") && (decodedPath.includes(filter) || path2.includes(filter)))
+  const path = route.record.path.toLowerCase();
+  const decodedPath = decode(path);
+  if (!filter.startsWith("/") && (decodedPath.includes(filter) || path.includes(filter)))
     return true;
-  if (decodedPath.startsWith(filter) || path2.startsWith(filter))
+  if (decodedPath.startsWith(filter) || path.startsWith(filter))
     return true;
   if (route.record.name && String(route.record.name).includes(filter))
     return true;
@@ -25055,8 +25106,8 @@ function onClickOutside(target, handler, options = {}) {
     }, { passive: true }),
     useEventListener(window2, "pointerup", (e3) => {
       if (e3.button === 0) {
-        const path2 = e3.composedPath();
-        e3.composedPath = () => path2;
+        const path = e3.composedPath();
+        e3.composedPath = () => path;
         fallback = window2.setTimeout(() => listener(e3), 50);
       }
     }, { passive: true }),
@@ -42038,9 +42089,9 @@ function _resolvePath(filepath) {
   }
 }
 async function _fetchAssets(filepath) {
-  const path2 = _resolvePath(filepath);
+  const path = _resolvePath(filepath);
   {
-    return await (globalThis.__shiki_fetch__ || globalThis.fetch)(path2).then((r2) => r2.text());
+    return await (globalThis.__shiki_fetch__ || globalThis.fetch)(path).then((r2) => r2.text());
   }
 }
 async function _fetchJSONAssets(filepath) {
@@ -43961,7 +44012,7 @@ function W(i2) {
   return { c() {
     t2 = element("div"), r2 = text(o);
   }, m(a2, n2) {
-    insert(a2, t2, n2), append(t2, r2), i2[3](t2);
+    insert(a2, t2, n2), append$1(t2, r2), i2[3](t2);
   }, p(a2, [n2]) {
     n2 & 1 && o !== (o = a2[0].name + "") && set_data(r2, o);
   }, i: noop$2, o: noop$2, d(a2) {

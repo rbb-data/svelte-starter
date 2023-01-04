@@ -1,4 +1,4 @@
-import { bl as useDark, bm as useToggle, k as watch, _ as __vitePreload } from "./vendor-4822719a.js";
+import { bl as useDark, bm as useToggle, k as watch, _ as __vitePreload } from "./vendor-7db0712c.js";
 const isDark = useDark({ valueDark: "htw-dark" });
 const toggleDark = useToggle(isDark);
 function applyDarkToControls() {
@@ -16,8 +16,8 @@ window.__hst_controls_dark_ready = () => {
   applyDarkToControls();
 };
 const clientSupportPlugins = {
-  "vanilla": () => __vitePreload(() => import("./vendor-4822719a.js").then((n) => n.bT), true ? [] : void 0),
-  "svelte3": () => __vitePreload(() => import("./vendor-4822719a.js").then((n) => n.bU), true ? [] : void 0)
+  "vanilla": () => __vitePreload(() => import("./vendor-7db0712c.js").then((n) => n.bT), true ? [] : void 0),
+  "svelte3": () => __vitePreload(() => import("./vendor-7db0712c.js").then((n) => n.bU), true ? [] : void 0)
 };
 export {
   clientSupportPlugins as c,

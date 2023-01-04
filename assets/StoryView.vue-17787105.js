@@ -17,14 +17,14 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { b as useRoute, c as computed, d as defineComponent, u as useCssVars, a as unref, bt as toRefs, r as ref, o as openBlock, e as createElementBlock, f as createVNode, w as withCtx, I as Icon, n as normalizeClass, g as createBaseVNode, t as toDisplayString, i as defineStore, j as useStorage, x as resolveDirective, y as withDirectives, bu as useRouter, bv as useResizeObserver, l as resolveComponent, q as createBlock, h as createCommentVNode, G as normalizeStyle, bj as withModifiers, A as pushScopeId, B as popScopeId, k as watch, bg as renderSlot, m as withKeys, z as createTextVNode, F as Fragment, p as renderList, J as onMounted, bw as vModelText, bi as onUnmounted, bx as VTooltip, by as createStaticVNode, s as useEventListener, br as SANDBOX_READY, bz as EVENT_SEND, bo as STATE_SYNC, bs as applyState, bp as PREVIEW_SETTINGS_SYNC, bA as toRaw, be as mergeProps, bB as Dropdown, bC as clone, bD as omit, bE as useTimeoutFn, bF as onClickOutside, v as isRef, bG as nextTick, bH as Qg, bI as Ig, bJ as Fg, bK as $g, bf as resolveDynamicComponent, E as reactive, _ as __vitePreload, bd as watchEffect, bc as markRaw, bL as shallowRef, bM as unindent, bN as getHighlighter, bO as Gg, T as Transition, bq as h, bP as onBeforeUnmount } from "./vendor-4822719a.js";
-import { b as base, u as useStoryStore } from "./story-f6665c5c.js";
-import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, i as isMobile, b as BaseSplitPane, a as _sfc_main$y } from "./MobileOverlay.vue2-a4b6535a.js";
-import { B as BaseEmpty } from "./BaseEmpty.vue-cd0f2057.js";
-import { g as getContrastColor, _ as _sfc_main$x, t as toRawDeep } from "./state-9266783e.js";
+import { b as useRoute, c as computed, d as defineComponent, u as useCssVars, a as unref, bt as toRefs, r as ref, o as openBlock, e as createElementBlock, f as createVNode, w as withCtx, I as Icon, n as normalizeClass, g as createBaseVNode, t as toDisplayString, i as defineStore, j as useStorage, x as resolveDirective, y as withDirectives, bu as useRouter, bv as useResizeObserver, l as resolveComponent, q as createBlock, h as createCommentVNode, G as normalizeStyle, bj as withModifiers, A as pushScopeId, B as popScopeId, k as watch, bg as renderSlot, m as withKeys, z as createTextVNode, F as Fragment, p as renderList, J as onMounted, bw as vModelText, bi as onUnmounted, bx as VTooltip, by as createStaticVNode, s as useEventListener, br as SANDBOX_READY, bz as EVENT_SEND, bo as STATE_SYNC, bs as applyState, bp as PREVIEW_SETTINGS_SYNC, bA as toRaw, be as mergeProps, bB as Dropdown, bC as clone, bD as omit, bE as useTimeoutFn, bF as onClickOutside, v as isRef, bG as nextTick, bH as Qg, bI as Ig, bJ as Fg, bK as $g, bf as resolveDynamicComponent, E as reactive, _ as __vitePreload, bd as watchEffect, bc as markRaw, bL as shallowRef, bM as unindent, bN as getHighlighter, bO as Gg, T as Transition, bq as h, bP as onBeforeUnmount } from "./vendor-7db0712c.js";
+import { b as base, u as useStoryStore } from "./story-582bb2d8.js";
+import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, i as isMobile, b as BaseSplitPane, a as _sfc_main$y } from "./MobileOverlay.vue2-275313ce.js";
+import { B as BaseEmpty } from "./BaseEmpty.vue-5d907a0c.js";
+import { g as getContrastColor, _ as _sfc_main$x, t as toRawDeep } from "./state-e239ba4f.js";
 import { h as histoireConfig } from "./config-58fadf80.js";
-import { i as isDark, c as clientSupportPlugins } from "./__resolved__virtual__histoire-support-plugins-client-5e433a7f.js";
-import { useEventsStore } from "./events-00b312e8.js";
+import { i as isDark, c as clientSupportPlugins } from "./__resolved__virtual__histoire-support-plugins-client-556e6aec.js";
+import { useEventsStore } from "./events-6240ab2f.js";
 function useCurrentVariantRoute(variant) {
   const route = useRoute();
   const isActive = computed(() => route.query.variantId === variant.value.id);

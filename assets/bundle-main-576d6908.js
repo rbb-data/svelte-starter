@@ -17,11 +17,11 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { d as defineComponent, u as useCssVars, a as unref, c as computed, b as useRoute, r as ref, o as openBlock, e as createElementBlock, f as createVNode, w as withCtx, g as createBaseVNode, I as Icon, n as normalizeClass, t as toDisplayString, h as createCommentVNode, i as defineStore, j as useStorage, k as watch, l as resolveComponent, m as withKeys, F as Fragment, p as renderList, q as createBlock, s as useEventListener, v as isRef, x as resolveDirective, y as withDirectives, z as createTextVNode, A as pushScopeId, B as popScopeId, C as defineAsyncComponent, D as vShow, _ as __vitePreload, E as reactive, G as normalizeStyle, T as Transition, H as useTitle, J as onMounted, K as createApp, L as createPinia, M as plugin } from "./vendor-4822719a.js";
-import { f as files, m as mapFile, t as tree, _ as _sfc_main$c } from "./GenericMountStory.vue2-b5501df9.js";
-import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, a as _sfc_main$b, i as isMobile, b as BaseSplitPane } from "./MobileOverlay.vue2-a4b6535a.js";
-import { u as useStoryStore, r as router } from "./story-f6665c5c.js";
-import { i as isDark, t as toggleDark } from "./__resolved__virtual__histoire-support-plugins-client-5e433a7f.js";
+import { d as defineComponent, u as useCssVars, a as unref, c as computed, b as useRoute, r as ref, o as openBlock, e as createElementBlock, f as createVNode, w as withCtx, g as createBaseVNode, I as Icon, n as normalizeClass, t as toDisplayString, h as createCommentVNode, i as defineStore, j as useStorage, k as watch, l as resolveComponent, m as withKeys, F as Fragment, p as renderList, q as createBlock, s as useEventListener, v as isRef, x as resolveDirective, y as withDirectives, z as createTextVNode, A as pushScopeId, B as popScopeId, C as defineAsyncComponent, D as vShow, _ as __vitePreload, E as reactive, G as normalizeStyle, T as Transition, H as useTitle, J as onMounted, K as createApp, L as createPinia, M as plugin } from "./vendor-7db0712c.js";
+import { f as files, m as mapFile, t as tree, _ as _sfc_main$c } from "./GenericMountStory.vue2-8e2fd5a7.js";
+import { u as useScrollOnActive, B as BaseListItemLink, _ as _export_sfc, a as _sfc_main$b, i as isMobile, b as BaseSplitPane } from "./MobileOverlay.vue2-275313ce.js";
+import { u as useStoryStore, r as router } from "./story-582bb2d8.js";
+import { i as isDark, t as toggleDark } from "./__resolved__virtual__histoire-support-plugins-client-556e6aec.js";
 import { h as histoireConfig, c as customLogos } from "./config-58fadf80.js";
 const style$1 = "";
 const style = "";
@@ -607,7 +607,7 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   },
   setup(__props, { emit }) {
     const SearchPane = defineAsyncComponent({
-      loader: () => __vitePreload(() => import("./SearchPane.vue-e2d6cba3.js"), true ? ["assets/SearchPane.vue-e2d6cba3.js","assets/vendor-4822719a.js","assets/story-f6665c5c.js","assets/config-58fadf80.js","assets/BaseEmpty.vue-cd0f2057.js","assets/MobileOverlay.vue2-a4b6535a.js","assets/GenericMountStory.vue2-b5501df9.js","assets/__resolved__virtual__histoire-support-plugins-client-5e433a7f.js"] : void 0),
+      loader: () => __vitePreload(() => import("./SearchPane.vue-29def568.js"), true ? ["assets/SearchPane.vue-29def568.js","assets/vendor-7db0712c.js","assets/story-582bb2d8.js","assets/config-58fadf80.js","assets/BaseEmpty.vue-5d907a0c.js","assets/MobileOverlay.vue2-275313ce.js","assets/GenericMountStory.vue2-8e2fd5a7.js","assets/__resolved__virtual__histoire-support-plugins-client-556e6aec.js"] : void 0),
       loadingComponent: _sfc_main$3,
       delay: 0
     });

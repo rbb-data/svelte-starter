@@ -17,8 +17,8 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { c as clientSupportPlugins } from "./__resolved__virtual__histoire-support-plugins-client-5e433a7f.js";
-import { d as defineComponent, r as ref, bd as watchEffect, o as openBlock, q as createBlock, be as mergeProps, bf as resolveDynamicComponent, h as createCommentVNode, bc as markRaw, E as reactive, v as isRef, a as unref } from "./vendor-4822719a.js";
+import { c as clientSupportPlugins } from "./__resolved__virtual__histoire-support-plugins-client-556e6aec.js";
+import { d as defineComponent, r as ref, bd as watchEffect, o as openBlock, q as createBlock, be as mergeProps, bf as resolveDynamicComponent, h as createCommentVNode, bc as markRaw, E as reactive, v as isRef, a as unref } from "./vendor-7db0712c.js";
 import { h as histoireConfig } from "./config-58fadf80.js";
 const __default__ = {
   inheritAttrs: false

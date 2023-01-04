@@ -3,10 +3,10 @@
     "file": "assets/rbb24-square-0d9f15b6.png",
     "src": "static/rbb24-square.png"
   },
-  "_story-f6665c5c.js": {
-    "file": "assets/story-f6665c5c.js",
+  "_story-582bb2d8.js": {
+    "file": "assets/story-582bb2d8.js",
     "imports": [
-      "_vendor-4822719a.js",
+      "_vendor-7db0712c.js",
       "_config-58fadf80.js"
     ],
     "dynamicImports": [
@@ -14,65 +14,47 @@
       "node_modules/@histoire/app/dist/bundled/components/story/StoryView.vue.js"
     ]
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-arrow-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-arrow-story-svelte-26ed22d5.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-arrow-story-svelte",
+  "node_modules/@histoire/app/dist/bundle-main.js": {
+    "file": "assets/bundle-main-576d6908.js",
+    "src": "node_modules/@histoire/app/dist/bundle-main.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-7db0712c.js",
+      "_GenericMountStory.vue2-8e2fd5a7.js",
+      "_MobileOverlay.vue2-275313ce.js",
+      "_story-582bb2d8.js",
+      "___resolved__virtual__histoire-support-plugins-client-556e6aec.js",
+      "_config-58fadf80.js"
+    ],
+    "dynamicImports": [
+      "node_modules/@histoire/app/dist/bundled/components/search/SearchPane.vue.js"
+    ]
+  },
+  "node_modules/@histoire/app/dist/bundled/components/HomeView.vue.js": {
+    "file": "assets/HomeView.vue-4b0e1f96.js",
+    "src": "node_modules/@histoire/app/dist/bundled/components/HomeView.vue.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_config-58fadf80.js",
+      "_vendor-7db0712c.js"
+    ]
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-svgtext-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-svgtext-story-svelte-3d5a67e4.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-svgtext-story-svelte",
     "isDynamicEntry": true
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartlegend-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-chartlegend-story-svelte-6886e6b5.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartlegend-story-svelte",
-    "isDynamicEntry": true
+  "_MobileOverlay.vue2-275313ce.js": {
+    "file": "assets/MobileOverlay.vue2-275313ce.js",
+    "imports": [
+      "_vendor-7db0712c.js"
+    ]
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay0-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-areay0-story-svelte-0ce9883e.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay0-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:md:src-lib-components-layercake-arrow-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-layercake-arrow-story-md-7a2e9268.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-layercake-arrow-story-md",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:md:src-lib-components-shared-button-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-shared-button-story-md-08144fec.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-button-story-md",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-introduction-story-js": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-introduction-story-js-9a92e9e8.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-introduction-story-js",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabelx-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axislabelx-story-svelte-f27dd0b3.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabelx-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabely-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axislabely-story-svelte-f9ab2a1a.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabely-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisx-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axisx-story-svelte-101b8f6c.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisx-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisy-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axisy-story-svelte-e14ac09f.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisy-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barh-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-barh-story-svelte-ebc8334f.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barh-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barv-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-barv-story-svelte-12f06cdc.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barv-story-svelte",
-    "isDynamicEntry": true
+  "_config-58fadf80.js": {
+    "file": "assets/config-58fadf80.js",
+    "assets": [
+      "assets/rbb24-square-0d9f15b6.png"
+    ]
   },
   "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-circle-story-svelte": {
     "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-circle-story-svelte-07edbf3e.js",
@@ -84,19 +66,123 @@
     "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-group-story-svelte",
     "isDynamicEntry": true
   },
+  "___resolved__virtual__histoire-support-plugins-client-556e6aec.js": {
+    "file": "assets/__resolved__virtual__histoire-support-plugins-client-556e6aec.js",
+    "imports": [
+      "_vendor-7db0712c.js"
+    ],
+    "dynamicImports": [
+      "_vendor-7db0712c.js",
+      "_vendor-7db0712c.js"
+    ]
+  },
+  "_BaseEmpty.vue-5d907a0c.js": {
+    "file": "assets/BaseEmpty.vue-5d907a0c.js",
+    "imports": [
+      "_MobileOverlay.vue2-275313ce.js",
+      "_vendor-7db0712c.js"
+    ]
+  },
+  "node_modules/@histoire/app/dist/bundle-sandbox.js": {
+    "file": "assets/bundle-sandbox-8337cbbd.js",
+    "src": "node_modules/@histoire/app/dist/bundle-sandbox.js",
+    "isEntry": true,
+    "imports": [
+      "_vendor-7db0712c.js",
+      "_GenericMountStory.vue2-8e2fd5a7.js",
+      "_state-e239ba4f.js",
+      "___resolved__virtual__histoire-support-plugins-client-556e6aec.js",
+      "_config-58fadf80.js"
+    ]
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-linev-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-linev-story-svelte-94aa852c.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-linev-story-svelte",
+    "isDynamicEntry": true
+  },
+  "node_modules/@histoire/app/dist/bundled/stores/events.js": {
+    "file": "assets/events-6240ab2f.js",
+    "src": "node_modules/@histoire/app/dist/bundled/stores/events.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-7db0712c.js",
+      "_story-582bb2d8.js",
+      "_config-58fadf80.js"
+    ]
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-path-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-path-story-svelte-db38142c.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-path-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-areay-story-svelte-7efbbe18.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay-story-svelte",
+    "isDynamicEntry": true
+  },
   "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-htmltext-story-svelte": {
     "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-htmltext-story-svelte-c5b12835.js",
     "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-htmltext-story-svelte",
     "isDynamicEntry": true
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-line-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-line-story-svelte-2a6a2030.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-line-story-svelte",
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay0-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-areay0-story-svelte-0ce9883e.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay0-story-svelte",
     "isDynamicEntry": true
   },
-  "../../../../../__resolved__virtual:md:src-lib-components-shared-chartlegend-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-shared-chartlegend-story-md-4190b7f5.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-chartlegend-story-md",
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabely-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axislabely-story-svelte-f9ab2a1a.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabely-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-recth-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-recth-story-svelte-0d99fb8d.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-recth-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabelx-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axislabelx-story-svelte-f27dd0b3.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axislabelx-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisx-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axisx-story-svelte-101b8f6c.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisx-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-arrow-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-arrow-story-svelte-26ed22d5.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-arrow-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-search-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-search-story-svelte-c81dd885.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-search-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-lineh-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-lineh-story-svelte-74570fb6.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-lineh-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-button-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-button-story-svelte-24c3bae7.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-button-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartfooter-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-chartfooter-story-svelte-ea92a1b2.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartfooter-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartheader-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-chartheader-story-svelte-c27b0f71.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartheader-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-table-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-table-story-svelte-d3f378a6.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-table-story-svelte",
     "isDynamicEntry": true
   },
   "../../../../../__resolved__virtual:md:src-lib-components-shared-dropdown-story-md": {
@@ -104,19 +190,9 @@
     "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-dropdown-story-md",
     "isDynamicEntry": true
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-svgtext-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-svgtext-story-svelte-3d5a67e4.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-svgtext-story-svelte",
-    "isDynamicEntry": true
-  },
   "../../../../../__resolved__virtual:md:src-lib-components-shared-radiobuttons-story-md": {
     "file": "assets/__resolved__virtual_md_src-lib-components-shared-radiobuttons-story-md-7cda79bd.js",
     "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-radiobuttons-story-md",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartfooter-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-chartfooter-story-svelte-ea92a1b2.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartfooter-story-svelte",
     "isDynamicEntry": true
   },
   "../../../../../__resolved__virtual:md:src-lib-components-shared-search-story-md": {
@@ -129,206 +205,9 @@
     "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-select-story-md",
     "isDynamicEntry": true
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-dropdown-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-dropdown-story-svelte-b767d8a2.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-dropdown-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:md:src-lib-components-shared-slant-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-shared-slant-story-md-f7acfe79.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-slant-story-md",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-radiobuttons-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-radiobuttons-story-svelte-9196e3e0.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-radiobuttons-story-svelte",
-    "isDynamicEntry": true
-  },
   "../../../../../__resolved__virtual:md:src-lib-components-shared-tabpanels-story-md": {
     "file": "assets/__resolved__virtual_md_src-lib-components-shared-tabpanels-story-md-bd6ee317.js",
     "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-tabpanels-story-md",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-search-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-search-story-svelte-c81dd885.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-search-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-select-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-select-story-svelte-dfd0f1ad.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-select-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-slant-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-slant-story-svelte-460cb209.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-slant-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabpanels-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-tabpanels-story-svelte-b065f237.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabpanels-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-table-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-table-story-svelte-d3f378a6.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-table-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:md:src-lib-components-shared-chartfooter-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-shared-chartfooter-story-md-1aac4260.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-chartfooter-story-md",
-    "isDynamicEntry": true
-  },
-  "node_modules/@histoire/app/dist/bundle-main.js": {
-    "file": "assets/bundle-main-9589cd9a.js",
-    "src": "node_modules/@histoire/app/dist/bundle-main.js",
-    "isEntry": true,
-    "imports": [
-      "_vendor-4822719a.js",
-      "_GenericMountStory.vue2-b5501df9.js",
-      "_MobileOverlay.vue2-a4b6535a.js",
-      "_story-f6665c5c.js",
-      "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js",
-      "_config-58fadf80.js"
-    ],
-    "dynamicImports": [
-      "node_modules/@histoire/app/dist/bundled/components/search/SearchPane.vue.js"
-    ]
-  },
-  "_config-58fadf80.js": {
-    "file": "assets/config-58fadf80.js",
-    "assets": [
-      "assets/rbb24-square-0d9f15b6.png"
-    ]
-  },
-  "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js": {
-    "file": "assets/__resolved__virtual__histoire-support-plugins-client-5e433a7f.js",
-    "imports": [
-      "_vendor-4822719a.js"
-    ],
-    "dynamicImports": [
-      "_vendor-4822719a.js",
-      "_vendor-4822719a.js"
-    ]
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-areay-story-svelte-7efbbe18.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-button-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-button-story-svelte-24c3bae7.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-button-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabs-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-tabs-story-svelte-69595f37.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabs-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-lineh-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-lineh-story-svelte-74570fb6.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-lineh-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-linev-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-linev-story-svelte-94aa852c.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-linev-story-svelte",
-    "isDynamicEntry": true
-  },
-  "node_modules/@histoire/app/dist/bundle-sandbox.js": {
-    "file": "assets/bundle-sandbox-67c05d53.js",
-    "src": "node_modules/@histoire/app/dist/bundle-sandbox.js",
-    "isEntry": true,
-    "imports": [
-      "_vendor-4822719a.js",
-      "_GenericMountStory.vue2-b5501df9.js",
-      "_state-9266783e.js",
-      "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js",
-      "_config-58fadf80.js"
-    ]
-  },
-  "node_modules/@histoire/app/dist/bundled/stores/events.js": {
-    "file": "assets/events-00b312e8.js",
-    "src": "node_modules/@histoire/app/dist/bundled/stores/events.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-4822719a.js",
-      "_story-f6665c5c.js",
-      "_config-58fadf80.js"
-    ]
-  },
-  "_state-9266783e.js": {
-    "file": "assets/state-9266783e.js",
-    "imports": [
-      "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js",
-      "_vendor-4822719a.js",
-      "_config-58fadf80.js"
-    ]
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartheader-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-chartheader-story-svelte-c27b0f71.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartheader-story-svelte",
-    "isDynamicEntry": true
-  },
-  "node_modules/@histoire/app/dist/bundled/components/HomeView.vue.js": {
-    "file": "assets/HomeView.vue-aa814963.js",
-    "src": "node_modules/@histoire/app/dist/bundled/components/HomeView.vue.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "_config-58fadf80.js",
-      "_vendor-4822719a.js"
-    ]
-  },
-  "_BaseEmpty.vue-cd0f2057.js": {
-    "file": "assets/BaseEmpty.vue-cd0f2057.js",
-    "imports": [
-      "_MobileOverlay.vue2-a4b6535a.js",
-      "_vendor-4822719a.js"
-    ]
-  },
-  "_MobileOverlay.vue2-a4b6535a.js": {
-    "file": "assets/MobileOverlay.vue2-a4b6535a.js",
-    "imports": [
-      "_vendor-4822719a.js"
-    ]
-  },
-  "../../../../../__resolved__virtual:md:src-lib-components-shared-chartheader-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-shared-chartheader-story-md-488bddd6.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-chartheader-story-md",
-    "isDynamicEntry": true
-  },
-  "node_modules/@histoire/app/dist/bundled/components/search/SearchPane.vue.js": {
-    "file": "assets/SearchPane.vue-e2d6cba3.js",
-    "src": "node_modules/@histoire/app/dist/bundled/components/search/SearchPane.vue.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-4822719a.js",
-      "_story-f6665c5c.js",
-      "_BaseEmpty.vue-cd0f2057.js",
-      "node_modules/@histoire/app/dist/bundle-main.js",
-      "_MobileOverlay.vue2-a4b6535a.js",
-      "_config-58fadf80.js",
-      "_GenericMountStory.vue2-b5501df9.js",
-      "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js"
-    ],
-    "dynamicImports": [
-      "node_modules/@histoire/app/dist/bundled/components/search/search-docs-data.js"
-    ]
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-path-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-path-story-svelte-db38142c.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-path-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-rectv-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-rectv-story-svelte-8e1c3ef5.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-rectv-story-svelte",
-    "isDynamicEntry": true
-  },
-  "../../../../../__resolved__virtual:md:src-lib-components-introduction-story-md": {
-    "file": "assets/__resolved__virtual_md_src-lib-components-introduction-story-md-72089961.js",
-    "src": "../../../../../__resolved__virtual:md:src-lib-components-introduction-story-md",
     "isDynamicEntry": true
   },
   "../../../../../__resolved__virtual:md:src-lib-components-shared-tabs-story-md": {
@@ -336,36 +215,38 @@
     "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-tabs-story-md",
     "isDynamicEntry": true
   },
-  "node_modules/@histoire/app/dist/bundled/components/search/search-docs-data.js": {
-    "file": "assets/search-docs-data-b805e213.js",
-    "src": "node_modules/@histoire/app/dist/bundled/components/search/search-docs-data.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "_vendor-4822719a.js"
-    ]
-  },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-recth-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-recth-story-svelte-0d99fb8d.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-recth-story-svelte",
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-select-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-select-story-svelte-dfd0f1ad.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-select-story-svelte",
     "isDynamicEntry": true
   },
-  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-checkboxes-story-svelte": {
-    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-checkboxes-story-svelte-02c33898.js",
-    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-checkboxes-story-svelte",
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisy-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-axisy-story-svelte-e14ac09f.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-axisy-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-line-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-line-story-svelte-2a6a2030.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-line-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-rectv-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-rectv-story-svelte-8e1c3ef5.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-rectv-story-svelte",
     "isDynamicEntry": true
   },
   "node_modules/@histoire/app/dist/bundled/components/story/StoryView.vue.js": {
-    "file": "assets/StoryView.vue-ef262d8a.js",
+    "file": "assets/StoryView.vue-17787105.js",
     "src": "node_modules/@histoire/app/dist/bundled/components/story/StoryView.vue.js",
     "isDynamicEntry": true,
     "imports": [
-      "_vendor-4822719a.js",
-      "_story-f6665c5c.js",
-      "_MobileOverlay.vue2-a4b6535a.js",
-      "_BaseEmpty.vue-cd0f2057.js",
-      "_state-9266783e.js",
+      "_vendor-7db0712c.js",
+      "_story-582bb2d8.js",
+      "_MobileOverlay.vue2-275313ce.js",
+      "_BaseEmpty.vue-5d907a0c.js",
+      "_state-e239ba4f.js",
       "_config-58fadf80.js",
-      "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js",
+      "___resolved__virtual__histoire-support-plugins-client-556e6aec.js",
       "node_modules/@histoire/app/dist/bundled/stores/events.js"
     ],
     "dynamicImports": [
@@ -385,16 +266,135 @@
       "../../../../../__resolved__virtual:md:src-lib-components-shared-tabs-story-md"
     ]
   },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabpanels-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-tabpanels-story-svelte-b065f237.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabpanels-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartlegend-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-chartlegend-story-svelte-6886e6b5.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-chartlegend-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-radiobuttons-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-radiobuttons-story-svelte-9196e3e0.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-radiobuttons-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabs-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-tabs-story-svelte-69595f37.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-tabs-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barh-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-barh-story-svelte-ebc8334f.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barh-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:md:src-lib-components-shared-chartfooter-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-shared-chartfooter-story-md-1aac4260.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-chartfooter-story-md",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-dropdown-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-dropdown-story-svelte-b767d8a2.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-dropdown-story-svelte",
+    "isDynamicEntry": true
+  },
+  "_state-e239ba4f.js": {
+    "file": "assets/state-e239ba4f.js",
+    "imports": [
+      "___resolved__virtual__histoire-support-plugins-client-556e6aec.js",
+      "_vendor-7db0712c.js",
+      "_config-58fadf80.js"
+    ]
+  },
+  "../../../../../__resolved__virtual:md:src-lib-components-shared-chartheader-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-shared-chartheader-story-md-488bddd6.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-chartheader-story-md",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:md:src-lib-components-shared-slant-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-shared-slant-story-md-f7acfe79.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-slant-story-md",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:md:src-lib-components-shared-chartlegend-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-shared-chartlegend-story-md-4190b7f5.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-chartlegend-story-md",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-checkboxes-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-checkboxes-story-svelte-02c33898.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-checkboxes-story-svelte",
+    "isDynamicEntry": true
+  },
   "../../../../../__resolved__virtual:md:src-lib-components-shared-checkboxes-story-md": {
     "file": "assets/__resolved__virtual_md_src-lib-components-shared-checkboxes-story-md-ca248f08.js",
     "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-checkboxes-story-md",
     "isDynamicEntry": true
   },
-  "_GenericMountStory.vue2-b5501df9.js": {
-    "file": "assets/GenericMountStory.vue2-b5501df9.js",
+  "../../../../../__resolved__virtual:md:src-lib-components-introduction-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-introduction-story-md-72089961.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-introduction-story-md",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:md:src-lib-components-layercake-arrow-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-layercake-arrow-story-md-7a2e9268.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-layercake-arrow-story-md",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barv-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-layercake-barv-story-svelte-12f06cdc.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-barv-story-svelte",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-shared-slant-story-svelte": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-shared-slant-story-svelte-460cb209.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-shared-slant-story-svelte",
+    "isDynamicEntry": true
+  },
+  "node_modules/@histoire/app/dist/bundled/components/search/search-docs-data.js": {
+    "file": "assets/search-docs-data-9b28de88.js",
+    "src": "node_modules/@histoire/app/dist/bundled/components/search/search-docs-data.js",
+    "isDynamicEntry": true,
     "imports": [
-      "_vendor-4822719a.js",
-      "___resolved__virtual__histoire-support-plugins-client-5e433a7f.js"
+      "_vendor-7db0712c.js"
+    ]
+  },
+  "../../../../../__resolved__virtual:story-source:src-lib-components-introduction-story-js": {
+    "file": "assets/__resolved__virtual_story-source_src-lib-components-introduction-story-js-9a92e9e8.js",
+    "src": "../../../../../__resolved__virtual:story-source:src-lib-components-introduction-story-js",
+    "isDynamicEntry": true
+  },
+  "../../../../../__resolved__virtual:md:src-lib-components-shared-button-story-md": {
+    "file": "assets/__resolved__virtual_md_src-lib-components-shared-button-story-md-08144fec.js",
+    "src": "../../../../../__resolved__virtual:md:src-lib-components-shared-button-story-md",
+    "isDynamicEntry": true
+  },
+  "node_modules/@histoire/app/dist/bundled/components/search/SearchPane.vue.js": {
+    "file": "assets/SearchPane.vue-29def568.js",
+    "src": "node_modules/@histoire/app/dist/bundled/components/search/SearchPane.vue.js",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-7db0712c.js",
+      "_story-582bb2d8.js",
+      "_BaseEmpty.vue-5d907a0c.js",
+      "node_modules/@histoire/app/dist/bundle-main.js",
+      "_MobileOverlay.vue2-275313ce.js",
+      "_config-58fadf80.js",
+      "_GenericMountStory.vue2-8e2fd5a7.js",
+      "___resolved__virtual__histoire-support-plugins-client-556e6aec.js"
+    ],
+    "dynamicImports": [
+      "node_modules/@histoire/app/dist/bundled/components/search/search-docs-data.js"
+    ]
+  },
+  "_GenericMountStory.vue2-8e2fd5a7.js": {
+    "file": "assets/GenericMountStory.vue2-8e2fd5a7.js",
+    "imports": [
+      "_vendor-7db0712c.js",
+      "___resolved__virtual__histoire-support-plugins-client-556e6aec.js"
     ],
     "dynamicImports": [
       "../../../../../__resolved__virtual:story-source:src-lib-components-layercake-areay-story-svelte",
@@ -432,8 +432,8 @@
       "../../../../../__resolved__virtual:story-source:src-lib-components-introduction-story-js"
     ]
   },
-  "_vendor-4822719a.js": {
-    "file": "assets/vendor-4822719a.js",
+  "_vendor-7db0712c.js": {
+    "file": "assets/vendor-7db0712c.js",
     "isDynamicEntry": true,
     "dynamicImports": [
       "node_modules/@histoire/app/dist/bundled/stores/events.js"
