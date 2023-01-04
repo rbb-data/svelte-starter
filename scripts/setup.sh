@@ -24,13 +24,19 @@ set -o xtrace  # prints every command before execution
 # make sure to run from project root
 cd $(dirname $0)/..
 
+# make the sed command work on Mac and Linux
+sed_option="-i"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed_option="-i ''"
+fi
+
 
 update_environment_variables() {
   # store current year and month as environment variable
-  sed -i '' 's/{project-creation-date}/'"$project_creation_date"'/g' .env
+  sed $sed_option 's/{project-creation-date}/'"$project_creation_date"'/g' .env
 
   # substitute '{project-name}' with the actual project name
-  sed -i '' 's/{project-name}/'"$project_name"'/g' .env
+  sed $sed_option 's/{project-name}/'"$project_name"'/g' .env
 }
 
 update_readme() {
@@ -38,26 +44,26 @@ update_readme() {
   node scripts/helpers/update-readme.js
 
   # substitute '{project-creation-date}' with the current date
-  sed -i '' 's/{project-creation-date}/'"$project_creation_date"'/g' README.md
+  sed $sed_option 's/{project-creation-date}/'"$project_creation_date"'/g' README.md
 
   # substitute '{project-name}' with the actual project name
-  sed -i '' 's/{project-name}/'"$project_name"'/g' README.md
+  sed $sed_option 's/{project-name}/'"$project_name"'/g' README.md
 
   # substitue README heading with the project name
-  sed -i '' '1s/.*/# '"$project_name"'/' README.md
+  sed $sed_option '1s/.*/# '"$project_name"'/' README.md
 }
 
 update_iframe_snippet() {
   # substitute '{project-creation-date}' in the iframe snippet
-  sed -i '' 's/{project-creation-date}/'"$project_creation_date"'/g' iframe.html
+  sed $sed_option 's/{project-creation-date}/'"$project_creation_date"'/g' iframe.html
 
   # substitute '{project-name}' in the iframe snippet
-  sed -i '' 's/{project-name}/'"$project_name"'/g' iframe.html
+  sed $sed_option 's/{project-name}/'"$project_name"'/g' iframe.html
 }
 
 update_page_title() {
   # substitute '{project-name}' in the html root file
-  sed -i '' 's/{project-name}/'"$project_name"'/g' src/app.html
+  sed $sed_option 's/{project-name}/'"$project_name"'/g' src/app.html
 }
 
 main() {
