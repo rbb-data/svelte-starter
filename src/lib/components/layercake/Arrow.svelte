@@ -199,8 +199,8 @@
     &__shape {
       stroke: var(--__color);
       stroke-width: var(--__width);
-      stroke-linecap: round;
-      stroke-linejoin: round;
+      stroke-linejoin: var(--stroke-linejoin, round);
+      stroke-linecap: var(--stroke-linecap, round);
       fill: none;
     }
   }

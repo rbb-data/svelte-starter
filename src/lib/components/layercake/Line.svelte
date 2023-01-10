@@ -74,8 +74,8 @@
     --__outline-width: var(--_outline-width, var(--chart-outline-width, 1));
     --__opacity: var(--_opacity, var(--chart-opacity, 1));
 
-    stroke-linejoin: round;
-    stroke-linecap: round;
+    stroke-linejoin: var(--stroke-linejoin, round);
+    stroke-linecap: var(--stroke-linecap, round);
     opacity: var(--__opacity);
   }
 

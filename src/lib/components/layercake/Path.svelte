@@ -98,8 +98,8 @@
     --__opacity: var(--_opacity, var(--chart-opacity, 1));
 
     fill: none;
-    stroke-linejoin: round;
-    stroke-linecap: round;
+    stroke-linejoin: var(--stroke-linejoin, round);
+    stroke-linecap: var(--stroke-linecap, round);
     opacity: var(--__opacity);
   }
 

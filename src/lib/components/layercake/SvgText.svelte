@@ -6,7 +6,7 @@
   import { getContext } from 'svelte/internal';
 
   import { get } from './utils';
-  import type { LayerCakeContext } from './types';
+  import type { LayerCakeContext, Accessor } from './types';
 
   type D = $$Generic;
 
@@ -16,6 +16,9 @@
   export let data: D | undefined = undefined;
   export let xIndex = 0;
   export let yIndex = 0;
+
+  export let xData: ReturnType<Accessor<D>> | undefined = undefined;
+  export let yData: ReturnType<Accessor<D>> | undefined = undefined;
 
   export let xAlign: 'left' | 'center' | 'right' = 'left';
   export let yAlign: 'top' | 'center' | 'bottom' = 'bottom';
@@ -35,16 +38,32 @@
   } as const;
 
   const ctx = getContext<LayerCakeContext<D>>('LayerCake');
-  let xGet: typeof ctx['xGet'], yGet: typeof ctx['yGet'];
+  let xScale: typeof ctx['xScale'],
+    yScale: typeof ctx['yScale'],
+    xGet: typeof ctx['xGet'],
+    yGet: typeof ctx['yGet'];
 
   $: x = $$restProps.x || 0;
   $: y = $$restProps.y || 0;
 
-  $: if (data != undefined && ctx != undefined) {
+  $: if (ctx != undefined) {
     xGet = ctx.xGet;
     yGet = ctx.yGet;
-    x = get($xGet, data, xIndex);
-    y = get($yGet, data, yIndex);
+
+    if (data != undefined) {
+      x = get($xGet, data, xIndex);
+      y = get($yGet, data, yIndex);
+    }
+
+    if (xData != undefined) {
+      xScale = ctx.xScale;
+      x = $xScale(xData);
+    }
+
+    if (yData != undefined) {
+      yScale = ctx.yScale;
+      y = $yScale(yData);
+    }
   }
 
   $: _xOffset = typeof xOffset === 'number' ? `${xOffset}px` : xOffset;
