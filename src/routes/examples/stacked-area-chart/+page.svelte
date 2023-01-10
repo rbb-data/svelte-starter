@@ -52,13 +52,13 @@
   const stack = d3stack<typeof data[number], Fruit>().keys(fruits);
   const stackedData = stack(data);
 
-  // x-accessor (category label)
+  // x-accessor (year)
   const x = (d: typeof stackedData[number][number]) => d.data.year;
 </script>
 
 <div
   use:chart={{
-    type: 'bar',
+    type: 'area',
     title: '.chart-header__title',
     subtitle: '.chart-header__subtitle',
     locale,
@@ -89,6 +89,7 @@
         <!-- y-axis -->
         <AxisY label="Anzahl Früchte" n={5} />
 
+        <!-- loop over fruits -->
         {#each stackedData as d}
           {@const fruit = d.key}
           {@const lastD = d[d.length - 1]}
