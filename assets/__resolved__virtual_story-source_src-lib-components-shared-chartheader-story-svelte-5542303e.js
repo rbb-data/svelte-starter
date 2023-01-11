@@ -2,7 +2,7 @@ const __resolved__virtual_storySource_srcLibComponentsSharedChartheaderStorySvel
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import ChartHeader from './ChartHeader.svelte';
+  import ChartHeader from '$lib/components/shared/ChartHeader.svelte';
 
   let title = 'Chart title';
   let subtitle = 'Chart subtitle';

@@ -35,7 +35,7 @@ const __resolved__virtual_storySource_srcLibComponentsLayercakeAreayStorySvelte 
         <Svg>
           <AxisX />
           <AxisY />
-          <AreaY {data} />
+          <AreaY />
           <Path outline="none" />
           <Path yIndex={1} outline="none" />
         </Svg>
@@ -52,7 +52,7 @@ const __resolved__virtual_storySource_srcLibComponentsLayercakeAreayStorySvelte 
         y={['y1', 'y2']}
       >
         <Svg>
-          <AreaY {data} />
+          <AreaY />
         </Svg>
       </LayerCake>
     </div>

@@ -3,7 +3,7 @@ const __resolved__virtual_storySource_srcLibComponentsSharedButtonStorySvelte = 
   import { logEvent } from 'histoire/client';
   export let Hst: HstType;
 
-  import Button from './Button.svelte';
+  import Button from '$lib/components/shared/Button.svelte';
   import SearchIcon from '$icons/SearchIcon.svelte';
 
   let content = 'Content';

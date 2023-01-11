@@ -2,7 +2,7 @@ const __resolved__virtual_storySource_srcLibComponentsSharedRadiobuttonsStorySve
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import RadioButtons from './RadioButtons.svelte';
+  import RadioButtons from '$lib/components/shared/RadioButtons.svelte';
 
   let selectedOption: string;
   let selectedComplexOption: { label: string; value: string };

@@ -2,7 +2,7 @@ const __resolved__virtual_storySource_srcLibComponentsSharedChartlegendStorySvel
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import ChartLegend from './ChartLegend.svelte';
+  import ChartLegend from '$lib/components/shared/ChartLegend.svelte';
   import * as tokens from '$lib/tokens';
 <\/script>
 

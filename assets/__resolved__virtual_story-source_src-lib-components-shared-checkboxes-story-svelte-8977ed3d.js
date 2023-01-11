@@ -2,7 +2,7 @@ const __resolved__virtual_storySource_srcLibComponentsSharedCheckboxesStorySvelt
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import CheckBoxes from './CheckBoxes.svelte';
+  import CheckBoxes from '$lib/components/shared/CheckBoxes.svelte';
 
   let selectedOptions: string[] = [];
   let selectedComplexOptions: { label: string; value: string }[] = [];

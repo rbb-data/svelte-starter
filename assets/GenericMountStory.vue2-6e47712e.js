@@ -41,7 +41,7 @@ function create_fragment$13(ctx) {
   let symbol_action;
   let mounted;
   let dispose;
-  let path_levels = [ctx[7], { d: ctx[0] }];
+  let path_levels = [ctx[8], { d: ctx[0] }];
   let path_data = {};
   for (let i = 0; i < path_levels.length; i += 1) {
     path_data = assign(path_data, path_levels[i]);
@@ -64,42 +64,42 @@ function create_fragment$13(ctx) {
       set_svg_attributes(path, path_data);
       toggle_class(path, "area", true);
       toggle_class(path, "s-g6XqzDxDD4f2", true);
-      add_location(path, file$_, 48, 2, 1247);
+      add_location(path, file$_, 52, 2, 1323);
       attr_dev(g, "class", "area-y0 s-g6XqzDxDD4f2");
-      set_style(g, "--_color", ctx[7].stroke || ctx[1] || "");
+      set_style(g, "--_color", ctx[8].stroke || ctx[1] || "");
       set_style(g, "--_outline", ctx[2] || "");
-      set_style(g, "--_outline-width", ctx[6] || "");
-      set_style(g, "--_opacity", ctx[7].opacity || "");
-      add_location(g, file$_, 40, 0, 1017);
+      set_style(g, "--_outline-width", ctx[7] || "");
+      set_style(g, "--_opacity", ctx[8].opacity || "");
+      add_location(g, file$_, 44, 0, 1093);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, g, anchor);
       append_hydration_dev(g, path);
       if (!mounted) {
-        dispose = action_destroyer(symbol_action = symbol.call(null, g, ctx[5]));
+        dispose = action_destroyer(symbol_action = symbol.call(null, g, ctx[6]));
         mounted = true;
       }
     },
     p: function update(ctx2, [dirty]) {
       set_svg_attributes(path, path_data = get_spread_update(path_levels, [
-        dirty & 128 && ctx2[7],
+        dirty & 256 && ctx2[8],
         dirty & 1 && { d: ctx2[0] }
       ]));
       toggle_class(path, "area", true);
       toggle_class(path, "s-g6XqzDxDD4f2", true);
-      if (symbol_action && is_function(symbol_action.update) && dirty & 32)
-        symbol_action.update.call(null, ctx2[5]);
-      if (dirty & 130) {
-        set_style(g, "--_color", ctx2[7].stroke || ctx2[1] || "");
+      if (symbol_action && is_function(symbol_action.update) && dirty & 64)
+        symbol_action.update.call(null, ctx2[6]);
+      if (dirty & 258) {
+        set_style(g, "--_color", ctx2[8].stroke || ctx2[1] || "");
       }
       if (dirty & 4) {
         set_style(g, "--_outline", ctx2[2] || "");
       }
-      if (dirty & 64) {
-        set_style(g, "--_outline-width", ctx2[6] || "");
-      }
       if (dirty & 128) {
-        set_style(g, "--_opacity", ctx2[7].opacity || "");
+        set_style(g, "--_outline-width", ctx2[7] || "");
+      }
+      if (dirty & 256) {
+        set_style(g, "--_opacity", ctx2[8].opacity || "");
       }
     },
     i: noop,
@@ -124,10 +124,12 @@ function instance$13($$self, $$props, $$invalidate) {
   let outlineWidth;
   const omit_props_names = ["color", "outline", "d", "data", "xIndex", "y0Index", "y1Index", "label", "parent"];
   let $$restProps = compute_rest_props($$props, omit_props_names);
-  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(15, $yGet = $$value)), yGet);
-  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(16, $xGet = $$value)), xGet);
+  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(16, $yGet = $$value)), yGet);
+  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(17, $xGet = $$value)), xGet);
+  let $ctxData, $$unsubscribe_ctxData = noop, $$subscribe_ctxData = () => ($$unsubscribe_ctxData(), $$unsubscribe_ctxData = subscribe(ctxData, ($$value) => $$invalidate(18, $ctxData = $$value)), ctxData);
   $$self.$$.on_destroy.push(() => $$unsubscribe_yGet());
   $$self.$$.on_destroy.push(() => $$unsubscribe_xGet());
+  $$self.$$.on_destroy.push(() => $$unsubscribe_ctxData());
   let { $$slots: slots = {}, $$scope } = $$props;
   validate_slots("AreaY", slots, []);
   let { color = void 0 } = $$props;
@@ -140,12 +142,12 @@ function instance$13($$self, $$props, $$invalidate) {
   let { label = void 0 } = $$props;
   let { parent = void 0 } = $$props;
   const ctx = getContext("LayerCake");
-  let xGet, yGet;
+  let ctxData, xGet, yGet;
   let area;
   let friendly;
   $$self.$$set = ($$new_props) => {
     $$props = assign(assign({}, $$props), exclude_internal_props($$new_props));
-    $$invalidate(7, $$restProps = compute_rest_props($$props, omit_props_names));
+    $$invalidate(8, $$restProps = compute_rest_props($$props, omit_props_names));
     if ("color" in $$new_props)
       $$invalidate(1, color = $$new_props.color);
     if ("outline" in $$new_props)
@@ -153,17 +155,17 @@ function instance$13($$self, $$props, $$invalidate) {
     if ("d" in $$new_props)
       $$invalidate(0, d = $$new_props.d);
     if ("data" in $$new_props)
-      $$invalidate(8, data = $$new_props.data);
+      $$invalidate(9, data = $$new_props.data);
     if ("xIndex" in $$new_props)
-      $$invalidate(9, xIndex = $$new_props.xIndex);
+      $$invalidate(10, xIndex = $$new_props.xIndex);
     if ("y0Index" in $$new_props)
-      $$invalidate(10, y0Index = $$new_props.y0Index);
+      $$invalidate(11, y0Index = $$new_props.y0Index);
     if ("y1Index" in $$new_props)
-      $$invalidate(11, y1Index = $$new_props.y1Index);
+      $$invalidate(12, y1Index = $$new_props.y1Index);
     if ("label" in $$new_props)
-      $$invalidate(12, label = $$new_props.label);
+      $$invalidate(13, label = $$new_props.label);
     if ("parent" in $$new_props)
-      $$invalidate(13, parent = $$new_props.parent);
+      $$invalidate(14, parent = $$new_props.parent);
   };
   $$self.$capture_state = () => ({
     getContext,
@@ -180,13 +182,15 @@ function instance$13($$self, $$props, $$invalidate) {
     label,
     parent,
     ctx,
+    ctxData,
     xGet,
     yGet,
     area,
     friendly,
     outlineWidth,
     $yGet,
-    $xGet
+    $xGet,
+    $ctxData
   });
   $$self.$inject_state = ($$new_props) => {
     if ("color" in $$props)
@@ -196,43 +200,49 @@ function instance$13($$self, $$props, $$invalidate) {
     if ("d" in $$props)
       $$invalidate(0, d = $$new_props.d);
     if ("data" in $$props)
-      $$invalidate(8, data = $$new_props.data);
+      $$invalidate(9, data = $$new_props.data);
     if ("xIndex" in $$props)
-      $$invalidate(9, xIndex = $$new_props.xIndex);
+      $$invalidate(10, xIndex = $$new_props.xIndex);
     if ("y0Index" in $$props)
-      $$invalidate(10, y0Index = $$new_props.y0Index);
+      $$invalidate(11, y0Index = $$new_props.y0Index);
     if ("y1Index" in $$props)
-      $$invalidate(11, y1Index = $$new_props.y1Index);
+      $$invalidate(12, y1Index = $$new_props.y1Index);
     if ("label" in $$props)
-      $$invalidate(12, label = $$new_props.label);
+      $$invalidate(13, label = $$new_props.label);
     if ("parent" in $$props)
-      $$invalidate(13, parent = $$new_props.parent);
+      $$invalidate(14, parent = $$new_props.parent);
+    if ("ctxData" in $$props)
+      $$subscribe_ctxData($$invalidate(3, ctxData = $$new_props.ctxData));
     if ("xGet" in $$props)
-      $$subscribe_xGet($$invalidate(3, xGet = $$new_props.xGet));
+      $$subscribe_xGet($$invalidate(4, xGet = $$new_props.xGet));
     if ("yGet" in $$props)
-      $$subscribe_yGet($$invalidate(4, yGet = $$new_props.yGet));
+      $$subscribe_yGet($$invalidate(5, yGet = $$new_props.yGet));
     if ("area" in $$props)
-      $$invalidate(14, area = $$new_props.area);
+      $$invalidate(15, area = $$new_props.area);
     if ("friendly" in $$props)
-      $$invalidate(5, friendly = $$new_props.friendly);
+      $$invalidate(6, friendly = $$new_props.friendly);
     if ("outlineWidth" in $$props)
-      $$invalidate(6, outlineWidth = $$new_props.outlineWidth);
+      $$invalidate(7, outlineWidth = $$new_props.outlineWidth);
   };
   if ($$props && "$$inject" in $$props) {
     $$self.$inject_state($$props.$$inject);
   }
   $$self.$$.update = () => {
-    $$invalidate(6, outlineWidth = $$restProps["outline-width"]);
-    if ($$self.$$.dirty & 118528) {
-      if (data != void 0 && ctx != void 0) {
-        $$subscribe_xGet($$invalidate(3, xGet = ctx.xGet));
-        $$subscribe_yGet($$invalidate(4, yGet = ctx.yGet));
-        $$invalidate(14, area = d3area().x((d2) => get($xGet, d2, xIndex)).y0((d2) => get($yGet, d2, y0Index)).y1((d2) => get($yGet, d2, y1Index)));
+    $$invalidate(7, outlineWidth = $$restProps["outline-width"]);
+    if ($$self.$$.dirty & 499200) {
+      if (ctx != void 0) {
+        if (data == void 0) {
+          $$subscribe_ctxData($$invalidate(3, ctxData = ctx.data));
+          $$invalidate(9, data = $ctxData);
+        }
+        $$subscribe_xGet($$invalidate(4, xGet = ctx.xGet));
+        $$subscribe_yGet($$invalidate(5, yGet = ctx.yGet));
+        $$invalidate(15, area = d3area().x((d2) => get($xGet, d2, xIndex)).y0((d2) => get($yGet, d2, y0Index)).y1((d2) => get($yGet, d2, y1Index)));
         $$invalidate(0, d = area(data));
       }
     }
     if (label != void 0) {
-      $$invalidate(5, friendly = {
+      $$invalidate(6, friendly = {
         id: $$restProps.id,
         type: "area",
         label,
@@ -244,6 +254,7 @@ function instance$13($$self, $$props, $$invalidate) {
     d,
     color,
     outline,
+    ctxData,
     xGet,
     yGet,
     friendly,
@@ -257,7 +268,8 @@ function instance$13($$self, $$props, $$invalidate) {
     parent,
     area,
     $yGet,
-    $xGet
+    $xGet,
+    $ctxData
   ];
 }
 class AreaY extends SvelteComponentDev {
@@ -267,12 +279,12 @@ class AreaY extends SvelteComponentDev {
       color: 1,
       outline: 2,
       d: 0,
-      data: 8,
-      xIndex: 9,
-      y0Index: 10,
-      y1Index: 11,
-      label: 12,
-      parent: 13
+      data: 9,
+      xIndex: 10,
+      y0Index: 11,
+      y1Index: 12,
+      label: 13,
+      parent: 14
     });
     dispatch_dev("SvelteRegisterComponent", {
       component: this,
@@ -1191,17 +1203,17 @@ const file$W = "src/lib/components/layercake/SvgText.svelte";
 function create_fragment$$(ctx) {
   let text_1;
   let text_1_text_anchor_value;
-  let style_transform = `translate(${ctx[7]}, calc(${ctx[11][ctx[3]]} + ${ctx[6]}))`;
+  let style_transform = `translate(${ctx[9]}, calc(${ctx[13][ctx[3]]} + ${ctx[8]}))`;
   let current;
-  const default_slot_template = ctx[21].default;
-  const default_slot = create_slot(default_slot_template, ctx, ctx[20], null);
+  const default_slot_template = ctx[27].default;
+  const default_slot = create_slot(default_slot_template, ctx, ctx[26], null);
   let text_1_levels = [
     {
-      "text-anchor": text_1_text_anchor_value = ctx[10][ctx[2]]
+      "text-anchor": text_1_text_anchor_value = ctx[12][ctx[2]]
     },
-    ctx[12],
-    { x: ctx[9] },
-    { y: ctx[8] }
+    ctx[14],
+    { x: ctx[11] },
+    { y: ctx[10] }
   ];
   let text_1_data = {};
   for (let i = 0; i < text_1_levels.length; i += 1) {
@@ -1225,11 +1237,11 @@ function create_fragment$$(ctx) {
     h: function hydrate() {
       set_svg_attributes(text_1, text_1_data);
       set_style(text_1, "transform", style_transform);
-      set_style(text_1, "--_color", ctx[12].fill || ctx[0] || "");
-      set_style(text_1, "--_outline", ctx[12].stroke || ctx[1] || "");
-      set_style(text_1, "--_opacity", ctx[12].opacity || "");
+      set_style(text_1, "--_color", ctx[14].fill || ctx[0] || "");
+      set_style(text_1, "--_outline", ctx[14].stroke || ctx[1] || "");
+      set_style(text_1, "--_opacity", ctx[14].opacity || "");
       toggle_class(text_1, "s-iCVW9LLkx0nx", true);
-      add_location(text_1, file$W, 38, 0, 954);
+      add_location(text_1, file$W, 50, 0, 1238);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, text_1, anchor);
@@ -1240,27 +1252,27 @@ function create_fragment$$(ctx) {
     },
     p: function update(ctx2, [dirty]) {
       if (default_slot) {
-        if (default_slot.p && (!current || dirty & 1048576)) {
+        if (default_slot.p && (!current || dirty & 67108864)) {
           update_slot_base(
             default_slot,
             default_slot_template,
             ctx2,
-            ctx2[20],
-            !current ? get_all_dirty_from_scope(ctx2[20]) : get_slot_changes(default_slot_template, ctx2[20], dirty, null),
+            ctx2[26],
+            !current ? get_all_dirty_from_scope(ctx2[26]) : get_slot_changes(default_slot_template, ctx2[26], dirty, null),
             null
           );
         }
       }
       set_svg_attributes(text_1, text_1_data = get_spread_update(text_1_levels, [
-        (!current || dirty & 4 && text_1_text_anchor_value !== (text_1_text_anchor_value = ctx2[10][ctx2[2]])) && { "text-anchor": text_1_text_anchor_value },
-        dirty & 4096 && ctx2[12],
-        (!current || dirty & 512) && { x: ctx2[9] },
-        (!current || dirty & 256) && { y: ctx2[8] }
+        (!current || dirty & 4 && text_1_text_anchor_value !== (text_1_text_anchor_value = ctx2[12][ctx2[2]])) && { "text-anchor": text_1_text_anchor_value },
+        dirty & 16384 && ctx2[14],
+        (!current || dirty & 2048) && { x: ctx2[11] },
+        (!current || dirty & 1024) && { y: ctx2[10] }
       ]));
       set_style(text_1, "transform", style_transform);
-      set_style(text_1, "--_color", ctx2[12].fill || ctx2[0] || "");
-      set_style(text_1, "--_outline", ctx2[12].stroke || ctx2[1] || "");
-      set_style(text_1, "--_opacity", ctx2[12].opacity || "");
+      set_style(text_1, "--_color", ctx2[14].fill || ctx2[0] || "");
+      set_style(text_1, "--_outline", ctx2[14].stroke || ctx2[1] || "");
+      set_style(text_1, "--_opacity", ctx2[14].opacity || "");
       toggle_class(text_1, "s-iCVW9LLkx0nx", true);
     },
     i: function intro(local) {
@@ -1300,14 +1312,20 @@ function instance$$($$self, $$props, $$invalidate) {
     "data",
     "xIndex",
     "yIndex",
+    "xData",
+    "yData",
     "xAlign",
     "yAlign",
     "xOffset",
     "yOffset"
   ];
   let $$restProps = compute_rest_props($$props, omit_props_names);
-  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(18, $yGet = $$value)), yGet);
-  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(19, $xGet = $$value)), xGet);
+  let $yScale, $$unsubscribe_yScale = noop, $$subscribe_yScale = () => ($$unsubscribe_yScale(), $$unsubscribe_yScale = subscribe(yScale, ($$value) => $$invalidate(22, $yScale = $$value)), yScale);
+  let $xScale, $$unsubscribe_xScale = noop, $$subscribe_xScale = () => ($$unsubscribe_xScale(), $$unsubscribe_xScale = subscribe(xScale, ($$value) => $$invalidate(23, $xScale = $$value)), xScale);
+  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(24, $yGet = $$value)), yGet);
+  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(25, $xGet = $$value)), xGet);
+  $$self.$$.on_destroy.push(() => $$unsubscribe_yScale());
+  $$self.$$.on_destroy.push(() => $$unsubscribe_xScale());
   $$self.$$.on_destroy.push(() => $$unsubscribe_yGet());
   $$self.$$.on_destroy.push(() => $$unsubscribe_xGet());
   let { $$slots: slots = {}, $$scope } = $$props;
@@ -1317,6 +1335,8 @@ function instance$$($$self, $$props, $$invalidate) {
   let { data = void 0 } = $$props;
   let { xIndex = 0 } = $$props;
   let { yIndex = 0 } = $$props;
+  let { xData = void 0 } = $$props;
+  let { yData = void 0 } = $$props;
   let { xAlign = "left" } = $$props;
   let { yAlign = "bottom" } = $$props;
   let { xOffset = 0 } = $$props;
@@ -1332,30 +1352,34 @@ function instance$$($$self, $$props, $$invalidate) {
     bottom: "0px"
   };
   const ctx = getContext("LayerCake");
-  let xGet, yGet;
+  let xScale, yScale, xGet, yGet;
   $$self.$$set = ($$new_props) => {
     $$props = assign(assign({}, $$props), exclude_internal_props($$new_props));
-    $$invalidate(12, $$restProps = compute_rest_props($$props, omit_props_names));
+    $$invalidate(14, $$restProps = compute_rest_props($$props, omit_props_names));
     if ("color" in $$new_props)
       $$invalidate(0, color = $$new_props.color);
     if ("outline" in $$new_props)
       $$invalidate(1, outline = $$new_props.outline);
     if ("data" in $$new_props)
-      $$invalidate(13, data = $$new_props.data);
+      $$invalidate(15, data = $$new_props.data);
     if ("xIndex" in $$new_props)
-      $$invalidate(14, xIndex = $$new_props.xIndex);
+      $$invalidate(16, xIndex = $$new_props.xIndex);
     if ("yIndex" in $$new_props)
-      $$invalidate(15, yIndex = $$new_props.yIndex);
+      $$invalidate(17, yIndex = $$new_props.yIndex);
+    if ("xData" in $$new_props)
+      $$invalidate(18, xData = $$new_props.xData);
+    if ("yData" in $$new_props)
+      $$invalidate(19, yData = $$new_props.yData);
     if ("xAlign" in $$new_props)
       $$invalidate(2, xAlign = $$new_props.xAlign);
     if ("yAlign" in $$new_props)
       $$invalidate(3, yAlign = $$new_props.yAlign);
     if ("xOffset" in $$new_props)
-      $$invalidate(16, xOffset = $$new_props.xOffset);
+      $$invalidate(20, xOffset = $$new_props.xOffset);
     if ("yOffset" in $$new_props)
-      $$invalidate(17, yOffset = $$new_props.yOffset);
+      $$invalidate(21, yOffset = $$new_props.yOffset);
     if ("$$scope" in $$new_props)
-      $$invalidate(20, $$scope = $$new_props.$$scope);
+      $$invalidate(26, $$scope = $$new_props.$$scope);
   };
   $$self.$capture_state = () => ({
     getContext,
@@ -1365,6 +1389,8 @@ function instance$$($$self, $$props, $$invalidate) {
     data,
     xIndex,
     yIndex,
+    xData,
+    yData,
     xAlign,
     yAlign,
     xOffset,
@@ -1372,12 +1398,16 @@ function instance$$($$self, $$props, $$invalidate) {
     textAnchor,
     yTranslate,
     ctx,
+    xScale,
+    yScale,
     xGet,
     yGet,
     _yOffset,
     _xOffset,
     y,
     x,
+    $yScale,
+    $xScale,
     $yGet,
     $xGet
   });
@@ -1387,51 +1417,69 @@ function instance$$($$self, $$props, $$invalidate) {
     if ("outline" in $$props)
       $$invalidate(1, outline = $$new_props.outline);
     if ("data" in $$props)
-      $$invalidate(13, data = $$new_props.data);
+      $$invalidate(15, data = $$new_props.data);
     if ("xIndex" in $$props)
-      $$invalidate(14, xIndex = $$new_props.xIndex);
+      $$invalidate(16, xIndex = $$new_props.xIndex);
     if ("yIndex" in $$props)
-      $$invalidate(15, yIndex = $$new_props.yIndex);
+      $$invalidate(17, yIndex = $$new_props.yIndex);
+    if ("xData" in $$props)
+      $$invalidate(18, xData = $$new_props.xData);
+    if ("yData" in $$props)
+      $$invalidate(19, yData = $$new_props.yData);
     if ("xAlign" in $$props)
       $$invalidate(2, xAlign = $$new_props.xAlign);
     if ("yAlign" in $$props)
       $$invalidate(3, yAlign = $$new_props.yAlign);
     if ("xOffset" in $$props)
-      $$invalidate(16, xOffset = $$new_props.xOffset);
+      $$invalidate(20, xOffset = $$new_props.xOffset);
     if ("yOffset" in $$props)
-      $$invalidate(17, yOffset = $$new_props.yOffset);
+      $$invalidate(21, yOffset = $$new_props.yOffset);
+    if ("xScale" in $$props)
+      $$subscribe_xScale($$invalidate(4, xScale = $$new_props.xScale));
+    if ("yScale" in $$props)
+      $$subscribe_yScale($$invalidate(5, yScale = $$new_props.yScale));
     if ("xGet" in $$props)
-      $$subscribe_xGet($$invalidate(4, xGet = $$new_props.xGet));
+      $$subscribe_xGet($$invalidate(6, xGet = $$new_props.xGet));
     if ("yGet" in $$props)
-      $$subscribe_yGet($$invalidate(5, yGet = $$new_props.yGet));
+      $$subscribe_yGet($$invalidate(7, yGet = $$new_props.yGet));
     if ("_yOffset" in $$props)
-      $$invalidate(6, _yOffset = $$new_props._yOffset);
+      $$invalidate(8, _yOffset = $$new_props._yOffset);
     if ("_xOffset" in $$props)
-      $$invalidate(7, _xOffset = $$new_props._xOffset);
+      $$invalidate(9, _xOffset = $$new_props._xOffset);
     if ("y" in $$props)
-      $$invalidate(8, y = $$new_props.y);
+      $$invalidate(10, y = $$new_props.y);
     if ("x" in $$props)
-      $$invalidate(9, x = $$new_props.x);
+      $$invalidate(11, x = $$new_props.x);
   };
   if ($$props && "$$inject" in $$props) {
     $$self.$inject_state($$props.$$inject);
   }
   $$self.$$.update = () => {
-    $$invalidate(9, x = $$restProps.x || 0);
-    $$invalidate(8, y = $$restProps.y || 0);
-    if ($$self.$$.dirty & 843776) {
-      if (data != void 0 && ctx != void 0) {
-        $$subscribe_xGet($$invalidate(4, xGet = ctx.xGet));
-        $$subscribe_yGet($$invalidate(5, yGet = ctx.yGet));
-        $$invalidate(9, x = get($xGet, data, xIndex));
-        $$invalidate(8, y = get($yGet, data, yIndex));
+    $$invalidate(11, x = $$restProps.x || 0);
+    $$invalidate(10, y = $$restProps.y || 0);
+    if ($$self.$$.dirty & 63930368) {
+      if (ctx != void 0) {
+        $$subscribe_xGet($$invalidate(6, xGet = ctx.xGet));
+        $$subscribe_yGet($$invalidate(7, yGet = ctx.yGet));
+        if (data != void 0) {
+          $$invalidate(11, x = get($xGet, data, xIndex));
+          $$invalidate(10, y = get($yGet, data, yIndex));
+        }
+        if (xData != void 0) {
+          $$subscribe_xScale($$invalidate(4, xScale = ctx.xScale));
+          $$invalidate(11, x = $xScale(xData));
+        }
+        if (yData != void 0) {
+          $$subscribe_yScale($$invalidate(5, yScale = ctx.yScale));
+          $$invalidate(10, y = $yScale(yData));
+        }
       }
     }
-    if ($$self.$$.dirty & 65536) {
-      $$invalidate(7, _xOffset = typeof xOffset === "number" ? `${xOffset}px` : xOffset);
+    if ($$self.$$.dirty & 1048576) {
+      $$invalidate(9, _xOffset = typeof xOffset === "number" ? `${xOffset}px` : xOffset);
     }
-    if ($$self.$$.dirty & 131072) {
-      $$invalidate(6, _yOffset = typeof yOffset === "number" ? `${yOffset}px` : yOffset);
+    if ($$self.$$.dirty & 2097152) {
+      $$invalidate(8, _yOffset = typeof yOffset === "number" ? `${yOffset}px` : yOffset);
     }
   };
   return [
@@ -1439,6 +1487,8 @@ function instance$$($$self, $$props, $$invalidate) {
     outline,
     xAlign,
     yAlign,
+    xScale,
+    yScale,
     xGet,
     yGet,
     _yOffset,
@@ -1451,8 +1501,12 @@ function instance$$($$self, $$props, $$invalidate) {
     data,
     xIndex,
     yIndex,
+    xData,
+    yData,
     xOffset,
     yOffset,
+    $yScale,
+    $xScale,
     $yGet,
     $xGet,
     $$scope,
@@ -1465,13 +1519,15 @@ class SvgText extends SvelteComponentDev {
     init(this, options, instance$$, create_fragment$$, safe_not_equal, {
       color: 0,
       outline: 1,
-      data: 13,
-      xIndex: 14,
-      yIndex: 15,
+      data: 15,
+      xIndex: 16,
+      yIndex: 17,
+      xData: 18,
+      yData: 19,
       xAlign: 2,
       yAlign: 3,
-      xOffset: 16,
-      yOffset: 17
+      xOffset: 20,
+      yOffset: 21
     });
     dispatch_dev("SvelteRegisterComponent", {
       component: this,
@@ -1508,6 +1564,18 @@ class SvgText extends SvelteComponentDev {
     throw new Error("<SvgText>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
   }
   set yIndex(value) {
+    throw new Error("<SvgText>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  get xData() {
+    throw new Error("<SvgText>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  set xData(value) {
+    throw new Error("<SvgText>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  get yData() {
+    throw new Error("<SvgText>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  set yData(value) {
     throw new Error("<SvgText>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
   }
   get xAlign() {
@@ -3573,10 +3641,7 @@ function create_default_slot_6$e(ctx) {
   let current;
   axisx = new AxisX({ $$inline: true });
   axisy = new AxisY({ $$inline: true });
-  areay = new AreaY({
-    props: { data: ctx[1] },
-    $$inline: true
-  });
+  areay = new AreaY({ $$inline: true });
   path0 = new Path({
     props: { outline: "none" },
     $$inline: true
@@ -3787,10 +3852,7 @@ function create_default_slot_4$p(ctx) {
 function create_default_slot_3$t(ctx) {
   let areay;
   let current;
-  areay = new AreaY({
-    props: { data: ctx[1] },
-    $$inline: true
-  });
+  areay = new AreaY({ $$inline: true });
   const block = {
     c: function create() {
       create_component(areay.$$.fragment);
@@ -3802,7 +3864,6 @@ function create_default_slot_3$t(ctx) {
       mount_component(areay, target, anchor);
       current = true;
     },
-    p: noop,
     i: function intro(local) {
       if (current)
         return;
@@ -3907,7 +3968,7 @@ function create_default_slot_1$x(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-XPhbm_Rsj7wq");
-      add_location(div, file$S, 41, 4, 1085);
+      add_location(div, file$S, 41, 4, 1078);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -4151,7 +4212,7 @@ function create_fragment$W(ctx) {
   let symbol_action;
   let mounted;
   let dispose;
-  let path_levels = [ctx[8], { d: ctx[0] }];
+  let path_levels = [ctx[9], { d: ctx[0] }];
   let path_data = {};
   for (let i = 0; i < path_levels.length; i += 1) {
     path_data = assign(path_data, path_levels[i]);
@@ -4174,42 +4235,42 @@ function create_fragment$W(ctx) {
       set_svg_attributes(path, path_data);
       toggle_class(path, "area", true);
       toggle_class(path, "s-ujhbZJwvSerx", true);
-      add_location(path, file$R, 48, 2, 1250);
+      add_location(path, file$R, 52, 2, 1326);
       attr_dev(g, "class", "area-y0 s-ujhbZJwvSerx");
-      set_style(g, "--_color", ctx[8].stroke || ctx[1] || "");
+      set_style(g, "--_color", ctx[9].stroke || ctx[1] || "");
       set_style(g, "--_outline", ctx[2] || "");
-      set_style(g, "--_outline-width", ctx[7] || "");
-      set_style(g, "--_opacity", ctx[8].opacity || "");
-      add_location(g, file$R, 40, 0, 1020);
+      set_style(g, "--_outline-width", ctx[8] || "");
+      set_style(g, "--_opacity", ctx[9].opacity || "");
+      add_location(g, file$R, 44, 0, 1096);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, g, anchor);
       append_hydration_dev(g, path);
       if (!mounted) {
-        dispose = action_destroyer(symbol_action = symbol.call(null, g, ctx[6]));
+        dispose = action_destroyer(symbol_action = symbol.call(null, g, ctx[7]));
         mounted = true;
       }
     },
     p: function update(ctx2, [dirty]) {
       set_svg_attributes(path, path_data = get_spread_update(path_levels, [
-        dirty & 256 && ctx2[8],
+        dirty & 512 && ctx2[9],
         dirty & 1 && { d: ctx2[0] }
       ]));
       toggle_class(path, "area", true);
       toggle_class(path, "s-ujhbZJwvSerx", true);
-      if (symbol_action && is_function(symbol_action.update) && dirty & 64)
-        symbol_action.update.call(null, ctx2[6]);
-      if (dirty & 258) {
-        set_style(g, "--_color", ctx2[8].stroke || ctx2[1] || "");
+      if (symbol_action && is_function(symbol_action.update) && dirty & 128)
+        symbol_action.update.call(null, ctx2[7]);
+      if (dirty & 514) {
+        set_style(g, "--_color", ctx2[9].stroke || ctx2[1] || "");
       }
       if (dirty & 4) {
         set_style(g, "--_outline", ctx2[2] || "");
       }
-      if (dirty & 128) {
-        set_style(g, "--_outline-width", ctx2[7] || "");
-      }
       if (dirty & 256) {
-        set_style(g, "--_opacity", ctx2[8].opacity || "");
+        set_style(g, "--_outline-width", ctx2[8] || "");
+      }
+      if (dirty & 512) {
+        set_style(g, "--_opacity", ctx2[9].opacity || "");
       }
     },
     i: noop,
@@ -4234,12 +4295,14 @@ function instance$W($$self, $$props, $$invalidate) {
   let outlineWidth;
   const omit_props_names = ["color", "outline", "d", "data", "xIndex", "yIndex", "label", "parent"];
   let $$restProps = compute_rest_props($$props, omit_props_names);
-  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(15, $yGet = $$value)), yGet);
-  let $yScale, $$unsubscribe_yScale = noop, $$subscribe_yScale = () => ($$unsubscribe_yScale(), $$unsubscribe_yScale = subscribe(yScale, ($$value) => $$invalidate(16, $yScale = $$value)), yScale);
-  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(17, $xGet = $$value)), xGet);
+  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(16, $yGet = $$value)), yGet);
+  let $yScale, $$unsubscribe_yScale = noop, $$subscribe_yScale = () => ($$unsubscribe_yScale(), $$unsubscribe_yScale = subscribe(yScale, ($$value) => $$invalidate(17, $yScale = $$value)), yScale);
+  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(18, $xGet = $$value)), xGet);
+  let $ctxData, $$unsubscribe_ctxData = noop, $$subscribe_ctxData = () => ($$unsubscribe_ctxData(), $$unsubscribe_ctxData = subscribe(ctxData, ($$value) => $$invalidate(19, $ctxData = $$value)), ctxData);
   $$self.$$.on_destroy.push(() => $$unsubscribe_yGet());
   $$self.$$.on_destroy.push(() => $$unsubscribe_yScale());
   $$self.$$.on_destroy.push(() => $$unsubscribe_xGet());
+  $$self.$$.on_destroy.push(() => $$unsubscribe_ctxData());
   let { $$slots: slots = {}, $$scope } = $$props;
   validate_slots("AreaY0", slots, []);
   let { color = void 0 } = $$props;
@@ -4251,12 +4314,12 @@ function instance$W($$self, $$props, $$invalidate) {
   let { label = void 0 } = $$props;
   let { parent = void 0 } = $$props;
   const ctx = getContext("LayerCake");
-  let xGet, yGet, yScale;
+  let ctxData, xGet, yGet, yScale;
   let area;
   let friendly;
   $$self.$$set = ($$new_props) => {
     $$props = assign(assign({}, $$props), exclude_internal_props($$new_props));
-    $$invalidate(8, $$restProps = compute_rest_props($$props, omit_props_names));
+    $$invalidate(9, $$restProps = compute_rest_props($$props, omit_props_names));
     if ("color" in $$new_props)
       $$invalidate(1, color = $$new_props.color);
     if ("outline" in $$new_props)
@@ -4264,15 +4327,15 @@ function instance$W($$self, $$props, $$invalidate) {
     if ("d" in $$new_props)
       $$invalidate(0, d = $$new_props.d);
     if ("data" in $$new_props)
-      $$invalidate(9, data = $$new_props.data);
+      $$invalidate(10, data = $$new_props.data);
     if ("xIndex" in $$new_props)
-      $$invalidate(10, xIndex = $$new_props.xIndex);
+      $$invalidate(11, xIndex = $$new_props.xIndex);
     if ("yIndex" in $$new_props)
-      $$invalidate(11, yIndex = $$new_props.yIndex);
+      $$invalidate(12, yIndex = $$new_props.yIndex);
     if ("label" in $$new_props)
-      $$invalidate(12, label = $$new_props.label);
+      $$invalidate(13, label = $$new_props.label);
     if ("parent" in $$new_props)
-      $$invalidate(13, parent = $$new_props.parent);
+      $$invalidate(14, parent = $$new_props.parent);
   };
   $$self.$capture_state = () => ({
     getContext,
@@ -4288,6 +4351,7 @@ function instance$W($$self, $$props, $$invalidate) {
     label,
     parent,
     ctx,
+    ctxData,
     xGet,
     yGet,
     yScale,
@@ -4296,7 +4360,8 @@ function instance$W($$self, $$props, $$invalidate) {
     outlineWidth,
     $yGet,
     $yScale,
-    $xGet
+    $xGet,
+    $ctxData
   });
   $$self.$inject_state = ($$new_props) => {
     if ("color" in $$props)
@@ -4306,44 +4371,50 @@ function instance$W($$self, $$props, $$invalidate) {
     if ("d" in $$props)
       $$invalidate(0, d = $$new_props.d);
     if ("data" in $$props)
-      $$invalidate(9, data = $$new_props.data);
+      $$invalidate(10, data = $$new_props.data);
     if ("xIndex" in $$props)
-      $$invalidate(10, xIndex = $$new_props.xIndex);
+      $$invalidate(11, xIndex = $$new_props.xIndex);
     if ("yIndex" in $$props)
-      $$invalidate(11, yIndex = $$new_props.yIndex);
+      $$invalidate(12, yIndex = $$new_props.yIndex);
     if ("label" in $$props)
-      $$invalidate(12, label = $$new_props.label);
+      $$invalidate(13, label = $$new_props.label);
     if ("parent" in $$props)
-      $$invalidate(13, parent = $$new_props.parent);
+      $$invalidate(14, parent = $$new_props.parent);
+    if ("ctxData" in $$props)
+      $$subscribe_ctxData($$invalidate(3, ctxData = $$new_props.ctxData));
     if ("xGet" in $$props)
-      $$subscribe_xGet($$invalidate(3, xGet = $$new_props.xGet));
+      $$subscribe_xGet($$invalidate(4, xGet = $$new_props.xGet));
     if ("yGet" in $$props)
-      $$subscribe_yGet($$invalidate(4, yGet = $$new_props.yGet));
+      $$subscribe_yGet($$invalidate(5, yGet = $$new_props.yGet));
     if ("yScale" in $$props)
-      $$subscribe_yScale($$invalidate(5, yScale = $$new_props.yScale));
+      $$subscribe_yScale($$invalidate(6, yScale = $$new_props.yScale));
     if ("area" in $$props)
-      $$invalidate(14, area = $$new_props.area);
+      $$invalidate(15, area = $$new_props.area);
     if ("friendly" in $$props)
-      $$invalidate(6, friendly = $$new_props.friendly);
+      $$invalidate(7, friendly = $$new_props.friendly);
     if ("outlineWidth" in $$props)
-      $$invalidate(7, outlineWidth = $$new_props.outlineWidth);
+      $$invalidate(8, outlineWidth = $$new_props.outlineWidth);
   };
   if ($$props && "$$inject" in $$props) {
     $$self.$inject_state($$props.$$inject);
   }
   $$self.$$.update = () => {
-    $$invalidate(7, outlineWidth = $$restProps["outline-width"]);
-    if ($$self.$$.dirty & 249344) {
-      if (data != void 0 && ctx != void 0) {
-        $$subscribe_xGet($$invalidate(3, xGet = ctx.xGet));
-        $$subscribe_yGet($$invalidate(4, yGet = ctx.yGet));
-        $$subscribe_yScale($$invalidate(5, yScale = ctx.yScale));
-        $$invalidate(14, area = d3area().x((d2) => get($xGet, d2, xIndex)).y0(() => $yScale(0)).y1((d2) => get($yGet, d2, yIndex)));
+    $$invalidate(8, outlineWidth = $$restProps["outline-width"]);
+    if ($$self.$$.dirty & 1022976) {
+      if (ctx != void 0) {
+        if (data == void 0) {
+          $$subscribe_ctxData($$invalidate(3, ctxData = ctx.data));
+          $$invalidate(10, data = $ctxData);
+        }
+        $$subscribe_xGet($$invalidate(4, xGet = ctx.xGet));
+        $$subscribe_yGet($$invalidate(5, yGet = ctx.yGet));
+        $$subscribe_yScale($$invalidate(6, yScale = ctx.yScale));
+        $$invalidate(15, area = d3area().x((d2) => get($xGet, d2, xIndex)).y0(() => $yScale(0)).y1((d2) => get($yGet, d2, yIndex)));
         $$invalidate(0, d = area(data));
       }
     }
     if (label != void 0) {
-      $$invalidate(6, friendly = {
+      $$invalidate(7, friendly = {
         id: $$restProps.id,
         type: "area",
         label,
@@ -4355,6 +4426,7 @@ function instance$W($$self, $$props, $$invalidate) {
     d,
     color,
     outline,
+    ctxData,
     xGet,
     yGet,
     yScale,
@@ -4369,7 +4441,8 @@ function instance$W($$self, $$props, $$invalidate) {
     area,
     $yGet,
     $yScale,
-    $xGet
+    $xGet,
+    $ctxData
   ];
 }
 class AreaY0 extends SvelteComponentDev {
@@ -4379,11 +4452,11 @@ class AreaY0 extends SvelteComponentDev {
       color: 1,
       outline: 2,
       d: 0,
-      data: 9,
-      xIndex: 10,
-      yIndex: 11,
-      label: 12,
-      parent: 13
+      data: 10,
+      xIndex: 11,
+      yIndex: 12,
+      label: 13,
+      parent: 14
     });
     dispatch_dev("SvelteRegisterComponent", {
       component: this,
@@ -4454,10 +4527,7 @@ function create_default_slot_6$d(ctx) {
   let current;
   axisx = new AxisX({ $$inline: true });
   axisy = new AxisY({ $$inline: true });
-  areay0 = new AreaY0({
-    props: { data: ctx[1] },
-    $$inline: true
-  });
+  areay0 = new AreaY0({ $$inline: true });
   path = new Path({
     props: { outline: "none" },
     $$inline: true
@@ -4653,10 +4723,7 @@ function create_default_slot_4$o(ctx) {
 function create_default_slot_3$s(ctx) {
   let areay0;
   let current;
-  areay0 = new AreaY0({
-    props: { data: ctx[1] },
-    $$inline: true
-  });
+  areay0 = new AreaY0({ $$inline: true });
   const block = {
     c: function create() {
       create_component(areay0.$$.fragment);
@@ -4668,7 +4735,6 @@ function create_default_slot_3$s(ctx) {
       mount_component(areay0, target, anchor);
       current = true;
     },
-    p: noop,
     i: function intro(local) {
       if (current)
         return;
@@ -4773,7 +4839,7 @@ function create_default_slot_1$w(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-v8X4CaTycAdo");
-      add_location(div, file$Q, 40, 4, 1044);
+      add_location(div, file$Q, 40, 4, 1037);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -15177,11 +15243,11 @@ const HtmlText_svelte_svelte_type_style_lang = "";
 const file$B = "src/lib/components/layercake/HtmlText.svelte";
 function create_fragment$E(ctx) {
   let div;
-  let style_transform = `translate(calc(${ctx[13][ctx[2]]} + ${ctx[10]}), calc(${ctx[14][ctx[3]]} + ${ctx[9]}))`;
+  let style_transform = `translate(calc(${ctx[15][ctx[2]]} + ${ctx[12]}), calc(${ctx[16][ctx[3]]} + ${ctx[11]}))`;
   let current;
-  const default_slot_template = ctx[28].default;
-  const default_slot = create_slot(default_slot_template, ctx, ctx[27], null);
-  let div_levels = [ctx[15]];
+  const default_slot_template = ctx[34].default;
+  const default_slot = create_slot(default_slot_template, ctx, ctx[33], null);
+  let div_levels = [ctx[17]];
   let div_data = {};
   for (let i = 0; i < div_levels.length; i += 1) {
     div_data = assign(div_data, div_levels[i]);
@@ -15203,15 +15269,15 @@ function create_fragment$E(ctx) {
     },
     h: function hydrate() {
       set_attributes(div, div_data);
-      set_style(div, "left", ctx[12]);
-      set_style(div, "top", ctx[11]);
+      set_style(div, "left", ctx[14]);
+      set_style(div, "top", ctx[13]);
       set_style(div, "max-width", ctx[4]);
       set_style(div, "transform", style_transform);
-      set_style(div, "--_color", ctx[15].fill || ctx[0] || "");
-      set_style(div, "--_outline", ctx[15].stroke || ctx[1] || "");
-      set_style(div, "--_opacity", ctx[15].opacity || "");
+      set_style(div, "--_color", ctx[17].fill || ctx[0] || "");
+      set_style(div, "--_outline", ctx[17].stroke || ctx[1] || "");
+      set_style(div, "--_opacity", ctx[17].opacity || "");
       toggle_class(div, "s-zNXtPXUuFoiG", true);
-      add_location(div, file$B, 50, 0, 1403);
+      add_location(div, file$B, 66, 0, 1776);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -15220,27 +15286,27 @@ function create_fragment$E(ctx) {
       }
       current = true;
     },
-    p: function update(ctx2, [dirty]) {
+    p: function update(ctx2, dirty) {
       if (default_slot) {
-        if (default_slot.p && (!current || dirty & 134217728)) {
+        if (default_slot.p && (!current || dirty[1] & 4)) {
           update_slot_base(
             default_slot,
             default_slot_template,
             ctx2,
-            ctx2[27],
-            !current ? get_all_dirty_from_scope(ctx2[27]) : get_slot_changes(default_slot_template, ctx2[27], dirty, null),
+            ctx2[33],
+            !current ? get_all_dirty_from_scope(ctx2[33]) : get_slot_changes(default_slot_template, ctx2[33], dirty, null),
             null
           );
         }
       }
-      set_attributes(div, div_data = get_spread_update(div_levels, [dirty & 32768 && ctx2[15]]));
-      set_style(div, "left", ctx2[12]);
-      set_style(div, "top", ctx2[11]);
+      set_attributes(div, div_data = get_spread_update(div_levels, [dirty[0] & 131072 && ctx2[17]]));
+      set_style(div, "left", ctx2[14]);
+      set_style(div, "top", ctx2[13]);
       set_style(div, "max-width", ctx2[4]);
       set_style(div, "transform", style_transform);
-      set_style(div, "--_color", ctx2[15].fill || ctx2[0] || "");
-      set_style(div, "--_outline", ctx2[15].stroke || ctx2[1] || "");
-      set_style(div, "--_opacity", ctx2[15].opacity || "");
+      set_style(div, "--_color", ctx2[17].fill || ctx2[0] || "");
+      set_style(div, "--_outline", ctx2[17].stroke || ctx2[1] || "");
+      set_style(div, "--_opacity", ctx2[17].opacity || "");
       toggle_class(div, "s-zNXtPXUuFoiG", true);
     },
     i: function intro(local) {
@@ -15282,18 +15348,24 @@ function instance$E($$self, $$props, $$invalidate) {
     "data",
     "xIndex",
     "yIndex",
+    "xData",
+    "yData",
     "xAlign",
     "yAlign",
     "xOffset",
     "yOffset"
   ];
   let $$restProps = compute_rest_props($$props, omit_props_names);
-  let $padding, $$unsubscribe_padding = noop, $$subscribe_padding = () => ($$unsubscribe_padding(), $$unsubscribe_padding = subscribe(padding, ($$value) => $$invalidate(23, $padding = $$value)), padding);
-  let $ctxWidth, $$unsubscribe_ctxWidth = noop, $$subscribe_ctxWidth = () => ($$unsubscribe_ctxWidth(), $$unsubscribe_ctxWidth = subscribe(ctxWidth, ($$value) => $$invalidate(24, $ctxWidth = $$value)), ctxWidth);
-  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(25, $yGet = $$value)), yGet);
-  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(26, $xGet = $$value)), xGet);
+  let $padding, $$unsubscribe_padding = noop, $$subscribe_padding = () => ($$unsubscribe_padding(), $$unsubscribe_padding = subscribe(padding, ($$value) => $$invalidate(27, $padding = $$value)), padding);
+  let $ctxWidth, $$unsubscribe_ctxWidth = noop, $$subscribe_ctxWidth = () => ($$unsubscribe_ctxWidth(), $$unsubscribe_ctxWidth = subscribe(ctxWidth, ($$value) => $$invalidate(28, $ctxWidth = $$value)), ctxWidth);
+  let $yScale, $$unsubscribe_yScale = noop, $$subscribe_yScale = () => ($$unsubscribe_yScale(), $$unsubscribe_yScale = subscribe(yScale, ($$value) => $$invalidate(29, $yScale = $$value)), yScale);
+  let $xScale, $$unsubscribe_xScale = noop, $$subscribe_xScale = () => ($$unsubscribe_xScale(), $$unsubscribe_xScale = subscribe(xScale, ($$value) => $$invalidate(30, $xScale = $$value)), xScale);
+  let $yGet, $$unsubscribe_yGet = noop, $$subscribe_yGet = () => ($$unsubscribe_yGet(), $$unsubscribe_yGet = subscribe(yGet, ($$value) => $$invalidate(31, $yGet = $$value)), yGet);
+  let $xGet, $$unsubscribe_xGet = noop, $$subscribe_xGet = () => ($$unsubscribe_xGet(), $$unsubscribe_xGet = subscribe(xGet, ($$value) => $$invalidate(32, $xGet = $$value)), xGet);
   $$self.$$.on_destroy.push(() => $$unsubscribe_padding());
   $$self.$$.on_destroy.push(() => $$unsubscribe_ctxWidth());
+  $$self.$$.on_destroy.push(() => $$unsubscribe_yScale());
+  $$self.$$.on_destroy.push(() => $$unsubscribe_xScale());
   $$self.$$.on_destroy.push(() => $$unsubscribe_yGet());
   $$self.$$.on_destroy.push(() => $$unsubscribe_xGet());
   let { $$slots: slots = {}, $$scope } = $$props;
@@ -15305,6 +15377,8 @@ function instance$E($$self, $$props, $$invalidate) {
   let { data = void 0 } = $$props;
   let { xIndex = 0 } = $$props;
   let { yIndex = 0 } = $$props;
+  let { xData = void 0 } = $$props;
+  let { yData = void 0 } = $$props;
   let { xAlign = "left" } = $$props;
   let { yAlign = "bottom" } = $$props;
   let { xOffset = 0 } = $$props;
@@ -15321,34 +15395,38 @@ function instance$E($$self, $$props, $$invalidate) {
     bottom: "-100%"
   };
   const ctx = getContext("LayerCake");
-  let xGet, yGet, ctxWidth, padding;
+  let xScale, yScale, xGet, yGet, ctxWidth, padding;
   $$self.$$set = ($$new_props) => {
     $$props = assign(assign({}, $$props), exclude_internal_props($$new_props));
-    $$invalidate(15, $$restProps = compute_rest_props($$props, omit_props_names));
+    $$invalidate(17, $$restProps = compute_rest_props($$props, omit_props_names));
     if ("x" in $$new_props)
-      $$invalidate(16, x = $$new_props.x);
+      $$invalidate(18, x = $$new_props.x);
     if ("y" in $$new_props)
-      $$invalidate(17, y = $$new_props.y);
+      $$invalidate(19, y = $$new_props.y);
     if ("color" in $$new_props)
       $$invalidate(0, color = $$new_props.color);
     if ("outline" in $$new_props)
       $$invalidate(1, outline = $$new_props.outline);
     if ("data" in $$new_props)
-      $$invalidate(18, data = $$new_props.data);
+      $$invalidate(20, data = $$new_props.data);
     if ("xIndex" in $$new_props)
-      $$invalidate(19, xIndex = $$new_props.xIndex);
+      $$invalidate(21, xIndex = $$new_props.xIndex);
     if ("yIndex" in $$new_props)
-      $$invalidate(20, yIndex = $$new_props.yIndex);
+      $$invalidate(22, yIndex = $$new_props.yIndex);
+    if ("xData" in $$new_props)
+      $$invalidate(23, xData = $$new_props.xData);
+    if ("yData" in $$new_props)
+      $$invalidate(24, yData = $$new_props.yData);
     if ("xAlign" in $$new_props)
       $$invalidate(2, xAlign = $$new_props.xAlign);
     if ("yAlign" in $$new_props)
       $$invalidate(3, yAlign = $$new_props.yAlign);
     if ("xOffset" in $$new_props)
-      $$invalidate(21, xOffset = $$new_props.xOffset);
+      $$invalidate(25, xOffset = $$new_props.xOffset);
     if ("yOffset" in $$new_props)
-      $$invalidate(22, yOffset = $$new_props.yOffset);
+      $$invalidate(26, yOffset = $$new_props.yOffset);
     if ("$$scope" in $$new_props)
-      $$invalidate(27, $$scope = $$new_props.$$scope);
+      $$invalidate(33, $$scope = $$new_props.$$scope);
   };
   $$self.$capture_state = () => ({
     getContext,
@@ -15360,6 +15438,8 @@ function instance$E($$self, $$props, $$invalidate) {
     data,
     xIndex,
     yIndex,
+    xData,
+    yData,
     xAlign,
     yAlign,
     xOffset,
@@ -15368,6 +15448,8 @@ function instance$E($$self, $$props, $$invalidate) {
     xTranslate,
     yTranslate,
     ctx,
+    xScale,
+    yScale,
     xGet,
     yGet,
     ctxWidth,
@@ -15378,80 +15460,106 @@ function instance$E($$self, $$props, $$invalidate) {
     left,
     $padding,
     $ctxWidth,
+    $yScale,
+    $xScale,
     $yGet,
     $xGet
   });
   $$self.$inject_state = ($$new_props) => {
     if ("x" in $$props)
-      $$invalidate(16, x = $$new_props.x);
+      $$invalidate(18, x = $$new_props.x);
     if ("y" in $$props)
-      $$invalidate(17, y = $$new_props.y);
+      $$invalidate(19, y = $$new_props.y);
     if ("color" in $$props)
       $$invalidate(0, color = $$new_props.color);
     if ("outline" in $$props)
       $$invalidate(1, outline = $$new_props.outline);
     if ("data" in $$props)
-      $$invalidate(18, data = $$new_props.data);
+      $$invalidate(20, data = $$new_props.data);
     if ("xIndex" in $$props)
-      $$invalidate(19, xIndex = $$new_props.xIndex);
+      $$invalidate(21, xIndex = $$new_props.xIndex);
     if ("yIndex" in $$props)
-      $$invalidate(20, yIndex = $$new_props.yIndex);
+      $$invalidate(22, yIndex = $$new_props.yIndex);
+    if ("xData" in $$props)
+      $$invalidate(23, xData = $$new_props.xData);
+    if ("yData" in $$props)
+      $$invalidate(24, yData = $$new_props.yData);
     if ("xAlign" in $$props)
       $$invalidate(2, xAlign = $$new_props.xAlign);
     if ("yAlign" in $$props)
       $$invalidate(3, yAlign = $$new_props.yAlign);
     if ("xOffset" in $$props)
-      $$invalidate(21, xOffset = $$new_props.xOffset);
+      $$invalidate(25, xOffset = $$new_props.xOffset);
     if ("yOffset" in $$props)
-      $$invalidate(22, yOffset = $$new_props.yOffset);
+      $$invalidate(26, yOffset = $$new_props.yOffset);
     if ("maxWidth" in $$props)
       $$invalidate(4, maxWidth = $$new_props.maxWidth);
+    if ("xScale" in $$props)
+      $$subscribe_xScale($$invalidate(5, xScale = $$new_props.xScale));
+    if ("yScale" in $$props)
+      $$subscribe_yScale($$invalidate(6, yScale = $$new_props.yScale));
     if ("xGet" in $$props)
-      $$subscribe_xGet($$invalidate(5, xGet = $$new_props.xGet));
+      $$subscribe_xGet($$invalidate(7, xGet = $$new_props.xGet));
     if ("yGet" in $$props)
-      $$subscribe_yGet($$invalidate(6, yGet = $$new_props.yGet));
+      $$subscribe_yGet($$invalidate(8, yGet = $$new_props.yGet));
     if ("ctxWidth" in $$props)
-      $$subscribe_ctxWidth($$invalidate(7, ctxWidth = $$new_props.ctxWidth));
+      $$subscribe_ctxWidth($$invalidate(9, ctxWidth = $$new_props.ctxWidth));
     if ("padding" in $$props)
-      $$subscribe_padding($$invalidate(8, padding = $$new_props.padding));
+      $$subscribe_padding($$invalidate(10, padding = $$new_props.padding));
     if ("_yOffset" in $$props)
-      $$invalidate(9, _yOffset = $$new_props._yOffset);
+      $$invalidate(11, _yOffset = $$new_props._yOffset);
     if ("_xOffset" in $$props)
-      $$invalidate(10, _xOffset = $$new_props._xOffset);
+      $$invalidate(12, _xOffset = $$new_props._xOffset);
     if ("top" in $$props)
-      $$invalidate(11, top = $$new_props.top);
+      $$invalidate(13, top = $$new_props.top);
     if ("left" in $$props)
-      $$invalidate(12, left = $$new_props.left);
+      $$invalidate(14, left = $$new_props.left);
   };
   if ($$props && "$$inject" in $$props) {
     $$self.$inject_state($$props.$$inject);
   }
   $$self.$$.update = () => {
-    if ($$self.$$.dirty & 65536) {
-      $$invalidate(12, left = (typeof x === "number" ? `${x}px` : x) || "0px");
+    if ($$self.$$.dirty[0] & 262144) {
+      $$invalidate(14, left = (typeof x === "number" ? `${x}px` : x) || "0px");
     }
-    if ($$self.$$.dirty & 131072) {
-      $$invalidate(11, top = (typeof y === "number" ? `${y}px` : y) || "0px");
+    if ($$self.$$.dirty[0] & 524288) {
+      $$invalidate(13, top = (typeof y === "number" ? `${y}px` : y) || "0px");
     }
-    if ($$self.$$.dirty & 129761280) {
-      if (data != void 0 && ctx != void 0) {
-        $$subscribe_xGet($$invalidate(5, xGet = ctx.xGet));
-        $$subscribe_yGet($$invalidate(6, yGet = ctx.yGet));
-        $$subscribe_ctxWidth($$invalidate(7, ctxWidth = ctx.width));
-        $$subscribe_padding($$invalidate(8, padding = ctx.padding));
-        const l = get($xGet, data, xIndex);
-        $$invalidate(12, left = l.toString() + "px");
-        const t = get($yGet, data, yIndex);
-        $$invalidate(11, top = t.toString() + "px");
-        const w = $ctxWidth - l + $padding.right - xOffset;
-        $$invalidate(4, maxWidth = `${w}px`);
+    if ($$self.$$.dirty[0] & 2079326208 | $$self.$$.dirty[1] & 3) {
+      if (ctx != void 0) {
+        $$subscribe_xGet($$invalidate(7, xGet = ctx.xGet));
+        $$subscribe_yGet($$invalidate(8, yGet = ctx.yGet));
+        $$subscribe_ctxWidth($$invalidate(9, ctxWidth = ctx.width));
+        $$subscribe_padding($$invalidate(10, padding = ctx.padding));
+        let l = null;
+        let t = null;
+        if (data != void 0) {
+          l = get($xGet, data, xIndex);
+          t = get($yGet, data, yIndex);
+        }
+        if (xData != void 0) {
+          $$subscribe_xScale($$invalidate(5, xScale = ctx.xScale));
+          l = $xScale(xData);
+        }
+        if (yData != void 0) {
+          $$subscribe_yScale($$invalidate(6, yScale = ctx.yScale));
+          t = $yScale(yData);
+        }
+        if (l != null)
+          $$invalidate(14, left = l.toString() + "px");
+        if (t != null)
+          $$invalidate(13, top = t.toString() + "px");
+        if (l != null) {
+          const w = $ctxWidth - l + $padding.right - xOffset;
+          $$invalidate(4, maxWidth = `${w}px`);
+        }
       }
     }
-    if ($$self.$$.dirty & 2097152) {
-      $$invalidate(10, _xOffset = typeof xOffset === "number" ? `${xOffset}px` : xOffset);
+    if ($$self.$$.dirty[0] & 33554432) {
+      $$invalidate(12, _xOffset = typeof xOffset === "number" ? `${xOffset}px` : xOffset);
     }
-    if ($$self.$$.dirty & 4194304) {
-      $$invalidate(9, _yOffset = typeof yOffset === "number" ? `${yOffset}px` : yOffset);
+    if ($$self.$$.dirty[0] & 67108864) {
+      $$invalidate(11, _yOffset = typeof yOffset === "number" ? `${yOffset}px` : yOffset);
     }
   };
   return [
@@ -15460,6 +15568,8 @@ function instance$E($$self, $$props, $$invalidate) {
     xAlign,
     yAlign,
     maxWidth,
+    xScale,
+    yScale,
     xGet,
     yGet,
     ctxWidth,
@@ -15476,10 +15586,14 @@ function instance$E($$self, $$props, $$invalidate) {
     data,
     xIndex,
     yIndex,
+    xData,
+    yData,
     xOffset,
     yOffset,
     $padding,
     $ctxWidth,
+    $yScale,
+    $xScale,
     $yGet,
     $xGet,
     $$scope,
@@ -15489,19 +15603,30 @@ function instance$E($$self, $$props, $$invalidate) {
 class HtmlText extends SvelteComponentDev {
   constructor(options) {
     super(options);
-    init(this, options, instance$E, create_fragment$E, safe_not_equal, {
-      x: 16,
-      y: 17,
-      color: 0,
-      outline: 1,
-      data: 18,
-      xIndex: 19,
-      yIndex: 20,
-      xAlign: 2,
-      yAlign: 3,
-      xOffset: 21,
-      yOffset: 22
-    });
+    init(
+      this,
+      options,
+      instance$E,
+      create_fragment$E,
+      safe_not_equal,
+      {
+        x: 18,
+        y: 19,
+        color: 0,
+        outline: 1,
+        data: 20,
+        xIndex: 21,
+        yIndex: 22,
+        xData: 23,
+        yData: 24,
+        xAlign: 2,
+        yAlign: 3,
+        xOffset: 25,
+        yOffset: 26
+      },
+      null,
+      [-1, -1]
+    );
     dispatch_dev("SvelteRegisterComponent", {
       component: this,
       tagName: "HtmlText",
@@ -15549,6 +15674,18 @@ class HtmlText extends SvelteComponentDev {
     throw new Error("<HtmlText>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
   }
   set yIndex(value) {
+    throw new Error("<HtmlText>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  get xData() {
+    throw new Error("<HtmlText>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  set xData(value) {
+    throw new Error("<HtmlText>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  get yData() {
+    throw new Error("<HtmlText>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+  }
+  set yData(value) {
     throw new Error("<HtmlText>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
   }
   get xAlign() {
@@ -15818,7 +15955,7 @@ function create_default_slot_25(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-QDOERVnb_Nue");
-      add_location(div, file$A, 24, 4, 685);
+      add_location(div, file$A, 24, 4, 733);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -16156,7 +16293,7 @@ function create_default_slot_20$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-QDOERVnb_Nue");
-      add_location(div, file$A, 47, 4, 1202);
+      add_location(div, file$A, 47, 4, 1250);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -16493,7 +16630,7 @@ function create_default_slot_15$3(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-QDOERVnb_Nue");
-      add_location(div, file$A, 77, 4, 1848);
+      add_location(div, file$A, 77, 4, 1896);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -16927,7 +17064,7 @@ function create_default_slot_8$8(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-QDOERVnb_Nue");
-      add_location(div, file$A, 102, 4, 2409);
+      add_location(div, file$A, 102, 4, 2457);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -17305,7 +17442,7 @@ function create_default_slot_1$k(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-QDOERVnb_Nue");
-      add_location(div, file$A, 128, 4, 3081);
+      add_location(div, file$A, 128, 4, 3129);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -21522,7 +21659,7 @@ function create_default_slot_21(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-kkUATs4YyhRY");
-      add_location(div, file$r, 24, 4, 647);
+      add_location(div, file$r, 24, 4, 695);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -21811,7 +21948,7 @@ function create_default_slot_17$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-kkUATs4YyhRY");
-      add_location(div, file$r, 45, 4, 1131);
+      add_location(div, file$r, 45, 4, 1179);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -22099,7 +22236,7 @@ function create_default_slot_13$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-kkUATs4YyhRY");
-      add_location(div, file$r, 68, 4, 1687);
+      add_location(div, file$r, 68, 4, 1735);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -22483,7 +22620,7 @@ function create_default_slot_7$7(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-kkUATs4YyhRY");
-      add_location(div, file$r, 86, 4, 2158);
+      add_location(div, file$r, 86, 4, 2206);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -22811,7 +22948,7 @@ function create_default_slot_1$d(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "layercake s-kkUATs4YyhRY");
-      add_location(div, file$r, 103, 4, 2712);
+      add_location(div, file$r, 103, 4, 2760);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -24034,9 +24171,9 @@ function create_default_slot_2$b(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(span, file$o, 52, 8, 1349);
+      add_location(span, file$o, 52, 8, 1370);
       attr_dev(div, "class", "splitter align-center");
-      add_location(div, file$o, 50, 6, 1282);
+      add_location(div, file$o, 50, 6, 1303);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -26724,7 +26861,7 @@ function create_shape_slot(ctx) {
       attr_dev(div, "slot", "shape");
       attr_dev(div, "class", "circle s-B0Etwbfms3eS");
       set_style(div, "--color", ctx[2].color);
-      add_location(div, file$j, 44, 6, 1237);
+      add_location(div, file$j, 44, 6, 1258);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -27590,7 +27727,7 @@ function create_if_block_8(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 22, 8, 618);
+      add_location(i, file$h, 22, 8, 639);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -27658,7 +27795,7 @@ function create_default_slot_10$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 19, 4, 527);
+      add_location(div, file$h, 19, 4, 548);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -27736,7 +27873,7 @@ function create_if_block_7$1(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 37, 8, 1071);
+      add_location(i, file$h, 37, 8, 1092);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -27804,7 +27941,7 @@ function create_default_slot_9$3(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 34, 4, 968);
+      add_location(div, file$h, 34, 4, 989);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -27978,7 +28115,7 @@ function create_if_block_5$3(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 59, 8, 1608);
+      add_location(i, file$h, 59, 8, 1629);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -28054,7 +28191,7 @@ function create_default_slot_7$5(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 56, 4, 1517);
+      add_location(div, file$h, 56, 4, 1538);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -28135,7 +28272,7 @@ function create_if_block_4$5(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 75, 8, 2057);
+      add_location(i, file$h, 75, 8, 2078);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -28204,7 +28341,7 @@ function create_default_slot_6$6(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 72, 4, 1967);
+      add_location(div, file$h, 72, 4, 1988);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -28314,7 +28451,7 @@ function create_if_block_3$5(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 98, 8, 2694);
+      add_location(i, file$h, 98, 8, 2715);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -28398,7 +28535,7 @@ function create_default_slot_4$7(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 95, 4, 2596);
+      add_location(div, file$h, 95, 4, 2617);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -28479,7 +28616,7 @@ function create_if_block_2$6(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 114, 8, 3158);
+      add_location(i, file$h, 114, 8, 3179);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -28548,7 +28685,7 @@ function create_default_slot_3$8(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 111, 4, 3067);
+      add_location(div, file$h, 111, 4, 3088);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -28626,7 +28763,7 @@ function create_if_block_1$6(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 130, 8, 3579);
+      add_location(i, file$h, 130, 8, 3600);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -28695,7 +28832,7 @@ function create_default_slot_2$8(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 127, 4, 3488);
+      add_location(div, file$h, 127, 4, 3509);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -28773,7 +28910,7 @@ function create_if_block$e(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$h, 146, 8, 3982);
+      add_location(i, file$h, 146, 8, 4003);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -28842,7 +28979,7 @@ function create_default_slot_1$8(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-vSiuPK4jSs6Y");
-      add_location(div, file$h, 143, 4, 3891);
+      add_location(div, file$h, 143, 4, 3912);
     },
     m: function mount(target, anchor) {
       mount_component(checkboxes, target, anchor);
@@ -31161,7 +31298,7 @@ function create_if_block_6$1(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$c, 20, 10, 626);
+      add_location(i, file$c, 20, 10, 647);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -31235,9 +31372,9 @@ function create_default_slot_8$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 17, 6, 542);
+      add_location(div0, file$c, 17, 6, 563);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 9, 4, 292);
+      add_location(div1, file$c, 9, 4, 313);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -31314,7 +31451,7 @@ function create_if_block_5$2(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$c, 39, 10, 1105);
+      add_location(i, file$c, 39, 10, 1126);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -31389,9 +31526,9 @@ function create_default_slot_7$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 36, 6, 1021);
+      add_location(div0, file$c, 36, 6, 1042);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 27, 4, 749);
+      add_location(div1, file$c, 27, 4, 770);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -31468,7 +31605,7 @@ function create_if_block_4$3(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$c, 57, 10, 1621);
+      add_location(i, file$c, 57, 10, 1642);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -31542,9 +31679,9 @@ function create_default_slot_6$5(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 54, 6, 1525);
+      add_location(div0, file$c, 54, 6, 1546);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 46, 4, 1246);
+      add_location(div1, file$c, 46, 4, 1267);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -31730,9 +31867,9 @@ function create_default_slot_4$6(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 81, 6, 2301);
+      add_location(div0, file$c, 81, 6, 2322);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 64, 4, 1757);
+      add_location(div1, file$c, 64, 4, 1778);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -31812,7 +31949,7 @@ function create_if_block_2$4(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$c, 103, 10, 2885);
+      add_location(i, file$c, 103, 10, 2906);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -31887,9 +32024,9 @@ function create_default_slot_3$7(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 100, 6, 2801);
+      add_location(div0, file$c, 100, 6, 2822);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 91, 4, 2534);
+      add_location(div1, file$c, 91, 4, 2555);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -31966,7 +32103,7 @@ function create_if_block_1$4(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$c, 122, 10, 3369);
+      add_location(i, file$c, 122, 10, 3390);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -32041,9 +32178,9 @@ function create_default_slot_2$7(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 119, 6, 3285);
+      add_location(div0, file$c, 119, 6, 3306);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 110, 4, 3011);
+      add_location(div1, file$c, 110, 4, 3032);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -32120,7 +32257,7 @@ function create_if_block$9(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$c, 141, 10, 3857);
+      add_location(i, file$c, 141, 10, 3878);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -32195,9 +32332,9 @@ function create_default_slot_1$7(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-7YONNAxMYvH2");
-      add_location(div0, file$c, 138, 6, 3773);
+      add_location(div0, file$c, 138, 6, 3794);
       attr_dev(div1, "class", "wrapper s-7YONNAxMYvH2");
-      add_location(div1, file$c, 129, 4, 3497);
+      add_location(div1, file$c, 129, 4, 3518);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -33175,7 +33312,7 @@ function create_if_block_7(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 22, 8, 563);
+      add_location(i, file$a, 22, 8, 584);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -33246,7 +33383,7 @@ function create_default_slot_9$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 19, 4, 484);
+      add_location(div, file$a, 19, 4, 505);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -33324,7 +33461,7 @@ function create_if_block_6(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 37, 8, 994);
+      add_location(i, file$a, 37, 8, 1015);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -33395,7 +33532,7 @@ function create_default_slot_8$3(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 34, 4, 892);
+      add_location(div, file$a, 34, 4, 913);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -33569,7 +33706,7 @@ function create_if_block_4$2(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 59, 8, 1501);
+      add_location(i, file$a, 59, 8, 1522);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -33648,7 +33785,7 @@ function create_default_slot_6$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 56, 4, 1422);
+      add_location(div, file$a, 56, 4, 1443);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -33729,7 +33866,7 @@ function create_if_block_3$2(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 75, 8, 1918);
+      add_location(i, file$a, 75, 8, 1939);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -33801,7 +33938,7 @@ function create_default_slot_5$5(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 72, 4, 1840);
+      add_location(div, file$a, 72, 4, 1861);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -33911,7 +34048,7 @@ function create_if_block_2$3(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 98, 8, 2524);
+      add_location(i, file$a, 98, 8, 2545);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -33998,7 +34135,7 @@ function create_default_slot_3$6(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 95, 4, 2438);
+      add_location(div, file$a, 95, 4, 2459);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -34079,7 +34216,7 @@ function create_if_block_1$3(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 114, 8, 2959);
+      add_location(i, file$a, 114, 8, 2980);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -34151,7 +34288,7 @@ function create_default_slot_2$6(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 111, 4, 2880);
+      add_location(div, file$a, 111, 4, 2901);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -34229,7 +34366,7 @@ function create_if_block$7(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$a, 130, 8, 3348);
+      add_location(i, file$a, 130, 8, 3369);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -34301,7 +34438,7 @@ function create_default_slot_1$6(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "result s-9aSb3n_4tAkN");
-      add_location(div, file$a, 127, 4, 3269);
+      add_location(div, file$a, 127, 4, 3290);
     },
     m: function mount(target, anchor) {
       mount_component(radiobuttons, target, anchor);
@@ -35766,7 +35903,7 @@ function create_if_block_5(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$8, 88, 10, 2163);
+      add_location(i, file$8, 88, 10, 2184);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -35840,9 +35977,9 @@ function create_default_slot_8$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-DuHwGkmG9OZn");
-      add_location(div0, file$8, 85, 6, 2075);
+      add_location(div0, file$8, 85, 6, 2096);
       attr_dev(div1, "class", "wrapper s-DuHwGkmG9OZn");
-      add_location(div1, file$8, 77, 4, 1856);
+      add_location(div1, file$8, 77, 4, 1877);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -36023,9 +36160,9 @@ function create_default_slot_6$3(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-DuHwGkmG9OZn");
-      add_location(div0, file$8, 107, 6, 2661);
+      add_location(div0, file$8, 107, 6, 2682);
       attr_dev(div1, "class", "wrapper s-DuHwGkmG9OZn");
-      add_location(div1, file$8, 95, 4, 2291);
+      add_location(div1, file$8, 95, 4, 2312);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -36105,7 +36242,7 @@ function create_if_block_3$1(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$8, 128, 10, 3228);
+      add_location(i, file$8, 128, 10, 3249);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -36179,9 +36316,9 @@ function create_default_slot_5$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-DuHwGkmG9OZn");
-      add_location(div0, file$8, 125, 6, 3140);
+      add_location(div0, file$8, 125, 6, 3161);
       attr_dev(div1, "class", "wrapper s-DuHwGkmG9OZn");
-      add_location(div1, file$8, 117, 4, 2895);
+      add_location(div1, file$8, 117, 4, 2916);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -36362,9 +36499,9 @@ function create_default_slot_3$5(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-DuHwGkmG9OZn");
-      add_location(div0, file$8, 147, 6, 3774);
+      add_location(div0, file$8, 147, 6, 3795);
       attr_dev(div1, "class", "wrapper s-DuHwGkmG9OZn");
-      add_location(div1, file$8, 135, 4, 3372);
+      add_location(div1, file$8, 135, 4, 3393);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -36444,7 +36581,7 @@ function create_if_block_1$1(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$8, 170, 10, 4374);
+      add_location(i, file$8, 170, 10, 4395);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -36518,9 +36655,9 @@ function create_default_slot_2$5(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-DuHwGkmG9OZn");
-      add_location(div0, file$8, 167, 6, 4286);
+      add_location(div0, file$8, 167, 6, 4307);
       attr_dev(div1, "class", "wrapper s-DuHwGkmG9OZn");
-      add_location(div1, file$8, 157, 4, 4006);
+      add_location(div1, file$8, 157, 4, 4027);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -36662,9 +36799,9 @@ function create_default_slot_1$5(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-DuHwGkmG9OZn");
-      add_location(div0, file$8, 186, 6, 4766);
+      add_location(div0, file$8, 186, 6, 4787);
       attr_dev(div1, "class", "wrapper s-DuHwGkmG9OZn");
-      add_location(div1, file$8, 177, 4, 4506);
+      add_location(div1, file$8, 177, 4, 4527);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -37565,7 +37702,7 @@ function create_if_block_4(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$6, 19, 10, 581);
+      add_location(i, file$6, 19, 10, 602);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -37638,9 +37775,9 @@ function create_default_slot_6$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-tSNKq4koiSFo");
-      add_location(div0, file$6, 16, 6, 497);
+      add_location(div0, file$6, 16, 6, 518);
       attr_dev(div1, "class", "wrapper s-tSNKq4koiSFo");
-      add_location(div1, file$6, 9, 4, 286);
+      add_location(div1, file$6, 9, 4, 307);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -37717,7 +37854,7 @@ function create_if_block_3(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$6, 36, 10, 1058);
+      add_location(i, file$6, 36, 10, 1079);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -37790,9 +37927,9 @@ function create_default_slot_5$3(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-tSNKq4koiSFo");
-      add_location(div0, file$6, 33, 6, 962);
+      add_location(div0, file$6, 33, 6, 983);
       attr_dev(div1, "class", "wrapper s-tSNKq4koiSFo");
-      add_location(div1, file$6, 26, 4, 722);
+      add_location(div1, file$6, 26, 4, 743);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -37976,9 +38113,9 @@ function create_default_slot_3$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-tSNKq4koiSFo");
-      add_location(div0, file$6, 58, 6, 1649);
+      add_location(div0, file$6, 58, 6, 1670);
       attr_dev(div1, "class", "wrapper s-tSNKq4koiSFo");
-      add_location(div1, file$6, 43, 4, 1194);
+      add_location(div1, file$6, 43, 4, 1215);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -38058,7 +38195,7 @@ function create_if_block_1(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$6, 79, 10, 2194);
+      add_location(i, file$6, 79, 10, 2215);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -38132,9 +38269,9 @@ function create_default_slot_2$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-tSNKq4koiSFo");
-      add_location(div0, file$6, 76, 6, 2110);
+      add_location(div0, file$6, 76, 6, 2131);
       attr_dev(div1, "class", "wrapper s-tSNKq4koiSFo");
-      add_location(div1, file$6, 68, 4, 1882);
+      add_location(div1, file$6, 68, 4, 1903);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -38211,7 +38348,7 @@ function create_if_block$4(ctx) {
       this.h();
     },
     h: function hydrate() {
-      add_location(i, file$6, 97, 10, 2643);
+      add_location(i, file$6, 97, 10, 2664);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, i, anchor);
@@ -38285,9 +38422,9 @@ function create_default_slot_1$4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div0, "class", "result s-tSNKq4koiSFo");
-      add_location(div0, file$6, 94, 6, 2559);
+      add_location(div0, file$6, 94, 6, 2580);
       attr_dev(div1, "class", "wrapper s-tSNKq4koiSFo");
-      add_location(div1, file$6, 86, 4, 2322);
+      add_location(div1, file$6, 86, 4, 2343);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div1, anchor);
@@ -40298,7 +40435,7 @@ function create_default_slot_18$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 27, 6, 674);
+      add_location(div, file$3, 27, 6, 716);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -40441,7 +40578,7 @@ function create_default_slot_16$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 45, 6, 1081);
+      add_location(div, file$3, 45, 6, 1123);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -40674,7 +40811,7 @@ function create_default_slot_13$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 65, 6, 1488);
+      add_location(div, file$3, 65, 6, 1530);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -40866,7 +41003,7 @@ function create_default_slot_10$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 81, 6, 1855);
+      add_location(div, file$3, 81, 6, 1897);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -41024,7 +41161,7 @@ function create_default_slot_8$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 95, 6, 2229);
+      add_location(div, file$3, 95, 6, 2271);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -41168,7 +41305,7 @@ function create_default_slot_6$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 109, 6, 2580);
+      add_location(div, file$3, 109, 6, 2622);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -41312,7 +41449,7 @@ function create_default_slot_4$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 124, 6, 2991);
+      add_location(div, file$3, 124, 6, 3033);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -41457,7 +41594,7 @@ function create_default_slot_2$2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s-XJ_1c8CSCPyr");
-      add_location(div, file$3, 138, 6, 3314);
+      add_location(div, file$3, 138, 6, 3356);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -42593,7 +42730,7 @@ function create_default_slot_2$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "custom-table s-rTqnjXO7zxWr");
-      add_location(div, file$1, 68, 4, 1874);
+      add_location(div, file$1, 68, 4, 1895);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -42654,7 +42791,7 @@ function create_default_slot_1$1(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "custom-table s-rTqnjXO7zxWr");
-      add_location(div, file$1, 74, 4, 2055);
+      add_location(div, file$1, 74, 4, 2076);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -43063,7 +43200,7 @@ function create_default_slot_18(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 23, 6, 662);
+      add_location(div, file, 23, 6, 704);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -43206,7 +43343,7 @@ function create_default_slot_16(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 41, 6, 1069);
+      add_location(div, file, 41, 6, 1111);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -43439,7 +43576,7 @@ function create_default_slot_13(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 61, 6, 1476);
+      add_location(div, file, 61, 6, 1518);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -43631,7 +43768,7 @@ function create_default_slot_10(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 77, 6, 1843);
+      add_location(div, file, 77, 6, 1885);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -43789,7 +43926,7 @@ function create_default_slot_8(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 91, 6, 2217);
+      add_location(div, file, 91, 6, 2259);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -43933,7 +44070,7 @@ function create_default_slot_6(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 105, 6, 2568);
+      add_location(div, file, 105, 6, 2610);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -44077,7 +44214,7 @@ function create_default_slot_4(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 120, 6, 2979);
+      add_location(div, file, 120, 6, 3021);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -44222,7 +44359,7 @@ function create_default_slot_2(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "panel s--pQoW_zgAn_6");
-      add_location(div, file, 134, 6, 3302);
+      add_location(div, file, 134, 6, 3344);
     },
     m: function mount(target, anchor) {
       insert_hydration_dev(target, div, anchor);
@@ -44748,8 +44885,8 @@ class Tabs_story extends SvelteComponentDev {
 }
 const Comp32 = { "title": "Introduction", "icon": "carbon:document-blank", "group": "top", "docsOnly": true, "variants": [] };
 let files = [
-  { "id": "src-lib-components-layercake-areay-story-svelte", "path": ["AreaY"], "filePath": "src/lib/components/layercake/AreaY.story.svelte", "story": { "id": "src-lib-components-layercake-areay-story-svelte", "title": "AreaY", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-areay-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-areay-story-svelte-1", "title": "Shape only", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 0, component: AreaY_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-areay-story-svelte-7efbbe18.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-layercake-areay0-story-svelte", "path": ["AreaY0"], "filePath": "src/lib/components/layercake/AreaY0.story.svelte", "story": { "id": "src-lib-components-layercake-areay0-story-svelte", "title": "AreaY0", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-areay0-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-areay0-story-svelte-1", "title": "Shape only", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 1, component: AreaY0_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-areay0-story-svelte-0ce9883e.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-layercake-areay-story-svelte", "path": ["AreaY"], "filePath": "src/lib/components/layercake/AreaY.story.svelte", "story": { "id": "src-lib-components-layercake-areay-story-svelte", "title": "AreaY", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-areay-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-areay-story-svelte-1", "title": "Shape only", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 0, component: AreaY_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-areay-story-svelte-52ead359.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-layercake-areay0-story-svelte", "path": ["AreaY0"], "filePath": "src/lib/components/layercake/AreaY0.story.svelte", "story": { "id": "src-lib-components-layercake-areay0-story-svelte", "title": "AreaY0", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-areay0-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-areay0-story-svelte-1", "title": "Shape only", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 1, component: AreaY0_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-areay0-story-svelte-f6031192.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-arrow-story-svelte", "path": ["Arrow"], "filePath": "src/lib/components/layercake/Arrow.story.svelte", "story": { "id": "src-lib-components-layercake-arrow-story-svelte", "title": "Arrow", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-arrow-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-arrow-story-svelte-1", "title": "Curve", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-arrow-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 2, component: Arrow_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-arrow-story-svelte-26ed22d5.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-axislabelx-story-svelte", "path": ["AxisLabelX"], "filePath": "src/lib/components/layercake/AxisLabelX.story.svelte", "story": { "id": "src-lib-components-layercake-axislabelx-story-svelte", "title": "AxisLabelX", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 3, component: AxisLabelX_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-axislabelx-story-svelte-f27dd0b3.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-axislabely-story-svelte", "path": ["AxisLabelY"], "filePath": "src/lib/components/layercake/AxisLabelY.story.svelte", "story": { "id": "src-lib-components-layercake-axislabely-story-svelte", "title": "AxisLabelY", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 4, component: AxisLabelY_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-axislabely-story-svelte-f9ab2a1a.js"), true ? [] : void 0) },
@@ -44759,27 +44896,27 @@ let files = [
   { "id": "src-lib-components-layercake-barv-story-svelte", "path": ["BarV"], "filePath": "src/lib/components/layercake/BarV.story.svelte", "story": { "id": "src-lib-components-layercake-barv-story-svelte", "title": "BarV", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-barv-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-barv-story-svelte-1", "title": "With bar labels", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-barv-story-svelte-2", "title": "With bar labels on top", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 8, component: BarV_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-barv-story-svelte-12f06cdc.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-circle-story-svelte", "path": ["Circle"], "filePath": "src/lib/components/layercake/Circle.story.svelte", "story": { "id": "src-lib-components-layercake-circle-story-svelte", "title": "Circle", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-circle-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-circle-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-circle-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 9, component: Circle_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-circle-story-svelte-07edbf3e.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-group-story-svelte", "path": ["Group"], "filePath": "src/lib/components/layercake/Group.story.svelte", "story": { "id": "src-lib-components-layercake-group-story-svelte", "title": "Group", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 10, component: Group_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-group-story-svelte-8465ac88.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-layercake-htmltext-story-svelte", "path": ["HtmlText"], "filePath": "src/lib/components/layercake/HtmlText.story.svelte", "story": { "id": "src-lib-components-layercake-htmltext-story-svelte", "title": "HtmlText", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-htmltext-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-1", "title": "With custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-2", "title": "With custom offsets", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-3", "title": "Align along x-axis", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-4", "title": "Align on y-axis", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 11, component: HtmlText_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-htmltext-story-svelte-c5b12835.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-layercake-htmltext-story-svelte", "path": ["HtmlText"], "filePath": "src/lib/components/layercake/HtmlText.story.svelte", "story": { "id": "src-lib-components-layercake-htmltext-story-svelte", "title": "HtmlText", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-htmltext-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-1", "title": "With custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-2", "title": "With custom offsets", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-3", "title": "Align along x-axis", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-htmltext-story-svelte-4", "title": "Align on y-axis", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 11, component: HtmlText_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-htmltext-story-svelte-acca6956.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-line-story-svelte", "path": ["Line"], "filePath": "src/lib/components/layercake/Line.story.svelte", "story": { "id": "src-lib-components-layercake-line-story-svelte", "title": "Line", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-line-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-line-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-line-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 12, component: Line_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-line-story-svelte-2a6a2030.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-lineh-story-svelte", "path": ["LineH"], "filePath": "src/lib/components/layercake/LineH.story.svelte", "story": { "id": "src-lib-components-layercake-lineh-story-svelte", "title": "LineH", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-lineh-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-lineh-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-lineh-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 13, component: LineH_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-lineh-story-svelte-74570fb6.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-linev-story-svelte", "path": ["LineV"], "filePath": "src/lib/components/layercake/LineV.story.svelte", "story": { "id": "src-lib-components-layercake-linev-story-svelte", "title": "LineV", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-linev-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-linev-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-linev-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 14, component: LineV_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-linev-story-svelte-94aa852c.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-path-story-svelte", "path": ["Path"], "filePath": "src/lib/components/layercake/Path.story.svelte", "story": { "id": "src-lib-components-layercake-path-story-svelte", "title": "Path", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-path-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-path-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-path-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 15, component: Path_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-path-story-svelte-db38142c.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-recth-story-svelte", "path": ["RectH"], "filePath": "src/lib/components/layercake/RectH.story.svelte", "story": { "id": "src-lib-components-layercake-recth-story-svelte", "title": "RectH", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-recth-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-recth-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-recth-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 16, component: RectH_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-recth-story-svelte-0d99fb8d.js"), true ? [] : void 0) },
   { "id": "src-lib-components-layercake-rectv-story-svelte", "path": ["RectV"], "filePath": "src/lib/components/layercake/RectV.story.svelte", "story": { "id": "src-lib-components-layercake-rectv-story-svelte", "title": "RectV", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-rectv-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-rectv-story-svelte-1", "title": "Custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-rectv-story-svelte-2", "title": "Within chart", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 17, component: RectV_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-rectv-story-svelte-8e1c3ef5.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-layercake-svgtext-story-svelte", "path": ["SvgText"], "filePath": "src/lib/components/layercake/SvgText.story.svelte", "story": { "id": "src-lib-components-layercake-svgtext-story-svelte", "title": "SvgText", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-svgtext-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-1", "title": "With custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-2", "title": "With custom offsets", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-3", "title": "Align along x-axis", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-4", "title": "Align on y-axis", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 18, component: SvgText_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-svgtext-story-svelte-3d5a67e4.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-button-story-svelte", "path": ["Button"], "filePath": "src/lib/components/shared/Button.story.svelte", "story": { "id": "src-lib-components-shared-button-story-svelte", "title": "Button", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-button-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-1", "title": "Full width", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-2", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-3", "title": "With icon", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-4", "title": "Round with icon", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-5", "title": "Icon and text", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 19, component: Button_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-button-story-svelte-24c3bae7.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-chartfooter-story-svelte", "path": ["ChartFooter"], "filePath": "src/lib/components/shared/ChartFooter.story.svelte", "story": { "id": "src-lib-components-shared-chartfooter-story-svelte", "title": "ChartFooter", "group": "viz", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 20, component: ChartFooter_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-chartfooter-story-svelte-ea92a1b2.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-chartheader-story-svelte", "path": ["ChartHeader"], "filePath": "src/lib/components/shared/ChartHeader.story.svelte", "story": { "id": "src-lib-components-shared-chartheader-story-svelte", "title": "ChartHeader", "group": "viz", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-chartheader-story-svelte-0", "title": "Title", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-chartheader-story-svelte-1", "title": "With subtitle", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 21, component: ChartHeader_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-chartheader-story-svelte-c27b0f71.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-chartlegend-story-svelte", "path": ["ChartLegend"], "filePath": "src/lib/components/shared/ChartLegend.story.svelte", "story": { "id": "src-lib-components-shared-chartlegend-story-svelte", "title": "ChartLegend", "group": "viz", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-chartlegend-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-chartlegend-story-svelte-1", "title": "With complex items", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-chartlegend-story-svelte-2", "title": "With custom shapes", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 22, component: ChartLegend_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-chartlegend-story-svelte-6886e6b5.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-checkboxes-story-svelte", "path": ["CheckBoxes"], "filePath": "src/lib/components/shared/CheckBoxes.story.svelte", "story": { "id": "src-lib-components-shared-checkboxes-story-svelte", "title": "CheckBoxes", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-checkboxes-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-1", "title": "Specify initially selected values", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-2", "title": "Custom option label", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-3", "title": "Disabled option", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-4", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-6", "title": "Hide label visually", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-7", "title": "Chips", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 23, component: CheckBoxes_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-checkboxes-story-svelte-02c33898.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-dropdown-story-svelte", "path": ["Dropdown"], "filePath": "src/lib/components/shared/Dropdown.story.svelte", "story": { "id": "src-lib-components-shared-dropdown-story-svelte", "title": "Dropdown", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-dropdown-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-1", "title": "Initially Open", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-2", "title": "Specify initially selected value", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-3", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-4", "title": "Disabled", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-5", "title": "Hide clear button", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-6", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 24, component: Dropdown_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-dropdown-story-svelte-b767d8a2.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-radiobuttons-story-svelte", "path": ["RadioButtons"], "filePath": "src/lib/components/shared/RadioButtons.story.svelte", "story": { "id": "src-lib-components-shared-radiobuttons-story-svelte", "title": "RadioButtons", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-radiobuttons-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-1", "title": "Specify initially selected values", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-2", "title": "Custom option label", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-3", "title": "Disabled option", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-4", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-6", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 25, component: RadioButtons_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-radiobuttons-story-svelte-9196e3e0.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-search-story-svelte", "path": ["Search"], "filePath": "src/lib/components/shared/Search.story.svelte", "story": { "id": "src-lib-components-shared-search-story-svelte", "title": "Search", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-search-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-1", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-2", "title": "Fuzzy searching", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-3", "title": "Fuzzy searching complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-4", "title": "Async loading", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-5", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 26, component: Search_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-search-story-svelte-c81dd885.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-select-story-svelte", "path": ["Select"], "filePath": "src/lib/components/shared/Select.story.svelte", "story": { "id": "src-lib-components-shared-select-story-svelte", "title": "Select", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-select-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-1", "title": "Specify initially selected value", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-2", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-3", "title": "Disabled", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-4", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 27, component: Select_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-select-story-svelte-dfd0f1ad.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-slant-story-svelte", "path": ["Slant"], "filePath": "src/lib/components/shared/Slant.story.svelte", "story": { "id": "src-lib-components-shared-slant-story-svelte", "title": "Slant", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-slant-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-slant-story-svelte-1", "title": "With text", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-slant-story-svelte-2", "title": "With custom colors", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 28, component: Slant_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-slant-story-svelte-460cb209.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-tabpanels-story-svelte", "path": ["TabPanels"], "filePath": "src/lib/components/shared/TabPanels.story.svelte", "story": { "id": "src-lib-components-shared-tabpanels-story-svelte", "title": "TabPanels", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-tabpanels-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-1", "title": "Specify initially selected tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-2", "title": "Custom tab labels", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-3", "title": "Complex tabs", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-4", "title": "Disabled tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-6", "title": "Customize all colors", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-7", "title": "Without slants", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 29, component: TabPanels_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-tabpanels-story-svelte-b065f237.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-table-story-svelte", "path": ["Table"], "filePath": "src/lib/components/shared/Table.story.svelte", "story": { "id": "src-lib-components-shared-table-story-svelte", "title": "Table", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-table-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-table-story-svelte-1", "title": "Right-aligned data columns", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-table-story-svelte-2", "title": "Customized columns", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 30, component: Table_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-table-story-svelte-d3f378a6.js"), true ? [] : void 0) },
-  { "id": "src-lib-components-shared-tabs-story-svelte", "path": ["Tabs"], "filePath": "src/lib/components/shared/Tabs.story.svelte", "story": { "id": "src-lib-components-shared-tabs-story-svelte", "title": "Tabs", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-tabs-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-1", "title": "Specify initially selected tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-2", "title": "Custom tab labels", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-3", "title": "Complex tabs", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-4", "title": "Disabled tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-6", "title": "Customize all colors", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-7", "title": "Without slants", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 31, component: Tabs_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-tabs-story-svelte-69595f37.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-layercake-svgtext-story-svelte", "path": ["SvgText"], "filePath": "src/lib/components/layercake/SvgText.story.svelte", "story": { "id": "src-lib-components-layercake-svgtext-story-svelte", "title": "SvgText", "group": "layercake", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-layercake-svgtext-story-svelte-0", "title": "Within chart", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-1", "title": "With custom attributes", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-2", "title": "With custom offsets", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-3", "title": "Align along x-axis", "icon": null, "iconColor": null }, { "id": "src-lib-components-layercake-svgtext-story-svelte-4", "title": "Align on y-axis", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 18, component: SvgText_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-layercake-svgtext-story-svelte-ee6cc3aa.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-button-story-svelte", "path": ["Button"], "filePath": "src/lib/components/shared/Button.story.svelte", "story": { "id": "src-lib-components-shared-button-story-svelte", "title": "Button", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-button-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-1", "title": "Full width", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-2", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-3", "title": "With icon", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-4", "title": "Round with icon", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-button-story-svelte-5", "title": "Icon and text", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 19, component: Button_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-button-story-svelte-aedc05ff.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-chartfooter-story-svelte", "path": ["ChartFooter"], "filePath": "src/lib/components/shared/ChartFooter.story.svelte", "story": { "id": "src-lib-components-shared-chartfooter-story-svelte", "title": "ChartFooter", "group": "viz", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "_default", "title": "default" }] }, "supportPluginId": "svelte3", "index": 20, component: ChartFooter_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-chartfooter-story-svelte-5c1367f3.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-chartheader-story-svelte", "path": ["ChartHeader"], "filePath": "src/lib/components/shared/ChartHeader.story.svelte", "story": { "id": "src-lib-components-shared-chartheader-story-svelte", "title": "ChartHeader", "group": "viz", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-chartheader-story-svelte-0", "title": "Title", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-chartheader-story-svelte-1", "title": "With subtitle", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 21, component: ChartHeader_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-chartheader-story-svelte-5542303e.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-chartlegend-story-svelte", "path": ["ChartLegend"], "filePath": "src/lib/components/shared/ChartLegend.story.svelte", "story": { "id": "src-lib-components-shared-chartlegend-story-svelte", "title": "ChartLegend", "group": "viz", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-chartlegend-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-chartlegend-story-svelte-1", "title": "With complex items", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-chartlegend-story-svelte-2", "title": "With custom shapes", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 22, component: ChartLegend_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-chartlegend-story-svelte-74c4cbc7.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-checkboxes-story-svelte", "path": ["CheckBoxes"], "filePath": "src/lib/components/shared/CheckBoxes.story.svelte", "story": { "id": "src-lib-components-shared-checkboxes-story-svelte", "title": "CheckBoxes", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-checkboxes-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-1", "title": "Specify initially selected values", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-2", "title": "Custom option label", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-3", "title": "Disabled option", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-4", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-6", "title": "Hide label visually", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-checkboxes-story-svelte-7", "title": "Chips", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 23, component: CheckBoxes_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-checkboxes-story-svelte-8977ed3d.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-dropdown-story-svelte", "path": ["Dropdown"], "filePath": "src/lib/components/shared/Dropdown.story.svelte", "story": { "id": "src-lib-components-shared-dropdown-story-svelte", "title": "Dropdown", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-dropdown-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-1", "title": "Initially Open", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-2", "title": "Specify initially selected value", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-3", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-4", "title": "Disabled", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-5", "title": "Hide clear button", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-dropdown-story-svelte-6", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 24, component: Dropdown_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-dropdown-story-svelte-c48d1edb.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-radiobuttons-story-svelte", "path": ["RadioButtons"], "filePath": "src/lib/components/shared/RadioButtons.story.svelte", "story": { "id": "src-lib-components-shared-radiobuttons-story-svelte", "title": "RadioButtons", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-radiobuttons-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-1", "title": "Specify initially selected values", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-2", "title": "Custom option label", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-3", "title": "Disabled option", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-4", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-radiobuttons-story-svelte-6", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 25, component: RadioButtons_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-radiobuttons-story-svelte-ce658b6c.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-search-story-svelte", "path": ["Search"], "filePath": "src/lib/components/shared/Search.story.svelte", "story": { "id": "src-lib-components-shared-search-story-svelte", "title": "Search", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-search-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-1", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-2", "title": "Fuzzy searching", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-3", "title": "Fuzzy searching complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-4", "title": "Async loading", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-search-story-svelte-5", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 26, component: Search_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-search-story-svelte-b6f5485f.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-select-story-svelte", "path": ["Select"], "filePath": "src/lib/components/shared/Select.story.svelte", "story": { "id": "src-lib-components-shared-select-story-svelte", "title": "Select", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-select-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-1", "title": "Specify initially selected value", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-2", "title": "Complex options", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-3", "title": "Disabled", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-select-story-svelte-4", "title": "Hide label visually", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 27, component: Select_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-select-story-svelte-1e6b0168.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-slant-story-svelte", "path": ["Slant"], "filePath": "src/lib/components/shared/Slant.story.svelte", "story": { "id": "src-lib-components-shared-slant-story-svelte", "title": "Slant", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-slant-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-slant-story-svelte-1", "title": "With text", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-slant-story-svelte-2", "title": "With custom colors", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 28, component: Slant_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-slant-story-svelte-9b16ebdd.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-tabpanels-story-svelte", "path": ["TabPanels"], "filePath": "src/lib/components/shared/TabPanels.story.svelte", "story": { "id": "src-lib-components-shared-tabpanels-story-svelte", "title": "TabPanels", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-tabpanels-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-1", "title": "Specify initially selected tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-2", "title": "Custom tab labels", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-3", "title": "Complex tabs", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-4", "title": "Disabled tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-6", "title": "Customize all colors", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabpanels-story-svelte-7", "title": "Without slants", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 29, component: TabPanels_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-tabpanels-story-svelte-16a6b2fa.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-table-story-svelte", "path": ["Table"], "filePath": "src/lib/components/shared/Table.story.svelte", "story": { "id": "src-lib-components-shared-table-story-svelte", "title": "Table", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-table-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-table-story-svelte-1", "title": "Right-aligned data columns", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-table-story-svelte-2", "title": "Customized columns", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 30, component: Table_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-table-story-svelte-0adbb431.js"), true ? [] : void 0) },
+  { "id": "src-lib-components-shared-tabs-story-svelte", "path": ["Tabs"], "filePath": "src/lib/components/shared/Tabs.story.svelte", "story": { "id": "src-lib-components-shared-tabs-story-svelte", "title": "Tabs", "group": "ui", "layout": { "type": "grid", "width": "100%" }, "icon": null, "iconColor": null, "docsOnly": false, "variants": [{ "id": "src-lib-components-shared-tabs-story-svelte-0", "title": "Basic", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-1", "title": "Specify initially selected tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-2", "title": "Custom tab labels", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-3", "title": "Complex tabs", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-4", "title": "Disabled tab", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-5", "title": "Custom accent color", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-6", "title": "Customize all colors", "icon": null, "iconColor": null }, { "id": "src-lib-components-shared-tabs-story-svelte-7", "title": "Without slants", "icon": null, "iconColor": null }] }, "supportPluginId": "svelte3", "index": 31, component: Tabs_story, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-shared-tabs-story-svelte-a7eefe93.js"), true ? [] : void 0) },
   { "id": "src-lib-components-introduction-story-js", "path": ["Introduction"], "filePath": "src/lib/components/Introduction.story.js", "story": { "id": "src-lib-components-introduction-story-js", "title": "Introduction", "group": "top", "layout": { "type": "single", "iframe": true }, "icon": "carbon:document-blank", "docsOnly": true, "variants": [] }, "supportPluginId": "vanilla", "index": 32, component: Comp32, source: () => __vitePreload(() => import("./__resolved__virtual_story-source_src-lib-components-introduction-story-js-9a92e9e8.js"), true ? [] : void 0) }
 ];
 let tree = [{ "group": true, "id": "top", "title": "", "children": [{ "title": "Introduction", "index": 32 }] }, { "group": true, "id": "ui", "title": "User Interface", "children": [{ "title": "Button", "index": 19 }, { "title": "CheckBoxes", "index": 23 }, { "title": "Dropdown", "index": 24 }, { "title": "RadioButtons", "index": 25 }, { "title": "Search", "index": 26 }, { "title": "Select", "index": 27 }, { "title": "Slant", "index": 28 }, { "title": "Table", "index": 30 }, { "title": "TabPanels", "index": 29 }, { "title": "Tabs", "index": 31 }] }, { "group": true, "id": "viz", "title": "Visualization", "children": [{ "title": "ChartFooter", "index": 20 }, { "title": "ChartHeader", "index": 21 }, { "title": "ChartLegend", "index": 22 }] }, { "group": true, "id": "layercake", "title": "LayerCake", "children": [{ "title": "AreaY", "index": 0 }, { "title": "AreaY0", "index": 1 }, { "title": "Arrow", "index": 2 }, { "title": "AxisLabelX", "index": 3 }, { "title": "AxisLabelY", "index": 4 }, { "title": "AxisX", "index": 5 }, { "title": "AxisY", "index": 6 }, { "title": "BarH", "index": 7 }, { "title": "BarV", "index": 8 }, { "title": "Circle", "index": 9 }, { "title": "Group", "index": 10 }, { "title": "HtmlText", "index": 11 }, { "title": "Line", "index": 12 }, { "title": "LineH", "index": 13 }, { "title": "LineV", "index": 14 }, { "title": "Path", "index": 15 }, { "title": "RectH", "index": 16 }, { "title": "RectV", "index": 17 }, { "title": "SvgText", "index": 18 }] }];

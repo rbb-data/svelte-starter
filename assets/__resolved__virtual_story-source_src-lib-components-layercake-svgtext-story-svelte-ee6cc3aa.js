@@ -7,8 +7,8 @@ const __resolved__virtual_storySource_srcLibComponentsLayercakeSvgtextStorySvelt
   import SvgText from '$lib/components/layercake/SvgText.svelte';
   import AxisX from '$lib/components/layercake/AxisX.svelte';
   import AxisY from '$lib/components/layercake/AxisY.svelte';
-  import LineV from './LineV.svelte';
-  import LineH from './LineH.svelte';
+  import LineV from '$lib/components/layercake/LineV.svelte';
+  import LineH from '$lib/components/layercake/LineH.svelte';
 
   const data = [
     { x: 0, y: 10 },

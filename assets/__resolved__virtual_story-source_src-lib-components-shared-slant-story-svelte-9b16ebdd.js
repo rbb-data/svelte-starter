@@ -2,7 +2,7 @@ const __resolved__virtual_storySource_srcLibComponentsSharedSlantStorySvelte = `
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import Slant from './Slant.svelte';
+  import Slant from '$lib/components/shared/Slant.svelte';
   import * as tokens from '$lib/tokens';
 
   let text = 'Text';

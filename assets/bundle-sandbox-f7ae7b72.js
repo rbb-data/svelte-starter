@@ -1,5 +1,5 @@
 import { bn as parseQuery, r as ref, K as createApp, L as createPinia, k as watch, c as computed, bo as STATE_SYNC, bp as PREVIEW_SETTINGS_SYNC, J as onMounted, bq as h, br as SANDBOX_READY, bs as applyState } from "./vendor-7db0712c.js";
-import { m as mapFile, f as files, _ as _sfc_main } from "./GenericMountStory.vue2-8e2fd5a7.js";
+import { m as mapFile, f as files, _ as _sfc_main } from "./GenericMountStory.vue2-6e47712e.js";
 import { a as applyPreviewSettings, _ as _sfc_main$1, t as toRawDeep } from "./state-e239ba4f.js";
 import { i as isDark } from "./__resolved__virtual__histoire-support-plugins-client-556e6aec.js";
 import { h as histoireConfig } from "./config-58fadf80.js";
