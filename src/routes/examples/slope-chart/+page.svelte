@@ -62,8 +62,8 @@
   }}
 >
   <ChartHeader>
-    Titel
-    <svelte:fragment slot="subtitle">Untertitel</svelte:fragment>
+    Chart Titel
+    <svelte:fragment slot="subtitle">Chart Untertitel</svelte:fragment>
   </ChartHeader>
 
   <div class="layercake">
@@ -137,7 +137,7 @@
         getValue: (_, i) => [data[1].quark, data[1].pudding][i],
       },
     ]}
-    caption="Daten zum Chart: Titel"
+    caption="Daten zum Chart: Chart Titel"
   />
 </div>
 

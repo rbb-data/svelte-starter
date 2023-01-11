@@ -35,7 +35,7 @@
         <Svg>
           <AxisX />
           <AxisY />
-          <AreaY0 {data} />
+          <AreaY0 />
           <Path outline="none" />
         </Svg>
       </LayerCake>
@@ -51,7 +51,7 @@
         y={['y1', 'y2']}
       >
         <Svg>
-          <AreaY0 {data} />
+          <AreaY0 />
         </Svg>
       </LayerCake>
     </div>

@@ -26,12 +26,18 @@
   export let parent: SymbolOptions['parentId'] | undefined = undefined;
 
   const ctx = getContext<LayerCakeContext<D>>('LayerCake');
-  let xGet: typeof ctx['xGet'],
+  let ctxData: typeof ctx['data'],
+    xGet: typeof ctx['xGet'],
     yGet: typeof ctx['yGet'],
     yScale: typeof ctx['yScale'];
 
   let area: Area<D>;
-  $: if (data != undefined && ctx != undefined) {
+  $: if (ctx != undefined) {
+    if (data == undefined) {
+      ctxData = ctx.data;
+      data = $ctxData;
+    }
+
     xGet = ctx.xGet;
     yGet = ctx.yGet;
     yScale = ctx.yScale;
@@ -71,8 +77,8 @@
     --__outline-width: var(--_outline-width, var(--chart-outline-width, 1));
     --__opacity: var(--_opacity, var(--chart-opacity, 0.6));
 
-    stroke-linejoin: round;
-    stroke-linecap: round;
+    stroke-linejoin: var(--stroke-linejoin, round);
+    stroke-linecap: var(--stroke-linecap, round);
   }
 
   .area {

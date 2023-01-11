@@ -2,8 +2,8 @@
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import Tabs from './Tabs.svelte';
-  import TabPanels from './TabPanels.svelte';
+  import Tabs from '$lib/components/shared/Tabs.svelte';
+  import TabPanels from '$lib/components/shared/TabPanels.svelte';
 
   const tabs = ['Tab 1', 'Tab 2', 'Tab 3'];
   const complexTabs = [

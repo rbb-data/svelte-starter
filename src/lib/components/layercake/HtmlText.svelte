@@ -6,7 +6,7 @@
   import { getContext } from 'svelte/internal';
 
   import { get } from './utils';
-  import type { LayerCakeContext } from './types';
+  import type { LayerCakeContext, Accessor } from './types';
 
   type D = $$Generic;
 
@@ -18,6 +18,9 @@
   export let data: D | undefined = undefined;
   export let xIndex = 0;
   export let yIndex = 0;
+
+  export let xData: ReturnType<Accessor<D>> | undefined = undefined;
+  export let yData: ReturnType<Accessor<D>> | undefined = undefined;
 
   export let xAlign: 'left' | 'center' | 'right' = 'left';
   export let yAlign: 'top' | 'center' | 'bottom' = 'bottom';
@@ -39,7 +42,9 @@
   } as const;
 
   const ctx = getContext<LayerCakeContext<D>>('LayerCake');
-  let xGet: typeof ctx['xGet'],
+  let xScale: typeof ctx['xScale'],
+    yScale: typeof ctx['yScale'],
+    xGet: typeof ctx['xGet'],
     yGet: typeof ctx['yGet'],
     ctxWidth: typeof ctx['width'],
     padding: typeof ctx['padding'];
@@ -47,23 +52,38 @@
   $: left = (typeof x === 'number' ? `${x}px` : x) || '0px';
   $: top = (typeof y === 'number' ? `${y}px` : y) || '0px';
 
-  $: if (data != undefined && ctx != undefined) {
+  $: if (ctx != undefined) {
     xGet = ctx.xGet;
     yGet = ctx.yGet;
     ctxWidth = ctx.width;
     padding = ctx.padding;
 
-    // get left value (x-coordinate)
-    const l = get($xGet, data, xIndex);
-    left = l.toString() + 'px';
+    let l = null; // left value (x-coordinate)
+    let t = null; // top value (y-coordinate)
 
-    // get top value (y-coordinate)
-    const t = get($yGet, data, yIndex);
-    top = t.toString() + 'px';
+    if (data != undefined) {
+      l = get($xGet, data, xIndex);
+      t = get($yGet, data, yIndex);
+    }
+
+    if (xData != undefined) {
+      xScale = ctx.xScale;
+      l = $xScale(xData);
+    }
+
+    if (yData != undefined) {
+      yScale = ctx.yScale;
+      t = $yScale(yData);
+    }
+
+    if (l != null) left = l.toString() + 'px';
+    if (t != null) top = t.toString() + 'px';
 
     // get max width
-    const w = $ctxWidth - l + $padding.right - xOffset;
-    maxWidth = `${w}px`;
+    if (l != null) {
+      const w = $ctxWidth - l + $padding.right - xOffset;
+      maxWidth = `${w}px`;
+    }
   }
 
   $: _xOffset = typeof xOffset === 'number' ? `${xOffset}px` : xOffset;

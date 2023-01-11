@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { ascending } from 'd3-array';
+
   import InternalLink from '$lib/components/shared/InternalLink.svelte';
 
   const examples = [
@@ -24,7 +26,15 @@
       label: 'Slope chart',
       href: '/examples/slope-chart',
     },
-  ];
+    {
+      label: 'Area chart',
+      href: '/examples/area-chart',
+    },
+    {
+      label: 'Stacked area chart',
+      href: '/examples/stacked-area-chart',
+    },
+  ].sort((a, b) => ascending(a.label, b.label));
 </script>
 
 <ul>
