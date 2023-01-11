@@ -2,7 +2,7 @@
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import Dropdown from './Dropdown.svelte';
+  import Dropdown from '$lib/components/shared/Dropdown.svelte';
 
   let selectedOption: string;
   let selectedComplexOption: { label: string; value: string };

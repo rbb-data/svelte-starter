@@ -2,7 +2,7 @@
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import Table from './Table.svelte';
+  import Table from '$lib/components/shared/Table.svelte';
 
   let highlightFirstColumn = false;
 

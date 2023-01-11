@@ -2,7 +2,7 @@
   import type { Hst as HstType } from '@histoire/plugin-svelte';
   export let Hst: HstType;
 
-  import ChartFooter from './ChartFooter.svelte';
+  import ChartFooter from '$lib/components/shared/ChartFooter.svelte';
 
   let content = 'Footer';
 </script>

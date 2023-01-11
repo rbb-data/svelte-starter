@@ -5,7 +5,7 @@
   import { csvParse } from 'd3-dsv';
   import debounce from 'lodash.debounce';
 
-  import Search from './Search.svelte';
+  import Search from '$lib/components/shared/Search.svelte';
   import { fuzzysearch } from '$lib/utils';
 
   const options = [
