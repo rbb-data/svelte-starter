@@ -46,7 +46,7 @@ upload() {
   # files, then re-add and compress them while copying to the cloud.
 
   # remove folder if it exists
-  gsutil -q stat ${cloud_dst}/* && gsutil rm -r $cloud_dst
+  gsutil rm -r $cloud_dst || echo 'Folder does not exist in Cloud Storage:' "$cloud_dst"
 
   # compress and upload files
   gsutil cp -r -z html,css,js "$BUILD_DIR" "$cloud_dst"
