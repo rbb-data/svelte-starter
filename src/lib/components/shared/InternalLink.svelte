@@ -9,7 +9,7 @@
    */
   export let href: string;
 
-  $: _href = base + href + (dev ? '' : '.html');
+  $: _href = base + href + (dev ? '' : href === '/' ? 'index.html' : '.html');
 </script>
 
 <a {...$$restProps} href={_href} rel="{$$restProps.rel || ''} external">
