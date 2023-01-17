@@ -67,9 +67,13 @@ async function main() {
 
   // write data to file
   for (const [name, _data] of Object.entries(data)) {
-    const out = path.join(outFolder, `${name}.csv`);
-    fs.writeFileSync(path.join(process.cwd(), out), csvFormat(_data));
-    process.stdout.write(`Written to ${out}\n`);
+    if (name.startsWith('_')) {
+      process.stdout.write(`Ignored sheet ${name}\n`);
+    } else {
+      const out = path.join(outFolder, `${name}.csv`);
+      fs.writeFileSync(path.join(process.cwd(), out), csvFormat(_data));
+      process.stdout.write(`Written to ${out}\n`);
+    }
   }
 }
 
