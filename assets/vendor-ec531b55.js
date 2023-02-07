@@ -20308,7 +20308,7 @@ async function logEvent(name, argument) {
       event
     });
   } else {
-    const { useEventsStore } = await __vitePreload(() => import("./events-6240ab2f.js"), true ? ["assets/events-6240ab2f.js","assets/story-582bb2d8.js","assets/config-58fadf80.js"] : void 0);
+    const { useEventsStore } = await __vitePreload(() => import("./events-92302273.js"), true ? ["assets/events-92302273.js","assets/story-697a5f18.js","assets/config-58fadf80.js"] : void 0);
     useEventsStore().addEvent(event);
   }
 }
