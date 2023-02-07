@@ -4,8 +4,8 @@ on:
   # trigger action manually
   workflow_dispatch:
     inputs:
-      deploy_to_main_path:
-        description: 'Deploy for production (DANGER)'
+      deploy_to_production:
+        description: 'Deploy to production (DANGER)'
         required: true
         default: false
         type: boolean
@@ -47,13 +47,13 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v0
 
-      - name: Deploy to main page
-        run: npm run deploy
-        if: ${{ github.event.inputs.deploy_to_main_path == 'true' }}
-
       - name: Deploy to production page
+        run: npm run deploy
+        if: ${{ github.event.inputs.deploy_to_production == 'true' }}
+
+      - name: Deploy to experimental page
         run: npm run deploy--experimental
-        if: ${{ github.event.inputs.deploy_to_main_path == 'false' }}
+        if: ${{ github.event.inputs.deploy_to_production == 'false' }}
 
       - name: Import environment variables
         run: cat .env >> $GITHUB_ENV
@@ -62,4 +62,4 @@ jobs:
         run: echo Deployed to https://storage.googleapis.com${BASE_PATH}${SUFFIX}/index.html >> $GITHUB_STEP_SUMMARY
         env:
           BASE_PATH: ${{ env.BASE_PATH }}
-          SUFFIX: "${{ github.event.inputs.deploy_to_main_path == 'false' && '-experimental' || '' }}"
+          SUFFIX: "${{ github.event.inputs.deploy_to_production == 'false' && '-experimental' || '' }}"
