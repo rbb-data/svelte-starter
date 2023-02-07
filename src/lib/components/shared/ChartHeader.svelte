@@ -33,6 +33,7 @@
   .chart-header {
     line-height: var(--line-height-tight);
     color: var(--c-ui-black);
+    margin-bottom: var(--s-rem-4);
 
     &__title {
       font-weight: var(--font-weight-bold);
@@ -43,7 +44,6 @@
     &__subtitle {
       font-weight: var(--font-weight-semi-bold);
       font-size: var(--font-size-xs);
-      margin-bottom: var(--s-rem-4);
     }
   }
 </style>

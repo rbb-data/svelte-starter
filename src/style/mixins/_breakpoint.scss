@@ -1,6 +1,8 @@
 /* breakpoints that allow to write CSS by default
 for a viewport size between "narrow" and "wide" */
 
+@import '../sass-tokens';
+
 @mixin breakpoint($mode) {
   @if $mode == narrow {
     @media (max-width: #{$bp-xs - 1}) {

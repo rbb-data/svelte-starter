@@ -91,6 +91,7 @@
 </script>
 
 <div
+  class:html-text={true}
   {...$$restProps}
   style:left
   style:top

@@ -83,6 +83,7 @@
     &[data-variant='secondary'] {
       --_color: var(--_button-color-accent);
       --_background-color: var(--_button-color-secondary);
+      border-color: currentColor;
     }
 
     &[data-variant='tertiary'] {

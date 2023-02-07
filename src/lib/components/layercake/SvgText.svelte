@@ -71,6 +71,7 @@
 </script>
 
 <text
+  class:svg-text={true}
   text-anchor={textAnchor[xAlign]}
   {...$$restProps}
   {x}
