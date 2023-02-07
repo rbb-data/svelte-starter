@@ -1236,6 +1236,7 @@ function create_fragment$$(ctx) {
     },
     h: function hydrate() {
       set_svg_attributes(text_1, text_1_data);
+      toggle_class(text_1, "svg-text", true);
       set_style(text_1, "transform", style_transform);
       set_style(text_1, "--_color", ctx[14].fill || ctx[0] || "");
       set_style(text_1, "--_outline", ctx[14].stroke || ctx[1] || "");
@@ -1269,6 +1270,7 @@ function create_fragment$$(ctx) {
         (!current || dirty & 2048) && { x: ctx2[11] },
         (!current || dirty & 1024) && { y: ctx2[10] }
       ]));
+      toggle_class(text_1, "svg-text", true);
       set_style(text_1, "transform", style_transform);
       set_style(text_1, "--_color", ctx2[14].fill || ctx2[0] || "");
       set_style(text_1, "--_outline", ctx2[14].stroke || ctx2[1] || "");
@@ -15269,6 +15271,7 @@ function create_fragment$E(ctx) {
     },
     h: function hydrate() {
       set_attributes(div, div_data);
+      toggle_class(div, "html-text", true);
       set_style(div, "left", ctx[14]);
       set_style(div, "top", ctx[13]);
       set_style(div, "max-width", ctx[4]);
@@ -15300,6 +15303,7 @@ function create_fragment$E(ctx) {
         }
       }
       set_attributes(div, div_data = get_spread_update(div_levels, [dirty[0] & 131072 && ctx2[17]]));
+      toggle_class(div, "html-text", true);
       set_style(div, "left", ctx2[14]);
       set_style(div, "top", ctx2[13]);
       set_style(div, "max-width", ctx2[4]);
