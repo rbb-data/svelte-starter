@@ -3,7 +3,7 @@ import { ascending, range } from 'd3-array';
 /**
  * Prevent overlap of children nodes along the x- or y-axis
  */
-export default function preventOverlap(
+export function preventOverlap(
   node: HTMLElement | SVGGraphicsElement,
   { axis, gap = 0 }: { axis: 'x' | 'y'; gap?: number }
 ) {

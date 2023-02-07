@@ -1,4 +1,4 @@
-export default function typeahead(
+export function typeahead(
   node: HTMLElement,
   {
     handleInput,

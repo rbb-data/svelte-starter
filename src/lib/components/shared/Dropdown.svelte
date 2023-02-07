@@ -18,7 +18,8 @@
   import CheckIcon from '$icons/CheckIcon.svelte';
   import ErrorCloseIcon from '$icons/ErrorCloseIcon.svelte';
 
-  import typeahead from '$lib/actions/typeahead';
+  import { typeahead } from '$lib/actions/typeahead';
+  import { clickOutside } from '$lib/actions/click-outside';
   import { getIndexBefore, getIndexAfter } from './helpers';
 
   type Option = $$Generic;
@@ -111,19 +112,7 @@
       });
     }
   }
-
-  function handleClickOutside(e: MouseEvent) {
-    const node = e.target as HTMLElement;
-    if (
-      node === selectElement ||
-      (node.tagName === 'LI' && node.getAttribute('role') === 'option')
-    )
-      return;
-    isOpen = false;
-  }
 </script>
-
-<svelte:window on:click={handleClickOutside} />
 
 <div
   {id}
@@ -214,6 +203,8 @@
           focusedIndex = index;
         },
       }}
+      use:clickOutside
+      on:outclick={() => (isOpen = false)}
     >
       {#each options as option, i}
         {@const selected = selectedOption === option}

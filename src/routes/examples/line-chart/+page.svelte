@@ -15,7 +15,7 @@
   import AxisY from '$lib/components/layercake/AxisY.svelte';
   import AxisLabelY from '$lib/components/layercake/AxisLabelY.svelte';
 
-  import preventOverlap from '$lib/actions/prevent-overlap';
+  import { preventOverlap } from '$lib/actions/prevent-overlap';
   import * as tokens from '$lib/tokens';
 
   const data = [

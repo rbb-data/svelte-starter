@@ -26,6 +26,7 @@
   import CheckIcon from '$icons/CheckIcon.svelte';
   import SearchIcon from '$icons/SearchIcon.svelte';
 
+  import { clickOutside } from '$lib/actions/click-outside';
   import { getIndexBefore, getIndexAfter } from './helpers';
 
   /** globally unique id */
@@ -156,19 +157,7 @@
     if (selectedIndex < 0) selectedIndex = undefined;
     highlightedIndex = selectedIndex || focusedIndex || 0;
   }
-
-  function handleClickOutside(e: MouseEvent) {
-    const node = e.target as HTMLElement;
-    if (
-      node.closest(`#${id}`) ||
-      (node.tagName === 'LI' && node.getAttribute('role') === 'option')
-    )
-      return;
-    isOpen = false;
-  }
 </script>
-
-<svelte:window on:click={handleClickOutside} />
 
 <div
   {id}
@@ -231,6 +220,8 @@
       class="search__suggestions | shadow-sm"
       role="listbox"
       aria-orientation="vertical"
+      use:clickOutside
+      on:outclick={() => (isOpen = false)}
     >
       {#each suggestions as suggestion, i}
         {@const focused = focusedIndex === i}

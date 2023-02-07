@@ -12,7 +12,7 @@
   import AxisLabelY from '$lib/components/layercake/AxisLabelY.svelte';
   import LineV from '$lib/components/layercake/LineV.svelte';
 
-  import preventOverlap from '$lib/actions/prevent-overlap';
+  import { preventOverlap } from '$lib/actions/prevent-overlap';
   import * as tokens from '$lib/tokens';
 
   import Slope from './Slope.svelte';
