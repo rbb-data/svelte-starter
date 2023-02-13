@@ -30,7 +30,11 @@
   style:transform="translateX({translateX}%)"
 >
   {#each slides as slide, i}
-    <div class="slider__slide" style:width="{100 / n}%">
+    <div
+      class="slider__slide"
+      style:width="{100 / n}%"
+      aria-hidden={i !== activeIndex}
+    >
       {#if i >= activeIndex - 1 && i <= activeIndex + 1}
         <slot {slide} index={i} active={i === activeIndex}>
           {slide}
