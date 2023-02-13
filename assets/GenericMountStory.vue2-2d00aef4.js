@@ -39572,7 +39572,7 @@ function create_if_block$4(ctx) {
     block,
     id: create_if_block$4.name,
     type: "if",
-    source: "(27:6) {#if i >= activeIndex - 1 && i <= activeIndex + 1}",
+    source: "(31:6) {#if i >= activeIndex - 1 && i <= activeIndex + 1}",
     ctx
   });
   return block;
@@ -39603,7 +39603,7 @@ function fallback_block$2(ctx) {
     block,
     id: fallback_block$2.name,
     type: "fallback",
-    source: "(28:59)            ",
+    source: "(32:59)            ",
     ctx
   });
   return block;
@@ -39611,6 +39611,7 @@ function fallback_block$2(ctx) {
 function create_each_block$3(ctx) {
   let div;
   let t;
+  let div_aria_hidden_value;
   let style_width = `${100 / ctx[2]}%`;
   let current;
   let if_block = ctx[10] >= ctx[0] - 1 && ctx[10] <= ctx[0] + 1 && create_if_block$4(ctx);
@@ -39623,7 +39624,7 @@ function create_each_block$3(ctx) {
       this.h();
     },
     l: function claim(nodes) {
-      div = claim_element(nodes, "DIV", { class: true });
+      div = claim_element(nodes, "DIV", { class: true, "aria-hidden": true });
       var div_nodes = children(div);
       if (if_block)
         if_block.l(div_nodes);
@@ -39633,6 +39634,7 @@ function create_each_block$3(ctx) {
     },
     h: function hydrate() {
       attr_dev(div, "class", "slider__slide");
+      attr_dev(div, "aria-hidden", div_aria_hidden_value = ctx[10] !== ctx[0]);
       set_style(div, "width", style_width);
       add_location(div, file$7, 25, 4, 593);
     },
@@ -39662,6 +39664,9 @@ function create_each_block$3(ctx) {
           if_block = null;
         });
         check_outros();
+      }
+      if (!current || dirty & 1 && div_aria_hidden_value !== (div_aria_hidden_value = ctx2[10] !== ctx2[0])) {
+        attr_dev(div, "aria-hidden", div_aria_hidden_value);
       }
       if (dirty & 4 && style_width !== (style_width = `${100 / ctx2[2]}%`)) {
         set_style(div, "width", style_width);
